@@ -2155,7 +2155,7 @@ window.BANKMATO2 = [
     "niva": "A",
     "poang": "0/1/2",
     "t": "<p>För det reella talet \\(a\\) definieras</p>\n<p>\\[\nf_a(x)=x^3+ax^2+3x.\n\\]</p>\n<p>Bestäm alla värden på \\(a\\) för vilka grafen till \\(f_a\\) saknar både maximi- och minimipunkt.</p>",
-    "s": "<p>Derivatan är</p>\n<p>\\[\nf_a'(x)=3x^2+2ax+3.\n\\]</p>\n<p>För att \\(f_a\\) ska ha en maximi- och en minimipunkt krävs två olika reella nollställen till derivatan. Funktionen saknar maximi- och minimipunkt när derivatan har högst ett reellt nollställe.</p>\n<p>Uttrycket under rottecknet i andragradsformeln är</p>\n<p>\\[\n\\Delta=(2a)^2-4\\cdot3\\cdot3\n=4a^2-36.\n\\]</p>\n<p>Villkoret blir</p>\n<p>\\[\n\\Delta\\le0\n\\Rightarrow\n4a^2\\le36\n\\Rightarrow\na^2\\le9.\n\\]</p>\n<p><strong>\\[\n-3\\le a\\le3.\n\\]</strong></p>\n<p>När \\(a=\\pm3\\) har derivatan ett dubbelt nollställe. Då är tangenten horisontell i en punkt, men derivatan byter inte tecken. Punkten är alltså en punkt med horisontell tangent men är varken en maximi- eller minimipunkt (den brukar kallas terrasspunkt).</p>",
+    "s": "<p>Derivatan är</p>\n<p>\\[\nf_a'(x)=3x^2+2ax+3.\n\\]</p>\n<p>För att \\(f_a\\) ska ha en maximi- och en minimipunkt krävs två olika reella nollställen till derivatan. Funktionen saknar maximi- och minimipunkt när derivatan har högst ett reellt nollställe.</p>\n<p>Uttrycket under rottecknet i andragradsformeln är</p>\n<p>\\[\n\\Delta=(2a)^2-4\\cdot3\\cdot3\n=4a^2-36.\n\\]</p>\n<p>Villkoret blir</p>\n<p>\\[\n\\Delta\\le0\n\\Rightarrow\n4a^2\\le36\n\\Rightarrow\na^2\\le9.\n\\]</p>\n<p><strong>\\[\n-3\\le a\\le3.\n\\]</strong></p>\n<p>När \\(a=\\pm3\\) har derivatan ett dubbelt nollställe. Då är tangenten horisontell i en punkt, men derivatan byter inte tecken. Punkten är alltså en punkt med horisontell tangent men är varken en maximi- eller minimipunkt.</p>",
     "familj": "parameter_extrempunkter_a"
   },
   {
@@ -2441,7 +2441,7 @@ window.BANKMATO2 = [
     "niva": "A",
     "poang": "0/1/2",
     "t": "<p>För det reella talet \\(a\\) ges</p><p>\\[f_a(x)=x^3-3ax+2.\\]</p><p>Undersök hur antalet punkter där derivatan är 0 och deras typ beror på \\(a\\). Ta även upp gränsfallet.</p>",
-    "s": "<p>\\[f_a'(x)=3x^2-3a=3(x^2-a).\\]</p><p>Om \\(a&lt;0\\) är \\(x^2-a&gt;0\\) för alla x: <strong>inga punkter där derivatan är 0</strong>.</p><p>Om \\(a=0\\) är \\(f'(x)=3x^2\\), som inte byter tecken vid 0. Tangenten är horisontell vid \\(x=0\\), men derivatan byter inte tecken. Punkten är därför en punkt med horisontell tangent men är varken maximi- eller minimipunkt (en terrasspunkt).</p><p>Om \\(a&gt;0\\) fås \\(x=\\pm\\sqrt a\\). Tecknet är +,−,+, så \\(x=-\\sqrt a\\) är <strong>maximipunkt</strong> och \\(x=\\sqrt a\\) <strong>minimipunkt</strong>.</p>",
+    "s": "<p>\\[f_a'(x)=3x^2-3a=3(x^2-a).\\]</p><p>Om \\(a&lt;0\\) är \\(x^2-a&gt;0\\) för alla x: <strong>inga punkter där derivatan är 0</strong>.</p><p>Om \\(a=0\\) är \\(f'(x)=3x^2\\), som inte byter tecken vid 0. Tangenten är horisontell vid \\(x=0\\), men derivatan byter inte tecken. Punkten är därför en punkt med horisontell tangent men är varken maximi- eller minimipunkt.</p><p>Om \\(a&gt;0\\) fås \\(x=\\pm\\sqrt a\\). Tecknet är +,−,+, så \\(x=-\\sqrt a\\) är <strong>maximipunkt</strong> och \\(x=\\sqrt a\\) <strong>minimipunkt</strong>.</p>",
     "familj": "parameter_stationara_kubik_a"
   },
   {
@@ -8459,8 +8459,8 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Skriv i radianer.</p><p>a) (30^circ)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) (135^circ)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) (225^circ)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) (300^circ)</p>",
-    "s": "<p><strong>Formel från formelbladet:</strong> (180^circ=pi) radianer.</p><p>a) (30^circ=\frac{30}{180}pi=\boxed{pi/6}).</p><p>b) (135^circ=\frac{135}{180}pi=\boxed{3pi/4}).</p><p>c) (225^circ=\frac{225}{180}pi=\boxed{5pi/4}).</p><p>d) (300^circ=\frac{300}{180}pi=\boxed{5pi/3}).</p>",
+    "t": "<p>Skriv i radianer.</p><p>a) \\(30^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(135^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(225^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(300^\\circ\\)</p>",
+    "s": "<p>Använd sambandet \\(180^\\circ=\\pi\\) radianer.</p><p>a) \\(30^\\circ=\\frac{30}{180}\\pi=\\boxed{\\frac{\\pi}{6}}\\).</p><p>b) \\(135^\\circ=\\frac{135}{180}\\pi=\\boxed{\\frac{3\\pi}{4}}\\).</p><p>c) \\(225^\\circ=\\frac{225}{180}\\pi=\\boxed{\\frac{5\\pi}{4}}\\).</p><p>d) \\(300^\\circ=\\frac{300}{180}\\pi=\\boxed{\\frac{5\\pi}{3}}\\).</p>",
     "familj": "radianer_grader_rutin_6"
   },
   {
@@ -8472,8 +8472,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En cirkel har radien 12 cm.</p><p>a) Bestäm båglängden som svarar mot vinkeln (\frac{5pi}{6}).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm arean av motsvarande cirkelsektor.</p>",
-    "s": "<p><strong>Formler från formelbladet:</strong> Båglängd (b=rcdot v) och cirkelsektorns area (A=\frac{r^2v}{2}), där (v) mäts i radianer.</p><p>a) (b=12cdot\frac{5pi}{6}=\boxed{10pi\text{ cm}}).</p><p>b) (A=\frac{12^2cdot 5pi/6}{2}=\frac{144cdot 5pi}{12}=\boxed{60pi\text{ cm}^2}).</p>",
+    "t": "<p>En cirkel har radien 12 cm.</p><p>a) Bestäm båglängden som svarar mot vinkeln \\(\\frac{5\\pi}{6}\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm arean av motsvarande cirkelsektor.</p>",
+    "s": "<p>Vinkeln är given i radianer. För en cirkel med radien \\(r\\) gäller \\(b=rv\\) för båglängden och \\(A=\\frac{r^2v}{2}\\) för sektorns area.</p><p>a) \\(b=12\\cdot\\frac{5\\pi}{6}=\\boxed{10\\pi\\text{ cm}}\\).</p><p>b) \\(A=\\frac{12^2}{2}\\cdot\\frac{5\\pi}{6}=\\boxed{60\\pi\\text{ cm}^2}\\).</p>",
     "familj": "radianer_baglangd_sektor_3"
   },
   {
@@ -8485,8 +8485,8 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "3/0/0",
-    "t": "<p>Bestäm koordinaterna för punkten på enhetscirkeln som motsvarar vinkeln</p><p>a) (\frac{2pi}{3})<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) (\frac{7pi}{6})<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) (\frac{11pi}{6})</p>",
-    "s": "<p><strong>Idé:</strong> På enhetscirkeln har punkten koordinaterna ((cos v,sin v)).</p><p>a) (cos\frac{2pi}{3}=-\frac12) och (sin\frac{2pi}{3}=\frac{sqrt3}{2}), alltså (\boxed{left(-\frac12,\frac{sqrt3}{2}\right)}).</p><p>b) (\boxed{left(-\frac{sqrt3}{2},-\frac12\right)}).</p><p>c) (\boxed{left(\frac{sqrt3}{2},-\frac12\right)}).</p>",
+    "t": "<p>Bestäm koordinaterna för punkten på enhetscirkeln som motsvarar vinkeln</p><p>a) \\(\\frac{2\\pi}{3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{7\\pi}{6}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{11\\pi}{6}\\)</p>",
+    "s": "<p><strong>Idé:</strong> På enhetscirkeln har punkten koordinaterna \\((\\cos v,\\sin v)\\).</p><p>a) \\(\\cos\\frac{2\\pi}{3}=-\\frac12\\) och \\(\\sin\\frac{2\\pi}{3}=\\frac{\\sqrt3}{2}\\), alltså \\(\\boxed{\\left(-\\frac12,\\frac{\\sqrt3}{2}\\right)}\\).</p><p>b) \\(\\boxed{\\left(-\\frac{\\sqrt3}{2},-\\frac12\\right)}\\).</p><p>c) \\(\\boxed{\\left(\\frac{\\sqrt3}{2},-\\frac12\\right)}\\).</p>",
     "familj": "enhetscirkel_koordinater_rutin_5"
   },
   {
@@ -8498,8 +8498,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/1",
-    "t": "<p>Vattendjupet i en liten hamn kan under ett dygn beskrivas med modellen</p><p>[d(t)=2,4+0,8sin!left(\frac{pi}{6}(t-1)\right)]</p><p>där (d) mäts i meter och (t) är antal timmar efter midnatt.</p><p>a) Bestäm modellens största och minsta djup.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm när djupet är 2,4 m första gången efter midnatt.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Förklara vad perioden betyder i den här situationen.</p>",
-    "s": "<p>a) Medellinjen är 2,4 och amplituden är 0,8. Därför är största djupet (2,4+0,8=\boxed{3,2\text{ m}}) och minsta djupet (2,4-0,8=\boxed{1,6\text{ m}}).</p><p>b) Djupet är 2,4 m när sinusdelen är 0. Då gäller (\frac{pi}{6}(t-1)=0,pi,2pi,ldots). Första gången efter midnatt fås av (t-1=0), alltså (\boxed{t=1}). Det är klockan 01.00.</p><p>c) Koefficienten framför (t) är (pi/6), så perioden är (T=\frac{2pi}{pi/6}=12). Det betyder att tidvattnet upprepar sitt mönster var 12:e timme.</p>",
+    "t": "<p>Vattendjupet i en liten hamn kan under ett dygn beskrivas med modellen</p><p>\\[d(t)=2,4+0,8\\sin\\!\\left(\\frac{\\pi}{6}(t-1)\\right)\\]</p><p>där \\(d\\) mäts i meter och \\(t\\) är antal timmar efter midnatt.</p><p>a) Bestäm modellens största och minsta djup.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm när djupet är 2,4 m första gången efter midnatt.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Förklara vad perioden betyder i den här situationen.</p>",
+    "s": "<p>a) Medellinjen är 2,4 och amplituden är 0,8. Därför är största djupet \\(2,4+0,8=\\boxed{3,2\\text{ m}}\\) och minsta djupet \\(2,4-0,8=\\boxed{1,6\\text{ m}}\\).</p><p>b) Djupet är 2,4 m när sinusdelen är 0. Första gången efter midnatt fås när</p><p>\\[\\frac{\\pi}{6}(t-1)=0,\\]</p><p>så \\(t=1\\). Det är alltså \\(\\boxed{\\text{klockan 01.00}}\\).</p><p>c) Perioden är \\(T=\\frac{2\\pi}{\\pi/6}=12\\) timmar. Det betyder att modellens mönster upprepas var 12:e timme.</p>",
     "familj": "trig_modell_tidvatten_1"
   },
   {
@@ -8511,8 +8511,8 @@ window.BANKMATO2 = [
     ],
     "niva": "A",
     "poang": "0/1/3",
-    "t": "<p>Temperaturen under ett dygn modelleras med</p><p>[T(t)=m+Acos!left(\frac{pi}{12}(t-c)\right),qquad 0le tle24]</p><p>där (t) är tiden i timmar efter midnatt. Under dygnet är lägsta temperaturen (12^circ\text{C}), högsta temperaturen (20^circ\text{C}) och maximum inträffar klockan 15.</p><p>Bestäm (m), (A) och (c).</p>",
-    "s": "<p><strong>Idé:</strong> Läs av medellinje, amplitud och fasförskjutning.</p><p>Medellinjen är medelvärdet av största och minsta värdet:</p><p>[m=\frac{20+12}{2}=16.]</p><p>Amplituden är halva skillnaden:</p><p>[A=\frac{20-12}{2}=4.]</p><p>Cosinus är som störst när vinkeln är 0. Eftersom maximum inträffar vid (t=15) måste (t-c=0) då, alltså (c=15).</p><p>Parametrarna är alltså (\boxed{m=16, A=4, c=15}).</p>",
+    "t": "<p>Temperaturen under ett dygn modelleras med</p><p>\\[T(t)=m+A\\cos\\!\\left(\\frac{\\pi}{12}(t-c)\\right),\\qquad 0\\le t\\le24\\]</p><p>där \\(t\\) är tiden i timmar efter midnatt. Under dygnet är lägsta temperaturen \\(12^\\circ\\text{C}\\), högsta temperaturen \\(20^\\circ\\text{C}\\) och maximum inträffar klockan 15.</p><p>Bestäm \\(m\\), \\(A\\) och \\(c\\).</p>",
+    "s": "<p><strong>Idé:</strong> Bestäm medellinje, amplitud och förskjutning.</p><p>Medellinjen är</p><p>\\[m=\\frac{20+12}{2}=16.\\]</p><p>Amplituden är</p><p>\\[A=\\frac{20-12}{2}=4.\\]</p><p>Cosinus är som störst när vinkeln är 0. Eftersom maximum inträffar vid \\(t=15\\) ska \\(t-c=0\\) då. Alltså är \\(c=15\\).</p><p>Så \\(\\boxed{m=16,\\ A=4,\\ c=15}\\).</p>",
     "familj": "trig_modell_bestam_parametrar_3"
   },
   {
@@ -8524,8 +8524,8 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Derivera.</p><p>a) ((3x-1)^5)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) (sqrt{2x+7})<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) ((x^2+1)^4)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) (sin(4x))</p>",
-    "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln ((f(g(x)))'=f'(g(x))cdot g'(x)).</p><p>a) (5(3x-1)^4cdot 3=\boxed{15(3x-1)^4}).</p><p>b) ((2x+7)^{1/2}) ger derivatan (\frac12(2x+7)^{-1/2}cdot2=\boxed{\frac{1}{sqrt{2x+7}}}).</p><p>c) (4(x^2+1)^3cdot2x=\boxed{8x(x^2+1)^3}).</p><p>d) (cos(4x)cdot4=\boxed{4cos(4x)}).</p>",
+    "t": "<p>Derivera.</p><p>a) \\((3x-1)^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sqrt{2x+7}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((x^2+1)^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin(4x)\\)</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln \\(f(g(x))' = f'(g(x))\\cdot g'(x)\\).</p><p>a) \\(5(3x-1)^4\\cdot3=\\boxed{15(3x-1)^4}\\).</p><p>b) Skriv först roten som en potens: \\((2x+7)^{1/2}\\). Då blir derivatan \\(\\frac12(2x+7)^{-1/2}\\cdot2=\\boxed{\\frac1{\\sqrt{2x+7}}}\\).</p><p>c) \\(4(x^2+1)^3\\cdot2x=\\boxed{8x(x^2+1)^3}\\).</p><p>d) \\(\\cos(4x)\\cdot4=\\boxed{4\\cos(4x)}\\).</p>",
     "familj": "kedjeregel_rutin_7"
   },
   {
@@ -8537,8 +8537,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Funktionen (f) ges av (f(x)=(x^2-4x)^3).</p><p>a) Bestäm (f'(x)).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm tangentens ekvation i punkten där (x=1).</p>",
-    "s": "<p>a) <strong>Formel från formelbladet:</strong> Kedjeregeln.</p><p>Yttre funktionen är (u^3) och inre funktionen är (u=x^2-4x).</p><p>[f'(x)=3(x^2-4x)^2cdot(2x-4)=\boxed{3(2x-4)(x^2-4x)^2}.]</p><p>b) Först behövs punktens koordinater. (f(1)=(1-4)^3=-27). Lutningen blir</p><p>[f'(1)=3(-2)cdot(-3)^2=-54.]</p><p>Tangenten genom ((1,-27)) med lutning (-54) ges av</p><p>[y+27=-54(x-1).]</p><p>Alltså (\boxed{y=-54x+27}).</p>",
+    "t": "<p>Funktionen \\(f\\) ges av \\(f(x)=(x^2-4x)^3\\).</p><p>a) Bestäm \\(f'(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm tangentens ekvation i punkten där \\(x=1\\).</p>",
+    "s": "<p>a) <strong>Formel från formelbladet:</strong> Kedjeregeln.</p><p>Den yttre funktionen är en tredje potens och den inre är \\(x^2-4x\\). Därför</p><p>\\[f'(x)=3(x^2-4x)^2(2x-4).\\]</p><p>b) \\(f(1)=(-3)^3=-27\\), så punkten är \\((1,-27)\\). Lutningen blir</p><p>\\[f'(1)=3(-3)^2(-2)=-54.\\]</p><p>Tangenten ges då av</p><p>\\[y+27=-54(x-1),\\]</p><p>alltså \\(\\boxed{y=-54x+27}\\).</p>",
     "familj": "kedjeregel_tangent_2"
   },
   {
@@ -8550,8 +8550,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/1",
-    "t": "<p>En rektangel har omkretsen 40 cm.</p><p>a) Visa att arean kan skrivas (A(x)=x(20-x)), där (x) är den ena sidans längd.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm rektangelns största möjliga area.</p>",
-    "s": "<p>a) Om sidorna är (x) och (y) gäller (2x+2y=40), alltså (x+y=20) och (y=20-x). Arean blir därför (A=xy=x(20-x)).</p><p>b) Derivera:</p><p>[A'(x)=20-2x.]</p><p>Extrempunkt fås när (A'(x)=0), alltså (20-2x=0Rightarrow x=10).</p><p>Eftersom (A''(x)=-2<0) är detta ett maximum. Största möjliga area blir</p><p>[A(10)=10cdot10=\boxed{100\text{ cm}^2}.]</p><p>Rektangeln blir alltså en kvadrat.</p>",
+    "t": "<p>En rektangel har omkretsen 40 cm.</p><p>a) Visa att arean kan skrivas \\(A(x)=x(20-x)\\), där \\(x\\) är den ena sidans längd.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm rektangelns största möjliga area.</p>",
+    "s": "<p>a) Om sidorna är \\(x\\) och \\(y\\) gäller \\(2x+2y=40\\), alltså \\(y=20-x\\). Därför</p><p>\\[A=xy=x(20-x).\\]</p><p>b) Derivera:</p><p>\\[A'(x)=20-2x.\\]</p><p>När \\(A'(x)=0\\) fås \\(x=10\\). Eftersom \\(A'\\) går från positiv till negativ där är arean maximal. Då är även den andra sidan 10 cm och</p><p>\\[A(10)=10\\cdot10=\\boxed{100\\text{ cm}^2}.\\]</p>",
     "familj": "optimering_rektangel_omkrets_1"
   },
   {
@@ -8563,8 +8563,8 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "3/0/0",
-    "t": "<p>Bestäm volymen när området under kurvan roterar ett varv kring x-axeln.</p><p>a) (y=x)<br>för (0le xle2)</p><p>b) (y=2x)<br>för (0le xle1)</p><p>c) (y=sqrt{x})<br>för (0le xle4)</p>",
-    "s": "<p><strong>Formel från formelbladet:</strong> Vid rotation kring x-axeln gäller (V=piint_a^b y^2,dx).</p><p>a) (V=piint_0^2 x^2,dx=pileft[\frac{x^3}{3}\right]_0^2=\boxed{\frac{8pi}{3}}).</p><p>b) (V=piint_0^1 (2x)^2,dx=4piint_0^1 x^2,dx=\boxed{\frac{4pi}{3}}).</p><p>c) (V=piint_0^4 (sqrt{x})^2,dx=piint_0^4 x,dx=pileft[\frac{x^2}{2}\right]_0^4=\boxed{8pi}).</p>",
+    "t": "<p>Bestäm volymen när området under kurvan roterar ett varv kring x-axeln.</p><p>a) \\(y=x\\)<br>för \\(0\\le x\\le2\\)</p><p>b) \\(y=2x\\)<br>för \\(0\\le x\\le1\\)</p><p>c) \\(y=\\sqrt{x}\\)<br>för \\(0\\le x\\le4\\)</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> Vid rotation kring x-axeln gäller \\(V=\\pi\\int_a^b y^2\\,dx\\).</p><p>a) \\(V=\\pi\\int_0^2x^2\\,dx=\\pi\\left[\\frac{x^3}{3}\\right]_0^2=\\boxed{\\frac{8\\pi}{3}}\\).</p><p>b) \\(V=\\pi\\int_0^1(2x)^2\\,dx=4\\pi\\left[\\frac{x^3}{3}\\right]_0^1=\\boxed{\\frac{4\\pi}{3}}\\).</p><p>c) \\(V=\\pi\\int_0^4(\\sqrt{x})^2\\,dx=\\pi\\int_0^4x\\,dx=\\pi\\left[\\frac{x^2}{2}\\right]_0^4=\\boxed{8\\pi}\\).</p>",
     "familj": "rotation_xaxel_rutin_6"
   },
   {
@@ -8576,8 +8576,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Bestäm arean mellan kurvorna (y=2x) och (y=x^2).</p>",
-    "s": "<p>Skärningspunkterna fås ur (2x=x^2), alltså (x(x-2)=0). Därför skär kurvorna varandra när (x=0) och (x=2).</p><p>På intervallet ([0,2]) ligger (y=2x) ovanför (y=x^2). Arean blir därför</p><p>[A=int_0^2 (2x-x^2),dx.]</p><p>En primitiv funktion är (x^2-\frac{x^3}{3}). Alltså</p><p>[A=left[x^2-\frac{x^3}{3}\right]_0^2=4-\frac83=\boxed{\frac43}.]</p>",
+    "t": "<p>Bestäm arean mellan kurvorna \\(y=2x\\) och \\(y=x^2\\).</p>",
+    "s": "<p>Skärningspunkterna fås ur \\(2x=x^2\\), alltså \\(x(x-2)=0\\). Kurvorna skär därför varandra vid \\(x=0\\) och \\(x=2\\).</p><p>På intervallet \\[0,2\\] ligger \\(y=2x\\) ovanför \\(y=x^2\\). Arean är</p><p>\\[A=\\int_0^2(2x-x^2)\\,dx=\\left[x^2-\\frac{x^3}{3}\\right]_0^2=4-\\frac83=\\boxed{\\frac43}.\\]</p>",
     "familj": "area_mellan_kurvor_enkel_6"
   },
   {
@@ -8589,8 +8589,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/1",
-    "t": "<p>En kontinuerlig slumpvariabel (X) har täthetsfunktionen</p><p>[f(x)=\begin{cases}kx, & 0le xle 2,\u0000, & \text{annars.}end{cases}]</p><p>a) Bestäm konstanten (k).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm sannolikheten (P(1le Xle 2)).</p>",
-    "s": "<p><strong>Idé:</strong> Arean under en täthetsfunktion ska vara 1.</p><p>a) [int_0^2 kx,dx=1.]</p><p>En primitiv funktion är (\frac{kx^2}{2}). Då fås</p><p>[left[\frac{kx^2}{2}\right]_0^2=2k=1Rightarrow k=\boxed{\frac12}.]</p><p>b) Nu är (f(x)=\frac{x}{2}) på intervallet ([0,2]). Sannolikheten blir</p><p>[P(1le Xle 2)=int_1^2 \frac{x}{2},dx=left[\frac{x^2}{4}\right]_1^2=1-\frac14=\boxed{\frac34}.]</p>",
+    "t": "<p>En kontinuerlig slumpvariabel \\(X\\) har täthetsfunktionen</p><p>\\[f(x)=\\begin{cases}kx, & 0\\le x\\le2,\\\\0, & \\text{annars.}\\end{cases}\\]</p><p>a) Bestäm konstanten \\(k\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm sannolikheten \\(P(1\\le X\\le2)\\).</p>",
+    "s": "<p><strong>Idé:</strong> Arean under en täthetsfunktion ska vara 1.</p><p>a) Därför gäller</p><p>\\[\\int_0^2kx\\,dx=1.\\]</p><p>Alltså \\(\\left[\\frac{kx^2}{2}\\right]_0^2=2k=1\\), vilket ger \\(\\boxed{k=\\frac12}\\).</p><p>b) Nu är \\(f(x)=\\frac{x}{2}\\) på intervallet. Då</p><p>\\[P(1\\le X\\le2)=\\int_1^2\\frac{x}{2}\\,dx=\\left[\\frac{x^2}{4}\\right]_1^2=1-\\frac14=\\boxed{\\frac34}.\\]</p>",
     "familj": "tathetsfunktion_linjar_4"
   },
   {
@@ -8602,8 +8602,8 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "3/0/0",
-    "t": "<p>I det komplexa talplanet motsvarar (z) punkten ((-3,4)).</p><p>a) Skriv (z) på formen (a+bi).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm (|z|).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm (overline z).</p>",
-    "s": "<p>a) Realdelen är (-3) och imaginärdelen är (4), alltså (\boxed{z=-3+4i}).</p><p>b) <strong>Formel från formelbladet:</strong> (|z|=sqrt{a^2+b^2}).</p><p>Alltså (|z|=sqrt{(-3)^2+4^2}=sqrt{25}=\boxed{5}).</p><p>c) Konjugatet fås genom att byta tecken på imaginärdelen: (\boxed{overline z=-3-4i}).</p>",
+    "t": "<p>I det komplexa talplanet motsvarar \\(z\\) punkten \\((-3,4)\\).</p><p>a) Skriv \\(z\\) på formen \\(a+bi\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(|z|\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(\\overline z\\).</p>",
+    "s": "<p>a) Realdelen är \\(-3\\) och imaginärdelen är 4, alltså \\(\\boxed{z=-3+4i}\\).</p><p>b) <strong>Formel från formelbladet:</strong> \\(|z|=\\sqrt{a^2+b^2}\\).</p><p>Alltså \\(|z|=\\sqrt{(-3)^2+4^2}=\\boxed{5}\\).</p><p>c) Konjugatet fås genom att byta tecken på imaginärdelen: \\(\\boxed{\\overline z=-3-4i}\\).</p>",
     "familj": "komplexplan_avlasning_6"
   },
   {
@@ -8615,8 +8615,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Skriv talet (z=-1+isqrt3) i polär form.</p>",
-    "s": "<p><strong>Formel från formelbladet:</strong> (z=r(cos v+isin v)).</p><p>Först bestäms absolutbeloppet:</p><p>[r=|z|=sqrt{(-1)^2+(sqrt3)^2}=sqrt4=2.]</p><p>Punkten ((-1,sqrt3)) ligger i andra kvadranten. Referensvinkeln är (pi/3), så argumentet är (v=2pi/3).</p><p>Därför är den polära formen (\boxed{2left(cos\frac{2pi}{3}+isin\frac{2pi}{3}\right)}).</p>",
+    "t": "<p>Skriv talet \\(z=-1+i\\sqrt3\\) i polär form.</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> \\(z=r(\\cos v+i\\sin v)\\).</p><p>Först bestäms absolutbeloppet:</p><p>\\[r=|z|=\\sqrt{(-1)^2+(\\sqrt3)^2}=2.\\]</p><p>Punkten \\((-1,\\sqrt3)\\) ligger i andra kvadranten. Vinkeln mot positiva realaxeln är därför \\(v=\\frac{2\\pi}{3}\\).</p><p>Den polära formen är</p><p>\\[\\boxed{z=2\\left(\\cos\\frac{2\\pi}{3}+i\\sin\\frac{2\\pi}{3}\\right)}.\\]</p>",
     "familj": "polar_form_enkel_6"
   },
   {
@@ -8628,8 +8628,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/1",
-    "t": "<p>Bestäm alla lösningar till ekvationen (z^4=16).</p>",
-    "s": "<p>Skriv (16) i polär form: (16=16(cos 0+isin 0)).</p><p><strong>Formel från formelbladet:</strong> Om (z^n=r(cos v+isin v)) så fås lösningarna genom att ta n:te roten av absolutbeloppet och dela argumentet i lika stora steg.</p><p>Här blir absolutbeloppet (sqrt[4]{16}=2) och argumenten</p><p>[\frac{0+2kpi}{4}=\frac{kpi}{2},qquad k=0,1,2,3.]</p><p>Lösningarna är alltså</p><p>[\boxed{2, 2i, -2, -2i}.]</p>",
+    "t": "<p>Bestäm alla lösningar till ekvationen \\(z^4=16\\).</p>",
+    "s": "<p>Skriv högerledet i polär form: \\(16=16(\\cos0+i\\sin0)\\).</p><p>För en fjärderot blir absolutbeloppet \\(\\sqrt[4]{16}=2\\), och argumenten är</p><p>\\[v_k=\\frac{0+2k\\pi}{4}=\\frac{k\\pi}{2},\\qquad k=0,1,2,3.\\]</p><p>Alltså</p><p>\\[z_k=2\\left(\\cos\\frac{k\\pi}{2}+i\\sin\\frac{k\\pi}{2}\\right),\\quad k=0,1,2,3,\\]</p><p>vilket ger \\(\\boxed{2,\\ 2i,\\ -2,\\ -2i}\\).</p>",
     "familj": "rotter_enhetsvinklar_3"
   },
   {
@@ -8641,8 +8641,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/1",
-    "t": "<p>Beskriv geometriskt mängden av alla komplexa tal (z) som uppfyller (|z-1|=|z+3|).</p>",
-    "s": "<p>Låt (z=x+iy). Då är (|z-1|) avståndet från punkten ((x,y)) till ((1,0)), och (|z+3|) är avståndet till ((-3,0)).</p><p>Villkoret säger alltså att punkten ska ligga lika långt från dessa båda punkter.</p><p>Därför får man mittnormalen till sträckan mellan ((-3,0)) och ((1,0)). Mittpunkten är ((-1,0)), så mängden är den lodräta linjen (\boxed{x=-1}).</p>",
+    "t": "<p>Beskriv geometriskt mängden av alla komplexa tal \\(z\\) som uppfyller \\(|z-1|=|z+3|\\).</p>",
+    "s": "<p>Låt \\(z=x+iy\\). Då är \\(|z-1|\\) avståndet från punkten \\((x,y)\\) till \\((1,0)\\), och \\(|z+3|\\) är avståndet till \\((-3,0)\\).</p><p>Villkoret säger att punkten ligger lika långt från de båda punkterna. Mängden är därför den linje som går vinkelrätt genom mittpunkten av sträckan mellan dem.</p><p>Mittpunkten är \\((-1,0)\\), så linjen är \\(\\boxed{x=-1}\\).</p>",
     "familj": "komplexplan_lokus_mittnormal_2"
   },
   {
@@ -10191,136 +10191,2813 @@ window.BANKMATO2 = [
     "t": "<p>Ett komplext tal förändras enligt \\(T(z)=iz\\).</p><p>a) Bestäm \\(T(2-i)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Beskriv vad multiplikationen med \\(i\\) gör geometriskt i det komplexa talplanet.</p>",
     "s": "<p>a) \\(i(2-i)=2i-i^2=\\boxed{1+2i}\\).</p><p>b) Talet \\(i\\) har absolutbelopp 1 och argument \\(\\pi/2\\). Multiplikation med \\(i\\) vrider därför alla punkter \\(90^\\circ\\) moturs kring origo utan att ändra avståndet till origo.</p>",
     "familj": "komplexplan_rotation_i_3"
+  },
+  {
+    "id": "2.179",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En cirkelformad mossfläck växer utåt. Radien ökar med 18 cm per år.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt mossfläckens area ökar när radien är 75 cm.</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln. Arean beror på radien, och radien beror på tiden, så</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\cdot\\frac{dr}{dt}.\\]</p><p>För en cirkel är \\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vi räknar i meter: \\(r=0,75\\) m och \\(dr/dt=0,18\\) m/år.</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot0,75\\cdot0,18=0,27\\pi\\approx0,85.\\]</p><p><strong>Arean ökar med ungefär \\(\\boxed{0,85\\text{ m}^2/\\text{år}}\\).</strong></p>",
+    "familj": "forandringshastighet_cirkel_area_1"
+  },
+  {
+    "id": "2.180",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En tunn oljefläck på vattenytan antas vara cirkelformad. Vid ett visst ögonblick är radien 8,0 m och fläckens area ökar med 40 m²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt radien ökar vid detta ögonblick.</p>",
+    "s": "<p>För cirkeln gäller \\(A=\\pi r^2\\).</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dA/dt=40\\) och \\(r=8\\):</p><p>\\[40=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{40}{16\\pi}=\\frac{2,5}{\\pi}\\approx0,80.\\]</p><p><strong>Radien ökar med ungefär \\(\\boxed{0,80\\text{ m/min}}\\).</strong></p>",
+    "familj": "forandringshastighet_cirkel_radie_2"
+  },
+  {
+    "id": "2.181",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En klotformad ballong blåses upp. Radien ökar med 0,60 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Hur snabbt ökar ballongens volym när radien är 12 cm?</p>",
+    "s": "<p>Volymen av ett klot är</p><p>\\[V=\\frac{4\\pi r^3}{3}.\\]</p><p>Eftersom \\(V\\) beror på \\(r\\), som i sin tur beror på tiden, använder vi <strong>kedjeregeln från formelbladet</strong>:</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dV}{dr}=4\\pi r^2.\\]</p><p>Vid \\(r=12\\) cm och \\(dr/dt=0,60\\) cm/s:</p><p>\\[\\frac{dV}{dt}=4\\pi\\cdot12^2\\cdot0,60=345,6\\pi\\approx1086.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{1,09\\cdot10^3\\text{ cm}^3/\\text{s}}\\).</strong></p>",
+    "familj": "forandringshastighet_klot_volym_1"
+  },
+  {
+    "id": "2.182",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En klotformad isbit smälter. När radien är 5,0 cm minskar isbitens yta med 20 cm²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Bestäm hur snabbt radien minskar vid detta ögonblick.</p>",
+    "s": "<p>Ytan av ett klot är \\(A=4\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dr}=8\\pi r.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}.\\]</p><p>Eftersom ytan minskar är \\(dA/dt=-20\\). Vid \\(r=5\\):</p><p>\\[-20=8\\pi\\cdot5\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=-\\frac{1}{2\\pi}\\approx-0,159.\\]</p><p><strong>Radien minskar alltså med ungefär \\(\\boxed{0,16\\text{ cm/min}}\\).</strong></p>",
+    "familj": "forandringshastighet_klot_radie_2"
+  },
+  {
+    "id": "2.183",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En kubformad modell förstoras så att sidlängden ökar med 0,30 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kub med sidlängden s markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<polygon points=\"125,78 238,78 292,42 180,42\" fill=\"#F0F5F7\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<polygon points=\"238,78 292,42 292,154 238,190\" fill=\"#E2EDF1\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<rect x=\"125\" y=\"78\" width=\"113\" height=\"112\" fill=\"#EAF3F6\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<line x1=\"125\" y1=\"207\" x2=\"238\" y2=\"207\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M125 207 l9 -5 v10 z\" fill=\"#268FA3\"/><path d=\"M238 207 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"182\" y=\"226\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">s</text>\n</svg></span><p>Bestäm hur snabbt kubens volym ökar när sidlängden är 8,0 cm.</p>",
+    "s": "<p>Låt sidlängden vara \\(s\\). Volymen är \\(V=s^3\\), alltså</p><p>\\[\\frac{dV}{ds}=3s^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{ds}\\frac{ds}{dt}=3s^2\\frac{ds}{dt}.\\]</p><p>Vid \\(s=8,0\\) cm och \\(ds/dt=0,30\\) cm/s:</p><p>\\[\\frac{dV}{dt}=3\\cdot8^2\\cdot0,30=57,6.\\]</p><p><strong>Volymen ökar med \\(\\boxed{57,6\\text{ cm}^3/\\text{s}}\\).</strong></p>",
+    "familj": "forandringshastighet_kub_volym_1"
+  },
+  {
+    "id": "2.184",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En kvadratisk ljusbild på en vägg växer men behåller sin form. När sidlängden är 3,0 m ökar bildens area med 1,8 m²/s.</p><p>a) Bestäm \\(dA/ds\\) när \\(s=3,0\\) m.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm hur snabbt sidlängden ökar vid samma ögonblick.</p>",
+    "s": "<p>För en kvadrat är \\(A=s^2\\).</p><p>a) \\[\\frac{dA}{ds}=2s.\\]</p><p>Vid \\(s=3,0\\) m är</p><p>\\[\\boxed{\\frac{dA}{ds}=6,0\\text{ m}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{ds}\\frac{ds}{dt}.\\]</p><p>Alltså</p><p>\\[1,8=6,0\\frac{ds}{dt}\\Rightarrow \\frac{ds}{dt}=\\boxed{0,30\\text{ m/s}}.\\]</p>",
+    "familj": "forandringshastighet_kvadrat_sida_1"
+  },
+  {
+    "id": "2.185",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En cylindrisk bassäng har den konstanta höjden 1,5 m. Bassängens radie ökar med 4,0 cm/min när den vecklas ut.</p><span class=\"fig\"><svg width=\"390\" height=\"255\" viewBox=\"0 0 390 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och fast höjd h\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"253\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<ellipse cx=\"185\" cy=\"60\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<path d=\"M107 60 L107 188 M263 60 L263 188\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"188\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"60\" x2=\"250\" y2=\"60\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M250 60 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"218\" y=\"50\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<line x1=\"287\" y1=\"60\" x2=\"287\" y2=\"188\" stroke=\"#5C575E\" stroke-width=\"1.6\"/>\n<path d=\"M287 60 l-5 9 h10 z M287 188 l-5 -9 h10 z\" fill=\"#5C575E\"/>\n<text x=\"300\" y=\"129\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h</text>\n</svg></span><p>Bestäm hur snabbt bassängens volym ökar när radien är 2,0 m.</p>",
+    "s": "<p>Eftersom höjden är konstant kan volymen skrivas som en funktion av radien:</p><p>\\[V=\\pi r^2h=1,5\\pi r^2.\\]</p><p>Då</p><p>\\[\\frac{dV}{dr}=3\\pi r.\\]</p><p>Omvandla först \\(4,0\\) cm/min till \\(0,040\\) m/min. <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}=3\\pi\\cdot2,0\\cdot0,040=0,24\\pi.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{0,75\\text{ m}^3/\\text{min}}\\).</strong></p>",
+    "familj": "forandringshastighet_cylinder_volym_1"
+  },
+  {
+    "id": "2.186",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En hög med sand behåller formen av en kon där höjden hela tiden är tre gånger basradien, alltså \\(h=3r\\).</p><span class=\"fig\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kon med höjden h och basradien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<path d=\"M185 35 L95 205 L275 205 Z\" fill=\"#F4EFE2\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"205\" rx=\"90\" ry=\"20\" fill=\"#EFE4C7\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"35\" x2=\"185\" y2=\"205\" stroke=\"#5C575E\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<text x=\"195\" y=\"123\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h = 3r</text>\n<line x1=\"185\" y1=\"205\" x2=\"270\" y2=\"205\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M270 205 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"226\" y=\"195\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Sand tillförs med 0,12 m³/min. Bestäm hur snabbt basradien ökar när \\(r=0,80\\) m.</p>",
+    "s": "<p><strong>Första steget:</strong> Skriv volymen som en funktion av \\(r\\).</p><p>Konens volym är</p><p>\\[V=\\frac{\\pi r^2h}{3}.\\]</p><p>Eftersom \\(h=3r\\) får vi</p><p>\\[V=\\frac{\\pi r^2(3r)}{3}=\\pi r^3.\\]</p><p>Därför</p><p>\\[\\frac{dV}{dr}=3\\pi r^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>Vid \\(r=0,80\\) m:</p><p>\\[0,12=3\\pi(0,80)^2\\frac{dr}{dt}=1,92\\pi\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=\\frac{0,12}{1,92\\pi}=\\frac{0,0625}{\\pi}\\approx0,0199\\text{ m/min}.\\]</p><p><strong>Basradien ökar med ungefär \\(\\boxed{2,0\\text{ cm/min}}\\).</strong></p>",
+    "familj": "forandringshastighet_kon_radie_1"
+  },
+  {
+    "id": "2.187",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Ett radarsystem söker av ett cirkelformat område. Sökningens radie ökar med 0,40 km/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>När radien är 6,0 km:</p><p>a) bestäm \\(dA/dr\\),<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt det avsökta området ökar.</p>",
+    "s": "<p>Arean är \\(A=\\pi r^2\\).</p><p>a) \\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vid \\(r=6,0\\) km:</p><p>\\[\\boxed{\\frac{dA}{dr}=12\\pi\\text{ km}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=12\\pi\\cdot0,40=\\boxed{4,8\\pi\\text{ km}^2/\\text{min}}\\approx15,1\\text{ km}^2/\\text{min}.\\]</p>",
+    "familj": "forandringshastighet_radar_area_1"
+  },
+  {
+    "id": "2.188",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Efter en sten träffat en stilla vattenyta sprids en cirkelformad våg utåt. Omkretsen av den yttersta vågfronten ökar med 5,0 m/s.</p><span class=\"fig\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkelformad våg med radien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"116\" r=\"76\" fill=\"#EEF7FA\" stroke=\"#527C91\" stroke-width=\"2.3\"/>\n<circle cx=\"182\" cy=\"116\" r=\"58\" fill=\"none\" stroke=\"#A7C6D3\" stroke-width=\"1.2\"/>\n<circle cx=\"182\" cy=\"116\" r=\"40\" fill=\"none\" stroke=\"#C8DDE5\" stroke-width=\"1.2\"/>\n<line x1=\"182\" y1=\"116\" x2=\"252\" y2=\"116\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M252 116 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"106\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"182\" y=\"218\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">den yttersta vågfronten är en cirkel</text>\n</svg></span><p>När vågfrontens radie är 4,0 m:</p><p>a) bestäm hur snabbt radien ökar,<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt arean innanför vågfronten ökar.</p>",
+    "s": "<p>a) Omkretsen är \\(C=2\\pi r\\), så</p><p>\\[\\frac{dC}{dr}=2\\pi.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dC}{dt}=\\frac{dC}{dr}\\frac{dr}{dt}.\\]</p><p>Därför</p><p>\\[5,0=2\\pi\\frac{dr}{dt}\\Rightarrow \\boxed{\\frac{dr}{dt}=\\frac{5}{2\\pi}\\approx0,80\\text{ m/s}}.\\]</p><p>b) Arean är \\(A=\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Vid \\(r=4,0\\) m:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot4\\cdot\\frac{5}{2\\pi}=\\boxed{20\\text{ m}^2/\\text{s}}.\\]</p><p><strong>Insikt:</strong> Samma förändringshastighet för radien kan kopplas vidare till flera andra storheter.</p>",
+    "familj": "forandringshastighet_vagfront_tva_steg_1"
+  },
+  {
+    "id": "1.221",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=2\\sin x\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(2\\), perioden är \\(2\\pi\\) och medellinjen är \\(y=0\\)., största värdet är \\(2\\) och minsta värdet är \\(-2\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_sin_amp2_1000"
+  },
+  {
+    "id": "1.222",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=3\\cos x-1\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(3\\), perioden är \\(2\\pi\\) och medellinjen är \\(y=-1\\)., största värdet är \\(2\\) och minsta värdet är \\(-4\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_cos_amp3_shift_1000"
+  },
+  {
+    "id": "1.223",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=\\sin(2x)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(1\\), perioden är \\(\\pi\\) och medellinjen är \\(y=0\\)., största värdet är \\(1\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_sin_2x_1000"
+  },
+  {
+    "id": "1.224",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=2\\cos(3x)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(2\\), perioden är \\(2\\pi/3\\) och medellinjen är \\(y=0\\)., största värdet är \\(2\\) och minsta värdet är \\(-2\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_cos_3x_1000"
+  },
+  {
+    "id": "1.225",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=-2\\sin x+1\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(2\\), perioden är \\(2\\pi\\) och medellinjen är \\(y=1\\)., största värdet är \\(3\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_neg_sin_shift_1000"
+  },
+  {
+    "id": "1.226",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skissa grafen till \\(y=-\\cos(2x)+2\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(1\\), perioden är \\(\\pi\\) och medellinjen är \\(y=2\\)., största värdet är \\(3\\) och minsta värdet är \\(1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_neg_cos_shift_1000"
+  },
+  {
+    "id": "1.227",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Skissa grafen till \\(y=3\\sin(x-\\pi/2)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(3\\), perioden är \\(2\\pi\\) och medellinjen är \\(y=0\\)., största värdet är \\(3\\) och minsta värdet är \\(-3\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_sin_phase_1000"
+  },
+  {
+    "id": "1.228",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Skissa grafen till \\(y=2\\cos(x+\\pi/3)+1\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(2\\), perioden är \\(2\\pi\\) och medellinjen är \\(y=1\\)., största värdet är \\(3\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_cos_phase_1000"
+  },
+  {
+    "id": "1.229",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Skissa grafen till \\(y=\\sin(x/2)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(1\\), perioden är \\(4\\pi\\) och medellinjen är \\(y=0\\)., största värdet är \\(1\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_sin_half_1000"
+  },
+  {
+    "id": "1.230",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Skissa grafen till \\(y=1+2\\cos(2x-\\pi)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(2\\), perioden är \\(\\pi\\) och medellinjen är \\(y=1\\)., största värdet är \\(3\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_cos_phase2_1000"
+  },
+  {
+    "id": "1.231",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Skissa grafen till \\(y=2-3\\sin(2x)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(3\\), perioden är \\(\\pi\\) och medellinjen är \\(y=2\\)., största värdet är \\(5\\) och minsta värdet är \\(-1\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_sin_combined_1000"
+  },
+  {
+    "id": "1.232",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Skissa grafen till \\(y=-2+4\\cos(x/2)\\) i koordinatsystemet. Markera minst en hel period och funktionens största och minsta värde.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p><strong>Kontrollpunkter:</strong> amplituden är \\(4\\), perioden är \\(4\\pi\\) och medellinjen är \\(y=-2\\)., största värdet är \\(2\\) och minsta värdet är \\(-6\\).</p><p>Använd dessa värden för att placera maximi- och minimipunkter samt noll-/medellinjepassager. En korrekt skiss ska följa sinus-/cosinusformens ordning och ha rätt period.</p>",
+    "familj": "graf_cos_half_1000"
+  },
+  {
+    "id": "1.233",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin x=\\frac12.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/6,\\ 5\\pi/6\\).</p>",
+    "familj": "trigekv_npserie_1"
+  },
+  {
+    "id": "1.234",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\cos x=-\\frac12.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=2\\pi/3,\\ 4\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_2"
+  },
+  {
+    "id": "1.235",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\tan x=1.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/4,\\ 5\\pi/4\\).</p>",
+    "familj": "trigekv_npserie_3"
+  },
+  {
+    "id": "1.236",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin(2x)=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=0,\\pi/2,\\pi,\\ 3\\pi/2\\).</p>",
+    "familj": "trigekv_npserie_4"
+  },
+  {
+    "id": "1.237",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\cos(3x)=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/6,\\pi/2,\\ 5\\pi/6,\\ 7\\pi/6,\\ 3\\pi/2,\\ 11\\pi/6\\).</p>",
+    "familj": "trigekv_npserie_5"
+  },
+  {
+    "id": "1.238",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\sin x-\\sqrt3=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/3,\\ 2\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_6"
+  },
+  {
+    "id": "1.239",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\cos^2x-1=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/4,\\ 3\\pi/4,\\ 5\\pi/4,\\ 7\\pi/4\\).</p>",
+    "familj": "trigekv_npserie_7"
+  },
+  {
+    "id": "1.240",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\sin^2x-\\sin x-1=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/2,\\ 7\\pi/6,\\ 11\\pi/6\\).</p>",
+    "familj": "trigekv_npserie_8"
+  },
+  {
+    "id": "1.241",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\cos^2x+3\\cos x+1=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=2\\pi/3,\\pi,\\ 4\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_9"
+  },
+  {
+    "id": "1.242",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin2x=\\sin x.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=0,\\pi/3,\\pi,\\ 5\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_10"
+  },
+  {
+    "id": "1.243",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin2x=\\cos x.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/6,\\pi/2,\\ 5\\pi/6,\\ 3\\pi/2\\).</p>",
+    "familj": "trigekv_npserie_11"
+  },
+  {
+    "id": "1.244",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen</p><p>\\[\\cos2x=\\cos x.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=0,\\ 2\\pi/3,\\ 4\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_12"
+  },
+  {
+    "id": "1.245",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin x+\\cos x=0.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=3\\pi/4,\\ 7\\pi/4\\).</p>",
+    "familj": "trigekv_npserie_13"
+  },
+  {
+    "id": "1.246",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\sin x\\cos x=\\frac12.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/12,\\ 5\\pi/12,\\ 13\\pi/12,\\ 17\\pi/12\\).</p>",
+    "familj": "trigekv_npserie_14"
+  },
+  {
+    "id": "1.247",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin^2x-\\cos^2x=\\frac12.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/3,\\ 2\\pi/3,\\ 4\\pi/3,\\ 5\\pi/3\\).</p>",
+    "familj": "trigekv_npserie_15"
+  },
+  {
+    "id": "1.248",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Lös ekvationen</p><p>\\[\\frac{1}{1+\\tan^2x}=\\frac34.\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/6,\\ 5\\pi/6,\\ 7\\pi/6,\\ 11\\pi/6\\).</p>",
+    "familj": "trigekv_npserie_16"
+  },
+  {
+    "id": "1.249",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[1-\\sin^2x=\\cos^2x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Trigonometriska ettan ger direkt \\(1-\\sin^2x=\\cos^2x\\).</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_1"
+  },
+  {
+    "id": "1.250",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[1-\\cos^2x=\\sin^2x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Trigonometriska ettan ger direkt \\(1-\\cos^2x=\\sin^2x\\).</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_2"
+  },
+  {
+    "id": "1.251",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\frac{1-\\sin^2x}{\\cos x}=\\cos x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Byt ut täljaren mot \\(\\cos^2x\\) och förkorta med \\(\\cos x\\), där uttrycket är definierat.</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_3"
+  },
+  {
+    "id": "1.252",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[(\\sin x+\\cos x)^2=1+\\sin2x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Utveckla kvadraten: \\(\\sin^2x+2\\sin x\\cos x+\\cos^2x=1+\\sin2x\\).</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_4"
+  },
+  {
+    "id": "1.253",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[(\\cos x-\\sin x)^2=1-\\sin2x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Utveckla kvadraten och använd \\(\\sin^2x+\\cos^2x=1\\) samt \\(2\\sin x\\cos x=\\sin2x\\).</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_5"
+  },
+  {
+    "id": "1.254",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\frac{\\sin2x}{2\\cos x}=\\sin x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Använd \\(\\sin2x=2\\sin x\\cos x\\) och förkorta.</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_6"
+  },
+  {
+    "id": "1.255",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\frac{1-\\cos2x}{2}=\\sin^2x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Från \\(\\cos2x=1-2\\sin^2x\\) fås \\(1-\\cos2x=2\\sin^2x\\).</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_7"
+  },
+  {
+    "id": "1.256",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\frac{\\sin(x+y)+\\sin(x-y)}{2}=\\sin x\\cos y.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Använd additionsformlerna på båda sinusuttrycken. Termerna med \\(\\cos x\\sin y\\) tar ut varandra.</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_8"
+  },
+  {
+    "id": "1.257",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\cos(x+y)+\\cos(x-y)=2\\cos x\\cos y.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Utveckla båda med additionsformeln för cosinus. Termerna med \\(\\sin x\\sin y\\) tar ut varandra.</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_9"
+  },
+  {
+    "id": "1.258",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Visa att identiteten gäller där båda leden är definierade:</p><p>\\[\\frac{1-\\cos2x}{\\sin2x}=\\tan x.\\]</p>",
+    "s": "<p><strong>Idé:</strong> Utgå från vänsterledet och använd formler från formelbladet.</p><p>Använd \\(1-\\cos2x=2\\sin^2x\\) och \\(\\sin2x=2\\sin x\\cos x\\), och förkorta.</p><p>Därmed har vänsterledet skrivits om till högerledet.</p>",
+    "familj": "identitet_npserie_10"
+  },
+  {
+    "id": "1.259",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Skriv \\(15^\\circ\\) i radianer.</p>",
+    "s": "<p>Använd \\(180^\\circ=\\pi\\) radianer:</p><p>\\[15^\\circ=\\frac{15}{180}\\pi=\\boxed{\\pi/12}.\\]</p>",
+    "familj": "radian_rutin_extra_1"
+  },
+  {
+    "id": "1.260",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Skriv \\(75^\\circ\\) i radianer.</p>",
+    "s": "<p>Använd \\(180^\\circ=\\pi\\) radianer:</p><p>\\[75^\\circ=\\frac{75}{180}\\pi=\\boxed{5\\pi/12}.\\]</p>",
+    "familj": "radian_rutin_extra_2"
+  },
+  {
+    "id": "1.261",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Skriv \\(210^\\circ\\) i radianer.</p>",
+    "s": "<p>Använd \\(180^\\circ=\\pi\\) radianer:</p><p>\\[210^\\circ=\\frac{210}{180}\\pi=\\boxed{7\\pi/6}.\\]</p>",
+    "familj": "radian_rutin_extra_3"
+  },
+  {
+    "id": "1.262",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Skriv \\(330^\\circ\\) i radianer.</p>",
+    "s": "<p>Använd \\(180^\\circ=\\pi\\) radianer:</p><p>\\[330^\\circ=\\frac{330}{180}\\pi=\\boxed{11\\pi/6}.\\]</p>",
+    "familj": "radian_rutin_extra_4"
+  },
+  {
+    "id": "1.263",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En cirkelsektor har radien 9 cm och båglängden \\(6\\pi\\) cm. Bestäm sektorns vinkel i radianer och grader.</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> \\(b=rv\\).</p><p>\\[v=\\frac br=\\frac{6\\pi}{9}=\\frac{2\\pi}{3}.\\]</p><p>Eftersom \\(\\pi\\) radianer motsvarar \\(180^\\circ\\) blir vinkeln \\(\\boxed{2\\pi/3=120^\\circ}\\).</p>",
+    "familj": "radian_baglangd_c4"
+  },
+  {
+    "id": "1.264",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En cirkelsektor har area \\(40\\pi\\text{ cm}^2\\) och radie 10 cm. Bestäm medelpunktsvinkeln i radianer.</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> \\(A=\\frac{r^2v}{2}\\).</p><p>\\[40\\pi=\\frac{10^2v}{2}=50v\\Rightarrow v=\\boxed{\\frac{4\\pi}{5}}.\\]</p>",
+    "familj": "radian_sektor_c4"
+  },
+  {
+    "id": "1.265",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Höjden över marken för en gondol i ett pariserhjul modelleras av</p><p>\\[h(t)=14-12\\cos\\left(\\frac{\\pi t}{20}\\right),\\]</p><p>där \\(t\\) mäts i sekunder.</p><p>a) Bestäm största och minsta höjd.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm hur lång tid ett varv tar.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm första tidpunkten då gondolen är 14 m över marken.</p>",
+    "s": "<p>a) Medellinje 14 och amplitud 12 ger min \\(2\\) m och max \\(26\\) m.</p><p>b) Perioden är \\(T=2\\pi/(\\pi/20)=\\boxed{40\\text{ s}}\\).</p><p>c) \\(h=14\\) ger cosinusdelen 0. Första gången \\(\\pi t/20=\\pi/2\\), alltså \\(t=\\boxed{10\\text{ s}}\\).</p>",
+    "familj": "modell_pariserhjul_np2"
+  },
+  {
+    "id": "1.266",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En periodisk temperaturmodell har formen \\(T(t)=a+b\\sin(c(t-d))\\). Under ett dygn är temperaturen som högst 24 °C och som lägst 12 °C. Tiden mellan två efterföljande maximipunkter är 24 h och temperaturen passerar medellinjen uppåt klockan 09.00.</p><p>Bestäm en möjlig modell.</p>",
+    "s": "<p>Medellinjen är \\(a=(24+12)/2=18\\) och amplituden \\(b=(24-12)/2=6\\).</p><p>Period 24 ger \\(c=2\\pi/24=\\pi/12\\).</p><p>Sinus passerar medellinjen uppåt när argumentet är 0. Välj därför \\(d=9\\).</p><p>En möjlig modell är \\(\\boxed{T(t)=18+6\\sin(\\frac{\\pi}{12}(t-9))}\\).</p>",
+    "familj": "modell_temp_param_a2"
+  },
+  {
+    "id": "1.267",
+    "kap": 1,
+    "omr": "enhetscirkeln",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En punkt \\(P\\) på enhetscirkeln ligger i tredje kvadranten och har x-koordinaten \\(-3/5\\).</p><p>Bestäm punktens y-koordinat och \\(\\tan v\\), där \\(v\\) är motsvarande vinkel.</p>",
+    "s": "<p>På enhetscirkeln gäller \\(x^2+y^2=1\\). Alltså \\(9/25+y^2=1\\Rightarrow y^2=16/25\\). I tredje kvadranten är y negativ, så \\(y=-4/5\\).</p><p>\\[\\tan v=\\frac{y}{x}=\\frac{-4/5}{-3/5}=\\boxed{4/3}.\\]</p>",
+    "familj": "enhetscirkel_q3_c"
+  },
+  {
+    "id": "1.268",
+    "kap": 1,
+    "omr": "enhetscirkeln",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Vinkeln \\(v\\) ligger i andra kvadranten och \\(\\sin v=3/5\\).</p><p>Bestäm exakt \\(\\sin(2v)\\) och \\(\\cos(2v)\\).</p>",
+    "s": "<p>I andra kvadranten är cosinus negativ. Trigonometriska ettan ger \\(\\cos v=-4/5\\).</p><p>Dubbelvinkelformlerna ger</p><p>\\[\\sin2v=2\\sin v\\cos v=2\\cdot\\frac35\\cdot\\left(-\\frac45\\right)=\\boxed{-24/25},\\]</p><p>\\[\\cos2v=\\cos^2v-\\sin^2v=\\frac{16}{25}-\\frac9{25}=\\boxed{7/25}.\\]</p>",
+    "familj": "enhetscirkel_double_a"
+  },
+  {
+    "id": "1.269",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Funktionen \\(f(x)=a\\sin(bx)+d\\) har största värdet 7, minsta värdet −1 och perioden \\(\\pi\\).</p><p>Bestäm positiva värden på \\(a\\) och \\(b\\) samt \\(d\\).</p>",
+    "s": "<p>Medellinjen är \\(d=(7+(-1))/2=3\\). Amplituden är \\(a=(7-(-1))/2=4\\).</p><p>Perioden \\(2\\pi/b=\\pi\\) ger \\(b=2\\).</p><p>Alltså \\(\\boxed{a=4,b=2,d=3}\\).</p>",
+    "familj": "trig_param_c_extra"
+  },
+  {
+    "id": "1.270",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Funktionerna \\(f(x)=2\\sin x+1\\) och \\(g(x)=2\\cos x+1\\) skär varandra flera gånger.</p><p>Bestäm alla skärningspunkters x-koordinater i intervallet \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Skärning kräver \\(2\\sin x+1=2\\cos x+1\\), alltså \\(\\sin x=\\cos x\\).</p><p>Där \\(\\cos x\\ne0\\) kan vi dividera och får \\(\\tan x=1\\). I intervallet blir \\(\\boxed{x=\\pi/4,\\ 5\\pi/4}\\).</p>",
+    "familj": "trig_intersection_a"
+  },
+  {
+    "id": "2.189",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(x^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3x^5-2x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(1/x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sqrt{x}\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{4x^3}\\).</p><p>b) \\(\\boxed{15x^4-4x}\\).</p><p>c) \\(\\boxed{-1/x^2}\\).</p><p>d) \\(\\boxed{1/(2\\sqrt{x})}\\).</p>",
+    "familj": "deriv_mangd_1"
+  },
+  {
+    "id": "2.190",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln x\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{\\cos x}\\).</p><p>b) \\(\\boxed{-\\sin x}\\).</p><p>c) \\(\\boxed{e^x}\\).</p><p>d) \\(\\boxed{1/x}\\).</p>",
+    "familj": "deriv_mangd_2"
+  },
+  {
+    "id": "2.191",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(\\sin(3x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos(5x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln(4x)\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{3\\cos(3x)}\\).</p><p>b) \\(\\boxed{-5\\sin(5x)}\\).</p><p>c) \\(\\boxed{2e^{2x}}\\).</p><p>d) \\(\\boxed{1/x}\\).</p>",
+    "familj": "deriv_mangd_3"
+  },
+  {
+    "id": "2.192",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(x e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x \\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(x^2 \\ln x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((x+1)e^x\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{e^x(x+1)}\\).</p><p>b) \\(\\boxed{\\sin x+x \\cos x}\\).</p><p>c) \\(\\boxed{2x \\ln x+x}\\).</p><p>d) \\(\\boxed{e^x(x+2)}\\).</p>",
+    "familj": "deriv_mangd_4"
+  },
+  {
+    "id": "2.193",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\((x^2+1)^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sqrt{3x+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\ln(2x+5)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(e^{x^2}\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{6x(x^2+1)^2}\\).</p><p>b) \\(\\boxed{3/(2\\sqrt{3x+1})}\\).</p><p>c) \\(\\boxed{2/(2x+5)}\\).</p><p>d) \\(\\boxed{2x e^{x^2}}\\).</p>",
+    "familj": "deriv_mangd_5"
+  },
+  {
+    "id": "2.194",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\((x^2+1)/(x-1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((2x+1)/(x+2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin x/x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln x/x\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{(x^2-2x-1)/(x-1)^2}\\).</p><p>b) \\(\\boxed{3/(x+2)^2}\\).</p><p>c) \\(\\boxed{(x \\cos x-\\sin x)/x^2}\\).</p><p>d) \\(\\boxed{(1-\\ln x)/x^2}\\).</p>",
+    "familj": "deriv_mangd_6"
+  },
+  {
+    "id": "2.195",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(\\sin^2 x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos^2 x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{\\sin x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln(x^2+1)\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{2\\sin x \\cos x}\\).</p><p>b) \\(\\boxed{-2\\sin x \\cos x}\\).</p><p>c) \\(\\boxed{e^{\\sin x}\\cos x}\\).</p><p>d) \\(\\boxed{2x/(x^2+1)}\\).</p>",
+    "familj": "deriv_mangd_7"
+  },
+  {
+    "id": "2.196",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(x^2 \\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x^3 e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((x+2)\\ln x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(x \\sin(2x)\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{2x \\cos x-x^2 \\sin x}\\).</p><p>b) \\(\\boxed{e^x(x^3+3x^2)}\\).</p><p>c) \\(\\boxed{\\ln x+(x+2)/x}\\).</p><p>d) \\(\\boxed{\\sin(2x)+2x \\cos(2x)}\\).</p>",
+    "familj": "deriv_mangd_8"
+  },
+  {
+    "id": "2.197",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(e^x/(x+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x^2/(x^2+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos x/(1+x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln x/(x+1)\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{e^x*x/(x+1)^2}\\).</p><p>b) \\(\\boxed{2x/(x^2+1)^2}\\).</p><p>c) \\(\\boxed{(-(1+x)\\sin x-\\cos x)/(1+x)^2}\\).</p><p>d) \\(\\boxed{((x+1)/x-\\ln x)/(x+1)^2}\\).</p>",
+    "familj": "deriv_mangd_9"
+  },
+  {
+    "id": "2.198",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\((2x-1)^6\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((1+x^3)^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos(x^2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin(\\sqrt{x})\\)</p>",
+    "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{12(2x-1)^5}\\).</p><p>b) \\(\\boxed{12x^2(1+x^3)^3}\\).</p><p>c) \\(\\boxed{-2x \\sin(x^2)}\\).</p><p>d) \\(\\boxed{\\cos(\\sqrt{x})/(2\\sqrt{x})}\\).</p>",
+    "familj": "deriv_mangd_10"
+  },
+  {
+    "id": "2.199",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Funktionen \\(f(x)=x+\\frac{4}{x}\\), \\(x>0\\).</p><p>Bestäm funktionens minsta värde.</p>",
+    "s": "<p>\\[f'(x)=1-\\frac4{x^2}.\\]</p><p>\\(f'(x)=0\\) ger \\(x^2=4\\Rightarrow x=2\\) eftersom \\(x>0\\). Derivatan går från negativ till positiv, så punkten är minimum.</p><p>\\[f(2)=2+2=\\boxed4.\\]</p>",
+    "familj": "graf_min_x4x"
+  },
+  {
+    "id": "2.200",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm de lodräta och vågräta asymptoterna till</p><p>\\[f(x)=\\frac{3x+2}{x-4}.\\]</p>",
+    "s": "<p>Nämnaren är 0 vid \\(x=4\\), medan täljaren inte är 0 där. Därför är \\(\\boxed{x=4}\\) en lodrät asymptot.</p><p>För stora \\(|x|\\) dominerar \\(3x/x\\), så \\(f(x)\\to3\\). Den vågräta asymptoten är \\(\\boxed{y=3}\\).</p>",
+    "familj": "asymptot_rationell_c"
+  },
+  {
+    "id": "2.201",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>För \\(f(x)=x^3-3x^2-9x+5\\), bestäm alla maximi- och minimipunkter.</p>",
+    "s": "<p>\\[f'(x)=3x^2-6x-9=3(x-3)(x+1).\\]</p><p>Nollställena till derivatan är \\(x=-1\\) och \\(x=3\\). Tecknet för derivatan är +, −, +, så \\(x=-1\\) ger max och \\(x=3\\) min.</p><p>\\[f(-1)=10,\\quad f(3)=-22.\\]</p><p>Alltså maxpunkt \\(\\boxed{(-1,10)}\\) och minpunkt \\(\\boxed{(3,-22)}\\).</p>",
+    "familj": "graf_extrem_c2"
+  },
+  {
+    "id": "2.202",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>För parametern \\(a\\) ges funktionen</p><p>\\[f_a(x)=x^3-3ax.\\]</p><p>Undersök för vilka värden på \\(a\\) grafen har två extrempunkter, en punkt med horisontell tangent men ingen extrempunkt, respektive inga punkter med horisontell tangent.</p>",
+    "s": "<p>\\[f_a'(x)=3x^2-3a=3(x^2-a).\\]</p><p>Om \\(a>0\\) finns två nollställen \\(x=\\pm\\sqrt a\\), alltså två extrempunkter.</p><p>Om \\(a=0\\) är \\(f'(x)=3x^2\\), som bara är 0 vid \\(x=0\\) men inte byter tecken. Där finns en horisontell tangent men ingen extrempunkt.</p><p>Om \\(a<0\\) är \\(x^2-a>0\\) för alla x, så derivatan blir aldrig 0.</p>",
+    "familj": "graf_parameter_extrem_a2"
+  },
+  {
+    "id": "2.203",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Funktionen \\(f(x)=\\frac{x^2+1}{x-1}\\).</p><p>a) Bestäm en linjär asymptot.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm eventuella extrempunkter.</p>",
+    "s": "<p>a) Polynomdivision ger \\(f(x)=x+1+\\frac2{x-1}\\). Därför är den linjära asymptoten \\(\\boxed{y=x+1}\\).</p><p>b) Derivera:</p><p>\\[f'(x)=1-\\frac2{(x-1)^2}.\\]</p><p>\\(f'(x)=0\\) ger \\((x-1)^2=2\\), alltså \\(x=1\\pm\\sqrt2\\).</p><p>Vid \\(x=1-\\sqrt2\\) går derivatan från positiv till negativ, så där finns en maximipunkt. Vid \\(x=1+\\sqrt2\\) går derivatan från negativ till positiv, så där finns en minimipunkt.</p><p>\\[f(1-\\sqrt2)=2-2\\sqrt2,\\qquad f(1+\\sqrt2)=2+2\\sqrt2.\\]</p><p>Alltså maxpunkt \\(\\boxed{(1-\\sqrt2,\\,2-2\\sqrt2)}\\) och minpunkt \\(\\boxed{(1+\\sqrt2,\\,2+2\\sqrt2)}\\).</p>",
+    "familj": "asymptot_extrem_a"
+  },
+  {
+    "id": "2.204",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>En rektangulär hage ska byggas längs en rak stenmur. Det behövs därför stängsel på bara tre sidor. Totalt finns 80 m stängsel.</p><p>Bestäm den största möjliga arean.</p>",
+    "s": "<p>Låt sidorna vinkelrätt mot muren vara \\(x\\) och sidan parallellt med muren \\(y\\). Då \\(2x+y=80\\Rightarrow y=80-2x\\).</p><p>\\[A(x)=x(80-2x)=80x-2x^2,\\quad A'(x)=80-4x.\\]</p><p>\\(A'(x)=0\\Rightarrow x=20\\), och då \\(y=40\\). Eftersom andraderivatan är negativ fås maximum.</p><p>\\[A_{max}=20\\cdot40=\\boxed{800\\text{ m}^2}.\\]</p>",
+    "familj": "optimering_hage_c"
+  },
+  {
+    "id": "2.205",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En öppen låda ska tillverkas genom att kvadrater med sidan \\(x\\) cm klipps bort ur hörnen på en rektangulär kartong som är 30 cm × 20 cm. Kanterna viks sedan upp.</p><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
+    "s": "<p>Volymen är \\(V(x)=x(30-2x)(20-2x)\\), där \\(0<x<10\\).</p><p>Utveckla: \\(V=600x-100x^2+4x^3\\), så</p><p>\\[V'(x)=600-200x+12x^2.\\]</p><p>\\(V'=0\\) ger \\(3x^2-50x+150=0\\), alltså \\(x=(25\\pm5\\sqrt7)/3\\). Bara den mindre lösningen ligger i intervallet:</p><p>\\[\\boxed{x=\\frac{25-5\\sqrt7}{3}\\approx3,92\\text{ cm}}.\\]</p><p>Ändpunkterna ger volym 0, så detta är maximum.</p>",
+    "familj": "optimering_lada_a2"
+  },
+  {
+    "id": "2.206",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Radien i en cirkelformad oljefläck ökar med 0,6 m/min. Bestäm hur snabbt arean ökar när radien är 5 m.</p><span class=\"fig\"><svg width=\"360\" height=\"230\" viewBox=\"0 0 360 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med markerad radie\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"175\" cy=\"115\" r=\"72\" fill=\"#F7FAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"175\" y1=\"115\" x2=\"247\" y2=\"115\" stroke=\"#268FA3\" stroke-width=\"2\"/><text x=\"209\" y=\"105\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">r</text></svg></span>",
+    "s": "<p>Arean är \\(A=\\pi r^2\\). Kedjeregeln ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=2\\pi r\\cdot0,6.\\]</p><p>När \\(r=5\\): \\(dA/dt=2\\pi\\cdot5\\cdot0,6=\\boxed{6\\pi\\text{ m}^2/\\text{min}}\\).</p>",
+    "familj": "forandringshastighet_olja_c"
+  },
+  {
+    "id": "2.207",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm tangentens ekvation till \\(y=\\ln x+x\\) vid \\(x=1\\).</p>",
+    "s": "<p>\\[f'(x)=1/x+1.\\] Vid \\(x=1\\) är lutningen 2 och punkten är \\((1,1)\\). Alltså \\(y-1=2(x-1)\\), dvs \\(\\boxed{y=2x-1}\\).</p>",
+    "familj": "tangent_ln_c"
+  },
+  {
+    "id": "2.208",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla punkter där grafen till \\(f(x)=e^x-2x\\) har horisontell tangent.</p>",
+    "s": "<p>\\[f'(x)=e^x-2.\\] Horisontell tangent kräver \\(e^x=2\\Rightarrow x=\\ln2\\).</p><p>\\(y=f(\\ln2)=2-2\\ln2\\). Punkten är \\(\\boxed{(\\ln2,2-2\\ln2)}\\).</p>",
+    "familj": "exp_horisontell_c"
+  },
+  {
+    "id": "2.209",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Låt \\(f(x)=x^2+1\\) och \\(g(x)=\\sin x\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm derivatan av \\(f(g(x))\\).</p>",
+    "s": "<p>a) \\(f(g(x))=(\\sin x)^2+1=\\sin^2x+1\\).</p><p>b) Kedjeregeln ger \\(2\\sin x\\cos x=\\boxed{\\sin2x}\\).</p>",
+    "familj": "sammansatt_fg_trig_c"
+  },
+  {
+    "id": "2.210",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Låt \\(f(g(x))=e^{x^2+1}\\), där \\(f(u)=e^u\\).</p><p>Bestäm en möjlig funktion \\(g\\) och beräkna derivatan av \\(f(g(x))\\) med kedjeregeln.</p>",
+    "s": "<p>En naturlig inre funktion är \\(g(x)=x^2+1\\).</p><p>Kedjeregeln ger \\(f'(g(x))g'(x)=e^{x^2+1}\\cdot2x\\).</p><p>Alltså \\(\\boxed{2xe^{x^2+1}}\\).</p>",
+    "familj": "sammansatt_identifiera_a"
+  },
+  {
+    "id": "2.211",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Volymen av ett klot är \\(V=4\\pi r^3/3\\). Radien växer med 0,2 cm/s. Bestäm hur snabbt volymen ökar när \\(r=3\\) cm.</p><span class=\"fig\"><svg width=\"360\" height=\"230\" viewBox=\"0 0 360 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med markerad radie\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"175\" cy=\"115\" r=\"72\" fill=\"#F7FAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/><ellipse cx=\"175\" cy=\"115\" rx=\"72\" ry=\"22\" fill=\"none\" stroke=\"#A7B1B7\" stroke-dasharray=\"5 4\"/><line x1=\"175\" y1=\"115\" x2=\"237\" y2=\"79\" stroke=\"#268FA3\" stroke-width=\"2\"/><text x=\"211\" y=\"91\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">r</text></svg></span>",
+    "s": "<p>Kedjeregeln ger \\(dV/dt=(dV/dr)(dr/dt)\\). Eftersom \\(dV/dr=4\\pi r^2\\) blir</p><p>\\[\\frac{dV}{dt}=4\\pi(3)^2\\cdot0,2=\\boxed{7,2\\pi\\text{ cm}^3/\\text{s}}.\\]</p>",
+    "familj": "rate_sphere_c"
+  },
+  {
+    "id": "2.212",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En cylinder har konstant höjd 10 cm men dess radie ökar. När radien är 4 cm ökar volymen med \\(80\\pi\\text{ cm}^3/\\text{s}\\). Bestäm hur snabbt radien ökar då.</p><span class=\"fig\"><svg width=\"360\" height=\"250\" viewBox=\"0 0 360 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och höjd h\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"175\" cy=\"65\" rx=\"70\" ry=\"22\" fill=\"#F7FAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"105\" y1=\"65\" x2=\"105\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"245\" y1=\"65\" x2=\"245\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"2\"/><ellipse cx=\"175\" cy=\"190\" rx=\"70\" ry=\"22\" fill=\"#F7FAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"175\" y1=\"65\" x2=\"235\" y2=\"65\" stroke=\"#268FA3\" stroke-width=\"2\"/><text x=\"202\" y=\"55\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">r</text><line x1=\"270\" y1=\"65\" x2=\"270\" y2=\"190\" stroke=\"#268FA3\" stroke-width=\"2\"/><text x=\"278\" y=\"132\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">h</text></svg></span>",
+    "s": "<p>\\(V=\\pi r^2h=10\\pi r^2\\). Då \\(dV/dr=20\\pi r\\).</p><p>Kedjeregeln ger \\(dV/dt=(20\\pi r)(dr/dt)\\). Vid \\(r=4\\):</p><p>\\[80\\pi=80\\pi\\frac{dr}{dt}\\Rightarrow\\boxed{dr/dt=1\\text{ cm/s}}.\\]</p>",
+    "familj": "rate_cylinder_a"
+  },
+  {
+    "id": "2.213",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Skissa huvuddragen hos grafen \\(f(x)=\\ln x-x\\), \\(x>0\\), genom att bestämma var den växer/minskar och dess största värde.</p>",
+    "s": "<p>\\[f'(x)=1/x-1=(1-x)/x.\\]</p><p>För \\(0<x<1\\) är derivatan positiv, och för \\(x>1\\) negativ. Därför har funktionen maximum vid \\(x=1\\).</p><p>\\[f(1)=0-1=-1.\\] Största värdet är \\(\\boxed{-1}\\).</p>",
+    "familj": "graf_lnminusx_c"
+  },
+  {
+    "id": "3.165",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(x^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(4x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(x^-2\\)</p>",
+    "s": "<p>Använd tabellen över primitiva funktioner i formelbladet och kontrollera gärna genom derivering.</p><p>a) En primitiv funktion är \\(\\boxed{x^4/4}\\). Lägg till konstanten C vid obestämd integral.</p><p>b) En primitiv funktion är \\(\\boxed{2x^2}\\). Lägg till konstanten C vid obestämd integral.</p><p>c) En primitiv funktion är \\(\\boxed{x}\\). Lägg till konstanten C vid obestämd integral.</p><p>d) En primitiv funktion är \\(\\boxed{-x^-1}\\). Lägg till konstanten C vid obestämd integral.</p>",
+    "familj": "integral_mangd_1"
+  },
+  {
+    "id": "3.166",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1/x\\)</p>",
+    "s": "<p>Använd tabellen över primitiva funktioner i formelbladet och kontrollera gärna genom derivering.</p><p>a) En primitiv funktion är \\(\\boxed{-\\cos x}\\). Lägg till konstanten C vid obestämd integral.</p><p>b) En primitiv funktion är \\(\\boxed{\\sin x}\\). Lägg till konstanten C vid obestämd integral.</p><p>c) En primitiv funktion är \\(\\boxed{e^x}\\). Lägg till konstanten C vid obestämd integral.</p><p>d) En primitiv funktion är \\(\\boxed{\\ln x}\\). Lägg till konstanten C vid obestämd integral.</p>",
+    "familj": "integral_mangd_2"
+  },
+  {
+    "id": "3.167",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(3x^2+2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(5e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(4/x\\)</p>",
+    "s": "<p>Använd tabellen över primitiva funktioner i formelbladet och kontrollera gärna genom derivering.</p><p>a) En primitiv funktion är \\(\\boxed{x^3+x^2}\\). Lägg till konstanten C vid obestämd integral.</p><p>b) En primitiv funktion är \\(\\boxed{5e^x}\\). Lägg till konstanten C vid obestämd integral.</p><p>c) En primitiv funktion är \\(\\boxed{2\\sin x}\\). Lägg till konstanten C vid obestämd integral.</p><p>d) En primitiv funktion är \\(\\boxed{4\\ln x}\\). Lägg till konstanten C vid obestämd integral.</p>",
+    "familj": "integral_mangd_3"
+  },
+  {
+    "id": "3.168",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\((2x+1)^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{3x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos(2x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1/(4x+1)\\)</p>",
+    "s": "<p>Använd tabellen över primitiva funktioner i formelbladet och kontrollera gärna genom derivering.</p><p>a) En primitiv funktion är \\(\\boxed{(2x+1)^3/6}\\). Lägg till konstanten C vid obestämd integral.</p><p>b) En primitiv funktion är \\(\\boxed{e^{3x}/3}\\). Lägg till konstanten C vid obestämd integral.</p><p>c) En primitiv funktion är \\(\\boxed{\\sin(2x)/2}\\). Lägg till konstanten C vid obestämd integral.</p><p>d) En primitiv funktion är \\(\\boxed{\\ln(4x+1)/4}\\). Lägg till konstanten C vid obestämd integral.</p>",
+    "familj": "integral_mangd_4"
+  },
+  {
+    "id": "3.169",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(2x^4-5x^2+3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(6x^2-4x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(x^{-3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(7\\)</p>",
+    "s": "<p>Använd potensregeln för primitiva funktioner.</p><p>a) \\(\\boxed{\\frac25x^5-\\frac53x^3+3x}\\).</p><p>b) \\(\\boxed{2x^3-2x^2}\\).</p><p>c) \\(\\boxed{-\\frac1{2x^2}}\\).</p><p>d) \\(\\boxed{7x}\\).</p><p>En godtycklig konstant kan läggas till i varje svar.</p>",
+    "familj": "integral_mangd_5"
+  },
+  {
+    "id": "3.170",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(2\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(4e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac5x\\), \\(x>0\\)</p>",
+    "s": "<p>Använd tabellen med primitiva funktioner på formelbladet.</p><p>a) \\(\\boxed{-2\\cos x}\\).</p><p>b) \\(\\boxed{3\\sin x}\\).</p><p>c) \\(\\boxed{4e^x}\\).</p><p>d) \\(\\boxed{5\\ln x}\\).</p><p>En godtycklig konstant kan läggas till i varje svar.</p>",
+    "familj": "integral_mangd_6"
+  },
+  {
+    "id": "3.171",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(5x^3-6x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(2x^2+3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(7e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin x+\\cos x\\)</p>",
+    "s": "<p>a) \\(\\boxed{\\frac54x^4-3x^2}\\).</p><p>b) \\(\\boxed{\\frac23x^3+3x}\\).</p><p>c) \\(\\boxed{7e^x}\\).</p><p>d) \\(\\boxed{-\\cos x+\\sin x}\\).</p><p>En godtycklig konstant kan läggas till i varje svar.</p>",
+    "familj": "integral_mangd_7"
+  },
+  {
+    "id": "3.172",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\((3x-2)^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin(4x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac1{2x+3}\\)</p>",
+    "s": "<p>a) Eftersom derivatan av \\(3x-2\\) är 3 blir en primitiv funktion \\(\\boxed{\\frac{(3x-2)^3}{9}}\\).</p><p>b) \\(\\boxed{\\frac12e^{2x}}\\).</p><p>c) \\(\\boxed{-\\frac14\\cos(4x)}\\).</p><p>d) \\(\\boxed{\\frac12\\ln(2x+3)}\\) där logaritmen är definierad.</p><p>En godtycklig konstant kan läggas till.</p>",
+    "familj": "integral_mangd_8"
+  },
+  {
+    "id": "3.173",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(x^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x^{-1/2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(3x^2-4x+1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac2{x^2}\\)</p>",
+    "s": "<p>a) \\(\\boxed{x^6/6}\\).</p><p>b) \\(\\boxed{2\\sqrt{x}}\\).</p><p>c) \\(\\boxed{x^3-2x^2+x}\\).</p><p>d) Skriv som \\(2x^{-2}\\): en primitiv funktion är \\(\\boxed{-2/x}\\).</p><p>En godtycklig konstant kan läggas till.</p>",
+    "familj": "integral_mangd_9"
+  },
+  {
+    "id": "3.174",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(\\sin(2x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos(3x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{-x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac1{x+2}\\), \\(x>-2\\)</p>",
+    "s": "<p>a) \\(\\boxed{-\\frac12\\cos(2x)}\\).</p><p>b) \\(\\boxed{\\frac13\\sin(3x)}\\).</p><p>c) \\(\\boxed{-e^{-x}}\\).</p><p>d) \\(\\boxed{\\ln(x+2)}\\).</p><p>En godtycklig konstant kan läggas till.</p>",
+    "familj": "integral_mangd_10"
+  },
+  {
+    "id": "3.175",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(4x^3+x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(6x^5-2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2e^x+3\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac4x\\), \\(x>0\\)</p>",
+    "s": "<p>a) \\(\\boxed{x^4+\\frac12x^2}\\).</p><p>b) \\(\\boxed{x^6-2x}\\).</p><p>c) \\(\\boxed{2e^x+3\\sin x}\\).</p><p>d) \\(\\boxed{4\\ln x}\\).</p><p>En godtycklig konstant kan läggas till.</p>",
+    "familj": "integral_mangd_11"
+  },
+  {
+    "id": "3.176",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\((4x+1)^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{5x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos(x/2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac1{3x-1}\\), \\(x>1/3\\)</p>",
+    "s": "<p>a) \\(\\boxed{\\frac{(4x+1)^4}{16}}\\).</p><p>b) \\(\\boxed{\\frac15e^{5x}}\\).</p><p>c) \\(\\boxed{2\\sin(x/2)}\\).</p><p>d) \\(\\boxed{\\frac13\\ln(3x-1)}\\).</p><p>En godtycklig konstant kan läggas till.</p>",
+    "familj": "integral_mangd_12"
+  },
+  {
+    "id": "3.177",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm arean mellan \\(y=x^2\\) och \\(y=2x\\).</p>",
+    "s": "<p>Skärningar: \\(x^2=2x\\Rightarrow x=0,2\\). På intervallet ligger \\(2x\\) över \\(x^2\\).</p><p>\\[A=\\int_0^2(2x-x^2)dx=\\left[x^2-\\frac{x^3}{3}\\right]_0^2=\\boxed{4/3}.\\]</p>",
+    "familj": "area_parabel_linje_c2"
+  },
+  {
+    "id": "3.178",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm arean mellan kurvorna \\(y=4-x^2\\) och \\(y=x^2\\).</p>",
+    "s": "<p>Skärning: \\(4-x^2=x^2\\Rightarrow x=\\pm\\sqrt2\\). Övre kurvan är \\(4-x^2\\).</p><p>\\[A=\\int_{-\\sqrt2}^{\\sqrt2}(4-2x^2)dx.\\]</p><p>Symmetri ger \\(2[4x-2x^3/3]_0^{\\sqrt2}=\\boxed{16\\sqrt2/3}\\).</p>",
+    "familj": "area_two_parabola_c"
+  },
+  {
+    "id": "3.179",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>För vilket positivt värde på \\(a\\) är arean mellan \\(y=ax\\) och \\(y=x^2\\) lika med \\(9/2\\)?</p>",
+    "s": "<p>Skärningarna är \\(x=0\\) och \\(x=a\\). Arean blir</p><p>\\[A=\\int_0^a(ax-x^2)dx=\\left[\\frac{ax^2}{2}-\\frac{x^3}{3}\\right]_0^a=\\frac{a^3}{6}.\\]</p><p>Sätt \\(a^3/6=9/2\\Rightarrow a^3=27\\), alltså \\(\\boxed{a=3}\\).</p>",
+    "familj": "area_parameter_a"
+  },
+  {
+    "id": "3.180",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Området under \\(y=\\sqrt{x}\\) mellan \\(x=0\\) och \\(x=4\\) roteras kring x-axeln. Bestäm volymen.</p>",
+    "s": "<p><strong>Formel från formelbladet:</strong> \\(V=\\pi\\int_a^b y^2dx\\).</p><p>Här är \\(y^2=x\\), så</p><p>\\[V=\\pi\\int_0^4x dx=\\pi[x^2/2]_0^4=\\boxed{8\\pi}.\\]</p>",
+    "familj": "rotation_sqrt_c"
+  },
+  {
+    "id": "3.181",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Området mellan \\(y=2\\) och \\(y=x^2\\) för \\(0\\le x\\le\\sqrt2\\) roteras kring x-axeln. Bestäm volymen.</p>",
+    "s": "<p>Rotationen bildar brickor med yttre radie 2 och inre radie \\(x^2\\).</p><p>\\[V=\\pi\\int_0^{\\sqrt2}(2^2-(x^2)^2)dx=\\pi\\int_0^{\\sqrt2}(4-x^4)dx.\\]</p><p>\\[V=\\pi[4x-x^5/5]_0^{\\sqrt2}=\\boxed{16\\sqrt2\\pi/5}.\\]</p>",
+    "familj": "rotation_washer_a"
+  },
+  {
+    "id": "3.182",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En bils hastighet under de första 6 sekunderna modelleras av \\(v(t)=3t+2\\) m/s. Bestäm sträckan bilen färdas under tiden.</p>",
+    "s": "<p>Sträckan fås genom att integrera hastigheten:</p><p>\\[s=\\int_0^6(3t+2)dt=[1,5t^2+2t]_0^6=54+12=\\boxed{66\\text{ m}}.\\]</p>",
+    "familj": "integral_hastighet_c"
+  },
+  {
+    "id": "3.183",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Ett vattenflöde in i en tank ges av \\(q(t)=5+0,4t\\) liter/min under \\(0\\le t\\le10\\). Tanken innehåller från början 80 liter. Hur mycket vatten finns efter 10 minuter?</p>",
+    "s": "<p>Inflödet under 10 min är</p><p>\\[\\int_0^{10}(5+0,4t)dt=[5t+0,2t^2]_0^{10}=50+20=70.\\]</p><p>Med 80 liter från början finns \\(\\boxed{150\\text{ liter}}\\).</p>",
+    "familj": "integral_flode_c2"
+  },
+  {
+    "id": "3.184",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En partikels hastighet är \\(v(t)=t^2-4t+3\\) m/s under \\(0\\le t\\le4\\). Bestäm partikelns totala färdsträcka.</p>",
+    "s": "<p>Färdsträcka kräver integralen av \\(|v(t)|\\). Nollställena är \\(t=1\\) och \\(t=3\\). Hastigheten är positiv på \\([0,1]\\), negativ på \\([1,3]\\) och positiv på \\([3,4]\\).</p><p>En primitiv funktion är \\(F=t^3/3-2t^2+3t\\).</p><p>Sträckan är \\(F(1)-F(0)-[F(3)-F(1)]+F(4)-F(3)=\\boxed4\\) m.</p>",
+    "familj": "integral_total_distance_a"
+  },
+  {
+    "id": "3.185",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En täthetsfunktion ges av \\(f(x)=kx\\) för \\(0\\le x\\le3\\) och 0 annars. Bestäm \\(k\\).</p>",
+    "s": "<p>Arean under täthetsfunktionen ska vara 1:</p><p>\\[\\int_0^3kx dx=k[x^2/2]_0^3=9k/2=1.\\]</p><p>Alltså \\(\\boxed{k=2/9}\\).</p>",
+    "familj": "density_k_c"
+  },
+  {
+    "id": "3.186",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Området under \\(y=3-x\\) för \\(0\\le x\\le3\\) roteras kring x-axeln. Bestäm rotationskroppens volym.</p>",
+    "s": "<p>\\[V=\\pi\\int_0^3(3-x)^2dx.\\]</p><p>En primitiv funktion kan fås genom substitution eller utveckling. \\(\\int_0^3(3-x)^2dx=9\\). Därför \\(\\boxed{V=9\\pi}\\).</p>",
+    "familj": "rotation_line_c"
+  },
+  {
+    "id": "3.187",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm arean som begränsas av \\(y=\\sin x\\), x-axeln och linjerna \\(x=0\\) och \\(x=\\pi\\).</p>",
+    "s": "<p>Sinus är icke-negativ på intervallet. Arean är</p><p>\\[A=\\int_0^\\pi\\sin x dx=[-\\cos x]_0^\\pi=1-(-1)=\\boxed2.\\]</p>",
+    "familj": "area_sin_c"
+  },
+  {
+    "id": "3.188",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm konstanten \\(a\\) så att</p><p>\\[\\int_0^2(ax+1)dx=8.\\]</p>",
+    "s": "<p>\\[\\int_0^2(ax+1)dx=[ax^2/2+x]_0^2=2a+2.\\]</p><p>Sätt \\(2a+2=8\\Rightarrow\\boxed{a=3}\\).</p>",
+    "familj": "integral_parameter_c"
+  },
+  {
+    "id": "3.189",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En tank töms med nettohastigheten \\(q(t)=12-2t\\) liter/min. Vid \\(t=0\\) finns 50 liter. Modellen gäller tills flödet blir 0.</p><p>Bestäm den största mängd vatten som har runnit ut enligt modellen.</p>",
+    "s": "<p>Flödet är positivt tills \\(12-2t=0\\Rightarrow t=6\\).</p><p>Total utflödesmängd är</p><p>\\[\\int_0^6(12-2t)dt=[12t-t^2]_0^6=72-36=\\boxed{36\\text{ liter}}.\\]</p><p>Det finns tillräckligt med vatten från början, så modellen är möjlig under intervallet.</p>",
+    "familj": "integral_tank_a"
+  },
+  {
+    "id": "4.223",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=2+3i\\) och \\(z_2=1-2i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{3+1i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{1+5i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{8-1i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{2-3i}\\).</p>",
+    "familj": "complex_arith_batch_1"
+  },
+  {
+    "id": "4.224",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=4-1i\\) och \\(z_2=-2+3i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{2+2i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{6-4i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-5+14i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{4+1i}\\).</p>",
+    "familj": "complex_arith_batch_2"
+  },
+  {
+    "id": "4.225",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=-3+2i\\) och \\(z_2=5+1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{2+3i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-8+1i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-17+7i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{-3-2i}\\).</p>",
+    "familj": "complex_arith_batch_3"
+  },
+  {
+    "id": "4.226",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=1+4i\\) och \\(z_2=2-1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{3+3i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-1+5i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{6+7i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{1-4i}\\).</p>",
+    "familj": "complex_arith_batch_4"
+  },
+  {
+    "id": "4.227",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=3+3i\\) och \\(z_2=-1+2i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{2+5i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{4+1i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-9+3i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{3-3i}\\).</p>",
+    "familj": "complex_arith_batch_5"
+  },
+  {
+    "id": "4.228",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=5-2i\\) och \\(z_2=2+2i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{7+0i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{3-4i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{14+6i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{5+2i}\\).</p>",
+    "familj": "complex_arith_batch_6"
+  },
+  {
+    "id": "4.229",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=2-5i\\) och \\(z_2=-3+1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{-1-4i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{5-6i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-1+17i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{2+5i}\\).</p>",
+    "familj": "complex_arith_batch_7"
+  },
+  {
+    "id": "4.230",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=6+1i\\) och \\(z_2=1+3i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{7+4i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{5-2i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{3+19i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{6-1i}\\).</p>",
+    "familj": "complex_arith_batch_8"
+  },
+  {
+    "id": "4.231",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=1-2i\\) och \\(z_2=3+4i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{4+2i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-2-6i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{11-2i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{1+2i}\\).</p>",
+    "familj": "complex_arith_batch_9"
+  },
+  {
+    "id": "4.232",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=-4+1i\\) och \\(z_2=2-3i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{-2-2i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-6+4i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-5+14i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{-4-1i}\\).</p>",
+    "familj": "complex_arith_batch_10"
+  },
+  {
+    "id": "4.233",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=5+3i\\) och \\(z_2=-2+1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{3+4i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{7+2i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-13-1i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{5-3i}\\).</p>",
+    "familj": "complex_arith_batch_11"
+  },
+  {
+    "id": "4.234",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=2+2i\\) och \\(z_2=4-1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{6+1i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-2+3i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{10+6i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{2-2i}\\).</p>",
+    "familj": "complex_arith_batch_12"
+  },
+  {
+    "id": "4.235",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=-1+5i\\) och \\(z_2=3+2i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{2+7i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{-4+3i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-13+13i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{-1-5i}\\).</p>",
+    "familj": "complex_arith_batch_13"
+  },
+  {
+    "id": "4.236",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=7-2i\\) och \\(z_2=1-4i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{8-6i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{6+2i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-1-30i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{7+2i}\\).</p>",
+    "familj": "complex_arith_batch_14"
+  },
+  {
+    "id": "4.237",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=3-6i\\) och \\(z_2=-2-1i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{1-7i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{5-5i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-12+9i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{3+6i}\\).</p>",
+    "familj": "complex_arith_batch_15"
+  },
+  {
+    "id": "4.238",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Låt \\(z_1=4+5i\\) och \\(z_2=2+3i\\).</p><p>a) Bestäm \\(z_1+z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1-z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(\\overline{z_1}\\).</p>",
+    "s": "<p>a) Addera real- och imaginärdelar: \\(\\boxed{6+8i}\\).</p><p>b) Subtrahera del för del: \\(\\boxed{2+2i}\\).</p><p>c) Multiplicera och använd \\(i^2=-1\\): \\(\\boxed{-7+22i}\\).</p><p>d) Byt tecken på imaginärdelen: \\(\\boxed{4-5i}\\).</p>",
+    "familj": "complex_arith_batch_16"
+  },
+  {
+    "id": "4.239",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{3+5i}{1+1i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(1-1i\\). Nämnaren blir \\(2\\).</p><p>Täljaren ger realdel \\(8\\) och imaginärdel \\(2\\). Alltså</p><p>\\[\\boxed{4 + 1i}.\\]</p>",
+    "familj": "complex_div_batch_1"
+  },
+  {
+    "id": "4.240",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{4+2i}{2-1i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(2+1i\\). Nämnaren blir \\(5\\).</p><p>Täljaren ger realdel \\(6\\) och imaginärdel \\(8\\). Alltså</p><p>\\[\\boxed{\\frac{6}{5} + \\frac{8}{5}i}.\\]</p>",
+    "familj": "complex_div_batch_2"
+  },
+  {
+    "id": "4.241",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{1+3i}{1-2i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(1+2i\\). Nämnaren blir \\(5\\).</p><p>Täljaren ger realdel \\(-5\\) och imaginärdel \\(5\\). Alltså</p><p>\\[\\boxed{-1 + 1i}.\\]</p>",
+    "familj": "complex_div_batch_3"
+  },
+  {
+    "id": "4.242",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{5-1i}{2+1i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(2-1i\\). Nämnaren blir \\(5\\).</p><p>Täljaren ger realdel \\(9\\) och imaginärdel \\(-7\\). Alltså</p><p>\\[\\boxed{\\frac{9}{5} - \\frac{7}{5}i}.\\]</p>",
+    "familj": "complex_div_batch_4"
+  },
+  {
+    "id": "4.243",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{2+4i}{1-1i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(1+1i\\). Nämnaren blir \\(2\\).</p><p>Täljaren ger realdel \\(-2\\) och imaginärdel \\(6\\). Alltså</p><p>\\[\\boxed{-1 + 3i}.\\]</p>",
+    "familj": "complex_div_batch_5"
+  },
+  {
+    "id": "4.244",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{6+2i}{2+2i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(2-2i\\). Nämnaren blir \\(8\\).</p><p>Täljaren ger realdel \\(16\\) och imaginärdel \\(-8\\). Alltså</p><p>\\[\\boxed{2 - 1i}.\\]</p>",
+    "familj": "complex_div_batch_6"
+  },
+  {
+    "id": "4.245",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{3-3i}{1+2i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(1-2i\\). Nämnaren blir \\(5\\).</p><p>Täljaren ger realdel \\(-3\\) och imaginärdel \\(-9\\). Alltså</p><p>\\[\\boxed{\\frac{-3}{5} - \\frac{9}{5}i}.\\]</p>",
+    "familj": "complex_div_batch_7"
+  },
+  {
+    "id": "4.246",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\):</p><p>\\[\\frac{7+1i}{3-1i}.\\]</p>",
+    "s": "<p>Multiplicera täljare och nämnare med nämnarens konjugat \\(3+1i\\). Nämnaren blir \\(10\\).</p><p>Täljaren ger realdel \\(20\\) och imaginärdel \\(10\\). Alltså</p><p>\\[\\boxed{2 + 1i}.\\]</p>",
+    "familj": "complex_div_batch_8"
+  },
+  {
+    "id": "4.247",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=1+1i\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=\\sqrt2\\) och \\(v=\\pi/4\\).</p><p>Alltså \\(\\boxed{z=\\sqrt2(\\cos(\\pi/4)+i\\sin(\\pi/4))}\\).</p>",
+    "familj": "polar_convert_batch_1"
+  },
+  {
+    "id": "4.248",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=-1+1i\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=\\sqrt2\\) och \\(v=3\\pi/4\\).</p><p>Alltså \\(\\boxed{z=\\sqrt2(\\cos(3\\pi/4)+i\\sin(3\\pi/4))}\\).</p>",
+    "familj": "polar_convert_batch_2"
+  },
+  {
+    "id": "4.249",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=-1-1i\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=\\sqrt2\\) och \\(v=5\\pi/4\\).</p><p>Alltså \\(\\boxed{z=\\sqrt2(\\cos(5\\pi/4)+i\\sin(5\\pi/4))}\\).</p>",
+    "familj": "polar_convert_batch_3"
+  },
+  {
+    "id": "4.250",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=0+3i\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=3\\) och \\(v=\\pi/2\\).</p><p>Alltså \\(\\boxed{z=3(\\cos(\\pi/2)+i\\sin(\\pi/2))}\\).</p>",
+    "familj": "polar_convert_batch_4"
+  },
+  {
+    "id": "4.251",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=3+0i\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=3\\) och \\(v=0\\).</p><p>Alltså \\(\\boxed{z=3(\\cos(0)+i\\sin(0))}\\).</p>",
+    "familj": "polar_convert_batch_5"
+  },
+  {
+    "id": "4.252",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=1+i\\sqrt3\\) i polär form med argument i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Bestäm först absolutbeloppet och kvadranten. Här fås \\(|z|=2\\) och \\(v=\\pi/3\\).</p><p>Alltså \\(\\boxed{z=2(\\cos(\\pi/3)+i\\sin(\\pi/3))}\\).</p>",
+    "familj": "polar_convert_batch_6"
+  },
+  {
+    "id": "4.253",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[2(\\cos\\frac\\pi6+i\\sin\\frac\\pi6) \\cdot 3(\\cos\\frac\\pi4+i\\sin\\frac\\pi4).\\]</p>",
+    "s": "<p>Multiplicera absolutbeloppen och addera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{6(\\cos(5\\pi/12)+i\\sin(5\\pi/12))}.\\]</p>",
+    "familj": "polar_op_batch_1"
+  },
+  {
+    "id": "4.254",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[4(\\cos\\frac{2\\pi}3+i\\sin\\frac{2\\pi}3) / 2(\\cos\\frac\\pi6+i\\sin\\frac\\pi6).\\]</p>",
+    "s": "<p>Dividera absolutbeloppen och subtrahera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{2(\\cos(\\pi/2)+i\\sin(\\pi/2))}.\\]</p>",
+    "familj": "polar_op_batch_2"
+  },
+  {
+    "id": "4.255",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[3e^{i\\pi/4} \\cdot 2e^{i\\pi/3}.\\]</p>",
+    "s": "<p>Multiplicera absolutbeloppen och addera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{6(\\cos(7\\pi/12)+i\\sin(7\\pi/12))}.\\]</p>",
+    "familj": "polar_op_batch_3"
+  },
+  {
+    "id": "4.256",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[8e^{i5\\pi/6} / 2e^{i\\pi/3}.\\]</p>",
+    "s": "<p>Dividera absolutbeloppen och subtrahera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{4(\\cos(\\pi/2)+i\\sin(\\pi/2))}.\\]</p>",
+    "familj": "polar_op_batch_4"
+  },
+  {
+    "id": "4.257",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[5(\\cos\\pi+i\\sin\\pi) \\cdot 2(\\cos\\frac\\pi2+i\\sin\\frac\\pi2).\\]</p>",
+    "s": "<p>Multiplicera absolutbeloppen och addera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{10(\\cos(3\\pi/2)+i\\sin(3\\pi/2))}.\\]</p>",
+    "familj": "polar_op_batch_5"
+  },
+  {
+    "id": "4.258",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[6e^{i7\\pi/6} / 3e^{i\\pi/6}.\\]</p>",
+    "s": "<p>Dividera absolutbeloppen och subtrahera argumenten. Lägg till eller dra bort hela varv \\(2\\pi\\) om argumentet behöver skrivas i ett annat standardintervall.</p><p>\\[\\boxed{2(\\cos(\\pi)+i\\sin(\\pi))}.\\]</p>",
+    "familj": "polar_op_batch_6"
+  },
+  {
+    "id": "4.259",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla komplexa lösningar till \\(z^3=8\\). Svara i polär form.</p>",
+    "s": "<p>Skriv \\(8=8(\\cos0+i\\sin0)\\). Tredjerötternas absolutbelopp är 2 och argumenten är \\(0,2\\pi/3,4\\pi/3\\).</p><p>\\[\\boxed{z=2(\\cos0+i\\sin0),\\quad 2(\\cos\\frac{2\\pi}{3}+i\\sin\\frac{2\\pi}{3}),\\quad 2(\\cos\\frac{4\\pi}{3}+i\\sin\\frac{4\\pi}{3})}.\\]</p>",
+    "familj": "complex_roots_batch_1"
+  },
+  {
+    "id": "4.260",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla komplexa lösningar till \\(z^4=16\\). Svara i polär form.</p>",
+    "s": "<p>Skriv \\(16=16(\\cos0+i\\sin0)\\). Fjärderötternas absolutbelopp är 2 och argumenten skiljer \\(\\pi/2\\).</p><p>\\[\\boxed{z=2(\\cos0+i\\sin0),\\ 2(\\cos\\frac\\pi2+i\\sin\\frac\\pi2),\\ 2(\\cos\\pi+i\\sin\\pi),\\ 2(\\cos\\frac{3\\pi}{2}+i\\sin\\frac{3\\pi}{2})}.\\]</p>",
+    "familj": "complex_roots_batch_2"
+  },
+  {
+    "id": "4.261",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla komplexa lösningar till \\(z^3=-8\\). Svara i polär form.</p>",
+    "s": "<p>Skriv \\(-8=8(\\cos\\pi+i\\sin\\pi)\\). Tredjerötternas absolutbelopp är 2.</p><p>Argumenten är \\(\\pi/3,\\pi,5\\pi/3\\), alltså</p><p>\\[\\boxed{z=2(\\cos\\frac\\pi3+i\\sin\\frac\\pi3),\\ 2(\\cos\\pi+i\\sin\\pi),\\ 2(\\cos\\frac{5\\pi}{3}+i\\sin\\frac{5\\pi}{3})}.\\]</p>",
+    "familj": "complex_roots_batch_3"
+  },
+  {
+    "id": "4.262",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla komplexa lösningar till \\(z^4=-16\\). Svara i polär form.</p>",
+    "s": "<p>Skriv \\(-16=16(\\cos\\pi+i\\sin\\pi)\\). Fjärderötternas absolutbelopp är 2.</p><p>Argumenten är \\(\\pi/4,3\\pi/4,5\\pi/4,7\\pi/4\\). Därför</p><p>\\[\\boxed{z_k=2\\left(\\cos\\left(\\frac\\pi4+k\\frac\\pi2\\right)+i\\sin\\left(\\frac\\pi4+k\\frac\\pi2\\right)\\right),\\quad k=0,1,2,3}.\\]</p>",
+    "familj": "complex_roots_batch_4"
+  },
+  {
+    "id": "4.263",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna \\((1+i)^8\\) med polär form.</p>",
+    "s": "<p>\\(1+i=\\sqrt2(\\cos\\frac\\pi4+i\\sin\\frac\\pi4)\\).</p><p>De Moivres formel ger absolutbelopp \\((\\sqrt2)^8=16\\) och argument \\(8\\cdot\\pi/4=2\\pi\\).</p><p>Alltså \\(\\boxed{16}\\).</p>",
+    "familj": "demoivre_1i8"
+  },
+  {
+    "id": "4.264",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna \\((\\sqrt3+i)^6\\) med de Moivres formel.</p>",
+    "s": "<p>\\(\\sqrt3+i=2(\\cos\\frac\\pi6+i\\sin\\frac\\pi6)\\).</p><p>Upphöjt till 6 fås absolutbelopp \\(2^6=64\\) och argument \\(\\pi\\).</p><p>Alltså \\(\\boxed{-64}\\).</p>",
+    "familj": "demoivre_sqrt3i6"
+  },
+  {
+    "id": "4.265",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Utför polynomdivision.</p><p>a) \\((x^3+3x^2+3x+1)/(x+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((x^3-8)/(x-2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((2x^3+x^2-8x-4)/(x+2)\\)</p>",
+    "s": "<p>a) \\(x^3+3x^2+3x+1=(x+1)(x^2+2x+1)\\), alltså kvot \\(\\boxed{x^2+2x+1}\\).</p><p>b) Kvoten är \\(\\boxed{x^2+2x+4}\\).</p><p>c) Division ger \\(\\boxed{2x^2-3x-2}\\) med rest 0.</p>",
+    "familj": "poly_div_routine_new1"
+  },
+  {
+    "id": "4.266",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm kvot och rest när \\(x^3+2x+5\\) divideras med \\(x-1\\).</p>",
+    "s": "<p>Skriv \\(x^3+0x^2+2x+5\\). Division ger kvoten \\(x^2+x+3\\). Produkten \\((x-1)(x^2+x+3)=x^3+2x-3\\), så resten är 8.</p><p>\\[\\boxed{q(x)=x^2+x+3,\\ r=8}.\\]</p>",
+    "familj": "poly_div_remainder_new"
+  },
+  {
+    "id": "4.267",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Polynomet \\(P(x)=x^3-2x^2-5x+6\\) har nollstället \\(x=1\\). Faktorisera polynomet fullständigt.</p>",
+    "s": "<p>Eftersom \\(x=1\\) är nollställe är \\(x-1\\) en faktor. Division ger \\(x^2-x-6\\).</p><p>\\[x^2-x-6=(x-3)(x+2).\\]</p><p>Alltså \\(\\boxed{P(x)=(x-1)(x-3)(x+2)}\\).</p>",
+    "familj": "poly_factor_root_new"
+  },
+  {
+    "id": "4.268",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Bestäm \\(a\\) så att polynomet \\(P(x)=x^3+ax^2-4x-4\\) är delbart med \\(x+1\\). Faktorisera sedan polynomet.</p>",
+    "s": "<p>Faktorsatsen ger \\(P(-1)=-1+a+4-4=a-1\\). Därför \\(a=1\\).</p><p>Då \\(P=x^3+x^2-4x-4=(x+1)(x^2-4)\\), alltså \\(\\boxed{(x+1)(x-2)(x+2)}\\).</p>",
+    "familj": "poly_parameter_factor_new"
+  },
+  {
+    "id": "4.269",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös ekvationen \\(x^3-4x^2+13x-18=0\\) om du vet att \\(x=2\\) är en lösning.</p>",
+    "s": "<p>Dividera med \\(x-2\\): kvoten blir \\(x^2-2x+9\\).</p><p>Andragradsekvationen \\(x^2-2x+9=0\\) ger \\(x=1\\pm2\\sqrt2 i\\).</p><p>Alla lösningar: \\(\\boxed{2,\\ 1+2\\sqrt2i,\\ 1-2\\sqrt2i}\\).</p>",
+    "familj": "poly_complex_roots_new"
+  },
+  {
+    "id": "4.270",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Ett polynom med reella koefficienter har grad 4 och nollställena \\(2+i\\) och \\(-1\\), där \\(-1\\) är ett dubbelt nollställe. Bestäm ett polynom med koefficienten 1 framför \\(x^4\\).</p>",
+    "s": "<p>Eftersom koefficienterna är reella måste även \\(2-i\\) vara nollställe.</p><p>\\[P(x)=(x-(2+i))(x-(2-i))(x+1)^2.\\]</p><p>Det första paret ger \\((x-2)^2+1=x^2-4x+5\\). Därför</p><p>\\[\\boxed{P(x)=(x^2-4x+5)(x+1)^2}.\\]</p>",
+    "familj": "poly_conjugate_roots_a"
+  },
+  {
+    "id": "4.271",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beskriv geometriskt mängden av alla komplexa tal \\(z\\) som uppfyller \\(|z-(2-i)|=3\\).</p>",
+    "s": "<p>Absolutbeloppet beskriver avståndet från punkten \\(z\\) till \\(2-i\\). Villkoret är därför en cirkel med centrum \\((2,-1)\\) och radie 3.</p><p>\\(\\boxed{\\text{Cirkel: centrum }(2,-1),\\ r=3}\\).</p>",
+    "familj": "complex_locus_circle_new"
+  },
+  {
+    "id": "4.272",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Beskriv geometriskt mängden av alla \\(z=x+iy\\) som uppfyller</p><p>\\[|z-2|=2|z+1|.\\]</p>",
+    "s": "<p>Kvadrera båda leden:</p><p>\\[(x-2)^2+y^2=4((x+1)^2+y^2).\\]</p><p>Utveckla och samla:</p><p>\\[x^2-4x+4+y^2=4x^2+8x+4+4y^2\\]</p><p>\\[x^2+4x+y^2=0\\Rightarrow (x+2)^2+y^2=4.\\]</p><p>Mängden är alltså \\(\\boxed{\\text{cirkeln med centrum }(-2,0)\\text{ och radie }2}\\).</p>",
+    "familj": "complex_locus_apollonius_a"
+  },
+  {
+    "id": "1.271",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(3\\sin x=3\\) för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>\\(\\sin x=1\\) endast vid \\(\\boxed{x=\\pi/2}\\) i intervallet.</p>",
+    "familj": "trig_final_e1"
+  },
+  {
+    "id": "1.272",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(2\\cos x+1=0\\) för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>\\(\\cos x=-1/2\\). Enhetscirkeln ger \\(\\boxed{x=2\\pi/3,4\\pi/3}\\).</p>",
+    "familj": "trig_final_e2"
+  },
+  {
+    "id": "1.273",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Förenkla \\(\\sin(x+\\pi/2)\\) med additionsformeln.</p>",
+    "s": "<p>\\[\\sin(x+\\pi/2)=\\sin x\\cos\\pi/2+\\cos x\\sin\\pi/2=\\boxed{\\cos x}.\\]</p>",
+    "familj": "trig_add_final"
+  },
+  {
+    "id": "1.274",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Visa att \\(\\cos^4x-\\sin^4x=\\cos2x\\).</p>",
+    "s": "<p>Faktorisera vänsterledet:</p><p>\\[(\\cos^2x-\\sin^2x)(\\cos^2x+\\sin^2x).\\]</p><p>Andra faktorn är 1 och första är \\(\\cos2x\\). Därmed är identiteten visad.</p>",
+    "familj": "trig_identity_final"
+  },
+  {
+    "id": "1.275",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm en funktion på formen \\(y=a\\sin bx\\) som har amplitud 3 och period \\(\\pi/2\\).</p>",
+    "s": "<p>Amplituden ger \\(a=3\\). Perioden \\(2\\pi/b=\\pi/2\\) ger \\(b=4\\). En möjlig funktion är \\(\\boxed{y=3\\sin4x}\\).</p>",
+    "familj": "trig_func_param_final"
+  },
+  {
+    "id": "1.276",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Skissa \\(y=2\\cos(2x)-1\\) för \\(0\\le x\\le2\\pi\\). Markera max, min och period.</p><span class=\"fig\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tomt koordinatsystem för grafskiss\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"25\" x2=\"55\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"95\" y1=\"25\" x2=\"95\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"135\" y1=\"25\" x2=\"135\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"175\" y1=\"25\" x2=\"175\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"215\" y1=\"25\" x2=\"215\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"255\" y1=\"25\" x2=\"255\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"295\" y1=\"25\" x2=\"295\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"335\" y1=\"25\" x2=\"335\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"375\" y1=\"25\" x2=\"375\" y2=\"215\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"35\" x2=\"405\" y2=\"35\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"70\" x2=\"405\" y2=\"70\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"105\" x2=\"405\" y2=\"105\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"140\" x2=\"405\" y2=\"140\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"175\" x2=\"405\" y2=\"175\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"210\" x2=\"405\" y2=\"210\" stroke=\"#E4E9EC\"/><line x1=\"45\" y1=\"200\" x2=\"410\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M410 200 l-9 -5 v10 z\" fill=\"#2B2527\"/><line x1=\"75\" y1=\"230\" x2=\"75\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M75 20 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"402\" y=\"193\" font-family=\"sans-serif\" font-size=\"12\">x</text><text x=\"82\" y=\"29\" font-family=\"sans-serif\" font-size=\"12\">y</text></svg></span>",
+    "s": "<p>Amplitud 2, medellinje −1 och period \\(\\pi\\). Maxvärde 1 och minvärde −3. Två hela perioder ryms på \\([0,2\\pi]\\).</p>",
+    "familj": "trig_graph_final_c"
+  },
+  {
+    "id": "1.277",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Lös \\(\\sin^2x=\\cos^2x\\) för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>\\(\\sin^2x-\\cos^2x=0\\Rightarrow -\\cos2x=0\\). Alltså \\(2x=\\pi/2+k\\pi\\), så \\(\\boxed{x=\\pi/4,3\\pi/4,5\\pi/4,7\\pi/4}\\).</p>",
+    "familj": "trig_eq_final_c"
+  },
+  {
+    "id": "1.278",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Bestäm alla \\(a\\) för vilka ekvationen \\(\\sin x=a\\) har exakt en lösning i intervallet \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>För \\(-1<a<1\\) och \\(a\\ne0\\) finns två lösningar. För \\(a=0\\) finns två lösningar i intervallet: 0 och \\(\\pi\\). För \\(a=1\\) respektive \\(a=-1\\) finns exakt en lösning. Utanför \\([-1,1]\\) finns ingen.</p><p>Alltså \\(\\boxed{a=\\pm1}\\).</p>",
+    "familj": "trig_parameter_count_final"
+  },
+  {
+    "id": "1.279",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>En svängning modelleras av \\(s(t)=4\\sin(5t+\\pi/6)\\). Bestäm amplitud, period och första positiva tidpunkt då \\(s(t)=0\\).</p>",
+    "s": "<p>Amplitud 4. Period \\(T=2\\pi/5\\). Nollställe när \\(5t+\\pi/6=k\\pi\\). Första positiva fås vid \\(k=1\\): \\(t=(5\\pi/6)/5=\\boxed{\\pi/6}\\).</p>",
+    "familj": "trig_model_osc_final"
+  },
+  {
+    "id": "1.280",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(5\\pi/12\\) radianer i grader.</p>",
+    "s": "<p>Multiplicera med \\(180^\\circ/\\pi\\): \\(5\\pi/12\\cdot180^\\circ/\\pi=\\boxed{75^\\circ}\\).</p>",
+    "familj": "radian_final_e"
+  },
+  {
+    "id": "1.281",
+    "kap": 1,
+    "omr": "enhetscirkeln",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm exakt \\(\\sin(7\\pi/6)\\) och \\(\\cos(7\\pi/6)\\).</p>",
+    "s": "<p>Vinkeln ligger i tredje kvadranten med motsvarande vinkel i första kvadranten \\(\\pi/6\\). Båda koordinaterna är negativa: \\(\\boxed{\\sin=-1/2,\\cos=-\\sqrt3/2}\\).</p>",
+    "familj": "unit_final_e"
+  },
+  {
+    "id": "1.282",
+    "kap": 1,
+    "omr": "trig_formler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Visa att</p><p>\\[\\sin(x+y)\\sin(x-y)=\\sin^2x-\\sin^2y.\\]</p>",
+    "s": "<p>Utveckla vänsterledet med additionsformlerna:</p><p>\\[(\\sin x\\cos y+\\cos x\\sin y)(\\sin x\\cos y-\\cos x\\sin y)\\]</p><p>\\[=\\sin^2x\\cos^2y-\\cos^2x\\sin^2y.\\]</p><p>Byt \\(\\cos^2y=1-\\sin^2y\\) och \\(\\cos^2x=1-\\sin^2x\\). Blandtermerna tar ut varandra och resultatet blir \\(\\sin^2x-\\sin^2y\\).</p>",
+    "familj": "identity_product_a"
+  },
+  {
+    "id": "1.283",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En modell har formen \\(f(t)=a+b\\cos(\\pi t/6)\\). Man vet att \\(f(0)=11\\) och \\(f(6)=3\\). Bestäm \\(a\\) och \\(b\\).</p>",
+    "s": "<p>Vid \\(t=0\\): \\(a+b=11\\). Vid \\(t=6\\): \\(a+b\\cos\\pi=a-b=3\\).</p><p>Addera ekvationerna: \\(2a=14\\Rightarrow a=7\\). Då \\(b=4\\).</p><p>\\(\\boxed{a=7,b=4}\\).</p>",
+    "familj": "trig_model_system_a"
+  },
+  {
+    "id": "1.284",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Lös \\(\\cos x+\\cos2x=0\\) för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p>Använd \\(\\cos2x=2\\cos^2x-1\\). Sätt \\(u=\\cos x\\): \\(2u^2+u-1=0=(2u-1)(u+1)\\).</p><p>Alltså \\(\\cos x=1/2\\) eller \\(-1\\). Svar \\(\\boxed{x=\\pi/3,\\pi,\\ 5\\pi/3}\\).</p>",
+    "familj": "trig_eq_quadratic_final"
+  },
+  {
+    "id": "2.214",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(x^7\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3/x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sqrt{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(5x^{-3}\\)</p>",
+    "s": "<p>a) \\(7x^6\\).</p><p>b) \\(-6/x^3\\).</p><p>c) \\(1/(2\\sqrt{x})\\).</p><p>d) \\(-15x^{-4}\\).</p>",
+    "familj": "deriv_final_e1"
+  },
+  {
+    "id": "2.215",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Derivera.</p><p>a) \\(e^{4x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\ln(3x+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin5x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos2x\\)</p>",
+    "s": "<p>a) \\(4e^{4x}\\).</p><p>b) \\(3/(3x+1)\\).</p><p>c) \\(5\\cos5x\\).</p><p>d) \\(-2\\sin2x\\).</p>",
+    "familj": "deriv_final_e2"
+  },
+  {
+    "id": "2.216",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Derivera och förenkla \\(f(x)=x^2e^x\\).</p>",
+    "s": "<p>Produktregeln: \\(f'=2xe^x+x^2e^x=e^x(x^2+2x)\\). Alltså \\(\\boxed{x e^x(x+2)}\\).</p>",
+    "familj": "deriv_product_final"
+  },
+  {
+    "id": "2.217",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Derivera \\(f(x)=\\frac{x^2+1}{x+1}\\).</p>",
+    "s": "<p>Kvotregeln ger</p><p>\\[f'=\\frac{2x(x+1)-(x^2+1)}{(x+1)^2}=\\boxed{\\frac{x^2+2x-1}{(x+1)^2}}.\\]</p>",
+    "familj": "deriv_quotient_final"
+  },
+  {
+    "id": "2.218",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Derivera \\(f(x)=\\ln(1+x^2)\\).</p>",
+    "s": "<p>Kedjeregeln ger \\(f'=1/(1+x^2)\\cdot2x=\\boxed{2x/(1+x^2)}\\).</p>",
+    "familj": "deriv_chain_final"
+  },
+  {
+    "id": "2.219",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm extrempunkterna till \\(f(x)=x^3-6x^2+9x\\).</p>",
+    "s": "<p>\\(f'=3x^2-12x+9=3(x-1)(x-3)\\). Teckenstudium ger max vid \\(x=1\\), min vid \\(x=3\\). \\(f(1)=4\\), \\(f(3)=0\\). Punkter \\(\\boxed{(1,4),(3,0)}\\).</p>",
+    "familj": "deriv_extrem_final"
+  },
+  {
+    "id": "2.220",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm asymptoterna till \\(f(x)=2+\\frac{5}{x+3}\\).</p>",
+    "s": "<p>Nämnaren är 0 vid \\(x=-3\\), vilket ger lodrät asymptot \\(\\boxed{x=-3}\\). När \\(|x|\\to\\infty\\) går bråket mot 0, så \\(\\boxed{y=2}\\) är vågrät asymptot.</p>",
+    "familj": "deriv_asym_final"
+  },
+  {
+    "id": "2.221",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>En kvadrat har sidan \\(s\\), som växer med 1,5 cm/s. Hur snabbt växer arean när sidan är 8 cm?</p>",
+    "s": "<p>\\(A=s^2\\), så \\(dA/ds=2s\\). Kedjeregeln:</p><p>\\[dA/dt=2s\\,ds/dt=2\\cdot8\\cdot1,5=\\boxed{24\\text{ cm}^2/s}.\\]</p>",
+    "familj": "rate_square_final"
+  },
+  {
+    "id": "2.222",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>En cirkels area ökar med \\(10\\pi\\text{ cm}^2/s\\) när radien är 5 cm. Hur snabbt ökar radien då?</p>",
+    "s": "<p>\\(A=\\pi r^2\\), så \\(dA/dt=2\\pi r\\,dr/dt\\).</p><p>\\[10\\pi=2\\pi\\cdot5\\,dr/dt\\Rightarrow\\boxed{dr/dt=1\\text{ cm/s}}.\\]</p>",
+    "familj": "rate_circle_inverse_final"
+  },
+  {
+    "id": "2.223",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En cylinder har höjden \\(h=2r\\). Radien ökar med 0,5 cm/s. Bestäm hur snabbt cylinderns volym ökar när \\(r=3\\) cm.</p>",
+    "s": "<p>Eftersom \\(h=2r\\) kan volymen först skrivas enbart med r:</p><p>\\[V=\\pi r^2h=2\\pi r^3.\\]</p><p>Då \\(dV/dr=6\\pi r^2\\), och</p><p>\\[dV/dt=6\\pi r^2dr/dt=6\\pi\\cdot9\\cdot0,5=\\boxed{27\\pi\\text{ cm}^3/s}.\\]</p>",
+    "familj": "rate_cylinder_relation_a"
+  },
+  {
+    "id": "2.224",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En rektangel har arean 100 cm². Låt ena sidan vara \\(x\\) cm. Bestäm den minsta möjliga omkretsen.</p>",
+    "s": "<p>Andra sidan är \\(100/x\\), så \\(P(x)=2x+200/x\\), \\(x>0\\).</p><p>\\[P'=2-200/x^2=0\\Rightarrow x^2=100\\Rightarrow x=10.\\]</p><p>Derivatan byter från negativ till positiv. Minsta omkrets är \\(P(10)=20+20=\\boxed{40\\text{ cm}}\\).</p>",
+    "familj": "optimize_perimeter_a"
+  },
+  {
+    "id": "2.225",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Funktionen \\(h(x)=f(g(x))\\). Man vet att \\(g(2)=3\\), \\(g'(2)=-4\\) och \\(f'(3)=5\\). Bestäm \\(h'(2)\\).</p>",
+    "s": "<p>Kedjeregeln ger \\(h'(x)=f'(g(x))g'(x)\\). Därför</p><p>\\[h'(2)=f'(3)(-4)=5(-4)=\\boxed{-20}.\\]</p>",
+    "familj": "chain_values_a"
+  },
+  {
+    "id": "2.226",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Bestäm alla värden på \\(a\\) för vilka \\(f(x)=x^3+ax^2+3x\\) saknar både maximi- och minimipunkt.</p>",
+    "s": "<p>\\(f'=3x^2+2ax+3\\). För att sakna två olika reella nollställen ska uttrycket under rottecknet i andragradsformeln vara \\(\\le0\\):</p><p>\\[(2a)^2-36\\le0\\Rightarrow a^2\\le9.\\]</p><p>Alltså \\(\\boxed{-3\\le a\\le3}\\).</p>",
+    "familj": "deriv_parameter_no_extrema_final"
+  },
+  {
+    "id": "2.227",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm minsta värdet av \\(f(x)=e^x-2x\\).</p>",
+    "s": "<p>\\(f^{\\prime}(x)=e^x-2=0\\Rightarrow x=\\ln2\\). \\(f^{\\prime\\prime}(x)=e^x>0\\), så det är minimum.</p><p>Minsta värdet är \\(f(\\ln2)=2-2\\ln2=\\boxed{2-2\\ln2}\\).</p>",
+    "familj": "exp_min_final"
+  },
+  {
+    "id": "3.190",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Beräkna.</p><p>a) \\(\\int_0^2x^2dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^\\pi\\sin xdx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^1e^xdx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_1^e\\frac1x dx\\)</p>",
+    "s": "<p>a) \\(\\boxed{8/3}\\).</p><p>b) \\(\\boxed2\\).</p><p>c) \\(\\boxed{e-1}\\).</p><p>d) \\(\\boxed1\\).</p>",
+    "familj": "integral_final_e"
+  },
+  {
+    "id": "3.191",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm arean under \\(y=3x^2\\) för \\(0\\le x\\le2\\).</p>",
+    "s": "<p>\\[A=\\int_0^2 3x^2dx=[x^3]_0^2=\\boxed8.\\]</p>",
+    "familj": "area_final_e"
+  },
+  {
+    "id": "3.192",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm \\(a\\) om \\(\\int_1^a 2x dx=15\\) och \\(a>1\\).</p>",
+    "s": "<p>\\([x^2]_1^a=a^2-1=15\\), så \\(a^2=16\\). Eftersom \\(a>1\\): \\(\\boxed{a=4}\\).</p>",
+    "familj": "integral_bound_c"
+  },
+  {
+    "id": "3.193",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm arean mellan \\(y=x+2\\) och \\(y=x^2\\) mellan deras skärningspunkter.</p>",
+    "s": "<p>Skärning: \\(x^2=x+2\\Rightarrow (x-2)(x+1)=0\\), alltså \\(x=-1,2\\). Linjen ligger över parabeln.</p><p>\\[A=\\int_{-1}^2(x+2-x^2)dx=\\boxed{9/2}.\\]</p>",
+    "familj": "area_line_parab_final"
+  },
+  {
+    "id": "3.194",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Området under \\(y=x^2\\) för \\(0\\le x\\le1\\) roteras kring x-axeln. Bestäm volymen.</p>",
+    "s": "<p>\\[V=\\pi\\int_0^1(x^2)^2dx=\\pi[x^5/5]_0^1=\\boxed{\\pi/5}.\\]</p>",
+    "familj": "rotation_final_c"
+  },
+  {
+    "id": "3.195",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>En kraft beror på läget enligt \\(F(x)=4x+2\\) N. Bestäm arbetet när föremålet flyttas från \\(x=0\\) till \\(x=3\\) m.</p>",
+    "s": "<p>Arbetet är integralen av kraften över sträckan:</p><p>\\[W=\\int_0^3(4x+2)dx=[2x^2+2x]_0^3=18+6=\\boxed{24\\text{ J}}.\\]</p>",
+    "familj": "integral_work_c"
+  },
+  {
+    "id": "3.196",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En hastighet ges av \\(v(t)=3-t\\) m/s för \\(0\\le t\\le5\\). Bestäm både förflyttning och färdsträcka.</p>",
+    "s": "<p>Förflyttningen är \\(\\int_0^5(3-t)dt=[3t-t^2/2]_0^5=15-12,5=\\boxed{2,5\\text{ m}}\\).</p><p>För färdsträckan måste teckenbytet vid \\(t=3\\) beaktas:</p><p>\\[\\int_0^3(3-t)dt-\\int_3^5(3-t)dt=4,5+2=\\boxed{6,5\\text{ m}}.\\]</p>",
+    "familj": "integral_disp_distance_a"
+  },
+  {
+    "id": "3.197",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Området mellan \\(y=x\\) och \\(y=x^2\\) för \\(0\\le x\\le1\\) roteras kring x-axeln. Bestäm volymen.</p>",
+    "s": "<p>På intervallet är \\(x\\ge x^2\\). Den yttre radien är \\(x\\) och den inre radien är \\(x^2\\). Därför</p><p>\\[V=\\pi\\int_0^1(x^2-(x^2)^2)dx=\\pi\\int_0^1(x^2-x^4)dx\\]</p><p>\\[=\\pi(1/3-1/5)=\\boxed{2\\pi/15}.\\]</p>",
+    "familj": "rotation_between_curves_a"
+  },
+  {
+    "id": "3.198",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Funktionen \\(f(x)=x^2-a\\) har två nollställen. Arean mellan grafen och x-axeln mellan nollställena är \\(32/3\\). Bestäm \\(a>0\\).</p>",
+    "s": "<p>Nollställena är \\(\\pm\\sqrt a\\). Mellan dem är \\(f\\le0\\), så arean är</p><p>\\[A=\\int_{-\\sqrt a}^{\\sqrt a}(a-x^2)dx=\\frac43a^{3/2}.\\]</p><p>Sätt \\(4a^{3/2}/3=32/3\\Rightarrow a^{3/2}=8\\Rightarrow\\boxed{a=4}\\).</p>",
+    "familj": "area_parameter_final_a"
+  },
+  {
+    "id": "3.199",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm en funktion \\(f\\) om \\(f'(x)=3x^2-4x+1\\) och \\(f(0)=5\\).</p>",
+    "s": "<p>Integrera derivatan:</p><p>\\[f(x)=x^3-2x^2+x+C.\\]</p><p>\\(f(0)=C=5\\). Alltså \\(\\boxed{f(x)=x^3-2x^2+x+5}\\).</p>",
+    "familj": "antiderivative_initial_c"
+  },
+  {
+    "id": "3.200",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En befolkning förändras med hastigheten \\(P'(t)=200e^{0,1t}\\) personer/år. Vid \\(t=0\\) är befolkningen 5000. Bestäm \\(P(5)\\).</p>",
+    "s": "<p>Förändringen under 5 år är</p><p>\\[\\int_0^5 200e^{0,1t}dt=2000[e^{0,1t}]_0^5=2000(e^{0,5}-1).\\]</p><p>Alltså \\(\\boxed{P(5)=5000+2000(e^{0,5}-1)}\\).</p>",
+    "familj": "integral_population_c"
+  },
+  {
+    "id": "3.201",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En täthetsfunktion är konstant på intervallet \\(2\\le x\\le6\\) och 0 annars. Bestäm konstantens värde och \\(P(X>5)\\).</p>",
+    "s": "<p>Om konstanten är \\(k\\) ska \\(4k=1\\), alltså \\(k=1/4\\). Sannolikheten \\(X>5\\) är arean över intervallet \\([5,6]\\): \\(1\\cdot1/4=\\boxed{1/4}\\).</p>",
+    "familj": "density_uniform_final"
+  },
+  {
+    "id": "3.202",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En behållare fylls med nettoflödet \\(q(t)=6t-t^2\\) liter/min under \\(0\\le t\\le6\\). Vid vilken tidpunkt har den tillförda volymen blivit 18 liter?</p>",
+    "s": "<p>Tillförd volym till tiden \\(T\\) är</p><p>\\[V(T)=\\int_0^T(6t-t^2)dt=3T^2-\\frac{T^3}{3}.\\]</p><p>Sätt \\(V(T)=18\\):</p><p>\\[3T^2-\\frac{T^3}{3}=18.\\]</p><p>\\(T=3\\) uppfyller ekvationen eftersom \\(27-9=18\\). På intervallet \\(0<T<6\\) är flödet positivt, så den tillförda volymen ökar hela tiden. Lösningen är därför unik.</p><p>\\(\\boxed{T=3\\text{ min}}\\).</p>",
+    "familj": "integral_accumulated_a"
+  },
+  {
+    "id": "3.203",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Området under \\(y=2-x\\) mellan \\(x=0\\) och \\(x=2\\) roteras kring x-axeln. Bestäm volymen.</p>",
+    "s": "<p>\\[V=\\pi\\int_0^2(2-x)^2dx=\\pi\\cdot\\frac83=\\boxed{8\\pi/3}.\\]</p>",
+    "familj": "rotation_triangle_final"
+  },
+  {
+    "id": "4.273",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "4/0/0",
+    "t": "<p>Beräkna.</p><p>a) \\(i^{23}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(i^{40}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(i^{57}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(i^{102}\\)</p>",
+    "s": "<p>Potenser av \\(i\\) upprepas med period 4.</p><p>a) \\(23\\equiv3\\pmod4\\Rightarrow\\boxed{-i}\\).</p><p>b) \\(\\boxed1\\).</p><p>c) \\(57\\equiv1\\Rightarrow\\boxed i\\).</p><p>d) \\(102\\equiv2\\Rightarrow\\boxed{-1}\\).</p>",
+    "familj": "i_powers_final"
+  },
+  {
+    "id": "4.274",
+    "kap": 4,
+    "omr": "komplex_aritmetik",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Bestäm för \\(z=3-4i\\):</p><p>a) \\(|z|\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\bar z\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(z\\bar z\\)</p>",
+    "s": "<p>a) \\(|z|=\\sqrt{9+16}=\\boxed5\\).</p><p>b) \\(\\boxed{3+4i}\\).</p><p>c) \\(z\\bar z=|z|^2=\\boxed{25}\\).</p>",
+    "familj": "complex_abs_conj_final"
+  },
+  {
+    "id": "4.275",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(z=-2i\\) i polär form med argument i \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Absolutbeloppet är 2 och punkten ligger på negativa imaginära axeln, så \\(v=3\\pi/2\\).</p><p>\\(\\boxed{2(\\cos(3\\pi/2)+i\\sin(3\\pi/2))}\\).</p>",
+    "familj": "polar_final_e"
+  },
+  {
+    "id": "4.276",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna i polär form:</p><p>\\[4e^{i\\pi/3}\\cdot 3e^{-i\\pi/6}.\\]</p>",
+    "s": "<p>Multiplicera absolutbeloppen och addera argumenten:</p><p>\\[12e^{i(\\pi/3-\\pi/6)}=\\boxed{12e^{i\\pi/6}}.\\]</p>",
+    "familj": "polar_mult_final"
+  },
+  {
+    "id": "4.277",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm \\((2e^{i\\pi/4})^3\\).</p>",
+    "s": "<p>De Moivre: absolutbelopp \\(2^3=8\\), argument \\(3\\pi/4\\). Svar \\(\\boxed{8e^{i3\\pi/4}}\\).</p>",
+    "familj": "demoivre_final_c"
+  },
+  {
+    "id": "4.278",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Bestäm alla tredje rötter till \\(8i\\).</p>",
+    "s": "<p>\\(8i=8e^{i\\pi/2}\\). Rötternas absolutbelopp är 2 och argumenten</p><p>\\[\\frac{\\pi/2+2k\\pi}{3}=\\pi/6+2k\\pi/3,\\quad k=0,1,2.\\]</p><p>Alltså \\(\\boxed{2e^{i\\pi/6},2e^{i5\\pi/6},2e^{i3\\pi/2}}\\).</p>",
+    "familj": "roots_8i_final"
+  },
+  {
+    "id": "4.279",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Utför polynomdivision.</p><p>a) \\((x^2-9)/(x-3)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((x^3+1)/(x+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((x^3-3x^2-4x+12)/(x-3)\\)</p>",
+    "s": "<p>a) \\(\\boxed{x+3}\\).</p><p>b) \\(\\boxed{x^2-x+1}\\).</p><p>c) \\(\\boxed{x^2-4}\\).</p>",
+    "familj": "poly_div_final_e"
+  },
+  {
+    "id": "4.280",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Faktorisera \\(x^3-5x^2+2x+8\\) om \\(x=2\\) är ett nollställe.</p>",
+    "s": "<p>Division med \\(x-2\\) ger \\(x^2-3x-4=(x-4)(x+1)\\).</p><p>\\(\\boxed{(x-2)(x-4)(x+1)}\\).</p>",
+    "familj": "poly_factor_final_c"
+  },
+  {
+    "id": "4.281",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Ett tredjegradspolynom med reella koefficienter har nollställena \\(1+2i\\) och \\(-3\\). Koefficienten framför \\(x^3\\) är 1. Bestäm polynomet.</p>",
+    "s": "<p>Även \\(1-2i\\) är nollställe. Därför</p><p>\\[P=(x+3)(x-(1+2i))(x-(1-2i)).\\]</p><p>Det komplexa paret ger \\((x-1)^2+4=x^2-2x+5\\).</p><p>\\[P=(x+3)(x^2-2x+5)=\\boxed{x^3+x^2-x+15}.\\]</p>",
+    "familj": "poly_conj_final_a"
+  },
+  {
+    "id": "4.282",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Markera mängden av alla komplexa tal \\(z\\) som uppfyller \\(\\operatorname{Re}z=2\\).</p>",
+    "s": "<p>Villkoret betyder att x-koordinaten i det komplexa talplanet alltid är 2. Mängden är därför den lodräta linjen \\(\\boxed{x=2}\\).</p>",
+    "familj": "complex_re_line_final"
+  },
+  {
+    "id": "4.283",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beskriv mängden \\(|z+2-i|<3\\) geometriskt.</p>",
+    "s": "<p>Uttrycket är avståndet från punkten \\(-2+i\\). Villkoret betyder alla punkter med avstånd mindre än 3: insidan av cirkeln med centrum \\((-2,1)\\) och radie 3, utan rand.</p>",
+    "familj": "complex_disk_final"
+  },
+  {
+    "id": "4.284",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Ett komplext tal \\(z\\) har absolutbelopp 2 och argument \\(v\\). Talet \\(z^3\\) är ett negativt reellt tal. Bestäm alla möjliga \\(v\\) i intervallet \\(0\\le v<2\\pi\\).</p>",
+    "s": "<p>Argumentet till \\(z^3\\) är \\(3v\\). Negativt reellt tal har argument \\(\\pi+2k\\pi\\).</p><p>\\[3v=\\pi+2k\\pi\\Rightarrow v=\\pi/3+2k\\pi/3.\\]</p><p>I intervallet: \\(\\boxed{v=\\pi/3,\\pi,\\ 5\\pi/3}\\).</p>",
+    "familj": "polar_argument_condition_a"
+  },
+  {
+    "id": "4.285",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>De fyra lösningarna till \\(z^4=16\\) bildar hörnen i en fyrhörning i det komplexa talplanet. Bestäm fyrhörningens area.</p>",
+    "s": "<p>Rötterna är \\(2,2i,-2,-2i\\). De bildar en kvadrat vars diagonaler båda har längden 4.</p><p>Arean är \\(A=d_1d_2/2=4\\cdot4/2=\\boxed8\\).</p>",
+    "familj": "roots_geometry_area_a"
+  },
+  {
+    "id": "4.286",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/1",
+    "t": "<p>Bestäm resten när \\(P(x)=2x^4-3x^2+5x-7\\) divideras med \\(x-2\\), utan att utföra hela polynomdivisionen.</p>",
+    "s": "<p>När ett polynom divideras med \\(x-a\\) är resten \\(P(a)\\). Här blir resten därför \\(P(2)\\):</p><p>\\[2\\cdot16-3\\cdot4+10-7=32-12+10-7=\\boxed{23}.\\]</p>",
+    "familj": "remainder_theorem_final"
   }
-,
-{
-  "id": "2.179",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En cirkelformad mossfläck växer utåt. Radien ökar med 18 cm per år.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt mossfläckens area ökar när radien är 75 cm.</p>",
-  "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln. Arean beror på radien, och radien beror på tiden, så</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\cdot\\frac{dr}{dt}.\\]</p><p>För en cirkel är \\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vi räknar i meter: \\(r=0,75\\) m och \\(dr/dt=0,18\\) m/år.</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot0,75\\cdot0,18=0,27\\pi\\approx0,85.\\]</p><p><strong>Arean ökar med ungefär \\(\\boxed{0,85\\text{ m}^2/\\text{år}}\\).</strong></p>",
-  "familj": "forandringshastighet_cirkel_area_1"
-},
-{
-  "id": "2.180",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En tunn oljefläck på vattenytan antas vara cirkelformad. Vid ett visst ögonblick är radien 8,0 m och fläckens area ökar med 40 m²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt radien ökar vid detta ögonblick.</p>",
-  "s": "<p>För cirkeln gäller \\(A=\\pi r^2\\).</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dA/dt=40\\) och \\(r=8\\):</p><p>\\[40=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{40}{16\\pi}=\\frac{2,5}{\\pi}\\approx0,80.\\]</p><p><strong>Radien ökar med ungefär \\(\\boxed{0,80\\text{ m/min}}\\).</strong></p>",
-  "familj": "forandringshastighet_cirkel_radie_2"
-},
-{
-  "id": "2.181",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En klotformad ballong blåses upp. Radien ökar med 0,60 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Hur snabbt ökar ballongens volym när radien är 12 cm?</p>",
-  "s": "<p>Volymen av ett klot är</p><p>\\[V=\\frac{4\\pi r^3}{3}.\\]</p><p>Eftersom \\(V\\) beror på \\(r\\), som i sin tur beror på tiden, använder vi <strong>kedjeregeln från formelbladet</strong>:</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dV}{dr}=4\\pi r^2.\\]</p><p>Vid \\(r=12\\) cm och \\(dr/dt=0,60\\) cm/s:</p><p>\\[\\frac{dV}{dt}=4\\pi\\cdot12^2\\cdot0,60=345,6\\pi\\approx1086.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{1,09\\cdot10^3\\text{ cm}^3/\\text{s}}\\).</strong></p>",
-  "familj": "forandringshastighet_klot_volym_1"
-},
-{
-  "id": "2.182",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En klotformad isbit smälter. När radien är 5,0 cm minskar isbitens yta med 20 cm²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Bestäm hur snabbt radien minskar vid detta ögonblick.</p>",
-  "s": "<p>Ytan av ett klot är \\(A=4\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dr}=8\\pi r.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}.\\]</p><p>Eftersom ytan minskar är \\(dA/dt=-20\\). Vid \\(r=5\\):</p><p>\\[-20=8\\pi\\cdot5\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=-\\frac{1}{2\\pi}\\approx-0,159.\\]</p><p><strong>Radien minskar alltså med ungefär \\(\\boxed{0,16\\text{ cm/min}}\\).</strong></p>",
-  "familj": "forandringshastighet_klot_radie_2"
-},
-{
-  "id": "2.183",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En kubformad modell förstoras så att sidlängden ökar med 0,30 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kub med sidlängden s markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<polygon points=\"125,78 238,78 292,42 180,42\" fill=\"#F0F5F7\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<polygon points=\"238,78 292,42 292,154 238,190\" fill=\"#E2EDF1\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<rect x=\"125\" y=\"78\" width=\"113\" height=\"112\" fill=\"#EAF3F6\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<line x1=\"125\" y1=\"207\" x2=\"238\" y2=\"207\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M125 207 l9 -5 v10 z\" fill=\"#268FA3\"/><path d=\"M238 207 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"182\" y=\"226\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">s</text>\n</svg></span><p>Bestäm hur snabbt kubens volym ökar när sidlängden är 8,0 cm.</p>",
-  "s": "<p>Låt sidlängden vara \\(s\\). Volymen är \\(V=s^3\\), alltså</p><p>\\[\\frac{dV}{ds}=3s^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{ds}\\frac{ds}{dt}=3s^2\\frac{ds}{dt}.\\]</p><p>Vid \\(s=8,0\\) cm och \\(ds/dt=0,30\\) cm/s:</p><p>\\[\\frac{dV}{dt}=3\\cdot8^2\\cdot0,30=57,6.\\]</p><p><strong>Volymen ökar med \\(\\boxed{57,6\\text{ cm}^3/\\text{s}}\\).</strong></p>",
-  "familj": "forandringshastighet_kub_volym_1"
-},
-{
-  "id": "2.184",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En kvadratisk ljusbild på en vägg växer men behåller sin form. När sidlängden är 3,0 m ökar bildens area med 1,8 m²/s.</p><p>a) Bestäm \\(dA/ds\\) när \\(s=3,0\\) m.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm hur snabbt sidlängden ökar vid samma ögonblick.</p>",
-  "s": "<p>För en kvadrat är \\(A=s^2\\).</p><p>a) \\[\\frac{dA}{ds}=2s.\\]</p><p>Vid \\(s=3,0\\) m är</p><p>\\[\\boxed{\\frac{dA}{ds}=6,0\\text{ m}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{ds}\\frac{ds}{dt}.\\]</p><p>Alltså</p><p>\\[1,8=6,0\\frac{ds}{dt}\\Rightarrow \\frac{ds}{dt}=\\boxed{0,30\\text{ m/s}}.\\]</p>",
-  "familj": "forandringshastighet_kvadrat_sida_1"
-},
-{
-  "id": "2.185",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En cylindrisk bassäng har den konstanta höjden 1,5 m. Bassängens radie ökar med 4,0 cm/min när den vecklas ut.</p><span class=\"fig\"><svg width=\"390\" height=\"255\" viewBox=\"0 0 390 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och fast höjd h\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"253\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<ellipse cx=\"185\" cy=\"60\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<path d=\"M107 60 L107 188 M263 60 L263 188\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"188\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"60\" x2=\"250\" y2=\"60\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M250 60 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"218\" y=\"50\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<line x1=\"287\" y1=\"60\" x2=\"287\" y2=\"188\" stroke=\"#5C575E\" stroke-width=\"1.6\"/>\n<path d=\"M287 60 l-5 9 h10 z M287 188 l-5 -9 h10 z\" fill=\"#5C575E\"/>\n<text x=\"300\" y=\"129\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h</text>\n</svg></span><p>Bestäm hur snabbt bassängens volym ökar när radien är 2,0 m.</p>",
-  "s": "<p>Eftersom höjden är konstant kan volymen skrivas som en funktion av radien:</p><p>\\[V=\\pi r^2h=1,5\\pi r^2.\\]</p><p>Då</p><p>\\[\\frac{dV}{dr}=3\\pi r.\\]</p><p>Omvandla först \\(4,0\\) cm/min till \\(0,040\\) m/min. <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}=3\\pi\\cdot2,0\\cdot0,040=0,24\\pi.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{0,75\\text{ m}^3/\\text{min}}\\).</strong></p>",
-  "familj": "forandringshastighet_cylinder_volym_1"
-},
-{
-  "id": "2.186",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>En hög med sand behåller formen av en kon där höjden hela tiden är tre gånger basradien, alltså \\(h=3r\\).</p><span class=\"fig\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kon med höjden h och basradien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<path d=\"M185 35 L95 205 L275 205 Z\" fill=\"#F4EFE2\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"205\" rx=\"90\" ry=\"20\" fill=\"#EFE4C7\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"35\" x2=\"185\" y2=\"205\" stroke=\"#5C575E\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<text x=\"195\" y=\"123\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h = 3r</text>\n<line x1=\"185\" y1=\"205\" x2=\"270\" y2=\"205\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M270 205 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"226\" y=\"195\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Sand tillförs med 0,12 m³/min. Bestäm hur snabbt basradien ökar när \\(r=0,80\\) m.</p>",
-  "s": "<p><strong>Första steget:</strong> Skriv volymen som en funktion av \\(r\\).</p><p>Konens volym är</p><p>\\[V=\\frac{\\pi r^2h}{3}.\\]</p><p>Eftersom \\(h=3r\\) får vi</p><p>\\[V=\\frac{\\pi r^2(3r)}{3}=\\pi r^3.\\]</p><p>Därför</p><p>\\[\\frac{dV}{dr}=3\\pi r^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>Vid \\(r=0,80\\) m:</p><p>\\[0,12=3\\pi(0,80)^2\\frac{dr}{dt}=1,92\\pi\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=\\frac{0,12}{1,92\\pi}=\\frac{0,0625}{\\pi}\\approx0,0199\\text{ m/min}.\\]</p><p><strong>Basradien ökar med ungefär \\(\\boxed{2,0\\text{ cm/min}}\\).</strong></p>",
-  "familj": "forandringshastighet_kon_radie_1"
-},
-{
-  "id": "2.187",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>Ett radarsystem söker av ett cirkelformat område. Sökningens radie ökar med 0,40 km/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>När radien är 6,0 km:</p><p>a) bestäm \\(dA/dr\\),<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt det avsökta området ökar.</p>",
-  "s": "<p>Arean är \\(A=\\pi r^2\\).</p><p>a) \\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vid \\(r=6,0\\) km:</p><p>\\[\\boxed{\\frac{dA}{dr}=12\\pi\\text{ km}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=12\\pi\\cdot0,40=\\boxed{4,8\\pi\\text{ km}^2/\\text{min}}\\approx15,1\\text{ km}^2/\\text{min}.\\]</p>",
-  "familj": "forandringshastighet_radar_area_1"
-},
-{
-  "id": "2.188",
-  "kap": 2,
-  "omr": "tillampningar_derivata",
-  "kurs": [
-    "2c"
-  ],
-  "niva": "C",
-  "poang": "0/3/0",
-  "t": "<p>Efter en sten träffat en stilla vattenyta sprids en cirkelformad våg utåt. Omkretsen av den yttersta vågfronten ökar med 5,0 m/s.</p><span class=\"fig\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkelformad våg med radien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"116\" r=\"76\" fill=\"#EEF7FA\" stroke=\"#527C91\" stroke-width=\"2.3\"/>\n<circle cx=\"182\" cy=\"116\" r=\"58\" fill=\"none\" stroke=\"#A7C6D3\" stroke-width=\"1.2\"/>\n<circle cx=\"182\" cy=\"116\" r=\"40\" fill=\"none\" stroke=\"#C8DDE5\" stroke-width=\"1.2\"/>\n<line x1=\"182\" y1=\"116\" x2=\"252\" y2=\"116\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M252 116 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"106\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"182\" y=\"218\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">den yttersta vågfronten är en cirkel</text>\n</svg></span><p>När vågfrontens radie är 4,0 m:</p><p>a) bestäm hur snabbt radien ökar,<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt arean innanför vågfronten ökar.</p>",
-  "s": "<p>a) Omkretsen är \\(C=2\\pi r\\), så</p><p>\\[\\frac{dC}{dr}=2\\pi.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dC}{dt}=\\frac{dC}{dr}\\frac{dr}{dt}.\\]</p><p>Därför</p><p>\\[5,0=2\\pi\\frac{dr}{dt}\\Rightarrow \\boxed{\\frac{dr}{dt}=\\frac{5}{2\\pi}\\approx0,80\\text{ m/s}}.\\]</p><p>b) Arean är \\(A=\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Vid \\(r=4,0\\) m:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot4\\cdot\\frac{5}{2\\pi}=\\boxed{20\\text{ m}^2/\\text{s}}.\\]</p><p><strong>Insikt:</strong> Samma förändringshastighet för radien kan kopplas vidare till flera andra storheter.</p>",
-  "familj": "forandringshastighet_vagfront_tva_steg_1"
-}
 ];
