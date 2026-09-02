@@ -1,7 +1,9 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Utbyggd från användarens uppdaterade version i fyra sparade omgångar.
-   Nya uppgifter prioriterar E/C-träning, varierade kontexter och pedagogiska facit.
-   SVG används endast när den tillför matematisk information. */
+   Banken är utbyggd med särskilt fokus på tillämpningar av derivata samt
+   delbarhet, största gemensamma delare och minsta gemensamma multipel.
+   Inom tillämpningar av derivata har ett större antal befintliga uppgifter
+   fått tydligare facit och nya SVG-figurer.
+   Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
 
 window.BANKMATF1 = [
   {
@@ -1292,7 +1294,7 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "id": "1.125",
     "t": "<p>David ska köpa 12 burkar energidryck. Det finns 4 olika smaker att välja mellan.</p><ol type=\"a\"><li>På hur många sätt kan han välja 12 burkar om bara antalet av varje smak spelar roll?</li><li>På hur många sätt kan han välja burkarna om han vill ha minst en av varje smak?</li></ol>",
-    "s": "<p><strong>a)</strong> Låt \\(x_1,x_2,x_3,x_4\\) vara antal burkar av de fyra smakerna. Då söker vi antalet icke-negativa heltalslösningar till</p><p>\\[x_1+x_2+x_3+x_4=12.\\]</p><p>Med separatorer (stjärnor och streck) motsvarar detta att placera 3 streck bland 15 positioner:</p><p>\\[\\binom{15}{3}=455.\\]</p><p><strong>b)</strong> Om minst en av varje smak ska väljas sätter vi \\(y_i=x_i-1\\). Då är \\(y_i\\ge 0\\) och</p><p>\\[y_1+y_2+y_3+y_4=8.\\]</p><p>Antalet lösningar blir då</p><p>\\[\\binom{11}{3}=165.\\]</p><p><strong>Svar:</strong> a) 455 sätt, b) 165 sätt.</p>"
+    "s": "<p><strong>a)</strong> Låt \\(x_1,x_2,x_3,x_4\\) vara antalet burkar av de fyra smakerna. Då söker vi antalet heltalslösningar till</p><p>\\[x_1+x_2+x_3+x_4=12\\]</p><p>där varje \\(x_i\\) är 0 eller positivt.</p><p>Ett sätt att räkna är att tänka de 12 burkarna som 12 markeringar och skilja de fyra smakerna åt med tre streck. Vi ordnar alltså 12 markeringar och 3 streck i en rad. Det räcker att välja vilka 3 av de 15 platserna som ska innehålla streck:</p><p>\\[\\binom{15}{3}=455.\\]</p><p><strong>b)</strong> Om minst en burk av varje smak ska väljas lägger vi först undan en burk av varje smak. Då återstår 8 burkar att fördela fritt mellan de fyra smakerna.</p><p>Det motsvarar 8 markeringar och 3 streck, alltså</p><p>\\[\\binom{11}{3}=165.\\]</p><p><strong>Svar:</strong> a) 455 sätt, b) 165 sätt.</p>"
   },
   {
     "kap": 1,
@@ -4138,7 +4140,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "rekursiva_talfoljder",
     "niva": "C",
-    "typ": "rekursion med stationärt värde i dosmodell",
+    "typ": "rekursion med jämviktsvärde i dosmodell",
     "poang": "0/2/0",
     "t": "<p>En medicinmängd följer rekursionen</p><p>\\[M_0=0,\\qquad M_{n+1}=0,8M_n+10.\\]</p><p>Bestäm en explicit formel för \\(M_n\\).</p>",
     "s": "<p>Jämviktsvärdet \\(L\\) uppfyller</p><p>\\[L=0,8L+10\\Rightarrow0,2L=10\\Rightarrow L=50.\\]</p><p>Därför</p><p>\\[M_{n+1}-50=0,8(M_n-50).\\]</p><p>Eftersom \\(M_0-50=-50\\) får vi</p><p>\\[M_n-50=-50\\cdot0,8^n.\\]</p><p><strong>\\[M_n=50(1-0,8^n).\\]</strong></p>",
@@ -4318,7 +4320,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "konvergens p-integral",
+    "typ": "konvergens för generaliserad integral med x upphöjt till minus p",
     "poang": "0/1/2",
     "t": "<p>För vilka värden på parametern \\(p\\) konvergerar den generaliserade integralen \\(\\displaystyle\\int_1^\\infty x^{-p}\\,dx\\)?</p>",
     "s": "<p>Skriv integralen med en övre gräns \\(R\\):</p><p>\\[\\int_1^R x^{-p}\\,dx=\\frac{R^{1-p}-1}{1-p}\\qquad(p\\ne1).\\]</p><p>När \\(R\\to\\infty\\) blir gränsvärdet ändligt exakt när exponenten \\(1-p&lt;0\\), det vill säga när <strong>\\(p&gt;1\\)</strong>.</p><p>För \\(p=1\\) får vi \\(\\int_1^R\\frac{1}{x}\\,dx=\\ln R\\), som går mot oändligheten. Alltså konvergerar integralen exakt för <strong>\\(p&gt;1\\)</strong>.</p>",
@@ -4358,7 +4360,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "A",
-    "typ": "parameter i generaliserad integral vid singularitet",
+    "typ": "parameter i generaliserad integral där integranden går mot oändligheten",
     "poang": "0/1/2",
     "t": "<p>För vilka reella värden på \\(p\\gt 0\\) konvergerar integralen</p><p>\\[\\int_0^2 \\frac{1}{(2-x)^p}\\,dx?\\]</p>",
     "s": "<p>Problemet finns vid \\(x=2\\). Sätt \\(u=2-x\\). Då får vi samma konvergensfråga som för</p><p>\\[\\int_0^2 u^{-p}\\,du.\\]</p><p>För \\(p\\ne1\\) är en primitiv funktion \\(u^{1-p}/(1-p)\\). När \\(u\\to0^+\\) går \\(u^{1-p}\\to0\\) exakt när \\(1-p\\gt 0\\), alltså när \\(p&lt;1\\).</p><p>För \\(p=1\\) uppstår \\(\\ln u\\), som divergerar. Eftersom \\(p\\gt 0\\) är svaret <strong>\\(0\\lt p\\lt 1\\)</strong>.</p>",
@@ -4378,7 +4380,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "E",
-    "typ": "p-integral",
+    "typ": "generaliserad integral med potensfunktion",
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"270\" viewBox=\"0 0 450 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen till y lika med ett genom x i kvadrat med det obegränsade området från x lika med 2 markerat\">\n<rect width=\"450\" height=\"280\" fill=\"white\"/>\n<path d=\"M 151.3,212.0 L 151.3,192.2 L 152.6,192.6 L 153.9,193.0 L 155.2,193.4 L 156.5,193.8 L 157.8,194.2 L 159.1,194.5 L 160.4,194.8 L 161.7,195.2 L 163.0,195.5 L 164.2,195.8 L 165.5,196.1 L 166.8,196.4 L 168.1,196.7 L 169.4,197.0 L 170.7,197.2 L 172.0,197.5 L 173.3,197.8 L 174.6,198.0 L 175.9,198.3 L 177.2,198.5 L 178.5,198.7 L 179.8,199.0 L 181.1,199.2 L 182.4,199.4 L 183.6,199.6 L 184.9,199.8 L 186.2,200.0 L 187.5,200.2 L 188.8,200.4 L 190.1,200.6 L 191.4,200.7 L 192.7,200.9 L 194.0,201.1 L 195.3,201.3 L 196.6,201.4 L 197.9,201.6 L 199.2,201.7 L 200.5,201.9 L 201.8,202.0 L 203.0,202.2 L 204.3,202.3 L 205.6,202.5 L 206.9,202.6 L 208.2,202.7 L 209.5,202.9 L 210.8,203.0 L 212.1,203.1 L 213.4,203.3 L 214.7,203.4 L 216.0,203.5 L 217.3,203.6 L 218.6,203.7 L 219.9,203.8 L 221.2,203.9 L 222.4,204.1 L 223.7,204.2 L 225.0,204.3 L 226.3,204.4 L 227.6,204.5 L 228.9,204.6 L 230.2,204.7 L 231.5,204.7 L 232.8,204.8 L 234.1,204.9 L 235.4,205.0 L 236.7,205.1 L 238.0,205.2 L 239.3,205.3 L 240.6,205.4 L 241.9,205.4 L 243.1,205.5 L 244.4,205.6 L 245.7,205.7 L 247.0,205.7 L 248.3,205.8 L 249.6,205.9 L 250.9,206.0 L 252.2,206.0 L 253.5,206.1 L 254.8,206.2 L 256.1,206.2 L 257.4,206.3 L 258.7,206.4 L 260.0,206.4 L 261.3,206.5 L 262.5,206.5 L 263.8,206.6 L 265.1,206.7 L 266.4,206.7 L 267.7,206.8 L 269.0,206.8 L 270.3,206.9 L 271.6,206.9 L 272.9,207.0 L 274.2,207.0 L 275.5,207.1 L 276.8,207.1 L 278.1,207.2 L 279.4,207.2 L 280.7,207.3 L 281.9,207.3 L 283.2,207.4 L 284.5,207.4 L 285.8,207.5 L 287.1,207.5 L 288.4,207.6 L 289.7,207.6 L 291.0,207.7 L 292.3,207.7 L 293.6,207.7 L 294.9,207.8 L 296.2,207.8 L 297.5,207.9 L 298.8,207.9 L 300.1,207.9 L 301.4,208.0 L 302.6,208.0 L 303.9,208.1 L 305.2,208.1 L 306.5,208.1 L 307.8,208.2 L 309.1,208.2 L 310.4,208.2 L 311.7,208.3 L 313.0,208.3 L 314.3,208.3 L 315.6,208.4 L 316.9,208.4 L 318.2,208.4 L 319.5,208.5 L 320.8,208.5 L 322.0,208.5 L 323.3,208.6 L 324.6,208.6 L 325.9,208.6 L 327.2,208.6 L 328.5,208.7 L 329.8,208.7 L 331.1,208.7 L 332.4,208.8 L 333.7,208.8 L 335.0,208.8 L 336.3,208.8 L 337.6,208.9 L 338.9,208.9 L 340.2,208.9 L 341.4,208.9 L 342.7,209.0 L 344.0,209.0 L 345.3,209.0 L 346.6,209.0 L 347.9,209.1 L 349.2,209.1 L 350.5,209.1 L 351.8,209.1 L 353.1,209.2 L 354.4,209.2 L 355.7,209.2 L 357.0,209.2 L 358.3,209.2 L 359.6,209.3 L 360.8,209.3 L 362.1,209.3 L 363.4,209.3 L 364.7,209.4 L 366.0,209.4 L 367.3,209.4 L 368.6,209.4 L 369.9,209.4 L 371.2,209.5 L 372.5,209.5 L 373.8,209.5 L 375.1,209.5 L 376.4,209.5 L 377.7,209.5 L 379.0,209.6 L 380.3,209.6 L 381.5,209.6 L 382.8,209.6 L 384.1,209.6 L 385.4,209.6 L 386.7,209.7 L 388.0,209.7 L 389.3,209.7 L 390.6,209.7 L 391.9,209.7 L 393.2,209.7 L 394.5,209.8 L 395.8,209.8 L 397.1,209.8 L 398.4,209.8 L 399.7,209.8 L 400.9,209.8 L 402.2,209.9 L 403.5,209.9 L 404.8,209.9 L 406.1,209.9 L 407.4,209.9 L 408.7,209.9 L 410.0,209.9 L 410.0,212.0 Z\" fill=\"#2C62A8\" fill-opacity=\".22\"/>\n<line x1=\"151.3\" y1=\"212\" x2=\"151.3\" y2=\"192.2\" stroke=\"#2C62A8\" stroke-width=\"1.8\"/>\n<path d=\"M 62.0,38.0 L 63.3,38.0 L 64.7,38.0 L 66.0,38.0 L 67.4,38.0 L 68.7,38.0 L 70.0,41.1 L 71.4,51.6 L 72.7,61.0 L 74.0,69.7 L 75.4,77.7 L 76.7,85.0 L 78.1,91.7 L 79.4,97.9 L 80.7,103.6 L 82.1,108.9 L 83.4,113.9 L 84.8,118.4 L 86.1,122.7 L 87.4,126.7 L 88.8,130.4 L 90.1,133.9 L 91.4,137.2 L 92.8,140.2 L 94.1,143.1 L 95.5,145.8 L 96.8,148.4 L 98.1,150.8 L 99.5,153.1 L 100.8,155.2 L 102.2,157.3 L 103.5,159.2 L 104.8,161.0 L 106.2,162.7 L 107.5,164.4 L 108.8,166.0 L 110.2,167.4 L 111.5,168.9 L 112.9,170.2 L 114.2,171.5 L 115.5,172.7 L 116.9,173.9 L 118.2,175.0 L 119.6,176.1 L 120.9,177.1 L 122.2,178.1 L 123.6,179.1 L 124.9,180.0 L 126.2,180.8 L 127.6,181.7 L 128.9,182.5 L 130.3,183.2 L 131.6,184.0 L 132.9,184.7 L 134.3,185.4 L 135.6,186.0 L 137.0,186.7 L 138.3,187.3 L 139.6,187.9 L 141.0,188.4 L 142.3,189.0 L 143.6,189.5 L 145.0,190.0 L 146.3,190.5 L 147.7,191.0 L 149.0,191.5 L 150.3,191.9 L 151.7,192.3 L 153.0,192.8 L 154.4,193.2 L 155.7,193.6 L 157.0,193.9 L 158.4,194.3 L 159.7,194.7 L 161.0,195.0 L 162.4,195.4 L 163.7,195.7 L 165.1,196.0 L 166.4,196.3 L 167.7,196.6 L 169.1,196.9 L 170.4,197.2 L 171.8,197.5 L 173.1,197.7 L 174.4,198.0 L 175.8,198.2 L 177.1,198.5 L 178.4,198.7 L 179.8,199.0 L 181.1,199.2 L 182.5,199.4 L 183.8,199.6 L 185.1,199.8 L 186.5,200.0 L 187.8,200.2 L 189.2,200.4 L 190.5,200.6 L 191.8,200.8 L 193.2,201.0 L 194.5,201.2 L 195.8,201.3 L 197.2,201.5 L 198.5,201.7 L 199.9,201.8 L 201.2,202.0 L 202.5,202.1 L 203.9,202.3 L 205.2,202.4 L 206.6,202.6 L 207.9,202.7 L 209.2,202.9 L 210.6,203.0 L 211.9,203.1 L 213.2,203.2 L 214.6,203.4 L 215.9,203.5 L 217.3,203.6 L 218.6,203.7 L 219.9,203.8 L 221.3,204.0 L 222.6,204.1 L 224.0,204.2 L 225.3,204.3 L 226.6,204.4 L 228.0,204.5 L 229.3,204.6 L 230.6,204.7 L 232.0,204.8 L 233.3,204.9 L 234.7,205.0 L 236.0,205.1 L 237.3,205.1 L 238.7,205.2 L 240.0,205.3 L 241.4,205.4 L 242.7,205.5 L 244.0,205.6 L 245.4,205.6 L 246.7,205.7 L 248.0,205.8 L 249.4,205.9 L 250.7,205.9 L 252.1,206.0 L 253.4,206.1 L 254.7,206.2 L 256.1,206.2 L 257.4,206.3 L 258.8,206.4 L 260.1,206.4 L 261.4,206.5 L 262.8,206.6 L 264.1,206.6 L 265.4,206.7 L 266.8,206.7 L 268.1,206.8 L 269.5,206.8 L 270.8,206.9 L 272.1,207.0 L 273.5,207.0 L 274.8,207.1 L 276.2,207.1 L 277.5,207.2 L 278.8,207.2 L 280.2,207.3 L 281.5,207.3 L 282.8,207.4 L 284.2,207.4 L 285.5,207.5 L 286.9,207.5 L 288.2,207.6 L 289.5,207.6 L 290.9,207.7 L 292.2,207.7 L 293.6,207.7 L 294.9,207.8 L 296.2,207.8 L 297.6,207.9 L 298.9,207.9 L 300.2,207.9 L 301.6,208.0 L 302.9,208.0 L 304.3,208.1 L 305.6,208.1 L 306.9,208.1 L 308.3,208.2 L 309.6,208.2 L 311.0,208.2 L 312.3,208.3 L 313.6,208.3 L 315.0,208.4 L 316.3,208.4 L 317.6,208.4 L 319.0,208.5 L 320.3,208.5 L 321.7,208.5 L 323.0,208.5 L 324.3,208.6 L 325.7,208.6 L 327.0,208.6 L 328.4,208.7 L 329.7,208.7 L 331.0,208.7 L 332.4,208.8 L 333.7,208.8 L 335.0,208.8 L 336.4,208.8 L 337.7,208.9 L 339.1,208.9 L 340.4,208.9 L 341.7,208.9 L 343.1,209.0 L 344.4,209.0 L 345.8,209.0 L 347.1,209.1 L 348.4,209.1 L 349.8,209.1 L 351.1,209.1 L 352.4,209.1 L 353.8,209.2 L 355.1,209.2 L 356.5,209.2 L 357.8,209.2 L 359.1,209.3 L 360.5,209.3 L 361.8,209.3 L 363.2,209.3 L 364.5,209.3 L 365.8,209.4 L 367.2,209.4 L 368.5,209.4 L 369.8,209.4 L 371.2,209.5 L 372.5,209.5 L 373.9,209.5 L 375.2,209.5 L 376.5,209.5 L 377.9,209.5 L 379.2,209.6 L 380.6,209.6 L 381.9,209.6 L 383.2,209.6 L 384.6,209.6 L 385.9,209.7 L 387.2,209.7 L 388.6,209.7 L 389.9,209.7 L 391.3,209.7 L 392.6,209.7 L 393.9,209.8 L 395.3,209.8 L 396.6,209.8 L 398.0,209.8 L 399.3,209.8 L 400.6,209.8 L 402.0,209.9 L 403.3,209.9 L 404.6,209.9 L 406.0,209.9 L 407.3,209.9 L 408.7,209.9 L 410.0,209.9\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<line x1=\"48\" y1=\"212\" x2=\"426\" y2=\"212\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"62\" y1=\"24\" x2=\"62\" y2=\"228\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"89.7\" y1=\"212\" x2=\"89.7\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"89.7\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">1</text><line x1=\"151.3\" y1=\"212\" x2=\"151.3\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"151.3\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">2</text><line x1=\"212.9\" y1=\"212\" x2=\"212.9\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"212.9\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">3</text><line x1=\"274.5\" y1=\"212\" x2=\"274.5\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"274.5\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">4</text><line x1=\"336.1\" y1=\"212\" x2=\"336.1\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"336.1\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">5</text><line x1=\"397.7\" y1=\"212\" x2=\"397.7\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"397.7\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">6</text><line x1=\"57\" y1=\"172.5\" x2=\"62\" y2=\"172.5\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"177.5\" font-size=\"13\" text-anchor=\"end\">0,5</text><line x1=\"57\" y1=\"132.9\" x2=\"62\" y2=\"132.9\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"137.9\" font-size=\"13\" text-anchor=\"end\">1</text><line x1=\"57\" y1=\"93.4\" x2=\"62\" y2=\"93.4\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"98.4\" font-size=\"13\" text-anchor=\"end\">1,5</text><line x1=\"57\" y1=\"53.8\" x2=\"62\" y2=\"53.8\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"58.8\" font-size=\"13\" text-anchor=\"end\">2</text>\n<text x=\"432\" y=\"217\" font-size=\"14\">x</text><text x=\"56\" y=\"18\" font-size=\"14\">y</text>\n<text x=\"151.3\" y=\"250\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"middle\">start x = 2</text>\n<path d=\"M404 206 l12 6 -12 6\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"1.6\"/>\n<text x=\"414\" y=\"198\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">området fortsätter</text>\n<text x=\"80\" y=\"42\" font-size=\"16\">y = 1/x²</text>\n</svg></span><p>Beräkna \\(\\int_2^{\\infty}\\frac1{x^2}\\,dx\\).</p>",
     "s": "<p>\\[\\int_2^{\\infty}\\frac1{x^2}dx=\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_2^b=\\lim_{b\\to\\infty}\\left(\\frac12-\\frac1b\\right)=\\frac12.\\]</p>",
@@ -4408,7 +4410,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "singularitet vid noll",
+    "typ": "generaliserad integral där integranden går mot oändligheten vid noll",
     "poang": "0/2/0",
     "t": "<p>Avgör om \\(\\int_0^1\\frac1{\\sqrt{x}}\\,dx\\) konvergerar och bestäm i så fall värdet.</p>",
     "s": "<p>Integranden är obegränsad vid \\(x=0\\), så</p><p>\\[\\int_0^1x^{-1/2}dx=\\lim_{a\\to0^+}[2\\sqrt{x}]_a^1=2.\\]</p><p>Integralen <strong>konvergerar till 2</strong>.</p>",
@@ -4418,17 +4420,17 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "jämföra två p-integraler",
+    "typ": "jämföra generaliserade integraler med olika exponenter",
     "poang": "0/2/0",
     "t": "<p>För vilka av \\(p=0,8\\), \\(p=1\\) och \\(p=1,4\\) konvergerar \\(\\int_1^{\\infty}x^{-p}\\,dx\\)?</p>",
-    "s": "<p>En p-integral \\(\\int_1^{\\infty}x^{-p}dx\\) konvergerar exakt när \\(p\\gt1\\). Därför divergerar fallen \\(p=0,8\\) och \\(p=1\\), medan <strong>\\(p=1,4\\)</strong> konvergerar.</p>",
+    "s": "<p>Vi använder att en integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) konvergerar när \\(p\\gt1\\).</p><p>Därför divergerar fallen \\(p=0,8\\) och \\(p=1\\), medan <strong>\\(p=1,4\\)</strong> ger en konvergent integral.</p>",
     "id": "3.39"
   },
   {
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "E",
-    "typ": "p-integral från 3",
+    "typ": "generaliserad integral från 3 till oändligheten",
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_3^{\\infty}x^{-2}\\,dx\\).</p>",
     "s": "<p>\\[\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_3^b=\\frac13.\\]</p>",
@@ -4448,10 +4450,10 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "singularitet båda sidor",
+    "typ": "generaliserad integral med problem vid x lika med noll",
     "poang": "0/2/0",
     "t": "<p>Avgör om \\(\\int_{-1}^{1}\\frac1{x^2}\\,dx\\) konvergerar.</p>",
-    "s": "<p>Integranden har en singularitet vid \\(x=0\\), så integralen måste delas i två. Redan</p><p>\\[\\int_0^1x^{-2}dx=\\lim_{a\\to0^+}\\left[-\\frac1x\\right]_a^1=\\infty.\\]</p><p>Alltså <strong>divergerar integralen</strong>.</p>",
+    "s": "<p>Integranden går mot oändligheten när \\(x\\to0\\), så integralen måste delas i två delar.</p><p>Redan</p><p>\\[\\int_0^1x^{-2}dx=\\lim_{a\\to0^+}\\left[-\\frac1x\\right]_a^1=\\infty.\\]</p><p>Alltså <strong>divergerar integralen</strong>.</p>",
     "id": "3.61"
   },
   {
@@ -4478,7 +4480,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "E",
-    "typ": "p-integral från två till oändligheten",
+    "typ": "generaliserad integral från 2 till oändligheten",
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"280\" viewBox=\"0 0 440 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med ett genom x kvadrat med området från x lika med två mot oändligheten markerat\"><rect width=\"440\" height=\"280\" fill=\"white\"/><polygon points=\"136.9,235.0 136.9,203.0 139.7,204.2 142.4,205.4 145.1,206.5 147.8,207.5 150.6,208.5 153.3,209.5 156.0,210.4 158.8,211.2 161.5,212.0 164.2,212.8 167.0,213.5 169.7,214.2 172.4,214.8 175.2,215.4 177.9,216.0 180.6,216.6 183.3,217.2 186.1,217.7 188.8,218.2 191.5,218.7 194.3,219.1 197.0,219.6 199.7,220.0 202.5,220.4 205.2,220.8 207.9,221.1 210.7,221.5 213.4,221.8 216.1,222.2 218.8,222.5 221.6,222.8 224.3,223.1 227.0,223.4 229.8,223.7 232.5,223.9 235.2,224.2 238.0,224.4 240.7,224.7 243.4,224.9 246.2,225.1 248.9,225.3 251.6,225.5 254.3,225.7 257.1,225.9 259.8,226.1 262.5,226.3 265.3,226.5 268.0,226.7 270.7,226.8 273.5,227.0 276.2,227.1 278.9,227.3 281.7,227.5 284.4,227.6 287.1,227.7 289.8,227.9 292.6,228.0 295.3,228.1 298.0,228.3 300.8,228.4 303.5,228.5 306.2,228.6 309.0,228.7 311.7,228.8 314.4,228.9 317.2,229.0 319.9,229.2 322.6,229.2 325.3,229.3 328.1,229.4 330.8,229.5 333.5,229.6 336.3,229.7 339.0,229.8 341.7,229.9 344.5,230.0 347.2,230.0 349.9,230.1 352.7,230.2 355.4,230.3 358.1,230.3 360.8,230.4 363.6,230.5 366.3,230.5 369.0,230.6 371.8,230.7 374.5,230.7 377.2,230.8 380.0,230.9 382.7,230.9 385.4,231.0 388.2,231.0 390.9,231.1 393.6,231.1 396.3,231.2 399.1,231.2 401.8,231.3 404.5,231.3 407.3,231.4 410.0,231.4 410.0,235.0\" fill=\"#E3B52B\" fill-opacity=\".22\"/><line x1=\"55\" y1=\"235\" x2=\"410\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,34.8 58.0,54.8 60.9,72.0 63.9,86.9 66.8,99.8 69.8,111.0 72.8,121.0 75.7,129.8 78.7,137.6 81.6,144.5 84.6,150.8 87.5,156.4 90.5,161.5 93.5,166.1 96.4,170.2 99.4,174.1 102.3,177.5 105.3,180.7 108.2,183.7 111.2,186.4 114.2,188.9 117.1,191.2 120.1,193.3 123.0,195.3 126.0,197.2 129.0,198.9 131.9,200.5 134.9,202.0 137.8,203.4 140.8,204.7 143.8,205.9 146.7,207.1 149.7,208.2 152.6,209.2 155.6,210.2 158.5,211.1 161.5,212.0 164.5,212.8 167.4,213.6 170.4,214.3 173.3,215.0 176.3,215.7 179.2,216.3 182.2,216.9 185.2,217.5 188.1,218.1 191.1,218.6 194.0,219.1 197.0,219.6 200.0,220.0 202.9,220.4 205.9,220.9 208.8,221.3 211.8,221.6 214.7,222.0 217.7,222.4 220.7,222.7 223.6,223.0 226.6,223.3 229.5,223.6 232.5,223.9 235.5,224.2 238.4,224.5 241.4,224.7 244.3,225.0 247.3,225.2 250.3,225.4 253.2,225.7 256.2,225.9 259.1,226.1 262.1,226.3 265.0,226.5 268.0,226.7 271.0,226.8 273.9,227.0 276.9,227.2 279.8,227.4 282.8,227.5 285.8,227.7 288.7,227.8 291.7,228.0 294.6,228.1 297.6,228.2 300.5,228.4 303.5,228.5 306.5,228.6 309.4,228.7 312.4,228.9 315.3,229.0 318.3,229.1 321.2,229.2 324.2,229.3 327.2,229.4 330.1,229.5 333.1,229.6 336.0,229.7 339.0,229.8 342.0,229.9 344.9,230.0 347.9,230.1 350.8,230.1 353.8,230.2 356.8,230.3 359.7,230.4 362.7,230.5 365.6,230.5 368.6,230.6 371.5,230.7 374.5,230.7 377.5,230.8 380.4,230.9 383.4,230.9 386.3,231.0 389.3,231.1 392.2,231.1 395.2,231.2 398.2,231.2 401.1,231.3 404.1,231.3 407.0,231.4 410.0,231.4\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.4\"/><line x1=\"136.9\" y1=\"235\" x2=\"136.9\" y2=\"203.0\" stroke=\"#777\" stroke-dasharray=\"5 4\"/><text x=\"136.9\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"330\" y=\"78\" font-size=\"14\" fill=\"#2C62A8\">y = 1/x²</text><text x=\"400\" y=\"229\" font-size=\"14\">x</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Beräkna</p><p>\\[\\int_2^{\\infty}\\frac{1}{x^2}\\,dx.\\]</p>",
     "s": "<p>Skriv integralen som ett gränsvärde:</p><p>\\[\\int_2^{\\infty}\\frac1{x^2}\\,dx=\\lim_{b\\to\\infty}\\int_2^b x^{-2}\\,dx.\\]</p><p>\\[=\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_2^b=\\lim_{b\\to\\infty}\\left(-\\frac1b+\\frac12\\right)=\\frac12.\\]</p><p><strong>Integralen konvergerar och värdet är \\(\\frac12\\).</strong></p>",
@@ -4498,17 +4500,17 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "E",
-    "typ": "avgöra divergens för p-integral",
+    "typ": "avgöra divergens för generaliserad integral",
     "poang": "2/0/0",
     "t": "<p>Avgör om integralen</p><p>\\[\\int_1^{\\infty}\\frac{1}{\\sqrt{x}}\\,dx\\]</p><p>konvergerar eller divergerar.</p>",
-    "s": "<p>Integranden är \\(x^{-1/2}\\). För en p-integral \\(\\int_1^{\\infty}x^{-p}dx\\) krävs \\(p>1\\) för konvergens.</p><p>Här är \\(p=\\frac12\\), så integralen <strong>divergerar</strong>.</p><p>Man kan också se det direkt:</p><p>\\[\\int_1^b x^{-1/2}dx=2\\sqrt b-2\\to\\infty.\\]</p>",
+    "s": "<p>Integranden är \\(x^{-1/2}\\). För en integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) krävs \\(p>1\\) för konvergens.</p><p>Här är \\(p=\\frac12\\), så integralen <strong>divergerar</strong>.</p><p>Man kan också se det direkt:</p><p>\\[\\int_1^b x^{-1/2}dx=2\\sqrt b-2\\to\\infty.\\]</p>",
     "id": "3.87"
   },
   {
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "integrerbar singularitet vid noll",
+    "typ": "konvergent generaliserad integral vid noll",
     "poang": "0/2/0",
     "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\frac{1}{\\sqrt{x}}\\,dx.\\]</p>",
     "s": "<p>Integralen är generaliserad eftersom integranden går mot oändligheten när \\(x\\to0^+\\).</p><p>\\[\\int_0^1x^{-1/2}dx=\\lim_{a\\to0^+}\\left[2\\sqrt{x}\\right]_a^1\\]</p><p>\\[=\\lim_{a\\to0^+}(2-2\\sqrt a)=2.\\]</p><p><strong>Integralen konvergerar och värdet är 2.</strong></p>",
@@ -4518,17 +4520,17 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "parameter i p-integral",
+    "typ": "parameter i generaliserad integral",
     "poang": "0/2/0",
     "t": "<p>För vilka reella värden på \\(a\\) konvergerar</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^{a+2}}\\,dx?\\]</p>",
-    "s": "<p>Detta är en p-integral med exponent</p><p>\\[p=a+2.\\]</p><p>En integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) konvergerar precis när \\(p>1\\).</p><p>Alltså</p><p>\\[a+2>1\\Rightarrow a>-1.\\]</p><p><strong>Integralen konvergerar för \\(a>-1\\).</strong></p>",
+    "s": "<p>Integralen har formen</p><p>\\[\\int_1^{\\infty}x^{-p}dx\\]</p><p>med</p><p>\\[p=a+2.\\]</p><p>En sådan integral konvergerar när \\(p>1\\).</p><p>Alltså</p><p>\\[a+2>1\\Rightarrow a>-1.\\]</p><p><strong>Integralen konvergerar för \\(a>-1\\).</strong></p>",
     "id": "3.89"
   },
   {
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "E",
-    "typ": "p-integral från tre",
+    "typ": "generaliserad integral från 3 till oändligheten",
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\int_3^{\\infty}\\frac1{x^3}\\,dx.\\]</p>",
     "s": "<p>\\[\\int_3^{\\infty}x^{-3}dx=\\lim_{b\\to\\infty}\\left[-\\frac1{2x^2}\\right]_3^b.\\]</p><p>\\[=0-\\left(-\\frac1{18}\\right)=\\frac1{18}.\\]</p><p><strong>Integralen konvergerar till \\(\\frac1{18}\\).</strong></p>",
@@ -4548,7 +4550,7 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "generaliserade_integraler",
     "niva": "C",
-    "typ": "logaritmisk singularitet vid noll",
+    "typ": "generaliserad integral med logaritm vid noll",
     "poang": "0/2/0",
     "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\ln x\\,dx.\\]</p>",
     "s": "<p>Integralen är generaliserad eftersom \\(\\ln x\\to-\\infty\\) när \\(x\\to0^+\\).</p><p>En primitiv funktion är \\(x\\ln x-x\\). Därför</p><p>\\[\\int_0^1\\ln xdx=\\lim_{a\\to0^+}[x\\ln x-x]_a^1.\\]</p><p>Vid \\(x=1\\) blir värdet \\(-1\\). Dessutom gäller \\(a\\ln a\\to0\\) och \\(a\\to0\\).</p><p>Alltså blir gränsvärdet <strong>\\(-1\\)</strong>. Integralen konvergerar.</p>",
@@ -4690,8 +4692,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter två fordon",
     "poang": "0/3/0",
-    "t": "<p>Två raka vägar korsar varandra vinkelrätt. Bil A är 300 m norr om korsningen och kör söderut med 90 km/h. Bil B är 400 m öster om korsningen och kör österut. I detta ögonblick ökar avståndet mellan bilarna med 18 km/h. Bestäm bil B:s hastighet.</p>",
-    "s": "<p>Använd km: \\(x=0,4\\), \\(y=0,3\\), \\(s=0,5\\). Eftersom A närmar sig korsningen är \\(y'=-90\\). B har \\(x'=v\\), och \\(s'=18\\). Derivera \\(s^2=x^2+y^2\\):</p><p>\\[ss'=xx'+yy'.\\]</p><p>\\[0,5\\cdot18=0,4v+0,3(-90).\\]</p><p>\\(9=0,4v-27\\), så <strong>\\(v=90\\text{ km/h}\\)</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två raka vägar korsar varandra vinkelrätt. Bil A är 300 m norr om korsningen och kör söderut med 90 km/h. Bil B är 400 m öster om korsningen och kör österut. I detta ögonblick ökar avståndet mellan bilarna med 18 km/h.</p><p>Bestäm bil B:s hastighet.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Låt <strong>x</strong> vara bil B:s avstånd från korsningen, <strong>y</strong> bil A:s avstånd från korsningen och <strong>s</strong> avståndet mellan bilarna.</p><p>Vi räknar i km. I detta ögonblick är</p><p>\\[x=0,4,\\qquad y=0,3,\\qquad s=0,5.\\]</p><p>Bil A närmar sig korsningen, alltså \\(y'=-90\\). Bil B kör bort från korsningen, så \\(x'=v\\). Dessutom är \\(s'=18\\).</p><p>Av figuren ser vi en rätvinklig triangel, så Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[2ss'=2xx'+2yy'\\quad\\Rightarrow\\quad ss'=xx'+yy'.\\]</p><p>Sätt in värdena:</p><p>\\[0,5\\cdot18=0,4v+0,3\\cdot(-90).\\]</p><p>Det ger</p><p>\\[9=0,4v-27\\Rightarrow 0,4v=36\\Rightarrow v=90.\\]</p><p><strong>Svar: bil B kör \\(90\\ \\text{km/h}\\).</strong></p>",
     "id": "3.09"
   },
   {
@@ -4700,8 +4702,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter ballong",
     "poang": "0/2/1",
-    "t": "<p>En ballong stiger lodrätt med 1,5 m/s. När den är 18 m över marken passerar en cyklist rakt under den och fortsätter horisontellt med 6,0 m/s. Hur snabbt ökar avståndet mellan dem 4,0 s senare?</p>",
-    "s": "<p>Efter 4 s är höjden \\(y=24\\) m och den horisontella sträckan \\(x=24\\) m. Avståndet är \\(s=24\\sqrt2\\). Derivering av \\(s^2=x^2+y^2\\) ger</p><p>\\[s'=\\frac{xx'+yy'}s=\\frac{24\\cdot6+24\\cdot1,5}{24\\sqrt2}=\\frac{7,5}{\\sqrt2}\\approx\\mathbf{5,30\\text{ m/s}}.\\]</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"300\" y=\"181\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"316\" y=\"166\" font-size=\"13\">cyklist</text>\n</svg></span><p>En ballong stiger lodrätt med 1,5 m/s. När den är 18 m över marken passerar en cyklist rakt under den och fortsätter horisontellt med 6,0 m/s.</p><p>Hur snabbt ökar avståndet mellan dem 4,0 s senare?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"300\" y=\"181\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"316\" y=\"166\" font-size=\"13\">cyklist</text>\n</svg></span><p>Låt <strong>x</strong> vara cyklistens horisontella avstånd från punkten rakt under ballongen, <strong>y</strong> ballongens höjd över marken och <strong>s</strong> avståndet mellan ballongen och cyklisten.</p><p>Efter 4,0 s är</p><p>\\[x=6,0\\cdot4,0=24\\ \\text{m},\\qquad y=18+1,5\\cdot4,0=24\\ \\text{m}.\\]</p><p>Dessutom är \\(x'=6,0\\) m/s och \\(y'=1,5\\) m/s.</p><p>Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera:</p><p>\\[ss'=xx'+yy'.\\]</p><p>När \\(x=y=24\\) blir</p><p>\\[s=\\sqrt{24^2+24^2}=24\\sqrt2.\\]</p><p>Sätt in:</p><p>\\[(24\\sqrt2)s'=24\\cdot6,0+24\\cdot1,5=180.\\]</p><p>Alltså</p><p>\\[s'=\\frac{180}{24\\sqrt2}=\\frac{7,5}{\\sqrt2}\\approx5,3.\\]</p><p><strong>Svar: avståndet ökar med ungefär \\(5,3\\ \\text{m/s}\\).</strong></p>",
     "id": "3.10"
   },
   {
@@ -4710,8 +4712,8 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "relaterade förändringshastigheter konisk tank",
     "poang": "0/2/1",
-    "t": "<p>En upp-och-nedvänd konisk tank har höjden 3,0 m och toppradien 1,5 m. Vatten pumpas in med 50 liter/min. Hur snabbt stiger vattennivån när djupet är 2,0 m?</p>",
-    "s": "<p>Likformighet ger \\(r/h=1,5/3=1/2\\), alltså \\(r=h/2\\). Volymen är</p><p>\\[V=\\frac13\\pi r^2h=\\frac{\\pi}{12}h^3.\\]</p><p>Därför \\(V'=\\frac\\pi4h^2h'\\). Med \\(V'=0,050\\,\\text{m}^3/\\text{min}\\) och \\(h=2\\):</p><p>\\[h'=\\frac{0,050}{\\pi}\\approx\\mathbf{0,0159\\text{ m/min}}\\] (cirka 1,59 cm/min).</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Upp-och-nedvänd konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<text x=\"232\" y=\"78\" font-size=\"12\">3,0 m</text><text x=\"245\" y=\"95\" font-size=\"12\">1,5 m</text>\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">50 liter/min</text>\n</svg></span><p>En upp-och-nedvänd konisk tank har höjden 3,0 m och toppradien 1,5 m. Vatten pumpas in med 50 liter/min.</p><p>Hur snabbt stiger vattennivån när djupet är 2,0 m?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<text x=\"232\" y=\"78\" font-size=\"12\">3,0 m</text><text x=\"245\" y=\"95\" font-size=\"12\">1,5 m</text>\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">50 liter/min</text>\n</svg></span><p>Volymen ökar med \\(50\\) liter/min = \\(0,050\\ \\text{m}^3/\\text{min}\\).</p><p>Av likformighet i figuren gäller</p><p>\\[\\frac{r}{h}=\\frac{1,5}{3,0}=\\frac12\\quad\\Rightarrow\\quad r=\\frac h2.\\]</p><p>Volymen av vattnet är</p><p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h2\\right)^2h=\\frac{\\pi}{12}h^3.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{4}h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=2,0\\) m får vi</p><p>\\[0,050=\\frac{\\pi}{4}\\cdot 2^2\\cdot\\frac{dh}{dt}=\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{0,050}{\\pi}\\approx0,0159.\\]</p><p><strong>Svar: vattennivån stiger med ungefär \\(0,0159\\ \\text{m/min}\\), alltså cirka \\(1,59\\ \\text{cm/min}\\).</strong></p>",
     "id": "3.11"
   },
   {
@@ -4720,8 +4722,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter stege",
     "poang": "0/3/0",
-    "t": "<span class=\"fig\"><svg height=\"275\" width=\"430\" viewBox=\"0 0 430 275\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fem meter lång stege mot en vägg\">\n<rect width=\"430\" height=\"275\" fill=\"white\"/>\n<line x1=\"90\" y1=\"35\" x2=\"90\" y2=\"235\" stroke=\"#444\" stroke-width=\"5\"/>\n<line x1=\"75\" y1=\"235\" x2=\"380\" y2=\"235\" stroke=\"#444\" stroke-width=\"5\"/>\n<line x1=\"90\" y1=\"75\" x2=\"310\" y2=\"235\" stroke=\"#222\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n<text x=\"202\" y=\"142\" font-size=\"17\" transform=\"rotate(36 202 142)\">5,0 m</text>\n<line x1=\"98\" y1=\"213\" x2=\"298\" y2=\"213\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<path d=\"M298 208 l12 5 -12 5\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<text x=\"195\" y=\"207\" font-size=\"16\">x</text>\n<line x1=\"112\" y1=\"82\" x2=\"112\" y2=\"225\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<path d=\"M107 94 l5 -12 5 12\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<text x=\"120\" y=\"157\" font-size=\"16\">y</text>\n<path d=\"M315 225 l18 0\" stroke=\"#222\" stroke-width=\"2\"/><path d=\"M325 218 l10 7 -10 7\" fill=\"none\" stroke=\"#222\" stroke-width=\"2\"/>\n<text x=\"305\" y=\"205\" font-size=\"15\">0,80 m/s</text>\n</svg></span><p>En 5,0 m lång stege står mot en lodrät vägg. Stegens fot glider bort från väggen med hastigheten 0,80 m/s.</p><p>Hur snabbt rör sig stegens övre ände nedåt när foten är 3,0 m från väggen?</p>",
-    "s": "<p>Låt \\(x\\) vara avståndet från väggen och \\(y\\) höjden. Stegens längd ger</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3\\) är \\(y=4\\). Derivera med avseende på tiden:</p><p>\\[2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0.\\]</p><p>\\[\\frac{dy}{dt}=-\\frac{x}{y}\\frac{dx}{dt}=-\\frac34\\cdot0,80=\\mathbf{-0,60\\text{ m/s}}.\\]</p><p>Minustecknet betyder att änden rör sig nedåt; farten är 0,60 m/s.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg, längd 5,0 m\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">5,0 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 3,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,80 m/s</text>\n</svg></span><p>En 5,0 m lång stege står mot en lodrät vägg. Stegens fot glider bort från väggen med hastigheten 0,80 m/s.</p><p>Hur snabbt rör sig stegens övre ände nedåt när foten är 3,0 m från väggen?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till stege mot vägg\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">5,0 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 3,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,80 m/s</text>\n</svg></span><p>Låt \\(x\\) vara stegens fotavstånd från väggen och \\(y\\) höjden upp på väggen.</p><p>Eftersom stegen är 5,0 m lång gäller</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3,0\\) m fås</p><p>\\[y=\\sqrt{25-9}=4,0\\ \\text{m}.\\]</p><p>Derivera sambandet:</p><p>\\[2xx'+2yy'=0\\quad\\Rightarrow\\quad xx'+yy'=0.\\]</p><p>Här är \\(x'=0,80\\) m/s. Sätt in värdena:</p><p>\\[3,0\\cdot0,80+4,0\\,y'=0.\\]</p><p>Alltså</p><p>\\[y'=-0,60\\ \\text{m/s}.\\]</p><p>Minustecknet betyder att höjden minskar.</p><p><strong>Svar: stegens övre ände rör sig nedåt med \\(0,60\\ \\text{m/s}\\).</strong></p>",
     "id": "3.19"
   },
   {
@@ -4730,8 +4732,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter växande cirkel",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg height=\"260\" width=\"380\" viewBox=\"0 0 380 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkelformad fläck med växande radie\">\n<rect width=\"380\" height=\"260\" fill=\"white\"/>\n<circle cx=\"180\" cy=\"132\" r=\"82\" fill=\"#999\" fill-opacity=\".16\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"180\" cy=\"132\" r=\"3\" fill=\"#222\"/>\n<line x1=\"180\" y1=\"132\" x2=\"262\" y2=\"132\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M250 126 l12 6 -12 6\" fill=\"none\" stroke=\"#222\" stroke-width=\"2\"/>\n<text x=\"194\" y=\"113\" font-size=\"16\">r = 6,0 cm</text>\n<path d=\"M268 115 q20 17 2 35\" fill=\"none\" stroke=\"#555\" stroke-width=\"2\"/>\n<path d=\"M271 142 l-1 8 8-3\" fill=\"none\" stroke=\"#555\" stroke-width=\"2\"/>\n<text x=\"235\" y=\"72\" font-size=\"15\">dr/dt = 0,40 cm/s</text>\n</svg></span><p>En cirkelformad fläck växer så att radien ökar med 0,40 cm/s. Hur snabbt ökar fläckens area när radien är 6,0 cm?</p>",
-    "s": "<p>Arean är \\(A=\\pi r^2\\). Derivering med avseende på tiden ger</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Vid \\(r=6,0\\) och \\(dr/dt=0,40\\):</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot6\\cdot0,40=\\mathbf{4,8\\pi\\approx15,1\\text{ cm}^2/\\text{s}}.\\]</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Växande cirkel\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r = 6,0 cm</text>\n<text x=\"237\" y=\"100\" font-size=\"12\">dr/dt = 0,40 cm/s</text>\n</svg></span><p>En cirkelformad fläck växer så att radien ökar med 0,40 cm/s. Hur snabbt ökar fläckens area när radien är 6,0 cm?</p>",
+    "s": "<p>Arean är \\(A=\\pi r^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=6,0\\) cm och \\(dr/dt=0,40\\) cm/s:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot6,0\\cdot0,40=4,8\\pi.\\]</p><p><strong>Svar: arean ökar med \\(4,8\\pi\\ \\text{cm}^2/\\text{s}\\approx15,1\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
     "id": "3.20"
   },
   {
@@ -4740,8 +4742,8 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "relaterade förändringshastigheter konisk tank",
     "poang": "0/1/2",
-    "t": "<span class=\"fig\"><svg width=\"470\" height=\"330\" viewBox=\"0 0 490 335\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Upp och nedvänd konisk tank med höjden 6,0 m och toppradien 3,0 m samt vatten till djupet h\">\n<rect width=\"490\" height=\"335\" fill=\"white\"/>\n<path d=\"M175 220 L215 295 L255 220 Z\" fill=\"#2C62A8\" fill-opacity=\".18\"/>\n<path d=\"M95 75 L215 295 L335 75\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<line x1=\"95\" y1=\"75\" x2=\"335\" y2=\"75\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<line x1=\"175\" y1=\"220\" x2=\"255\" y2=\"220\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<line x1=\"215\" y1=\"75\" x2=\"215\" y2=\"295\" stroke=\"#bbb\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"360\" y1=\"75\" x2=\"360\" y2=\"295\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<path d=\"M355 87 l5-12 5 12 M355 283 l5 12 5-12\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<text x=\"370\" y=\"180\" font-size=\"15\">höjd 6,0 m</text>\n<line x1=\"215\" y1=\"55\" x2=\"335\" y2=\"55\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<path d=\"M227 50 l-12 5 12 5 M323 50 l12 5 -12 5\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<text x=\"275\" y=\"44\" font-size=\"15\" text-anchor=\"middle\">radie 3,0 m</text>\n<line x1=\"272\" y1=\"220\" x2=\"272\" y2=\"295\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<path d=\"M267 230 l5-10 5 10 M267 285 l5 10 5-10\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<text x=\"282\" y=\"262\" font-size=\"15\">h</text>\n<line x1=\"215\" y1=\"206\" x2=\"255\" y2=\"206\" stroke=\"#777\" stroke-width=\"1.4\"/>\n<text x=\"235\" y=\"200\" font-size=\"15\" text-anchor=\"middle\">r</text>\n<path d=\"M120 12 L120 62\" stroke=\"#222\" stroke-width=\"3\"/><path d=\"M113 51 l7 11 7-11\" fill=\"none\" stroke=\"#222\" stroke-width=\"2\"/>\n<text x=\"130\" y=\"30\" font-size=\"14\">inflöde 0,050 m³/min</text>\n</svg></span><p>En upp-och-nedvänd konisk tank är 6,0 m hög och har toppradien 3,0 m. Vatten rinner in med \\(0,050\\,\\text{m}^3/\\text{min}\\).</p><p>Hur snabbt stiger vattenytan när vattendjupet är 2,0 m?</p>",
-    "s": "<p>Likformighet ger \\(r/h=3/6=1/2\\), alltså \\(r=h/2\\).</p><p>Vattenvolymen är</p><p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h2\\right)^2h=\\frac{\\pi h^3}{12}.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi h^2}{4}\\frac{dh}{dt}.\\]</p><p>Vid \\(h=2,0\\) och \\(dV/dt=0,050\\):</p><p>\\[0,050=\\pi\\frac{dh}{dt}\\]</p><p>så <strong>\\(dh/dt=0,050/\\pi\\approx0,0159\\text{ m/min}\\)</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Upp-och-nedvänd konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<text x=\"232\" y=\"78\" font-size=\"12\">6,0 m</text><text x=\"245\" y=\"95\" font-size=\"12\">3,0 m</text>\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">0,050 m³/min</text>\n</svg></span><p>En upp-och-nedvänd konisk tank är 6,0 m hög och har toppradien 3,0 m. Vatten rinner in med \\(0,050\\,\\text{m}^3/\\text{min}\\).</p><p>Hur snabbt stiger vattennivån när djupet är 4,0 m?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till större konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<text x=\"232\" y=\"78\" font-size=\"12\">6,0 m</text><text x=\"245\" y=\"95\" font-size=\"12\">3,0 m</text>\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">0,050 m³/min</text>\n</svg></span><p>Av likformighet gäller</p><p>\\[\\frac{r}{h}=\\frac{3,0}{6,0}=\\frac12\\quad\\Rightarrow\\quad r=\\frac h2.\\]</p><p>Volymen blir då</p><p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h2\\right)^2h=\\frac{\\pi}{12}h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{4}h^2\\frac{dh}{dt}.\\]</p><p>Sätt in \\(dV/dt=0,050\\) och \\(h=4,0\\):</p><p>\\[0,050=\\frac{\\pi}{4}\\cdot16\\cdot\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Därför</p><p>\\[\\frac{dh}{dt}=\\frac{0,050}{4\\pi}\\approx0,0040.\\]</p><p><strong>Svar: vattennivån stiger med ungefär \\(0,0040\\ \\text{m/min}\\), alltså cirka \\(0,40\\ \\text{cm/min}\\).</strong></p>",
     "id": "3.21"
   },
   {
@@ -4751,8 +4753,8 @@ window.BANKMATF1 = [
     "typ": "relaterade förändringshastigheter för kvadrat",
     "poang": "2/0/0",
     "id": "3.27",
-    "t": "<p>Sidan \\(s\\) i en kvadrat ökar med hastigheten \\(0,6\\ \\text{cm/s}\\).</p><p>Hur snabbt ökar kvadratens area när \\(s=5,0\\ \\text{cm}\\)?</p>",
-    "s": "<p>Arean är \\(A=s^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2s\\frac{ds}{dt}.\\]</p><p>Sätt in \\(s=5,0\\) och \\(ds/dt=0,6\\):</p><p>\\[\\frac{dA}{dt}=2\\cdot 5,0\\cdot 0,6=6,0.\\]</p><p><strong>Arean ökar med \\(6,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"220\" height=\"180\" viewBox=\"0 0 240 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat med sidan s\">\n<rect x=\"10\" y=\"10\" width=\"220\" height=\"180\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"65\" y=\"45\" width=\"95\" height=\"95\" fill=\"#f8fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<text x=\"106\" y=\"36\" font-size=\"14\">s</text>\n<text x=\"49\" y=\"98\" font-size=\"14\">s</text>\n</svg></span><p>Sidan \\(s\\) i en kvadrat ökar med hastigheten \\(0,6\\ \\text{cm/s}\\).</p><p>Hur snabbt ökar kvadratens area när \\(s=5,0\\ \\text{cm}\\)?</p>",
+    "s": "<p>Arean är \\(A=s^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2s\\frac{ds}{dt}.\\]</p><p>Sätt in \\(s=5,0\\) och \\(ds/dt=0,6\\):</p><p>\\[\\frac{dA}{dt}=2\\cdot5,0\\cdot0,6=6,0.\\]</p><p><strong>Svar: arean ökar med \\(6,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>"
   },
   {
     "kap": 3,
@@ -4760,8 +4762,8 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "cirkelns area",
     "poang": "2/0/0",
-    "t": "<p>Radien i en cirkel ökar med 0,30 cm/s. Hur snabbt ökar arean när radien är 8,0 cm?</p>",
-    "s": "<p>\\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}=2\\pi\\cdot8\\cdot0,30=4,8\\pi\\approx15,1.\\]</p><p><strong>15,1 cm²/s</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande radie\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r = 8,0 cm</text>\n<text x=\"237\" y=\"100\" font-size=\"12\">dr/dt = 0,30 cm/s</text>\n</svg></span><p>Radien i en cirkel ökar med 0,30 cm/s. Hur snabbt ökar arean när radien är 8,0 cm?</p>",
+    "s": "<p>Arean är \\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=8,0\\) cm och \\(dr/dt=0,30\\) cm/s:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot8,0\\cdot0,30=4,8\\pi.\\]</p><p><strong>Svar: \\(4,8\\pi\\ \\text{cm}^2/\\text{s}\\approx15,1\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
     "id": "3.44"
   },
   {
@@ -4770,8 +4772,8 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "sfärens volym",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg height=\"250\" width=\"400\" viewBox=\"0 0 400 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med radie r som växer\">\n<rect width=\"400\" height=\"250\" fill=\"white\"/><circle cx=\"180\" cy=\"130\" r=\"80\" fill=\"#888\" fill-opacity=\".12\" stroke=\"#333\" stroke-width=\"2.3\"/>\n<ellipse cx=\"180\" cy=\"130\" rx=\"80\" ry=\"23\" fill=\"none\" stroke=\"#999\" stroke-dasharray=\"5 4\"/>\n<line x1=\"180\" y1=\"130\" x2=\"260\" y2=\"130\" stroke=\"#333\" stroke-width=\"2\"/><path d=\"M248 124 l12 6 -12 6\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"210\" y=\"117\" font-size=\"16\">r</text><text x=\"275\" y=\"95\" font-size=\"15\">dr/dt</text>\n</svg></span><p>Radien i en sfär ökar med 0,20 cm/s. Hur snabbt ökar volymen när radien är 5,0 cm?</p>",
-    "s": "<p>\\(V=\\frac43\\pi r^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}=4\\pi\\cdot25\\cdot0,20=20\\pi.\\]</p><p><strong>\\(20\\pi\\approx62,8\\) cm³/s</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Växande sfär\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\">r = 5,0 cm</text>\n<text x=\"236\" y=\"100\" font-size=\"12\">dr/dt = 0,20 cm/s</text>\n</svg></span><p>Radien i en sfär ökar med 0,20 cm/s. Hur snabbt ökar volymen när radien är 5,0 cm?</p>",
+    "s": "<p>Volymen är \\(V=\\frac43\\pi r^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=5,0\\) cm och \\(dr/dt=0,20\\) cm/s:</p><p>\\[\\frac{dV}{dt}=4\\pi\\cdot25\\cdot0,20=20\\pi.\\]</p><p><strong>Svar: volymen ökar med \\(20\\pi\\ \\text{cm}^3/\\text{s}\\approx62,8\\ \\text{cm}^3/\\text{s}\\).</strong></p>",
     "id": "3.45"
   },
   {
@@ -4780,8 +4782,8 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "kubens volym",
     "poang": "2/0/0",
-    "t": "<p>Kantlängden \\(a\\) i en kub ökar med 0,10 cm/s. Hur snabbt ökar kubens volym när \\(a=6,0\\) cm?</p>",
-    "s": "<p>\\(V=a^3\\), därför</p><p>\\[\\frac{dV}{dt}=3a^2\\frac{da}{dt}=3\\cdot36\\cdot0,10=10,8.\\]</p><p><strong>10,8 cm³/s</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"250\" height=\"180\" viewBox=\"0 0 270 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kub med kanten a\">\n<rect x=\"10\" y=\"10\" width=\"250\" height=\"180\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<polygon points=\"70,120 130,120 130,60 70,60\" fill=\"#f8fbff\" stroke=\"#555\" stroke-width=\"2\"/>\n<polygon points=\"130,120 185,95 185,35 130,60\" fill=\"#eef3ff\" stroke=\"#555\" stroke-width=\"2\"/>\n<polygon points=\"70,60 130,60 185,35 125,35\" fill=\"#ffffff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"120\" x2=\"125\" y2=\"95\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"125\" y1=\"95\" x2=\"185\" y2=\"95\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"125\" y1=\"95\" x2=\"125\" y2=\"35\" stroke=\"#555\" stroke-width=\"2\"/>\n<text x=\"92\" y=\"54\" font-size=\"14\">a</text>\n</svg></span><p>Kantlängden \\(a\\) i en kub ökar med 0,10 cm/s. Hur snabbt ökar kubens volym när \\(a=6,0\\) cm?</p>",
+    "s": "<p>Volymen är \\(V=a^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=3a^2\\frac{da}{dt}.\\]</p><p>Sätt in \\(a=6,0\\) cm och \\(da/dt=0,10\\) cm/s:</p><p>\\[\\frac{dV}{dt}=3\\cdot6,0^2\\cdot0,10=10,8.\\]</p><p><strong>Svar: volymen ökar med \\(10,8\\ \\text{cm}^3/\\text{s}\\).</strong></p>",
     "id": "3.46"
   },
   {
@@ -4790,8 +4792,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "stege mot vägg",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg height=\"280\" width=\"430\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg med x och y\">\n<rect width=\"430\" height=\"280\" fill=\"white\"/><line x1=\"80\" y1=\"35\" x2=\"80\" y2=\"235\" stroke=\"#444\" stroke-width=\"5\"/><line x1=\"65\" y1=\"235\" x2=\"380\" y2=\"235\" stroke=\"#444\" stroke-width=\"5\"/>\n<line x1=\"80\" y1=\"65\" x2=\"315\" y2=\"235\" stroke=\"#222\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n<line x1=\"90\" y1=\"215\" x2=\"305\" y2=\"215\" stroke=\"#888\"/><text x=\"192\" y=\"207\" font-size=\"16\">x</text><line x1=\"102\" y1=\"75\" x2=\"102\" y2=\"225\" stroke=\"#888\"/><text x=\"112\" y=\"155\" font-size=\"16\">y</text>\n</svg></span><p>En 10 m lång stege står mot en vägg. Foten glider bort från väggen med 0,50 m/s. Hur snabbt rör sig stegens överände nedåt när foten är 6,0 m från väggen?</p>",
-    "s": "<p>\\(x^2+y^2=100\\). När \\(x=6\\) är \\(y=8\\). Derivera:</p><p>\\[2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0.\\]</p><p>\\[\\frac{dy}{dt}=-\\frac{x}{y}\\frac{dx}{dt}=-\\frac68\\cdot0,50=-0,375.\\]</p><p>Överänden rör sig <strong>nedåt med 0,375 m/s</strong>.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg, längd 10 m\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">10 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 6,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,50 m/s</text>\n</svg></span><p>En 10 m lång stege står mot en vägg. Foten glider bort från väggen med 0,50 m/s. Hur snabbt rör sig stegens överände nedåt när foten är 6,0 m från väggen?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till stege 10 m\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">10 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 6,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,50 m/s</text>\n</svg></span><p>Med beteckningarna i figuren gäller</p><p>\\[x^2+y^2=10^2=100.\\]</p><p>När \\(x=6,0\\) m är</p><p>\\[y=\\sqrt{100-36}=8,0\\ \\text{m}.\\]</p><p>Derivera:</p><p>\\[xx'+yy'=0.\\]</p><p>Sätt in \\(x=6,0\\), \\(x'=0,50\\) och \\(y=8,0\\):</p><p>\\[6,0\\cdot0,50+8,0y'=0.\\]</p><p>Då fås</p><p>\\[y'=-\\frac{3,0}{8,0}=-0,375\\ \\text{m/s}.\\]</p><p><strong>Svar: överänden rör sig nedåt med \\(0,375\\ \\text{m/s}\\).</strong></p>",
     "id": "3.47"
   },
   {
@@ -4800,8 +4802,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "kon med likformighet",
     "poang": "0/2/0",
-    "t": "<p>Vatten fylls i en konisk behållare. För vattenytan gäller hela tiden \\(r=h/3\\). Vattenvolymen ökar med 2,0 dm³/s. Bestäm \\(dh/dt\\) när \\(h=6\\) dm.</p>",
-    "s": "<p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h3\\right)^2h=\\frac{\\pi h^3}{27}.\\]</p><p>Derivering ger</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi h^2}{9}\\frac{dh}{dt}.\\]</p><p>Vid \\(h=6\\):</p><p>\\[2=4\\pi\\frac{dh}{dt}\\Rightarrow \\frac{dh}{dt}=\\frac1{2\\pi}\\approx0,159\\text{ dm/s}.\\]</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare med sambandet r = h/3\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r = h/3</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Vatten fylls i en konisk behållare. För vattenytan gäller hela tiden \\(r=h/3\\). Vattenvolymen ökar med 2,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=6\\) dm.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till konisk behållare\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r = h/3</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Volymen i konen är</p><p>\\[V=\\frac13\\pi r^2h.\\]</p><p>Eftersom \\(r=h/3\\) får vi</p><p>\\[V=\\frac13\\pi\\left(\\frac h3\\right)^2h=\\frac{\\pi}{27}h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{9}h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=6\\) dm gäller</p><p>\\[2,0=\\frac{\\pi}{9}\\cdot36\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{1}{2\\pi}\\approx0,159.\\]</p><p><strong>Svar: \\(dh/dt\\approx0,159\\ \\text{dm/s}\\).</strong></p>",
     "id": "3.48"
   },
   {
@@ -4830,8 +4832,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "skugga likformiga trianglar",
     "poang": "0/2/0",
-    "t": "<p>En 1,8 m lång person går bort från en 6,0 m hög gatlykta med 1,5 m/s. Hur snabbt växer personens skugga?</p>",
-    "s": "<p>Låt \\(x\\) vara avståndet från lampan till personen och \\(s\\) skuggans längd. Likformighet ger</p><p>\\[\\frac6{x+s}=\\frac{1,8}{s}.\\]</p><p>\\[6s=1,8x+1,8s\\Rightarrow4,2s=1,8x\\Rightarrow s=\\frac37x.\\]</p><p>Derivera: \\(s'=\\frac37x'=\\frac37\\cdot1,5\\approx0,643\\) m/s.</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"370\" height=\"210\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Person, gatlykta och skugga\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"185\" x2=\"390\" y2=\"185\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"90\" y2=\"185\" stroke=\"#555\" stroke-width=\"5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"105\" y2=\"45\" stroke=\"#555\" stroke-width=\"3\"/>\n<circle cx=\"109\" cy=\"43\" r=\"6\" fill=\"#f0c36d\" stroke=\"#916d1b\"/>\n<line x1=\"225\" y1=\"185\" x2=\"225\" y2=\"118\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"225\" cy=\"108\" r=\"10\" fill=\"#333\"/>\n<line x1=\"109\" y1=\"43\" x2=\"285\" y2=\"185\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<line x1=\"90\" y1=\"185\" x2=\"225\" y2=\"185\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"225\" y1=\"185\" x2=\"285\" y2=\"185\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"145\" y=\"177\" font-size=\"14\">x</text>\n<text x=\"248\" y=\"177\" font-size=\"14\">s</text>\n<text x=\"98\" y=\"117\" font-size=\"13\">6,0 m</text>\n<text x=\"235\" y=\"145\" font-size=\"13\">1,8 m</text>\n</svg></span><p>En 1,8 m lång person går bort från en 6,0 m hög gatlykta med 1,5 m/s. Hur snabbt växer personens skugga?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"370\" height=\"210\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till gatlykta och skugga\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"185\" x2=\"390\" y2=\"185\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"90\" y2=\"185\" stroke=\"#555\" stroke-width=\"5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"105\" y2=\"45\" stroke=\"#555\" stroke-width=\"3\"/>\n<circle cx=\"109\" cy=\"43\" r=\"6\" fill=\"#f0c36d\" stroke=\"#916d1b\"/>\n<line x1=\"225\" y1=\"185\" x2=\"225\" y2=\"118\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"225\" cy=\"108\" r=\"10\" fill=\"#333\"/>\n<line x1=\"109\" y1=\"43\" x2=\"285\" y2=\"185\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<line x1=\"90\" y1=\"185\" x2=\"225\" y2=\"185\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"225\" y1=\"185\" x2=\"285\" y2=\"185\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"145\" y=\"177\" font-size=\"14\">x</text>\n<text x=\"248\" y=\"177\" font-size=\"14\">s</text>\n<text x=\"98\" y=\"117\" font-size=\"13\">6,0 m</text>\n<text x=\"235\" y=\"145\" font-size=\"13\">1,8 m</text>\n</svg></span><p>Låt \\(x\\) vara personens avstånd till lyktan och \\(s\\) skuggans längd.</p><p>Av likformiga trianglar i figuren får vi</p><p>\\[\\frac{6,0}{x+s}=\\frac{1,8}{s}.\\]</p><p>Korsmultiplicera:</p><p>\\[6,0s=1,8(x+s)=1,8x+1,8s.\\]</p><p>Alltså</p><p>\\[4,2s=1,8x\\quad\\Rightarrow\\quad s=\\frac{1,8}{4,2}x=\\frac37x.\\]</p><p>Derivera:</p><p>\\[s'=\\frac37x'.\\]</p><p>Eftersom \\(x'=1,5\\) m/s blir</p><p>\\[s'=\\frac37\\cdot1,5=\\frac{9}{14}\\approx0,643.\\]</p><p><strong>Svar: skuggan växer med ungefär \\(0,64\\ \\text{m/s}\\).</strong></p>",
     "id": "3.68"
   },
   {
@@ -4840,8 +4842,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "sfär area mot volym",
     "poang": "0/2/0",
-    "t": "<p>Volymen av en sfär ökar med 12 cm³/s. Hur snabbt ökar radien när \\(r=3\\) cm?</p>",
-    "s": "<p>\\[V=\\frac43\\pi r^3\\Rightarrow V'=4\\pi r^2r'.\\]</p><p>\\[12=4\\pi\\cdot9\\,r'\\Rightarrow r'=\\frac1{3\\pi}\\approx0,106\\text{ cm/s}.\\]</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\">r = 3 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med 12 cm³/s. Hur snabbt ökar radien när \\(r=3\\) cm?</p>",
+    "s": "<p>Volymen är \\(V=\\frac43\\pi r^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=12\\) cm³/s och \\(r=3\\) cm:</p><p>\\[12=4\\pi\\cdot3^2\\frac{dr}{dt}=36\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{12}{36\\pi}=\\frac{1}{3\\pi}.\\]</p><p><strong>Svar: \\(dr/dt=\\frac{1}{3\\pi}\\ \\text{cm/s}\\approx0,106\\ \\text{cm/s}\\).</strong></p>",
     "id": "3.69"
   },
   {
@@ -4850,8 +4852,8 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "omkrets cirkel",
     "poang": "2/0/0",
-    "t": "<p>Radien i en cirkel minskar med 0,12 m/s. Hur snabbt förändras omkretsen?</p>",
-    "s": "<p>\\(O=2\\pi r\\), alltså</p><p>\\[O'=2\\pi r'=2\\pi(-0,12)=-0,24\\pi\\approx-0,754\\text{ m/s}.\\]</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med minskande radie\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r</text>\n<text x=\"237\" y=\"100\" font-size=\"12\">dr/dt = -0,12 m/s</text>\n</svg></span><p>Radien i en cirkel minskar med 0,12 m/s. Hur snabbt förändras omkretsen?</p>",
+    "s": "<p>Omkretsen är \\(O=2\\pi r\\). Derivera:</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dr/dt=-0,12\\) m/s:</p><p>\\[\\frac{dO}{dt}=2\\pi\\cdot(-0,12)=-0,24\\pi.\\]</p><p><strong>Svar: omkretsen minskar med \\(0,24\\pi\\ \\text{m/s}\\approx0,754\\ \\text{m/s}\\).</strong></p>",
     "id": "3.79"
   },
   {
@@ -4860,8 +4862,8 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "relaterad förändringshastighet cirkel",
     "poang": "2/0/0",
-    "t": "<p>Radien i en cirkel ökar med \\(0,40\\) cm/s. Hur snabbt ökar cirkelns area när radien är 5,0 cm?</p>",
-    "s": "<p>\\[A=\\pi r^2\\Rightarrow\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=5,0\\) och \\(dr/dt=0,40\\):</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot5\\cdot0,40=4\\pi.\\]</p><p><strong>Arean ökar med \\(4\\pi\\approx12,6\\text{ cm}^2/\\text{s}\\).</strong></p>",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande radie\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r = 5,0 cm</text>\n<text x=\"237\" y=\"100\" font-size=\"12\">dr/dt = 0,40 cm/s</text>\n</svg></span><p>Radien i en cirkel ökar med \\(0,40\\) cm/s. Hur snabbt ökar cirkelns area när radien är 5,0 cm?</p>",
+    "s": "<p>Arean ges av \\(A=\\pi r^2\\). Derivera:</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=5,0\\) cm och \\(dr/dt=0,40\\) cm/s:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot5,0\\cdot0,40=4\\pi.\\]</p><p><strong>Svar: \\(4\\pi\\ \\text{cm}^2/\\text{s}\\approx12,6\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
     "id": "3.98"
   },
   {
@@ -4880,8 +4882,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterad förändringshastighet stege",
     "poang": "0/3/0",
-    "t": "<span class=\"fig\"><svg width=\"400\" height=\"300\" viewBox=\"0 0 400 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fem meter lång stege mot en vägg med tre meter från väggen och fyra meter upp på väggen\"><rect width=\"400\" height=\"300\" fill=\"white\"/><line x1=\"85\" y1=\"35\" x2=\"85\" y2=\"250\" stroke=\"#444\" stroke-width=\"4\"/><line x1=\"65\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#444\" stroke-width=\"4\"/><line x1=\"85\" y1=\"70\" x2=\"310\" y2=\"250\" stroke=\"#B48A18\" stroke-width=\"7\" stroke-linecap=\"round\"/><text x=\"205\" y=\"145\" font-size=\"16\" fill=\"#B48A18\">5 m</text><line x1=\"85\" y1=\"270\" x2=\"310\" y2=\"270\" stroke=\"#777\"/><line x1=\"85\" y1=\"264\" x2=\"85\" y2=\"276\" stroke=\"#777\"/><line x1=\"310\" y1=\"264\" x2=\"310\" y2=\"276\" stroke=\"#777\"/><text x=\"198\" y=\"292\" font-size=\"15\" text-anchor=\"middle\">x = 3 m</text><line x1=\"55\" y1=\"70\" x2=\"55\" y2=\"250\" stroke=\"#777\"/><line x1=\"49\" y1=\"70\" x2=\"61\" y2=\"70\" stroke=\"#777\"/><line x1=\"49\" y1=\"250\" x2=\"61\" y2=\"250\" stroke=\"#777\"/><text x=\"32\" y=\"165\" font-size=\"15\" transform=\"rotate(-90 32 165)\">y</text><line x1=\"310\" y1=\"250\" x2=\"342\" y2=\"250\" stroke=\"#2C62A8\" stroke-width=\"2.4\"/><polygon points=\"342,250 332,244 332,256\" fill=\"#2C62A8\"/><text x=\"278\" y=\"232\" font-size=\"13\" fill=\"#2C62A8\">dx/dt = 0,60 m/s</text></svg></span><p>En 5,0 m lång stege står mot en vägg. Stegens nederända glider bort från väggen med \\(0,60\\) m/s. Hur snabbt rör sig överänden när nederänden är 3,0 m från väggen?</p>",
-    "s": "<p>Låt \\(x\\) vara avståndet från väggen och \\(y\\) höjden. Stegens längd är konstant:</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3\\) är \\(y=4\\). Derivera med avseende på tiden:</p><p>\\[2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0.\\]</p><p>\\[\\frac{dy}{dt}=-\\frac{x}{y}\\frac{dx}{dt}=-\\frac34\\cdot0,60=-0,45.\\]</p><p><strong>Överänden rör sig nedåt med 0,45 m/s.</strong></p>",
+    "t": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg, längd 5,0 m\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">5,0 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 3,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,60 m/s</text>\n</svg></span><p>En 5,0 m lång stege står mot en vägg. Stegens nederända glider bort från väggen med \\(0,60\\) m/s. Hur snabbt rör sig överänden när nederänden är 3,0 m från väggen?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"330\" height=\"215\" viewBox=\"0 0 380 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till stege 5,0 m\">\n<rect x=\"12\" y=\"12\" width=\"356\" height=\"221\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"70\" y1=\"210\" x2=\"320\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"210\" stroke=\"#666\" stroke-width=\"3\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"60\" stroke=\"#b45f32\" stroke-width=\"5\"/>\n<line x1=\"70\" y1=\"210\" x2=\"190\" y2=\"210\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"210\" x2=\"70\" y2=\"60\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"78\" y1=\"202\" x2=\"78\" y2=\"192\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<line x1=\"78\" y1=\"202\" x2=\"88\" y2=\"202\" stroke=\"#333\" stroke-width=\"1.3\"/>\n<text x=\"110\" y=\"126\" font-size=\"13\">5,0 m</text>\n<text x=\"105\" y=\"196\" font-size=\"12\">x = 3,0 m</text>\n<text x=\"50\" y=\"132\" font-size=\"13\">y</text>\n<line x1=\"178\" y1=\"204\" x2=\"202\" y2=\"204\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"206,204 196,199 196,209\" fill=\"#0e5d9e\"/><text x=\"134\" y=\"219\" font-size=\"12\">0,60 m/s</text>\n</svg></span><p>Som i figuren betecknar vi avstånden med \\(x\\) och \\(y\\). Då gäller</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3,0\\) m är \\(y=4,0\\) m.</p><p>Derivera:</p><p>\\[xx'+yy'=0.\\]</p><p>Sätt in \\(x=3,0\\), \\(x'=0,60\\) och \\(y=4,0\\):</p><p>\\[3,0\\cdot0,60+4,0y'=0.\\]</p><p>Det ger</p><p>\\[y'=-0,45\\ \\text{m/s}.\\]</p><p><strong>Svar: överänden rör sig nedåt med \\(0,45\\ \\text{m/s}\\).</strong></p>",
     "id": "3.100"
   },
   {
@@ -4890,8 +4892,8 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterad förändringshastighet sfär",
     "poang": "0/2/0",
-    "t": "<p>Volymen av en sfär ökar med \\(30\\text{ cm}^3/\\text{s}\\). Hur snabbt ökar radien när \\(r=2,0\\) cm?</p>",
-    "s": "<p>\\[V=\\frac43\\pi r^3.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=30\\) och \\(r=2\\):</p><p>\\[30=16\\pi\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=\\frac{15}{8\\pi}\\approx0,597.\\]</p><p><strong>Radien ökar med cirka 0,60 cm/s.</strong></p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\">r = 2,0 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med \\(30\\text{ cm}^3/\\text{s}\\). Hur snabbt ökar radien när \\(r=2,0\\) cm?</p>",
+    "s": "<p>Volymen av en sfär är \\(V=\\frac43\\pi r^3\\). Då</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=30\\) cm³/s och \\(r=2,0\\) cm:</p><p>\\[30=4\\pi\\cdot2^2\\frac{dr}{dt}=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{30}{16\\pi}=\\frac{15}{8\\pi}.\\]</p><p><strong>Svar: \\(dr/dt=\\frac{15}{8\\pi}\\ \\text{cm/s}\\approx0,597\\ \\text{cm/s}\\).</strong></p>",
     "id": "3.101"
   },
   {
@@ -5031,7 +5033,7 @@ window.BANKMATF1 = [
     "typ": "granska felaktigt CAS-resultat för generaliserad integral",
     "poang": "0/2/0",
     "t": "<p>Ett CAS ger resultatet</p><p>\\[\\int_0^2\\frac{1}{(x-1)^2}\\,dx=-2.\\]</p><p>Förklara varför resultatet inte kan användas som värde på den generaliserade integralen och avgör om integralen konvergerar.</p>",
-    "s": "<p>Integranden har en singularitet vid \\(x=1\\). Integralen måste därför delas upp:</p><p>\\[\\int_0^1\\frac{dx}{(x-1)^2}+\\int_1^2\\frac{dx}{(x-1)^2}.\\]</p><p>Redan den första delen divergerar eftersom en primitiv funktion är \\(-1/(x-1)\\), som går mot \\(+\\infty\\) när \\(x\\to1^-\\). Även den andra delen divergerar.</p><p>Integralen är alltså <strong>divergent</strong>. CAS-resultatet kommer av att man formellt satt in ändpunkterna utan att hantera singulariteten.</p>",
+    "s": "<p>Integranden går mot oändligheten när \\(x\\to1\\). Integralen måste därför delas upp:</p><p>\\[\\int_0^1\\frac{dx}{(x-1)^2}+\\int_1^2\\frac{dx}{(x-1)^2}.\\]</p><p>Redan den första delen divergerar eftersom en primitiv funktion är \\(-1/(x-1)\\), som går mot \\(+\\infty\\) när \\(x\\to1^-\\). Även den andra delen divergerar.</p><p>Integralen är alltså <strong>divergent</strong>. CAS-resultatet kommer av att man formellt satt in ändpunkterna utan att ta hänsyn till att integranden går mot oändligheten vid \\(x=1\\).</p>",
     "id": "3.23"
   },
   {
@@ -6218,7 +6220,7 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
-    "typ": "resonans med exponentialterm",
+    "typ": "exponentialterm som ingår i den homogena lösningen",
     "poang": "0/3/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''-3y'+2y=e^x.\\]</p>",
     "s": "<p>Den homogena ekvationen har rötterna 1 och 2, så \\(y_h=C_1e^x+C_2e^{2x}\\).</p><p>En vanlig ansats \\(Ae^x\\) fungerar inte eftersom \\(e^x\\) redan är en homogen lösning. Vi multiplicerar därför med \\(x\\) och söker</p><p>\\[y_p=Axe^x.\\]</p><p>Då \\(y_p'=A(1+x)e^x\\) och \\(y_p''=A(x+2)e^x\\). Insättning ger</p><p>\\[A[(x+2)-3(x+1)+2x]e^x=-Ae^x=e^x,\\]</p><p>så \\(A=-1\\).</p><p><strong>\\(y=C_1e^x+C_2e^{2x}-xe^x\\)</strong>.</p>",
@@ -6238,7 +6240,7 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
-    "typ": "välja ansats vid dubbel resonans",
+    "typ": "välja ansats när högerledet ingår i den homogena lösningen",
     "poang": "0/2/0",
     "t": "<p>För differentialekvationen</p><p>\\[y''-4y'+4y=e^{2x}\\]</p><p>förklarar en elev att ansatsen \\(y_p=Ae^{2x}\\) inte fungerar.</p><ol type=\"a\"><li>Förklara varför.</li><li>Ange en lämplig ansats för en partikulärlösning.</li></ol>",
     "s": "<p>Den homogena karakteristiska ekvationen är \\((r-2)^2=0\\). Därför innehåller den homogena lösningen både \\(e^{2x}\\) och \\(xe^{2x}\\).</p><p>Ansatsen \\(Ae^{2x}\\) ligger alltså redan i den homogena lösningsrymden. Eftersom roten 2 är en <strong>dubbelrot</strong> måste ansatsen multipliceras med \\(x^2\\).</p><p>En lämplig ansats är <strong>\\(y_p=Ax^2e^{2x}\\)</strong>.</p>",
@@ -6258,10 +6260,10 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "A",
-    "typ": "resonans vid periodisk kraft och begynnelsevillkor",
+    "typ": "periodiskt högerled som ingår i den homogena lösningen och begynnelsevillkor",
     "poang": "0/1/3",
     "t": "<p>Lös</p><p>\\[y''+4y=6\\cos(2x),\\qquad y(0)=0,\\qquad y'(0)=0.\\]</p><p>Beskriv också vad som är speciellt med lösningens amplitud.</p>",
-    "s": "<p>Homogena lösningen är \\(y_h=C_1\\cos2x+C_2\\sin2x\\). Eftersom högerledets \\(\\cos2x\\) redan ingår i den homogena lösningen uppstår resonans.</p><p>En lämplig ansats är \\(y_p=Ax\\sin2x\\). Insättning ger \\(4A\\cos2x=6\\cos2x\\), alltså \\(A=3/2\\).</p><p>Den allmänna lösningen är</p><p>\\[y=C_1\\cos2x+C_2\\sin2x+\\frac32x\\sin2x.\\]</p><p>Begynnelsevillkoren ger \\(C_1=0\\) och \\(C_2=0\\). Alltså</p><p><strong>\\(y=\\frac32x\\sin2x\\)</strong>.</p><p>Faktorn \\(x\\) gör att svängningarnas omslutande amplitud växer linjärt. Lösningen är därför inte begränsad trots att den yttre kraften har konstant amplitud.</p>",
+    "s": "<p>Den homogena lösningen är \\(y_h=C_1\\cos2x+C_2\\sin2x\\). Högerledets \\(\\cos2x\\) har alltså samma form som en term som redan finns i den homogena lösningen.</p><p>Därför fungerar inte en vanlig ansats med bara sinus och cosinus. Vi prövar i stället</p><p>\\[y_p=Ax\\sin2x.\\]</p><p>Insättning ger \\(4A\\cos2x=6\\cos2x\\), alltså \\(A=3/2\\).</p><p>Den allmänna lösningen är</p><p>\\[y=C_1\\cos2x+C_2\\sin2x+\\frac32x\\sin2x.\\]</p><p>Begynnelsevillkoren ger \\(C_1=0\\) och \\(C_2=0\\). Alltså</p><p><strong>\\(y=\\frac32x\\sin2x\\)</strong>.</p><p>Faktorn \\(x\\) gör att svängningarnas amplitud växer med tiden. Lösningen är därför inte begränsad.</p>",
     "id": "4.34"
   },
   {
@@ -6298,17 +6300,17 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
-    "typ": "resonans med sinus",
+    "typ": "sinusterm som ingår i den homogena lösningen",
     "poang": "0/2/0",
     "t": "<p>Bestäm lämplig ansats för en partikulärlösning till \\(y''+4y=\\sin2x\\). Motivera.</p>",
-    "s": "<p>Den homogena lösningen innehåller \\(\\cos2x\\) och \\(\\sin2x\\). Ansatsen \\(A\\cos2x+B\\sin2x\\) skulle därför ligga i den homogena lösningen. Vid resonans multipliceras med \\(x\\):</p><p><strong>\\(y_p=x(A\\cos2x+B\\sin2x)\\)</strong>.</p>",
+    "s": "<p>Den homogena lösningen innehåller \\(\\cos2x\\) och \\(\\sin2x\\). Ansatsen \\(A\\cos2x+B\\sin2x\\) skulle därför bara ge termer som redan ingår i den homogena lösningen.</p><p>För att få en ny form multiplicerar vi därför ansatsen med \\(x\\):</p><p><strong>\\(y_p=x(A\\cos2x+B\\sin2x)\\)</strong>.</p>",
     "id": "4.81"
   },
   {
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "E",
-    "typ": "exponential utan resonans",
+    "typ": "exponentialterm som inte ingår i den homogena lösningen",
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''-y=4e^{2x}\\).</p>",
     "s": "<p>Homogent: \\(y_h=C_1e^x+C_2e^{-x}\\). Sök \\(y_p=Ae^{2x}\\):</p><p>\\[4Ae^{2x}-Ae^{2x}=3Ae^{2x}=4e^{2x}\\Rightarrow A=4/3.\\]</p><p><strong>\\(y=C_1e^x+C_2e^{-x}+\\frac43e^{2x}\\)</strong>.</p>",
@@ -6318,7 +6320,7 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "E",
-    "typ": "cosinus utan resonans",
+    "typ": "cosinusterm som inte ingår i den homogena lösningen",
     "poang": "2/0/0",
     "t": "<p>Bestäm en partikulärlösning till \\(y''+9y=8\\cos2x\\).</p>",
     "s": "<p>Sök \\(y_p=A\\cos2x+B\\sin2x\\). Då \\(y_p''=-4A\\cos2x-4B\\sin2x\\). Vänsterled blir \\(5A\\cos2x+5B\\sin2x\\). Därför \\(A=8/5\\), \\(B=0\\).</p><p><strong>\\(y_p=\\frac85\\cos2x\\)</strong>.</p>",
@@ -6338,7 +6340,7 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
-    "typ": "resonans exponential",
+    "typ": "exponentialterm som ingår i den homogena lösningen",
     "poang": "0/2/0",
     "t": "<p>Bestäm en partikulärlösning till \\(y''-4y'+4y=e^{2x}\\).</p>",
     "s": "<p>Den homogena ekvationen har dubbelroten \\(r=2\\), så både \\(e^{2x}\\) och \\(xe^{2x}\\) ingår i den homogena lösningen. Därför behövs ansatsen \\(y_p=Ax^2e^{2x}\\). Insättning ger \\(2Ae^{2x}=e^{2x}\\), så \\(A=1/2\\).</p><p><strong>\\(y_p=\\frac12x^2e^{2x}\\)</strong>.</p>",
@@ -6408,10 +6410,10 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
-    "typ": "resonans med exponentialhögerled",
+    "typ": "exponentialhögerled som ingår i den homogena lösningen",
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''-5y'+6y=e^{2x}.\\]</p>",
-    "s": "<p>Den homogena ekvationen har rötterna 2 och 3:</p><p>\\[y_h=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Eftersom högerledet \\(e^{2x}\\) redan motsvarar den homogena roten \\(r=2\\) uppstår resonans. Därför prövar vi</p><p>\\[y_p=Axe^{2x}.\\]</p><p>Insättning i vänsterledet ger \\(-Ae^{2x}\\). För att få högerledet \\(e^{2x}\\) krävs \\(A=-1\\).</p><p>Alltså</p><p><strong>\\[y=C_1e^{2x}+C_2e^{3x}-xe^{2x}.\\]</strong></p>",
+    "s": "<p>Den homogena ekvationen har rötterna 2 och 3:</p><p>\\[y_h=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Högerledet \\(e^{2x}\\) har samma form som termen \\(e^{2x}\\) som redan finns i den homogena lösningen. Därför fungerar inte ansatsen \\(Ae^{2x}\\).</p><p>Vi prövar i stället</p><p>\\[y_p=Axe^{2x}.\\]</p><p>Insättning i vänsterledet ger \\(-Ae^{2x}\\). För att få högerledet \\(e^{2x}\\) krävs \\(A=-1\\).</p><p>Alltså</p><p><strong>\\[y=C_1e^{2x}+C_2e^{3x}-xe^{2x}.\\]</strong></p>",
     "id": "4.153"
   },
   {
@@ -6628,10 +6630,10 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "modellering_digitalt",
     "niva": "E",
-    "typ": "stationärt värde i medicinmodell",
+    "typ": "jämviktsvärde i medicinmodell",
     "poang": "2/0/0",
-    "t": "<p>En medicinmängd modelleras av</p><p>\\[M'=12-0,15M.\\]</p><p>Bestäm den stationära mängden medicin.</p>",
-    "s": "<p>Vid ett stationärt värde är \\(M'=0\\):</p><p>\\[0=12-0,15M\\Rightarrow M=\\frac{12}{0,15}=80.\\]</p><p><strong>Den stationära mängden är 80 mg.</strong></p>",
+    "t": "<p>En medicinmängd modelleras av</p><p>\\[M'=12-0,15M.\\]</p><p>Bestäm den jämviktsmängden medicin.</p>",
+    "s": "<p>Vid jämvikt förändras inte mängden, så \\(M'=0\\):</p><p>\\[0=12-0,15M\\Rightarrow M=\\frac{12}{0,15}=80.\\]</p><p><strong>Jämviktsmängden är 80 mg.</strong></p>",
     "id": "4.164"
   },
   {
@@ -6878,10 +6880,10 @@ window.BANKMATF1 = [
     "kap": 4,
     "omr": "riktningsfalt_euler",
     "niva": "C",
-    "typ": "tolka riktningsfält och nollutningslinje",
+    "typ": "tolka riktningsfält och linjen där lutningen är noll",
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med x minus två y\"><rect width=\"420\" height=\"300\" fill=\"white\"/><line x1=\"42\" y1=\"150\" x2=\"378\" y2=\"150\" stroke=\"#555\" stroke-width=\"1.4\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"272\" stroke=\"#555\" stroke-width=\"1.4\"/><text x=\"66\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-2</text><text x=\"138\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-1</text><text x=\"210\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"282\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"354\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"198\" y=\"264\" font-size=\"12\" text-anchor=\"end\">-2</text><text x=\"198\" y=\"209\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"198\" y=\"99\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"198\" y=\"44\" font-size=\"12\" text-anchor=\"end\">2</text><line x1=\"58.9\" y1=\"270.9\" x2=\"73.1\" y2=\"249.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"53.0\" y1=\"205.0\" x2=\"79.0\" y2=\"205.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"58.9\" y1=\"139.1\" x2=\"73.1\" y2=\"160.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"62.0\" y1=\"82.6\" x2=\"70.0\" y2=\"107.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"63.2\" y1=\"27.3\" x2=\"68.8\" y2=\"52.7\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"271.9\" x2=\"143.2\" y2=\"248.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"212.9\" x2=\"148.3\" y2=\"197.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"142.1\" x2=\"148.3\" y2=\"157.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"83.1\" x2=\"143.2\" y2=\"106.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.7\" y1=\"27.4\" x2=\"141.3\" y2=\"52.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"272.4\" x2=\"214.0\" y2=\"247.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"215.9\" x2=\"217.1\" y2=\"194.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"197.0\" y1=\"150.0\" x2=\"223.0\" y2=\"150.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"84.1\" x2=\"217.1\" y2=\"105.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"27.6\" x2=\"214.0\" y2=\"52.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"278.7\" y1=\"272.6\" x2=\"285.3\" y2=\"247.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"216.9\" x2=\"287.2\" y2=\"193.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"157.9\" x2=\"292.3\" y2=\"142.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"87.1\" x2=\"292.3\" y2=\"102.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"28.1\" x2=\"287.2\" y2=\"51.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"351.2\" y1=\"272.7\" x2=\"356.8\" y2=\"247.3\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"350.0\" y1=\"217.4\" x2=\"358.0\" y2=\"192.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"160.9\" x2=\"361.1\" y2=\"139.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"341.0\" y1=\"95.0\" x2=\"367.0\" y2=\"95.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"29.1\" x2=\"361.1\" y2=\"50.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"66\" y1=\"205\" x2=\"354\" y2=\"95\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"312\" y=\"103\" font-size=\"13\" fill=\"#B23A2E\">y = x/2</text><text x=\"387\" y=\"145\" font-size=\"14\">x</text><text x=\"218\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=x-2y\\).</p><ol type=\"a\"><li>Förklara varför segmenten är horisontella längs linjen \\(y=x\\).</li><li>En lösning går genom \\((0,1)\\). Stiger eller sjunker den precis där?</li></ol>",
-    "s": "<p><strong>a)</strong> Segmenten är horisontella där lutningen är noll:</p><p>\\[x-2y=0\\Rightarrow y=\\frac{x}{2}.\\]</p><p>Alltså är nollutningslinjen \\(y=x/2\\).</p><p><strong>b)</strong> I punkten \\((0,1)\\) är</p><p>\\[y'=0-2\\cdot1=-2.\\]</p><p>Lösningen <strong>sjunker</strong> precis där.</p>",
+    "s": "<p><strong>a)</strong> Segmenten är horisontella där lutningen är noll:</p><p>\\[x-2y=0\\Rightarrow y=\\frac{x}{2}.\\]</p><p>Alltså ligger de horisontella segmenten längs linjen <strong>\\(y=x/2\\)</strong>.</p><p><strong>b)</strong> I punkten \\((0,1)\\) är</p><p>\\[y'=0-2\\cdot1=-2.\\]</p><p>Lösningen <strong>sjunker</strong> precis där.</p>",
     "id": "4.137"
   },
   {
@@ -7003,5 +7005,425 @@ window.BANKMATF1 = [
     "t": "<p>Visa genom insättning att \\(y=xe^x\\) löser</p><p>\\[y''-2y'+y=0.\\]</p>",
     "s": "<p>Derivera:</p><p>\\[y'=e^x+xe^x=(x+1)e^x,\\]</p><p>\\[y''=(x+2)e^x.\\]</p><p>Insättning ger</p><p>\\[(x+2)e^x-2(x+1)e^x+xe^x\\]</p><p>\\[=(x+2-2x-2+x)e^x=0.\\]</p><p>Alltså är \\(y=xe^x\\) en lösning.</p>",
     "id": "4.161"
+  },
+  {
+    "id": "1.208",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "fördela identiska objekt med ett minsta antal i varje grupp",
+    "poang": "0/2/0",
+    "t": "<p>Under fyra träningsveckor ska 14 likadana bonuspass fördelas. Varje vecka ska innehålla minst 2 bonuspass.</p><p>På hur många olika sätt kan antalet bonuspass fördelas mellan veckorna?</p>",
+    "s": "<p><strong>Första steget:</strong> Kravet på minst 2 pass per vecka använder \\(4\\cdot2=8\\) pass. Då återstår</p><p>\\[14-8=6\\]</p><p>pass som får fördelas fritt mellan de fyra veckorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"105\" viewBox=\"0 0 420 122\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Exempel på sex markeringar fördelade i fyra grupper med tre skiljestreck\">\n<rect x=\"10\" y=\"12\" width=\"400\" height=\"96\" rx=\"7\" fill=\"white\" stroke=\"#c7c7c7\"/>\n<circle cx=\"55\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"82\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"112\" y1=\"35\" x2=\"112\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"145\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"178\" y1=\"35\" x2=\"178\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"207\" y1=\"35\" x2=\"207\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"241\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"268\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"295\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<text x=\"52\" y=\"99\" font-size=\"12\">2</text><text x=\"142\" y=\"99\" font-size=\"12\">1</text><text x=\"190\" y=\"99\" font-size=\"12\">0</text><text x=\"266\" y=\"99\" font-size=\"12\">3</text>\n<text x=\"323\" y=\"61\" font-size=\"12\">extra pass</text>\n</svg></span><p>Vi kan tänka de 6 återstående passen som 6 markeringar. Tre streck skiljer de fyra veckorna åt. Bilden visar ett exempel: \\(2,1,0,3\\) extra pass.</p><p>Totalt ska alltså 6 markeringar och 3 streck ordnas. Vi väljer var de tre strecken ska stå bland 9 platser:</p><p>\\[\\binom93=84.\\]</p><p><strong>Det finns 84 möjliga fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.209",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "fördelning med olika minsta antal",
+    "poang": "0/2/0",
+    "t": "<p>Ett café ska förbereda 12 portionsskålar av tre sorters frukt: äpple, banan och päron. Minst 1 skål ska vara äpple, minst 2 ska vara banan och minst 3 ska vara päron.</p><p>På hur många sätt kan antalet skålar av de tre sorterna fördelas?</p>",
+    "s": "<p>Vi uppfyller först minimikraven: \\(1+2+3=6\\) skålar. Då återstår 6 skålar att fördela fritt mellan tre sorter.</p><p>Låt de extra antalen vara \\(x,y,z\\). Då</p><p>\\[x+y+z=6\\]</p><p>där variablerna är 0 eller positiva.</p><p>Sex markeringar ska delas i tre grupper med två streck. Därför blir antalet fördelningar</p><p>\\[\\binom{8}{2}=28.\\]</p><p><strong>Svar: 28 fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.210",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "heltalslösningar med två minsta villkor",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm antalet heltalslösningar till</p><p>\\[x+y+z+w=10\\]</p><p>där alla variabler är 0 eller positiva och dessutom \\(x\\ge2\\) och \\(y\\ge1\\).</p>",
+    "s": "<p>Sätt \\(x=2+a\\) och \\(y=1+b\\), där \\(a,b\\ge0\\). Då blir ekvationen</p><p>\\[a+b+z+w=7.\\]</p><p>Vi ska alltså fördela 7 enheter mellan fyra variabler. Det motsvarar 7 markeringar och 3 streck:</p><p>\\[\\binom{10}{3}=120.\\]</p><p><strong>Det finns 120 lösningar.</strong></p>"
+  },
+  {
+    "id": "1.211",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "heltalslösningar med övre gräns",
+    "poang": "0/2/0",
+    "t": "<p>Hur många heltalslösningar har</p><p>\\[x+y+z=15\\]</p><p>om \\(x,y,z\\) är 0 eller positiva och \\(x\\le5\\)?</p>",
+    "s": "<p>Utan villkoret \\(x\\le5\\) finns</p><p>\\[\\binom{17}{2}=136\\]</p><p>lösningar.</p><p>Vi tar bort lösningarna där \\(x\\ge6\\). Sätt då \\(x=6+a\\). Ekvationen blir</p><p>\\[a+y+z=9,\\]</p><p>vilket ger</p><p>\\[\\binom{11}{2}=55\\]</p><p>lösningar.</p><p>Alltså återstår</p><p>\\[136-55=81.\\]</p><p><strong>Svar: 81 lösningar.</strong></p>"
+  },
+  {
+    "id": "1.212",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "fördela identiska föremål med minimikrav",
+    "poang": "0/2/0",
+    "t": "<p>18 likadana klistermärken ska delas mellan fem barn. Varje barn ska få minst 2 klistermärken.</p><p>På hur många sätt kan antalen fördelas?</p>",
+    "s": "<p>Ge först varje barn 2 klistermärken. Då används 10 och det återstår 8.</p><p>De 8 återstående klistermärkena får fördelas fritt mellan fem barn. Vi behöver därför fyra skiljestreck:</p><p>\\[\\binom{8+4}{4}=\\binom{12}{4}=495.\\]</p><p><strong>Svar: 495 fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.213",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "fördelning med övre gräns för en grupp",
+    "poang": "0/2/0",
+    "t": "<p>Tio likadana rabattkuponger ska fördelas mellan fyra butiker. En bestämd butik får högst 2 kuponger. Övriga butiker får även få 0 kuponger.</p><p>På hur många sätt kan kupongerna fördelas?</p>",
+    "s": "<p>Utan begränsningen finns</p><p>\\[\\binom{13}{3}=286\\]</p><p>fördelningar.</p><p>Vi tar bort de fördelningar där den bestämda butiken får minst 3 kuponger. Lägg först 3 kuponger där. Då återstår 7 kuponger att fördela mellan fyra butiker:</p><p>\\[\\binom{10}{3}=120.\\]</p><p>Antalet tillåtna fördelningar blir</p><p>\\[286-120=166.\\]</p><p><strong>Svar: 166.</strong></p>"
+  },
+  {
+    "id": "1.214",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kombinationer med upprepning och två obligatoriska sorter",
+    "poang": "0/2/0",
+    "t": "<p>En kund väljer 7 bakverk från fyra sorter. Flera bakverk av samma sort får väljas. Kunden vill ha minst ett kanelbakverk och minst ett chokladbakverk.</p><p>Hur många olika val av antal finns?</p>",
+    "s": "<p>Lägg först undan ett kanelbakverk och ett chokladbakverk. Då återstår 5 bakverk att fördela fritt mellan fyra sorter.</p><p>Fem markeringar och tre skiljestreck ger</p><p>\\[\\binom{8}{3}=56.\\]</p><p><strong>Det finns 56 olika val.</strong></p>"
+  },
+  {
+    "id": "1.215",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "poängfördelning med minimi- och maximivillkor",
+    "poang": "0/2/0",
+    "t": "<p>En bedömning består av fyra delområden. Totalt ska 14 poäng fördelas mellan delområdena. Varje delområde ska få minst 2 poäng och det första delområdet får högst 5 poäng.</p><p>På hur många sätt kan poängtalen fördelas?</p>",
+    "s": "<p>Ge först varje delområde 2 poäng. Då återstår 6 poäng att fördela.</p><p>Låt de extra poängen vara \\(x_1,x_2,x_3,x_4\\). Då</p><p>\\[x_1+x_2+x_3+x_4=6.\\]</p><p>Utan maxvillkoret finns \\(\\binom93=84\\) fördelningar.</p><p>Det första delområdet får högst 5 poäng totalt, alltså högst 3 extra poäng. Vi tar därför bort fallen \\(x_1\\ge4\\). Sätt \\(x_1=4+y\\). Då återstår</p><p>\\[y+x_2+x_3+x_4=2,\\]</p><p>vilket ger \\(\\binom53=10\\) fall.</p><p>Alltså</p><p>\\[84-10=74.\\]</p><p><strong>Svar: 74 fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.216",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "välja grupp med minst två från varje kategori",
+    "poang": "0/2/0",
+    "t": "<p>En arbetsgrupp med 5 personer ska väljas bland 7 personer från avdelning A och 6 personer från avdelning B. Gruppen ska innehålla minst 2 personer från vardera avdelningen.</p><p>Hur många grupper är möjliga?</p>",
+    "s": "<p>Med 5 personer och minst 2 från varje avdelning finns bara två möjliga fördelningar:</p><p>2 från A och 3 från B, eller 3 från A och 2 från B.</p><p>Därför</p><p>\\[\\binom72\\binom63+\\binom73\\binom62\\]</p><p>\\[=21\\cdot20+35\\cdot15=420+525=945.\\]</p><p><strong>Svar: 945 grupper.</strong></p>"
+  },
+  {
+    "id": "1.217",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "välja provuppgifter med flera kategorivillkor",
+    "poang": "0/3/0",
+    "t": "<p>Ett prov ska innehålla 6 uppgifter. Läraren kan välja bland 5 algebrauppgifter, 4 kombinatorikuppgifter och 3 talteoriuppgifter.</p><p>Provet ska innehålla minst 2 kombinatorikuppgifter och minst 1 talteoriuppgift. Hur många olika prov kan skapas om ordningen inte spelar roll?</p>",
+    "s": "<p>Vi delar upp efter hur många kombinatorikuppgifter och talteoriuppgifter som väljs. De möjliga fördelningarna \\((A,K,T)\\) är</p><p>\\[(3,2,1),(2,2,2),(1,2,3),(2,3,1),(1,3,2),(0,3,3),(1,4,1),(0,4,2).\\]</p><p>För varje fördelning väljer vi uppgifter inom respektive kategori och adderar fallen:</p><p>\\[\\binom53\\binom42\\binom31+\\binom52\\binom42\\binom32+\\binom51\\binom42\\binom33\\]</p><p>\\[+\\binom52\\binom43\\binom31+\\binom51\\binom43\\binom32+\\binom50\\binom43\\binom33\\]</p><p>\\[+\\binom51\\binom44\\binom31+\\binom50\\binom44\\binom32=592.\\]</p><p><strong>Svar: 592 olika prov.</strong></p>"
+  },
+  {
+    "id": "1.218",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "ordna bokstäver med upprepning och vokaler tillsammans",
+    "poang": "0/2/0",
+    "t": "<p>Hur många olika ord kan bildas av alla bokstäver i <strong>MATEMATIK</strong> om alla vokaler ska stå tillsammans?</p>",
+    "s": "<p>Vokalerna är A, A, E och I. Betrakta dem först som ett block.</p><p>Då ska följande sex objekt ordnas:</p><p>vokalblocket, M, M, T, T, K.</p><p>Eftersom M och T förekommer två gånger vardera blir antalet yttre ordningar</p><p>\\[\\frac{6!}{2!2!}=180.\\]</p><p>Inne i vokalblocket kan A, A, E och I ordnas på</p><p>\\[\\frac{4!}{2!}=12\\]</p><p>sätt.</p><p>Multiplikationsprincipen ger</p><p>\\[180\\cdot12=2160.\\]</p><p><strong>Svar: 2160 ord.</strong></p>"
+  },
+  {
+    "id": "1.219",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "ordna böcker med två blockvillkor",
+    "poang": "0/2/0",
+    "t": "<p>På en hylla ska 8 olika böcker ställas i rad. Tre bestämda matematikböcker ska stå tillsammans och två bestämda fysikböcker ska också stå tillsammans.</p><p>På hur många sätt kan böckerna ordnas?</p>",
+    "s": "<p>Se de tre matematikböckerna som ett block och de två fysikböckerna som ett annat block.</p><p>Tillsammans med de tre återstående böckerna har vi då 5 objekt att ordna:</p><p>\\[5!\\]</p><p>Matematikböckerna kan ordnas inom sitt block på \\(3!\\) sätt och fysikböckerna på \\(2!\\) sätt.</p><p>Totalt</p><p>\\[5!\\cdot3!\\cdot2!=120\\cdot6\\cdot2=1440.\\]</p><p><strong>Svar: 1440 ordningar.</strong></p>"
+  },
+  {
+    "id": "1.220",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "välja platser utan grannar och placera personer",
+    "poang": "0/3/0",
+    "t": "<span class=\"fig smal\"><svg width=\"380\" height=\"105\" viewBox=\"0 0 420 116\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"En rad med tio numrerade sittplatser\">\n<rect x=\"8\" y=\"10\" width=\"404\" height=\"92\" rx=\"7\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"22\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"37\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">1</text><rect x=\"60\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"75\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">2</text><rect x=\"98\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"113\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">3</text><rect x=\"136\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"151\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">4</text><rect x=\"174\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"189\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">5</text><rect x=\"212\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"227\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">6</text><rect x=\"250\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"265\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">7</text><rect x=\"288\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"303\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">8</text><rect x=\"326\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"341\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">9</text><rect x=\"364\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"379\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">10</text></svg></span><p>Fyra olika elever ska placeras på fyra av de tio stolarna. Ingen av de använda stolarna får ligga bredvid en annan använd stol.</p><p>På hur många sätt kan eleverna placeras?</p>",
+    "s": "<p><strong>Steg 1: välj stolarna.</strong> Antalet sätt att välja 4 platser bland 10 utan att två valda platser ligger intill varandra är</p><p>\\[\\binom{10-4+1}{4}=\\binom74=35.\\]</p><p>Ett sätt att förstå formeln är att först tänka en tom stol mellan varje par valda stolar. Då återstår 7 möjliga lägen för de 4 valda stolarna.</p><p><strong>Steg 2: placera eleverna.</strong> De fyra olika eleverna kan ordnas på de valda stolarna på</p><p>\\[4!=24\\]</p><p>sätt.</p><p>Totalt</p><p>\\[35\\cdot24=840.\\]</p><p><strong>Svar: 840 placeringar.</strong></p>"
+  },
+  {
+    "id": "1.221",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kod med exakt antal ettor utan angränsande ettor",
+    "poang": "0/2/0",
+    "t": "<p>En kod består av åtta tecken, där varje tecken är 0 eller 1. Koden ska innehålla exakt tre ettor och inga två ettor får stå bredvid varandra.</p><p>Hur många sådana koder finns?</p>",
+    "s": "<p>Vi ska välja tre positioner bland åtta, men inga två får vara intill varandra.</p><p>För tre valda positioner behövs minst två mellanrum mellan ettorna. Standardräkningen för 3 icke angränsande positioner bland 8 ger</p><p>\\[\\binom{8-3+1}{3}=\\binom63=20.\\]</p><p><strong>Det finns 20 koder.</strong></p>"
+  },
+  {
+    "id": "1.222",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kod med exakta typer av tecken utan upprepning",
+    "poang": "0/2/0",
+    "t": "<p>En kod består av 6 tecken. Exakt 2 tecken ska vara bokstäver och övriga 4 ska vara siffror. Bokstäverna väljs bland A, B, C, D och E. Inget tecken får upprepas.</p><p>Hur många koder är möjliga?</p>",
+    "s": "<p>Välj först vilka 2 av kodens 6 positioner som ska innehålla bokstäver:</p><p>\\[\\binom62=15.\\]</p><p>De två olika bokstäverna kan väljas och ordnas på</p><p>\\[5\\cdot4=20\\]</p><p>sätt.</p><p>De fyra olika siffrorna kan väljas och ordnas på</p><p>\\[10\\cdot9\\cdot8\\cdot7=5040\\]</p><p>sätt.</p><p>Totalt</p><p>\\[15\\cdot20\\cdot5040=1\\,512\\,000.\\]</p><p><strong>Svar: 1 512 000 koder.</strong></p>"
+  },
+  {
+    "id": "1.223",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "registreringskod med minst en vokal och utan upprepning",
+    "poang": "0/3/0",
+    "t": "<p>En kod består av tre bokstäver följda av tre siffror. Inga bokstäver får upprepas och inga siffror får upprepas. Bland de 26 bokstäverna räknas A, E, I, O och U som vokaler.</p><p>Hur många koder innehåller minst en vokal?</p>",
+    "s": "<p>Det är enklast att använda komplementmetoden.</p><p>Alla ordnade val av tre olika bokstäver:</p><p>\\[26\\cdot25\\cdot24=15600.\\]</p><p>Det finns 21 icke-vokaler. Koder utan någon vokal har därför</p><p>\\[21\\cdot20\\cdot19=7980\\]</p><p>möjliga bokstavsdelar.</p><p>Med minst en vokal återstår</p><p>\\[15600-7980=7620\\]</p><p>bokstavsdelar.</p><p>Sifferdelen kan bildas på</p><p>\\[10\\cdot9\\cdot8=720\\]</p><p>sätt.</p><p>Totalt</p><p>\\[7620\\cdot720=5\\,486\\,400.\\]</p><p><strong>Svar: 5 486 400 koder.</strong></p>"
+  },
+  {
+    "id": "1.224",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kod med exakt två bestämda tecken utan att de står intill",
+    "poang": "0/2/0",
+    "t": "<p>En kod består av 6 bokstäver. Varje position får innehålla A, B, C eller D och upprepning är tillåten. Koden ska innehålla exakt två A, och de två A:na får inte stå bredvid varandra.</p><p>Hur många koder finns?</p>",
+    "s": "<p>Först väljer vi två positioner för A som inte ligger intill varandra. Antalet sådana val bland 6 positioner är</p><p>\\[\\binom{6-2+1}{2}=\\binom52=10.\\]</p><p>På de fyra återstående positionerna får vi välja B, C eller D fritt:</p><p>\\[3^4=81.\\]</p><p>Multiplikationsprincipen ger</p><p>\\[10\\cdot81=810.\\]</p><p><strong>Svar: 810 koder.</strong></p>"
+  },
+  {
+    "id": "1.225",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "prispall med förbjudet par",
+    "poang": "0/2/0",
+    "t": "<p>Åtta löpare deltar i ett lopp. Guld, silver och brons ska delas ut. Två bestämda löpare, A och B, får av en särskild anledning inte båda finnas på prispallen.</p><p>Hur många möjliga prispallar finns?</p>",
+    "s": "<p>Utan begränsningen finns</p><p>\\[8\\cdot7\\cdot6=336\\]</p><p>ordnade prispallar.</p><p>Räkna de förbjudna fallen: A och B är båda med. Den tredje personen väljs bland de övriga 6 och de tre personerna kan ordnas på prispallen på \\(3!\\) sätt:</p><p>\\[6\\cdot3!=36.\\]</p><p>Tillåtna prispallar:</p><p>\\[336-36=300.\\]</p><p><strong>Svar: 300.</strong></p>"
+  },
+  {
+    "id": "1.226",
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "kortkombination med exakt antal hjärter och kungar",
+    "poang": "0/3/0",
+    "t": "<p>Ur en vanlig kortlek med 52 kort väljs 5 kort utan hänsyn till ordning.</p><p>Hur många femkortshänder innehåller exakt 2 hjärter och exakt 1 kung?</p>",
+    "s": "<p>Vi måste skilja på två fall eftersom hjärter kung både är hjärter och kung.</p><p><strong>Fall 1: hjärter kung är med.</strong> Välj ytterligare 1 hjärter bland de 12 hjärter som inte är kung och 3 kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[12\\binom{36}{3}=85\\,680.\\]</p><p><strong>Fall 2: den enda kungen är inte hjärter kung.</strong> Välj 1 av de 3 kungarna utanför hjärter, 2 hjärter bland de 12 hjärter som inte är kung och 2 övriga kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[3\\binom{12}{2}\\binom{36}{2}=124\\,740.\\]</p><p>Totalt</p><p>\\[85\\,680+124\\,740=210\\,420.\\]</p><p><strong>Svar: 210 420 händer.</strong></p>"
+  },
+  {
+    "id": "1.227",
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "kortprobabilitet med minst ett ess och minst en kung",
+    "poang": "0/3/0",
+    "t": "<p>Fem kort dras slumpmässigt ur en vanlig kortlek med 52 kort.</p><p>Bestäm sannolikheten att handen innehåller minst ett ess och minst en kung.</p>",
+    "s": "<p>Totalt finns \\(\\binom{52}{5}\\) femkortshänder.</p><p>Vi använder komplement och additionsprincipen. Från alla händer tar vi bort händer utan ess och händer utan kung, men då har händer utan både ess och kung tagits bort två gånger och måste läggas tillbaka:</p><p>\\[N=\\binom{52}{5}-2\\binom{48}{5}+\\binom{44}{5}=260\\,360.\\]</p><p>Sannolikheten blir</p><p>\\[P=\\frac{260360}{\\binom{52}{5}}\\approx0,1002.\\]</p><p><strong>Sannolikheten är cirka 10,0 %.</strong></p>"
+  },
+  {
+    "id": "1.228",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kortaste vägar i rutnät med förbjuden punkt",
+    "poang": "0/3/0",
+    "t": "<span class=\"fig smal\"><svg width=\"330\" height=\"270\" viewBox=\"0 0 350 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rutnät med startpunkten A, slutpunkten B och punkten P\">\n<rect x=\"12\" y=\"12\" width=\"326\" height=\"252\" rx=\"7\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"45\" y1=\"45\" x2=\"45\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"95\" y1=\"45\" x2=\"95\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"145\" y1=\"45\" x2=\"145\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"195\" y1=\"45\" x2=\"195\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"245\" y1=\"45\" x2=\"245\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"295\" y1=\"45\" x2=\"295\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"225\" x2=\"295\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"180\" x2=\"295\" y2=\"180\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"135\" x2=\"295\" y2=\"135\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"90\" x2=\"295\" y2=\"90\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"45\" x2=\"295\" y2=\"45\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<circle cx=\"45\" cy=\"225\" r=\"5\" fill=\"#333\"/><text x=\"24\" y=\"232\" font-size=\"15\">A</text>\n<circle cx=\"295\" cy=\"45\" r=\"5\" fill=\"#333\"/><text x=\"304\" y=\"50\" font-size=\"15\">B</text>\n<circle cx=\"145\" cy=\"180\" r=\"6\" fill=\"#b45f32\"/><text x=\"154\" y=\"172\" font-size=\"15\">P</text>\n<text x=\"56\" y=\"255\" font-size=\"12\">endast åt höger eller uppåt</text>\n</svg></span><p>Från A till B ska man gå en kortaste väg i rutnätet. Man får bara gå åt höger eller uppåt. Punkten P får inte passeras.</p><p>Hur många kortaste vägar finns?</p>",
+    "s": "<p>Från A till B krävs 5 steg åt höger och 4 steg uppåt, totalt 9 steg. Utan begränsning finns</p><p>\\[\\binom94=126\\]</p><p>kortaste vägar.</p><p>Räkna sedan vägarna som passerar P. Från A till P krävs 2 steg åt höger och 1 upp:</p><p>\\[\\binom31=3.\\]</p><p>Från P till B krävs 3 steg åt höger och 3 upp:</p><p>\\[\\binom63=20.\\]</p><p>Alltså passerar</p><p>\\[3\\cdot20=60\\]</p><p>vägar P.</p><p>Antalet tillåtna vägar är därför</p><p>\\[126-60=66.\\]</p><p><strong>Svar: 66 vägar.</strong></p>"
+  },
+  {
+    "id": "1.229",
+    "kap": 1,
+    "omr": "kombinatoriska_principer",
+    "niva": "C",
+    "typ": "fördela olika uppgifter så att alla får minst en",
+    "poang": "0/3/0",
+    "t": "<p>Sex olika laboratorieuppgifter ska fördelas mellan tre elever. Varje uppgift tilldelas exakt en elev och varje elev måste få minst en uppgift.</p><p>På hur många sätt kan uppgifterna fördelas?</p>",
+    "s": "<p>Utan kravet kan varje av de 6 uppgifterna tilldelas någon av 3 elever:</p><p>\\[3^6=729.\\]</p><p>Vi tar bort fördelningar där minst en elev inte får någon uppgift. Om en bestämd elev saknas kan varje uppgift gå till någon av de två andra:</p><p>\\[2^6=64.\\]</p><p>Det finns 3 val av den elev som saknas, så vi drar bort \\(3\\cdot64\\).</p><p>Fördelningar där två bestämda elever saknas har då dragits bort två gånger. Det finns 3 sådana fall, ett för varje elev som får alla uppgifter, så de läggs tillbaka:</p><p>\\[729-3\\cdot64+3=540.\\]</p><p><strong>Svar: 540 fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.230",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "fördela identiska objekt med både minimi- och maximivillkor",
+    "poang": "0/2/0",
+    "t": "<p>Åtta likadana kulor ska läggas i fyra märkta lådor A, B, C och D. Ingen låda får vara tom och låda A får innehålla högst 3 kulor.</p><p>På hur många sätt kan antalen fördelas?</p>",
+    "s": "<p>Lägg först en kula i varje låda. Då återstår 4 kulor att fördela fritt. Sätt \\(x_A,x_B,x_C,x_D\\) till antalet extra kulor. Då</p><p>\\[x_A+x_B+x_C+x_D=4.\\]</p><p>Utan maxvillkoret finns</p><p>\\[\\binom73=35\\]</p><p>fördelningar.</p><p>Låda A får högst 3 kulor totalt, alltså högst 2 extra. Vi tar bort fallen \\(x_A\\ge3\\). Lägg 3 extra kulor i A; då återstår 1 extra kula att placera mellan fyra lådor:</p><p>\\[\\binom43=4.\\]</p><p>Alltså</p><p>\\[35-4=31.\\]</p><p><strong>Svar: 31 fördelningar.</strong></p>"
+  },
+  {
+    "id": "1.231",
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "välja styrelse med minimi- och maximivillkor",
+    "poang": "0/2/0",
+    "t": "<p>En styrelse med 5 personer ska väljas bland 9 anställda. Tre av de anställda är chefer. Styrelsen ska innehålla minst 1 men högst 2 chefer.</p><p>Hur många styrelser är möjliga?</p>",
+    "s": "<p>Vi delar upp i två fall.</p><p><strong>Exakt 1 chef:</strong></p><p>\\[\\binom31\\binom64=3\\cdot15=45.\\]</p><p><strong>Exakt 2 chefer:</strong></p><p>\\[\\binom32\\binom63=3\\cdot20=60.\\]</p><p>Fallen kan inte överlappa, så vi adderar:</p><p>\\[45+60=105.\\]</p><p><strong>Svar: 105 styrelser.</strong></p>"
+  },
+  {
+    "id": "3.110",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "E",
+    "typ": "relaterad förändringshastighet för kvadrat via diagonal",
+    "poang": "2/0/0",
+    "t": "<span class=\"fig smal\"><svg width=\"220\" height=\"180\" viewBox=\"0 0 240 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat med diagonal d\">\n<rect x=\"10\" y=\"10\" width=\"220\" height=\"180\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"65\" y=\"45\" width=\"95\" height=\"95\" fill=\"#f8fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<text x=\"106\" y=\"36\" font-size=\"14\">d</text>\n<text x=\"49\" y=\"98\" font-size=\"14\">d</text>\n</svg></span><p>En kvadrats diagonal \\(d\\) ökar med 0,80 cm/s. Hur snabbt ökar kvadratens area när diagonalen är 10 cm?</p>",
+    "s": "<p>För en kvadrat gäller \\(A=\\frac{d^2}{2}\\), eftersom \\(d=s\\sqrt2\\).</p><p>Derivera:</p><p>\\[\\frac{dA}{dt}=d\\frac{dd}{dt}.\\]</p><p>Sätt in \\(d=10\\) cm och \\(dd/dt=0,80\\) cm/s:</p><p>\\[\\frac{dA}{dt}=10\\cdot0,80=8,0.\\]</p><p><strong>Svar: arean ökar med \\(8,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>"
+  },
+  {
+    "id": "3.111",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "E",
+    "typ": "cylinder med känt inflöde",
+    "poang": "2/0/0",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"200\" viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med konstant radie\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"200\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<ellipse cx=\"145\" cy=\"55\" rx=\"52\" ry=\"16\" fill=\"#f8fbff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"93\" y1=\"55\" x2=\"93\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"197\" y1=\"55\" x2=\"197\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<ellipse cx=\"145\" cy=\"165\" rx=\"52\" ry=\"16\" fill=\"#eef6ff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"145\" y1=\"165\" x2=\"145\" y2=\"55\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<text x=\"154\" y=\"111\" font-size=\"14\">h</text>\n<line x1=\"145\" y1=\"55\" x2=\"193\" y2=\"55\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"153\" y=\"47\" font-size=\"13\">r = 2 dm</text>\n</svg></span><p>En cylindrisk behållare har konstant radie 2 dm. Volymen ökar med 1,6 dm³/min.</p><p>Hur snabbt stiger vätskenivån?</p>",
+    "s": "<p>Volymen av en cylinder är \\(V=\\pi r^2h\\). Här är \\(r=2\\) dm konstant, så</p><p>\\[V=4\\pi h.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Sätt in \\(dV/dt=1,6\\) dm³/min:</p><p>\\[1,6=4\\pi\\frac{dh}{dt}\\Rightarrow \\frac{dh}{dt}=\\frac{0,4}{\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{0,4}{\\pi}\\ \\text{dm/min}\\approx0,127\\ \\text{dm/min}\\).</strong></p>"
+  },
+  {
+    "id": "3.112",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "relaterade förändringshastigheter två fordon ny variant",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två vägar korsar varandra vinkelrätt. En buss är 500 m väster om korsningen och kör österut med 72 km/h. En lastbil är 1200 m norr om korsningen och kör norrut. I detta ögonblick ökar avståndet mellan dem med 84 km/h.</p><p>Bestäm lastbilens hastighet.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">x</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">y</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Vi räknar i km. Låt \\(x\\) vara bussens avstånd till korsningen och \\(y\\) lastbilens avstånd till korsningen. Då är \\(x=0,5\\), \\(y=1,2\\).</p><p>Bussen närmar sig korsningen, så \\(x'=-72\\). Lastbilen kör bort från korsningen, så \\(y'=v\\). Avståndet mellan dem betecknas \\(s\\), och \\(s'=84\\).</p><p>Pythagoras ger \\(s^2=x^2+y^2\\), alltså \\(ss'=xx'+yy'\\).</p><p>Först är \\(s=\\sqrt{0,5^2+1,2^2}=1,3\\) km.</p><p>Sätt in:</p><p>\\[1,3\\cdot84=0,5\\cdot(-72)+1,2v.\\]</p><p>Det ger \\(109,2=-36+1,2v\\), alltså \\(1,2v=145,2\\) och</p><p>\\[v=121.\\]</p><p><strong>Svar: lastbilen kör \\(121\\ \\text{km/h}\\).</strong></p>"
+  },
+  {
+    "id": "3.113",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "konisk behållare med sambandet r lika med 2h",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare med r = 2h\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r = 2h</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">dV/dt = 3,0 dm³/s</text>\n</svg></span><p>I en konisk behållare gäller hela tiden sambandet \\(r=2h\\) för vätskans yta. Volymen ökar med 3,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=2,0\\) dm.</p>",
+    "s": "<p>Volymen ges av \\(V=\\frac13\\pi r^2h\\). Med \\(r=2h\\) får vi</p><p>\\[V=\\frac13\\pi(2h)^2h=\\frac43\\pi h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=2,0\\) dm blir</p><p>\\[3,0=4\\pi\\cdot2,0^2\\frac{dh}{dt}=16\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{3}{16\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{3}{16\\pi}\\ \\text{dm/s}\\approx0,0597\\ \\text{dm/s}\\).</strong></p>"
+  },
+  {
+    "id": "3.114",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "skugga med person som går mot lykta",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig smal\"><svg width=\"370\" height=\"210\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Person som går mot gatlykta\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"185\" x2=\"390\" y2=\"185\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"90\" y2=\"185\" stroke=\"#555\" stroke-width=\"5\"/>\n<line x1=\"90\" y1=\"55\" x2=\"105\" y2=\"45\" stroke=\"#555\" stroke-width=\"3\"/>\n<circle cx=\"109\" cy=\"43\" r=\"6\" fill=\"#f0c36d\" stroke=\"#916d1b\"/>\n<line x1=\"225\" y1=\"185\" x2=\"225\" y2=\"118\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"225\" cy=\"108\" r=\"10\" fill=\"#333\"/>\n<line x1=\"109\" y1=\"43\" x2=\"285\" y2=\"185\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<line x1=\"90\" y1=\"185\" x2=\"225\" y2=\"185\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"225\" y1=\"185\" x2=\"285\" y2=\"185\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"145\" y=\"177\" font-size=\"14\">x</text>\n<text x=\"248\" y=\"177\" font-size=\"14\">s</text>\n<text x=\"98\" y=\"117\" font-size=\"13\">6,0 m</text>\n<text x=\"235\" y=\"145\" font-size=\"13\">1,8 m</text>\n</svg></span><p>En 1,6 m lång person går <strong>mot</strong> en 4,8 m hög gatlykta med hastigheten 1,2 m/s. Hur snabbt förändras skuggans längd?</p>",
+    "s": "<p>Låt \\(x\\) vara personens avstånd till lyktan och \\(s\\) skuggans längd. Av likformiga trianglar gäller</p><p>\\[\\frac{4,8}{x+s}=\\frac{1,6}{s}.\\]</p><p>Korsmultiplicera:</p><p>\\[4,8s=1,6x+1,6s\\Rightarrow3,2s=1,6x\\Rightarrow s=\\frac12x.\\]</p><p>Derivera:</p><p>\\[s'=\\frac12x'.\\]</p><p>Personen går mot lyktan, alltså minskar \\(x\\): \\(x'=-1,2\\) m/s.</p><p>Därför</p><p>\\[s'=\\frac12\\cdot(-1,2)=-0,60.\\]</p><p><strong>Svar: skuggan minskar med \\(0,60\\ \\text{m/s}\\).</strong></p>"
+  },
+  {
+    "id": "3.115",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "relaterade förändringshastigheter helikopter",
+    "poang": "0/3/0",
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"225\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Helikopter och observatör på marken\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"226\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"40\" y1=\"195\" x2=\"390\" y2=\"195\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<circle cx=\"90\" cy=\"195\" r=\"4\" fill=\"#333\"/><text x=\"64\" y=\"212\" font-size=\"13\">O</text>\n<line x1=\"250\" y1=\"85\" x2=\"282\" y2=\"85\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"250\" y=\"90\" width=\"34\" height=\"13\" rx=\"5\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"267\" y1=\"85\" x2=\"267\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"245\" y1=\"72\" x2=\"289\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"250\" y1=\"195\" x2=\"250\" y2=\"98\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"250\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"267\" y2=\"96\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"171\" y=\"188\" font-size=\"14\">x</text>\n<text x=\"254\" y=\"151\" font-size=\"14\">1,2 km</text>\n<text x=\"178\" y=\"136\" font-size=\"14\">s</text>\n</svg></span><p>En helikopter flyger horisontellt på höjden 1,2 km. När den är 1,6 km horisontellt från en observatör på marken ökar avståndet mellan observatören och helikoptern med 150 km/h.</p><p>Bestäm helikopterns hastighet.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"225\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till helikopter\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"226\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"40\" y1=\"195\" x2=\"390\" y2=\"195\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<circle cx=\"90\" cy=\"195\" r=\"4\" fill=\"#333\"/><text x=\"64\" y=\"212\" font-size=\"13\">O</text>\n<line x1=\"250\" y1=\"85\" x2=\"282\" y2=\"85\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"250\" y=\"90\" width=\"34\" height=\"13\" rx=\"5\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"267\" y1=\"85\" x2=\"267\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"245\" y1=\"72\" x2=\"289\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"250\" y1=\"195\" x2=\"250\" y2=\"98\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"250\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"267\" y2=\"96\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"171\" y=\"188\" font-size=\"14\">x</text>\n<text x=\"254\" y=\"151\" font-size=\"14\">1,2 km</text>\n<text x=\"178\" y=\"136\" font-size=\"14\">s</text>\n</svg></span><p>Låt \\(x\\) vara det horisontella avståndet från observatören till punkten rakt under helikoptern och \\(s\\) avståndet till helikoptern. Höjden är konstant 1,2 km.</p><p>Vi har sambandet</p><p>\\[s^2=x^2+1,2^2.\\]</p><p>Derivera:</p><p>\\[2ss'=2xx'\\quad\\Rightarrow\\quad ss'=xx'.\\]</p><p>När \\(x=1,6\\) km blir</p><p>\\[s=\\sqrt{1,6^2+1,2^2}=2,0\\ \\text{km}.\\]</p><p>Eftersom \\(s'=150\\) km/h får vi</p><p>\\[2,0\\cdot150=1,6x'.\\]</p><p>Alltså</p><p>\\[x'=\\frac{300}{1,6}=187,5.\\]</p><p><strong>Svar: helikopterns hastighet är \\(187,5\\ \\text{km/h}\\).</strong></p>"
+  },
+  {
+    "id": "3.116",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "E",
+    "typ": "linjär approximation av logaritm med figur",
+    "poang": "2/0/0",
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"205\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till y = ln x med tangent i x = 1\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"50\" y1=\"190\" x2=\"380\" y2=\"190\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"50\" y1=\"190\" x2=\"50\" y2=\"35\" stroke=\"#555\" stroke-width=\"2\"/>\n<path d=\"M 70 170 C 130 135, 180 120, 325 84\" fill=\"none\" stroke=\"#0e5d9e\" stroke-width=\"2.5\"/>\n<line x1=\"82\" y1=\"158\" x2=\"340\" y2=\"93\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<circle cx=\"210\" cy=\"126\" r=\"4\" fill=\"#333\"/>\n<text x=\"217\" y=\"121\" font-size=\"12\">x = 1</text>\n<text x=\"280\" y=\"79\" font-size=\"13\">y = \\ln x</text>\n<text x=\"288\" y=\"103\" font-size=\"13\">tangent</text>\n</svg></span><p>Använd tangentlinjen till \\(y=\\ln x\\) vid \\(x=1\\) för att uppskatta \\(\\ln(1,05)\\).</p>",
+    "s": "<p>Vi linjäriserar funktionen \\(f(x)=\\ln x\\) kring \\(x=1\\).</p><p>\\[f(1)=0,\\qquad f'(x)=\\frac1x\\Rightarrow f'(1)=1.\\]</p><p>Tangentlinjen blir därför</p><p>\\[L(x)=f(1)+f'(1)(x-1)=x-1.\\]</p><p>Sätt in \\(x=1,05\\):</p><p>\\[\\ln(1,05)\\approx L(1,05)=1,05-1=0,05.\\]</p><p><strong>Svar: \\(\\ln(1,05)\\approx0,05\\).</strong></p>"
+  },
+  {
+    "id": "3.117",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "cirkelns omkrets från areaändring",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande area\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r</text>\n\n</svg></span><p>En cirkels area ökar med \\(6\\pi\\ \\text{cm}^2/\\text{s}\\). Hur snabbt ökar omkretsen när radien är 3,0 cm?</p>",
+    "s": "<p>Vi använder först sambandet för arean:</p><p>\\[A=\\pi r^2\\Rightarrow \\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>När \\(r=3,0\\) cm och \\(dA/dt=6\\pi\\) får vi</p><p>\\[6\\pi=2\\pi\\cdot3,0\\cdot\\frac{dr}{dt}.\\]</p><p>Därför är \\(dr/dt=1,0\\) cm/s.</p><p>Omkretsen är \\(O=2\\pi r\\), alltså</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}=2\\pi\\cdot1,0=2\\pi.\\]</p><p><strong>Svar: omkretsen ökar med \\(2\\pi\\ \\text{cm/s}\\).</strong></p>"
+  },
+  {
+    "id": "2.209",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "primtalsfaktorisering",
+    "poang": "2/0/0",
+    "t": "<p>Primtalsfaktorisera talet \\(840\\).</p>",
+    "s": "<p>Vi delar steg för steg med primtal:</p><p>\\[840=84\\cdot10=(2\\cdot2\\cdot3\\cdot7)(2\\cdot5).\\]</p><p>Samla lika faktorer:</p><p>\\[840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p><strong>Svar: \\(840=2^3\\cdot3\\cdot5\\cdot7\\).</strong></p>"
+  },
+  {
+    "id": "2.210",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "största gemensamma delare med primtalsfaktorisering",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm \\(\\mathrm{{sgd}}(672,840)\\).</p>",
+    "s": "<p>Primtalsfaktorisera båda talen:</p><p>\\[672=2^5\\cdot3\\cdot7,\\qquad 840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p>Den största gemensamma delaren fås av de gemensamma primtalen med minsta exponent:</p><p>\\[\\mathrm{{sgd}}(672,840)=2^3\\cdot3\\cdot7=168.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(672,840)=168\\).</strong></p>"
+  },
+  {
+    "id": "2.211",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "minsta gemensamma multipel med primtalsfaktorisering",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm minsta gemensamma multipel till \\(45\\) och \\(72\\).</p>",
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[45=3^2\\cdot5,\\qquad 72=2^3\\cdot3^2.\\]</p><p>För minsta gemensamma multipel tar vi med alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(45,72)=2^3\\cdot3^2\\cdot5=360.\\]</p><p><strong>Svar: minsta gemensamma multipel är \\(360\\).</strong></p>"
+  },
+  {
+    "id": "2.212",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "Euklides algoritm",
+    "poang": "2/0/0",
+    "t": "<p>Använd Euklides algoritm för att bestämma \\(\\mathrm{{sgd}}(714,546)\\).</p>",
+    "s": "<p>Använd divisionsalgoritmen steg för steg:</p><p>\\[714=546\\cdot1+168\\]</p><p>\\[546=168\\cdot3+42\\]</p><p>\\[168=42\\cdot4+0\\]</p><p>När resten blir 0 är den sista positiva resten största gemensamma delaren.</p><p><strong>Svar: \\(\\mathrm{{sgd}}(714,546)=42\\).</strong></p>"
+  },
+  {
+    "id": "2.213",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "minsta faktor för delbarhet",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm det minsta positiva heltalet \\(k\\) så att \\(90k\\) blir delbart med \\(168\\).</p>",
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[90=2\\cdot3^2\\cdot5,\\qquad 168=2^3\\cdot3\\cdot7.\\]</p><p>För att \\(90k\\) ska vara delbart med \\(168\\) måste produkten innehålla minst faktorerna \\(2^3\\), \\(3\\) och \\(7\\).</p><p>Talet 90 innehåller redan \\(2\\) och \\(3^2\\), men saknar två extra tvåor och en sjua.</p><p>Alltså räcker</p><p>\\[k=2^2\\cdot7=28.\\]</p><p><strong>Svar: \\(k=28\\).</strong></p>"
+  },
+  {
+    "id": "2.214",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "identiska paket med största gemensamma delare",
+    "poang": "0/2/0",
+    "t": "<p>Ett idrottsläger har \\(210\\) bananer, \\(294\\) äpplen och \\(378\\) juicepaket. Man vill göra så många identiska matkassar som möjligt utan att något blir över.</p><p>Hur många matkassar kan göras, och vad innehåller varje kasse?</p>",
+    "s": "<p>Antalet kassar måste dela alla tre talen. Vi bestämmer därför</p><p>\\[\\mathrm{{sgd}}(210,294,378).\\]</p><p>Först</p><p>\\[\\mathrm{{sgd}}(210,294)=42.\\]</p><p>Sedan</p><p>\\[\\mathrm{{sgd}}(42,378)=42.\\]</p><p>Alltså kan man göra som mest \\(42\\) kassar.</p><p>Innehållet i varje kasse blir</p><p>\\[210/42=5\\text{ bananer},\\quad 294/42=7\\text{ äpplen},\\quad 378/42=9\\text{ juicepaket}.\\]</p><p><strong>Svar: \\(42\\) matkassar, med \\(5\\) bananer, \\(7\\) äpplen och \\(9\\) juicepaket i varje.</strong></p>"
+  },
+  {
+    "id": "2.215",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "minsta gemensamma multipel i tidsschema",
+    "poang": "0/2/0",
+    "t": "<p>Tre sprinklers startar samtidigt. De går sedan igång var 14:e, 18:e respektive 24:e minut.</p><p>Efter hur lång tid går alla tre igång samtidigt nästa gång?</p>",
+    "s": "<p>Vi söker minsta gemensamma multipel till \\(14\\), \\(18\\) och \\(24\\).</p><p>Primtalsfaktorisera:</p><p>\\[14=2\\cdot7,\\qquad 18=2\\cdot3^2,\\qquad 24=2^3\\cdot3.\\]</p><p>Ta alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(14,18,24)=2^3\\cdot3^2\\cdot7=504.\\]</p><p><strong>Svar: de går igång samtidigt nästa gång efter \\(504\\) minuter, alltså efter \\(8\\) timmar och \\(24\\) minuter.</strong></p>"
+  },
+  {
+    "id": "2.216",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "antal positiva delare",
+    "poang": "0/2/0",
+    "t": "<p>Hur många positiva delare har talet \\(900\\)?</p>",
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[900=9\\cdot100=3^2\\cdot2^2\\cdot5^2=2^2\\cdot3^2\\cdot5^2.\\]</p><p>En positiv delare kan då skrivas som \\(2^a3^b5^c\\), där</p><p>\\[a,b,c\\in\\{0,1,2\\}.\\]</p><p>Det finns alltså 3 val för \\(a\\), 3 val för \\(b\\) och 3 val för \\(c\\).</p><p>Med multiplikationsprincipen fås</p><p>\\[3\\cdot3\\cdot3=27.\\]</p><p><strong>Svar: talet \\(900\\) har \\(27\\) positiva delare.</strong></p>"
+  },
+  {
+    "id": "2.217",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "Euklides algoritm och heltalskombination",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm \\(\\mathrm{{sgd}}(612,342)\\) och skriv sedan denna största gemensamma delare som en heltalskombination av \\(612\\) och \\(342\\).</p>",
+    "s": "<p>Vi börjar med Euklides algoritm:</p><p>\\[612=342\\cdot1+270\\]</p><p>\\[342=270\\cdot1+72\\]</p><p>\\[270=72\\cdot3+54\\]</p><p>\\[72=54\\cdot1+18\\]</p><p>\\[54=18\\cdot3+0\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(612,342)=18\\).</p><p>Nu går vi baklänges:</p><p>\\[18=72-54\\]</p><p>och \\(54=270-72\\cdot3\\), alltså</p><p>\\[18=72-(270-72\\cdot3)=4\\cdot72-270.\\]</p><p>Vidare är \\(72=342-270\\), så</p><p>\\[18=4(342-270)-270=4\\cdot342-5\\cdot270.\\]</p><p>Slutligen är \\(270=612-342\\), alltså</p><p>\\[18=4\\cdot342-5(612-342)=-5\\cdot612+9\\cdot342.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(612,342)=18\\) och \\(18=-5\\cdot612+9\\cdot342\\).</strong></p>"
+  },
+  {
+    "id": "2.218",
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "största möjlig brickstorlek i kontext",
+    "poang": "0/2/0",
+    "t": "<p>Ett golv är 504 cm långt och 378 cm brett. Det ska täckas med lika stora kvadratiska plattor utan att någon platta kapas.</p><p>Bestäm den största möjliga sidlängden hos plattorna och hur många plattor som behövs.</p>",
+    "s": "<p>Plattans sidlängd måste dela både 504 och 378. Den största möjliga sidlängden är därför</p><p>\\[\\mathrm{{sgd}}(504,378).\\]</p><p>Med Euklides algoritm:</p><p>\\[504=378+126,\\qquad 378=3\\cdot126.\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(504,378)=126\\).</p><p>Varje platta blir alltså \\(126\\) cm \\(\\times\\) \\(126\\) cm.</p><p>Antalet plattor blir</p><p>\\[\\frac{504}{126}\\cdot\\frac{378}{126}=4\\cdot3=12.\\]</p><p><strong>Svar: sidlängden ska vara \\(126\\) cm och det behövs \\(12\\) plattor.</strong></p>"
   }
 ];
