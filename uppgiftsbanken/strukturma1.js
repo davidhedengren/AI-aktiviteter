@@ -4,6 +4,7 @@
    som saknar uppgifter för den valda inriktningen. */
 
 window.KAPNAMNMA1 = {
+  "0": "Grundläggande tal och beräkningar",
   "1": "Algebra och ekvationer",
   "2": "Funktioner och modeller",
   "3": "Potenser, procent och förändringar",
@@ -14,8 +15,17 @@ window.KAPNAMNMA1 = {
 };
 
 window.OMRMA1 = {
-  "1": {
+  "0": {
+    "tal_rakneordning": "Tal och räkneordning",
+    "negativa_tal": "Negativa tal",
     "decimaltal_positionssystem": "Decimaltal och positionssystem",
+    "avrundning": "Avrundning",
+    "overslag_grunder": "Överslagsräkning och uppskattning",
+    "enhetsbyten": "Enhetsbyten",
+    "tiopotenser_prefix": "Tiopotenser och prefix",
+    "brak_andelar": "Bråk och andelar"
+  },
+  "1": {
     "algebraiska_uttryck": "Algebraiska uttryck",
     "multiplicera_uttryck": "Multiplicera uttryck",
     "faktorisering": "Faktorisering",
@@ -73,7 +83,7 @@ window.OMRMA1 = {
     "felkallor": "Felkällor och kritisk granskning av statistik"
   },
   "6": {
-    "kalkylprogram": "Kalkylprogram",
+    "kalkylprogram": "Kalkylprogram – bland annat ränta och amortering",
     "digital_grafritning": "Digital grafritning",
     "digital_ekvationslosning": "Digital ekvationslösning",
     "programmering": "Programmering som matematiskt verktyg",
