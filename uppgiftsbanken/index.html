@@ -1901,7 +1901,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   <aside class="panel vänster">
     <div class="sök">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input type="search" id="sökfält" placeholder="Sök i uppgifterna" autocomplete="off">
+      <input type="search" id="sökfält" placeholder="Sök text, område eller tagg" autocomplete="off">
     </div>
     <div class="spar-inriktning" id="sparInriktning" hidden>
       <p class="etikett" style="padding-left:4px">Spår</p>
@@ -2557,7 +2557,7 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   b.setAttribute('aria-pressed',state.nivåer.has(n));
   rita();
 }));
-$('#sökfält').addEventListener('input',e=>{state.sök=e.target.value.toLowerCase().trim();rita();});
+$('#sökfält').addEventListener('input',e=>{state.sök=normaliseraSök(e.target.value);rita();});
 $('#sorteraKnapp').addEventListener('click',()=>{
   state.sorteraNivå=!state.sorteraNivå;
   $('#sorteraKnapp').setAttribute('aria-pressed',state.sorteraNivå);
@@ -2568,13 +2568,42 @@ $('#visaPoäng').addEventListener('change',e=>{state.visaPoäng=e.target.checked
 $('#bytKurs').addEventListener('click',visaKursval);
 
 /* ── urvalet ── */
+/* Sökrutan söker både i själva uppgiftstexten och i uppgiftens metadata.
+   Det gör att man till exempel kan söka på "regression", även om ordet
+   inte råkar stå utskrivet i uppgiften men finns i område/familj/taggar. */
+function normaliseraSök(värde){
+  return String(värde??'')
+    .replace(/<[^>]+>/g,' ')
+    .replace(/[_/–—-]+/g,' ')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function söktextFör(x){
+  const områdesnamn=DB.omr?.[x.kap]?.[x.omr]||'';
+  const familj=Array.isArray(x.familj)?x.familj.join(' '):(x.familj||'');
+  const taggar=[x.taggar,x.tags,x.etiketter]
+    .flatMap(v=>Array.isArray(v)?v:(v?[v]:[]))
+    .join(' ');
+  return normaliseraSök([
+    x.t, x.id,
+    x.omr, områdesnamn,
+    kapitelNamn(x.kap),
+    familj, taggar,
+    x.typ||'', x.kategori||''
+  ].join(' '));
+}
 function urval(){
   return variantBank().filter(x=>{
     if(!state.nivåer.has(x.niva)) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
     if(state.sök){
-      const t=(x.t+' '+x.id+' '+DB.omr[x.kap][x.omr]).replace(/<[^>]+>/g,' ').toLowerCase();
-      if(!t.includes(state.sök)) return false;
+      const t=söktextFör(x);
+      /* Flera sökord behöver inte ligga bredvid varandra. Exempelvis
+         "linjär regression" matchar så länge båda orden finns i text/taggar. */
+      const termer=state.sök.split(' ').filter(Boolean);
+      if(!termer.every(term=>t.includes(term))) return false;
     }
     return true;
   }).sort((a,b)=>{
