@@ -32,6 +32,7 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%}
+html{overflow:hidden}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);
   font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
 button,input,select{font-family:inherit;font-size:inherit;color:inherit}
@@ -1139,7 +1140,7 @@ table.data th{background:var(--sunken);font-weight:600}
 /* ── utskrift ── */
 #utskrift{display:none}
 @media print{
-  body{overflow:visible;background:#fff}
+  html,body{overflow:visible;background:#fff}
   .kursval,.top,.arbetsyta{display:none!important}
   #utskrift{display:block;font-family:var(--las);font-size:11.5pt;line-height:1.6;color:#000}
   #utskrift .ph{display:flex;align-items:center;gap:14px;border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:22px}
@@ -2098,6 +2099,14 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 <div id="utskrift"></div>
 
 <script>
+/* Webbläsaren minns annars sidans skrollposition mellan sidladdningar och
+   återställer den efter en omladdning (F5) — även om innehållet bytts ut
+   mot appens fasta layout. Har man scrollat i kursväljaren innan man
+   startar en kurs "ärver" den nya vyn den gamla skrollpositionen, vilket
+   klipper toppen/vänsterkanten. En ny flik har ingen sådan historik och
+   ser därför rätt ut. Manuell återställning löser båda fallen. */
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+
 /* ═══════════════ kurser ═══════════════
    Varje kurs pekar ut sina egna filer och sina egna globala namn.
    Vill du lägga till Fysik 3 eller Matematik räcker det att lägga till
@@ -2425,6 +2434,7 @@ function visaKursval(){
   $('#kursval').hidden=false;
   $('#kvFel').hidden=true;
   ritaKursval();
+  window.scrollTo(0,0);
 }
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
@@ -2435,6 +2445,7 @@ function startaKurs(kurs){
   document.querySelector('.arbetsyta').hidden=false;
   $('#lista').innerHTML='<div class="tomt"><h3>Läser in kursen…</h3><p>Uppgifterna förbereds.</p></div>';
   $('#träffar').textContent='';
+  window.scrollTo(0,0);
 
   try{
     DB.bank.forEach(x=>{
