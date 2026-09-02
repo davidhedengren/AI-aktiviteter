@@ -1,4 +1,5 @@
 /* strukturma1.js — Gemensam struktur för Matematik nivå 1a, 1b och 1c.
+   Kapitel 0 är ett gemensamt grundkapitel för alla tre spår.
    Vilka uppgifter som hör till respektive inriktning styrs i uppgifterma1.js
    med fältet kurs: ["1a","1b","1c"]. Index.html döljer automatiskt områden
    som saknar uppgifter för den valda inriktningen. */
@@ -23,7 +24,7 @@ window.OMRMA1 = {
     "overslag_grunder": "Överslagsräkning och uppskattning",
     "enhetsbyten": "Enhetsbyten",
     "tiopotenser_prefix": "Tiopotenser och prefix",
-    "brak_andelar": "Bråk och andelar"
+    "brakrakning": "Bråkräkning"
   },
   "1": {
     "algebraiska_uttryck": "Algebraiska uttryck",
