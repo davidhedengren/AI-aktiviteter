@@ -1,10 +1,7 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Bevisdelen omfattar direkta bevis, indirekta bevis (kontraposition och
-   motsägelsebevis) samt induktionsbevis.
-   Samtliga Venn-diagram är renderingskontrollerade: varje delområde är
-   punktprovat mot mängduttrycket i facit.
-   Alla SVG-id:n är unika per figur.
-   Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
+   Utbyggd från användarens uppdaterade version i fyra sparade omgångar.
+   Nya uppgifter prioriterar E/C-träning, varierade kontexter och pedagogiska facit.
+   SVG används endast när den tillför matematisk information. */
 
 window.BANKMATF1 = [
   {
@@ -1369,6 +1366,106 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "E",
+    "typ": "välja kommitté",
+    "poang": "2/0/0",
+    "t": "<p>Ur 12 personer ska en kommitté med 4 personer väljas. Hur många olika kommittéer finns?</p>",
+    "s": "<p>Ordningen spelar ingen roll, så vi använder kombinationer:</p><p>\\[\\binom{12}{4}=495.\\]</p><p><strong>Svar: 495 kommittéer.</strong></p>",
+    "id": "1.187"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "E",
+    "typ": "ordna foton",
+    "poang": "2/0/0",
+    "t": "<p>Sex olika fotografier ska hängas på rad. På hur många sätt kan de ordnas?</p>",
+    "s": "<p>Alla sex används och ordningen spelar roll:</p><p>\\[6!=720.\\]</p><p><strong>Svar: 720 ordningar.</strong></p>",
+    "id": "1.188"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "E",
+    "typ": "ordnade roller",
+    "poang": "2/0/0",
+    "t": "<p>I en förening med 14 medlemmar ska en ordförande och en vice ordförande väljas. Samma person kan inte ha båda rollerna.</p><p>Hur många val är möjliga?</p>",
+    "s": "<p>Rollerna är olika, så ordningen spelar roll. Det finns 14 val till ordförande och sedan 13 val till vice ordförande:</p><p>\\[14\\cdot13=182.\\]</p><p><strong>Svar: 182.</strong></p>",
+    "id": "1.189"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "E",
+    "typ": "välja toppings utan ordning",
+    "poang": "2/0/0",
+    "t": "<p>En pizza ska få exakt 3 olika toppings av 8 möjliga. Ordningen spelar ingen roll.</p><p>Hur många val finns?</p>",
+    "s": "<p>Vi väljer 3 av 8 utan ordning:</p><p>\\[\\binom83=56.\\]</p><p><strong>Svar: 56.</strong></p>",
+    "id": "1.190"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "E",
+    "typ": "ordna del av en grupp",
+    "poang": "2/0/0",
+    "t": "<p>Av 9 löpare ska fyra väljas ut och placeras på fyra olika stafettsträckor. Hur många laguppställningar finns?</p>",
+    "s": "<p>Vi väljer fyra personer och sträckorna är olika, så ordningen spelar roll:</p><p>\\[P(9,4)=9\\cdot8\\cdot7\\cdot6=3024.\\]</p><p><strong>Svar: 3024.</strong></p>",
+    "id": "1.191"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "cirkulär permutation",
+    "poang": "0/2/0",
+    "t": "<p>Tio personer sätter sig runt ett runt bord. Två placeringar som bara skiljer sig genom att alla har roterat lika mycket räknas som samma.</p><p>Hur många olika placeringar finns?</p>",
+    "s": "<p>Fixera en person på en plats för att ta bort rotationerna. De övriga 9 personerna kan sedan ordnas på</p><p>\\[9!=362\\,880\\]</p><p>sätt. <strong>Svar: 362 880 placeringar.</strong></p>",
+    "id": "1.192"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "kommitté med könsvillkor",
+    "poang": "0/2/0",
+    "t": "<p>En grupp består av 8 kvinnor och 7 män. En kommitté med 5 personer ska väljas med exakt 3 kvinnor.</p><p>Hur många kommittéer finns?</p>",
+    "s": "<p>Välj först 3 av de 8 kvinnorna och sedan 2 av de 7 männen:</p><p>\\[\\binom83\\binom72=56\\cdot21=1176.\\]</p><p><strong>Svar: 1176.</strong></p>",
+    "id": "1.193"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "alla särskilda böcker tillsammans",
+    "poang": "0/2/0",
+    "t": "<p>Sju olika böcker ska ställas på en hylla. Fyra av dem är matematikböcker och ska stå tillsammans.</p><p>Hur många ordningar är möjliga?</p>",
+    "s": "<p>Betrakta de fyra matematikböckerna som ett block. Då finns blocket och tre andra böcker, alltså 4 objekt, som kan ordnas på \\(4!\\) sätt.</p><p>Inuti blocket kan de fyra matematikböckerna ordnas på \\(4!\\) sätt.</p><p>\\[4!\\cdot4!=24\\cdot24=576.\\]</p><p><strong>Svar: 576.</strong></p>",
+    "id": "1.194"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "två personer inte intill",
+    "poang": "0/2/0",
+    "t": "<p>Sju personer ska stå på rad. Två bestämda personer får inte stå bredvid varandra.</p><p>Hur många ordningar är möjliga?</p>",
+    "s": "<p>Alla ordningar: \\(7!=5040\\).</p><p>Ordningar där de två står tillsammans: behandla dem som ett block. Då finns 6 objekt att ordna och två interna ordningar:</p><p>\\[2\\cdot6!=1440.\\]</p><p>Tillåtna ordningar:</p><p>\\[5040-1440=3600.\\]</p><p><strong>Svar: 3600.</strong></p>",
+    "id": "1.195"
+  },
+  {
+    "kap": 1,
+    "omr": "permutationer_kombinationer",
+    "niva": "C",
+    "typ": "lärare separerade av elever",
+    "poang": "0/3/0",
+    "t": "<p>Fem elever och tre lärare ska stå på rad. Ingen lärare får stå bredvid en annan lärare.</p><p>Hur många ordningar är möjliga?</p>",
+    "s": "<p>Ordna först de fem eleverna: \\(5!\\) sätt.</p><p>De skapar 6 möjliga luckor för lärare:</p><p>\\[_E_E_E_E_E_\\]</p><p>Välj 3 av dessa 6 luckor och placera sedan de tre olika lärarna i de valda luckorna:</p><p>\\[5!\\binom63 3!=120\\cdot20\\cdot6=14\\,400.\\]</p><p><strong>Svar: 14 400.</strong></p>",
+    "id": "1.196"
+  },
+  {
+    "kap": 1,
     "omr": "binomialsatsen",
     "niva": "A",
     "typ": "parameter i binomialkoefficient",
@@ -1516,6 +1613,86 @@ window.BANKMATF1 = [
     "t": "<p>I utvecklingen av \\((1+ax)^5\\) är koefficienten framför \\(x^2\\) lika med 90. Bestäm positiva \\(a\\).</p>",
     "s": "<p>Koefficienten framför \\(x^2\\) är</p><p>\\[\\binom52a^2=10a^2.\\]</p><p>\\[10a^2=90\\Rightarrow a^2=9.\\]</p><p>Eftersom \\(a\\) är positivt är <strong>\\(a=3\\)</strong>.</p>",
     "id": "1.158"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "E",
+    "typ": "utveckla binom grad fem",
+    "poang": "3/0/0",
+    "t": "<p>Utveckla \\((2x+3)^4\\).</p>",
+    "s": "<p>Med binomialsatsen:</p><p>\\[(2x+3)^4=(2x)^4+4(2x)^3(3)+6(2x)^2(3^2)+4(2x)(3^3)+3^4.\\]</p><p><strong>\\[16x^4+96x^3+216x^2+216x+81.\\]</strong></p>",
+    "id": "1.179"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "E",
+    "typ": "koefficient framför x kubik",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm koefficienten framför \\(x^3\\) i \\((2x-1)^6\\).</p>",
+    "s": "<p>En allmän term är</p><p>\\[\\binom6k(2x)^{6-k}(-1)^k.\\]</p><p>För \\(x^3\\) krävs \\(6-k=3\\), alltså \\(k=3\\).</p><p>Koefficienten blir</p><p>\\[\\binom63 2^3(-1)^3=20\\cdot8\\cdot(-1)=-160.\\]</p><p><strong>Svar: \\(-160\\).</strong></p>",
+    "id": "1.180"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "E",
+    "typ": "koefficient i binomialutveckling",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm koefficienten framför \\(x^4\\) i \\((1-3x)^6\\).</p>",
+    "s": "<p>Termen med \\(x^4\\) fås när fyra faktorer bidrar med \\(-3x\\):</p><p>\\[\\binom64(-3)^4x^4.\\]</p><p>Koefficienten är</p><p>\\[15\\cdot81=1215.\\]</p><p><strong>Svar: 1215.</strong></p>",
+    "id": "1.181"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "E",
+    "typ": "första termer i binomialutveckling",
+    "poang": "3/0/0",
+    "t": "<p>Skriv de fyra första termerna i utvecklingen av \\((1+x)^8\\), ordnade efter stigande potens av \\(x\\).</p>",
+    "s": "<p>Binomialkoefficienterna i början av rad 8 är \\(1,8,28,56\\).</p><p>Därför börjar utvecklingen</p><p><strong>\\[1+8x+28x^2+56x^3+\\cdots\\]</strong></p>",
+    "id": "1.182"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "E",
+    "typ": "mittenterm i binomialutveckling",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm mittentermen i utvecklingen av \\((a+b)^8\\).</p>",
+    "s": "<p>Det finns 9 termer, så mittentermen är den femte. Den motsvarar \\(k=4\\):</p><p>\\[\\binom84a^{8-4}b^4=70a^4b^4.\\]</p><p><strong>Mittentermen är \\(70a^4b^4\\).</strong></p>",
+    "id": "1.183"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "C",
+    "typ": "koefficient med negativa potenser",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm koefficienten framför \\(x^4\\) i utvecklingen av</p><p>\\[\\left(x^2+\\frac{2}{x}\\right)^5.\\]</p>",
+    "s": "<p>En allmän term är</p><p>\\[\\binom5k(x^2)^{5-k}\\left(\\frac2x\\right)^k.\\]</p><p>Potensen av \\(x\\) blir</p><p>\\[2(5-k)-k=10-3k.\\]</p><p>Vi vill ha \\(10-3k=4\\), alltså \\(k=2\\).</p><p>Koefficienten blir</p><p>\\[\\binom52 2^2=10\\cdot4=40.\\]</p><p><strong>Svar: 40.</strong></p>",
+    "id": "1.184"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "C",
+    "typ": "konstantterm i binomialutveckling",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm konstanttermen i</p><p>\\[\\left(2x^2-\\frac1x\\right)^6.\\]</p>",
+    "s": "<p>En allmän term är</p><p>\\[\\binom6k(2x^2)^{6-k}\\left(-\\frac1x\\right)^k.\\]</p><p>Potensen av \\(x\\) blir \\(2(6-k)-k=12-3k\\). För en konstant term krävs</p><p>\\[12-3k=0\\Rightarrow k=4.\\]</p><p>Koefficienten blir</p><p>\\[\\binom64 2^{2}(-1)^4=15\\cdot4=60.\\]</p><p><strong>Konstanttermen är 60.</strong></p>",
+    "id": "1.185"
+  },
+  {
+    "kap": 1,
+    "omr": "binomialsatsen",
+    "niva": "C",
+    "typ": "bestäm parameter från koefficient",
+    "poang": "0/2/0",
+    "t": "<p>I utvecklingen av \\((1+ax)^4\\) är koefficienten framför \\(x^2\\) lika med 54.</p><p>Bestäm alla reella värden på \\(a\\).</p>",
+    "s": "<p>Termen med \\(x^2\\) är</p><p>\\[\\binom42 (ax)^2=6a^2x^2.\\]</p><p>Alltså</p><p>\\[6a^2=54\\Rightarrow a^2=9.\\]</p><p><strong>\\(a=3\\) eller \\(a=-3\\).</strong></p>",
+    "id": "1.186"
   },
   {
     "kap": 1,
@@ -1729,6 +1906,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "E",
+    "typ": "inklusion-exklusion två mängder",
+    "poang": "2/0/0",
+    "t": "<p>I en årskurs spelar 45 elever ett instrument, 38 elever utövar en lagsport och 16 elever gör båda delarna.</p><p>Hur många elever gör minst en av aktiviteterna?</p>",
+    "s": "<p>De 16 eleverna i båda grupperna räknas två gånger om vi bara adderar. Därför</p><p>\\[45+38-16=67.\\]</p><p><strong>67 elever gör minst en av aktiviteterna.</strong></p>",
+    "id": "1.174"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "E",
+    "typ": "exakt en av två mängder",
+    "poang": "2/0/0",
+    "t": "<p>På en mässa besöker 32 personer monter A, 27 personer monter B och 11 personer båda montrarna.</p><p>Hur många besöker exakt en av montrarna?</p>",
+    "s": "<p>Endast A: \\(32-11=21\\).</p><p>Endast B: \\(27-11=16\\).</p><p>Exakt en monter:</p><p>\\[21+16=37.\\]</p><p><strong>Svar: 37 personer.</strong></p>",
+    "id": "1.175"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "E",
+    "typ": "ingen av två mängder",
+    "poang": "2/0/0",
+    "t": "<p>I en grupp på 80 personer läser 41 en morgontidning, 30 en kvällstidning och 12 läser båda.</p><p>Hur många läser ingen av tidningarna?</p>",
+    "s": "<p>Först bestämmer vi hur många som läser minst en tidning:</p><p>\\[41+30-12=59.\\]</p><p>Resten läser ingen:</p><p>\\[80-59=21.\\]</p><p><strong>Svar: 21 personer.</strong></p>",
+    "id": "1.176"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "C",
+    "typ": "inklusion-exklusion tre intressen",
+    "poang": "0/3/0",
+    "t": "<p>På en skola följer 58 elever fotboll, 46 ishockey och 35 basket. 22 följer både fotboll och ishockey, 18 fotboll och basket, 14 ishockey och basket, och 7 följer alla tre.</p><p>Hur många följer minst en av sporterna?</p>",
+    "s": "<p>Använd inklusion–exklusion:</p><p>\\[58+46+35-22-18-14+7=92.\\]</p><p>De parvisa snitten dras bort eftersom de annars räknas två gånger. De 7 som ligger i alla tre har då dragits bort en gång för mycket och läggs tillbaka.</p><p><strong>92 elever följer minst en sport.</strong></p>",
+    "id": "1.177"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "C",
+    "typ": "bestäm okänt snitt",
+    "poang": "0/2/0",
+    "t": "<p>På en arbetsplats använder 72 personer program A och 54 personer program B. Totalt 98 personer använder minst ett av programmen.</p><p>Hur många använder båda programmen?</p>",
+    "s": "<p>Additionsprincipen ger</p><p>\\[|A\\cup B|=|A|+|B|-|A\\cap B|.\\]</p><p>Sätt in värdena:</p><p>\\[98=72+54-|A\\cap B|.\\]</p><p>\\[|A\\cap B|=126-98=28.\\]</p><p><strong>28 personer använder båda programmen.</strong></p>",
+    "id": "1.178"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "E",
+    "typ": "inklusion-exklusion i kursval",
+    "poang": "2/0/0",
+    "t": "<p>På en skola läser 52 elever franska, 44 elever tyska och 18 elever båda språken.</p><p>Hur många läser minst ett av språken?</p>",
+    "s": "<p>De 18 som läser båda räknas två gånger i summan \\(52+44\\). Därför</p><p>\\[52+44-18=78.\\]</p><p><strong>78 elever läser minst ett av språken.</strong></p>",
+    "id": "1.205"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "C",
+    "typ": "bestäm snitt från total och utanför",
+    "poang": "0/2/0",
+    "t": "<p>I en grupp på 150 personer använder 90 tjänst A och 70 tjänst B. 25 personer använder ingen av tjänsterna.</p><p>Hur många använder båda?</p>",
+    "s": "<p>Antalet som använder minst en tjänst är</p><p>\\[150-25=125.\\]</p><p>Additionsprincipen ger</p><p>\\[125=90+70-|A\\cap B|.\\]</p><p>Alltså</p><p>\\[|A\\cap B|=160-125=35.\\]</p><p><strong>35 personer använder båda tjänsterna.</strong></p>",
+    "id": "1.206"
+  },
+  {
+    "kap": 1,
+    "omr": "additionsprincipen_mangder",
+    "niva": "C",
+    "typ": "exakt en och ingen från två mängder",
+    "poang": "0/3/0",
+    "t": "<p>På ett evenemang provar 64 personer aktivitet A och 51 personer aktivitet B. 23 provar båda. Totalt deltar 110 personer.</p><ol type=\"a\"><li>Hur många provar exakt en av aktiviteterna?</li><li>Hur många provar ingen av aktiviteterna?</li></ol>",
+    "s": "<p><strong>a)</strong> Endast A: \\(64-23=41\\). Endast B: \\(51-23=28\\).</p><p>Exakt en:</p><p>\\[41+28=69.\\]</p><p><strong>b)</strong> Minst en aktivitet:</p><p>\\[64+51-23=92.\\]</p><p>Ingen aktivitet:</p><p>\\[110-92=18.\\]</p><p><strong>Svar: 69 provar exakt en och 18 provar ingen.</strong></p>",
+    "id": "1.207"
+  },
+  {
+    "kap": 1,
     "omr": "kombinatorik_sannolikhet",
     "niva": "A",
     "typ": "komplementhändelse vid urval utan återläggning",
@@ -1736,6 +1993,86 @@ window.BANKMATF1 = [
     "t": "<p>Fem kort dras slumpmässigt ur en vanlig kortlek med 52 kort. Bestäm sannolikheten att handen innehåller minst ett ess.</p>",
     "s": "<p><strong>Idé:</strong> \"Minst ett\" är besvärligt att räkna direkt, eftersom man då måste behandla fallen ett, två, tre och fyra ess var för sig. Komplementhändelsen \"inget ess\" är däremot ett enda fall.</p><p>Antalet möjliga händer är</p><p>\\[\\binom{52}{5}=2\\,598\\,960.\\]</p><p>En hand utan ess består av 5 kort valda bland de 48 som inte är ess:</p><p>\\[\\binom{48}{5}=1\\,712\\,304.\\]</p><p>Därför är</p><p>\\[P(\\text{inget ess})=\\frac{1\\,712\\,304}{2\\,598\\,960}\\approx0,659.\\]</p><p>Den sökta sannolikheten blir</p><p>\\[P(\\text{minst ett ess})=1-\\frac{\\binom{48}{5}}{\\binom{52}{5}}\\approx\\mathbf{0,341}.\\]</p><p>Ungefär 34 % av alla femkortshänder innehåller minst ett ess.</p>",
     "id": "1.173"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "E",
+    "typ": "sannolikhet båda jämna utan återläggning",
+    "poang": "2/0/0",
+    "t": "<p>Två olika tal väljs slumpmässigt ur \\(\\{1,2,\\ldots,10\\}\\). Vad är sannolikheten att båda talen är jämna?</p>",
+    "s": "<p>Det finns \\(\\binom{10}{2}=45\\) möjliga par. Fem av talen är jämna, så gynnsamma par är \\(\\binom52=10\\).</p><p>\\[P=\\frac{10}{45}=\\frac29.\\]</p><p><strong>Svar: \\(\\frac29\\).</strong></p>",
+    "id": "1.197"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "E",
+    "typ": "sannolikhet två från viss grupp",
+    "poang": "2/0/0",
+    "t": "<p>I en klass finns 8 flickor och 12 pojkar. Två elever väljs slumpmässigt.</p><p>Vad är sannolikheten att båda är flickor?</p>",
+    "s": "<p>Alla par: \\(\\binom{20}{2}=190\\). Gynnsamma par: \\(\\binom82=28\\).</p><p>\\[P=\\frac{28}{190}=\\frac{14}{95}.\\]</p>",
+    "id": "1.198"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "E",
+    "typ": "alla röda utan återläggning",
+    "poang": "2/0/0",
+    "t": "<p>En påse innehåller 6 röda och 4 blå kulor. Tre kulor väljs utan återläggning.</p><p>Vad är sannolikheten att alla tre är röda?</p>",
+    "s": "<p>Alla möjliga tregrupper: \\(\\binom{10}{3}=120\\). Tre röda kan väljas på \\(\\binom63=20\\) sätt.</p><p>\\[P=\\frac{20}{120}=\\frac16.\\]</p><p><strong>Svar: \\(\\frac16\\).</strong></p>",
+    "id": "1.199"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "E",
+    "typ": "sannolikhet att bestämd person väljs",
+    "poang": "2/0/0",
+    "t": "<p>Ur 10 personer väljs en grupp med 3 personer slumpmässigt. Vad är sannolikheten att en bestämd person, Alex, kommer med?</p>",
+    "s": "<p>Alla grupper: \\(\\binom{10}{3}=120\\).</p><p>Om Alex ska vara med väljer vi de två andra bland de återstående 9:</p><p>\\[\\binom92=36.\\]</p><p>\\[P=\\frac{36}{120}=\\frac3{10}.\\]</p>",
+    "id": "1.200"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "exakt två röda",
+    "poang": "0/2/0",
+    "t": "<p>En låda innehåller 5 röda och 7 blå komponenter. Fyra komponenter väljs slumpmässigt utan återläggning.</p><p>Vad är sannolikheten att exakt två är röda?</p>",
+    "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>För exakt två röda väljer vi 2 av 5 röda och 2 av 7 blå:</p><p>\\[\\binom52\\binom72=10\\cdot21=210.\\]</p><p>\\[P=\\frac{210}{495}=\\frac{14}{33}.\\]</p><p><strong>Svar: \\(\\frac{14}{33}\\approx42,4\\%\\).</strong></p>",
+    "id": "1.201"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "minst en defekt via komplement",
+    "poang": "0/2/0",
+    "t": "<p>I ett parti med 20 produkter är 2 defekta. Tre produkter väljs slumpmässigt utan återläggning.</p><p>Bestäm sannolikheten att minst en av de valda produkterna är defekt.</p>",
+    "s": "<p>Det är enklast att använda komplementhändelsen ”ingen defekt”.</p><p>\\[P(\\text{ingen defekt})=\\frac{\\binom{18}{3}}{\\binom{20}{3}}=\\frac{816}{1140}.\\]</p><p>Därför</p><p>\\[P(\\text{minst en defekt})=1-\\frac{816}{1140}=\\frac{324}{1140}=\\frac{27}{95}.\\]</p><p><strong>\\(\\frac{27}{95}\\approx28,4\\%\\).</strong></p>",
+    "id": "1.202"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "exakt en kvinna i urval",
+    "poang": "0/2/0",
+    "t": "<p>En grupp består av 7 kvinnor och 5 män. Fyra personer väljs slumpmässigt.</p><p>Vad är sannolikheten att exakt en kvinna väljs?</p>",
+    "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>Gynnsamt: välj 1 av 7 kvinnor och 3 av 5 män:</p><p>\\[\\binom71\\binom53=7\\cdot10=70.\\]</p><p>\\[P=\\frac{70}{495}=\\frac{14}{99}.\\]</p><p><strong>\\(P\\approx14,1\\%\\).</strong></p>",
+    "id": "1.203"
+  },
+  {
+    "kap": 1,
+    "omr": "kombinatorik_sannolikhet",
+    "niva": "C",
+    "typ": "minst två särskilda objekt",
+    "poang": "0/3/0",
+    "t": "<p>Av 12 böcker är 4 signerade. Fyra böcker väljs slumpmässigt.</p><p>Vad är sannolikheten att minst två signerade böcker väljs?</p>",
+    "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>”Minst två” betyder exakt 2, exakt 3 eller exakt 4 signerade:</p><p>\\[\\binom42\\binom82+\\binom43\\binom81+\\binom44\\binom80\\]</p><p>\\[=6\\cdot28+4\\cdot8+1=201.\\]</p><p>\\[P=\\frac{201}{495}=\\frac{67}{165}.\\]</p><p><strong>\\(P\\approx40,6\\%\\).</strong></p>",
+    "id": "1.204"
   },
   {
     "kap": 2,
@@ -2279,6 +2616,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "E",
+    "typ": "aritmetisk följd bestäm term",
+    "poang": "2/0/0",
+    "t": "<p>En aritmetisk talföljd har \\(a_1=7\\) och differensen \\(d=4\\). Bestäm \\(a_{20}\\).</p>",
+    "s": "<p>För en aritmetisk följd gäller \\(a_n=a_1+(n-1)d\\).</p><p>\\[a_{20}=7+19\\cdot4=83.\\]</p><p><strong>Svar: 83.</strong></p>",
+    "id": "2.181"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "E",
+    "typ": "summa aritmetisk följd",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna summan av de 30 första termerna i den aritmetiska följden</p><p>\\[5,8,11,14,\\ldots\\]</p>",
+    "s": "<p>Här är \\(a_1=5\\), \\(d=3\\) och</p><p>\\[a_{30}=5+29\\cdot3=92.\\]</p><p>Summan blir</p><p>\\[S_{30}=\\frac{30(5+92)}2=15\\cdot97=1455.\\]</p><p><strong>Svar: 1455.</strong></p>",
+    "id": "2.182"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "E",
+    "typ": "geometrisk följd bestäm term",
+    "poang": "2/0/0",
+    "t": "<p>En geometrisk talföljd har \\(a_1=3\\) och kvoten \\(q=2\\). Bestäm \\(a_8\\).</p>",
+    "s": "<p>\\[a_n=a_1q^{n-1}.\\]</p><p>\\[a_8=3\\cdot2^7=384.\\]</p><p><strong>Svar: 384.</strong></p>",
+    "id": "2.183"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "E",
+    "typ": "ändlig geometrisk summa",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[1+\\frac12+\\frac14+\\cdots+\\frac1{128}.\\]</p>",
+    "s": "<p>Det är en geometrisk summa med \\(a_1=1\\), \\(q=\\frac12\\) och 8 termer.</p><p>\\[S_8=\\frac{1-(1/2)^8}{1-1/2}=2\\left(1-\\frac1{256}\\right)=\\frac{255}{128}.\\]</p><p><strong>Svar: \\(\\frac{255}{128}\\).</strong></p>",
+    "id": "2.184"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "E",
+    "typ": "identifiera följdtyp och kvot",
+    "poang": "2/0/0",
+    "t": "<p>Avgör om följden är aritmetisk eller geometrisk och ange differens eller kvot:</p><p>\\[160,\\ 80,\\ 40,\\ 20,\\ldots\\]</p>",
+    "s": "<p>Kvoten mellan efterföljande termer är konstant:</p><p>\\[\\frac{80}{160}=\\frac{40}{80}=\\frac{20}{40}=\\frac12.\\]</p><p>Följden är därför <strong>geometrisk med kvoten \\(q=\\frac12\\)</strong>.</p>",
+    "id": "2.185"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "C",
+    "typ": "sittplatser i växande rader",
+    "poang": "0/2/0",
+    "t": "<p>En läktare har 25 rader. Första raden har 18 platser och varje ny rad har 2 platser fler än föregående rad.</p><p>Hur många sittplatser finns totalt?</p>",
+    "s": "<p>Antalet platser per rad bildar en aritmetisk följd med \\(a_1=18\\), \\(d=2\\).</p><p>Sista raden har</p><p>\\[a_{25}=18+24\\cdot2=66.\\]</p><p>Totalt:</p><p>\\[S_{25}=\\frac{25(18+66)}2=25\\cdot42=1050.\\]</p><p><strong>Svar: 1050 platser.</strong></p>",
+    "id": "2.186"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "C",
+    "typ": "oändlig geometrisk summa i studsmodell",
+    "poang": "0/3/0",
+    "t": "<p>En boll släpps från 12 m höjd. Efter varje studs når den 70 % av föregående maxhöjd.</p><p>Hur lång sträcka färdas bollen totalt om modellen fortsätter obegränsat?</p>",
+    "s": "<p>Först faller bollen 12 m. Därefter går den både upp och ner för varje studshöjd:</p><p>\\[12+2(12\\cdot0,7+12\\cdot0,7^2+\\cdots).\\]</p><p>Den geometriska serien i parentes har första term \\(8,4\\) och kvot \\(0,7\\):</p><p>\\[\\frac{8,4}{1-0,7}=28.\\]</p><p>Total sträcka:</p><p>\\[12+2\\cdot28=68.\\]</p><p><strong>Bollen färdas totalt 68 m.</strong></p>",
+    "id": "2.187"
+  },
+  {
+    "kap": 2,
+    "omr": "aritmetiska_geometriska",
+    "niva": "C",
+    "typ": "bestäm antal termer från geometrisk tillväxt",
+    "poang": "0/2/0",
+    "t": "<p>En geometrisk följd börjar med 5 och har kvoten 1,5. Bestäm det minsta \\(n\\) för vilket \\(a_n>100\\).</p>",
+    "s": "<p>\\[a_n=5\\cdot1,5^{n-1}.\\]</p><p>Vi söker</p><p>\\[5\\cdot1,5^{n-1}>100\\Rightarrow1,5^{n-1}>20.\\]</p><p>Logaritmera:</p><p>\\[n-1>\\frac{\\ln20}{\\ln1,5}\\approx7,39.\\]</p><p>Alltså måste \\(n-1\\ge8\\), alltså <strong>\\(n=9\\)</strong>. Kontroll: \\(a_8\\approx85,4\\), \\(a_9\\approx128,1\\).</p>",
+    "id": "2.188"
+  },
+  {
+    "kap": 2,
     "omr": "kongruens",
     "niva": "E",
     "typ": "bestämma restklass",
@@ -2616,6 +3033,66 @@ window.BANKMATF1 = [
     "t": "<p>Bestäm den minsta icke-negativa resten till \\(-23\\pmod7\\).</p>",
     "s": "<p>\\(-23+28=5\\). Alltså \\(-23\\equiv5\\pmod7\\). <strong>Resten är 5.</strong></p>",
     "id": "2.137"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "E",
+    "typ": "bestäm rest",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm resten när 347 divideras med 12.</p>",
+    "s": "<p>\\[347=12\\cdot28+11.\\]</p><p>Resten är därför <strong>11</strong>, vilket också kan skrivas \\(347\\equiv11\\pmod{12}\\).</p>",
+    "id": "2.195"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "E",
+    "typ": "addition modulo nio",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm resten när \\(58+79\\) divideras med 9.</p>",
+    "s": "<p>Arbeta med resterna vid division med 9:</p><p>\\[58\\equiv4\\pmod9,\\qquad79\\equiv7\\pmod9.\\]</p><p>Då</p><p>\\[58+79\\equiv4+7=11\\equiv2\\pmod9.\\]</p><p><strong>Resten är 2.</strong></p>",
+    "id": "2.196"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "E",
+    "typ": "potens modulo fem",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm resten när \\(17^2\\) divideras med 5.</p>",
+    "s": "<p>Eftersom \\(17\\equiv2\\pmod5\\) får vi</p><p>\\[17^2\\equiv2^2=4\\pmod5.\\]</p><p><strong>Resten är 4.</strong></p>",
+    "id": "2.197"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "E",
+    "typ": "veckodag med modulo sju",
+    "poang": "2/0/0",
+    "t": "<p>Det är tisdag i dag. Vilken veckodag är det om 100 dagar?</p>",
+    "s": "<p>Veckodagar upprepas med period 7. Dividera 100 med 7:</p><p>\\[100=14\\cdot7+2.\\]</p><p>Det räcker alltså att gå två dagar fram från tisdag: onsdag, torsdag.</p><p><strong>Svar: torsdag.</strong></p>",
+    "id": "2.198"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "C",
+    "typ": "lösa linjär kongruens",
+    "poang": "0/2/0",
+    "t": "<p>Lös kongruensen</p><p>\\[4x\\equiv3\\pmod7.\\]</p>",
+    "s": "<p>Vi behöver inversen till 4 modulo 7. Eftersom</p><p>\\[4\\cdot2=8\\equiv1\\pmod7\\]</p><p>kan vi multiplicera båda leden med 2:</p><p>\\[x\\equiv6\\pmod7.\\]</p><p><strong>Lösning: \\(x=6+7k\\), där \\(k\\in\\mathbb Z\\).</strong></p>",
+    "id": "2.199"
+  },
+  {
+    "kap": 2,
+    "omr": "kongruens",
+    "niva": "C",
+    "typ": "sista två siffror med potenscykel",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm de två sista siffrorna i \\(3^{20}\\).</p>",
+    "s": "<p>De två sista siffrorna bestäms av resten modulo 100. Vi kan kvadrera stegvis:</p><p>\\[3^4=81\\pmod{100}.\\]</p><p>\\[3^{10}=59049\\equiv49\\pmod{100}.\\]</p><p>Därför</p><p>\\[3^{20}\\equiv49^2=2401\\equiv1\\pmod{100}.\\]</p><p><strong>De två sista siffrorna är 01.</strong></p>",
+    "id": "2.200"
   },
   {
     "kap": 2,
@@ -3259,6 +3736,106 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "bas tio till bas fem",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(243_{10}\\) till bas 5.</p>",
+    "s": "<p>Största fempotensen som ryms är \\(5^3=125\\):</p><p>\\[243=1\\cdot125+4\\cdot25+3\\cdot5+3.\\]</p><p>Alltså är <strong>\\(243_{10}=1433_5\\)</strong>.</p>",
+    "id": "2.165"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "binärt tal till bas tio",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(1101011_2\\) till bas tio.</p>",
+    "s": "<p>Utveckla med tvåpotenser:</p><p>\\[1101011_2=1\\cdot64+1\\cdot32+0\\cdot16+1\\cdot8+0\\cdot4+1\\cdot2+1.\\]</p><p>\\[64+32+8+2+1=107.\\]</p><p><strong>Svar: \\(1101011_2=107_{10}\\).</strong></p>",
+    "id": "2.166"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "bas fem till bas tio",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(3241_5\\) till bas tio.</p>",
+    "s": "<p>\\[3241_5=3\\cdot5^3+2\\cdot5^2+4\\cdot5+1\\]</p><p>\\[=375+50+20+1=446.\\]</p><p><strong>Svar: \\(446_{10}\\).</strong></p>",
+    "id": "2.167"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "bas tio till bas två",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(127_{10}\\) till bas två.</p>",
+    "s": "<p>\\(127=64+32+16+8+4+2+1\\), alltså används alla tvåpotenser från \\(2^6\\) till \\(2^0\\).</p><p><strong>\\(127_{10}=1111111_2\\)</strong>.</p>",
+    "id": "2.168"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "bas åtta till bas tio",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(1567_8\\) till bas tio.</p>",
+    "s": "<p>\\[1567_8=1\\cdot8^3+5\\cdot8^2+6\\cdot8+7\\]</p><p>\\[=512+320+48+7=887.\\]</p><p><strong>Svar: \\(887_{10}\\).</strong></p>",
+    "id": "2.169"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "C",
+    "typ": "addition i bas fem",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna \\(2431_5+1324_5\\) och skriv svaret i bas 5.</p>",
+    "s": "<p>Räkna från höger och växla när en kolumn når 5:</p><p>Ental: \\(1+4=5=10_5\\): skriv 0 och minnessiffra 1.</p><p>Femtal: \\(3+2+1=6=11_5\\): skriv 1 och minnessiffra 1.</p><p>\\(25\\)-tal: \\(4+3+1=8=13_5\\): skriv 3 och minnessiffra 1.</p><p>\\(125\\)-tal: \\(2+1+1=4\\).</p><p>Alltså</p><p><strong>\\[2431_5+1324_5=4310_5.\\]</strong></p>",
+    "id": "2.170"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "C",
+    "typ": "okänd siffra i talbas",
+    "poang": "0/2/0",
+    "t": "<p>I talet \\(3a2_6\\) är \\(a\\) en siffra i bas 6. Man vet att \\(3a2_6=134_{10}\\).</p><p>Bestäm \\(a\\).</p>",
+    "s": "<p>Värdet i bas tio är</p><p>\\[3\\cdot6^2+a\\cdot6+2=108+6a+2=110+6a.\\]</p><p>Sätt detta lika med 134:</p><p>\\[110+6a=134\\Rightarrow6a=24\\Rightarrow a=4.\\]</p><p><strong>Svar: \\(a=4\\).</strong></p>",
+    "id": "2.171"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "C",
+    "typ": "bestäm okänd bas",
+    "poang": "0/2/0",
+    "t": "<p>Talet \\(132_b\\) är lika med \\(56_{10}\\). Bestäm basen \\(b\\).</p>",
+    "s": "<p>I bas \\(b\\) betyder talet</p><p>\\[132_b=b^2+3b+2.\\]</p><p>Alltså</p><p>\\[b^2+3b+2=56\\Rightarrow b^2+3b-54=0.\\]</p><p>Faktorisera:</p><p>\\[(b-6)(b+9)=0.\\]</p><p>En talbas måste vara positiv och större än den största siffran 3. Därför är <strong>\\(b=6\\)</strong>.</p>",
+    "id": "2.172"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "E",
+    "typ": "bas fem till bas tio ny variant",
+    "poang": "2/0/0",
+    "t": "<p>Omvandla \\(2024_5\\) till bas tio.</p>",
+    "s": "<p>\\[2024_5=2\\cdot5^3+0\\cdot5^2+2\\cdot5+4=250+10+4=264.\\]</p><p><strong>Svar: \\(264_{10}\\).</strong></p>",
+    "id": "2.205"
+  },
+  {
+    "kap": 2,
+    "omr": "talbaser",
+    "niva": "C",
+    "typ": "subtraktion i bas sex",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna \\(4312_6-254_6\\) och skriv svaret i bas 6.</p>",
+    "s": "<p>Ett säkert sätt är att kontrollera via bas tio:</p><p>\\[4312_6=4\\cdot216+3\\cdot36+1\\cdot6+2=980.\\]</p><p>\\[254_6=2\\cdot36+5\\cdot6+4=106.\\]</p><p>Skillnaden är \\(980-106=874\\).</p><p>Omvandla 874 tillbaka till bas 6:</p><p>\\[874=4\\cdot216+0\\cdot36+1\\cdot6+4.\\]</p><p><strong>\\[4312_6-254_6=4014_6.\\]</strong></p>",
+    "id": "2.206"
+  },
+  {
+    "kap": 2,
     "omr": "talfoljder_sigma",
     "niva": "A",
     "typ": "teleskopsumma",
@@ -3279,6 +3856,66 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "E",
+    "typ": "beräkna summa med sigma",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\sum_{k=2}^{6}(3k-2).\\]</p>",
+    "s": "<p>Sätt in \\(k=2,3,4,5,6\\):</p><p>\\[4+7+10+13+16=50.\\]</p><p><strong>Svar: 50.</strong></p>",
+    "id": "2.189"
+  },
+  {
+    "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "E",
+    "typ": "skriva aritmetisk summa med sigma",
+    "poang": "2/0/0",
+    "t": "<p>Skriv summan</p><p>\\[4+7+10+\\cdots+31\\]</p><p>med sigma-notation.</p>",
+    "s": "<p>Termen kan skrivas \\(3k+1\\). När \\(k=1\\) fås 4 och när \\(k=10\\) fås 31.</p><p><strong>\\[\\sum_{k=1}^{10}(3k+1).\\]</strong></p>",
+    "id": "2.190"
+  },
+  {
+    "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "E",
+    "typ": "bestäm termer från explicit formel",
+    "poang": "2/0/0",
+    "t": "<p>En talföljd ges av \\(a_n=3n^2-1\\). Bestäm de fyra första termerna.</p>",
+    "s": "<p>\\[a_1=2,\\quad a_2=11,\\quad a_3=26,\\quad a_4=47.\\]</p><p><strong>Följden börjar \\(2,11,26,47,\\ldots\\)</strong></p>",
+    "id": "2.191"
+  },
+  {
+    "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "C",
+    "typ": "bestäm parameter i sigma-summa",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm \\(a\\) om</p><p>\\[\\sum_{k=1}^{10}(ak+1)=230.\\]</p>",
+    "s": "<p>Dela upp summan:</p><p>\\[a\\sum_{k=1}^{10}k+\\sum_{k=1}^{10}1=230.\\]</p><p>\\[55a+10=230\\Rightarrow55a=220\\Rightarrow a=4.\\]</p><p><strong>Svar: \\(a=4\\).</strong></p>",
+    "id": "2.192"
+  },
+  {
+    "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "C",
+    "typ": "summa av udda tal med summaformel",
+    "poang": "0/2/0",
+    "t": "<p>Visa med summaformler att</p><p>\\[\\sum_{k=1}^{n}(2k-1)=n^2.\\]</p>",
+    "s": "<p>Separera summan:</p><p>\\[\\sum_{k=1}^{n}(2k-1)=2\\sum_{k=1}^{n}k-\\sum_{k=1}^{n}1.\\]</p><p>\\[=2\\cdot\\frac{n(n+1)}2-n=n(n+1)-n=n^2.\\]</p><p><strong>Alltså är summan av de \\(n\\) första udda talen \\(n^2\\).</strong></p>",
+    "id": "2.193"
+  },
+  {
+    "kap": 2,
+    "omr": "talfoljder_sigma",
+    "niva": "E",
+    "typ": "summa av de första heltalen",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\sum_{k=1}^{20}k.\\]</p>",
+    "s": "<p>Använd formeln</p><p>\\[1+2+\\cdots+n=\\frac{n(n+1)}2.\\]</p><p>\\[\\sum_{k=1}^{20}k=\\frac{20\\cdot21}{2}=210.\\]</p><p><strong>Svar: 210.</strong></p>",
+    "id": "2.194"
+  },
+  {
+    "kap": 2,
     "omr": "delbarhet",
     "niva": "A",
     "typ": "delbarhet med sammansatt modul",
@@ -3289,6 +3926,106 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "primtalsfaktorisering",
+    "poang": "2/0/0",
+    "t": "<p>Primtalsfaktorisera talet \\(756\\).</p>",
+    "s": "<p>Vi delar stegvis med primtal:</p><p>\\[756=2\\cdot378=2^2\\cdot189=2^2\\cdot3\\cdot63=2^2\\cdot3^3\\cdot7.\\]</p><p><strong>Svar:</strong> \\(\\boxed{756=2^2\\cdot3^3\\cdot7}\\).</p>",
+    "id": "2.157"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "största gemensamma delare med Euklides algoritm",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm \\(\\mathrm{sgd}(420,588)\\) med Euklides algoritm.</p>",
+    "s": "<p>Vi dividerar successivt och använder resten:</p><p>\\[588=1\\cdot420+168\\]</p><p>\\[420=2\\cdot168+84\\]</p><p>\\[168=2\\cdot84.\\]</p><p>Den sista icke-nollresten är 84. Alltså är <strong>\\(\\mathrm{sgd}(420,588)=84\\)</strong>.</p>",
+    "id": "2.158"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "minsta gemensamma multipel",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm minsta gemensamma multipel till 36 och 84.</p>",
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[36=2^2\\cdot3^2,\\qquad84=2^2\\cdot3\\cdot7.\\]</p><p>För MGM tar vi den högsta förekommande potensen av varje primtal:</p><p>\\[\\mathrm{mgm}(36,84)=2^2\\cdot3^2\\cdot7=252.\\]</p><p><strong>Svar: 252.</strong></p>",
+    "id": "2.159"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "delbarhetsregler",
+    "poang": "3/0/0",
+    "t": "<p>Avgör om talet 2772 är delbart med</p><ol type=\"a\"><li>4</li><li>9</li><li>11.</li></ol>",
+    "s": "<p><strong>a)</strong> De två sista siffrorna är 72 och \\(72\\) är delbart med 4. Alltså är 2772 delbart med 4.</p><p><strong>b)</strong> Siffersumman är \\(2+7+7+2=18\\), som är delbar med 9. Alltså är 2772 delbart med 9.</p><p><strong>c)</strong> Den alternerande summan är \\(2-7+7-2=0\\), som är delbar med 11. Alltså är 2772 också delbart med 11.</p>",
+    "id": "2.160"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "identiska paket med sgd",
+    "poang": "2/0/0",
+    "t": "<p>Ett lager har 180 röda och 252 blå reflexband. Man vill göra så många <em>identiska</em> paket som möjligt utan att något band blir över.</p><p>Hur många paket kan göras, och hur många band av varje färg ligger i varje paket?</p>",
+    "s": "<p>Antalet paket måste dela både 180 och 252. Det största möjliga antalet är därför</p><p>\\[\\mathrm{sgd}(180,252)=36.\\]</p><p>I varje paket blir det</p><p>\\[180/36=5\\text{ röda},\\qquad252/36=7\\text{ blå}.\\]</p><p><strong>Svar: 36 paket med 5 röda och 7 blå reflexband i varje.</strong></p>",
+    "id": "2.161"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "minsta faktor för delbarhet",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm det minsta positiva heltalet \\(k\\) som gör produkten \\(18k\\) delbar med 84.</p>",
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[18=2\\cdot3^2,\\qquad84=2^2\\cdot3\\cdot7.\\]</p><p>Produkten \\(18k\\) har redan en faktor 2 och minst en faktor 3. För att bli delbar med 84 saknas därför minst en extra faktor 2 och en faktor 7.</p><p>Det minsta möjliga \\(k\\) är</p><p>\\[k=2\\cdot7=14.\\]</p><p>Kontroll: \\(18\\cdot14=252=3\\cdot84\\).</p><p><strong>Svar: \\(k=14\\).</strong></p>",
+    "id": "2.162"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "största kvadratiska platta med sgd",
+    "poang": "0/2/0",
+    "t": "<p>Ett rektangulärt golv är 378 cm långt och 630 cm brett. Golvet ska täckas helt av lika stora kvadratiska plattor utan att plattor behöver kapas.</p><p>Vilken är den största möjliga sidlängden på plattorna?</p>",
+    "s": "<p>Plattans sida måste dela både 378 och 630. Den största möjliga sidan är därför deras största gemensamma delare.</p><p>Med Euklides algoritm:</p><p>\\[630=1\\cdot378+252,\\quad378=1\\cdot252+126,\\quad252=2\\cdot126.\\]</p><p>Alltså är \\(\\mathrm{sgd}(378,630)=126\\).</p><p><strong>Plattorna kan som mest ha sidan 126 cm.</strong></p>",
+    "id": "2.163"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "antal positiva delare",
+    "poang": "0/2/0",
+    "t": "<p>Hur många positiva delare har talet 720?</p>",
+    "s": "<p>Primtalsfaktorisera först:</p><p>\\[720=72\\cdot10=2^4\\cdot3^2\\cdot5.\\]</p><p>En positiv delare kan innehålla \\(2^a3^b5^c\\), där</p><p>\\[a=0,1,2,3,4,\\qquad b=0,1,2,\\qquad c=0,1.\\]</p><p>Det finns alltså</p><p>\\[(4+1)(2+1)(1+1)=5\\cdot3\\cdot2=30\\]</p><p>möjliga delare. <strong>Svar: 30.</strong></p>",
+    "id": "2.164"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "E",
+    "typ": "största gemensamma delare ny variant",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm \\(\\mathrm{sgd}(945,630)\\).</p>",
+    "s": "<p>Med Euklides algoritm:</p><p>\\[945=1\\cdot630+315\\]</p><p>\\[630=2\\cdot315.\\]</p><p>Alltså är <strong>\\(\\mathrm{sgd}(945,630)=315\\)</strong>.</p>",
+    "id": "2.207"
+  },
+  {
+    "kap": 2,
+    "omr": "delbarhet",
+    "niva": "C",
+    "typ": "minsta gemensamma multipel i tidsschema",
+    "poang": "0/2/0",
+    "t": "<p>Tre busslinjer avgår samtidigt klockan 06.00. De avgår sedan var 18:e, 24:e respektive 30:e minut.</p><p>När avgår alla tre samtidigt nästa gång?</p>",
+    "s": "<p>Vi söker minsta gemensamma multipel av 18, 24 och 30.</p><p>\\[18=2\\cdot3^2,\\quad24=2^3\\cdot3,\\quad30=2\\cdot3\\cdot5.\\]</p><p>\\[\\mathrm{mgm}=2^3\\cdot3^2\\cdot5=360\\text{ minuter}.\\]</p><p>360 minuter är 6 timmar. Sex timmar efter 06.00 är <strong>12.00</strong>.</p>",
+    "id": "2.208"
+  },
+  {
+    "kap": 2,
     "omr": "rekursiva_talfoljder",
     "niva": "A",
     "typ": "sluten formel för rekursion och induktionsbevis",
@@ -3296,6 +4033,126 @@ window.BANKMATF1 = [
     "t": "<p>En talföljd definieras av</p><p>\\[a_1=2,\\qquad a_{n+1}=3a_n+4\\quad\\text{för }n\\ge1.\\]</p><ol type=\"a\"><li>Beräkna \\(a_2\\), \\(a_3\\) och \\(a_4\\).</li><li>Visa med induktion att \\(a_n=4\\cdot3^{\\,n-1}-2\\) för alla \\(n\\ge1\\).</li></ol>",
     "s": "<p><strong>a)</strong> Rekursionen ger</p><p>\\[a_2=3\\cdot2+4=10,\\qquad a_3=3\\cdot10+4=34,\\qquad a_4=3\\cdot34+4=106.\\]</p><p><strong>b) Basfall.</strong> För \\(n=1\\) ger formeln \\(4\\cdot3^{0}-2=4-2=2\\), vilket stämmer med \\(a_1=2\\).</p><p><strong>Induktionsantagande.</strong> Anta att formeln gäller för något \\(n=k\\ge1\\), alltså att</p><p>\\[a_k=4\\cdot3^{\\,k-1}-2.\\]</p><p><strong>Induktionssteg.</strong> Använd rekursionen och sätt in antagandet:</p><p>\\[a_{k+1}=3a_k+4=3\\left(4\\cdot3^{\\,k-1}-2\\right)+4.\\]</p><p>Multiplicera in trean och förenkla:</p><p>\\[=4\\cdot3^{\\,k}-6+4=4\\cdot3^{\\,k}-2.\\]</p><p>Detta är precis formeln med \\(n=k+1\\), eftersom \\(4\\cdot3^{\\,(k+1)-1}-2=4\\cdot3^{\\,k}-2\\).</p><p>Basfallet gäller och steget för antagandet vidare från \\(k\\) till \\(k+1\\). Enligt induktionsprincipen gäller formeln därför för alla \\(n\\ge1\\).</p><p><strong>Kontroll:</strong> \\(a_4=4\\cdot27-2=106\\), som i a).</p>",
     "id": "2.156"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "beräkna term ur rekursion",
+    "poang": "2/0/0",
+    "t": "<p>En talföljd definieras av \\(a_1=11\\) och \\(a_{n+1}=a_n-4\\).</p><p>Bestäm \\(a_6\\).</p>",
+    "s": "<p>Beräkna termerna steg för steg:</p><p>\\[a_2=7,\\quad a_3=3,\\quad a_4=-1,\\quad a_5=-5,\\quad a_6=-9.\\]</p><p><strong>Svar: \\(a_6=-9\\).</strong></p>",
+    "id": "2.173"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "geometrisk rekursion",
+    "poang": "2/0/0",
+    "t": "<p>En talföljd ges av \\(a_1=4\\) och \\(a_{n+1}=4a_n\\).</p><p>Skriv de fem första termerna.</p>",
+    "s": "<p>Varje term är fyra gånger den föregående:</p><p><strong>\\[4,\\ 16,\\ 64,\\ 256,\\ 1024.\\]</strong></p>",
+    "id": "2.174"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "skriva rekursion för aritmetisk följd",
+    "poang": "2/0/0",
+    "t": "<p>Skriv en rekursiv formel för talföljden</p><p>\\[12,\\ 9,\\ 6,\\ 3,\\ 0,\\ldots\\]</p>",
+    "s": "<p>Skillnaden mellan två efterföljande termer är alltid \\(-3\\). En rekursiv beskrivning är därför</p><p><strong>\\[a_1=12,\\qquad a_{n+1}=a_n-3.\\]</strong></p>",
+    "id": "2.175"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "skriva rekursion för geometrisk följd",
+    "poang": "2/0/0",
+    "t": "<p>Skriv en rekursiv formel för talföljden</p><p>\\[2,\\ 6,\\ 18,\\ 54,\\ldots\\]</p>",
+    "s": "<p>Varje term fås genom att multiplicera föregående term med 3. Alltså</p><p><strong>\\[a_1=2,\\qquad a_{n+1}=3a_n.\\]</strong></p>",
+    "id": "2.176"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "rekursion av andra ordningen",
+    "poang": "2/0/0",
+    "t": "<p>En talföljd ges av \\(a_1=1\\), \\(a_2=2\\) och \\(a_{n+2}=2a_{n+1}+a_n\\).</p><p>Bestäm \\(a_6\\).</p>",
+    "s": "<p>\\[a_3=2\\cdot2+1=5\\]</p><p>\\[a_4=2\\cdot5+2=12\\]</p><p>\\[a_5=2\\cdot12+5=29\\]</p><p>\\[a_6=2\\cdot29+12=70.\\]</p><p><strong>Svar: \\(a_6=70\\).</strong></p>",
+    "id": "2.177"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "C",
+    "typ": "rekursiv ekonomisk modell",
+    "poang": "0/2/0",
+    "t": "<p>Ett sparkonto innehåller 5000 kr. I slutet av varje år får kontot 4 % ränta och därefter sätts 1200 kr in.</p><p>Låt \\(S_n\\) vara saldot efter \\(n\\) år.</p><ol type=\"a\"><li>Skriv en rekursionsformel.</li><li>Bestäm \\(S_3\\).</li></ol>",
+    "s": "<p><strong>a)</strong> Först multipliceras saldot med \\(1,04\\), sedan läggs 1200 kr till:</p><p>\\[S_0=5000,\\qquad S_{n+1}=1,04S_n+1200.\\]</p><p><strong>b)</strong></p><p>\\[S_1=6400\\]</p><p>\\[S_2=1,04\\cdot6400+1200=7856\\]</p><p>\\[S_3=1,04\\cdot7856+1200=9370,24.\\]</p><p><strong>Efter tre år är saldot 9370,24 kr.</strong></p>",
+    "id": "2.178"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "C",
+    "typ": "explicit formel från rekursion med jämviktsvärde",
+    "poang": "0/2/0",
+    "t": "<p>En talföljd definieras av \\(T_0=80\\) och</p><p>\\[T_{n+1}=0,75T_n+5.\\]</p><p>Bestäm en explicit formel för \\(T_n\\).</p>",
+    "s": "<p><strong>Nyckelidé:</strong> Leta först efter ett jämviktsvärde \\(L\\) som inte ändras av rekursionen:</p><p>\\[L=0,75L+5\\Rightarrow0,25L=5\\Rightarrow L=20.\\]</p><p>Studera avvikelsen från 20:</p><p>\\[T_{n+1}-20=0,75(T_n-20).\\]</p><p>Avvikelsen bildar alltså en geometrisk följd. Eftersom \\(T_0-20=60\\) får vi</p><p><strong>\\[T_n=20+60\\cdot0,75^n.\\]</strong></p>",
+    "id": "2.179"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "C",
+    "typ": "explicit formel från linjär rekursion",
+    "poang": "0/2/0",
+    "t": "<p>En talföljd definieras av \\(a_1=5\\) och \\(a_{n+1}=3a_n-4\\).</p><p>Bestäm en explicit formel för \\(a_n\\).</p>",
+    "s": "<p>Jämviktsvärdet \\(L\\) uppfyller</p><p>\\[L=3L-4\\Rightarrow L=2.\\]</p><p>Då</p><p>\\[a_{n+1}-2=3(a_n-2).\\]</p><p>Alltså är \\(a_n-2\\) geometrisk med kvoten 3. Eftersom \\(a_1-2=3\\) får vi</p><p>\\[a_n-2=3\\cdot3^{n-1}=3^n.\\]</p><p><strong>\\[a_n=2+3^n.\\]</strong></p>",
+    "id": "2.180"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "procentuell minskning rekursivt",
+    "poang": "2/0/0",
+    "t": "<p>En mängd beskrivs av \\(a_0=100\\) och \\(a_{n+1}=0,9a_n\\). Bestäm \\(a_3\\).</p>",
+    "s": "<p>\\[a_1=90,\\qquad a_2=81,\\qquad a_3=72,9.\\]</p><p><strong>Svar: \\(a_3=72,9\\).</strong></p>",
+    "id": "2.201"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "E",
+    "typ": "rekursion med n beroende tillskott",
+    "poang": "2/0/0",
+    "t": "<p>En talföljd definieras av \\(a_1=2\\) och</p><p>\\[a_{n+1}=a_n+2n.\\]</p><p>Bestäm \\(a_5\\).</p>",
+    "s": "<p>\\[a_2=2+2\\cdot1=4\\]</p><p>\\[a_3=4+2\\cdot2=8\\]</p><p>\\[a_4=8+2\\cdot3=14\\]</p><p>\\[a_5=14+2\\cdot4=22.\\]</p><p><strong>Svar: 22.</strong></p>",
+    "id": "2.202"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "C",
+    "typ": "rekursion med stationärt värde i dosmodell",
+    "poang": "0/2/0",
+    "t": "<p>En medicinmängd följer rekursionen</p><p>\\[M_0=0,\\qquad M_{n+1}=0,8M_n+10.\\]</p><p>Bestäm en explicit formel för \\(M_n\\).</p>",
+    "s": "<p>Jämviktsvärdet \\(L\\) uppfyller</p><p>\\[L=0,8L+10\\Rightarrow0,2L=10\\Rightarrow L=50.\\]</p><p>Därför</p><p>\\[M_{n+1}-50=0,8(M_n-50).\\]</p><p>Eftersom \\(M_0-50=-50\\) får vi</p><p>\\[M_n-50=-50\\cdot0,8^n.\\]</p><p><strong>\\[M_n=50(1-0,8^n).\\]</strong></p>",
+    "id": "2.203"
+  },
+  {
+    "kap": 2,
+    "omr": "rekursiva_talfoljder",
+    "niva": "C",
+    "typ": "rekursion med gränsvärde",
+    "poang": "0/2/0",
+    "t": "<p>En talföljd definieras av \\(a_0=20\\) och</p><p>\\[a_{n+1}=0,5a_n+6.\\]</p><ol type=\"a\"><li>Bestäm följdens gränsvärde.</li><li>Bestäm en explicit formel.</li></ol>",
+    "s": "<p><strong>a)</strong> Ett gränsvärde \\(L\\) måste uppfylla</p><p>\\[L=0,5L+6\\Rightarrow L=12.\\]</p><p><strong>b)</strong> Avvikelsen från 12 uppfyller</p><p>\\[a_{n+1}-12=0,5(a_n-12).\\]</p><p>Eftersom \\(a_0-12=8\\) får vi</p><p><strong>\\[a_n=12+8\\cdot0,5^n.\\]</strong></p>",
+    "id": "2.204"
   },
   {
     "kap": 3,
@@ -3619,6 +4476,96 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "E",
+    "typ": "p-integral från två till oändligheten",
+    "poang": "2/0/0",
+    "t": "<span class=\"fig\"><svg width=\"440\" height=\"280\" viewBox=\"0 0 440 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med ett genom x kvadrat med området från x lika med två mot oändligheten markerat\"><rect width=\"440\" height=\"280\" fill=\"white\"/><polygon points=\"136.9,235.0 136.9,203.0 139.7,204.2 142.4,205.4 145.1,206.5 147.8,207.5 150.6,208.5 153.3,209.5 156.0,210.4 158.8,211.2 161.5,212.0 164.2,212.8 167.0,213.5 169.7,214.2 172.4,214.8 175.2,215.4 177.9,216.0 180.6,216.6 183.3,217.2 186.1,217.7 188.8,218.2 191.5,218.7 194.3,219.1 197.0,219.6 199.7,220.0 202.5,220.4 205.2,220.8 207.9,221.1 210.7,221.5 213.4,221.8 216.1,222.2 218.8,222.5 221.6,222.8 224.3,223.1 227.0,223.4 229.8,223.7 232.5,223.9 235.2,224.2 238.0,224.4 240.7,224.7 243.4,224.9 246.2,225.1 248.9,225.3 251.6,225.5 254.3,225.7 257.1,225.9 259.8,226.1 262.5,226.3 265.3,226.5 268.0,226.7 270.7,226.8 273.5,227.0 276.2,227.1 278.9,227.3 281.7,227.5 284.4,227.6 287.1,227.7 289.8,227.9 292.6,228.0 295.3,228.1 298.0,228.3 300.8,228.4 303.5,228.5 306.2,228.6 309.0,228.7 311.7,228.8 314.4,228.9 317.2,229.0 319.9,229.2 322.6,229.2 325.3,229.3 328.1,229.4 330.8,229.5 333.5,229.6 336.3,229.7 339.0,229.8 341.7,229.9 344.5,230.0 347.2,230.0 349.9,230.1 352.7,230.2 355.4,230.3 358.1,230.3 360.8,230.4 363.6,230.5 366.3,230.5 369.0,230.6 371.8,230.7 374.5,230.7 377.2,230.8 380.0,230.9 382.7,230.9 385.4,231.0 388.2,231.0 390.9,231.1 393.6,231.1 396.3,231.2 399.1,231.2 401.8,231.3 404.5,231.3 407.3,231.4 410.0,231.4 410.0,235.0\" fill=\"#E3B52B\" fill-opacity=\".22\"/><line x1=\"55\" y1=\"235\" x2=\"410\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,34.8 58.0,54.8 60.9,72.0 63.9,86.9 66.8,99.8 69.8,111.0 72.8,121.0 75.7,129.8 78.7,137.6 81.6,144.5 84.6,150.8 87.5,156.4 90.5,161.5 93.5,166.1 96.4,170.2 99.4,174.1 102.3,177.5 105.3,180.7 108.2,183.7 111.2,186.4 114.2,188.9 117.1,191.2 120.1,193.3 123.0,195.3 126.0,197.2 129.0,198.9 131.9,200.5 134.9,202.0 137.8,203.4 140.8,204.7 143.8,205.9 146.7,207.1 149.7,208.2 152.6,209.2 155.6,210.2 158.5,211.1 161.5,212.0 164.5,212.8 167.4,213.6 170.4,214.3 173.3,215.0 176.3,215.7 179.2,216.3 182.2,216.9 185.2,217.5 188.1,218.1 191.1,218.6 194.0,219.1 197.0,219.6 200.0,220.0 202.9,220.4 205.9,220.9 208.8,221.3 211.8,221.6 214.7,222.0 217.7,222.4 220.7,222.7 223.6,223.0 226.6,223.3 229.5,223.6 232.5,223.9 235.5,224.2 238.4,224.5 241.4,224.7 244.3,225.0 247.3,225.2 250.3,225.4 253.2,225.7 256.2,225.9 259.1,226.1 262.1,226.3 265.0,226.5 268.0,226.7 271.0,226.8 273.9,227.0 276.9,227.2 279.8,227.4 282.8,227.5 285.8,227.7 288.7,227.8 291.7,228.0 294.6,228.1 297.6,228.2 300.5,228.4 303.5,228.5 306.5,228.6 309.4,228.7 312.4,228.9 315.3,229.0 318.3,229.1 321.2,229.2 324.2,229.3 327.2,229.4 330.1,229.5 333.1,229.6 336.0,229.7 339.0,229.8 342.0,229.9 344.9,230.0 347.9,230.1 350.8,230.1 353.8,230.2 356.8,230.3 359.7,230.4 362.7,230.5 365.6,230.5 368.6,230.6 371.5,230.7 374.5,230.7 377.5,230.8 380.4,230.9 383.4,230.9 386.3,231.0 389.3,231.1 392.2,231.1 395.2,231.2 398.2,231.2 401.1,231.3 404.1,231.3 407.0,231.4 410.0,231.4\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.4\"/><line x1=\"136.9\" y1=\"235\" x2=\"136.9\" y2=\"203.0\" stroke=\"#777\" stroke-dasharray=\"5 4\"/><text x=\"136.9\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"330\" y=\"78\" font-size=\"14\" fill=\"#2C62A8\">y = 1/x²</text><text x=\"400\" y=\"229\" font-size=\"14\">x</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Beräkna</p><p>\\[\\int_2^{\\infty}\\frac{1}{x^2}\\,dx.\\]</p>",
+    "s": "<p>Skriv integralen som ett gränsvärde:</p><p>\\[\\int_2^{\\infty}\\frac1{x^2}\\,dx=\\lim_{b\\to\\infty}\\int_2^b x^{-2}\\,dx.\\]</p><p>\\[=\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_2^b=\\lim_{b\\to\\infty}\\left(-\\frac1b+\\frac12\\right)=\\frac12.\\]</p><p><strong>Integralen konvergerar och värdet är \\(\\frac12\\).</strong></p>",
+    "id": "3.85"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "E",
+    "typ": "exponentialintegral till oändligheten",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\int_0^{\\infty}e^{-3x}\\,dx.\\]</p>",
+    "s": "<p>\\[\\int_0^{\\infty}e^{-3x}\\,dx=\\lim_{b\\to\\infty}\\left[-\\frac13e^{-3x}\\right]_0^b.\\]</p><p>Eftersom \\(e^{-3b}\\to0\\) får vi</p><p>\\[0-\\left(-\\frac13\\right)=\\frac13.\\]</p><p><strong>Värdet är \\(\\frac13\\).</strong></p>",
+    "id": "3.86"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "E",
+    "typ": "avgöra divergens för p-integral",
+    "poang": "2/0/0",
+    "t": "<p>Avgör om integralen</p><p>\\[\\int_1^{\\infty}\\frac{1}{\\sqrt{x}}\\,dx\\]</p><p>konvergerar eller divergerar.</p>",
+    "s": "<p>Integranden är \\(x^{-1/2}\\). För en p-integral \\(\\int_1^{\\infty}x^{-p}dx\\) krävs \\(p>1\\) för konvergens.</p><p>Här är \\(p=\\frac12\\), så integralen <strong>divergerar</strong>.</p><p>Man kan också se det direkt:</p><p>\\[\\int_1^b x^{-1/2}dx=2\\sqrt b-2\\to\\infty.\\]</p>",
+    "id": "3.87"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "C",
+    "typ": "integrerbar singularitet vid noll",
+    "poang": "0/2/0",
+    "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\frac{1}{\\sqrt{x}}\\,dx.\\]</p>",
+    "s": "<p>Integralen är generaliserad eftersom integranden går mot oändligheten när \\(x\\to0^+\\).</p><p>\\[\\int_0^1x^{-1/2}dx=\\lim_{a\\to0^+}\\left[2\\sqrt{x}\\right]_a^1\\]</p><p>\\[=\\lim_{a\\to0^+}(2-2\\sqrt a)=2.\\]</p><p><strong>Integralen konvergerar och värdet är 2.</strong></p>",
+    "id": "3.88"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "C",
+    "typ": "parameter i p-integral",
+    "poang": "0/2/0",
+    "t": "<p>För vilka reella värden på \\(a\\) konvergerar</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^{a+2}}\\,dx?\\]</p>",
+    "s": "<p>Detta är en p-integral med exponent</p><p>\\[p=a+2.\\]</p><p>En integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) konvergerar precis när \\(p>1\\).</p><p>Alltså</p><p>\\[a+2>1\\Rightarrow a>-1.\\]</p><p><strong>Integralen konvergerar för \\(a>-1\\).</strong></p>",
+    "id": "3.89"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "E",
+    "typ": "p-integral från tre",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\int_3^{\\infty}\\frac1{x^3}\\,dx.\\]</p>",
+    "s": "<p>\\[\\int_3^{\\infty}x^{-3}dx=\\lim_{b\\to\\infty}\\left[-\\frac1{2x^2}\\right]_3^b.\\]</p><p>\\[=0-\\left(-\\frac1{18}\\right)=\\frac1{18}.\\]</p><p><strong>Integralen konvergerar till \\(\\frac1{18}\\).</strong></p>",
+    "id": "3.106"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "E",
+    "typ": "exponentialintegral med faktor",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\int_0^{\\infty}2e^{-2x}\\,dx.\\]</p>",
+    "s": "<p>En primitiv funktion är \\(-e^{-2x}\\). Därför</p><p>\\[\\int_0^{\\infty}2e^{-2x}dx=\\lim_{b\\to\\infty}[-e^{-2x}]_0^b=0-(-1)=1.\\]</p><p><strong>Svar: 1.</strong></p>",
+    "id": "3.107"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "C",
+    "typ": "logaritmisk singularitet vid noll",
+    "poang": "0/2/0",
+    "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\ln x\\,dx.\\]</p>",
+    "s": "<p>Integralen är generaliserad eftersom \\(\\ln x\\to-\\infty\\) när \\(x\\to0^+\\).</p><p>En primitiv funktion är \\(x\\ln x-x\\). Därför</p><p>\\[\\int_0^1\\ln xdx=\\lim_{a\\to0^+}[x\\ln x-x]_a^1.\\]</p><p>Vid \\(x=1\\) blir värdet \\(-1\\). Dessutom gäller \\(a\\ln a\\to0\\) och \\(a\\to0\\).</p><p>Alltså blir gränsvärdet <strong>\\(-1\\)</strong>. Integralen konvergerar.</p>",
+    "id": "3.108"
+  },
+  {
+    "kap": 3,
+    "omr": "generaliserade_integraler",
+    "niva": "C",
+    "typ": "parameter vid noll",
+    "poang": "0/2/0",
+    "t": "<p>För vilka reella \\(a\\) konvergerar</p><p>\\[\\int_0^1x^a\\,dx?\\]</p><p>Bestäm också integralens värde när den konvergerar.</p>",
+    "s": "<p>För \\(a\\ne-1\\) är en primitiv funktion</p><p>\\[\\frac{x^{a+1}}{a+1}.\\]</p><p>Gränsvärdet vid 0 blir ändligt precis när \\(a+1>0\\), alltså när</p><p>\\[a>-1.\\]</p><p>Då är</p><p>\\[\\int_0^1x^adx=\\left[\\frac{x^{a+1}}{a+1}\\right]_0^1=\\frac1{a+1}.\\]</p><p><strong>Konvergens för \\(a>-1\\), med värdet \\(1/(a+1)\\).</strong></p>",
+    "id": "3.109"
+  },
+  {
+    "kap": 3,
     "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "linjär approximation kring punkt",
@@ -3909,6 +4856,46 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "E",
+    "typ": "relaterad förändringshastighet cirkel",
+    "poang": "2/0/0",
+    "t": "<p>Radien i en cirkel ökar med \\(0,40\\) cm/s. Hur snabbt ökar cirkelns area när radien är 5,0 cm?</p>",
+    "s": "<p>\\[A=\\pi r^2\\Rightarrow\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=5,0\\) och \\(dr/dt=0,40\\):</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot5\\cdot0,40=4\\pi.\\]</p><p><strong>Arean ökar med \\(4\\pi\\approx12,6\\text{ cm}^2/\\text{s}\\).</strong></p>",
+    "id": "3.98"
+  },
+  {
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "E",
+    "typ": "linjär approximation av kvadratrot",
+    "poang": "2/0/0",
+    "t": "<p>Använd linjär approximation kring \\(x=25\\) för att uppskatta \\(\\sqrt{25,4}\\).</p>",
+    "s": "<p>Låt \\(f(x)=\\sqrt x\\). Då är</p><p>\\[f(25)=5,\\qquad f'(25)=\\frac1{2\\sqrt{25}}=\\frac1{10}.\\]</p><p>Den linjära approximationen ger</p><p>\\[f(25,4)\\approx5+\\frac1{10}(0,4)=5,04.\\]</p><p><strong>\\(\\sqrt{25,4}\\approx5,04\\).</strong></p>",
+    "id": "3.99"
+  },
+  {
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "relaterad förändringshastighet stege",
+    "poang": "0/3/0",
+    "t": "<span class=\"fig\"><svg width=\"400\" height=\"300\" viewBox=\"0 0 400 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fem meter lång stege mot en vägg med tre meter från väggen och fyra meter upp på väggen\"><rect width=\"400\" height=\"300\" fill=\"white\"/><line x1=\"85\" y1=\"35\" x2=\"85\" y2=\"250\" stroke=\"#444\" stroke-width=\"4\"/><line x1=\"65\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#444\" stroke-width=\"4\"/><line x1=\"85\" y1=\"70\" x2=\"310\" y2=\"250\" stroke=\"#B48A18\" stroke-width=\"7\" stroke-linecap=\"round\"/><text x=\"205\" y=\"145\" font-size=\"16\" fill=\"#B48A18\">5 m</text><line x1=\"85\" y1=\"270\" x2=\"310\" y2=\"270\" stroke=\"#777\"/><line x1=\"85\" y1=\"264\" x2=\"85\" y2=\"276\" stroke=\"#777\"/><line x1=\"310\" y1=\"264\" x2=\"310\" y2=\"276\" stroke=\"#777\"/><text x=\"198\" y=\"292\" font-size=\"15\" text-anchor=\"middle\">x = 3 m</text><line x1=\"55\" y1=\"70\" x2=\"55\" y2=\"250\" stroke=\"#777\"/><line x1=\"49\" y1=\"70\" x2=\"61\" y2=\"70\" stroke=\"#777\"/><line x1=\"49\" y1=\"250\" x2=\"61\" y2=\"250\" stroke=\"#777\"/><text x=\"32\" y=\"165\" font-size=\"15\" transform=\"rotate(-90 32 165)\">y</text><line x1=\"310\" y1=\"250\" x2=\"342\" y2=\"250\" stroke=\"#2C62A8\" stroke-width=\"2.4\"/><polygon points=\"342,250 332,244 332,256\" fill=\"#2C62A8\"/><text x=\"278\" y=\"232\" font-size=\"13\" fill=\"#2C62A8\">dx/dt = 0,60 m/s</text></svg></span><p>En 5,0 m lång stege står mot en vägg. Stegens nederända glider bort från väggen med \\(0,60\\) m/s. Hur snabbt rör sig överänden när nederänden är 3,0 m från väggen?</p>",
+    "s": "<p>Låt \\(x\\) vara avståndet från väggen och \\(y\\) höjden. Stegens längd är konstant:</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3\\) är \\(y=4\\). Derivera med avseende på tiden:</p><p>\\[2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0.\\]</p><p>\\[\\frac{dy}{dt}=-\\frac{x}{y}\\frac{dx}{dt}=-\\frac34\\cdot0,60=-0,45.\\]</p><p><strong>Överänden rör sig nedåt med 0,45 m/s.</strong></p>",
+    "id": "3.100"
+  },
+  {
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "niva": "C",
+    "typ": "relaterad förändringshastighet sfär",
+    "poang": "0/2/0",
+    "t": "<p>Volymen av en sfär ökar med \\(30\\text{ cm}^3/\\text{s}\\). Hur snabbt ökar radien när \\(r=2,0\\) cm?</p>",
+    "s": "<p>\\[V=\\frac43\\pi r^3.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=30\\) och \\(r=2\\):</p><p>\\[30=16\\pi\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=\\frac{15}{8\\pi}\\approx0,597.\\]</p><p><strong>Radien ökar med cirka 0,60 cm/s.</strong></p>",
+    "id": "3.101"
+  },
+  {
+    "kap": 3,
     "omr": "fordjupad_analys",
     "niva": "C",
     "typ": "optimering med integralvillkor",
@@ -4119,6 +5106,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "E",
+    "typ": "partiell integration x gånger e upphöjt tre x",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm</p><p>\\[\\int xe^{3x}\\,dx.\\]</p>",
+    "s": "<p>Välj \\(u=x\\) och \\(dv=e^{3x}dx\\). Då är \\(du=dx\\) och \\(v=\\frac13e^{3x}\\).</p><p>\\[\\int xe^{3x}dx=\\frac{x}{3}e^{3x}-\\frac13\\int e^{3x}dx\\]</p><p>\\[=\\frac{x}{3}e^{3x}-\\frac19e^{3x}+C.\\]</p><p><strong>\\[e^{3x}\\left(\\frac{x}{3}-\\frac19\\right)+C.\\]</strong></p>",
+    "id": "3.90"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "E",
+    "typ": "partiell integration trigonometrisk",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm</p><p>\\[\\int x\\sin(3x)\\,dx.\\]</p>",
+    "s": "<p>Välj \\(u=x\\), \\(dv=\\sin(3x)dx\\). Då är \\(v=-\\frac13\\cos(3x)\\).</p><p>\\[\\int x\\sin(3x)dx=-\\frac{x}{3}\\cos(3x)+\\frac13\\int\\cos(3x)dx\\]</p><p>\\[=\\boxed{-\\frac{x}{3}\\cos(3x)+\\frac19\\sin(3x)+C}.\\]</p>",
+    "id": "3.91"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "E",
+    "typ": "integral av logaritm med faktor",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm \\(\\int\\ln(3x)\\,dx\\) för \\(x>0\\).</p>",
+    "s": "<p>Skriv integranden som \\(1\\cdot\\ln(3x)\\). Välj \\(u=\\ln(3x)\\) och \\(dv=dx\\). Då är \\(du=\\frac1x dx\\) och \\(v=x\\).</p><p>\\[\\int\\ln(3x)dx=x\\ln(3x)-\\int1\\,dx.\\]</p><p><strong>\\[x\\ln(3x)-x+C.\\]</strong></p>",
+    "id": "3.92"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "E",
+    "typ": "bestämd integral med partiell integration",
+    "poang": "3/0/0",
+    "t": "<p>Beräkna</p><p>\\[\\int_0^2xe^x\\,dx.\\]</p>",
+    "s": "<p>En primitiv funktion är \\((x-1)e^x\\). Därför</p><p>\\[\\int_0^2xe^x dx=[(x-1)e^x]_0^2=e^2-(-1)=e^2+1.\\]</p><p><strong>Svar: \\(e^2+1\\).</strong></p>",
+    "id": "3.93"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "C",
+    "typ": "partiell integration två gånger med e minus x",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm</p><p>\\[\\int x^2e^{-x}\\,dx.\\]</p>",
+    "s": "<p>Första partiella integreringen: välj \\(u=x^2\\), \\(dv=e^{-x}dx\\). Då är \\(v=-e^{-x}\\).</p><p>\\[\\int x^2e^{-x}dx=-x^2e^{-x}+2\\int xe^{-x}dx.\\]</p><p>Vidare</p><p>\\[\\int xe^{-x}dx=-(x+1)e^{-x}.\\]</p><p>Alltså</p><p><strong>\\[\\int x^2e^{-x}dx=-(x^2+2x+2)e^{-x}+C.\\]</strong></p>",
+    "id": "3.94"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "C",
+    "typ": "partiell integration x kvadrat cosinus",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm</p><p>\\[\\int x^2\\cos x\\,dx.\\]</p>",
+    "s": "<p>Välj först \\(u=x^2\\), \\(dv=\\cos xdx\\):</p><p>\\[\\int x^2\\cos xdx=x^2\\sin x-2\\int x\\sin xdx.\\]</p><p>Den återstående integralen är</p><p>\\[\\int x\\sin xdx=-x\\cos x+\\sin x.\\]</p><p>Därför</p><p><strong>\\[x^2\\sin x+2x\\cos x-2\\sin x+C.\\]</strong></p>",
+    "id": "3.95"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "C",
+    "typ": "partiell integration polynom gånger logaritm",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm \\(\\int x\\ln(2x)\\,dx\\) för \\(x>0\\).</p>",
+    "s": "<p>Välj \\(u=\\ln(2x)\\) och \\(dv=x\\,dx\\). Då är \\(du=\\frac1x dx\\) och \\(v=\\frac{x^2}{2}\\).</p><p>\\[\\int x\\ln(2x)dx=\\frac{x^2}{2}\\ln(2x)-\\frac12\\int xdx\\]</p><p><strong>\\[=\\frac{x^2}{2}\\ln(2x)-\\frac{x^2}{4}+C.\\]</strong></p>",
+    "id": "3.96"
+  },
+  {
+    "kap": 3,
+    "omr": "partiell_integration",
+    "niva": "C",
+    "typ": "bestämd integral av logaritm i kvadrat",
+    "poang": "0/3/0",
+    "t": "<p>Beräkna</p><p>\\[\\int_1^e(\\ln x)^2\\,dx.\\]</p>",
+    "s": "<p>Välj \\(u=(\\ln x)^2\\), \\(dv=dx\\). Då är \\(du=\\frac{2\\ln x}{x}dx\\) och \\(v=x\\):</p><p>\\[\\int(\\ln x)^2dx=x(\\ln x)^2-2\\int\\ln xdx.\\]</p><p>Eftersom \\(\\int\\ln xdx=x\\ln x-x\\) får vi</p><p>\\[F(x)=x(\\ln x)^2-2x\\ln x+2x.\\]</p><p>\\[F(e)=e-2e+2e=e,\\qquad F(1)=2.\\]</p><p><strong>Integralen är \\(e-2\\).</strong></p>",
+    "id": "3.97"
+  },
+  {
+    "kap": 3,
     "omr": "fordjupad_analys",
     "niva": "A",
     "typ": "optimering av inskriven rektangel",
@@ -4136,6 +5203,46 @@ window.BANKMATF1 = [
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"300\" viewBox=\"0 0 440 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Området mellan linjen y lika med 2x och parabeln y lika med x kvadrat mellan skärningspunkterna\">\n<rect width=\"440\" height=\"300\" fill=\"white\"/>\n<path d=\"M 90.0,240.0 L 92.0,238.5 L 93.9,236.9 L 95.9,235.4 L 97.9,233.9 L 99.8,232.3 L 101.8,230.8 L 103.8,229.3 L 105.7,227.7 L 107.7,226.2 L 109.7,224.7 L 111.6,223.1 L 113.6,221.6 L 115.6,220.1 L 117.5,218.5 L 119.5,217.0 L 121.5,215.5 L 123.4,213.9 L 125.4,212.4 L 127.4,210.9 L 129.3,209.3 L 131.3,207.8 L 133.3,206.3 L 135.2,204.7 L 137.2,203.2 L 139.2,201.7 L 141.1,200.1 L 143.1,198.6 L 145.1,197.1 L 147.0,195.5 L 149.0,194.0 L 151.0,192.5 L 152.9,190.9 L 154.9,189.4 L 156.9,187.9 L 158.8,186.3 L 160.8,184.8 L 162.8,183.3 L 164.7,181.7 L 166.7,180.2 L 168.7,178.7 L 170.6,177.1 L 172.6,175.6 L 174.6,174.1 L 176.5,172.5 L 178.5,171.0 L 180.5,169.5 L 182.4,167.9 L 184.4,166.4 L 186.4,164.9 L 188.3,163.3 L 190.3,161.8 L 192.3,160.3 L 194.2,158.7 L 196.2,157.2 L 198.2,155.7 L 200.1,154.1 L 202.1,152.6 L 204.1,151.1 L 206.0,149.5 L 208.0,148.0 L 210.0,146.5 L 211.9,144.9 L 213.9,143.4 L 215.9,141.9 L 217.8,140.3 L 219.8,138.8 L 221.8,137.3 L 223.7,135.7 L 225.7,134.2 L 227.7,132.7 L 229.6,131.1 L 231.6,129.6 L 233.6,128.1 L 235.5,126.5 L 237.5,125.0 L 239.5,123.5 L 241.4,121.9 L 243.4,120.4 L 245.4,118.9 L 247.3,117.3 L 249.3,115.8 L 251.3,114.3 L 253.2,112.7 L 255.2,111.2 L 257.2,109.7 L 259.1,108.1 L 261.1,106.6 L 263.1,105.1 L 265.0,103.5 L 267.0,102.0 L 269.0,100.5 L 270.9,98.9 L 272.9,97.4 L 274.9,95.9 L 276.8,94.3 L 278.8,92.8 L 280.8,91.3 L 282.7,89.7 L 284.7,88.2 L 286.7,86.7 L 288.6,85.1 L 290.6,83.6 L 292.6,82.1 L 294.5,80.5 L 296.5,79.0 L 298.5,77.5 L 300.4,75.9 L 302.4,74.4 L 304.4,72.9 L 306.3,71.3 L 308.3,69.8 L 310.3,68.3 L 312.2,66.7 L 314.2,65.2 L 316.2,63.7 L 318.1,62.1 L 320.1,60.6 L 322.1,59.1 L 324.0,57.5 L 326.0,56.0 L 326.0,56.0 L 324.0,59.1 L 322.1,62.1 L 320.1,65.1 L 318.1,68.1 L 316.2,71.0 L 314.2,73.9 L 312.2,76.8 L 310.3,79.7 L 308.3,82.6 L 306.3,85.4 L 304.4,88.2 L 302.4,91.0 L 300.4,93.7 L 298.5,96.4 L 296.5,99.1 L 294.5,101.8 L 292.6,104.4 L 290.6,107.1 L 288.6,109.7 L 286.7,112.2 L 284.7,114.8 L 282.7,117.3 L 280.8,119.8 L 278.8,122.2 L 276.8,124.7 L 274.9,127.1 L 272.9,129.5 L 270.9,131.8 L 269.0,134.2 L 267.0,136.5 L 265.0,138.8 L 263.1,141.0 L 261.1,143.3 L 259.1,145.5 L 257.2,147.7 L 255.2,149.8 L 253.2,152.0 L 251.3,154.1 L 249.3,156.2 L 247.3,158.2 L 245.4,160.3 L 243.4,162.3 L 241.4,164.2 L 239.5,166.2 L 237.5,168.1 L 235.5,170.0 L 233.6,171.9 L 231.6,173.8 L 229.6,175.6 L 227.7,177.4 L 225.7,179.2 L 223.7,180.9 L 221.8,182.6 L 219.8,184.3 L 217.8,186.0 L 215.9,187.7 L 213.9,189.3 L 211.9,190.9 L 210.0,192.5 L 208.0,194.0 L 206.0,195.5 L 204.1,197.0 L 202.1,198.5 L 200.1,199.9 L 198.2,201.3 L 196.2,202.7 L 194.2,204.1 L 192.3,205.4 L 190.3,206.8 L 188.3,208.1 L 186.4,209.3 L 184.4,210.6 L 182.4,211.8 L 180.5,213.0 L 178.5,214.1 L 176.5,215.3 L 174.6,216.4 L 172.6,217.5 L 170.6,218.5 L 168.7,219.6 L 166.7,220.6 L 164.7,221.5 L 162.8,222.5 L 160.8,223.4 L 158.8,224.3 L 156.9,225.2 L 154.9,226.1 L 152.9,226.9 L 151.0,227.7 L 149.0,228.5 L 147.0,229.3 L 145.1,230.0 L 143.1,230.7 L 141.1,231.4 L 139.2,232.0 L 137.2,232.6 L 135.2,233.2 L 133.3,233.8 L 131.3,234.4 L 129.3,234.9 L 127.4,235.4 L 125.4,235.9 L 123.4,236.3 L 121.5,236.7 L 119.5,237.1 L 117.5,237.5 L 115.6,237.8 L 113.6,238.2 L 111.6,238.5 L 109.7,238.7 L 107.7,239.0 L 105.7,239.2 L 103.8,239.4 L 101.8,239.5 L 99.8,239.7 L 97.9,239.8 L 95.9,239.9 L 93.9,239.9 L 92.0,240.0 L 90.0,240.0 Z\" fill=\"#2C62A8\" fill-opacity=\".18\"/>\n<path d=\"M 42.8,232.6 L 45.8,233.5 L 48.7,234.4 L 51.6,235.1 L 54.6,235.9 L 57.5,236.5 L 60.5,237.1 L 63.5,237.7 L 66.4,238.2 L 69.3,238.6 L 72.3,239.0 L 75.2,239.3 L 78.2,239.5 L 81.2,239.7 L 84.1,239.9 L 87.0,240.0 L 90.0,240.0 L 93.0,240.0 L 95.9,239.9 L 98.8,239.7 L 101.8,239.5 L 104.8,239.3 L 107.7,239.0 L 110.7,238.6 L 113.6,238.2 L 116.5,237.7 L 119.5,237.1 L 122.5,236.5 L 125.4,235.9 L 128.3,235.1 L 131.3,234.4 L 134.2,233.5 L 137.2,232.6 L 140.2,231.7 L 143.1,230.7 L 146.1,229.6 L 149.0,228.5 L 151.9,227.3 L 154.9,226.1 L 157.8,224.8 L 160.8,223.4 L 163.8,222.0 L 166.7,220.6 L 169.7,219.0 L 172.6,217.5 L 175.6,215.8 L 178.5,214.1 L 181.4,212.4 L 184.4,210.6 L 187.3,208.7 L 190.3,206.8 L 193.2,204.8 L 196.2,202.7 L 199.2,200.6 L 202.1,198.5 L 205.1,196.3 L 208.0,194.0 L 210.9,191.7 L 213.9,189.3 L 216.8,186.8 L 219.8,184.3 L 222.8,181.8 L 225.7,179.2 L 228.7,176.5 L 231.6,173.8 L 234.6,171.0 L 237.5,168.1 L 240.4,165.2 L 243.4,162.3 L 246.3,159.2 L 249.3,156.2 L 252.2,153.0 L 255.2,149.8 L 258.1,146.6 L 261.1,143.3 L 264.1,139.9 L 267.0,136.5 L 269.9,133.0 L 272.9,129.5 L 275.9,125.9 L 278.8,122.2 L 281.8,118.5 L 284.7,114.8 L 287.6,110.9 L 290.6,107.1 L 293.6,103.1 L 296.5,99.1 L 299.4,95.1 L 302.4,91.0 L 305.4,86.8 L 308.3,82.6 L 311.2,78.3 L 314.2,73.9 L 317.1,69.5 L 320.1,65.1 L 323.1,60.6 L 326.0,56.0 L 328.9,51.4 L 331.9,46.7 L 334.9,41.9 L 337.8,37.1 L 340.8,32.3 L 343.7,27.4 L 346.6,22.4 L 349.6,17.4 L 352.6,12.3 L 355.5,7.1 L 358.4,1.9 L 361.4,-3.3 L 364.4,-8.7 L 367.3,-14.0 L 370.2,-19.5 L 373.2,-25.0 L 376.1,-30.5 L 379.1,-36.1 L 382.1,-41.8 L 385.0,-47.5 L 387.9,-53.3 L 390.9,-59.1 L 393.9,-65.0 L 396.8,-71.0 L 399.8,-77.0 L 402.7,-83.0 L 405.6,-89.2 L 408.6,-95.3 L 411.6,-101.6 L 414.5,-107.9 L 417.4,-114.2 L 420.4,-120.6\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<path d=\"M 42.8,276.8 L 408.6,-8.4\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.4\"/>\n<line x1=\"55\" y1=\"240\" x2=\"410\" y2=\"240\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"256\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"208\" y1=\"240\" x2=\"208\" y2=\"245\" stroke=\"#222\"/><text x=\"208\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"326\" y1=\"240\" x2=\"326\" y2=\"245\" stroke=\"#222\"/><text x=\"326\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"85\" y1=\"194\" x2=\"95\" y2=\"194\" stroke=\"#222\"/><text x=\"80\" y=\"199\" font-size=\"12.5\" text-anchor=\"end\">1</text><line x1=\"85\" y1=\"148\" x2=\"95\" y2=\"148\" stroke=\"#222\"/><text x=\"80\" y=\"153\" font-size=\"12.5\" text-anchor=\"end\">2</text><line x1=\"85\" y1=\"102\" x2=\"95\" y2=\"102\" stroke=\"#222\"/><text x=\"80\" y=\"107\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"85\" y1=\"56\" x2=\"95\" y2=\"56\" stroke=\"#222\"/><text x=\"80\" y=\"61\" font-size=\"12.5\" text-anchor=\"end\">4</text>\n<circle cx=\"90.0\" cy=\"240.0\" r=\"5\" fill=\"#B23A2E\"/>\n<circle cx=\"326.0\" cy=\"56.0\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"338\" y=\"58\" font-size=\"14\" fill=\"#B23A2E\">(2, 4)</text>\n<text x=\"330\" y=\"200\" font-size=\"15\" fill=\"#222\">y = x²</text>\n<text x=\"226\" y=\"51\" font-size=\"15\" fill=\"#2E7D52\">y = 2x</text>\n<text x=\"408\" y=\"245\" font-size=\"14\">x</text>\n</svg></span><p>Området begränsas av linjen \\(y=2x\\) och parabeln \\(y=x^2\\).</p><ol type=\"a\"><li>Bestäm skärningspunkterna.</li><li>Beräkna områdets area.</li></ol>",
     "s": "<p><strong>a)</strong> Kurvorna skär varandra där funktionsvärdena är lika:</p><p>\\[x^2=2x\\Rightarrow x^2-2x=0\\Rightarrow x(x-2)=0.\\]</p><p>Alltså \\(x=0\\) och \\(x=2\\), vilket ger punkterna \\((0,0)\\) och \\((2,4)\\).</p><p><strong>b)</strong> Mellan \\(x=0\\) och \\(x=2\\) ligger linjen ovanför parabeln, vilket syns i figuren och kan kontrolleras med en testpunkt: vid \\(x=1\\) är \\(2x=2\\) medan \\(x^2=1\\).</p><p>Arean är integralen av skillnaden mellan den övre och den undre kurvan:</p><p>\\[A=\\int_0^2\\left(2x-x^2\\right)dx=\\left[x^2-\\frac{x^3}{3}\\right]_0^2.\\]</p><p>Insättning ger</p><p>\\[A=\\left(4-\\frac83\\right)-0=\\frac{12-8}{3}=\\mathbf{\\frac43}\\approx1,33.\\]</p>",
     "id": "3.84"
+  },
+  {
+    "kap": 3,
+    "omr": "fordjupad_analys",
+    "niva": "E",
+    "typ": "medelvärde av linjär funktion",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm medelvärdet av \\(f(x)=2x+1\\) på intervallet \\([0,3]\\).</p>",
+    "s": "<p>Medelvärdet är</p><p>\\[\\frac1{3-0}\\int_0^3(2x+1)dx=\\frac13[x^2+x]_0^3.\\]</p><p>\\[=\\frac13(9+3)=4.\\]</p><p><strong>Medelvärdet är 4.</strong></p>",
+    "id": "3.102"
+  },
+  {
+    "kap": 3,
+    "omr": "fordjupad_analys",
+    "niva": "E",
+    "typ": "area mellan två enkla kurvor",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm arean mellan graferna \\(y=x\\) och \\(y=x^2\\) på intervallet \\([0,1]\\).</p>",
+    "s": "<p>På \\([0,1]\\) ligger \\(x\\) över \\(x^2\\). Arean är</p><p>\\[\\int_0^1(x-x^2)dx=\\left[\\frac{x^2}{2}-\\frac{x^3}{3}\\right]_0^1=\\frac12-\\frac13=\\frac16.\\]</p><p><strong>Arean är \\(\\frac16\\) areaenheter.</strong></p>",
+    "id": "3.103"
+  },
+  {
+    "kap": 3,
+    "omr": "fordjupad_analys",
+    "niva": "C",
+    "typ": "parameter från area mellan linje och parabel",
+    "poang": "0/3/0",
+    "t": "<p>För \\(k>0\\) begränsar kurvorna \\(y=kx\\) och \\(y=x^2\\) ett område mellan sina skärningspunkter. Bestäm \\(k\\) om områdets area är \\(\\frac43\\).</p>",
+    "s": "<p>Skärningspunkterna fås av \\(kx=x^2\\), alltså \\(x=0\\) och \\(x=k\\).</p><p>På intervallet \\([0,k]\\) ligger linjen över parabeln. Arean är</p><p>\\[A=\\int_0^k(kx-x^2)dx=\\left[\\frac{kx^2}{2}-\\frac{x^3}{3}\\right]_0^k=\\frac{k^3}{6}.\\]</p><p>Sätt \\(A=\\frac43\\):</p><p>\\[\\frac{k^3}{6}=\\frac43\\Rightarrow k^3=8.\\]</p><p><strong>\\(k=2\\).</strong></p>",
+    "id": "3.104"
+  },
+  {
+    "kap": 3,
+    "omr": "fordjupad_analys",
+    "niva": "C",
+    "typ": "optimering av rektangel under parabel",
+    "poang": "0/3/0",
+    "t": "<p>En rektangel är symmetrisk kring \\(y\\)-axeln. Dess bas ligger på \\(x\\)-axeln och de övre hörnen ligger på parabeln \\(y=9-x^2\\).</p><p>Bestäm rektangelns största möjliga area.</p>",
+    "s": "<p>Låt det högra övre hörnet ha \\(x\\)-koordinaten \\(x>0\\). Då är bredden \\(2x\\) och höjden \\(9-x^2\\).</p><p>\\[A(x)=2x(9-x^2)=18x-2x^3.\\]</p><p>\\[A'(x)=18-6x^2.\\]</p><p>\\[A'(x)=0\\Rightarrow x^2=3\\Rightarrow x=\\sqrt3.\\]</p><p>\\[A_{\\max}=2\\sqrt3(9-3)=12\\sqrt3.\\]</p><p><strong>Största arean är \\(12\\sqrt3\\) areaenheter.</strong></p>",
+    "id": "3.105"
   },
   {
     "kap": 4,
@@ -4869,6 +5976,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "E",
+    "typ": "homogen första ordningen",
+    "poang": "2/0/0",
+    "t": "<p>Lös den allmänna differentialekvationen</p><p>\\[y'=4y.\\]</p>",
+    "s": "<p>En första ordningens homogen ekvation \\(y'=ky\\) har lösningen \\(y=Ce^{kx}\\).</p><p><strong>\\[y=Ce^{4x}.\\]</strong></p>",
+    "id": "4.140"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "E",
+    "typ": "linjär första ordningen med konstant högerled",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'+3y=6.\\]</p>",
+    "s": "<p>Den homogena lösningen är \\(y_h=Ce^{-3x}\\).</p><p>Pröva en konstant partikulär lösning \\(y_p=A\\):</p><p>\\[3A=6\\Rightarrow A=2.\\]</p><p><strong>\\[y=Ce^{-3x}+2.\\]</strong></p>",
+    "id": "4.141"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "E",
+    "typ": "linjär första ordningen konstant term",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'-2y=8.\\]</p>",
+    "s": "<p>Homogen del: \\(y_h=Ce^{2x}\\).</p><p>Pröva \\(y_p=A\\):</p><p>\\[-2A=8\\Rightarrow A=-4.\\]</p><p><strong>\\[y=Ce^{2x}-4.\\]</strong></p>",
+    "id": "4.142"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "E",
+    "typ": "första ordningen med jämviktsvärde",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'=0,5y-3.\\]</p>",
+    "s": "<p>Homogena lösningen är \\(Ce^{0,5x}\\). En konstant partikulär lösning uppfyller</p><p>\\[0=0,5A-3\\Rightarrow A=6.\\]</p><p><strong>\\[y=Ce^{0,5x}+6.\\]</strong></p>",
+    "id": "4.143"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "E",
+    "typ": "kontrollera allmän lösning",
+    "poang": "2/0/0",
+    "t": "<p>Visa genom insättning att</p><p>\\[y=Ce^{-2x}+5\\]</p><p>är en lösningsfamilj till \\(y'=-2y+10\\).</p>",
+    "s": "<p>Derivera:</p><p>\\[y'=-2Ce^{-2x}.\\]</p><p>Högerledet blir</p><p>\\[-2y+10=-2(Ce^{-2x}+5)+10=-2Ce^{-2x}.\\]</p><p>Vänster- och högerled är lika. Alltså är familjen en lösningsfamilj.</p>",
+    "id": "4.144"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "C",
+    "typ": "inhomogen första ordningen med linjärt högerled",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y'=2y+4x-1.\\]</p>",
+    "s": "<p>Homogena lösningen är \\(y_h=Ce^{2x}\\).</p><p>Eftersom högerledet är linjärt prövar vi \\(y_p=ax+b\\). Då är \\(y_p'=a\\).</p><p>Insättning:</p><p>\\[a=2(ax+b)+4x-1.\\]</p><p>Jämför koefficienter:</p><p>\\[2a+4=0\\Rightarrow a=-2,\\]</p><p>\\[a=2b-1\\Rightarrow-2=2b-1\\Rightarrow b=-\\frac12.\\]</p><p><strong>\\[y=Ce^{2x}-2x-\\frac12.\\]</strong></p>",
+    "id": "4.145"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "C",
+    "typ": "linjär första ordningen med polynom",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y'+2y=6x+1.\\]</p>",
+    "s": "<p>Homogena lösningen är \\(y_h=Ce^{-2x}\\).</p><p>Pröva \\(y_p=ax+b\\). Då ger insättning</p><p>\\[a+2(ax+b)=6x+1.\\]</p><p>Jämför koefficienter:</p><p>\\[2a=6\\Rightarrow a=3,\\]</p><p>\\[a+2b=1\\Rightarrow3+2b=1\\Rightarrow b=-1.\\]</p><p><strong>\\[y=Ce^{-2x}+3x-1.\\]</strong></p>",
+    "id": "4.146"
+  },
+  {
+    "kap": 4,
+    "omr": "forsta_ordningen",
+    "niva": "C",
+    "typ": "Newtons avsvalningsform utan begynnelsevillkor",
+    "poang": "0/2/0",
+    "t": "<p>En temperatur \\(T(t)\\) uppfyller</p><p>\\[T'=-0,3(T-20).\\]</p><p>Bestäm den allmänna lösningen och tolka talet 20.</p>",
+    "s": "<p>Sätt \\(u=T-20\\). Då är \\(u'=T'\\) och</p><p>\\[u'=-0,3u.\\]</p><p>Alltså \\(u=Ce^{-0,3t}\\), så</p><p><strong>\\[T(t)=20+Ce^{-0,3t}.\\]</strong></p><p>Talet 20 är modellens <strong>jämviktstemperatur</strong>: när \\(T=20\\) är förändringshastigheten noll, och lösningarna närmar sig 20 över tid.</p>",
+    "id": "4.147"
+  },
+  {
+    "kap": 4,
     "omr": "andra_ordningen",
     "niva": "C",
     "typ": "begynnelsevillkor vid dubbelrot",
@@ -5169,6 +6356,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "E",
+    "typ": "homogen andra ordningen reella rötter",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y''-7y'+12y=0.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen</p><p>\\[r^2-7r+12=0=(r-3)(r-4)\\]</p><p>ger rötterna 3 och 4. Därför</p><p><strong>\\[y=C_1e^{3x}+C_2e^{4x}.\\]</strong></p>",
+    "id": "4.148"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "E",
+    "typ": "homogen andra ordningen dubbelrot",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y''+6y'+9y=0.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen är</p><p>\\[(r+3)^2=0.\\]</p><p>Dubbelroten är \\(r=-3\\). Därför</p><p><strong>\\[y=(C_1+C_2x)e^{-3x}.\\]</strong></p>",
+    "id": "4.149"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "E",
+    "typ": "homogen andra ordningen komplexa rötter",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y''+2y'+10y=0.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen ger</p><p>\\[r=\\frac{-2\\pm\\sqrt{4-40}}2=-1\\pm3i.\\]</p><p>Alltså</p><p><strong>\\[y=e^{-x}(C_1\\cos3x+C_2\\sin3x).\\]</strong></p>",
+    "id": "4.150"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "E",
+    "typ": "inhomogen andra ordningen konstant högerled",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y''-y=6.\\]</p>",
+    "s": "<p>Homogena ekvationen har rötterna \\(\\pm1\\):</p><p>\\[y_h=C_1e^x+C_2e^{-x}.\\]</p><p>Pröva en konstant partikulär lösning \\(y_p=A\\). Då</p><p>\\[-A=6\\Rightarrow A=-6.\\]</p><p><strong>\\[y=C_1e^x+C_2e^{-x}-6.\\]</strong></p>",
+    "id": "4.151"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "E",
+    "typ": "inhomogen andra ordningen exponentialhögerled",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y''-3y'+2y=e^{4x}.\\]</p>",
+    "s": "<p>Homogena rötter är 1 och 2:</p><p>\\[y_h=C_1e^x+C_2e^{2x}.\\]</p><p>Eftersom 4 inte är en homogen rot prövar vi \\(y_p=Ae^{4x}\\). Insättning ger</p><p>\\[(16-12+2)Ae^{4x}=e^{4x}\\Rightarrow6A=1.\\]</p><p>\\[A=\\frac16.\\]</p><p><strong>\\[y=C_1e^x+C_2e^{2x}+\\frac16e^{4x}.\\]</strong></p>",
+    "id": "4.152"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "C",
+    "typ": "resonans med exponentialhögerled",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''-5y'+6y=e^{2x}.\\]</p>",
+    "s": "<p>Den homogena ekvationen har rötterna 2 och 3:</p><p>\\[y_h=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Eftersom högerledet \\(e^{2x}\\) redan motsvarar den homogena roten \\(r=2\\) uppstår resonans. Därför prövar vi</p><p>\\[y_p=Axe^{2x}.\\]</p><p>Insättning i vänsterledet ger \\(-Ae^{2x}\\). För att få högerledet \\(e^{2x}\\) krävs \\(A=-1\\).</p><p>Alltså</p><p><strong>\\[y=C_1e^{2x}+C_2e^{3x}-xe^{2x}.\\]</strong></p>",
+    "id": "4.153"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "C",
+    "typ": "inhomogen andra ordningen linjärt polynom",
+    "poang": "0/2/0",
+    "t": "<p>Lös</p><p>\\[y''+y=2x.\\]</p>",
+    "s": "<p>Homogena lösningen är</p><p>\\[y_h=C_1\\cos x+C_2\\sin x.\\]</p><p>Pröva \\(y_p=ax+b\\). Då är \\(y_p''=0\\), så</p><p>\\[ax+b=2x.\\]</p><p>Det ger \\(a=2\\), \\(b=0\\), alltså \\(y_p=2x\\).</p><p><strong>\\[y=C_1\\cos x+C_2\\sin x+2x.\\]</strong></p>",
+    "id": "4.154"
+  },
+  {
+    "kap": 4,
+    "omr": "andra_ordningen",
+    "niva": "C",
+    "typ": "inhomogen andra ordningen trigonometriskt högerled",
+    "poang": "0/2/0",
+    "t": "<p>Lös</p><p>\\[y''+4y=\\cos x.\\]</p>",
+    "s": "<p>Homogena lösningen är</p><p>\\[y_h=C_1\\cos2x+C_2\\sin2x.\\]</p><p>Pröva \\(y_p=A\\cos x+B\\sin x\\). Eftersom högerledet bara innehåller cosinus kommer \\(B=0\\) efter koefficientjämförelse. Med \\(y_p=A\\cos x\\) får vi</p><p>\\[y_p''+4y_p=-A\\cos x+4A\\cos x=3A\\cos x.\\]</p><p>Alltså \\(3A=1\\Rightarrow A=\\frac13\\).</p><p><strong>\\[y=C_1\\cos2x+C_2\\sin2x+\\frac13\\cos x.\\]</strong></p>",
+    "id": "4.155"
+  },
+  {
+    "kap": 4,
     "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "terminalhastighet med linjär luftmotståndsmodell",
@@ -5339,6 +6606,86 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "E",
+    "typ": "formulera blandningsmodell",
+    "poang": "2/0/0",
+    "t": "<p>En tank innehåller 200 L vätska. Saltlösning med koncentrationen 0,05 kg/L rinner in med 4 L/min och lika mycket väl blandad vätska rinner ut.</p><p>Låt \\(M(t)\\) vara mängden salt i kg. Skriv differentialekvationen för \\(M\\).</p>",
+    "s": "<p>Inflödet av salt är</p><p>\\[0,05\\cdot4=0,20\\text{ kg/min}.\\]</p><p>Koncentrationen i tanken är \\(M/200\\) kg/L. Utflödet av salt blir därför</p><p>\\[4\\cdot\\frac{M}{200}=0,02M.\\]</p><p>Alltså</p><p><strong>\\[M'=0,20-0,02M.\\]</strong></p>",
+    "id": "4.162"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "E",
+    "typ": "tolka CAS-konstant",
+    "poang": "2/0/0",
+    "t": "<p>Ett CAS ger den allmänna lösningen</p><p>\\[T(t)=18+Ce^{-0,12t}\\]</p><p>till en temperaturmodell. Vad representerar talet 18 i modellen?</p>",
+    "s": "<p>När \\(t\\to\\infty\\) går exponentialtermen mot 0. Då närmar sig temperaturen</p><p>\\[T(t)\\to18.\\]</p><p><strong>Talet 18 är modellens omgivnings- eller jämviktstemperatur.</strong></p>",
+    "id": "4.163"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "E",
+    "typ": "stationärt värde i medicinmodell",
+    "poang": "2/0/0",
+    "t": "<p>En medicinmängd modelleras av</p><p>\\[M'=12-0,15M.\\]</p><p>Bestäm den stationära mängden medicin.</p>",
+    "s": "<p>Vid ett stationärt värde är \\(M'=0\\):</p><p>\\[0=12-0,15M\\Rightarrow M=\\frac{12}{0,15}=80.\\]</p><p><strong>Den stationära mängden är 80 mg.</strong></p>",
+    "id": "4.164"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "C",
+    "typ": "bestäm tillväxtkonstant från fördubblingstid",
+    "poang": "0/2/0",
+    "t": "<p>En population följer modellen \\(P'=kP\\). Populationen fördubblas på 10 år.</p><p>Bestäm \\(k\\).</p>",
+    "s": "<p>Lösningen är \\(P(t)=P_0e^{kt}\\). Fördubbling efter 10 år betyder</p><p>\\[2P_0=P_0e^{10k}.\\]</p><p>\\[2=e^{10k}\\Rightarrow\\ln2=10k.\\]</p><p><strong>\\[k=\\frac{\\ln2}{10}\\approx0,0693\\text{ per år}.\\]</strong></p>",
+    "id": "4.165"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "C",
+    "typ": "Newtons avsvalningslag från en mätning",
+    "poang": "0/3/0",
+    "t": "<p>Ett föremål håller 70 °C när det placeras i ett rum som håller 20 °C. Efter 5 minuter är temperaturen 50 °C. Modellen är</p><p>\\[T(t)=20+50e^{-kt}.\\]</p><p>Bestäm \\(k\\).</p>",
+    "s": "<p>Sätt in mätvärdet \\(T(5)=50\\):</p><p>\\[50=20+50e^{-5k}.\\]</p><p>\\[30=50e^{-5k}\\Rightarrow e^{-5k}=0,6.\\]</p><p>Logaritmera:</p><p>\\[-5k=\\ln0,6\\Rightarrow k=-\\frac{\\ln0,6}{5}.\\]</p><p><strong>\\[k\\approx0,1022\\text{ min}^{-1}.\\]</strong></p>",
+    "id": "4.166"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "C",
+    "typ": "tolka numeriskt fel",
+    "poang": "0/2/0",
+    "t": "<p>Ett numeriskt verktyg ger \\(y(4)\\approx7,82\\), medan en analytisk lösning ger \\(y(4)=8,00\\).</p><ol type=\"a\"><li>Bestäm det absoluta felet.</li><li>Bestäm det relativa felet i procent.</li></ol>",
+    "s": "<p><strong>a)</strong> Absolut fel:</p><p>\\[|7,82-8,00|=0,18.\\]</p><p><strong>b)</strong> Relativt fel:</p><p>\\[\\frac{0,18}{8,00}\\cdot100\\%=2,25\\%.\\]</p><p><strong>Svar: absolut fel 0,18 och relativt fel 2,25 %.</strong></p>",
+    "id": "4.167"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "E",
+    "typ": "exponentiell tillväxt från differentialekvation",
+    "poang": "2/0/0",
+    "t": "<p>En bakteriepopulation modelleras av \\(P'=0,06P\\) med \\(P(0)=800\\). Bestäm populationen efter 8 timmar enligt modellen.</p>",
+    "s": "<p>Lösningen till \\(P'=0,06P\\) är \\(P(t)=Ce^{0,06t}\\). Begynnelsevillkoret ger \\(C=800\\).</p><p>\\[P(8)=800e^{0,48}\\approx1292,9.\\]</p><p><strong>Modellen ger ungefär 1293 bakterier efter 8 timmar.</strong></p>",
+    "id": "4.175"
+  },
+  {
+    "kap": 4,
+    "omr": "modellering_digitalt",
+    "niva": "C",
+    "typ": "medicinmodell med tid till nivå",
+    "poang": "0/3/0",
+    "t": "<p>En medicinmängd \\(M(t)\\) i mg modelleras av</p><p>\\[M'=18-0,3M,\\qquad M(0)=0.\\]</p><ol type=\"a\"><li>Bestäm \\(M(t)\\).</li><li>När når mängden 45 mg?</li></ol>",
+    "s": "<p><strong>a)</strong> Jämviktsvärdet är \\(18/0,3=60\\). Lösningen kan därför skrivas \\(M=60+Ce^{-0,3t}\\). Av \\(M(0)=0\\) följer \\(C=-60\\):</p><p><strong>\\[M(t)=60(1-e^{-0,3t}).\\]</strong></p><p><strong>b)</strong> Sätt \\(M=45\\):</p><p>\\[45=60(1-e^{-0,3t})\\Rightarrow e^{-0,3t}=0,25.\\]</p><p>\\[-0,3t=\\ln0,25=-\\ln4\\]</p><p>\\[t=\\frac{\\ln4}{0,3}\\approx4,62.\\]</p><p><strong>Mängden når 45 mg efter cirka 4,62 timmar.</strong></p>",
+    "id": "4.176"
+  },
+  {
+    "kap": 4,
     "omr": "begynnelsevillkor",
     "niva": "A",
     "typ": "harmonisk svängning med amplitud och fasförskjutning",
@@ -5346,6 +6693,126 @@ window.BANKMATF1 = [
     "t": "<span class=\"fig\"><svg width=\"470\" height=\"320\" viewBox=\"0 0 470 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Svängningskurva med amplituden 5 och streckade linjer vid y lika med 5 och minus 5\">\n<rect width=\"470\" height=\"320\" fill=\"white\"/>\n<line x1=\"60\" y1=\"45\" x2=\"425\" y2=\"45\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<line x1=\"60\" y1=\"265\" x2=\"425\" y2=\"265\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<path d=\"M 60.0,89.0 L 60.6,90.3 L 61.1,91.7 L 61.7,93.0 L 62.3,94.4 L 62.9,95.8 L 63.5,97.2 L 64.0,98.6 L 64.6,100.0 L 65.2,101.4 L 65.8,102.9 L 66.3,104.4 L 66.9,105.8 L 67.5,107.3 L 68.0,108.8 L 68.6,110.3 L 69.2,111.8 L 69.8,113.3 L 70.3,114.9 L 70.9,116.4 L 71.5,118.0 L 72.1,119.5 L 72.7,121.1 L 73.2,122.7 L 73.8,124.2 L 74.4,125.8 L 75.0,127.4 L 75.5,129.0 L 76.1,130.6 L 76.7,132.2 L 77.2,133.8 L 77.8,135.5 L 78.4,137.1 L 79.0,138.7 L 79.5,140.4 L 80.1,142.0 L 80.7,143.6 L 81.3,145.3 L 81.8,146.9 L 82.4,148.6 L 83.0,150.2 L 83.6,151.9 L 84.2,153.5 L 84.7,155.2 L 85.3,156.8 L 85.9,158.5 L 86.5,160.1 L 87.0,161.8 L 87.6,163.4 L 88.2,165.1 L 88.8,166.7 L 89.3,168.3 L 89.9,170.0 L 90.5,171.6 L 91.0,173.2 L 91.6,174.9 L 92.2,176.5 L 92.8,178.1 L 93.3,179.7 L 93.9,181.3 L 94.5,182.9 L 95.1,184.5 L 95.7,186.1 L 96.2,187.7 L 96.8,189.2 L 97.4,190.8 L 98.0,192.4 L 98.5,193.9 L 99.1,195.4 L 99.7,197.0 L 100.2,198.5 L 100.8,200.0 L 101.4,201.5 L 102.0,203.0 L 102.5,204.5 L 103.1,205.9 L 103.7,207.4 L 104.3,208.8 L 104.8,210.3 L 105.4,211.7 L 106.0,213.1 L 106.6,214.5 L 107.2,215.9 L 107.7,217.2 L 108.3,218.6 L 108.9,219.9 L 109.4,221.3 L 110.0,222.6 L 110.6,223.9 L 111.2,225.1 L 111.8,226.4 L 112.3,227.7 L 112.9,228.9 L 113.5,230.1 L 114.0,231.3 L 114.6,232.5 L 115.2,233.6 L 115.8,234.8 L 116.3,235.9 L 116.9,237.0 L 117.5,238.1 L 118.1,239.2 L 118.7,240.2 L 119.2,241.3 L 119.8,242.3 L 120.4,243.3 L 121.0,244.3 L 121.5,245.2 L 122.1,246.1 L 122.7,247.1 L 123.2,247.9 L 123.8,248.8 L 124.4,249.7 L 125.0,250.5 L 125.5,251.3 L 126.1,252.1 L 126.7,252.9 L 127.3,253.6 L 127.8,254.3 L 128.4,255.0 L 129.0,255.7 L 129.6,256.3 L 130.1,257.0 L 130.7,257.6 L 131.3,258.2 L 131.9,258.7 L 132.4,259.3 L 133.0,259.8 L 133.6,260.3 L 134.2,260.7 L 134.8,261.2 L 135.3,261.6 L 135.9,262.0 L 136.5,262.4 L 137.1,262.7 L 137.6,263.0 L 138.2,263.3 L 138.8,263.6 L 139.3,263.9 L 139.9,264.1 L 140.5,264.3 L 141.1,264.5 L 141.6,264.6 L 142.2,264.7 L 142.8,264.8 L 143.4,264.9 L 143.9,265.0 L 144.5,265.0 L 145.1,265.0 L 145.7,265.0 L 146.2,264.9 L 146.8,264.9 L 147.4,264.8 L 148.0,264.6 L 148.6,264.5 L 149.1,264.3 L 149.7,264.1 L 150.3,263.9 L 150.9,263.7 L 151.4,263.4 L 152.0,263.1 L 152.6,262.8 L 153.2,262.5 L 153.7,262.1 L 154.3,261.7 L 154.9,261.3 L 155.4,260.8 L 156.0,260.4 L 156.6,259.9 L 157.2,259.4 L 157.8,258.9 L 158.3,258.3 L 158.9,257.7 L 159.5,257.1 L 160.1,256.5 L 160.6,255.9 L 161.2,255.2 L 161.8,254.5 L 162.4,253.8 L 162.9,253.0 L 163.5,252.3 L 164.1,251.5 L 164.7,250.7 L 165.2,249.9 L 165.8,249.0 L 166.4,248.2 L 166.9,247.3 L 167.5,246.4 L 168.1,245.4 L 168.7,244.5 L 169.2,243.5 L 169.8,242.5 L 170.4,241.5 L 171.0,240.5 L 171.6,239.4 L 172.1,238.4 L 172.7,237.3 L 173.3,236.2 L 173.8,235.1 L 174.4,233.9 L 175.0,232.8 L 175.6,231.6 L 176.2,230.4 L 176.7,229.2 L 177.3,228.0 L 177.9,226.7 L 178.4,225.5 L 179.0,224.2 L 179.6,222.9 L 180.2,221.6 L 180.8,220.3 L 181.3,218.9 L 181.9,217.6 L 182.5,216.2 L 183.1,214.8 L 183.6,213.4 L 184.2,212.0 L 184.8,210.6 L 185.4,209.2 L 185.9,207.7 L 186.5,206.3 L 187.1,204.8 L 187.7,203.4 L 188.2,201.9 L 188.8,200.4 L 189.4,198.9 L 189.9,197.3 L 190.5,195.8 L 191.1,194.3 L 191.7,192.7 L 192.2,191.2 L 192.8,189.6 L 193.4,188.0 L 194.0,186.5 L 194.5,184.9 L 195.1,183.3 L 195.7,181.7 L 196.3,180.1 L 196.8,178.5 L 197.4,176.9 L 198.0,175.2 L 198.6,173.6 L 199.2,172.0 L 199.7,170.4 L 200.3,168.7 L 200.9,167.1 L 201.4,165.4 L 202.0,163.8 L 202.6,162.2 L 203.2,160.5 L 203.8,158.9 L 204.3,157.2 L 204.9,155.6 L 205.5,153.9 L 206.1,152.3 L 206.6,150.6 L 207.2,149.0 L 207.8,147.3 L 208.3,145.7 L 208.9,144.0 L 209.5,142.4 L 210.1,140.8 L 210.7,139.1 L 211.2,137.5 L 211.8,135.9 L 212.4,134.2 L 213.0,132.6 L 213.5,131.0 L 214.1,129.4 L 214.7,127.8 L 215.2,126.2 L 215.8,124.6 L 216.4,123.0 L 217.0,121.5 L 217.6,119.9 L 218.1,118.3 L 218.7,116.8 L 219.3,115.2 L 219.8,113.7 L 220.4,112.2 L 221.0,110.7 L 221.6,109.2 L 222.1,107.7 L 222.7,106.2 L 223.3,104.7 L 223.9,103.2 L 224.4,101.8 L 225.0,100.4 L 225.6,98.9 L 226.2,97.5 L 226.8,96.1 L 227.3,94.7 L 227.9,93.4 L 228.5,92.0 L 229.0,90.6 L 229.6,89.3 L 230.2,88.0 L 230.8,86.7 L 231.3,85.4 L 231.9,84.1 L 232.5,82.9 L 233.1,81.7 L 233.7,80.4 L 234.2,79.2 L 234.8,78.0 L 235.4,76.9 L 236.0,75.7 L 236.5,74.6 L 237.1,73.5 L 237.7,72.4 L 238.2,71.3 L 238.8,70.2 L 239.4,69.2 L 240.0,68.2 L 240.6,67.2 L 241.1,66.2 L 241.7,65.2 L 242.3,64.3 L 242.9,63.3 L 243.4,62.4 L 244.0,61.6 L 244.6,60.7 L 245.2,59.9 L 245.7,59.0 L 246.3,58.2 L 246.9,57.5 L 247.4,56.7 L 248.0,56.0 L 248.6,55.3 L 249.2,54.6 L 249.8,53.9 L 250.3,53.3 L 250.9,52.7 L 251.5,52.1 L 252.0,51.5 L 252.6,51.0 L 253.2,50.4 L 253.8,49.9 L 254.3,49.5 L 254.9,49.0 L 255.5,48.6 L 256.1,48.2 L 256.6,47.8 L 257.2,47.4 L 257.8,47.1 L 258.4,46.8 L 258.9,46.5 L 259.5,46.2 L 260.1,46.0 L 260.7,45.8 L 261.2,45.6 L 261.8,45.5 L 262.4,45.3 L 263.0,45.2 L 263.6,45.1 L 264.1,45.1 L 264.7,45.0 L 265.3,45.0 L 265.9,45.0 L 266.4,45.0 L 267.0,45.1 L 267.6,45.2 L 268.1,45.3 L 268.7,45.4 L 269.3,45.6 L 269.9,45.8 L 270.5,46.0 L 271.0,46.2 L 271.6,46.5 L 272.2,46.8 L 272.8,47.1 L 273.3,47.4 L 273.9,47.8 L 274.5,48.1 L 275.1,48.5 L 275.6,49.0 L 276.2,49.4 L 276.8,49.9 L 277.4,50.4 L 277.9,50.9 L 278.5,51.4 L 279.1,52.0 L 279.6,52.6 L 280.2,53.2 L 280.8,53.9 L 281.4,54.5 L 281.9,55.2 L 282.5,55.9 L 283.1,56.6 L 283.7,57.4 L 284.2,58.2 L 284.8,59.0 L 285.4,59.8 L 286.0,60.6 L 286.5,61.5 L 287.1,62.3 L 287.7,63.2 L 288.3,64.2 L 288.9,65.1 L 289.4,66.1 L 290.0,67.0 L 290.6,68.0 L 291.1,69.1 L 291.7,70.1 L 292.3,71.2 L 292.9,72.2 L 293.4,73.3 L 294.0,74.4 L 294.6,75.6 L 295.2,76.7 L 295.8,77.9 L 296.3,79.1 L 296.9,80.3 L 297.5,81.5 L 298.0,82.7 L 298.6,84.0 L 299.2,85.3 L 299.8,86.5 L 300.4,87.8 L 300.9,89.2 L 301.5,90.5 L 302.1,91.8 L 302.6,93.2 L 303.2,94.6 L 303.8,95.9 L 304.4,97.3 L 304.9,98.8 L 305.5,100.2 L 306.1,101.6 L 306.7,103.1 L 307.2,104.5 L 307.8,106.0 L 308.4,107.5 L 309.0,109.0 L 309.5,110.5 L 310.1,112.0 L 310.7,113.5 L 311.3,115.0 L 311.9,116.6 L 312.4,118.1 L 313.0,119.7 L 313.6,121.3 L 314.1,122.8 L 314.7,124.4 L 315.3,126.0 L 315.9,127.6 L 316.4,129.2 L 317.0,130.8 L 317.6,132.4 L 318.2,134.0 L 318.8,135.7 L 319.3,137.3 L 319.9,138.9 L 320.5,140.6 L 321.1,142.2 L 321.6,143.8 L 322.2,145.5 L 322.8,147.1 L 323.4,148.8 L 323.9,150.4 L 324.5,152.1 L 325.1,153.7 L 325.7,155.4 L 326.2,157.0 L 326.8,158.7 L 327.4,160.3 L 327.9,162.0 L 328.5,163.6 L 329.1,165.2 L 329.7,166.9 L 330.2,168.5 L 330.8,170.2 L 331.4,171.8 L 332.0,173.4 L 332.6,175.1 L 333.1,176.7 L 333.7,178.3 L 334.3,179.9 L 334.9,181.5 L 335.4,183.1 L 336.0,184.7 L 336.6,186.3 L 337.2,187.9 L 337.7,189.4 L 338.3,191.0 L 338.9,192.5 L 339.5,194.1 L 340.0,195.6 L 340.6,197.2 L 341.2,198.7 L 341.8,200.2 L 342.3,201.7 L 342.9,203.2 L 343.5,204.7 L 344.1,206.1 L 344.6,207.6 L 345.2,209.0 L 345.8,210.4 L 346.4,211.9 L 346.9,213.3 L 347.5,214.7 L 348.1,216.0 L 348.6,217.4 L 349.2,218.8 L 349.8,220.1 L 350.4,221.4 L 350.9,222.7 L 351.5,224.0 L 352.1,225.3 L 352.7,226.6 L 353.2,227.8 L 353.8,229.0 L 354.4,230.2 L 355.0,231.4 L 355.5,232.6 L 356.1,233.8 L 356.7,234.9 L 357.3,236.0 L 357.8,237.2 L 358.4,238.2 L 359.0,239.3 L 359.6,240.4 L 360.1,241.4 L 360.7,242.4 L 361.3,243.4 L 361.9,244.4 L 362.4,245.3 L 363.0,246.3 L 363.6,247.2 L 364.2,248.1 L 364.8,248.9 L 365.3,249.8 L 365.9,250.6 L 366.5,251.4 L 367.1,252.2 L 367.6,252.9 L 368.2,253.7 L 368.8,254.4 L 369.3,255.1 L 369.9,255.8 L 370.5,256.4 L 371.1,257.1 L 371.6,257.7 L 372.2,258.2 L 372.8,258.8 L 373.4,259.3 L 373.9,259.8 L 374.5,260.3 L 375.1,260.8 L 375.7,261.2 L 376.2,261.6 L 376.8,262.0 L 377.4,262.4 L 378.0,262.8 L 378.6,263.1 L 379.1,263.4 L 379.7,263.6 L 380.3,263.9 L 380.9,264.1 L 381.4,264.3 L 382.0,264.5 L 382.6,264.6 L 383.2,264.7 L 383.7,264.8 L 384.3,264.9 L 384.9,265.0 L 385.4,265.0 L 386.0,265.0 L 386.6,265.0 L 387.2,264.9 L 387.8,264.8 L 388.3,264.7 L 388.9,264.6 L 389.5,264.5 L 390.1,264.3 L 390.6,264.1 L 391.2,263.9 L 391.8,263.6 L 392.4,263.4 L 392.9,263.1 L 393.5,262.8 L 394.1,262.4 L 394.7,262.0 L 395.2,261.6 L 395.8,261.2 L 396.4,260.8 L 397.0,260.3 L 397.5,259.8 L 398.1,259.3 L 398.7,258.8 L 399.2,258.2 L 399.8,257.7 L 400.4,257.1 L 401.0,256.4 L 401.6,255.8 L 402.1,255.1 L 402.7,254.4 L 403.3,253.7 L 403.9,252.9 L 404.4,252.2 L 405.0,251.4 L 405.6,250.6 L 406.1,249.8 L 406.7,248.9 L 407.3,248.1 L 407.9,247.2 L 408.4,246.2 L 409.0,245.3 L 409.6,244.4 L 410.2,243.4 L 410.8,242.4 L 411.3,241.4 L 411.9,240.4 L 412.5,239.3 L 413.0,238.2 L 413.6,237.2 L 414.2,236.0 L 414.8,234.9 L 415.3,233.8 L 415.9,232.6 L 416.5,231.4 L 417.1,230.2 L 417.6,229.0 L 418.2,227.8 L 418.8,226.6 L 419.4,225.3 L 419.9,224.0 L 420.5,222.7 L 421.1,221.4 L 421.7,220.1 L 422.2,218.8 L 422.8,217.4 L 423.4,216.0 L 424.0,214.7 L 424.6,213.3 L 425.1,211.9 L 425.7,210.4 L 426.3,209.0 L 426.8,207.6 L 427.4,206.1 L 428.0,204.6\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/>\n<line x1=\"40\" y1=\"155\" x2=\"440\" y2=\"155\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"60\" y1=\"10\" x2=\"60\" y2=\"300\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"175\" y1=\"155\" x2=\"175\" y2=\"160\" stroke=\"#222\"/><text x=\"175\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"290\" y1=\"155\" x2=\"290\" y2=\"160\" stroke=\"#222\"/><text x=\"290\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"405\" y1=\"155\" x2=\"405\" y2=\"160\" stroke=\"#222\"/><text x=\"405\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">3</text><line x1=\"55\" y1=\"265\" x2=\"65\" y2=\"265\" stroke=\"#222\"/><text x=\"50\" y=\"270\" font-size=\"12.5\" text-anchor=\"end\">-5</text><line x1=\"55\" y1=\"221\" x2=\"65\" y2=\"221\" stroke=\"#222\"/><text x=\"50\" y=\"226\" font-size=\"12.5\" text-anchor=\"end\">-3</text><line x1=\"55\" y1=\"89\" x2=\"65\" y2=\"89\" stroke=\"#222\"/><text x=\"50\" y=\"94\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"55\" y1=\"45\" x2=\"65\" y2=\"45\" stroke=\"#222\"/><text x=\"50\" y=\"50\" font-size=\"12.5\" text-anchor=\"end\">5</text>\n<circle cx=\"60\" cy=\"89\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"70\" y=\"80\" font-size=\"14\" fill=\"#B23A2E\">y(0) = 3</text>\n<text x=\"428\" y=\"36\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">största utslag</text>\n<text x=\"443\" y=\"160\" font-size=\"14\">x</text><text x=\"68\" y=\"22\" font-size=\"14\">y</text>\n<text x=\"40\" y=\"304\" font-size=\"14\" fill=\"#777\">Lika stort utslag åt båda håll: odämpad svängning.</text>\n</svg></span><p>En odämpad svängning beskrivs av</p><p>\\[y''+9y=0,\\qquad y(0)=3,\\qquad y'(0)=-12.\\]</p><ol type=\"a\"><li>Bestäm \\(y(x)\\).</li><li>Skriv lösningen på formen \\(y=A\\cos(3x+\\varphi)\\) och bestäm amplituden \\(A\\).</li></ol>",
     "s": "<p><strong>a)</strong> Karakteristiska ekvationen är \\(r^2+9=0\\) med rötterna \\(r=\\pm3i\\). Rent imaginära rötter \\(\\pm\\beta i\\) ger lösningen</p><p>\\[y=C_1\\cos3x+C_2\\sin3x.\\]</p><p>Villkoret \\(y(0)=3\\) ger direkt \\(C_1=3\\). Derivatan är</p><p>\\[y'=-3C_1\\sin3x+3C_2\\cos3x,\\]</p><p>så \\(y'(0)=3C_2=-12\\), alltså \\(C_2=-4\\). Lösningen är</p><p>\\[y=\\mathbf{3\\cos3x-4\\sin3x}.\\]</p><p><strong>b)</strong> Utveckla den önskade formen med additionsformeln:</p><p>\\[A\\cos(3x+\\varphi)=A\\cos\\varphi\\cos3x-A\\sin\\varphi\\sin3x.\\]</p><p>Jämförelse av koefficienterna framför \\(\\cos3x\\) och \\(\\sin3x\\) ger</p><p>\\[A\\cos\\varphi=3,\\qquad A\\sin\\varphi=4.\\]</p><p>Kvadrera och addera. Eftersom \\(\\cos^2\\varphi+\\sin^2\\varphi=1\\) faller \\(\\varphi\\) bort:</p><p>\\[A^2=3^2+4^2=25\\Rightarrow A=5.\\]</p><p>Vinkeln fås ur \\(\\tan\\varphi=4/3\\), och eftersom både \\(\\cos\\varphi\\) och \\(\\sin\\varphi\\) är positiva ligger \\(\\varphi\\) i första kvadranten:</p><p>\\[\\varphi=\\arctan\\frac43\\approx0,927.\\]</p><p>Alltså \\(y\\approx5\\cos(3x+0,927)\\), och <strong>amplituden är 5</strong>. Det stämmer med figuren, där kurvan precis når \\(\\pm5\\).</p>",
     "id": "4.121"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "första ordningens begynnelsevärdesproblem",
+    "poang": "2/0/0",
+    "t": "<p>Lös begynnelsevärdesproblemet</p><p>\\[y'=2y,\\qquad y(0)=3.\\]</p>",
+    "s": "<p>Den allmänna lösningen till \\(y'=2y\\) är \\(y=Ce^{2x}\\).</p><p>Begynnelsevillkoret ger</p><p>\\[3=y(0)=C.\\]</p><p><strong>\\[y=3e^{2x}.\\]</strong></p>",
+    "id": "4.124"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "exponentiellt avtagande begynnelsevärdesproblem",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'=-0,5y,\\qquad y(0)=8.\\]</p>",
+    "s": "<p>Den allmänna lösningen är \\(y=Ce^{-0,5x}\\). Av \\(y(0)=8\\) följer \\(C=8\\).</p><p><strong>\\[y=8e^{-0,5x}.\\]</strong></p>",
+    "id": "4.125"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "inhomogen första ordningen med begynnelsevillkor",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'=y+4,\\qquad y(0)=2.\\]</p>",
+    "s": "<p>En konstant partikulär lösning fås av \\(0=A+4\\), alltså \\(A=-4\\). Den allmänna lösningen är därför</p><p>\\[y=Ce^x-4.\\]</p><p>Begynnelsevillkoret ger \\(2=C-4\\), alltså \\(C=6\\).</p><p><strong>\\[y=6e^x-4.\\]</strong></p>",
+    "id": "4.126"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "andra ordningens begynnelsevärdesproblem med två reella rötter",
+    "poang": "3/0/0",
+    "t": "<p>Lös</p><p>\\[y''-5y'+6y=0,\\qquad y(0)=2,\\quad y'(0)=1.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen är \\(r^2-5r+6=0\\), med rötterna 2 och 3.</p><p>\\[y=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Villkoren ger</p><p>\\[C_1+C_2=2,\\qquad2C_1+3C_2=1.\\]</p><p>Subtrahera två gånger den första ekvationen från den andra:</p><p>\\[C_2=-3,\\qquad C_1=5.\\]</p><p><strong>\\[y=5e^{2x}-3e^{3x}.\\]</strong></p>",
+    "id": "4.127"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "harmonisk svängning med begynnelsevillkor",
+    "poang": "3/0/0",
+    "t": "<p>Lös</p><p>\\[y''+4y=0,\\qquad y(0)=0,\\quad y'(0)=6.\\]</p>",
+    "s": "<p>Karakteristiska rötter är \\(r=\\pm2i\\), så</p><p>\\[y=C_1\\cos2x+C_2\\sin2x.\\]</p><p>Av \\(y(0)=0\\) fås \\(C_1=0\\).</p><p>\\[y'=2C_2\\cos2x\\]</p><p>och \\(y'(0)=6\\) ger \\(2C_2=6\\Rightarrow C_2=3\\).</p><p><strong>\\[y=3\\sin2x.\\]</strong></p>",
+    "id": "4.128"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "C",
+    "typ": "dämpad svängning med begynnelsevillkor",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''+2y'+5y=0,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen \\(r^2+2r+5=0\\) ger \\(r=-1\\pm2i\\).</p><p>\\[y=e^{-x}(C_1\\cos2x+C_2\\sin2x).\\]</p><p>Av \\(y(0)=1\\) fås \\(C_1=1\\).</p><p>Derivatan vid \\(x=0\\) är \\(y'(0)=-C_1+2C_2\\). Villkoret \\(y'(0)=0\\) ger</p><p>\\[-1+2C_2=0\\Rightarrow C_2=\\frac12.\\]</p><p><strong>\\[y=e^{-x}\\left(\\cos2x+\\frac12\\sin2x\\right).\\]</strong></p>",
+    "id": "4.129"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "C",
+    "typ": "dubbelrot med begynnelsevillkor",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''-4y'+4y=0,\\qquad y(0)=2,\\quad y'(0)=1.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen är \\((r-2)^2=0\\). Alltså</p><p>\\[y=(C_1+C_2x)e^{2x}.\\]</p><p>Av \\(y(0)=2\\) fås \\(C_1=2\\).</p><p>Derivera:</p><p>\\[y'=\\bigl(C_2+2C_1+2C_2x\\bigr)e^{2x}.\\]</p><p>Vid \\(x=0\\): \\(1=C_2+4\\), alltså \\(C_2=-3\\).</p><p><strong>\\[y=(2-3x)e^{2x}.\\]</strong></p>",
+    "id": "4.130"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "C",
+    "typ": "inhomogen andra ordningen med begynnelsevillkor",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''-3y'+2y=4,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
+    "s": "<p>Den homogena ekvationen har rötterna 1 och 2:</p><p>\\[y_h=C_1e^x+C_2e^{2x}.\\]</p><p>För högerledet 4 prövar vi en konstant \\(y_p=A\\). Insättning ger \\(2A=4\\), alltså \\(A=2\\).</p><p>\\[y=C_1e^x+C_2e^{2x}+2.\\]</p><p>Villkoren ger</p><p>\\[C_1+C_2=-1,\\qquad C_1+2C_2=0.\\]</p><p>Alltså \\(C_2=1\\) och \\(C_1=-2\\).</p><p><strong>\\[y=-2e^x+e^{2x}+2.\\]</strong></p>",
+    "id": "4.131"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "första ordningen med jämviktsvärde och begynnelsevillkor",
+    "poang": "2/0/0",
+    "t": "<p>Lös</p><p>\\[y'=3-y,\\qquad y(0)=5.\\]</p>",
+    "s": "<p>Skriv ekvationen som \\(y'=-(y-3)\\). Den allmänna lösningen är</p><p>\\[y=3+Ce^{-x}.\\]</p><p>Begynnelsevillkoret ger \\(5=3+C\\), alltså \\(C=2\\).</p><p><strong>\\[y=3+2e^{-x}.\\]</strong></p>",
+    "id": "4.168"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "E",
+    "typ": "harmonisk begynnelsevärdesproblem",
+    "poang": "3/0/0",
+    "t": "<p>Lös</p><p>\\[y''+9y=0,\\qquad y(0)=4,\\quad y'(0)=-3.\\]</p>",
+    "s": "<p>Den allmänna lösningen är</p><p>\\[y=C_1\\cos3x+C_2\\sin3x.\\]</p><p>Av \\(y(0)=4\\) fås \\(C_1=4\\).</p><p>\\[y'=-3C_1\\sin3x+3C_2\\cos3x.\\]</p><p>Villkoret \\(y'(0)=-3\\) ger \\(3C_2=-3\\), alltså \\(C_2=-1\\).</p><p><strong>\\[y=4\\cos3x-\\sin3x.\\]</strong></p>",
+    "id": "4.169"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "C",
+    "typ": "dubbelrot med nya begynnelsevillkor",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''+4y'+4y=0,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
+    "s": "<p>Karakteristiska ekvationen är \\((r+2)^2=0\\). Därför</p><p>\\[y=(C_1+C_2x)e^{-2x}.\\]</p><p>Av \\(y(0)=1\\) fås \\(C_1=1\\).</p><p>Vid \\(x=0\\) är</p><p>\\[y'(0)=C_2-2C_1=C_2-2.\\]</p><p>Villkoret \\(y'(0)=0\\) ger \\(C_2=2\\).</p><p><strong>\\[y=(1+2x)e^{-2x}.\\]</strong></p>",
+    "id": "4.170"
+  },
+  {
+    "kap": 4,
+    "omr": "begynnelsevillkor",
+    "niva": "C",
+    "typ": "inhomogen harmonisk ekvation med begynnelsevillkor",
+    "poang": "0/3/0",
+    "t": "<p>Lös</p><p>\\[y''+y=2,\\qquad y(0)=0,\\quad y'(0)=1.\\]</p>",
+    "s": "<p>Homogena lösningen är \\(C_1\\cos x+C_2\\sin x\\). En konstant partikulär lösning är \\(y_p=2\\).</p><p>\\[y=C_1\\cos x+C_2\\sin x+2.\\]</p><p>Av \\(y(0)=0\\): \\(C_1+2=0\\Rightarrow C_1=-2\\).</p><p>\\[y'=-C_1\\sin x+C_2\\cos x\\]</p><p>och \\(y'(0)=1\\) ger \\(C_2=1\\).</p><p><strong>\\[y=-2\\cos x+\\sin x+2.\\]</strong></p>",
+    "id": "4.171"
   },
   {
     "kap": 4,
@@ -5359,6 +6826,116 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "ett Eulersteg",
+    "poang": "2/0/0",
+    "t": "<p>För \\(y'=1+x-y\\) gäller \\(y(0)=2\\). Använd ett Eulersteg med \\(h=0,25\\) för att approximera \\(y(0,25)\\).</p>",
+    "s": "<p>Startpunkten är \\((x_0,y_0)=(0,2)\\). Lutningen där är</p><p>\\[f(0,2)=1+0-2=-1.\\]</p><p>Eulers formel ger</p><p>\\[y_1=y_0+h f(x_0,y_0)=2+0,25(-1)=1,75.\\]</p><p><strong>\\(y(0,25)\\approx1,75\\).</strong></p>",
+    "id": "4.132"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "flera Eulersteg",
+    "poang": "3/0/0",
+    "t": "<p>För \\(y'=1-y\\) gäller \\(y(0)=0\\). Använd Eulers metod med \\(h=0,5\\) för att approximera \\(y(2)\\).</p>",
+    "s": "<span class=\"fig\"><svg width=\"430\" height=\"280\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Eulerpolygon för y prim lika med ett minus y med steglängd noll komma fem\"><rect width=\"430\" height=\"280\" fill=\"white\"/><line x1=\"55\" y1=\"235\" x2=\"390\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,235.0 138.8,141.8 222.5,95.2 306.2,71.9 390.0,60.3\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/><circle cx=\"55.0\" cy=\"235.0\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"62.0\" y=\"228.0\" font-size=\"11\">(0; 0)</text><circle cx=\"138.8\" cy=\"141.8\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"145.8\" y=\"134.8\" font-size=\"11\">(0,5; 0,5)</text><circle cx=\"222.5\" cy=\"95.2\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"229.5\" y=\"88.2\" font-size=\"11\">(1; 0,75)</text><circle cx=\"306.2\" cy=\"71.9\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"313.2\" y=\"64.9\" font-size=\"11\">(1,5; 0,875)</text><circle cx=\"390.0\" cy=\"60.3\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"328.0\" y=\"53.3\" font-size=\"11\">(2; 0,9375)</text><text x=\"55.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"138.8\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0.5</text><text x=\"222.5\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"306.2\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1.5</text><text x=\"390.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"401\" y=\"230\" font-size=\"14\">t</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Eulers formel är \\(y_{n+1}=y_n+h(1-y_n)\\).</p><p>\\[y_1=0+0,5(1)=0,5\\]</p><p>\\[y_2=0,5+0,5(0,5)=0,75\\]</p><p>\\[y_3=0,75+0,5(0,25)=0,875\\]</p><p>\\[y_4=0,875+0,5(0,125)=0,9375.\\]</p><p><strong>\\(y(2)\\approx0,9375\\).</strong></p>",
+    "id": "4.133"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "lutning i punkter",
+    "poang": "3/0/0",
+    "t": "<p>För differentialekvationen \\(y'=2x-y\\), bestäm riktningsfältets lutning i punkterna</p><ol type=\"a\"><li>\\((0,1)\\)</li><li>\\((1,0)\\)</li><li>\\((2,3)\\).</li></ol>",
+    "s": "<p>Lutningen fås genom att sätta in punktens koordinater i \\(2x-y\\).</p><p><strong>a)</strong> \\(2\\cdot0-1=-1\\).</p><p><strong>b)</strong> \\(2\\cdot1-0=2\\).</p><p><strong>c)</strong> \\(2\\cdot2-3=1\\).</p>",
+    "id": "4.134"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "jämviktslösningar från differentialekvation",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm de konstanta jämviktslösningarna till</p><p>\\[y'=(y-1)(3-y).\\]</p>",
+    "s": "<p>En konstant lösning har \\(y'=0\\). Därför löser vi</p><p>\\[(y-1)(3-y)=0.\\]</p><p>Det ger \\(y=1\\) eller \\(y=3\\).</p><p><strong>Jämviktslösningarna är \\(y(x)=1\\) och \\(y(x)=3\\).</strong></p>",
+    "id": "4.135"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "C",
+    "typ": "jämföra Eulersteg med olika steglängd",
+    "poang": "0/2/0",
+    "t": "<p>För \\(y'=-y\\) gäller \\(y(0)=1\\).</p><ol type=\"a\"><li>Approximerar \\(y(1)\\) med Eulers metod och \\(h=0,5\\).</li><li>Gör samma sak med \\(h=0,25\\).</li><li>Det exakta värdet är \\(e^{-1}\\approx0,3679\\). Vilken approximation är bäst?</li></ol>",
+    "s": "<p><strong>a)</strong> Med \\(h=0,5\\) multipliceras värdet varje steg med \\(1-h=0,5\\):</p><p>\\[y(1)\\approx0,5^2=0,25.\\]</p><p><strong>b)</strong> Med \\(h=0,25\\) multipliceras värdet med \\(0,75\\) vid varje av fyra steg:</p><p>\\[y(1)\\approx0,75^4=0,31640625.\\]</p><p><strong>c)</strong> Felet blir ungefär \\(0,1179\\) respektive \\(0,0515\\). Den mindre steglängden \\(h=0,25\\) ger alltså den bättre approximationen.</p>",
+    "id": "4.136"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "C",
+    "typ": "tolka riktningsfält och nollutningslinje",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med x minus två y\"><rect width=\"420\" height=\"300\" fill=\"white\"/><line x1=\"42\" y1=\"150\" x2=\"378\" y2=\"150\" stroke=\"#555\" stroke-width=\"1.4\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"272\" stroke=\"#555\" stroke-width=\"1.4\"/><text x=\"66\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-2</text><text x=\"138\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-1</text><text x=\"210\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"282\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"354\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"198\" y=\"264\" font-size=\"12\" text-anchor=\"end\">-2</text><text x=\"198\" y=\"209\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"198\" y=\"99\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"198\" y=\"44\" font-size=\"12\" text-anchor=\"end\">2</text><line x1=\"58.9\" y1=\"270.9\" x2=\"73.1\" y2=\"249.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"53.0\" y1=\"205.0\" x2=\"79.0\" y2=\"205.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"58.9\" y1=\"139.1\" x2=\"73.1\" y2=\"160.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"62.0\" y1=\"82.6\" x2=\"70.0\" y2=\"107.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"63.2\" y1=\"27.3\" x2=\"68.8\" y2=\"52.7\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"271.9\" x2=\"143.2\" y2=\"248.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"212.9\" x2=\"148.3\" y2=\"197.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"142.1\" x2=\"148.3\" y2=\"157.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"83.1\" x2=\"143.2\" y2=\"106.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.7\" y1=\"27.4\" x2=\"141.3\" y2=\"52.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"272.4\" x2=\"214.0\" y2=\"247.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"215.9\" x2=\"217.1\" y2=\"194.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"197.0\" y1=\"150.0\" x2=\"223.0\" y2=\"150.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"84.1\" x2=\"217.1\" y2=\"105.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"27.6\" x2=\"214.0\" y2=\"52.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"278.7\" y1=\"272.6\" x2=\"285.3\" y2=\"247.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"216.9\" x2=\"287.2\" y2=\"193.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"157.9\" x2=\"292.3\" y2=\"142.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"87.1\" x2=\"292.3\" y2=\"102.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"28.1\" x2=\"287.2\" y2=\"51.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"351.2\" y1=\"272.7\" x2=\"356.8\" y2=\"247.3\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"350.0\" y1=\"217.4\" x2=\"358.0\" y2=\"192.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"160.9\" x2=\"361.1\" y2=\"139.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"341.0\" y1=\"95.0\" x2=\"367.0\" y2=\"95.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"29.1\" x2=\"361.1\" y2=\"50.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"66\" y1=\"205\" x2=\"354\" y2=\"95\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"312\" y=\"103\" font-size=\"13\" fill=\"#B23A2E\">y = x/2</text><text x=\"387\" y=\"145\" font-size=\"14\">x</text><text x=\"218\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=x-2y\\).</p><ol type=\"a\"><li>Förklara varför segmenten är horisontella längs linjen \\(y=x\\).</li><li>En lösning går genom \\((0,1)\\). Stiger eller sjunker den precis där?</li></ol>",
+    "s": "<p><strong>a)</strong> Segmenten är horisontella där lutningen är noll:</p><p>\\[x-2y=0\\Rightarrow y=\\frac{x}{2}.\\]</p><p>Alltså är nollutningslinjen \\(y=x/2\\).</p><p><strong>b)</strong> I punkten \\((0,1)\\) är</p><p>\\[y'=0-2\\cdot1=-2.\\]</p><p>Lösningen <strong>sjunker</strong> precis där.</p>",
+    "id": "4.137"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "C",
+    "typ": "logistiskt riktningsfält",
+    "poang": "0/2/0",
+    "t": "<span class=\"fig\"><svg width=\"430\" height=\"300\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med y gånger två minus y\"><rect width=\"430\" height=\"300\" fill=\"white\"/><line x1=\"55\" y1=\"209.5\" x2=\"390\" y2=\"209.5\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"55\" y1=\"28\" x2=\"55\" y2=\"270\" stroke=\"#777\" stroke-width=\"1.2\"/><text x=\"45\" y=\"274.0\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"45\" y=\"213.5\" font-size=\"12\" text-anchor=\"end\">0</text><text x=\"45\" y=\"153.0\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"45\" y=\"92.5\" font-size=\"12\" text-anchor=\"end\">2</text><text x=\"45\" y=\"32.0\" font-size=\"12\" text-anchor=\"end\">3</text><text x=\"55.0\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"138.8\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"222.5\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"306.2\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">3</text><text x=\"390.0\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">4</text><line x1=\"50.4\" y1=\"260.0\" x2=\"59.6\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"44.0\" y1=\"209.5\" x2=\"66.0\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"45.3\" y1=\"184.5\" x2=\"64.7\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"46.1\" y1=\"155.4\" x2=\"63.9\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"45.3\" y1=\"124.0\" x2=\"64.7\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"44.0\" y1=\"88.5\" x2=\"66.0\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"46.8\" y1=\"50.9\" x2=\"63.2\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"50.4\" y1=\"18.0\" x2=\"59.6\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.1\" y1=\"260.0\" x2=\"143.4\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.8\" y1=\"209.5\" x2=\"149.8\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.1\" y1=\"184.5\" x2=\"148.4\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.8\" y1=\"155.4\" x2=\"147.7\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.1\" y1=\"124.0\" x2=\"148.4\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.8\" y1=\"88.5\" x2=\"149.8\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"130.6\" y1=\"50.9\" x2=\"146.9\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.1\" y1=\"18.0\" x2=\"143.4\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"217.9\" y1=\"260.0\" x2=\"227.1\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"211.5\" y1=\"209.5\" x2=\"233.5\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"212.8\" y1=\"184.5\" x2=\"232.2\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"213.6\" y1=\"155.4\" x2=\"231.4\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"212.8\" y1=\"124.0\" x2=\"232.2\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"211.5\" y1=\"88.5\" x2=\"233.5\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"214.3\" y1=\"50.9\" x2=\"230.7\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"217.9\" y1=\"18.0\" x2=\"227.1\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"301.6\" y1=\"260.0\" x2=\"310.9\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"295.2\" y1=\"209.5\" x2=\"317.2\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"296.6\" y1=\"184.5\" x2=\"315.9\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"297.3\" y1=\"155.4\" x2=\"315.2\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"296.6\" y1=\"124.0\" x2=\"315.9\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"295.2\" y1=\"88.5\" x2=\"317.2\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"298.1\" y1=\"50.9\" x2=\"314.4\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"301.6\" y1=\"18.0\" x2=\"310.9\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"385.4\" y1=\"260.0\" x2=\"394.6\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"379.0\" y1=\"209.5\" x2=\"401.0\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"380.3\" y1=\"184.5\" x2=\"399.7\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"381.1\" y1=\"155.4\" x2=\"398.9\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"380.3\" y1=\"124.0\" x2=\"399.7\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"379.0\" y1=\"88.5\" x2=\"401.0\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"381.8\" y1=\"50.9\" x2=\"398.2\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"385.4\" y1=\"18.0\" x2=\"394.6\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"55\" y1=\"209.5\" x2=\"390\" y2=\"209.5\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"315\" y=\"202.5\" font-size=\"13\" fill=\"#B23A2E\">y = 0</text><line x1=\"55\" y1=\"88.5\" x2=\"390\" y2=\"88.5\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"315\" y=\"81.5\" font-size=\"13\" fill=\"#B23A2E\">y = 2</text><text x=\"400\" y=\"251\" font-size=\"14\">t</text><text x=\"63\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=y(2-y)\\).</p><ol type=\"a\"><li>Vilka jämviktslösningar finns?</li><li>Vad händer på lång sikt med en lösning som startar vid \\(y(0)=0,5\\)?</li><li>Vad händer om \\(y(0)=3\\)?</li></ol>",
+    "s": "<p><strong>a)</strong> Jämvikt kräver \\(y'=0\\), alltså \\(y=0\\) eller \\(y=2\\).</p><p><strong>b)</strong> För \\(0<y<2\\) är \\(y(2-y)>0\\), så lösningen växer. När den närmar sig 2 blir lutningen mindre. Lösningen närmar sig därför <strong>\\(y=2\\) underifrån</strong>.</p><p><strong>c)</strong> För \\(y>2\\) är \\(2-y<0\\), så \\(y'<0\\). Lösningen sjunker och närmar sig <strong>\\(y=2\\) ovanifrån</strong>.</p>",
+    "id": "4.138"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "C",
+    "typ": "Euler i koncentrationsmodell",
+    "poang": "0/2/0",
+    "t": "<p>En koncentration \\(C(t)\\) modelleras av</p><p>\\[C'=4-0,2C,\\qquad C(0)=10,\\]</p><p>där \\(t\\) mäts i timmar. Använd Eulers metod med \\(h=1\\) för att approximera \\(C(3)\\).</p>",
+    "s": "<p>Eulers formel är</p><p>\\[C_{n+1}=C_n+1\\cdot(4-0,2C_n).\\]</p><p>\\[C_1=10+(4-2)=12\\]</p><p>\\[C_2=12+(4-2,4)=13,6\\]</p><p>\\[C_3=13,6+(4-2,72)=14,88.\\]</p><p><strong>\\(C(3)\\approx14,88\\).</strong></p>",
+    "id": "4.139"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "lutning i riktningsfält med x-kvadrat",
+    "poang": "3/0/0",
+    "t": "<p>För differentialekvationen \\(y'=y-x^2\\), bestäm lutningen i punkterna</p><ol type=\"a\"><li>\\((0,2)\\)</li><li>\\((1,1)\\)</li><li>\\((2,3)\\).</li></ol>",
+    "s": "<p>Sätt in koordinaterna i \\(y-x^2\\).</p><p><strong>a)</strong> \\(2-0^2=2\\).</p><p><strong>b)</strong> \\(1-1^2=0\\).</p><p><strong>c)</strong> \\(3-2^2=-1\\).</p>",
+    "id": "4.172"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "E",
+    "typ": "två Eulersteg",
+    "poang": "3/0/0",
+    "t": "<p>För \\(y'=x+y\\) gäller \\(y(0)=1\\). Använd Eulers metod med \\(h=0,2\\) för att approximera \\(y(0,4)\\).</p>",
+    "s": "<p>Första steget:</p><p>\\[y_1=1+0,2(0+1)=1,2.\\]</p><p>Nu är \\(x_1=0,2\\). Lutningen där är \\(0,2+1,2=1,4\\).</p><p>Andra steget:</p><p>\\[y_2=1,2+0,2\\cdot1,4=1,48.\\]</p><p><strong>\\(y(0,4)\\approx1,48\\).</strong></p>",
+    "id": "4.173"
+  },
+  {
+    "kap": 4,
+    "omr": "riktningsfalt_euler",
+    "niva": "C",
+    "typ": "stabilitet hos två jämvikter",
+    "poang": "0/3/0",
+    "t": "<p>Betrakta differentialekvationen</p><p>\\[y'=(1-y)(y+2).\\]</p><ol type=\"a\"><li>Bestäm jämviktslösningarna.</li><li>Avgör vilken jämvikt som är stabil och vilken som är instabil.</li></ol>",
+    "s": "<p><strong>a)</strong> Jämvikt fås när högerledet är noll:</p><p>\\[(1-y)(y+2)=0\\Rightarrow y=1\\text{ eller }y=-2.\\]</p><p><strong>b)</strong> Undersök tecknet på \\(y'\\):</p><p>För \\(y<-2\\) är \\(y'<0\\), så lösningar rör sig nedåt.</p><p>För \\(-2<y<1\\) är \\(y'>0\\), så lösningar rör sig uppåt.</p><p>För \\(y>1\\) är \\(y'<0\\), så lösningar rör sig nedåt.</p><p>Alltså rör sig lösningar bort från \\(y=-2\\): den är <strong>instabil</strong>. Lösningar från båda sidor rör sig mot \\(y=1\\): den är <strong>stabil</strong>.</p>",
+    "id": "4.174"
+  },
+  {
+    "kap": 4,
     "omr": "diffekv_grunder",
     "niva": "A",
     "typ": "jämvikter och stabilitet i logistisk modell",
@@ -5366,5 +6943,65 @@ window.BANKMATF1 = [
     "t": "<span class=\"fig\"><svg width=\"470\" height=\"330\" viewBox=\"0 0 470 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Faslinje för den logistiska modellen med jämvikterna y lika med 0 och y lika med 400 samt pilar som visar riktningen\">\n<rect width=\"470\" height=\"330\" fill=\"white\"/>\n<line x1=\"140\" y1=\"6\" x2=\"140\" y2=\"284\" stroke=\"#ccc\" stroke-width=\"1.6\"/>\n<text x=\"124\" y=\"242\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">0</text><text x=\"124\" y=\"170\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">200</text><text x=\"124\" y=\"98\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">400</text><text x=\"124\" y=\"26\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">600</text><line x1=\"140\" y1=\"276\" x2=\"140\" y2=\"248\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 238 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"230\" x2=\"140\" y2=\"186\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 196 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"176\" x2=\"140\" y2=\"147\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 157 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"129\" x2=\"140\" y2=\"104\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 114 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"35\" x2=\"140\" y2=\"68\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 58 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"75\" x2=\"140\" y2=\"89\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 79 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><circle cx=\"140\" cy=\"237\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"162\" y=\"242\" font-size=\"16\">y = 0</text><circle cx=\"140\" cy=\"93\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"162\" y=\"98\" font-size=\"16\">y = 400</text>\n<text x=\"260\" y=\"40\" font-size=\"15\" fill=\"#B23A2E\">y&#8242; &lt; 0</text>\n<text x=\"260\" y=\"170\" font-size=\"15\" fill=\"#2E7D52\">y&#8242; &gt; 0</text>\n<text x=\"260\" y=\"267\" font-size=\"15\" fill=\"#B23A2E\">y&#8242; &lt; 0</text>\n<text x=\"140\" y=\"-6\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">y</text>\n<text x=\"30\" y=\"318\" font-size=\"14\" fill=\"#777\">Pilarna visar åt vilket håll lösningen rör sig.</text>\n</svg></span><p>En population modelleras av</p><p>\\[P'=0,5\\,P\\left(1-\\frac{P}{400}\\right).\\]</p><ol type=\"a\"><li>Bestäm jämviktslösningarna.</li><li>Avgör för vilka \\(P\\gt0\\) populationen växer respektive minskar.</li><li>Klassificera jämvikterna som stabila eller instabila och beskriv vad som händer med en population som startar på \\(P(0)=50\\).</li></ol>",
     "s": "<p><strong>a)</strong> En jämviktslösning är konstant, alltså \\(P'=0\\):</p><p>\\[0,5P\\left(1-\\frac{P}{400}\\right)=0\\Rightarrow P=0\\quad\\text{eller}\\quad P=400.\\]</p><p><strong>b)</strong> Undersök tecknet på högerledet mellan och utanför jämvikterna.</p><p>För \\(0\\lt P\\lt400\\) är \\(P\\gt0\\) och \\(1-\\frac{P}{400}\\gt0\\), så produkten är positiv och <strong>populationen växer</strong>.</p><p>För \\(P\\gt400\\) är \\(P\\gt0\\) men \\(1-\\frac{P}{400}\\lt0\\), så produkten är negativ och <strong>populationen minskar</strong>.</p><p><strong>c)</strong> Faslinjen i figuren sammanfattar tecknen. Pilarna pekar bort från \\(P=0\\) och mot \\(P=400\\) från båda hållen.</p><p>Startar populationen strax ovanför 0 växer den, alltså rör den sig bort från jämvikten: <strong>\\(P=0\\) är instabil</strong>.</p><p>Kommer populationen underifrån växer den mot 400, och kommer den ovanifrån minskar den mot 400. Lösningarna närmar sig alltså jämvikten från båda håll: <strong>\\(P=400\\) är stabil</strong>.</p><p>Med \\(P(0)=50\\) ligger startvärdet mellan jämvikterna. Populationen växer därför hela tiden och närmar sig 400 utan att någonsin nå eller passera värdet. Talet 400 är modellens bärkraft.</p>",
     "id": "4.123"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "E",
+    "typ": "bestäm ordning hos differentialekvation",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm ordningen på differentialekvationen</p><p>\\[y'''+4y'-y=0.\\]</p>",
+    "s": "<p>Ordningen bestäms av den högsta derivatan som förekommer. Här är den högsta derivatan \\(y'''\\).</p><p><strong>Ekvationen är av tredje ordningen.</strong></p>",
+    "id": "4.156"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "E",
+    "typ": "verifiera lösningsfamilj",
+    "poang": "2/0/0",
+    "t": "<p>Visa att \\(y=Ce^{3x}\\) löser \\(y'=3y\\).</p>",
+    "s": "<p>Derivera:</p><p>\\[y'=3Ce^{3x}.\\]</p><p>Högerledet är</p><p>\\[3y=3Ce^{3x}.\\]</p><p>Vänster- och högerled är lika, så lösningsfamiljen är verifierad.</p>",
+    "id": "4.157"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "E",
+    "typ": "jämviktslösningar",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm de konstanta lösningarna till</p><p>\\[y'=y(4-y).\\]</p>",
+    "s": "<p>En konstant lösning kräver \\(y'=0\\). Därför</p><p>\\[y(4-y)=0\\]</p><p>vilket ger <strong>\\(y=0\\)</strong> eller <strong>\\(y=4\\)</strong>.</p>",
+    "id": "4.158"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "E",
+    "typ": "tolka tecken på förändringshastighet",
+    "poang": "2/0/0",
+    "t": "<p>En temperaturmodell är</p><p>\\[T'=-0,2(T-15).\\]</p><p>Är temperaturen stigande eller sjunkande när \\(T=25\\)? Hur är det när \\(T=10\\)?</p>",
+    "s": "<p>När \\(T=25\\):</p><p>\\[T'=-0,2(25-15)=-2<0,\\]</p><p>så temperaturen <strong>sjunker</strong>.</p><p>När \\(T=10\\):</p><p>\\[T'=-0,2(10-15)=1>0,\\]</p><p>så temperaturen <strong>stiger</strong>.</p>",
+    "id": "4.159"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "C",
+    "typ": "bestäm differentialekvation från lösningsfamilj",
+    "poang": "0/2/0",
+    "t": "<p>En lösningsfamilj ges av</p><p>\\[y=Ce^{-2x}+3.\\]</p><p>Bestäm en första ordningens differentialekvation som har exakt denna lösningsfamilj.</p>",
+    "s": "<p>Flytta först jämviktsvärdet:</p><p>\\[y-3=Ce^{-2x}.\\]</p><p>Derivera:</p><p>\\[y'=-2Ce^{-2x}=-2(y-3).\\]</p><p>En passande differentialekvation är därför</p><p><strong>\\[y'=-2(y-3).\\]</strong></p>",
+    "id": "4.160"
+  },
+  {
+    "kap": 4,
+    "omr": "diffekv_grunder",
+    "niva": "C",
+    "typ": "verifiera lösning till dubbelrotsekvation",
+    "poang": "0/2/0",
+    "t": "<p>Visa genom insättning att \\(y=xe^x\\) löser</p><p>\\[y''-2y'+y=0.\\]</p>",
+    "s": "<p>Derivera:</p><p>\\[y'=e^x+xe^x=(x+1)e^x,\\]</p><p>\\[y''=(x+2)e^x.\\]</p><p>Insättning ger</p><p>\\[(x+2)e^x-2(x+1)e^x+xe^x\\]</p><p>\\[=(x+2-2x-2+x)e^x=0.\\]</p><p>Alltså är \\(y=xe^x\\) en lösning.</p>",
+    "id": "4.161"
   }
 ];
