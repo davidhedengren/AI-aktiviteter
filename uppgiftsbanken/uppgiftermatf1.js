@@ -1,6 +1,6 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Områdestaggarna är sammanslagna så att strukturen använder större,
-   pedagogiskt meningsfulla block.
+   Bevisdelen omfattar direkta bevis, indirekta bevis (kontraposition och
+   motsägelsebevis) samt induktionsbevis.
    Samtliga Venn-diagram är renderingskontrollerade.
    Alla SVG-id:n är unika per figur.
    Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
@@ -2990,7 +2990,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "C",
-    "typ": "motsägelsebevis av irrationalitet",
+    "typ": "indirekt bevis – motsägelsebevis av irrationalitet",
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att \\(\\sqrt2\\) är irrationellt.</p>",
     "s": "<p>Anta motsatsen: \\(\\sqrt2=p/q\\) i förkortad form. Då \\(p^2=2q^2\\), så \\(p^2\\) och därmed \\(p\\) är jämnt. Sätt \\(p=2r\\). Då \\(4r^2=2q^2\\), alltså \\(q^2=2r^2\\), så även \\(q\\) är jämnt. Då har \\(p\\) och \\(q\\) gemensam faktor 2, i strid med att bråket var förkortat. Alltså är <strong>\\(\\sqrt2\\) irrationellt</strong>.</p>",
@@ -3000,7 +3000,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "A",
-    "typ": "motsägelsebevis om oändligt många primtal",
+    "typ": "indirekt bevis – motsägelsebevis om oändligt många primtal",
     "poang": "0/1/2",
     "t": "<p>Visa med ett motsägelsebevis att det finns oändligt många primtal.</p>",
     "s": "<p>Anta att det bara finns ändligt många primtal \\(p_1,\\ldots,p_n\\). Betrakta \\(N=p_1p_2\\cdots p_n+1\\). Talet \\(N>1\\) har en primtalsdelare \\(p\\). Men inget \\(p_i\\) delar \\(N\\), eftersom division med \\(p_i\\) ger resten 1. Därmed finns ett primtal som inte finns i listan, en motsägelse. Alltså finns <strong>oändligt många primtal</strong>.</p>",
@@ -3010,7 +3010,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "A",
-    "typ": "Euklides bevis för oändligt många primtal",
+    "typ": "indirekt bevis – Euklides bevis för oändligt många primtal",
     "poang": "0/1/3",
     "t": "<p>Visa med ett motsägelsebevis att det finns oändligt många primtal.</p>",
     "s": "<p>Anta motsatsen: att det bara finns ändligt många primtal \\(p_1,p_2,\\ldots,p_n\\).</p><p>Bilda talet</p><p>\\[N=p_1p_2\\cdots p_n+1.\\]</p><p>För varje primtal \\(p_i\\) ger division av \\(N\\) med \\(p_i\\) resten 1. Alltså är \\(N\\) inte delbart med något av de primtal som enligt antagandet skulle vara alla primtal.</p><p>Men varje heltal större än 1 är antingen ett primtal eller har en primtalsfaktor. Därför måste \\(N\\) ha en primtalsfaktor som inte finns i listan. Det motsäger antagandet. Alltså finns <strong>oändligt många primtal</strong>.</p>",
@@ -3020,7 +3020,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "C",
-    "typ": "irrationalitetsbevis",
+    "typ": "indirekt bevis – irrationalitetsbevis",
     "poang": "0/2/0",
     "id": "2.77",
     "t": "<p>Visa med ett motsägelsebevis att \\(\\sqrt{12}\\) är irrationellt.</p>",
@@ -3030,7 +3030,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "E",
-    "typ": "klassisk irrationalitetsbevis",
+    "typ": "indirekt bevis – klassisk irrationalitetsbevis",
     "poang": "2/0/0",
     "id": "2.78",
     "t": "<p>Visa med ett motsägelsebevis att \\(\\sqrt{2}\\) är irrationellt.</p>",
@@ -3040,7 +3040,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "C",
-    "typ": "motsägelsebevis om jämn/udda",
+    "typ": "indirekt bevis – motsägelsebevis om jämn/udda",
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att om \\(n^2\\) är udda så är \\(n\\) udda.</p>",
     "s": "<p>Anta motsatsen: \\(n^2\\) är udda men \\(n\\) är jämnt. Då finns ett heltal \\(k\\) så att \\(n=2k\\). Då</p><p>\\[n^2=4k^2=2(2k^2),\\]</p><p>vilket är jämnt. Det motsäger att \\(n^2\\) är udda. Alltså måste \\(n\\) vara udda.</p>",
@@ -3050,7 +3050,7 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "E",
-    "typ": "motsägelse om minsta rationella positiva tal",
+    "typ": "indirekt bevis – motsägelse om minsta rationella positiva tal",
     "poang": "2/0/0",
     "t": "<p>Visa med motsägelse att det inte finns något minsta positivt rationellt tal.</p>",
     "s": "<p>Anta att \\(r\\gt0\\) är det minsta positiva rationella talet. Då är \\(r/2\\) också positivt och rationellt, men \\(r/2\\lt r\\). Det motsäger att \\(r\\) var minst. Alltså finns inget minsta positivt rationellt tal.</p>",
@@ -3060,11 +3060,111 @@ window.BANKMATF1 = [
     "kap": 2,
     "omr": "bevismetoder",
     "niva": "C",
-    "typ": "irrationalitet roten ur 5",
+    "typ": "indirekt bevis – irrationalitet roten ur 5",
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att \\(\\sqrt5\\) är irrationellt.</p>",
     "s": "<p>Anta \\(\\sqrt5=a/b\\) i förkortad form. Då \\(a^2=5b^2\\), så \\(a\\) är delbart med 5. Sätt \\(a=5k\\). Då \\(25k^2=5b^2\\Rightarrow b^2=5k^2\\), så även \\(b\\) är delbart med 5. Det motsäger att \\(a/b\\) var förkortat.</p>",
     "id": "2.135"
+  },
+  {
+    "id": "2.141",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "E",
+    "typ": "direkt bevis – jämna tal",
+    "poang": "2/0/0",
+    "t": "<p>Visa med ett <strong>direkt bevis</strong> att summan av två jämna heltal alltid är jämn.</p>",
+    "s": "<p><strong>Idé:</strong> I ett direkt bevis utgår vi från det vi vet och arbetar steg för steg fram till det som ska visas.</p><p>Låt de två jämna heltalen vara \\(a\\) och \\(b\\). Eftersom de är jämna finns heltal \\(m\\) och \\(n\\) sådana att</p><p>\\[a=2m,\\qquad b=2n.\\]</p><p>Då är</p><p>\\[a+b=2m+2n=2(m+n).\\]</p><p>Eftersom \\(m+n\\) är ett heltal är \\(a+b\\) två gånger ett heltal. Därför är <strong>\\(a+b\\) jämnt</strong>.</p>"
+  },
+  {
+    "id": "2.142",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "E",
+    "typ": "direkt bevis – udda tal",
+    "poang": "2/0/0",
+    "t": "<p>Visa med ett direkt bevis att summan av två udda heltal alltid är jämn.</p>",
+    "s": "<p>Låt de udda talen vara</p><p>\\[a=2m+1,\\qquad b=2n+1\\]</p><p>där \\(m\\) och \\(n\\) är heltal.</p><p>Då blir</p><p>\\[a+b=(2m+1)+(2n+1)=2m+2n+2=2(m+n+1).\\]</p><p>Uttrycket är alltså två gånger ett heltal. Därför är <strong>summan jämn</strong>.</p>"
+  },
+  {
+    "id": "2.143",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "E",
+    "typ": "direkt bevis – rationella tal",
+    "poang": "2/0/0",
+    "t": "<p>Visa med ett direkt bevis att summan av två rationella tal är rationell.</p>",
+    "s": "<p>Låt \\(x\\) och \\(y\\) vara rationella. Då kan de skrivas</p><p>\\[x=\\frac{a}{b},\\qquad y=\\frac{c}{d}\\]</p><p>där \\(a,b,c,d\\) är heltal och \\(b\\ne0\\), \\(d\\ne0\\).</p><p>Då är</p><p>\\[x+y=\\frac{a}{b}+\\frac{c}{d}=\\frac{ad+bc}{bd}.\\]</p><p>Täljaren \\(ad+bc\\) är ett heltal och nämnaren \\(bd\\ne0\\) är ett heltal. Alltså kan summan skrivas som en kvot av två heltal.</p><p>Därför är <strong>\\(x+y\\) rationellt</strong>.</p>"
+  },
+  {
+    "id": "2.144",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "E",
+    "typ": "indirekt bevis – kontraposition",
+    "poang": "2/0/0",
+    "t": "<p>Visa med ett <strong>indirekt bevis</strong> att om \\(n^2\\) är jämnt, så är \\(n\\) jämnt.</p><p>Använd kontraposition.</p>",
+    "s": "<p><strong>Kontraposition:</strong> I stället för att visa</p><p>\\[n^2\\text{ jämnt}\\Rightarrow n\\text{ jämnt}\\]</p><p>visar vi det logiskt likvärdiga påståendet</p><p>\\[n\\text{ udda}\\Rightarrow n^2\\text{ udda}.\\]</p><p>Anta därför att \\(n\\) är udda. Då finns ett heltal \\(k\\) sådant att</p><p>\\[n=2k+1.\\]</p><p>Då</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=2(2k^2+2k)+1.\\]</p><p>Detta är udda. Kontrapositionen är alltså bevisad, och därmed gäller det ursprungliga påståendet: <strong>om \\(n^2\\) är jämnt så är \\(n\\) jämnt</strong>.</p>"
+  },
+  {
+    "id": "2.145",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "E",
+    "typ": "välja bevismetod",
+    "poang": "2/0/0",
+    "t": "<p>Förklara kort skillnaden mellan ett <strong>direkt bevis</strong> och ett <strong>indirekt bevis</strong>.</p><p>Nämn också två vanliga sätt att genomföra ett indirekt bevis.</p>",
+    "s": "<p>I ett <strong>direkt bevis</strong> utgår man från antagandena och härleder steg för steg det som ska visas.</p><p>I ett <strong>indirekt bevis</strong> visar man påståendet via ett logiskt likvärdigt eller motsatt resonemang i stället för att gå direkt från antagande till slutsats.</p><p>Två vanliga indirekta metoder är:</p><p>1. <strong>Kontraposition:</strong> för att visa \\(P\\Rightarrow Q\\) visar man i stället \\(\\neg Q\\Rightarrow\\neg P\\).</p><p>2. <strong>Motsägelsebevis:</strong> man antar att det man vill visa är falskt och visar att antagandet leder till en motsägelse.</p>"
+  },
+  {
+    "id": "2.146",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "C",
+    "typ": "direkt bevis – delbarhet",
+    "poang": "0/2/0",
+    "t": "<p>Låt \\(a,b,c\\) vara heltal. Visa med ett direkt bevis att om \\(a\\mid b\\) och \\(b\\mid c\\), så gäller \\(a\\mid c\\).</p>",
+    "s": "<p>Antag att \\(a\\mid b\\). Då finns ett heltal \\(m\\) sådant att</p><p>\\[b=am.\\]</p><p>Antag också att \\(b\\mid c\\). Då finns ett heltal \\(n\\) sådant att</p><p>\\[c=bn.\\]</p><p>Sätt in \\(b=am\\):</p><p>\\[c=(am)n=a(mn).\\]</p><p>Produkten \\(mn\\) är ett heltal. Alltså kan \\(c\\) skrivas som \\(a\\) gånger ett heltal.</p><p>Därför gäller <strong>\\(a\\mid c\\)</strong>.</p>"
+  },
+  {
+    "id": "2.147",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "C",
+    "typ": "direkt bevis – udda kvadrat modulo 8",
+    "poang": "0/2/0",
+    "t": "<p>Visa med ett direkt bevis att kvadraten av varje udda heltal ger resten 1 vid division med 8.</p>",
+    "s": "<p>Låt \\(n\\) vara udda. Då kan vi skriva</p><p>\\[n=2k+1\\]</p><p>för något heltal \\(k\\).</p><p>Kvadrera:</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=4k(k+1)+1.\\]</p><p>Två heltal i följd, \\(k\\) och \\(k+1\\), innehåller alltid ett jämnt tal. Därför är \\(k(k+1)\\) jämnt. Skriv \\(k(k+1)=2m\\).</p><p>Då</p><p>\\[n^2=4\\cdot2m+1=8m+1.\\]</p><p>Alltså ger \\(n^2\\) resten <strong>1</strong> vid division med 8.</p>"
+  },
+  {
+    "id": "2.148",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "C",
+    "typ": "indirekt bevis – kontraposition och delbarhet",
+    "poang": "0/2/0",
+    "t": "<p>Visa med ett indirekt bevis att om \\(n^2\\) är delbart med 3, så är \\(n\\) delbart med 3.</p><p>Använd kontraposition.</p>",
+    "s": "<p>Vi visar kontrapositionen:</p><p><strong>Om \\(n\\) inte är delbart med 3, så är \\(n^2\\) inte delbart med 3.</strong></p><p>Om \\(n\\) inte är delbart med 3 ger det resten 1 eller 2 vid division med 3.</p><p>Fall 1:</p><p>\\[n\\equiv1\\pmod3\\Rightarrow n^2\\equiv1^2=1\\pmod3.\\]</p><p>Fall 2:</p><p>\\[n\\equiv2\\pmod3\\Rightarrow n^2\\equiv2^2=4\\equiv1\\pmod3.\\]</p><p>I båda fallen ger \\(n^2\\) resten 1 och är alltså inte delbart med 3.</p><p>Kontrapositionen är bevisad. Därför gäller det ursprungliga påståendet.</p>"
+  },
+  {
+    "id": "2.149",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "C",
+    "typ": "indirekt bevis – kontraposition av produkt",
+    "poang": "0/2/0",
+    "t": "<p>Visa indirekt att om produkten \\(ab\\) är udda, så är både \\(a\\) och \\(b\\) udda.</p>",
+    "s": "<p>Det är smidigare att visa kontrapositionen:</p><p><strong>Om minst ett av talen \\(a\\) och \\(b\\) är jämnt, så är produkten \\(ab\\) jämn.</strong></p><p>Anta till exempel att \\(a\\) är jämnt. Då finns ett heltal \\(k\\) sådant att</p><p>\\[a=2k.\\]</p><p>Då blir</p><p>\\[ab=(2k)b=2(kb).\\]</p><p>Eftersom \\(kb\\) är ett heltal är produkten jämn. Samma resonemang gäller om \\(b\\) är jämnt.</p><p>Alltså är kontrapositionen sann. Därför gäller det ursprungliga påståendet: om \\(ab\\) är udda måste <strong>både \\(a\\) och \\(b\\) vara udda</strong>.</p>"
+  },
+  {
+    "id": "2.150",
+    "kap": 2,
+    "omr": "bevismetoder",
+    "niva": "C",
+    "typ": "direkt bevis – tre konsekutiva heltal",
+    "poang": "0/3/0",
+    "t": "<p>Visa med ett direkt bevis att produkten av tre på varandra följande heltal alltid är delbar med 6.</p>",
+    "s": "<p>Låt de tre heltalen vara</p><p>\\[n,\\qquad n+1,\\qquad n+2.\\]</p><p>För att produkten ska vara delbar med 6 måste den innehålla både en faktor 2 och en faktor 3.</p><p><strong>Faktor 2:</strong> Bland tre på varandra följande heltal finns alltid minst ett jämnt tal. Produkten är därför delbar med 2.</p><p><strong>Faktor 3:</strong> Tre på varandra följande heltal ger vid division med 3 resterna 0, 1 och 2 i någon ordning. Därför är exakt ett av dem delbart med 3. Produkten är alltså delbar med 3.</p><p>Eftersom 2 och 3 saknar gemensamma primfaktorer är produkten delbar med</p><p>\\[2\\cdot3=6.\\]</p><p>Alltså är <strong>\\(n(n+1)(n+2)\\) alltid delbart med 6</strong>.</p>"
   },
   {
     "kap": 3,

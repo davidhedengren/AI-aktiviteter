@@ -26,7 +26,7 @@ window.OMRMATF1 = {
     "talfoljder_sigma": "Talföljder och sigma-notation",
     "aritmetiska_geometriska": "Aritmetiska och geometriska talföljder",
     "rekursiva_talfoljder": "Rekursiva talföljder",
-    "bevismetoder": "Bevismetoder – induktion och motsägelsebevis"
+    "bevismetoder": "Bevismetoder – direkta, indirekta och induktionsbevis"
   },
   "3": {
     "partiell_integration": "Partiell integration",
