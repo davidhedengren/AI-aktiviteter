@@ -32,7 +32,7 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-html{overflow:hidden}
+html{overflow-x:auto;overflow-y:hidden}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);
   font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
 button,input,select{font-family:inherit;font-size:inherit;color:inherit}
@@ -644,6 +644,13 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 /* ── tre paneler ── */
 .arbetsyta{display:grid;grid-template-columns:272px minmax(0,1fr) 360px;
   height:calc(100vh - 80px);overflow:hidden}
+/* Grid- och flexbarn får annars en osynlig min-width satt av sitt eget
+   innehåll (t.ex. en rad knappar eller etiketter som inte vill radbryta).
+   Är den bredare än kolumnens 272px/360px tvingas hela .arbetsyta bredare
+   än fönstret, och överskottet hamnar dolt utanför högerkanten. min-width:0
+   tillåter kolumnen att krympa till sin satta bredd; innehållet får i
+   stället brytas eller klippas inuti panelen, där det hör hemma. */
+.arbetsyta>.vänster,.arbetsyta>.mitten,.arbetsyta>.höger{min-width:0}
 .panel{overflow-y:auto;overscroll-behavior:contain}
 .panel::-webkit-scrollbar{width:10px}
 .panel::-webkit-scrollbar-thumb{background:#D6D5D9;border-radius:99px;border:3px solid var(--canvas)}
