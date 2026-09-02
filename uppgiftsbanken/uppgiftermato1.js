@@ -14394,7 +14394,7 @@ window.BANKMATO1 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Bestäm den punkt på grafen till \\(y=x^2+1\\) som ligger närmast punkten \\((0,3)\\).</p>",
-    "s": "<p>En punkt på grafen har koordinaterna \\((x,x^2+1)\\). Kvadraten på avståndet till \\((0,3)\\) blir</p><p>\\[D(x)=x^2+(x^2-2)^2=x^4-3x^2+4.\\]</p><p>Det räcker att minimera \\(D(x)\\). Derivatan är \\(D^{\\prime}(x)=4x^3-6x=2x(2x^2-3)\\).</p><p>Kritiska punkter är \\(x=0\\) och \\(x=\\pm\\sqrt{3/2}\\). Jämförelse ger minsta avstånd för \\(x=\\pm\\sqrt{3/2}\\). Punkterna är alltså \\(\\left(\\pm\\sqrt{\\frac32},\\frac52\\right)\\).</p>",
+    "s": "<p>En punkt på grafen har koordinaterna \\((x,x^2+1)\\). Kvadraten på avståndet till \\((0,3)\\) blir</p><p>\\[D(x)=x^2+(x^2-2)^2=x^4-3x^2+4.\\]</p><p>Det räcker att minimera \\(D(x)\\). Derivatan är \\(D^{\\prime}(x)=4x^3-6x=2x(2x^2-3)\\).</p><p>Derivatans nollställen är \\(x=0\\) och \\(x=\\pm\\sqrt{3/2}\\). Jämförelse ger minsta avstånd för \\(x=\\pm\\sqrt{3/2}\\). Punkterna är alltså \\(\\left(\\pm\\sqrt{\\frac32},\\frac52\\right)\\).</p>",
     "familj": "r5_ext_distance_parabola"
   },
   {
@@ -14688,7 +14688,7 @@ window.BANKMATO1 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En bils hastighet \\(v\\) i m/s visas i figuren. Bestäm sträckan under de första 4 sekunderna.</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bilens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"126.2\" y1=\"18\" x2=\"126.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"126.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"204.5\" y1=\"18\" x2=\"204.5\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"204.5\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"282.8\" y1=\"18\" x2=\"282.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"282.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"186.0\" x2=\"367\" y2=\"186.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"190.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"48\" y1=\"156.0\" x2=\"367\" y2=\"156.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"160.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"126.0\" x2=\"367\" y2=\"126.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"130.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"96.0\" x2=\"367\" y2=\"96.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"100.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"66.0\" x2=\"367\" y2=\"66.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"70.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 216.0 L 126.2 96.0 L 204.5 36.0 L 361.0 36.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"216.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"126.2\" cy=\"96.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"204.5\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Bilens hastighet: v(t)</text></svg></span>",
-    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar därför upp figuren i enklare delar, eller använder trapezoidarea för varje intervall.</p><p>Den totala arean blir \\(19\\).</p><p><strong>Svar:</strong> \\(\\boxed{19\\text{ m}}\\).</p>",
+    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(19\\).</p><p><strong>Svar:</strong> \\(\\boxed{19\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_1"
   },
   {
@@ -14702,7 +14702,7 @@ window.BANKMATO1 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En cyklist har hastigheten \\(v\\) i m/s enligt figuren. Hur långt cyklar hon under 5 s?</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cyklistens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"110.6\" y1=\"18\" x2=\"110.6\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"110.6\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"173.2\" y1=\"18\" x2=\"173.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"173.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"235.8\" y1=\"18\" x2=\"235.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"235.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"298.4\" y1=\"18\" x2=\"298.4\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"298.4\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"164.6\" x2=\"367\" y2=\"164.6\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"168.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"113.1\" x2=\"367\" y2=\"113.1\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"117.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"61.7\" x2=\"367\" y2=\"61.7\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"65.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 138.9 L 173.2 138.9 L 298.4 36.0 L 361.0 36.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"138.9\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"173.2\" cy=\"138.9\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"298.4\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Cyklistens hastighet: v(t)</text></svg></span>",
-    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar därför upp figuren i enklare delar, eller använder trapezoidarea för varje intervall.</p><p>Den totala arean blir \\(23\\).</p><p><strong>Svar:</strong> \\(\\boxed{23\\text{ m}}\\).</p>",
+    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(23\\).</p><p><strong>Svar:</strong> \\(\\boxed{23\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_2"
   },
   {
@@ -14716,7 +14716,7 @@ window.BANKMATO1 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Ett tåg bromsar enligt figuren. Hur långt rullar tåget under 4 s?</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tågets hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"126.2\" y1=\"18\" x2=\"126.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"126.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"204.5\" y1=\"18\" x2=\"204.5\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"204.5\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"282.8\" y1=\"18\" x2=\"282.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"282.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"171.0\" x2=\"367\" y2=\"171.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"175.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"126.0\" x2=\"367\" y2=\"126.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"130.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"81.0\" x2=\"367\" y2=\"81.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"85.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">8</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 36.0 L 204.5 81.0 L 361.0 171.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"204.5\" cy=\"81.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"171.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tågets hastighet: v(t)</text></svg></span>",
-    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar därför upp figuren i enklare delar, eller använder trapezoidarea för varje intervall.</p><p>Den totala arean blir \\(22\\).</p><p><strong>Svar:</strong> \\(\\boxed{22\\text{ m}}\\).</p>",
+    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(22\\).</p><p><strong>Svar:</strong> \\(\\boxed{22\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_3"
   },
   {
@@ -14730,7 +14730,7 @@ window.BANKMATO1 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En drönare rör sig rakt fram med hastigheten \\(v\\) i m/s enligt grafen. Bestäm sträckan på 5 s.</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Drönarens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"110.6\" y1=\"18\" x2=\"110.6\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"110.6\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"173.2\" y1=\"18\" x2=\"173.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"173.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"235.8\" y1=\"18\" x2=\"235.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"235.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"298.4\" y1=\"18\" x2=\"298.4\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"298.4\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"156.0\" x2=\"367\" y2=\"156.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"160.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"48\" y1=\"96.0\" x2=\"367\" y2=\"96.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"100.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 156.0 L 110.6 36.0 L 235.8 36.0 L 361.0 216.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"156.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"110.6\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"235.8\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"216.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Drönarens hastighet: v(t)</text></svg></span>",
-    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar därför upp figuren i enklare delar, eller använder trapezoidarea för varje intervall.</p><p>Den totala arean blir \\(11\\).</p><p><strong>Svar:</strong> \\(\\boxed{11\\text{ m}}\\).</p>",
+    "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(11\\).</p><p><strong>Svar:</strong> \\(\\boxed{11\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_4"
   },
   {
@@ -14798,8 +14798,8 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>I figuren visas det tillåtna området för en linjär optimeringsuppgift.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"88.9\" y1=\"18\" x2=\"88.9\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"88.9\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"133.7\" y1=\"18\" x2=\"133.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"133.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"178.6\" y1=\"18\" x2=\"178.6\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"178.6\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"223.4\" y1=\"18\" x2=\"223.4\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"223.4\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"268.3\" y1=\"18\" x2=\"268.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"268.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"313.1\" y1=\"18\" x2=\"313.1\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"313.1\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"207.1\" x2=\"360\" y2=\"207.1\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"211.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"178.3\" x2=\"360\" y2=\"178.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"182.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"149.4\" x2=\"360\" y2=\"149.4\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"153.4\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"120.6\" x2=\"360\" y2=\"120.6\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"124.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"91.7\" x2=\"360\" y2=\"91.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"95.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"62.9\" x2=\"360\" y2=\"62.9\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"66.9\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,62.9 223.4,120.6 313.1,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"62.9\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"56.9\" font-size=\"11\" fill=\"#2D70B3\">(0; 6)</text><circle cx=\"223.4\" cy=\"120.6\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"228.4\" y=\"114.6\" font-size=\"11\" fill=\"#2D70B3\">(4; 4)</text><circle cx=\"313.1\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"318.1\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(6; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=4x+3y\\).</p>",
-    "s": "<p>Enligt metoden för linjär optimering räcker det att undersöka hörnpunkterna.</p><p>Det största värdet fås till \\(\\boxed{Z=28}\\) i punkten/punkterna (4; 4).</p>",
+    "t": "<p>I figuren visas ett tillåtet område.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"88.9\" y1=\"18\" x2=\"88.9\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"88.9\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"133.7\" y1=\"18\" x2=\"133.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"133.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"178.6\" y1=\"18\" x2=\"178.6\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"178.6\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"223.4\" y1=\"18\" x2=\"223.4\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"223.4\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"268.3\" y1=\"18\" x2=\"268.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"268.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"313.1\" y1=\"18\" x2=\"313.1\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"313.1\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"207.1\" x2=\"360\" y2=\"207.1\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"211.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"178.3\" x2=\"360\" y2=\"178.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"182.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"149.4\" x2=\"360\" y2=\"149.4\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"153.4\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"120.6\" x2=\"360\" y2=\"120.6\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"124.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"91.7\" x2=\"360\" y2=\"91.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"95.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"62.9\" x2=\"360\" y2=\"62.9\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"66.9\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,62.9 223.4,120.6 313.1,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"62.9\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"56.9\" font-size=\"11\" fill=\"#2D70B3\">(0; 6)</text><circle cx=\"223.4\" cy=\"120.6\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"228.4\" y=\"114.6\" font-size=\"11\" fill=\"#2D70B3\">(4; 4)</text><circle cx=\"313.1\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"318.1\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(6; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=4x+3y\\).</p>",
+    "s": "<p>För ett linjärt uttryck räcker det att undersöka hörnpunkterna i det tillåtna området.</p><p>Det största värdet fås till \\(\\boxed{Z=28}\\) i punkten/punkterna (4; 4).</p>",
     "familj": "r5_linopt_1"
   },
   {
@@ -14811,8 +14811,8 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>I figuren visas det tillåtna området för en linjär optimeringsuppgift.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"96.3\" y1=\"18\" x2=\"96.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"96.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"148.7\" y1=\"18\" x2=\"148.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"148.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"201.0\" y1=\"18\" x2=\"201.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"201.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"253.3\" y1=\"18\" x2=\"253.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"253.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"305.7\" y1=\"18\" x2=\"305.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"305.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"202.3\" x2=\"360\" y2=\"202.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"206.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"168.7\" x2=\"360\" y2=\"168.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"172.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"135.0\" x2=\"360\" y2=\"135.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"139.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"101.3\" x2=\"360\" y2=\"101.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"105.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"67.7\" x2=\"360\" y2=\"67.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"71.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,67.7 201.0,67.7 305.7,202.3 305.7,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"67.7\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"61.7\" font-size=\"11\" fill=\"#2D70B3\">(0; 5)</text><circle cx=\"201.0\" cy=\"67.7\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"206.0\" y=\"61.7\" font-size=\"11\" fill=\"#2D70B3\">(3; 5)</text><circle cx=\"305.7\" cy=\"202.3\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"310.7\" y=\"196.3\" font-size=\"11\" fill=\"#2D70B3\">(5; 1)</text><circle cx=\"305.7\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"310.7\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(5; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=5x+2y\\).</p>",
-    "s": "<p>Enligt metoden för linjär optimering räcker det att undersöka hörnpunkterna.</p><p>Det största värdet fås till \\(\\boxed{Z=27}\\) i punkten/punkterna (5; 1).</p>",
+    "t": "<p>I figuren visas ett tillåtet område.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"96.3\" y1=\"18\" x2=\"96.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"96.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"148.7\" y1=\"18\" x2=\"148.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"148.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"201.0\" y1=\"18\" x2=\"201.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"201.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"253.3\" y1=\"18\" x2=\"253.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"253.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"305.7\" y1=\"18\" x2=\"305.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"305.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"202.3\" x2=\"360\" y2=\"202.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"206.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"168.7\" x2=\"360\" y2=\"168.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"172.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"135.0\" x2=\"360\" y2=\"135.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"139.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"101.3\" x2=\"360\" y2=\"101.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"105.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"67.7\" x2=\"360\" y2=\"67.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"71.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,67.7 201.0,67.7 305.7,202.3 305.7,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"67.7\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"61.7\" font-size=\"11\" fill=\"#2D70B3\">(0; 5)</text><circle cx=\"201.0\" cy=\"67.7\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"206.0\" y=\"61.7\" font-size=\"11\" fill=\"#2D70B3\">(3; 5)</text><circle cx=\"305.7\" cy=\"202.3\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"310.7\" y=\"196.3\" font-size=\"11\" fill=\"#2D70B3\">(5; 1)</text><circle cx=\"305.7\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"310.7\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(5; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=5x+2y\\).</p>",
+    "s": "<p>För ett linjärt uttryck räcker det att undersöka hörnpunkterna i det tillåtna området.</p><p>Det största värdet fås till \\(\\boxed{Z=27}\\) i punkten/punkterna (5; 1).</p>",
     "familj": "r5_linopt_2"
   },
   {
@@ -14824,8 +14824,8 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>I figuren visas det tillåtna området för en linjär optimeringsuppgift.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"88.9\" y1=\"18\" x2=\"88.9\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"88.9\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"133.7\" y1=\"18\" x2=\"133.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"133.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"178.6\" y1=\"18\" x2=\"178.6\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"178.6\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"223.4\" y1=\"18\" x2=\"223.4\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"223.4\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"268.3\" y1=\"18\" x2=\"268.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"268.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"313.1\" y1=\"18\" x2=\"313.1\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"313.1\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"207.1\" x2=\"360\" y2=\"207.1\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"211.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"178.3\" x2=\"360\" y2=\"178.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"182.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"149.4\" x2=\"360\" y2=\"149.4\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"153.4\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"120.6\" x2=\"360\" y2=\"120.6\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"124.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"91.7\" x2=\"360\" y2=\"91.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"95.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"62.9\" x2=\"360\" y2=\"62.9\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"66.9\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,120.6 133.7,62.9 313.1,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"120.6\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"114.6\" font-size=\"11\" fill=\"#2D70B3\">(0; 4)</text><circle cx=\"133.7\" cy=\"62.9\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"138.7\" y=\"56.9\" font-size=\"11\" fill=\"#2D70B3\">(2; 6)</text><circle cx=\"313.1\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"318.1\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(6; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=3x+4y\\).</p>",
-    "s": "<p>Enligt metoden för linjär optimering räcker det att undersöka hörnpunkterna.</p><p>Det största värdet fås till \\(\\boxed{Z=30}\\) i punkten/punkterna (2; 6).</p>",
+    "t": "<p>I figuren visas ett tillåtet område.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tillåtet område\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"18\" x2=\"44.0\" y2=\"236\" stroke=\"#F0EFF2\"/><line x1=\"88.9\" y1=\"18\" x2=\"88.9\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"88.9\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"133.7\" y1=\"18\" x2=\"133.7\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"133.7\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"178.6\" y1=\"18\" x2=\"178.6\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"178.6\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"223.4\" y1=\"18\" x2=\"223.4\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"223.4\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"268.3\" y1=\"18\" x2=\"268.3\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"268.3\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"313.1\" y1=\"18\" x2=\"313.1\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"313.1\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"358.0\" y1=\"18\" x2=\"358.0\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"358.0\" y=\"257\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236.0\" x2=\"360\" y2=\"236.0\" stroke=\"#F0EFF2\"/><line x1=\"44\" y1=\"207.1\" x2=\"360\" y2=\"207.1\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"211.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"44\" y1=\"178.3\" x2=\"360\" y2=\"178.3\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"182.3\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"44\" y1=\"149.4\" x2=\"360\" y2=\"149.4\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"153.4\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"44\" y1=\"120.6\" x2=\"360\" y2=\"120.6\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"124.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"44\" y1=\"91.7\" x2=\"360\" y2=\"91.7\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"95.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"44\" y1=\"62.9\" x2=\"360\" y2=\"62.9\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"66.9\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"44\" y1=\"34.0\" x2=\"360\" y2=\"34.0\" stroke=\"#F0EFF2\"/><text x=\"34\" y=\"38.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">7</text><line x1=\"44\" y1=\"236\" x2=\"362\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"18\" x2=\"44\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><polygon points=\"44.0,236.0 44.0,120.6 133.7,62.9 313.1,236.0\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"44.0\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(0; 0)</text><circle cx=\"44.0\" cy=\"120.6\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"49.0\" y=\"114.6\" font-size=\"11\" fill=\"#2D70B3\">(0; 4)</text><circle cx=\"133.7\" cy=\"62.9\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"138.7\" y=\"56.9\" font-size=\"11\" fill=\"#2D70B3\">(2; 6)</text><circle cx=\"313.1\" cy=\"236.0\" r=\"3.8\" fill=\"#2D70B3\"/><text x=\"318.1\" y=\"230.0\" font-size=\"11\" fill=\"#2D70B3\">(6; 0)</text><text x=\"195.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tillåtet område</text></svg></span><p>Bestäm största värdet av \\(Z=3x+4y\\).</p>",
+    "s": "<p>För ett linjärt uttryck räcker det att undersöka hörnpunkterna i det tillåtna området.</p><p>Det största värdet fås till \\(\\boxed{Z=30}\\) i punkten/punkterna (2; 6).</p>",
     "familj": "r5_linopt_3"
   },
   {
@@ -14851,7 +14851,7 @@ window.BANKMATO1 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Bestäm alla värden på \\(k\\) för vilka uttrycket \\(Z=2x+ky\\) får sitt största värde i både \\((0,6)\\) och \\((4,4)\\) på det tillåtna området med hörnpunkter \\((0,0)\\), \\((0,6)\\), \\((4,4)\\), \\((6,0)\\).</p>",
-    "s": "<p>För att maximum ska fås i båda punkterna måste målfunktionen ge samma värde där:</p><p>\\[2\\cdot 0 +6k = 2\\cdot 4 + 4k.\\]</p><p>Det ger \\(6k=8+4k\\), alltså \\(2k=8\\) och \\(\\boxed{k=4}\\).</p><p>Då är målfunktionen parallell med kanten mellan punkterna.</p>",
+    "s": "<p>För att maximum ska fås i båda punkterna måste uttrycket \\(Z\\) ge samma värde där:</p><p>\\[2\\cdot 0 +6k = 2\\cdot 4 + 4k.\\]</p><p>Det ger \\(6k=8+4k\\), alltså \\(2k=8\\) och \\(\\boxed{k=4}\\).</p><p>Då är uttrycket \\(Z\\) parallell med kanten mellan punkterna.</p>",
     "familj": "r5_linopt_edge"
   },
   {
@@ -14876,7 +14876,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En geometrisk talföljd har första termen \\(a=2000\\), kvoten \\(k=1,05\\) och \\(n=6\\) termer. Bestäm summan.</p>",
+    "t": "<p>En geometrisk summa har första termen \\(a=2000\\), kvoten \\(k=1,05\\) och \\(n=6\\) termer. Bestäm summan.</p>",
     "s": "<p>Vi använder formeln</p><p>\\[S_n=a\\,\\frac{k^n-1}{k-1}.\\]</p><p>Insättning ger \\(S_6 \\approx 13603,83\\).</p>",
     "familj": "r5_geo_E_1"
   },
@@ -14889,7 +14889,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En geometrisk talföljd har första termen \\(a=500\\), kvoten \\(k=1,08\\) och \\(n=4\\) termer. Bestäm summan.</p>",
+    "t": "<p>En geometrisk summa har första termen \\(a=500\\), kvoten \\(k=1,08\\) och \\(n=4\\) termer. Bestäm summan.</p>",
     "s": "<p>Vi använder formeln</p><p>\\[S_n=a\\,\\frac{k^n-1}{k-1}.\\]</p><p>Insättning ger \\(S_4 \\approx 2253,06\\).</p>",
     "familj": "r5_geo_E_2"
   },
@@ -14902,7 +14902,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En geometrisk talföljd har första termen \\(a=1200\\), kvoten \\(k=0,9\\) och \\(n=5\\) termer. Bestäm summan.</p>",
+    "t": "<p>En geometrisk summa har första termen \\(a=1200\\), kvoten \\(k=0,9\\) och \\(n=5\\) termer. Bestäm summan.</p>",
     "s": "<p>Vi använder formeln</p><p>\\[S_n=a\\,\\frac{k^n-1}{k-1}.\\]</p><p>Insättning ger \\(S_5 \\approx 4914,12\\).</p>",
     "familj": "r5_geo_E_3"
   },
@@ -14928,7 +14928,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>För en geometrisk talföljd gäller att första termen är 5 och summan av de fyra första termerna är 75. Bestäm kvoten om den är positiv.</p>",
+    "t": "<p>För en geometrisk summa gäller att första termen är 5 och summan av de fyra första termerna är 75. Bestäm kvoten om den är positiv.</p>",
     "s": "<p>Formeln ger \\(75=5\\frac{k^4-1}{k-1}\\). Dividera med 5:</p><p>\\[15=\\frac{k^4-1}{k-1}=k^3+k^2+k+1.\\]</p><p>Prövning ger \\(k=2\\), eftersom \\(8+4+2+1=15\\).</p><p><strong>Svar:</strong> \\(\\boxed{k=2}\\).</p>",
     "familj": "r5_geo_C_2"
   },
@@ -14957,5 +14957,1537 @@ window.BANKMATO1 = [
     "t": "<p>En boll studsar så att den når 80 % av föregående höjd. Den släpps från 2,5 m. Hur lång sammanlagd sträcka har bollen färdats när den träffar marken för fjärde gången?</p>",
     "s": "<p>Första sträckan är 2,5 m nedåt. Därefter kommer tre hela upp-och-ned-sträckor med höjderna \\(2,5\\cdot0,8\\), \\(2,5\\cdot0,8^2\\) och \\(2,5\\cdot0,8^3\\).</p><p>Total sträcka blir</p><p>\\[2,5+2\\cdot 2,5(0,8+0,8^2+0,8^3)=2,5+5\\cdot 1,952=12,26.\\]</p><p><strong>Svar:</strong> \\(\\boxed{12,26\\text{ m}}\\).</p>",
     "familj": "r5_geo_A_2"
+  },
+  {
+    "id": "2.285",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=5 x^{4} - 3 x + 7.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=20 x^{3} - 3.\\]</p>",
+    "familj": "r6_der_E_1"
+  },
+  {
+    "id": "2.286",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=2 x^{3} + 4 x^{2} - 6.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=2 x \\left(3 x + 4\\right).\\]</p>",
+    "familj": "r6_der_E_2"
+  },
+  {
+    "id": "2.287",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=7 x^{5} - x^{2} + 3 x.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=35 x^{4} - 2 x + 3.\\]</p>",
+    "familj": "r6_der_E_3"
+  },
+  {
+    "id": "2.288",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=\\frac{3 x^{4}}{2} - 2 x^{2} + 5.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=6 x^{3} - 4 x.\\]</p>",
+    "familj": "r6_der_E_4"
+  },
+  {
+    "id": "2.289",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=x^{6} + 4 x^{3} - 8.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=6 x^{2} \\left(x^{3} + 2\\right).\\]</p>",
+    "familj": "r6_der_E_5"
+  },
+  {
+    "id": "2.290",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=9 x^{2} - 5 x + 1.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=18 x - 5.\\]</p>",
+    "familj": "r6_der_E_6"
+  },
+  {
+    "id": "2.291",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=4 x^{7} + 2 x^{3} - x.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=28 x^{6} + 6 x^{2} - 1.\\]</p>",
+    "familj": "r6_der_E_7"
+  },
+  {
+    "id": "2.292",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=6 x^{4} - x^{3} + 2 x^{2}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=x \\left(24 x^{2} - 3 x + 4\\right).\\]</p>",
+    "familj": "r6_der_E_8"
+  },
+  {
+    "id": "2.293",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=\\sqrt{x} + 3 x^{2}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=6 x + \\frac{1}{2 \\sqrt{x}}.\\]</p>",
+    "familj": "r6_der_E_9"
+  },
+  {
+    "id": "2.294",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=2 \\sqrt{x} - x.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=-1 + \\frac{1}{\\sqrt{x}}.\\]</p>",
+    "familj": "r6_der_E_10"
+  },
+  {
+    "id": "2.295",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=2 x^{2} + \\frac{3}{x}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=4 x - \\frac{3}{x^{2}}.\\]</p>",
+    "familj": "r6_der_E_11"
+  },
+  {
+    "id": "2.296",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=- 4 x + \\frac{5}{x}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=-4 - \\frac{5}{x^{2}}.\\]</p>",
+    "familj": "r6_der_E_12"
+  },
+  {
+    "id": "2.297",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=x^{\\frac{3}{2}} + 2 x.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=\\frac{3 \\sqrt{x}}{2} + 2.\\]</p>",
+    "familj": "r6_der_E_13"
+  },
+  {
+    "id": "2.298",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=4 \\sqrt{x} - x^{2}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=- 2 x + \\frac{2}{\\sqrt{x}}.\\]</p>",
+    "familj": "r6_der_E_14"
+  },
+  {
+    "id": "2.299",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=3 x + \\frac{2}{x^{2}}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=3 - \\frac{4}{x^{3}}.\\]</p>",
+    "familj": "r6_der_E_15"
+  },
+  {
+    "id": "2.300",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) då</p><p>\\[f(x)=5 x^{2} + \\frac{1}{x^{3}}.\\]</p>",
+    "s": "<p>Derivera term för term med deriveringsreglerna:</p><p>\\[f^{\\prime}(x)=10 x - \\frac{3}{x^{4}}.\\]</p>",
+    "familj": "r6_der_E_16"
+  },
+  {
+    "id": "2.301",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Derivera funktionerna.</p><p>a) \\(f(x)=3 x^{2} - 4 x + 8\\)</p><p>b) \\(f(x)=x^{4} + 5 x\\)</p><p>c) \\(f(x)=\\frac{2}{x}\\)</p>",
+    "s": "<p>a) \\(f^{\\prime}(x)=6 x - 4\\).</p><p>b) \\(f^{\\prime}(x)=4 x^{3} + 5\\).</p><p>c) \\(f^{\\prime}(x)=- \\frac{2}{x^{2}}\\).</p>",
+    "familj": "r6_der_multi_1"
+  },
+  {
+    "id": "2.302",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Derivera funktionerna.</p><p>a) \\(f(x)=6 x^{3} - x^{2} + 1\\)</p><p>b) \\(f(x)=3 \\sqrt{x}\\)</p><p>c) \\(f(x)=2 x + \\frac{1}{x^{2}}\\)</p>",
+    "s": "<p>a) \\(f^{\\prime}(x)=2 x \\left(9 x - 1\\right)\\).</p><p>b) \\(f^{\\prime}(x)=\\frac{3}{2 \\sqrt{x}}\\).</p><p>c) \\(f^{\\prime}(x)=2 - \\frac{2}{x^{3}}\\).</p>",
+    "familj": "r6_der_multi_2"
+  },
+  {
+    "id": "2.303",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Derivera funktionerna.</p><p>a) \\(f(x)=\\frac{x^{4}}{2} + 7\\)</p><p>b) \\(f(x)=x + \\frac{5}{x}\\)</p><p>c) \\(f(x)=x^{\\frac{3}{2}}\\)</p>",
+    "s": "<p>a) \\(f^{\\prime}(x)=2 x^{3}\\).</p><p>b) \\(f^{\\prime}(x)=1 - \\frac{5}{x^{2}}\\).</p><p>c) \\(f^{\\prime}(x)=\\frac{3 \\sqrt{x}}{2}\\).</p>",
+    "familj": "r6_der_multi_3"
+  },
+  {
+    "id": "2.304",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Derivera funktionerna.</p><p>a) \\(f(x)=8 x^{5} - 2 x\\)</p><p>b) \\(f(x)=4 \\sqrt{x} - 3\\)</p><p>c) \\(f(x)=x^{2} + \\frac{3}{x^{3}}\\)</p>",
+    "s": "<p>a) \\(f^{\\prime}(x)=40 x^{4} - 2\\).</p><p>b) \\(f^{\\prime}(x)=\\frac{2}{\\sqrt{x}}\\).</p><p>c) \\(f^{\\prime}(x)=2 x - \\frac{9}{x^{4}}\\).</p>",
+    "familj": "r6_der_multi_4"
+  },
+  {
+    "id": "2.305",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>Bestäm \\(f^{\\prime}(x)\\) om \\(f(x)=x\\sqrt{x}+\\frac{3}{\\sqrt{x}}\\). Skriv först om funktionen med potenser.</p>",
+    "s": "<p>\\(x\\sqrt{x}=x^{3/2}\\) och \\(3/\\sqrt{x}=3x^{-1/2}\\).</p><p>Alltså \\(f(x)=x^{3/2}+3x^{-1/2}\\).</p><p>\\[f^{\\prime}(x)=\\frac32x^{1/2}-\\frac32x^{-3/2}.\\]</p>",
+    "familj": "r6_der_C_1"
+  },
+  {
+    "id": "2.306",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För \\(x\\ne0\\) gäller \\(f(x)=\\frac{2x^4+6x^2}{x^2}\\). Förenkla först och bestäm sedan \\(f^{\\prime}(x)\\).</p>",
+    "s": "<p>För \\(x\\ne0\\) kan uttrycket förenklas:</p><p>\\[f(x)=2x^2+6.\\]</p><p>Därför är \\(\\boxed{f^{\\prime}(x)=4x}\\).</p>",
+    "familj": "r6_der_C_2"
+  },
+  {
+    "id": "2.307",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>Funktionen är \\(f(x)=ax^3-2x\\). Bestäm \\(a\\) så att \\(f^{\\prime}(2)=10\\).</p>",
+    "s": "<p>\\(f^{\\prime}(x)=3ax^2-2\\).</p><p>Villkoret ger \\(f^{\\prime}(2)=12a-2=10\\), alltså \\(12a=12\\) och \\(\\boxed{a=1}\\).</p>",
+    "familj": "r6_der_C_3"
+  },
+  {
+    "id": "2.308",
+    "kap": 2,
+    "omr": "deriveringsregler",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>Bestäm \\(f^{\\prime\\prime}(x)\\) om \\(f(x)=2x^5-3x^3+x\\).</p>",
+    "s": "<p>Först \\(f^{\\prime}(x)=10x^4-9x^2+1\\).</p><p>Derivera en gång till:</p><p>\\[\\boxed{f^{\\prime\\prime}(x)=40x^3-18x}.\\]</p>",
+    "familj": "r6_der_C_4"
+  },
+  {
+    "id": "3.333",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- x^{2} + 6 x + 1\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=6 - 2 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=10\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{10}\\) och extrempunkten är \\(\\boxed{(3; 10)}\\).</p>",
+    "familj": "r6_ext_func_1"
+  },
+  {
+    "id": "3.334",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=x^{2} - 8 x + 3\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=2 x - 8\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=4\\).</p><p>\\(f(4)=-13\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-13}\\) och extrempunkten är \\(\\boxed{(4; -13)}\\).</p>",
+    "familj": "r6_ext_func_2"
+  },
+  {
+    "id": "3.335",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- 2 x^{2} + 12 x - 5\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=12 - 4 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=13\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{13}\\) och extrempunkten är \\(\\boxed{(3; 13)}\\).</p>",
+    "familj": "r6_ext_func_3"
+  },
+  {
+    "id": "3.336",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=3 x^{2} - 12 x + 7\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=6 x - 12\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=2\\).</p><p>\\(f(2)=-5\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-5}\\) och extrempunkten är \\(\\boxed{(2; -5)}\\).</p>",
+    "familj": "r6_ext_func_4"
+  },
+  {
+    "id": "3.337",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- x^{2} + 10 x - 9\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=10 - 2 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=5\\).</p><p>\\(f(5)=16\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{16}\\) och extrempunkten är \\(\\boxed{(5; 16)}\\).</p>",
+    "familj": "r6_ext_func_5"
+  },
+  {
+    "id": "3.338",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=2 x^{2} - 4 x - 6\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=4 x - 4\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=1\\).</p><p>\\(f(1)=-8\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-8}\\) och extrempunkten är \\(\\boxed{(1; -8)}\\).</p>",
+    "familj": "r6_ext_func_6"
+  },
+  {
+    "id": "3.339",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- 3 x^{2} + 18 x + 2\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=18 - 6 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=29\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{29}\\) och extrempunkten är \\(\\boxed{(3; 29)}\\).</p>",
+    "familj": "r6_ext_func_7"
+  },
+  {
+    "id": "3.340",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=x^{2} + 6 x + 4\\]</p>",
+    "s": "<p>\\(f^{\\prime}(x)=2 x + 6\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=-3\\).</p><p>\\(f(-3)=-5\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-5}\\) och extrempunkten är \\(\\boxed{(-3; -5)}\\).</p>",
+    "familj": "r6_ext_func_8"
+  },
+  {
+    "id": "3.341",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har omkretsen 28 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">14 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 28</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
+    "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(14-x\\) cm.</p><p>\\[A(x)=x(14-x)=14x-x^2.\\]</p><p>\\(A^{\\prime}(x)=14-2x\\). Derivatan är noll när \\(x=7\\).</p><p>Då är båda sidorna \\(7\\) cm och största arean är \\(\\boxed{49\\text{ cm}^2}\\).</p>",
+    "familj": "r6_ext_rect_1"
+  },
+  {
+    "id": "3.342",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har omkretsen 32 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">16 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 32</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
+    "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(16-x\\) cm.</p><p>\\[A(x)=x(16-x)=16x-x^2.\\]</p><p>\\(A^{\\prime}(x)=16-2x\\). Derivatan är noll när \\(x=8\\).</p><p>Då är båda sidorna \\(8\\) cm och största arean är \\(\\boxed{64\\text{ cm}^2}\\).</p>",
+    "familj": "r6_ext_rect_2"
+  },
+  {
+    "id": "3.343",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har omkretsen 40 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">20 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 40</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
+    "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(20-x\\) cm.</p><p>\\[A(x)=x(20-x)=20x-x^2.\\]</p><p>\\(A^{\\prime}(x)=20-2x\\). Derivatan är noll när \\(x=10\\).</p><p>Då är båda sidorna \\(10\\) cm och största arean är \\(\\boxed{100\\text{ cm}^2}\\).</p>",
+    "familj": "r6_ext_rect_3"
+  },
+  {
+    "id": "3.344",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har omkretsen 48 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">24 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 48</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
+    "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(24-x\\) cm.</p><p>\\[A(x)=x(24-x)=24x-x^2.\\]</p><p>\\(A^{\\prime}(x)=24-2x\\). Derivatan är noll när \\(x=12\\).</p><p>Då är båda sidorna \\(12\\) cm och största arean är \\(\\boxed{144\\text{ cm}^2}\\).</p>",
+    "familj": "r6_ext_rect_4"
+  },
+  {
+    "id": "3.345",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 30 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">30 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
+    "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(30-2x\\) m.</p><p>\\[A(x)=x(30-2x)=30x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=30-4x\\), så derivatan är noll när \\(x=7,5\\).</p><p>Den tredje sidan blir då \\(15\\) m och största arean är \\(\\boxed{112,5\\text{ m}^2}\\).</p>",
+    "familj": "r6_ext_wall_1"
+  },
+  {
+    "id": "3.346",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 36 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">36 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
+    "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(36-2x\\) m.</p><p>\\[A(x)=x(36-2x)=36x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=36-4x\\), så derivatan är noll när \\(x=9\\).</p><p>Den tredje sidan blir då \\(18\\) m och största arean är \\(\\boxed{162\\text{ m}^2}\\).</p>",
+    "familj": "r6_ext_wall_2"
+  },
+  {
+    "id": "3.347",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 50 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">50 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
+    "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(50-2x\\) m.</p><p>\\[A(x)=x(50-2x)=50x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=50-4x\\), så derivatan är noll när \\(x=12,5\\).</p><p>Den tredje sidan blir då \\(25\\) m och största arean är \\(\\boxed{312,5\\text{ m}^2}\\).</p>",
+    "familj": "r6_ext_wall_3"
+  },
+  {
+    "id": "3.348",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En liten teater modellerar dagsintäkten med \\(I(x)=-4x^2+80x+200\\), där \\(x\\) är antalet tiokronors höjningar från ett grundpris och \\(I\\) mäts i kronor. Bestäm det \\(x\\)-värde som ger störst intäkt.</p>",
+    "s": "<p>Derivatan är \\(I^{\\prime}(x)=-8x+80\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-8x+80=0\\Rightarrow x=10.\\]</p><p>Det största modellvärdet blir \\(I(10)=600\\) kr.</p><p><strong>Svar:</strong> \\(x=10\\), vilket motsvarar en prishöjning med 100 kr.</p>",
+    "familj": "r6_ext_context_1"
+  },
+  {
+    "id": "3.349",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Höjden hos en boll modelleras av \\(h(t)=-2t^2+24t+50\\), där \\(h\\) mäts i meter och \\(t\\) i sekunder. När är bollen som högst och vilken är den största höjden?</p>",
+    "s": "<p>Derivatan är \\(h^{\\prime}(t)=-4t+24\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-4t+24=0\\Rightarrow t=6.\\]</p><p>Höjden blir \\(h(6)=122\\).</p><p><strong>Svar:</strong> bollen är som högst efter \\(\\boxed{6\\text{ s}}\\), och den största höjden är \\(\\boxed{122\\text{ m}}\\).</p>",
+    "familj": "r6_ext_context_2"
+  },
+  {
+    "id": "3.350",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En odlares förenklade vinstmodell är \\(V(x)=-5x^2+60x\\), där \\(x\\) anger antal hundratal plantor och \\(V\\) mäts i tusen kronor. Bestäm det \\(x\\)-värde som ger störst vinst.</p>",
+    "s": "<p>Derivatan är \\(V^{\\prime}(x)=-10x+60\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-10x+60=0\\Rightarrow x=6.\\]</p><p>Då blir \\(V(6)=180\\).</p><p><strong>Svar:</strong> \\(x=6\\), alltså 600 plantor, ger enligt modellen störst vinst: \\(\\boxed{180\\,000\\text{ kr}}\\).</p>",
+    "familj": "r6_ext_context_3"
+  },
+  {
+    "id": "3.351",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Figuren visar tre grafer \\(F_1\\), \\(F_2\\) och \\(F_3\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre grafer som är vertikalt förskjutna\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"46\" y1=\"162.7\" x2=\"362\" y2=\"162.7\" stroke=\"#2B2527\"/><line x1=\"200.0\" y1=\"18\" x2=\"200.0\" y2=\"226\" stroke=\"#2B2527\"/><path d=\"M 71.7 33.4 L 73.8 35.5 L 75.9 37.7 L 78.1 39.8 L 80.2 41.9 L 82.4 43.9 L 84.5 45.9 L 86.6 47.9 L 88.8 49.8 L 90.9 51.7 L 93.1 53.5 L 95.2 55.3 L 97.3 57.1 L 99.5 58.9 L 101.6 60.6 L 103.8 62.2 L 105.9 63.9 L 108.0 65.4 L 110.2 67.0 L 112.3 68.5 L 114.4 70.0 L 116.6 71.5 L 118.7 72.9 L 120.9 74.2 L 123.0 75.6 L 125.1 76.9 L 127.3 78.1 L 129.4 79.4 L 131.6 80.6 L 133.7 81.7 L 135.8 82.8 L 138.0 83.9 L 140.1 85.0 L 142.2 86.0 L 144.4 86.9 L 146.5 87.9 L 148.7 88.8 L 150.8 89.6 L 152.9 90.5 L 155.1 91.3 L 157.2 92.0 L 159.4 92.7 L 161.5 93.4 L 163.6 94.0 L 165.8 94.6 L 167.9 95.2 L 170.1 95.7 L 172.2 96.2 L 174.3 96.7 L 176.5 97.1 L 178.6 97.5 L 180.8 97.8 L 182.9 98.2 L 185.0 98.4 L 187.2 98.7 L 189.3 98.9 L 191.4 99.0 L 193.6 99.2 L 195.7 99.3 L 197.9 99.3 L 200.0 99.3 L 202.1 99.3 L 204.3 99.3 L 206.4 99.2 L 208.6 99.0 L 210.7 98.9 L 212.8 98.7 L 215.0 98.4 L 217.1 98.2 L 219.2 97.8 L 221.4 97.5 L 223.5 97.1 L 225.7 96.7 L 227.8 96.2 L 229.9 95.7 L 232.1 95.2 L 234.2 94.6 L 236.4 94.0 L 238.5 93.4 L 240.6 92.7 L 242.8 92.0 L 244.9 91.3 L 247.1 90.5 L 249.2 89.6 L 251.3 88.8 L 253.5 87.9 L 255.6 86.9 L 257.8 86.0 L 259.9 85.0 L 262.0 83.9 L 264.2 82.8 L 266.3 81.7 L 268.4 80.6 L 270.6 79.4 L 272.7 78.1 L 274.9 76.9 L 277.0 75.6 L 279.1 74.2 L 281.3 72.9 L 283.4 71.5 L 285.6 70.0 L 287.7 68.5 L 289.8 67.0 L 292.0 65.4 L 294.1 63.9 L 296.2 62.2 L 298.4 60.6 L 300.5 58.9 L 302.7 57.1 L 304.8 55.3 L 306.9 53.5 L 309.1 51.7 L 311.2 49.8 L 313.4 47.9 L 315.5 45.9 L 317.6 43.9 L 319.8 41.9 L 321.9 39.8 L 324.1 37.7 L 326.2 35.5 L 328.3 33.4\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.4\"/><text x=\"310.7\" y=\"57.1\" font-size=\"12\" fill=\"#C74440\">F₁</text><path d=\"M 71.7 96.7 L 73.8 98.9 L 75.9 101.0 L 78.1 103.1 L 80.2 105.2 L 82.4 107.2 L 84.5 109.2 L 86.6 111.2 L 88.8 113.1 L 90.9 115.0 L 93.1 116.9 L 95.2 118.7 L 97.3 120.4 L 99.5 122.2 L 101.6 123.9 L 103.8 125.6 L 105.9 127.2 L 108.0 128.8 L 110.2 130.3 L 112.3 131.9 L 114.4 133.3 L 116.6 134.8 L 118.7 136.2 L 120.9 137.6 L 123.0 138.9 L 125.1 140.2 L 127.3 141.5 L 129.4 142.7 L 131.6 143.9 L 133.7 145.1 L 135.8 146.2 L 138.0 147.3 L 140.1 148.3 L 142.2 149.3 L 144.4 150.3 L 146.5 151.2 L 148.7 152.1 L 150.8 153.0 L 152.9 153.8 L 155.1 154.6 L 157.2 155.3 L 159.4 156.1 L 161.5 156.7 L 163.6 157.4 L 165.8 158.0 L 167.9 158.5 L 170.1 159.1 L 172.2 159.6 L 174.3 160.0 L 176.5 160.4 L 178.6 160.8 L 180.8 161.2 L 182.9 161.5 L 185.0 161.8 L 187.2 162.0 L 189.3 162.2 L 191.4 162.4 L 193.6 162.5 L 195.7 162.6 L 197.9 162.6 L 200.0 162.7 L 202.1 162.6 L 204.3 162.6 L 206.4 162.5 L 208.6 162.4 L 210.7 162.2 L 212.8 162.0 L 215.0 161.8 L 217.1 161.5 L 219.2 161.2 L 221.4 160.8 L 223.5 160.4 L 225.7 160.0 L 227.8 159.6 L 229.9 159.1 L 232.1 158.5 L 234.2 158.0 L 236.4 157.4 L 238.5 156.7 L 240.6 156.1 L 242.8 155.3 L 244.9 154.6 L 247.1 153.8 L 249.2 153.0 L 251.3 152.1 L 253.5 151.2 L 255.6 150.3 L 257.8 149.3 L 259.9 148.3 L 262.0 147.3 L 264.2 146.2 L 266.3 145.1 L 268.4 143.9 L 270.6 142.7 L 272.7 141.5 L 274.9 140.2 L 277.0 138.9 L 279.1 137.6 L 281.3 136.2 L 283.4 134.8 L 285.6 133.3 L 287.7 131.9 L 289.8 130.3 L 292.0 128.8 L 294.1 127.2 L 296.2 125.6 L 298.4 123.9 L 300.5 122.2 L 302.7 120.4 L 304.8 118.7 L 306.9 116.9 L 309.1 115.0 L 311.2 113.1 L 313.4 111.2 L 315.5 109.2 L 317.6 107.2 L 319.8 105.2 L 321.9 103.1 L 324.1 101.0 L 326.2 98.9 L 328.3 96.7\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.4\"/><text x=\"310.7\" y=\"120.4\" font-size=\"12\" fill=\"#2D70B3\">F₂</text><path d=\"M 71.7 138.9 L 73.8 141.1 L 75.9 143.2 L 78.1 145.3 L 80.2 147.4 L 82.4 149.5 L 84.5 151.5 L 86.6 153.4 L 88.8 155.3 L 90.9 157.2 L 93.1 159.1 L 95.2 160.9 L 97.3 162.7 L 99.5 164.4 L 101.6 166.1 L 103.8 167.8 L 105.9 169.4 L 108.0 171.0 L 110.2 172.6 L 112.3 174.1 L 114.4 175.6 L 116.6 177.0 L 118.7 178.4 L 120.9 179.8 L 123.0 181.1 L 125.1 182.4 L 127.3 183.7 L 129.4 184.9 L 131.6 186.1 L 133.7 187.3 L 135.8 188.4 L 138.0 189.5 L 140.1 190.5 L 142.2 191.5 L 144.4 192.5 L 146.5 193.4 L 148.7 194.3 L 150.8 195.2 L 152.9 196.0 L 155.1 196.8 L 157.2 197.6 L 159.4 198.3 L 161.5 199.0 L 163.6 199.6 L 165.8 200.2 L 167.9 200.8 L 170.1 201.3 L 172.2 201.8 L 174.3 202.2 L 176.5 202.7 L 178.6 203.1 L 180.8 203.4 L 182.9 203.7 L 185.0 204.0 L 187.2 204.2 L 189.3 204.4 L 191.4 204.6 L 193.6 204.7 L 195.7 204.8 L 197.9 204.9 L 200.0 204.9 L 202.1 204.9 L 204.3 204.8 L 206.4 204.7 L 208.6 204.6 L 210.7 204.4 L 212.8 204.2 L 215.0 204.0 L 217.1 203.7 L 219.2 203.4 L 221.4 203.1 L 223.5 202.7 L 225.7 202.2 L 227.8 201.8 L 229.9 201.3 L 232.1 200.8 L 234.2 200.2 L 236.4 199.6 L 238.5 199.0 L 240.6 198.3 L 242.8 197.6 L 244.9 196.8 L 247.1 196.0 L 249.2 195.2 L 251.3 194.3 L 253.5 193.4 L 255.6 192.5 L 257.8 191.5 L 259.9 190.5 L 262.0 189.5 L 264.2 188.4 L 266.3 187.3 L 268.4 186.1 L 270.6 184.9 L 272.7 183.7 L 274.9 182.4 L 277.0 181.1 L 279.1 179.8 L 281.3 178.4 L 283.4 177.0 L 285.6 175.6 L 287.7 174.1 L 289.8 172.6 L 292.0 171.0 L 294.1 169.4 L 296.2 167.8 L 298.4 166.1 L 300.5 164.4 L 302.7 162.7 L 304.8 160.9 L 306.9 159.1 L 309.1 157.2 L 311.2 155.3 L 313.4 153.4 L 315.5 151.5 L 317.6 149.5 L 319.8 147.4 L 321.9 145.3 L 324.1 143.2 L 326.2 141.1 L 328.3 138.9\" fill=\"none\" stroke=\"#0F6B4F\" stroke-width=\"2.4\"/><text x=\"310.7\" y=\"162.7\" font-size=\"12\" fill=\"#0F6B4F\">F₃</text></svg></span><p>Graferna är förskjutna i höjdled. Förklara varför de kan vara primitiva funktioner till samma funktion \\(f\\).</p>",
+    "s": "<p>Graferna har samma form och samma lutning för varje \\(x\\)-värde. De skiljer sig bara med en konstant i höjdled.</p><p>Om \\(F_1^{\\prime}(x)=f(x)\\), så gäller också \\((F_1(x)+C)^{\\prime}=f(x)\\). Därför kan alla tre vara primitiva funktioner till samma \\(f\\).</p>",
+    "familj": "r6_prim_fig_shift"
+  },
+  {
+    "id": "3.352",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Funktionen \\(f(x)=2x\\) är given.</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre möjliga grafer A, B och C\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"12\" y=\"42\" width=\"112\" height=\"180\" fill=\"#fff\" stroke=\"#D7D5D9\"/><line x1=\"20\" y1=\"171.6\" x2=\"116\" y2=\"171.6\" stroke=\"#777\"/><line x1=\"68.0\" y1=\"50\" x2=\"68.0\" y2=\"214\" stroke=\"#777\"/><path d=\"M 28.0 75.6 L 29.0 80.3 L 30.0 85.0 L 31.0 89.5 L 32.0 93.8 L 33.0 98.1 L 34.0 102.2 L 35.0 106.3 L 36.0 110.2 L 37.0 113.9 L 38.0 117.6 L 39.0 121.1 L 40.0 124.6 L 41.0 127.9 L 42.0 131.0 L 43.0 134.1 L 44.0 137.0 L 45.0 139.9 L 46.0 142.6 L 47.0 145.1 L 48.0 147.6 L 49.0 149.9 L 50.0 152.2 L 51.0 154.3 L 52.0 156.2 L 53.0 158.1 L 54.0 159.8 L 55.0 161.5 L 56.0 163.0 L 57.0 164.3 L 58.0 165.6 L 59.0 166.7 L 60.0 167.8 L 61.0 168.7 L 62.0 169.4 L 63.0 170.1 L 64.0 170.6 L 65.0 171.1 L 66.0 171.4 L 67.0 171.5 L 68.0 171.6 L 69.0 171.5 L 70.0 171.4 L 71.0 171.1 L 72.0 170.6 L 73.0 170.1 L 74.0 169.4 L 75.0 168.7 L 76.0 167.8 L 77.0 166.7 L 78.0 165.6 L 79.0 164.3 L 80.0 163.0 L 81.0 161.5 L 82.0 159.8 L 83.0 158.1 L 84.0 156.2 L 85.0 154.3 L 86.0 152.2 L 87.0 149.9 L 88.0 147.6 L 89.0 145.1 L 90.0 142.6 L 91.0 139.9 L 92.0 137.0 L 93.0 134.1 L 94.0 131.0 L 95.0 127.9 L 96.0 124.6 L 97.0 121.1 L 98.0 117.6 L 99.0 113.9 L 100.0 110.2 L 101.0 106.3 L 102.0 102.2 L 103.0 98.1 L 104.0 93.8 L 105.0 89.5 L 106.0 85.0 L 107.0 80.3 L 108.0 75.6\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.2\"/><text x=\"20\" y=\"60\" font-size=\"14\" font-weight=\"600\" fill=\"#2B2527\">A</text><rect x=\"139\" y=\"42\" width=\"112\" height=\"180\" fill=\"#fff\" stroke=\"#D7D5D9\"/><line x1=\"147\" y1=\"171.6\" x2=\"243\" y2=\"171.6\" stroke=\"#777\"/><line x1=\"195.0\" y1=\"50\" x2=\"195.0\" y2=\"214\" stroke=\"#777\"/><path d=\"M 155.0 219.6 L 156.0 214.9 L 157.0 210.2 L 158.0 205.7 L 159.0 201.4 L 160.0 197.1 L 161.0 193.0 L 162.0 188.9 L 163.0 185.0 L 164.0 181.3 L 165.0 177.6 L 166.0 174.1 L 167.0 170.6 L 168.0 167.3 L 169.0 164.2 L 170.0 161.1 L 171.0 158.2 L 172.0 155.3 L 173.0 152.6 L 174.0 150.1 L 175.0 147.6 L 176.0 145.3 L 177.0 143.0 L 178.0 140.9 L 179.0 139.0 L 180.0 137.1 L 181.0 135.4 L 182.0 133.7 L 183.0 132.2 L 184.0 130.9 L 185.0 129.6 L 186.0 128.5 L 187.0 127.4 L 188.0 126.5 L 189.0 125.8 L 190.0 125.1 L 191.0 124.6 L 192.0 124.1 L 193.0 123.8 L 194.0 123.7 L 195.0 123.6 L 196.0 123.7 L 197.0 123.8 L 198.0 124.1 L 199.0 124.6 L 200.0 125.1 L 201.0 125.8 L 202.0 126.5 L 203.0 127.4 L 204.0 128.5 L 205.0 129.6 L 206.0 130.9 L 207.0 132.2 L 208.0 133.7 L 209.0 135.4 L 210.0 137.1 L 211.0 139.0 L 212.0 140.9 L 213.0 143.0 L 214.0 145.3 L 215.0 147.6 L 216.0 150.1 L 217.0 152.6 L 218.0 155.3 L 219.0 158.2 L 220.0 161.1 L 221.0 164.2 L 222.0 167.3 L 223.0 170.6 L 224.0 174.1 L 225.0 177.6 L 226.0 181.3 L 227.0 185.0 L 228.0 188.9 L 229.0 193.0 L 230.0 197.1 L 231.0 201.4 L 232.0 205.7 L 233.0 210.2 L 234.0 214.9 L 235.0 219.6\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.2\"/><text x=\"147\" y=\"60\" font-size=\"14\" font-weight=\"600\" fill=\"#2B2527\">B</text><rect x=\"266\" y=\"42\" width=\"112\" height=\"180\" fill=\"#fff\" stroke=\"#D7D5D9\"/><line x1=\"274\" y1=\"171.6\" x2=\"370\" y2=\"171.6\" stroke=\"#777\"/><line x1=\"322.0\" y1=\"50\" x2=\"322.0\" y2=\"214\" stroke=\"#777\"/><path d=\"M 282.0 195.6 L 283.0 194.4 L 284.0 193.2 L 285.0 192.0 L 286.0 190.8 L 287.0 189.6 L 288.0 188.4 L 289.0 187.2 L 290.0 186.0 L 291.0 184.8 L 292.0 183.6 L 293.0 182.4 L 294.0 181.2 L 295.0 180.0 L 296.0 178.8 L 297.0 177.6 L 298.0 176.4 L 299.0 175.2 L 300.0 174.0 L 301.0 172.8 L 302.0 171.6 L 303.0 170.4 L 304.0 169.2 L 305.0 168.0 L 306.0 166.8 L 307.0 165.6 L 308.0 164.4 L 309.0 163.2 L 310.0 162.0 L 311.0 160.8 L 312.0 159.6 L 313.0 158.4 L 314.0 157.2 L 315.0 156.0 L 316.0 154.8 L 317.0 153.6 L 318.0 152.4 L 319.0 151.2 L 320.0 150.0 L 321.0 148.8 L 322.0 147.6 L 323.0 146.4 L 324.0 145.2 L 325.0 144.0 L 326.0 142.8 L 327.0 141.6 L 328.0 140.4 L 329.0 139.2 L 330.0 138.0 L 331.0 136.8 L 332.0 135.6 L 333.0 134.4 L 334.0 133.2 L 335.0 132.0 L 336.0 130.8 L 337.0 129.6 L 338.0 128.4 L 339.0 127.2 L 340.0 126.0 L 341.0 124.8 L 342.0 123.6 L 343.0 122.4 L 344.0 121.2 L 345.0 120.0 L 346.0 118.8 L 347.0 117.6 L 348.0 116.4 L 349.0 115.2 L 350.0 114.0 L 351.0 112.8 L 352.0 111.6 L 353.0 110.4 L 354.0 109.2 L 355.0 108.0 L 356.0 106.8 L 357.0 105.6 L 358.0 104.4 L 359.0 103.2 L 360.0 102.0 L 361.0 100.8 L 362.0 99.6\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.2\"/><text x=\"274\" y=\"60\" font-size=\"14\" font-weight=\"600\" fill=\"#2B2527\">C</text></svg></span><p>Vilken av graferna A–C kan visa en primitiv funktion till \\(f\\)? Motivera.</p>",
+    "s": "<p>En primitiv funktion till \\(f(x)=2x\\) är \\(F(x)=x^2+C\\). Grafen måste därför vara en uppåtvänd parabel med symmetrilinje \\(x=0\\).</p><p><strong>Svar:</strong> graf A.</p>",
+    "familj": "r6_prim_fig_choice"
+  },
+  {
+    "id": "3.353",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>För en funktion \\(F\\) gäller att \\(F^{\\prime}(x)=2 x\\). Punkten \\((1;4)\\) ligger på grafen till \\(F\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till F\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"73.7\" y1=\"28\" x2=\"73.7\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"73.7\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-2</text><line x1=\"125.0\" y1=\"28\" x2=\"125.0\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"125.0\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-1</text><line x1=\"176.3\" y1=\"28\" x2=\"176.3\" y2=\"224\" stroke=\"#F0EFF2\"/><line x1=\"227.7\" y1=\"28\" x2=\"227.7\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"227.7\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">1</text><line x1=\"279.0\" y1=\"28\" x2=\"279.0\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"279.0\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">2</text><line x1=\"330.3\" y1=\"28\" x2=\"330.3\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"330.3\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"212.5\" x2=\"362\" y2=\"212.5\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"155.0\" x2=\"362\" y2=\"155.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"159.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"97.5\" x2=\"362\" y2=\"97.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"101.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">10</text><line x1=\"48\" y1=\"40.0\" x2=\"362\" y2=\"40.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"44.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">15</text><line x1=\"176.3\" y1=\"28\" x2=\"176.3\" y2=\"224\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><line x1=\"48\" y1=\"212.5\" x2=\"362\" y2=\"212.5\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"372\" y=\"216.5\" font-size=\"12\">x</text><text x=\"20\" y=\"40\" font-size=\"12\">y</text><path d=\"M 48.0 106.1 L 48.8 107.0 L 49.5 107.8 L 50.3 108.7 L 51.1 109.5 L 51.9 110.4 L 52.6 111.2 L 53.4 112.0 L 54.2 112.9 L 54.9 113.7 L 55.7 114.5 L 56.5 115.3 L 57.2 116.1 L 58.0 116.9 L 58.8 117.7 L 59.6 118.5 L 60.3 119.3 L 61.1 120.0 L 61.9 120.8 L 62.6 121.6 L 63.4 122.3 L 64.2 123.1 L 64.9 123.8 L 65.7 124.6 L 66.5 125.3 L 67.2 126.1 L 68.0 126.8 L 68.8 127.5 L 69.6 128.2 L 70.3 129.0 L 71.1 129.7 L 71.9 130.4 L 72.6 131.1 L 73.4 131.8 L 74.2 132.5 L 74.9 133.1 L 75.7 133.8 L 76.5 134.5 L 77.3 135.2 L 78.0 135.8 L 78.8 136.5 L 79.6 137.1 L 80.3 137.8 L 81.1 138.4 L 81.9 139.1 L 82.7 139.7 L 83.4 140.3 L 84.2 140.9 L 85.0 141.6 L 85.7 142.2 L 86.5 142.8 L 87.3 143.4 L 88.0 144.0 L 88.8 144.6 L 89.6 145.2 L 90.3 145.7 L 91.1 146.3 L 91.9 146.9 L 92.7 147.4 L 93.4 148.0 L 94.2 148.6 L 95.0 149.1 L 95.7 149.7 L 96.5 150.2 L 97.3 150.7 L 98.1 151.3 L 98.8 151.8 L 99.6 152.3 L 100.4 152.8 L 101.1 153.3 L 101.9 153.8 L 102.7 154.3 L 103.4 154.8 L 104.2 155.3 L 105.0 155.8 L 105.8 156.3 L 106.5 156.7 L 107.3 157.2 L 108.1 157.7 L 108.8 158.1 L 109.6 158.6 L 110.4 159.0 L 111.1 159.5 L 111.9 159.9 L 112.7 160.3 L 113.5 160.7 L 114.2 161.2 L 115.0 161.6 L 115.8 162.0 L 116.5 162.4 L 117.3 162.8 L 118.1 163.2 L 118.8 163.6 L 119.6 164.0 L 120.4 164.3 L 121.2 164.7 L 121.9 165.1 L 122.7 165.4 L 123.5 165.8 L 124.2 166.2 L 125.0 166.5 L 125.8 166.8 L 126.5 167.2 L 127.3 167.5 L 128.1 167.8 L 128.9 168.2 L 129.6 168.5 L 130.4 168.8 L 131.2 169.1 L 131.9 169.4 L 132.7 169.7 L 133.5 170.0 L 134.2 170.3 L 135.0 170.5 L 135.8 170.8 L 136.6 171.1 L 137.3 171.4 L 138.1 171.6 L 138.9 171.9 L 139.6 172.1 L 140.4 172.4 L 141.2 172.6 L 141.9 172.8 L 142.7 173.1 L 143.5 173.3 L 144.2 173.5 L 145.0 173.7 L 145.8 173.9 L 146.6 174.1 L 147.3 174.3 L 148.1 174.5 L 148.9 174.7 L 149.6 174.9 L 150.4 175.1 L 151.2 175.2 L 151.9 175.4 L 152.7 175.6 L 153.5 175.7 L 154.3 175.9 L 155.0 176.0 L 155.8 176.2 L 156.6 176.3 L 157.3 176.4 L 158.1 176.6 L 158.9 176.7 L 159.6 176.8 L 160.4 176.9 L 161.2 177.0 L 162.0 177.1 L 162.7 177.2 L 163.5 177.3 L 164.3 177.4 L 165.0 177.4 L 165.8 177.5 L 166.6 177.6 L 167.4 177.6 L 168.1 177.7 L 168.9 177.8 L 169.7 177.8 L 170.4 177.8 L 171.2 177.9 L 172.0 177.9 L 172.7 177.9 L 173.5 178.0 L 174.3 178.0 L 175.1 178.0 L 175.8 178.0 L 176.6 178.0 L 177.4 178.0 L 178.1 178.0 L 178.9 178.0 L 179.7 178.0 L 180.4 177.9 L 181.2 177.9 L 182.0 177.9 L 182.8 177.8 L 183.5 177.8 L 184.3 177.7 L 185.1 177.7 L 185.8 177.6 L 186.6 177.5 L 187.4 177.5 L 188.1 177.4 L 188.9 177.3 L 189.7 177.2 L 190.4 177.1 L 191.2 177.0 L 192.0 176.9 L 192.8 176.8 L 193.5 176.7 L 194.3 176.6 L 195.1 176.5 L 195.8 176.3 L 196.6 176.2 L 197.4 176.1 L 198.2 175.9 L 198.9 175.8 L 199.7 175.6 L 200.5 175.5 L 201.2 175.3 L 202.0 175.1 L 202.8 174.9 L 203.5 174.8 L 204.3 174.6 L 205.1 174.4 L 205.9 174.2 L 206.6 174.0 L 207.4 173.8 L 208.2 173.6 L 208.9 173.4 L 209.7 173.1 L 210.5 172.9 L 211.2 172.7 L 212.0 172.4 L 212.8 172.2 L 213.5 172.0 L 214.3 171.7 L 215.1 171.4 L 215.9 171.2 L 216.6 170.9 L 217.4 170.6 L 218.2 170.4 L 218.9 170.1 L 219.7 169.8 L 220.5 169.5 L 221.2 169.2 L 222.0 168.9 L 222.8 168.6 L 223.6 168.3 L 224.3 167.9 L 225.1 167.6 L 225.9 167.3 L 226.6 167.0 L 227.4 166.6 L 228.2 166.3 L 229.0 165.9 L 229.7 165.6 L 230.5 165.2 L 231.3 164.8 L 232.0 164.5 L 232.8 164.1 L 233.6 163.7 L 234.3 163.3 L 235.1 162.9 L 235.9 162.5 L 236.6 162.1 L 237.4 161.7 L 238.2 161.3 L 239.0 160.9 L 239.7 160.5 L 240.5 160.0 L 241.3 159.6 L 242.0 159.2 L 242.8 158.7 L 243.6 158.3 L 244.4 157.8 L 245.1 157.4 L 245.9 156.9 L 246.7 156.4 L 247.4 155.9 L 248.2 155.5 L 249.0 155.0 L 249.7 154.5 L 250.5 154.0 L 251.3 153.5 L 252.0 153.0 L 252.8 152.5 L 253.6 152.0 L 254.4 151.4 L 255.1 150.9 L 255.9 150.4 L 256.7 149.8 L 257.4 149.3 L 258.2 148.7 L 259.0 148.2 L 259.8 147.6 L 260.5 147.1 L 261.3 146.5 L 262.1 145.9 L 262.8 145.3 L 263.6 144.8 L 264.4 144.2 L 265.1 143.6 L 265.9 143.0 L 266.7 142.4 L 267.5 141.8 L 268.2 141.2 L 269.0 140.5 L 269.8 139.9 L 270.5 139.3 L 271.3 138.6 L 272.1 138.0 L 272.8 137.4 L 273.6 136.7 L 274.4 136.0 L 275.1 135.4 L 275.9 134.7 L 276.7 134.0 L 277.5 133.4 L 278.2 132.7 L 279.0 132.0 L 279.8 131.3 L 280.5 130.6 L 281.3 129.9 L 282.1 129.2 L 282.9 128.5 L 283.6 127.8 L 284.4 127.0 L 285.2 126.3 L 285.9 125.6 L 286.7 124.8 L 287.5 124.1 L 288.2 123.3 L 289.0 122.6 L 289.8 121.8 L 290.5 121.1 L 291.3 120.3 L 292.1 119.5 L 292.9 118.7 L 293.6 118.0 L 294.4 117.2 L 295.2 116.4 L 295.9 115.6 L 296.7 114.8 L 297.5 113.9 L 298.2 113.1 L 299.0 112.3 L 299.8 111.5 L 300.6 110.7 L 301.3 109.8 L 302.1 109.0 L 302.9 108.1 L 303.6 107.3 L 304.4 106.4 L 305.2 105.5 L 305.9 104.7 L 306.7 103.8 L 307.5 102.9 L 308.3 102.0 L 309.0 101.2 L 309.8 100.3 L 310.6 99.4 L 311.3 98.5 L 312.1 97.5 L 312.9 96.6 L 313.6 95.7 L 314.4 94.8 L 315.2 93.9 L 316.0 92.9 L 316.7 92.0 L 317.5 91.0 L 318.3 90.1 L 319.0 89.1 L 319.8 88.2 L 320.6 87.2 L 321.4 86.2 L 322.1 85.2 L 322.9 84.3 L 323.7 83.3 L 324.4 82.3 L 325.2 81.3 L 326.0 80.3 L 326.7 79.3 L 327.5 78.3 L 328.3 77.2 L 329.1 76.2 L 329.8 75.2 L 330.6 74.2 L 331.4 73.1 L 332.1 72.1 L 332.9 71.0 L 333.7 70.0 L 334.4 68.9 L 335.2 67.8 L 336.0 66.8 L 336.8 65.7 L 337.5 64.6 L 338.3 63.5 L 339.1 62.4 L 339.8 61.3 L 340.6 60.2 L 341.4 59.1 L 342.1 58.0 L 342.9 56.9 L 343.7 55.8 L 344.4 54.7 L 345.2 53.5 L 346.0 52.4 L 346.8 51.2 L 347.5 50.1 L 348.3 48.9 L 349.1 47.8 L 349.8 46.6 L 350.6 45.5 L 351.4 44.3 L 352.1 43.1 L 352.9 41.9 L 353.7 40.7 L 354.5 39.5 L 355.2 38.3 L 356.0 37.1\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><circle cx=\"227.7\" cy=\"166.5\" r=\"4\" fill=\"#2D70B3\"/><text x=\"234.7\" y=\"159.5\" font-size=\"11\" fill=\"#2D70B3\">(1; 4)</text><text x=\"195.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Graf till F</text></svg></span><p>Bestäm \\(F(x)\\).</p>",
+    "s": "<p>En primitiv funktion till \\(2 x\\) är \\(x^{2}+C\\).</p><p>Villkoret \\(F(1)=4\\) ger \\(C=3\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=x^{2} + 3}\\).</p>",
+    "familj": "r6_prim_fig_point_1"
+  },
+  {
+    "id": "3.354",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>För en funktion \\(F\\) gäller att \\(F^{\\prime}(x)=3 x^{2}\\). Punkten \\((1;2)\\) ligger på grafen till \\(F\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till F\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"59.8\" y1=\"28\" x2=\"59.8\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"59.8\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-2</text><line x1=\"119.1\" y1=\"28\" x2=\"119.1\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"119.1\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-1</text><line x1=\"178.3\" y1=\"28\" x2=\"178.3\" y2=\"224\" stroke=\"#F0EFF2\"/><line x1=\"237.5\" y1=\"28\" x2=\"237.5\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"237.5\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">1</text><line x1=\"296.8\" y1=\"28\" x2=\"296.8\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"296.8\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">2</text><line x1=\"356.0\" y1=\"28\" x2=\"356.0\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"356.0\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"181.5\" x2=\"362\" y2=\"181.5\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"134.4\" x2=\"362\" y2=\"134.4\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"138.4\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">10</text><line x1=\"48\" y1=\"87.2\" x2=\"362\" y2=\"87.2\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"91.2\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">20</text><line x1=\"48\" y1=\"40.0\" x2=\"362\" y2=\"40.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"44.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">30</text><line x1=\"178.3\" y1=\"28\" x2=\"178.3\" y2=\"224\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><line x1=\"48\" y1=\"181.5\" x2=\"362\" y2=\"181.5\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"372\" y=\"185.5\" font-size=\"12\">x</text><text x=\"20\" y=\"40\" font-size=\"12\">y</text><path d=\"M 48.0 227.1 L 48.8 226.2 L 49.5 225.3 L 50.3 224.4 L 51.1 223.6 L 51.8 222.7 L 52.6 221.9 L 53.4 221.1 L 54.2 220.3 L 54.9 219.5 L 55.7 218.7 L 56.5 217.9 L 57.2 217.1 L 58.0 216.3 L 58.8 215.6 L 59.5 214.8 L 60.3 214.1 L 61.1 213.4 L 61.9 212.7 L 62.6 212.0 L 63.4 211.3 L 64.2 210.6 L 64.9 209.9 L 65.7 209.2 L 66.5 208.6 L 67.2 207.9 L 68.0 207.3 L 68.8 206.6 L 69.6 206.0 L 70.3 205.4 L 71.1 204.8 L 71.9 204.2 L 72.6 203.6 L 73.4 203.0 L 74.2 202.5 L 75.0 201.9 L 75.7 201.3 L 76.5 200.8 L 77.3 200.2 L 78.0 199.7 L 78.8 199.2 L 79.6 198.7 L 80.3 198.2 L 81.1 197.7 L 81.9 197.2 L 82.7 196.7 L 83.4 196.2 L 84.2 195.7 L 85.0 195.3 L 85.7 194.8 L 86.5 194.4 L 87.3 194.0 L 88.0 193.5 L 88.8 193.1 L 89.6 192.7 L 90.3 192.3 L 91.1 191.9 L 91.9 191.5 L 92.7 191.1 L 93.4 190.7 L 94.2 190.3 L 95.0 190.0 L 95.7 189.6 L 96.5 189.2 L 97.3 188.9 L 98.0 188.6 L 98.8 188.2 L 99.6 187.9 L 100.4 187.6 L 101.1 187.3 L 101.9 186.9 L 102.7 186.6 L 103.4 186.3 L 104.2 186.1 L 105.0 185.8 L 105.8 185.5 L 106.5 185.2 L 107.3 185.0 L 108.1 184.7 L 108.8 184.4 L 109.6 184.2 L 110.4 183.9 L 111.1 183.7 L 111.9 183.5 L 112.7 183.2 L 113.5 183.0 L 114.2 182.8 L 115.0 182.6 L 115.8 182.4 L 116.5 182.2 L 117.3 182.0 L 118.1 181.8 L 118.8 181.6 L 119.6 181.4 L 120.4 181.2 L 121.2 181.1 L 121.9 180.9 L 122.7 180.7 L 123.5 180.6 L 124.2 180.4 L 125.0 180.3 L 125.8 180.1 L 126.5 180.0 L 127.3 179.8 L 128.1 179.7 L 128.9 179.6 L 129.6 179.4 L 130.4 179.3 L 131.2 179.2 L 131.9 179.1 L 132.7 179.0 L 133.5 178.9 L 134.2 178.8 L 135.0 178.7 L 135.8 178.6 L 136.6 178.5 L 137.3 178.4 L 138.1 178.3 L 138.9 178.2 L 139.6 178.1 L 140.4 178.1 L 141.2 178.0 L 141.9 177.9 L 142.7 177.8 L 143.5 177.8 L 144.2 177.7 L 145.0 177.7 L 145.8 177.6 L 146.6 177.5 L 147.3 177.5 L 148.1 177.4 L 148.9 177.4 L 149.6 177.4 L 150.4 177.3 L 151.2 177.3 L 151.9 177.2 L 152.7 177.2 L 153.5 177.2 L 154.3 177.1 L 155.0 177.1 L 155.8 177.1 L 156.6 177.1 L 157.3 177.0 L 158.1 177.0 L 158.9 177.0 L 159.6 177.0 L 160.4 177.0 L 161.2 176.9 L 162.0 176.9 L 162.7 176.9 L 163.5 176.9 L 164.3 176.9 L 165.0 176.9 L 165.8 176.9 L 166.6 176.9 L 167.4 176.9 L 168.1 176.8 L 168.9 176.8 L 169.7 176.8 L 170.4 176.8 L 171.2 176.8 L 172.0 176.8 L 172.7 176.8 L 173.5 176.8 L 174.3 176.8 L 175.1 176.8 L 175.8 176.8 L 176.6 176.8 L 177.4 176.8 L 178.1 176.8 L 178.9 176.8 L 179.7 176.8 L 180.4 176.8 L 181.2 176.8 L 182.0 176.8 L 182.7 176.8 L 183.5 176.8 L 184.3 176.8 L 185.1 176.8 L 185.8 176.8 L 186.6 176.8 L 187.4 176.8 L 188.1 176.8 L 188.9 176.8 L 189.7 176.8 L 190.4 176.8 L 191.2 176.8 L 192.0 176.8 L 192.8 176.8 L 193.5 176.7 L 194.3 176.7 L 195.1 176.7 L 195.8 176.7 L 196.6 176.7 L 197.4 176.7 L 198.2 176.6 L 198.9 176.6 L 199.7 176.6 L 200.5 176.6 L 201.2 176.5 L 202.0 176.5 L 202.8 176.5 L 203.5 176.5 L 204.3 176.4 L 205.1 176.4 L 205.8 176.3 L 206.6 176.3 L 207.4 176.3 L 208.2 176.2 L 208.9 176.2 L 209.7 176.1 L 210.5 176.1 L 211.2 176.0 L 212.0 176.0 L 212.8 175.9 L 213.5 175.8 L 214.3 175.8 L 215.1 175.7 L 215.9 175.6 L 216.6 175.5 L 217.4 175.5 L 218.2 175.4 L 218.9 175.3 L 219.7 175.2 L 220.5 175.1 L 221.2 175.0 L 222.0 174.9 L 222.8 174.8 L 223.6 174.7 L 224.3 174.6 L 225.1 174.5 L 225.9 174.4 L 226.6 174.3 L 227.4 174.1 L 228.2 174.0 L 229.0 173.9 L 229.7 173.7 L 230.5 173.6 L 231.3 173.4 L 232.0 173.3 L 232.8 173.1 L 233.6 173.0 L 234.3 172.8 L 235.1 172.7 L 235.9 172.5 L 236.7 172.3 L 237.4 172.1 L 238.2 171.9 L 239.0 171.8 L 239.7 171.6 L 240.5 171.4 L 241.3 171.2 L 242.0 170.9 L 242.8 170.7 L 243.6 170.5 L 244.3 170.3 L 245.1 170.0 L 245.9 169.8 L 246.7 169.6 L 247.4 169.3 L 248.2 169.1 L 249.0 168.8 L 249.7 168.5 L 250.5 168.3 L 251.3 168.0 L 252.0 167.7 L 252.8 167.4 L 253.6 167.1 L 254.4 166.8 L 255.1 166.5 L 255.9 166.2 L 256.7 165.9 L 257.4 165.6 L 258.2 165.2 L 259.0 164.9 L 259.8 164.6 L 260.5 164.2 L 261.3 163.8 L 262.1 163.5 L 262.8 163.1 L 263.6 162.7 L 264.4 162.3 L 265.1 162.0 L 265.9 161.6 L 266.7 161.2 L 267.5 160.7 L 268.2 160.3 L 269.0 159.9 L 269.8 159.5 L 270.5 159.0 L 271.3 158.6 L 272.1 158.1 L 272.8 157.6 L 273.6 157.2 L 274.4 156.7 L 275.1 156.2 L 275.9 155.7 L 276.7 155.2 L 277.5 154.7 L 278.2 154.2 L 279.0 153.6 L 279.8 153.1 L 280.5 152.6 L 281.3 152.0 L 282.1 151.4 L 282.9 150.9 L 283.6 150.3 L 284.4 149.7 L 285.2 149.1 L 285.9 148.5 L 286.7 147.9 L 287.5 147.3 L 288.2 146.7 L 289.0 146.0 L 289.8 145.4 L 290.5 144.7 L 291.3 144.0 L 292.1 143.4 L 292.9 142.7 L 293.6 142.0 L 294.4 141.3 L 295.2 140.6 L 295.9 139.9 L 296.7 139.1 L 297.5 138.4 L 298.2 137.6 L 299.0 136.9 L 299.8 136.1 L 300.6 135.3 L 301.3 134.5 L 302.1 133.7 L 302.9 132.9 L 303.6 132.1 L 304.4 131.3 L 305.2 130.5 L 305.9 129.6 L 306.7 128.7 L 307.5 127.9 L 308.3 127.0 L 309.0 126.1 L 309.8 125.2 L 310.6 124.3 L 311.3 123.4 L 312.1 122.4 L 312.9 121.5 L 313.7 120.5 L 314.4 119.6 L 315.2 118.6 L 316.0 117.6 L 316.7 116.6 L 317.5 115.6 L 318.3 114.6 L 319.0 113.5 L 319.8 112.5 L 320.6 111.4 L 321.3 110.4 L 322.1 109.3 L 322.9 108.2 L 323.7 107.1 L 324.4 106.0 L 325.2 104.9 L 326.0 103.7 L 326.7 102.6 L 327.5 101.4 L 328.3 100.2 L 329.1 99.0 L 329.8 97.9 L 330.6 96.6 L 331.4 95.4 L 332.1 94.2 L 332.9 92.9 L 333.7 91.7 L 334.4 90.4 L 335.2 89.1 L 336.0 87.8 L 336.8 86.5 L 337.5 85.2 L 338.3 83.9 L 339.1 82.5 L 339.8 81.1 L 340.6 79.8 L 341.4 78.4 L 342.1 77.0 L 342.9 75.6 L 343.7 74.1 L 344.4 72.7 L 345.2 71.2 L 346.0 69.8 L 346.8 68.3 L 347.5 66.8 L 348.3 65.3 L 349.1 63.8 L 349.8 62.2 L 350.6 60.7 L 351.4 59.1 L 352.1 57.5 L 352.9 55.9 L 353.7 54.3 L 354.5 52.7 L 355.2 51.1 L 356.0 49.4\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><circle cx=\"237.5\" cy=\"172.1\" r=\"4\" fill=\"#2D70B3\"/><text x=\"244.5\" y=\"165.1\" font-size=\"11\" fill=\"#2D70B3\">(1; 2)</text><text x=\"195.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Graf till F</text></svg></span><p>Bestäm \\(F(x)\\).</p>",
+    "s": "<p>En primitiv funktion till \\(3 x^{2}\\) är \\(x^{3}+C\\).</p><p>Villkoret \\(F(1)=2\\) ger \\(C=1\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=x^{3} + 1}\\).</p>",
+    "familj": "r6_prim_fig_point_2"
+  },
+  {
+    "id": "3.355",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>För en funktion \\(F\\) gäller att \\(F^{\\prime}(x)=4 x - 2\\). Punkten \\((2;5)\\) ligger på grafen till \\(F\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till F\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"28\" x2=\"48.0\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-2</text><line x1=\"107.2\" y1=\"28\" x2=\"107.2\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"107.2\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-1</text><line x1=\"166.5\" y1=\"28\" x2=\"166.5\" y2=\"224\" stroke=\"#F0EFF2\"/><line x1=\"225.7\" y1=\"28\" x2=\"225.7\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"225.7\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">1</text><line x1=\"284.9\" y1=\"28\" x2=\"284.9\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"284.9\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">2</text><line x1=\"344.2\" y1=\"28\" x2=\"344.2\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"344.2\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"213.2\" x2=\"362\" y2=\"213.2\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"159.1\" x2=\"362\" y2=\"159.1\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"163.1\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"104.9\" x2=\"362\" y2=\"104.9\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"108.9\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">10</text><line x1=\"48\" y1=\"50.8\" x2=\"362\" y2=\"50.8\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"54.8\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">15</text><line x1=\"166.5\" y1=\"28\" x2=\"166.5\" y2=\"224\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><line x1=\"48\" y1=\"213.2\" x2=\"362\" y2=\"213.2\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"372\" y=\"217.2\" font-size=\"12\">x</text><text x=\"20\" y=\"40\" font-size=\"12\">y</text><path d=\"M 48.0 72.5 L 48.8 73.9 L 49.5 75.3 L 50.3 76.7 L 51.1 78.0 L 51.8 79.4 L 52.6 80.8 L 53.4 82.1 L 54.2 83.5 L 54.9 84.8 L 55.7 86.2 L 56.5 87.5 L 57.2 88.8 L 58.0 90.1 L 58.8 91.5 L 59.6 92.8 L 60.3 94.0 L 61.1 95.3 L 61.9 96.6 L 62.6 97.9 L 63.4 99.1 L 64.2 100.4 L 64.9 101.7 L 65.7 102.9 L 66.5 104.1 L 67.2 105.4 L 68.0 106.6 L 68.8 107.8 L 69.6 109.0 L 70.3 110.2 L 71.1 111.4 L 71.9 112.6 L 72.6 113.8 L 73.4 114.9 L 74.2 116.1 L 75.0 117.2 L 75.7 118.4 L 76.5 119.5 L 77.3 120.7 L 78.0 121.8 L 78.8 122.9 L 79.6 124.0 L 80.3 125.1 L 81.1 126.2 L 81.9 127.3 L 82.7 128.4 L 83.4 129.5 L 84.2 130.5 L 85.0 131.6 L 85.7 132.6 L 86.5 133.7 L 87.3 134.7 L 88.0 135.7 L 88.8 136.8 L 89.6 137.8 L 90.3 138.8 L 91.1 139.8 L 91.9 140.8 L 92.7 141.8 L 93.4 142.8 L 94.2 143.7 L 95.0 144.7 L 95.7 145.6 L 96.5 146.6 L 97.3 147.5 L 98.0 148.5 L 98.8 149.4 L 99.6 150.3 L 100.4 151.2 L 101.1 152.1 L 101.9 153.0 L 102.7 153.9 L 103.4 154.8 L 104.2 155.7 L 105.0 156.6 L 105.8 157.4 L 106.5 158.3 L 107.3 159.1 L 108.1 160.0 L 108.8 160.8 L 109.6 161.6 L 110.4 162.4 L 111.1 163.3 L 111.9 164.1 L 112.7 164.9 L 113.5 165.6 L 114.2 166.4 L 115.0 167.2 L 115.8 168.0 L 116.5 168.7 L 117.3 169.5 L 118.1 170.2 L 118.8 171.0 L 119.6 171.7 L 120.4 172.4 L 121.2 173.1 L 121.9 173.8 L 122.7 174.5 L 123.5 175.2 L 124.2 175.9 L 125.0 176.6 L 125.8 177.3 L 126.5 177.9 L 127.3 178.6 L 128.1 179.2 L 128.9 179.9 L 129.6 180.5 L 130.4 181.1 L 131.2 181.8 L 131.9 182.4 L 132.7 183.0 L 133.5 183.6 L 134.2 184.2 L 135.0 184.8 L 135.8 185.3 L 136.6 185.9 L 137.3 186.5 L 138.1 187.0 L 138.9 187.6 L 139.6 188.1 L 140.4 188.6 L 141.2 189.2 L 141.9 189.7 L 142.7 190.2 L 143.5 190.7 L 144.2 191.2 L 145.0 191.7 L 145.8 192.2 L 146.6 192.6 L 147.3 193.1 L 148.1 193.6 L 148.9 194.0 L 149.6 194.5 L 150.4 194.9 L 151.2 195.3 L 151.9 195.8 L 152.7 196.2 L 153.5 196.6 L 154.3 197.0 L 155.0 197.4 L 155.8 197.8 L 156.6 198.1 L 157.3 198.5 L 158.1 198.9 L 158.9 199.2 L 159.6 199.6 L 160.4 199.9 L 161.2 200.3 L 162.0 200.6 L 162.7 200.9 L 163.5 201.2 L 164.3 201.5 L 165.0 201.8 L 165.8 202.1 L 166.6 202.4 L 167.4 202.7 L 168.1 202.9 L 168.9 203.2 L 169.7 203.5 L 170.4 203.7 L 171.2 203.9 L 172.0 204.2 L 172.7 204.4 L 173.5 204.6 L 174.3 204.8 L 175.1 205.0 L 175.8 205.2 L 176.6 205.4 L 177.4 205.6 L 178.1 205.8 L 178.9 205.9 L 179.7 206.1 L 180.4 206.3 L 181.2 206.4 L 182.0 206.5 L 182.7 206.7 L 183.5 206.8 L 184.3 206.9 L 185.1 207.0 L 185.8 207.1 L 186.6 207.2 L 187.4 207.3 L 188.1 207.4 L 188.9 207.4 L 189.7 207.5 L 190.4 207.6 L 191.2 207.6 L 192.0 207.7 L 192.8 207.7 L 193.5 207.7 L 194.3 207.7 L 195.1 207.8 L 195.8 207.8 L 196.6 207.8 L 197.4 207.8 L 198.2 207.7 L 198.9 207.7 L 199.7 207.7 L 200.5 207.6 L 201.2 207.6 L 202.0 207.5 L 202.8 207.5 L 203.5 207.4 L 204.3 207.3 L 205.1 207.3 L 205.8 207.2 L 206.6 207.1 L 207.4 207.0 L 208.2 206.9 L 208.9 206.7 L 209.7 206.6 L 210.5 206.5 L 211.2 206.3 L 212.0 206.2 L 212.8 206.0 L 213.5 205.9 L 214.3 205.7 L 215.1 205.5 L 215.9 205.3 L 216.6 205.2 L 217.4 205.0 L 218.2 204.8 L 218.9 204.5 L 219.7 204.3 L 220.5 204.1 L 221.2 203.9 L 222.0 203.6 L 222.8 203.4 L 223.6 203.1 L 224.3 202.8 L 225.1 202.6 L 225.9 202.3 L 226.6 202.0 L 227.4 201.7 L 228.2 201.4 L 229.0 201.1 L 229.7 200.8 L 230.5 200.5 L 231.3 200.1 L 232.0 199.8 L 232.8 199.4 L 233.6 199.1 L 234.3 198.7 L 235.1 198.4 L 235.9 198.0 L 236.7 197.6 L 237.4 197.2 L 238.2 196.8 L 239.0 196.4 L 239.7 196.0 L 240.5 195.6 L 241.3 195.2 L 242.0 194.7 L 242.8 194.3 L 243.6 193.8 L 244.3 193.4 L 245.1 192.9 L 245.9 192.5 L 246.7 192.0 L 247.4 191.5 L 248.2 191.0 L 249.0 190.5 L 249.7 190.0 L 250.5 189.5 L 251.3 189.0 L 252.0 188.4 L 252.8 187.9 L 253.6 187.4 L 254.4 186.8 L 255.1 186.2 L 255.9 185.7 L 256.7 185.1 L 257.4 184.5 L 258.2 183.9 L 259.0 183.4 L 259.8 182.7 L 260.5 182.1 L 261.3 181.5 L 262.1 180.9 L 262.8 180.3 L 263.6 179.6 L 264.4 179.0 L 265.1 178.3 L 265.9 177.7 L 266.7 177.0 L 267.5 176.3 L 268.2 175.7 L 269.0 175.0 L 269.8 174.3 L 270.5 173.6 L 271.3 172.9 L 272.1 172.1 L 272.8 171.4 L 273.6 170.7 L 274.4 169.9 L 275.1 169.2 L 275.9 168.4 L 276.7 167.7 L 277.5 166.9 L 278.2 166.1 L 279.0 165.3 L 279.8 164.5 L 280.5 163.7 L 281.3 162.9 L 282.1 162.1 L 282.9 161.3 L 283.6 160.5 L 284.4 159.6 L 285.2 158.8 L 285.9 157.9 L 286.7 157.1 L 287.5 156.2 L 288.2 155.4 L 289.0 154.5 L 289.8 153.6 L 290.5 152.7 L 291.3 151.8 L 292.1 150.9 L 292.9 150.0 L 293.6 149.0 L 294.4 148.1 L 295.2 147.2 L 295.9 146.2 L 296.7 145.3 L 297.5 144.3 L 298.2 143.4 L 299.0 142.4 L 299.8 141.4 L 300.6 140.4 L 301.3 139.4 L 302.1 138.4 L 302.9 137.4 L 303.6 136.4 L 304.4 135.4 L 305.2 134.3 L 305.9 133.3 L 306.7 132.2 L 307.5 131.2 L 308.3 130.1 L 309.0 129.0 L 309.8 128.0 L 310.6 126.9 L 311.3 125.8 L 312.1 124.7 L 312.9 123.6 L 313.7 122.5 L 314.4 121.3 L 315.2 120.2 L 316.0 119.1 L 316.7 117.9 L 317.5 116.8 L 318.3 115.6 L 319.0 114.5 L 319.8 113.3 L 320.6 112.1 L 321.3 110.9 L 322.1 109.7 L 322.9 108.5 L 323.7 107.3 L 324.4 106.1 L 325.2 104.9 L 326.0 103.7 L 326.7 102.4 L 327.5 101.2 L 328.3 99.9 L 329.1 98.7 L 329.8 97.4 L 330.6 96.1 L 331.4 94.8 L 332.1 93.6 L 332.9 92.3 L 333.7 91.0 L 334.4 89.6 L 335.2 88.3 L 336.0 87.0 L 336.8 85.7 L 337.5 84.3 L 338.3 83.0 L 339.1 81.6 L 339.8 80.3 L 340.6 78.9 L 341.4 77.5 L 342.1 76.1 L 342.9 74.7 L 343.7 73.3 L 344.4 71.9 L 345.2 70.5 L 346.0 69.1 L 346.8 67.7 L 347.5 66.2 L 348.3 64.8 L 349.1 63.3 L 349.8 61.9 L 350.6 60.4 L 351.4 58.9 L 352.1 57.5 L 352.9 56.0 L 353.7 54.5 L 354.5 53.0 L 355.2 51.5 L 356.0 50.0\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><circle cx=\"284.9\" cy=\"159.1\" r=\"4\" fill=\"#2D70B3\"/><text x=\"291.9\" y=\"152.1\" font-size=\"11\" fill=\"#2D70B3\">(2; 5)</text><text x=\"195.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Graf till F</text></svg></span><p>Bestäm \\(F(x)\\).</p>",
+    "s": "<p>En primitiv funktion till \\(4 x - 2\\) är \\(2 x^{2} - 2 x+C\\).</p><p>Villkoret \\(F(2)=5\\) ger \\(C=1\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=2 x^{2} - 2 x + 1}\\).</p>",
+    "familj": "r6_prim_fig_point_3"
+  },
+  {
+    "id": "3.356",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>För en funktion \\(F\\) gäller att \\(F^{\\prime}(x)=2 x^{3}\\). Punkten \\((1;3)\\) ligger på grafen till \\(F\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till F\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"61.1\" y1=\"28\" x2=\"61.1\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"61.1\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-2</text><line x1=\"126.6\" y1=\"28\" x2=\"126.6\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"126.6\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">-1</text><line x1=\"192.2\" y1=\"28\" x2=\"192.2\" y2=\"224\" stroke=\"#F0EFF2\"/><line x1=\"257.7\" y1=\"28\" x2=\"257.7\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"257.7\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">1</text><line x1=\"323.2\" y1=\"28\" x2=\"323.2\" y2=\"224\" stroke=\"#F0EFF2\"/><text x=\"323.2\" y=\"246\" text-anchor=\"middle\" font-size=\"11\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"224.0\" x2=\"362\" y2=\"224.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"187.2\" x2=\"362\" y2=\"187.2\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"191.2\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"150.4\" x2=\"362\" y2=\"150.4\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"154.4\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">10</text><line x1=\"48\" y1=\"113.6\" x2=\"362\" y2=\"113.6\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"117.6\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">15</text><line x1=\"48\" y1=\"76.8\" x2=\"362\" y2=\"76.8\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"80.8\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">20</text><line x1=\"48\" y1=\"40.0\" x2=\"362\" y2=\"40.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"44.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#5B5560\">25</text><line x1=\"192.2\" y1=\"28\" x2=\"192.2\" y2=\"224\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"372\" y=\"222.0\" font-size=\"12\">x</text><text x=\"20\" y=\"40\" font-size=\"12\">y</text><path d=\"M 48.0 119.4 L 48.8 121.2 L 49.5 123.0 L 50.3 124.8 L 51.1 126.5 L 51.8 128.2 L 52.6 129.9 L 53.4 131.6 L 54.2 133.2 L 54.9 134.8 L 55.7 136.4 L 56.5 137.9 L 57.2 139.5 L 58.0 141.0 L 58.8 142.4 L 59.6 143.9 L 60.3 145.3 L 61.1 146.7 L 61.9 148.1 L 62.6 149.4 L 63.4 150.7 L 64.2 152.0 L 64.9 153.3 L 65.7 154.6 L 66.5 155.8 L 67.2 157.0 L 68.0 158.2 L 68.8 159.4 L 69.6 160.5 L 70.3 161.6 L 71.1 162.7 L 71.9 163.8 L 72.6 164.9 L 73.4 165.9 L 74.2 166.9 L 74.9 167.9 L 75.7 168.9 L 76.5 169.9 L 77.3 170.8 L 78.0 171.7 L 78.8 172.6 L 79.6 173.5 L 80.3 174.4 L 81.1 175.2 L 81.9 176.1 L 82.7 176.9 L 83.4 177.7 L 84.2 178.5 L 85.0 179.2 L 85.7 180.0 L 86.5 180.7 L 87.3 181.4 L 88.0 182.1 L 88.8 182.8 L 89.6 183.5 L 90.3 184.2 L 91.1 184.8 L 91.9 185.4 L 92.7 186.0 L 93.4 186.6 L 94.2 187.2 L 95.0 187.8 L 95.7 188.3 L 96.5 188.9 L 97.3 189.4 L 98.0 189.9 L 98.8 190.4 L 99.6 190.9 L 100.4 191.4 L 101.1 191.9 L 101.9 192.4 L 102.7 192.8 L 103.4 193.2 L 104.2 193.7 L 105.0 194.1 L 105.8 194.5 L 106.5 194.9 L 107.3 195.2 L 108.1 195.6 L 108.8 196.0 L 109.6 196.3 L 110.4 196.7 L 111.1 197.0 L 111.9 197.3 L 112.7 197.6 L 113.5 197.9 L 114.2 198.2 L 115.0 198.5 L 115.8 198.8 L 116.5 199.1 L 117.3 199.3 L 118.1 199.6 L 118.8 199.8 L 119.6 200.1 L 120.4 200.3 L 121.1 200.5 L 121.9 200.7 L 122.7 200.9 L 123.5 201.2 L 124.2 201.3 L 125.0 201.5 L 125.8 201.7 L 126.5 201.9 L 127.3 202.1 L 128.1 202.2 L 128.8 202.4 L 129.6 202.5 L 130.4 202.7 L 131.2 202.8 L 131.9 203.0 L 132.7 203.1 L 133.5 203.2 L 134.2 203.4 L 135.0 203.5 L 135.8 203.6 L 136.6 203.7 L 137.3 203.8 L 138.1 203.9 L 138.9 204.0 L 139.6 204.1 L 140.4 204.2 L 141.2 204.3 L 141.9 204.3 L 142.7 204.4 L 143.5 204.5 L 144.2 204.5 L 145.0 204.6 L 145.8 204.7 L 146.6 204.7 L 147.3 204.8 L 148.1 204.8 L 148.9 204.9 L 149.6 204.9 L 150.4 205.0 L 151.2 205.0 L 151.9 205.1 L 152.7 205.1 L 153.5 205.2 L 154.3 205.2 L 155.0 205.2 L 155.8 205.3 L 156.6 205.3 L 157.3 205.3 L 158.1 205.3 L 158.9 205.4 L 159.6 205.4 L 160.4 205.4 L 161.2 205.4 L 162.0 205.4 L 162.7 205.5 L 163.5 205.5 L 164.3 205.5 L 165.0 205.5 L 165.8 205.5 L 166.6 205.5 L 167.4 205.5 L 168.1 205.5 L 168.9 205.5 L 169.7 205.5 L 170.4 205.6 L 171.2 205.6 L 172.0 205.6 L 172.7 205.6 L 173.5 205.6 L 174.3 205.6 L 175.1 205.6 L 175.8 205.6 L 176.6 205.6 L 177.4 205.6 L 178.1 205.6 L 178.9 205.6 L 179.7 205.6 L 180.4 205.6 L 181.2 205.6 L 182.0 205.6 L 182.7 205.6 L 183.5 205.6 L 184.3 205.6 L 185.1 205.6 L 185.8 205.6 L 186.6 205.6 L 187.4 205.6 L 188.1 205.6 L 188.9 205.6 L 189.7 205.6 L 190.5 205.6 L 191.2 205.6 L 192.0 205.6 L 192.8 205.6 L 193.5 205.6 L 194.3 205.6 L 195.1 205.6 L 195.8 205.6 L 196.6 205.6 L 197.4 205.6 L 198.1 205.6 L 198.9 205.6 L 199.7 205.6 L 200.5 205.6 L 201.2 205.6 L 202.0 205.6 L 202.8 205.6 L 203.5 205.6 L 204.3 205.6 L 205.1 205.6 L 205.8 205.6 L 206.6 205.6 L 207.4 205.6 L 208.2 205.6 L 208.9 205.6 L 209.7 205.6 L 210.5 205.6 L 211.2 205.6 L 212.0 205.6 L 212.8 205.6 L 213.5 205.6 L 214.3 205.6 L 215.1 205.5 L 215.9 205.5 L 216.6 205.5 L 217.4 205.5 L 218.2 205.5 L 218.9 205.5 L 219.7 205.5 L 220.5 205.5 L 221.2 205.5 L 222.0 205.4 L 222.8 205.4 L 223.6 205.4 L 224.3 205.4 L 225.1 205.4 L 225.9 205.3 L 226.6 205.3 L 227.4 205.3 L 228.2 205.3 L 229.0 205.2 L 229.7 205.2 L 230.5 205.2 L 231.3 205.1 L 232.0 205.1 L 232.8 205.1 L 233.6 205.0 L 234.3 205.0 L 235.1 204.9 L 235.9 204.9 L 236.7 204.8 L 237.4 204.8 L 238.2 204.7 L 239.0 204.6 L 239.7 204.6 L 240.5 204.5 L 241.3 204.4 L 242.0 204.4 L 242.8 204.3 L 243.6 204.2 L 244.3 204.1 L 245.1 204.0 L 245.9 203.9 L 246.7 203.8 L 247.4 203.7 L 248.2 203.6 L 249.0 203.5 L 249.7 203.4 L 250.5 203.3 L 251.3 203.2 L 252.0 203.0 L 252.8 202.9 L 253.6 202.8 L 254.4 202.6 L 255.1 202.5 L 255.9 202.3 L 256.7 202.1 L 257.4 202.0 L 258.2 201.8 L 259.0 201.6 L 259.8 201.4 L 260.5 201.2 L 261.3 201.0 L 262.1 200.8 L 262.8 200.6 L 263.6 200.4 L 264.4 200.2 L 265.1 199.9 L 265.9 199.7 L 266.7 199.4 L 267.4 199.2 L 268.2 198.9 L 269.0 198.7 L 269.8 198.4 L 270.5 198.1 L 271.3 197.8 L 272.1 197.5 L 272.8 197.1 L 273.6 196.8 L 274.4 196.5 L 275.1 196.1 L 275.9 195.8 L 276.7 195.4 L 277.5 195.0 L 278.2 194.7 L 279.0 194.3 L 279.8 193.8 L 280.5 193.4 L 281.3 193.0 L 282.1 192.6 L 282.9 192.1 L 283.6 191.6 L 284.4 191.2 L 285.2 190.7 L 285.9 190.2 L 286.7 189.7 L 287.5 189.1 L 288.2 188.6 L 289.0 188.1 L 289.8 187.5 L 290.5 186.9 L 291.3 186.3 L 292.1 185.7 L 292.9 185.1 L 293.6 184.5 L 294.4 183.8 L 295.2 183.1 L 295.9 182.5 L 296.7 181.8 L 297.5 181.1 L 298.2 180.3 L 299.0 179.6 L 299.8 178.8 L 300.6 178.1 L 301.3 177.3 L 302.1 176.5 L 302.9 175.6 L 303.6 174.8 L 304.4 173.9 L 305.2 173.1 L 305.9 172.2 L 306.7 171.2 L 307.5 170.3 L 308.3 169.4 L 309.0 168.4 L 309.8 167.4 L 310.6 166.4 L 311.3 165.4 L 312.1 164.3 L 312.9 163.2 L 313.6 162.1 L 314.4 161.0 L 315.2 159.9 L 316.0 158.7 L 316.7 157.6 L 317.5 156.4 L 318.3 155.1 L 319.0 153.9 L 319.8 152.6 L 320.6 151.3 L 321.3 150.0 L 322.1 148.7 L 322.9 147.3 L 323.7 146.0 L 324.4 144.5 L 325.2 143.1 L 326.0 141.6 L 326.7 140.2 L 327.5 138.7 L 328.3 137.1 L 329.1 135.6 L 329.8 134.0 L 330.6 132.3 L 331.4 130.7 L 332.1 129.0 L 332.9 127.3 L 333.7 125.6 L 334.4 123.9 L 335.2 122.1 L 336.0 120.3 L 336.8 118.4 L 337.5 116.5 L 338.3 114.6 L 339.1 112.7 L 339.8 110.7 L 340.6 108.7 L 341.4 106.7 L 342.1 104.7 L 342.9 102.6 L 343.7 100.5 L 344.4 98.3 L 345.2 96.1 L 346.0 93.9 L 346.8 91.6 L 347.5 89.4 L 348.3 87.0 L 349.1 84.7 L 349.8 82.3 L 350.6 79.9 L 351.4 77.4 L 352.2 74.9 L 352.9 72.4 L 353.7 69.8 L 354.5 67.2 L 355.2 64.5 L 356.0 61.8\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><circle cx=\"257.7\" cy=\"201.9\" r=\"4\" fill=\"#2D70B3\"/><text x=\"264.7\" y=\"194.9\" font-size=\"11\" fill=\"#2D70B3\">(1; 3)</text><text x=\"195.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Graf till F</text></svg></span><p>Bestäm \\(F(x)\\).</p>",
+    "s": "<p>En primitiv funktion till \\(2 x^{3}\\) är \\(\\frac{x^{4}}{2}+C\\).</p><p>Villkoret \\(F(1)=3\\) ger \\(C=\\frac{5}{2}\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=\\frac{x^{4}}{2} + \\frac{5}{2}}\\).</p>",
+    "familj": "r6_prim_fig_point_4"
+  },
+  {
+    "id": "3.357",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm alla primitiva funktioner till \\[f(x)=5 x^{4} - 2 x + 3.\\]</p>",
+    "s": "<p>Integrera term för term:</p><p>\\[\\boxed{F(x)=x^{5} - x^{2} + 3 x+C}.\\]</p>",
+    "familj": "r6_prim_routine_1"
+  },
+  {
+    "id": "3.358",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm alla primitiva funktioner till \\[f(x)=3 \\sqrt{x} + 2 x^{2}.\\]</p>",
+    "s": "<p>Integrera term för term:</p><p>\\[\\boxed{F(x)=2 x^{\\frac{3}{2}} + \\frac{2 x^{3}}{3}+C}.\\]</p>",
+    "familj": "r6_prim_routine_2"
+  },
+  {
+    "id": "4.230",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En person sätter in 1000 kr i slutet av varje år. Räntan är 4 %.</p><span class=\"fig smal\"><svg width=\"410\" height=\"190\" viewBox=\"0 0 410 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tidslinje med fem insättningar\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"188\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"98\" x2=\"365\" y2=\"98\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"65\" y1=\"89\" x2=\"65\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"65\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 1</text><line x1=\"65\" y1=\"81\" x2=\"65\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 60 56 L 65 48 L 70 56\" fill=\"#2D70B3\"/><text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">1000 kr</text><line x1=\"135\" y1=\"89\" x2=\"135\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"135\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 2</text><line x1=\"135\" y1=\"81\" x2=\"135\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 130 56 L 135 48 L 140 56\" fill=\"#2D70B3\"/><text x=\"135\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">1000 kr</text><line x1=\"205\" y1=\"89\" x2=\"205\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"205\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 3</text><line x1=\"205\" y1=\"81\" x2=\"205\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 200 56 L 205 48 L 210 56\" fill=\"#2D70B3\"/><text x=\"205\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">1000 kr</text><line x1=\"275\" y1=\"89\" x2=\"275\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"275\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 4</text><line x1=\"275\" y1=\"81\" x2=\"275\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 270 56 L 275 48 L 280 56\" fill=\"#2D70B3\"/><text x=\"275\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">1000 kr</text><line x1=\"345\" y1=\"89\" x2=\"345\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"345\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 5</text><line x1=\"345\" y1=\"81\" x2=\"345\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 340 56 L 345 48 L 350 56\" fill=\"#2D70B3\"/><text x=\"345\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">1000 kr</text><text x=\"205\" y=\"23\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">Ränta 4 % per år</text></svg></span><p>Hur mycket finns på kontot direkt efter den femte insättningen?</p>",
+    "s": "<p>Vid den femte insättningen har den första insättningen vuxit i fyra år, den andra i tre år och så vidare.</p><p>Beloppet är därför</p><p>\\[1000(1+1,04+1,04^2+1,04^3+1,04^4).\\]</p><p>Detta är en geometrisk summa:</p><p>\\[1000\\frac{1,04^5-1}{1,04-1}\\approx 5416,32.\\]</p><p><strong>Svar:</strong> cirka \\(\\boxed{5416\\text{ kr}}\\).</p>",
+    "familj": "r6_geo_fig_savings"
+  },
+  {
+    "id": "4.231",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En boll släpps från 2,0 m och når efter varje studs 70 % av föregående höjd.</p><span class=\"fig smal\"><svg width=\"400\" height=\"235\" viewBox=\"0 0 400 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Boll som studsar till successivt lägre höjder\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"25\" y1=\"190\" x2=\"375\" y2=\"190\" stroke=\"#595258\" stroke-width=\"2\"/><circle cx=\"45\" cy=\"55\" r=\"7\" fill=\"#C74440\"/><line x1=\"55\" y1=\"55\" x2=\"55\" y2=\"190\" stroke=\"#777\" stroke-dasharray=\"4 4\"/><text x=\"62\" y=\"120\" font-size=\"11\">2,0 m</text><path d=\"M65,190 Q95.0,15.0 125,190\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"95.0\" y=\"94.5\" text-anchor=\"middle\" font-size=\"11\">1,4 m</text><path d=\"M125,190 Q167.5,67.5 210,190\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"167.5\" y=\"120.8\" text-anchor=\"middle\" font-size=\"11\">0,98 m</text><path d=\"M210,190 Q252.5,104.2 295,190\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"252.5\" y=\"139.1\" text-anchor=\"middle\" font-size=\"11\">0,686 m</text></svg></span><p>Bestäm den sammanlagda sträckan från det att bollen släpps tills den träffar marken för fjärde gången.</p>",
+    "s": "<p>Första sträckan nedåt är \\(2,0\\) m. Därefter går bollen både upp och ner från höjderna \\(1,4\\), \\(0,98\\) och \\(0,686\\) m innan den träffar marken för fjärde gången.</p><p>Sträckan blir</p><p>\\[2+2(1,4+0,98+0,686)=8,132.\\]</p><p><strong>Svar:</strong> cirka \\(\\boxed{8,13\\text{ m}}\\).</p>",
+    "familj": "r6_geo_fig_bounce"
+  },
+  {
+    "id": "4.232",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>I ett mönster fördubblas antalet rutor i varje steg.</p><span class=\"fig smal\"><svg width=\"400\" height=\"225\" viewBox=\"0 0 400 225\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fyra steg med dubbelt så många rutor för varje steg\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"223\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"35\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"63\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 1</text><text x=\"63\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">1 rutor</text><rect x=\"115\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"133\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"143\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 2</text><text x=\"143\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">2 rutor</text><rect x=\"205\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"223\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"241\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"259\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"233\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 3</text><text x=\"233\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">4 rutor</text><rect x=\"290\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"308\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"326\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"344\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"290\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"308\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"326\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"344\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"318\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 4</text><text x=\"318\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">8 rutor</text></svg></span><p>Hur många rutor används sammanlagt i steg 1–8?</p>",
+    "s": "<p>Antalen bildar den geometriska summan</p><p>\\[1+2+4+\\cdots+2^7.\\]</p><p>Med \\(a=1\\), \\(k=2\\) och \\(n=8\\) fås</p><p>\\[S_8=\\frac{2^8-1}{2-1}=255.\\]</p><p><strong>Svar:</strong> \\(\\boxed{255}\\) rutor.</p>",
+    "familj": "r6_geo_fig_blocks"
+  },
+  {
+    "id": "4.233",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En förening sätter in 2000 kr i slutet av varje år på ett konto med 3 % ränta.</p><span class=\"fig smal\"><svg width=\"410\" height=\"190\" viewBox=\"0 0 410 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tidslinje med fem insättningar\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"188\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"98\" x2=\"365\" y2=\"98\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"65\" y1=\"89\" x2=\"65\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"65\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 1</text><line x1=\"65\" y1=\"81\" x2=\"65\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 60 56 L 65 48 L 70 56\" fill=\"#2D70B3\"/><text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">2000 kr</text><line x1=\"135\" y1=\"89\" x2=\"135\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"135\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 2</text><line x1=\"135\" y1=\"81\" x2=\"135\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 130 56 L 135 48 L 140 56\" fill=\"#2D70B3\"/><text x=\"135\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">2000 kr</text><line x1=\"205\" y1=\"89\" x2=\"205\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"205\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 3</text><line x1=\"205\" y1=\"81\" x2=\"205\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 200 56 L 205 48 L 210 56\" fill=\"#2D70B3\"/><text x=\"205\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">2000 kr</text><line x1=\"275\" y1=\"89\" x2=\"275\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"275\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 4</text><line x1=\"275\" y1=\"81\" x2=\"275\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 270 56 L 275 48 L 280 56\" fill=\"#2D70B3\"/><text x=\"275\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">2000 kr</text><line x1=\"345\" y1=\"89\" x2=\"345\" y2=\"107\" stroke=\"#2B2527\"/><text x=\"345\" y=\"125\" text-anchor=\"middle\" font-size=\"11\">år 5</text><line x1=\"345\" y1=\"81\" x2=\"345\" y2=\"50\" stroke=\"#2D70B3\" stroke-width=\"2\"/><path d=\"M 340 56 L 345 48 L 350 56\" fill=\"#2D70B3\"/><text x=\"345\" y=\"39\" text-anchor=\"middle\" font-size=\"11\">2000 kr</text><text x=\"205\" y=\"23\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">Ränta 3 % per år</text></svg></span><p>Bestäm kontots värde direkt efter den femte insättningen.</p>",
+    "s": "<p>Beloppen vid den femte insättningen är \\(2000\\), \\(2000\\cdot1,03\\), ..., \\(2000\\cdot1,03^4\\).</p><p>Summan blir</p><p>\\[2000\\frac{1,03^5-1}{1,03-1}\\approx 10618,27.\\]</p><p><strong>Svar:</strong> cirka \\(\\boxed{10618\\text{ kr}}\\).</p>",
+    "familj": "r6_geo_fig_savings2"
+  },
+  {
+    "id": "4.234",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En maskin producerar 800 detaljer första veckan. Produktionen ökar med 5 % per vecka. Hur många detaljer produceras sammanlagt under de första 6 veckorna?</p>",
+    "s": "<p>Första termen är \\(800\\), kvoten är \\(1,05\\) och antalet termer är \\(6\\).</p><p>\\[S=800\\frac{1,05^{6}-1}{1,05-1}\\approx 5441,53.\\]</p>",
+    "familj": "r6_geo_context_1"
+  },
+  {
+    "id": "4.235",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En ljuskälla förlorar 12 % av sin ljusstyrka efter varje filter. Den ursprungliga ljusstyrkan sätts till 100 enheter. Bestäm summan av ljusstyrkorna före filtret och efter de fyra första filtren.</p>",
+    "s": "<p>Första termen är \\(100\\), kvoten är \\(0,88\\) och antalet termer är \\(5\\).</p><p>\\[S=100\\frac{0,88^{5}-1}{0,88-1}\\approx 393,56.\\]</p>",
+    "familj": "r6_geo_context_2"
+  },
+  {
+    "id": "4.236",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En förening får 5000 kr första året och bidraget minskar med 4 % varje år. Hur mycket får föreningen sammanlagt under 7 år?</p>",
+    "s": "<p>Första termen är \\(5000\\), kvoten är \\(0,96\\) och antalet termer är \\(7\\).</p><p>\\[S=5000\\frac{0,96^{7}-1}{0,96-1}\\approx 31069,07.\\]</p>",
+    "familj": "r6_geo_context_3"
+  },
+  {
+    "id": "4.237",
+    "kap": 4,
+    "omr": "geometriska_summor",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En geometrisk summa har första termen 4, kvoten 3 och 5 termer. Bestäm summan.</p>",
+    "s": "<p>Första termen är \\(4\\), kvoten är \\(3\\) och antalet termer är \\(5\\).</p><p>\\[S=4\\frac{3^{5}-1}{3-1}\\approx 484.\\]</p>",
+    "familj": "r6_geo_context_4"
+  },
+  {
+    "id": "3.359",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=x^{3} - 3 x^{2} - 9 x + 5\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=3 \\left(x - 3\\right) \\left(x + 1\\right).\\]</p><p>Derivatans nollställen är \\(x=-1\\), \\(x=3\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-1\\)</th><th>\\(-1&lt;x&lt;3\\)</th><th>\\(x&gt;3\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-1\\): maximipunkt, \\(f(-1)=10\\)</li><li>vid \\(x=3\\): minimipunkt, \\(f(3)=-22\\)</li></ul>",
+    "familj": "maxmin_sign_E_1"
+  },
+  {
+    "id": "3.360",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=x^{3} + 3 x^{2} - 9 x + 1\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=3 \\left(x - 1\\right) \\left(x + 3\\right).\\]</p><p>Derivatans nollställen är \\(x=-3\\), \\(x=1\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-3\\)</th><th>\\(-3&lt;x&lt;1\\)</th><th>\\(x&gt;1\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-3\\): maximipunkt, \\(f(-3)=28\\)</li><li>vid \\(x=1\\): minimipunkt, \\(f(1)=-4\\)</li></ul>",
+    "familj": "maxmin_sign_E_2"
+  },
+  {
+    "id": "3.361",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=- x^{3} + 6 x^{2} - 9 x + 2\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=- 3 \\left(x - 3\\right) \\left(x - 1\\right).\\]</p><p>Derivatans nollställen är \\(x=1\\), \\(x=3\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;1\\)</th><th>\\(1&lt;x&lt;3\\)</th><th>\\(x&gt;3\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>+</td><td>-</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=1\\): minimipunkt, \\(f(1)=-2\\)</li><li>vid \\(x=3\\): maximipunkt, \\(f(3)=2\\)</li></ul>",
+    "familj": "maxmin_sign_E_3"
+  },
+  {
+    "id": "3.362",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=x^{3} - 6 x^{2} + 9 x + 4\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=3 \\left(x - 3\\right) \\left(x - 1\\right).\\]</p><p>Derivatans nollställen är \\(x=1\\), \\(x=3\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;1\\)</th><th>\\(1&lt;x&lt;3\\)</th><th>\\(x&gt;3\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=1\\): maximipunkt, \\(f(1)=8\\)</li><li>vid \\(x=3\\): minimipunkt, \\(f(3)=4\\)</li></ul>",
+    "familj": "maxmin_sign_E_4"
+  },
+  {
+    "id": "3.363",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=\\frac{x^{3}}{3} - 2 x^{2} + 3 x + 1\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=\\left(x - 3\\right) \\left(x - 1\\right).\\]</p><p>Derivatans nollställen är \\(x=1\\), \\(x=3\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;1\\)</th><th>\\(1&lt;x&lt;3\\)</th><th>\\(x&gt;3\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=1\\): maximipunkt, \\(f(1)=\\frac{7}{3}\\)</li><li>vid \\(x=3\\): minimipunkt, \\(f(3)=1\\)</li></ul>",
+    "familj": "maxmin_sign_E_5"
+  },
+  {
+    "id": "3.364",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>För funktionen \\(f(x)=- \\frac{x^{3}}{3} + x^{2} + 3 x - 2\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=- \\left(x - 3\\right) \\left(x + 1\\right).\\]</p><p>Derivatans nollställen är \\(x=-1\\), \\(x=3\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-1\\)</th><th>\\(-1&lt;x&lt;3\\)</th><th>\\(x&gt;3\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>+</td><td>-</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-1\\): minimipunkt, \\(f(-1)=- \\frac{11}{3}\\)</li><li>vid \\(x=3\\): maximipunkt, \\(f(3)=7\\)</li></ul>",
+    "familj": "maxmin_sign_E_6"
+  },
+  {
+    "id": "3.365",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=x^{4} - 8 x^{2}\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=4 x \\left(x - 2\\right) \\left(x + 2\\right).\\]</p><p>Derivatans nollställen är \\(x=-2\\), \\(x=0\\), \\(x=2\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-2\\)</th><th>\\(-2&lt;x&lt;0\\)</th><th>\\(0&lt;x&lt;2\\)</th><th>\\(x&gt;2\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-2\\): minimipunkt, \\(f(-2)=-16\\)</li><li>vid \\(x=0\\): maximipunkt, \\(f(0)=0\\)</li><li>vid \\(x=2\\): minimipunkt, \\(f(2)=-16\\)</li></ul>",
+    "familj": "maxmin_sign_E_7"
+  },
+  {
+    "id": "3.366",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=\\frac{x^{4}}{4} - 2 x^{2} + 3\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=x \\left(x - 2\\right) \\left(x + 2\\right).\\]</p><p>Derivatans nollställen är \\(x=-2\\), \\(x=0\\), \\(x=2\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-2\\)</th><th>\\(-2&lt;x&lt;0\\)</th><th>\\(0&lt;x&lt;2\\)</th><th>\\(x&gt;2\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>+</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-2\\): minimipunkt, \\(f(-2)=-1\\)</li><li>vid \\(x=0\\): maximipunkt, \\(f(0)=3\\)</li><li>vid \\(x=2\\): minimipunkt, \\(f(2)=-1\\)</li></ul>",
+    "familj": "maxmin_sign_E_8"
+  },
+  {
+    "id": "3.367",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=- \\frac{x^{4}}{4} + 2 x^{2} + 1\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=- x \\left(x - 2\\right) \\left(x + 2\\right).\\]</p><p>Derivatans nollställen är \\(x=-2\\), \\(x=0\\), \\(x=2\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;-2\\)</th><th>\\(-2&lt;x&lt;0\\)</th><th>\\(0&lt;x&lt;2\\)</th><th>\\(x&gt;2\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td><td>-</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=-2\\): maximipunkt, \\(f(-2)=5\\)</li><li>vid \\(x=0\\): minimipunkt, \\(f(0)=1\\)</li><li>vid \\(x=2\\): maximipunkt, \\(f(2)=5\\)</li></ul>",
+    "familj": "maxmin_sign_E_9"
+  },
+  {
+    "id": "3.368",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=x^{4} - 2 x^{3}\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=2 x^{2} \\left(2 x - 3\\right).\\]</p><p>Derivatans nollställen är \\(x=0\\), \\(x=\\frac{3}{2}\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;0\\)</th><th>\\(0&lt;x&lt;\\frac{3}{2}\\)</th><th>\\(x&gt;\\frac{3}{2}\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>-</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=0\\): ingen extrempunkt, \\(f(0)=0\\)</li><li>vid \\(x=\\frac{3}{2}\\): minimipunkt, \\(f(\\frac{3}{2})=- \\frac{27}{16}\\)</li></ul>",
+    "familj": "maxmin_sign_E_10"
+  },
+  {
+    "id": "3.369",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=\\frac{x^{4}}{4} - \\frac{4 x^{3}}{3} + 2 x^{2}\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=x \\left(x - 2\\right)^{2}.\\]</p><p>Derivatans nollställen är \\(x=0\\), \\(x=2\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;0\\)</th><th>\\(0&lt;x&lt;2\\)</th><th>\\(x&gt;2\\)</th></tr><tr><th>Tecken för derivatan</th><td>-</td><td>+</td><td>+</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=0\\): minimipunkt, \\(f(0)=0\\)</li><li>vid \\(x=2\\): ingen extrempunkt, \\(f(2)=\\frac{4}{3}\\)</li></ul>",
+    "familj": "maxmin_sign_E_11"
+  },
+  {
+    "id": "3.370",
+    "kap": 3,
+    "omr": "grafanalys_derivata",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>För funktionen \\(f(x)=- x^{4} + 4 x^{2} + 2\\):</p><p>a) Bestäm derivatans nollställen.<br>b) Gör en teckentabell för \\(f^{\\prime}(x)\\).<br>c) Bestäm funktionens maximi- och minimipunkter.</p>",
+    "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=- 4 x \\left(x^{2} - 2\\right).\\]</p><p>Derivatans nollställen är \\(x=- \\sqrt{2}\\), \\(x=0\\), \\(x=\\sqrt{2}\\).</p><table class=\"minitabell\"><tr><th>Intervall</th><th>\\(x&lt;- \\sqrt{2}\\)</th><th>\\(- \\sqrt{2}&lt;x&lt;0\\)</th><th>\\(0&lt;x&lt;\\sqrt{2}\\)</th><th>\\(x&gt;\\sqrt{2}\\)</th></tr><tr><th>Tecken för derivatan</th><td>+</td><td>-</td><td>+</td><td>-</td></tr></table><p>Av teckenbytena följer:</p><ul><li>vid \\(x=- \\sqrt{2}\\): maximipunkt, \\(f(- \\sqrt{2})=6\\)</li><li>vid \\(x=0\\): minimipunkt, \\(f(0)=2\\)</li><li>vid \\(x=\\sqrt{2}\\): maximipunkt, \\(f(\\sqrt{2})=6\\)</li></ul>",
+    "familj": "maxmin_sign_E_12"
+  },
+  {
+    "id": "3.371",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En boll kastas rakt upp. Höjden över marken efter \\(t\\) sekunder beskrivs av \\(h(t)=-5t^2+30t+2\\). Bestäm bollens största höjd och när den nås.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 211.2 L 51.5 208.2 L 53.0 205.2 L 54.6 202.2 L 56.1 199.3 L 57.6 196.4 L 59.1 193.6 L 60.7 190.7 L 62.2 187.9 L 63.7 185.2 L 65.2 182.4 L 66.8 179.7 L 68.3 177.0 L 69.8 174.4 L 71.3 171.8 L 72.9 169.2 L 74.4 166.6 L 75.9 164.1 L 77.5 161.6 L 79.0 159.1 L 80.5 156.7 L 82.0 154.3 L 83.5 151.9 L 85.1 149.6 L 86.6 147.2 L 88.1 145.0 L 89.7 142.7 L 91.2 140.5 L 92.7 138.3 L 94.2 136.1 L 95.8 134.0 L 97.3 131.9 L 98.8 129.8 L 100.3 127.8 L 101.8 125.8 L 103.4 123.8 L 104.9 121.8 L 106.4 119.9 L 107.9 118.0 L 109.5 116.1 L 111.0 114.3 L 112.5 112.5 L 114.0 110.7 L 115.6 109.0 L 117.1 107.3 L 118.6 105.6 L 120.1 104.0 L 121.7 102.3 L 123.2 100.7 L 124.7 99.2 L 126.2 97.7 L 127.8 96.2 L 129.3 94.7 L 130.8 93.3 L 132.4 91.8 L 133.9 90.5 L 135.4 89.1 L 136.9 87.8 L 138.4 86.5 L 140.0 85.3 L 141.5 84.0 L 143.0 82.8 L 144.6 81.7 L 146.1 80.5 L 147.6 79.4 L 149.1 78.4 L 150.7 77.3 L 152.2 76.3 L 153.7 75.3 L 155.2 74.4 L 156.8 73.4 L 158.3 72.5 L 159.8 71.7 L 161.3 70.9 L 162.9 70.1 L 164.4 69.3 L 165.9 68.5 L 167.4 67.8 L 168.9 67.1 L 170.5 66.5 L 172.0 65.9 L 173.5 65.3 L 175.1 64.7 L 176.6 64.2 L 178.1 63.7 L 179.6 63.2 L 181.2 62.8 L 182.7 62.4 L 184.2 62.0 L 185.7 61.6 L 187.2 61.3 L 188.8 61.0 L 190.3 60.8 L 191.8 60.6 L 193.3 60.4 L 194.9 60.2 L 196.4 60.1 L 197.9 60.0 L 199.4 59.9 L 201.0 59.8 L 202.5 59.8 L 204.0 59.8 L 205.6 59.9 L 207.1 60.0 L 208.6 60.1 L 210.1 60.2 L 211.7 60.4 L 213.2 60.6 L 214.7 60.8 L 216.2 61.0 L 217.7 61.3 L 219.3 61.6 L 220.8 62.0 L 222.3 62.4 L 223.8 62.8 L 225.4 63.2 L 226.9 63.7 L 228.4 64.2 L 229.9 64.7 L 231.5 65.3 L 233.0 65.9 L 234.5 66.5 L 236.0 67.1 L 237.6 67.8 L 239.1 68.5 L 240.6 69.3 L 242.2 70.1 L 243.7 70.9 L 245.2 71.7 L 246.7 72.5 L 248.2 73.4 L 249.8 74.4 L 251.3 75.3 L 252.8 76.3 L 254.3 77.3 L 255.9 78.4 L 257.4 79.4 L 258.9 80.5 L 260.4 81.7 L 262.0 82.8 L 263.5 84.0 L 265.0 85.3 L 266.5 86.5 L 268.1 87.8 L 269.6 89.1 L 271.1 90.5 L 272.6 91.8 L 274.2 93.3 L 275.7 94.7 L 277.2 96.2 L 278.8 97.7 L 280.3 99.2 L 281.8 100.7 L 283.3 102.3 L 284.9 104.0 L 286.4 105.6 L 287.9 107.3 L 289.4 109.0 L 291.0 110.7 L 292.5 112.5 L 294.0 114.3 L 295.5 116.1 L 297.1 118.0 L 298.6 119.9 L 300.1 121.8 L 301.6 123.8 L 303.2 125.8 L 304.7 127.8 L 306.2 129.8 L 307.7 131.9 L 309.2 134.0 L 310.8 136.1 L 312.3 138.3 L 313.8 140.5 L 315.4 142.7 L 316.9 145.0 L 318.4 147.2 L 319.9 149.6 L 321.4 151.9 L 323.0 154.3 L 324.5 156.7 L 326.0 159.1 L 327.6 161.6 L 329.1 164.1 L 330.6 166.6 L 332.1 169.2 L 333.7 171.8 L 335.2 174.4 L 336.7 177.0 L 338.2 179.7 L 339.8 182.4 L 341.3 185.2 L 342.8 187.9 L 344.3 190.7 L 345.9 193.6 L 347.4 196.4 L 348.9 199.3 L 350.4 202.2 L 352.0 205.2 L 353.5 208.2 L 355.0 211.2\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
+    "s": "<p>Derivatan är \\[- 10 \\left(t - 3\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=3\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(2\\)</li><li>\\(t=6\\): värdet är \\(2\\)</li><li>\\(t=3\\): värdet är \\(47\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{47}\\) m, och det fås för \\(t=3\\).</p>",
+    "familj": "maxmin_given_1"
+  },
+  {
+    "id": "3.372",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En odlares skörd per hektar modelleras av \\(S(x)=-2x^2+24x+35\\), där \\(x\\) är mängden gödsel i en viss enhet. Bestäm den gödselmängd som ger störst skörd.</p>",
+    "s": "<p>Derivatan är \\[- 4 \\left(x - 6\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(35\\)</li><li>\\(x=12\\): värdet är \\(35\\)</li><li>\\(x=6\\): värdet är \\(107\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{107}\\), och det fås för \\(x=6\\).</p>",
+    "familj": "maxmin_given_2"
+  },
+  {
+    "id": "3.373",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Kostnaden per tillverkad serie modelleras av \\(K(x)=0,5x^2-20x+340\\), där \\(x\\) är antalet serier. Bestäm det minsta värdet på \\(K\\) och för vilket \\(x\\) det fås.</p>",
+    "s": "<p>Derivatan är \\[x - 20.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=20\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(340\\)</li><li>\\(x=50\\): värdet är \\(590\\)</li><li>\\(x=20\\): värdet är \\(140\\)</li></ul><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{140}\\) kr, och det fås för \\(x=20\\).</p>",
+    "familj": "maxmin_given_3"
+  },
+  {
+    "id": "3.374",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Temperaturen i ett växthus under en del av dagen modelleras av \\(T(t)=-0,4t^2+4,8t+18\\), där \\(t\\) är timmar efter kl. 08.00. Bestäm den högsta temperaturen enligt modellen och när den inträffar.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 139.0 L 51.5 137.5 L 53.0 136.1 L 54.6 134.8 L 56.1 133.4 L 57.6 132.0 L 59.1 130.7 L 60.7 129.3 L 62.2 128.0 L 63.7 126.7 L 65.2 125.4 L 66.8 124.2 L 68.3 122.9 L 69.8 121.6 L 71.3 120.4 L 72.9 119.2 L 74.4 118.0 L 75.9 116.8 L 77.5 115.6 L 79.0 114.5 L 80.5 113.3 L 82.0 112.2 L 83.5 111.1 L 85.1 110.0 L 86.6 108.9 L 88.1 107.8 L 89.7 106.7 L 91.2 105.7 L 92.7 104.7 L 94.2 103.6 L 95.8 102.6 L 97.3 101.6 L 98.8 100.7 L 100.3 99.7 L 101.8 98.8 L 103.4 97.8 L 104.9 96.9 L 106.4 96.0 L 107.9 95.1 L 109.5 94.2 L 111.0 93.4 L 112.5 92.5 L 114.0 91.7 L 115.6 90.9 L 117.1 90.1 L 118.6 89.3 L 120.1 88.5 L 121.7 87.7 L 123.2 87.0 L 124.7 86.3 L 126.2 85.5 L 127.8 84.8 L 129.3 84.1 L 130.8 83.5 L 132.4 82.8 L 133.9 82.2 L 135.4 81.5 L 136.9 80.9 L 138.4 80.3 L 140.0 79.7 L 141.5 79.1 L 143.0 78.6 L 144.6 78.0 L 146.1 77.5 L 147.6 77.0 L 149.1 76.5 L 150.7 76.0 L 152.2 75.5 L 153.7 75.0 L 155.2 74.6 L 156.8 74.1 L 158.3 73.7 L 159.8 73.3 L 161.3 72.9 L 162.9 72.5 L 164.4 72.2 L 165.9 71.8 L 167.4 71.5 L 168.9 71.2 L 170.5 70.9 L 172.0 70.6 L 173.5 70.3 L 175.1 70.0 L 176.6 69.8 L 178.1 69.6 L 179.6 69.3 L 181.2 69.1 L 182.7 68.9 L 184.2 68.8 L 185.7 68.6 L 187.2 68.4 L 188.8 68.3 L 190.3 68.2 L 191.8 68.1 L 193.3 68.0 L 194.9 67.9 L 196.4 67.8 L 197.9 67.8 L 199.4 67.8 L 201.0 67.7 L 202.5 67.7 L 204.0 67.7 L 205.6 67.8 L 207.1 67.8 L 208.6 67.8 L 210.1 67.9 L 211.7 68.0 L 213.2 68.1 L 214.7 68.2 L 216.2 68.3 L 217.7 68.4 L 219.3 68.6 L 220.8 68.8 L 222.3 68.9 L 223.8 69.1 L 225.4 69.3 L 226.9 69.6 L 228.4 69.8 L 229.9 70.0 L 231.5 70.3 L 233.0 70.6 L 234.5 70.9 L 236.0 71.2 L 237.6 71.5 L 239.1 71.8 L 240.6 72.2 L 242.2 72.5 L 243.7 72.9 L 245.2 73.3 L 246.7 73.7 L 248.2 74.1 L 249.8 74.6 L 251.3 75.0 L 252.8 75.5 L 254.3 76.0 L 255.9 76.5 L 257.4 77.0 L 258.9 77.5 L 260.4 78.0 L 262.0 78.6 L 263.5 79.1 L 265.0 79.7 L 266.5 80.3 L 268.1 80.9 L 269.6 81.5 L 271.1 82.2 L 272.6 82.8 L 274.2 83.5 L 275.7 84.1 L 277.2 84.8 L 278.8 85.5 L 280.3 86.3 L 281.8 87.0 L 283.3 87.7 L 284.9 88.5 L 286.4 89.3 L 287.9 90.1 L 289.4 90.9 L 291.0 91.7 L 292.5 92.5 L 294.0 93.4 L 295.5 94.2 L 297.1 95.1 L 298.6 96.0 L 300.1 96.9 L 301.6 97.8 L 303.2 98.8 L 304.7 99.7 L 306.2 100.7 L 307.7 101.6 L 309.2 102.6 L 310.8 103.6 L 312.3 104.7 L 313.8 105.7 L 315.4 106.7 L 316.9 107.8 L 318.4 108.9 L 319.9 110.0 L 321.4 111.1 L 323.0 112.2 L 324.5 113.3 L 326.0 114.5 L 327.6 115.6 L 329.1 116.8 L 330.6 118.0 L 332.1 119.2 L 333.7 120.4 L 335.2 121.6 L 336.7 122.9 L 338.2 124.2 L 339.8 125.4 L 341.3 126.7 L 342.8 128.0 L 344.3 129.3 L 345.9 130.7 L 347.4 132.0 L 348.9 133.4 L 350.4 134.8 L 352.0 136.1 L 353.5 137.5 L 355.0 139.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
+    "s": "<p>Derivatan är \\[- \\frac{4 \\left(t - 6\\right)}{5}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(18\\)</li><li>\\(t=12\\): värdet är \\(18\\)</li><li>\\(t=6\\): värdet är \\(32,4\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{32,4}\\) °C, och det fås för \\(t=6\\).</p>",
+    "familj": "maxmin_given_4"
+  },
+  {
+    "id": "3.375",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Arean av ett rektangulärt område beskrivs av \\(A(x)=30x-x^2\\) för \\(0&lt;x&lt;30\\). Bestäm den största möjliga arean.</p>",
+    "s": "<p>Derivatan är \\[- 2 \\left(x - 15\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=15\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(0\\)</li><li>\\(x=30\\): värdet är \\(0\\)</li><li>\\(x=15\\): värdet är \\(225\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{225}\\) m², och det fås för \\(x=15\\).</p>",
+    "familj": "maxmin_given_5"
+  },
+  {
+    "id": "3.376",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En högtalares beräknade energiförbrukning under ett test beskrivs av \\(E(x)=x^2-14x+80\\). Bestäm funktionens minsta värde.</p>",
+    "s": "<p>Derivatan är \\[2 \\left(x - 7\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=7\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{31}\\), och det fås för \\(x=7\\).</p>",
+    "familj": "maxmin_given_6"
+  },
+  {
+    "id": "3.377",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En fontänstråles höjd i meter kan modelleras med \\(h(x)=-0,25x^2+2x+0,5\\), där \\(x\\) är det horisontella avståndet i meter. Bestäm strålens största höjd.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 133.1 L 51.5 132.2 L 53.0 131.3 L 54.6 130.3 L 56.1 129.4 L 57.6 128.5 L 59.1 127.6 L 60.7 126.8 L 62.2 125.9 L 63.7 125.1 L 65.2 124.2 L 66.8 123.4 L 68.3 122.6 L 69.8 121.8 L 71.3 121.0 L 72.9 120.2 L 74.4 119.5 L 75.9 118.7 L 77.5 118.0 L 79.0 117.2 L 80.5 116.5 L 82.0 115.8 L 83.6 115.1 L 85.1 114.4 L 86.6 113.8 L 88.1 113.1 L 89.7 112.5 L 91.2 111.8 L 92.7 111.2 L 94.2 110.6 L 95.8 110.0 L 97.3 109.4 L 98.8 108.8 L 100.3 108.3 L 101.8 107.7 L 103.4 107.2 L 104.9 106.7 L 106.4 106.1 L 108.0 105.6 L 109.5 105.1 L 111.0 104.7 L 112.5 104.2 L 114.1 103.7 L 115.6 103.3 L 117.1 102.9 L 118.6 102.4 L 120.1 102.0 L 121.7 101.6 L 123.2 101.3 L 124.7 100.9 L 126.2 100.5 L 127.8 100.2 L 129.3 99.8 L 130.8 99.5 L 132.4 99.2 L 133.9 98.9 L 135.4 98.6 L 136.9 98.3 L 138.4 98.0 L 140.0 97.8 L 141.5 97.6 L 143.0 97.3 L 144.6 97.1 L 146.1 96.9 L 147.6 96.7 L 149.1 96.5 L 150.6 96.3 L 152.2 96.2 L 153.7 96.0 L 155.2 95.9 L 156.8 95.8 L 158.3 95.7 L 159.8 95.6 L 161.3 95.5 L 162.8 95.4 L 164.4 95.3 L 165.9 95.3 L 167.4 95.2 L 168.9 95.2 L 170.5 95.2 L 172.0 95.2 L 173.5 95.2 L 175.1 95.2 L 176.6 95.2 L 178.1 95.3 L 179.6 95.3 L 181.2 95.4 L 182.7 95.5 L 184.2 95.6 L 185.7 95.7 L 187.2 95.8 L 188.8 95.9 L 190.3 96.0 L 191.8 96.2 L 193.4 96.3 L 194.9 96.5 L 196.4 96.7 L 197.9 96.9 L 199.5 97.1 L 201.0 97.3 L 202.5 97.6 L 204.0 97.8 L 205.6 98.0 L 207.1 98.3 L 208.6 98.6 L 210.1 98.9 L 211.7 99.2 L 213.2 99.5 L 214.7 99.8 L 216.2 100.2 L 217.8 100.5 L 219.3 100.9 L 220.8 101.3 L 222.3 101.6 L 223.9 102.0 L 225.4 102.4 L 226.9 102.9 L 228.4 103.3 L 230.0 103.7 L 231.5 104.2 L 233.0 104.7 L 234.5 105.1 L 236.0 105.6 L 237.6 106.1 L 239.1 106.7 L 240.6 107.2 L 242.2 107.7 L 243.7 108.3 L 245.2 108.8 L 246.7 109.4 L 248.2 110.0 L 249.8 110.6 L 251.3 111.2 L 252.8 111.8 L 254.4 112.5 L 255.9 113.1 L 257.4 113.8 L 258.9 114.4 L 260.5 115.1 L 262.0 115.8 L 263.5 116.5 L 265.0 117.2 L 266.5 118.0 L 268.1 118.7 L 269.6 119.5 L 271.1 120.2 L 272.6 121.0 L 274.2 121.8 L 275.7 122.6 L 277.2 123.4 L 278.8 124.2 L 280.3 125.1 L 281.8 125.9 L 283.3 126.8 L 284.9 127.6 L 286.4 128.5 L 287.9 129.4 L 289.4 130.3 L 291.0 131.3 L 292.5 132.2 L 294.0 133.1 L 295.5 134.1 L 297.0 135.0 L 298.6 136.0 L 300.1 137.0 L 301.6 138.0 L 303.2 139.0 L 304.7 140.1 L 306.2 141.1 L 307.7 142.1 L 309.2 143.2 L 310.8 144.3 L 312.3 145.4 L 313.8 146.5 L 315.3 147.6 L 316.9 148.7 L 318.4 149.8 L 319.9 151.0 L 321.4 152.1 L 323.0 153.3 L 324.5 154.5 L 326.0 155.7 L 327.5 156.9 L 329.1 158.1 L 330.6 159.3 L 332.1 160.6 L 333.7 161.8 L 335.2 163.1 L 336.7 164.3 L 338.2 165.6 L 339.8 166.9 L 341.3 168.2 L 342.8 169.6 L 344.3 170.9 L 345.8 172.2 L 347.4 173.6 L 348.9 175.0 L 350.4 176.3 L 351.9 177.7 L 353.5 179.1 L 355.0 180.6\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
+    "s": "<p>Derivatan är \\[- \\frac{x - 4}{2}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=4\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(0,5\\)</li><li>\\(x=10\\): värdet är \\(-4,5\\)</li><li>\\(x=4\\): värdet är \\(4,5\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{4,5}\\) m, och det fås för \\(x=4\\).</p>",
+    "familj": "maxmin_given_7"
+  },
+  {
+    "id": "3.378",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Vinsten i tusentals kronor för en produkt modelleras av \\(V(x)=-x^2+18x-45\\), där \\(x\\) är antalet hundratal sålda produkter. Bestäm den största vinsten.</p>",
+    "s": "<p>Derivatan är \\[- 2 \\left(x - 9\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=9\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(-45\\)</li><li>\\(x=18\\): värdet är \\(-45\\)</li><li>\\(x=9\\): värdet är \\(36\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{36}\\) tusen kr, och det fås för \\(x=9\\).</p>",
+    "familj": "maxmin_given_8"
+  },
+  {
+    "id": "3.379",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>En plants höjdökning per vecka modelleras under en period av \\(H(t)=-0,1t^2+2t+4\\). När är modellens värde som störst?</p>",
+    "s": "<p>Derivatan är \\[- \\frac{t - 10}{5}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=10\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(4\\)</li><li>\\(t=20\\): värdet är \\(4\\)</li><li>\\(t=10\\): värdet är \\(14\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{14}\\), och det fås för \\(t=10\\).</p>",
+    "familj": "maxmin_given_9"
+  },
+  {
+    "id": "3.380",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>Bränsleförbrukningen i en modellstudie beskrivs av \\(B(x)=0,01x^2-1,6x+90\\), där \\(x\\) är hastigheten i km/h. Bestäm vid vilken hastighet modellen ger minst förbrukning.</p>",
+    "s": "<p>Derivatan är \\[\\frac{x - 80}{50}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=80\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(90\\)</li><li>\\(x=160\\): värdet är \\(90\\)</li><li>\\(x=80\\): värdet är \\(26\\)</li></ul><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{26}\\), och det fås för \\(x=80\\).</p>",
+    "familj": "maxmin_given_10"
+  },
+  {
+    "id": "3.381",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>En brobåges höjd över körbanan modelleras av \\(h(x)=-0,02x^2+0,8x+3\\). Bestäm bågens största höjd.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 176.6 L 51.5 175.0 L 53.0 173.4 L 54.6 171.8 L 56.1 170.2 L 57.6 168.6 L 59.1 167.0 L 60.7 165.5 L 62.2 164.0 L 63.7 162.5 L 65.2 161.0 L 66.8 159.5 L 68.3 158.1 L 69.8 156.6 L 71.3 155.2 L 72.9 153.8 L 74.4 152.4 L 75.9 151.0 L 77.5 149.7 L 79.0 148.3 L 80.5 147.0 L 82.0 145.7 L 83.6 144.4 L 85.1 143.1 L 86.6 141.9 L 88.1 140.6 L 89.7 139.4 L 91.2 138.2 L 92.7 137.0 L 94.2 135.8 L 95.8 134.7 L 97.3 133.5 L 98.8 132.4 L 100.3 131.3 L 101.8 130.2 L 103.4 129.1 L 104.9 128.1 L 106.4 127.0 L 108.0 126.0 L 109.5 125.0 L 111.0 124.0 L 112.5 123.0 L 114.1 122.0 L 115.6 121.1 L 117.1 120.2 L 118.6 119.3 L 120.1 118.4 L 121.7 117.5 L 123.2 116.6 L 124.7 115.8 L 126.2 114.9 L 127.8 114.1 L 129.3 113.3 L 130.8 112.6 L 132.4 111.8 L 133.9 111.0 L 135.4 110.3 L 136.9 109.6 L 138.4 108.9 L 140.0 108.2 L 141.5 107.5 L 143.0 106.9 L 144.6 106.3 L 146.1 105.6 L 147.6 105.0 L 149.1 104.5 L 150.6 103.9 L 152.2 103.3 L 153.7 102.8 L 155.2 102.3 L 156.8 101.8 L 158.3 101.3 L 159.8 100.8 L 161.3 100.4 L 162.8 99.9 L 164.4 99.5 L 165.9 99.1 L 167.4 98.7 L 168.9 98.4 L 170.5 98.0 L 172.0 97.7 L 173.5 97.4 L 175.1 97.1 L 176.6 96.8 L 178.1 96.5 L 179.6 96.2 L 181.2 96.0 L 182.7 95.8 L 184.2 95.6 L 185.7 95.4 L 187.2 95.2 L 188.8 95.1 L 190.3 94.9 L 191.8 94.8 L 193.4 94.7 L 194.9 94.6 L 196.4 94.5 L 197.9 94.5 L 199.5 94.4 L 201.0 94.4 L 202.5 94.4 L 204.0 94.4 L 205.6 94.4 L 207.1 94.5 L 208.6 94.5 L 210.1 94.6 L 211.7 94.7 L 213.2 94.8 L 214.7 94.9 L 216.2 95.1 L 217.8 95.2 L 219.3 95.4 L 220.8 95.6 L 222.3 95.8 L 223.9 96.0 L 225.4 96.2 L 226.9 96.5 L 228.4 96.8 L 230.0 97.1 L 231.5 97.4 L 233.0 97.7 L 234.5 98.0 L 236.0 98.4 L 237.6 98.7 L 239.1 99.1 L 240.6 99.5 L 242.2 99.9 L 243.7 100.4 L 245.2 100.8 L 246.7 101.3 L 248.2 101.8 L 249.8 102.3 L 251.3 102.8 L 252.8 103.3 L 254.4 103.9 L 255.9 104.5 L 257.4 105.0 L 258.9 105.6 L 260.5 106.3 L 262.0 106.9 L 263.5 107.5 L 265.0 108.2 L 266.5 108.9 L 268.1 109.6 L 269.6 110.3 L 271.1 111.0 L 272.6 111.8 L 274.2 112.6 L 275.7 113.3 L 277.2 114.1 L 278.8 114.9 L 280.3 115.8 L 281.8 116.6 L 283.3 117.5 L 284.9 118.4 L 286.4 119.3 L 287.9 120.2 L 289.4 121.1 L 291.0 122.0 L 292.5 123.0 L 294.0 124.0 L 295.5 125.0 L 297.0 126.0 L 298.6 127.0 L 300.1 128.1 L 301.6 129.1 L 303.2 130.2 L 304.7 131.3 L 306.2 132.4 L 307.7 133.5 L 309.2 134.7 L 310.8 135.8 L 312.3 137.0 L 313.8 138.2 L 315.3 139.4 L 316.9 140.6 L 318.4 141.9 L 319.9 143.1 L 321.4 144.4 L 323.0 145.7 L 324.5 147.0 L 326.0 148.3 L 327.5 149.7 L 329.1 151.0 L 330.6 152.4 L 332.1 153.8 L 333.7 155.2 L 335.2 156.6 L 336.7 158.1 L 338.2 159.5 L 339.8 161.0 L 341.3 162.5 L 342.8 164.0 L 344.3 165.5 L 345.8 167.0 L 347.4 168.6 L 348.9 170.2 L 350.4 171.8 L 351.9 173.4 L 353.5 175.0 L 355.0 176.6\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
+    "s": "<p>Derivatan är \\[- \\frac{x - 20}{25}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=20\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(3\\)</li><li>\\(x=40\\): värdet är \\(3\\)</li><li>\\(x=20\\): värdet är \\(11\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{11}\\) m, och det fås för \\(x=20\\).</p>",
+    "familj": "maxmin_given_11"
+  },
+  {
+    "id": "3.382",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>Ljudnivån i en förenklad modell beskrivs av \\(L(t)=-t^2+10t+58\\) under intervallet \\(0\\le t\\le 8\\). Bestäm modellens största värde på intervallet.</p>",
+    "s": "<p>Derivatan är \\[- 2 \\left(t - 5\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=5\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(58\\)</li><li>\\(t=8\\): värdet är \\(74\\)</li><li>\\(t=5\\): värdet är \\(83\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{83}\\), och det fås för \\(t=5\\).</p>",
+    "familj": "maxmin_given_12"
+  },
+  {
+    "id": "3.383",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>En behållares fyllnadsgrad modelleras av \\(F(t)=-2t^3+15t^2+12\\) för \\(0\\le t\\le 5\\). Bestäm funktionens största värde på intervallet. Använd en teckentabell eller andraderivatan för att motivera.</p>",
+    "s": "<p>Derivatan är \\[- 6 t \\left(t - 5\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=0\\), \\(t=5\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(12\\)</li><li>\\(t=5\\): värdet är \\(137\\)</li><li>\\(t=0\\): värdet är \\(12\\)</li><li>\\(t=5\\): värdet är \\(137\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{137}\\), och det fås för \\(t=5\\).</p>",
+    "familj": "maxmin_given_13"
+  },
+  {
+    "id": "3.384",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/1/0",
+    "t": "<p>En produktionskostnad modelleras av \\(K(x)=x^3-12x^2+36x+90\\) för \\(0\\le x\\le 8\\). Bestäm funktionens största och minsta värde på intervallet.</p>",
+    "s": "<p>Derivatan är \\[3(x-6)(x-2).\\]</p><p>Derivatans nollställen i intervallet är \\(x=2\\) och \\(x=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi även med ändpunkterna:</p><ul><li>\\(K(0)=90\\)</li><li>\\(K(2)=122\\)</li><li>\\(K(6)=90\\)</li><li>\\(K(8)=122\\)</li></ul><p><strong>Svar:</strong> minsta värdet är \\(\\boxed{90}\\) och fås vid \\(x=0\\) och \\(x=6\\). Största värdet är \\(\\boxed{122}\\) och fås vid \\(x=2\\) och \\(x=8\\).</p>",
+    "familj": "maxmin_given_14"
+  },
+  {
+    "id": "3.385",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Man ska bygga en rektangulär hage mot en rak vägg. Totalt finns 60 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">60 - 2x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
+    "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(60-2x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(60-2x)=- 2 x^{2} + 60 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=60 - 4 x\\). Derivatans nollställe är \\(x=15\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{450\\text{ m}^2}\\).</p>",
+    "familj": "maxmin_model_fence_1"
+  },
+  {
+    "id": "3.386",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Man ska bygga en rektangulär hage mot en rak vägg. Totalt finns 84 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">84 - 2x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
+    "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(84-2x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(84-2x)=- 2 x^{2} + 84 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=84 - 4 x\\). Derivatans nollställe är \\(x=21\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{882\\text{ m}^2}\\).</p>",
+    "familj": "maxmin_model_fence_2"
+  },
+  {
+    "id": "3.387",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Man ska bygga två lika stora hagar bredvid varandra mot en rak vägg. Totalt finns 96 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"197.5\" y1=\"65\" x2=\"197.5\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">96 - 3x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
+    "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(96-3x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(96-3x)=- 3 x^{2} + 96 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=96 - 6 x\\). Derivatans nollställe är \\(x=16\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{768\\text{ m}^2}\\).</p>",
+    "familj": "maxmin_model_fence_3"
+  },
+  {
+    "id": "3.388",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>En affisch ska innehålla en tryckt yta på 384 cm². Sidmarginalerna ska vara 2 cm och marginalerna upptill och nedtill 3 cm.</p><span class=\"fig smal\"><svg width=\"330\" height=\"245\" viewBox=\"0 0 330 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Affisch med marginaler\"><rect x=\"1\" y=\"1\" width=\"328\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"65\" y=\"34\" width=\"200\" height=\"170\" fill=\"#F4F4F4\" stroke=\"#333\" stroke-width=\"2\"/><rect x=\"91\" y=\"64\" width=\"148\" height=\"110\" fill=\"#E6F0FA\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"165\" y=\"121\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2D70B3\">tryckt yta</text><text x=\"165\" y=\"226\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">sidmarginal 2 cm, över/under 3 cm</text></svg></span><p>Bestäm affischens mått så att hela affischens area blir så liten som möjligt.</p>",
+    "s": "<p>Låt den tryckta bredden vara \\(x\\) cm. Den tryckta höjden blir då \\(384/x\\) cm.</p><p>Affischens area är</p><p>\\[A(x)=(x+4)\\left(\\frac{384}{x}+6\\right)=408+6x+\\frac{1536}{x}.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=6-\\frac{1536}{x^2}\\).</p><p>\\[A^{\\prime}(x)=0\\Rightarrow x^2=256\\Rightarrow x=16.\\]</p><p>Den tryckta höjden blir 24 cm. Affischens yttermått blir därför \\(20\\text{ cm}\\times30\\text{ cm}\\).</p><p>Andraderivatan är positiv för \\(x&gt;0\\), så detta ger en minimipunkt.</p>",
+    "familj": "maxmin_model_poster"
+  },
+  {
+    "id": "3.389",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Av en kartong som är 32 cm × 20 cm klipps lika stora kvadrater med sidan \\(x\\) bort i hörnen. Kartongen viks sedan till en öppen låda.</p><span class=\"fig smal\"><svg width=\"410\" height=\"250\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kartong där kvadrater klipps bort i hörnen\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"70\" y=\"45\" width=\"270\" height=\"150\" fill=\"#F8E9C8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"70\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"70\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><text x=\"205.0\" y=\"223\" text-anchor=\"middle\" font-size=\"14\">32 cm</text><text x=\"44\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\">20 cm</text><text x=\"86\" y=\"68\" font-size=\"14\" fill=\"#C74440\">x</text></svg></span><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
+    "s": "<p>Lådans höjd är \\(x\\), längden \\(32-2x\\) och bredden \\(20-2x\\). Därför</p><p>\\[V(x)=x(32-2x)(20-2x)=4 x^{3} - 104 x^{2} + 640 x.\\]</p><p>Derivatan är \\(V^{\\prime}(x)=4 \\left(x - 4\\right) \\left(3 x - 40\\right)\\).</p><p>Det relevanta nollstället är \\(x\\approx 4\\) cm. En teckentabell visar att derivatan går från positiv till negativ, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> \\(x\\approx\\boxed{4\\text{ cm}}\\), vilket ger volymen cirka \\(1152\\text{ cm}^3\\).</p>",
+    "familj": "maxmin_model_box_1"
+  },
+  {
+    "id": "3.390",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Av en kartong som är 30 cm × 24 cm klipps lika stora kvadrater med sidan \\(x\\) bort i hörnen. Kartongen viks sedan till en öppen låda.</p><span class=\"fig smal\"><svg width=\"410\" height=\"250\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kartong där kvadrater klipps bort i hörnen\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"70\" y=\"45\" width=\"270\" height=\"150\" fill=\"#F8E9C8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"70\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"70\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><text x=\"205.0\" y=\"223\" text-anchor=\"middle\" font-size=\"14\">30 cm</text><text x=\"44\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\">24 cm</text><text x=\"86\" y=\"68\" font-size=\"14\" fill=\"#C74440\">x</text></svg></span><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
+    "s": "<p>Lådans höjd är \\(x\\), längden \\(30-2x\\) och bredden \\(24-2x\\). Därför</p><p>\\[V(x)=x(30-2x)(24-2x)=4 x^{3} - 108 x^{2} + 720 x.\\]</p><p>Derivatan är \\(V^{\\prime}(x)=12 \\left(x^{2} - 18 x + 60\\right)\\).</p><p>Det relevanta nollstället är \\(x\\approx 4,42\\) cm. En teckentabell visar att derivatan går från positiv till negativ, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> \\(x\\approx\\boxed{4,42\\text{ cm}}\\), vilket ger volymen cirka \\(1417,87\\text{ cm}^3\\).</p>",
+    "familj": "maxmin_model_box_2"
+  },
+  {
+    "id": "3.391",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En sluten cylindrisk behållare ska rymma 1000 cm³. Bestäm radie och höjd så att materialåtgången blir så liten som möjligt.</p><span class=\"fig smal\"><svg width=\"300\" height=\"260\" viewBox=\"0 0 300 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och höjd h\"><rect x=\"1\" y=\"1\" width=\"298\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"150\" cy=\"55\" rx=\"62\" ry=\"20\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"88\" y1=\"55\" x2=\"88\" y2=\"195\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"212\" y1=\"55\" x2=\"212\" y2=\"195\" stroke=\"#2D70B3\" stroke-width=\"2\"/><ellipse cx=\"150\" cy=\"195\" rx=\"62\" ry=\"20\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"150\" y1=\"195\" x2=\"210\" y2=\"195\" stroke=\"#333\"/><text x=\"181\" y=\"188\" font-size=\"14\">r</text><text x=\"226\" y=\"129\" font-size=\"14\">h</text></svg></span>",
+    "s": "<p>Volymvillkoret är \\(\\pi r^2h=1000\\), alltså \\(h=\\frac{1000}{\\pi r^2}\\).</p><p>Arean blir</p><p>\\[A(r)=2 \\pi r^{2} + \\frac{2000}{r}.\\]</p><p>Derivatan är \\(A^{\\prime}(r)=4 \\pi r - \\frac{2000}{r^{2}}\\). Nollstället ger \\(r=\\frac{5 \\cdot 2^{\\frac{2}{3}}}{\\sqrt[3]{\\pi}}\\approx 5,42\\) cm.</p><p>Då blir \\(h=\\frac{10 \\cdot 2^{\\frac{2}{3}}}{\\sqrt[3]{\\pi}}\\approx 10,84\\) cm.</p><p>Andraderivatan är positiv för \\(r&gt;0\\), så detta ger en minimipunkt.</p>",
+    "familj": "maxmin_model_cylinder_1"
+  },
+  {
+    "id": "3.392",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En öppen cylindrisk behållare ska rymma 500 cm³. Bestäm radie och höjd så att materialåtgången blir så liten som möjligt.</p><span class=\"fig smal\"><svg width=\"300\" height=\"260\" viewBox=\"0 0 300 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och höjd h\"><rect x=\"1\" y=\"1\" width=\"298\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"150\" cy=\"55\" rx=\"62\" ry=\"20\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"88\" y1=\"55\" x2=\"88\" y2=\"195\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"212\" y1=\"55\" x2=\"212\" y2=\"195\" stroke=\"#2D70B3\" stroke-width=\"2\"/><ellipse cx=\"150\" cy=\"195\" rx=\"62\" ry=\"20\" fill=\"#E8F0FB\" stroke=\"#2D70B3\" stroke-width=\"2\"/><line x1=\"150\" y1=\"195\" x2=\"210\" y2=\"195\" stroke=\"#333\"/><text x=\"181\" y=\"188\" font-size=\"14\">r</text><text x=\"226\" y=\"129\" font-size=\"14\">h</text><path d=\"M90 55 Q150 75 210 55\" fill=\"none\" stroke=\"#999\" stroke-dasharray=\"5 4\"/></svg></span>",
+    "s": "<p>Volymvillkoret är \\(\\pi r^2h=500\\), alltså \\(h=\\frac{500}{\\pi r^2}\\).</p><p>Arean blir</p><p>\\[A(r)=\\pi r^{2} + \\frac{1000}{r}.\\]</p><p>Derivatan är \\(A^{\\prime}(r)=2 \\pi r - \\frac{1000}{r^{2}}\\). Nollstället ger \\(r=\\frac{5 \\cdot 2^{\\frac{2}{3}}}{\\sqrt[3]{\\pi}}\\approx 5,42\\) cm.</p><p>Då blir \\(h=\\frac{5 \\cdot 2^{\\frac{2}{3}}}{\\sqrt[3]{\\pi}}\\approx 5,42\\) cm.</p><p>Andraderivatan är positiv för \\(r&gt;0\\), så detta ger en minimipunkt.</p>",
+    "familj": "maxmin_model_cylinder_2"
+  },
+  {
+    "id": "3.393",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>För en kon gäller att summan av radien och höjden är 18 cm.</p><span class=\"fig smal\"><svg width=\"300\" height=\"260\" viewBox=\"0 0 300 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kon med radie r och höjd h\"><rect x=\"1\" y=\"1\" width=\"298\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"150\" cy=\"202\" rx=\"70\" ry=\"22\" fill=\"#F8EFE6\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"80\" y2=\"202\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"220\" y2=\"202\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"150\" y2=\"202\" stroke=\"#777\" stroke-dasharray=\"5 4\"/><line x1=\"150\" y1=\"202\" x2=\"218\" y2=\"202\" stroke=\"#333\"/><text x=\"183\" y=\"194\" font-size=\"14\">r</text><text x=\"160\" y=\"125\" font-size=\"14\">h</text></svg></span><p>Bestäm den största möjliga volymen.</p>",
+    "s": "<p>Eftersom \\(r+h=18\\) är \\(h=18-r\\).</p><p>Volymen blir</p><p>\\[V(r)=\\frac{\\pi r^2(18-r)}{3}=6\\pi r^2-\\frac{\\pi r^3}{3}.\\]</p><p>Nu kan funktionen deriveras term för term:</p><p>\\[V^{\\prime}(r)=12\\pi r-\\pi r^2=\\pi r(12-r).\\]</p><p>I intervallet \\(0&lt;r&lt;18\\) är det relevanta nollstället \\(r=12\\).</p><p>Då är \\(h=6\\) cm och volymen \\(\\boxed{288\\pi\\text{ cm}^3}\\).</p><p>Derivatan är positiv före \\(r=12\\) och negativ efter, så funktionen har en maximipunkt där.</p>",
+    "familj": "maxmin_model_cone"
+  },
+  {
+    "id": "3.394",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En 80 cm lång tråd delas i två delar. Den ena delen böjs till en kvadrat och den andra till en cirkel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"220\" viewBox=\"0 0 390 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tråd som delas till en kvadrat och en cirkel\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"55\" y=\"58\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"103\" r=\"45\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2\"/><text x=\"100\" y=\"178\" text-anchor=\"middle\" font-size=\"13\">kvadrat</text><text x=\"270\" y=\"178\" text-anchor=\"middle\" font-size=\"13\">cirkel</text><text x=\"195\" y=\"202\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">trådens längd: 80 cm</text></svg></span><p>Hur ska tråden delas för att summan av figurernas areor ska bli så liten som möjligt?</p>",
+    "s": "<p>Låt \\(x\\) cm användas till kvadraten. Då är kvadratens sida \\(x/4\\) och arean \\(x^2/16\\).</p><p>Resten, \\(80-x\\), blir cirkelns omkrets. Cirkelns radie är därför \\((80-x)/(2\\pi)\\), och arean blir \\((80-x)^2/(4\\pi)\\).</p><p>Den sammanlagda arean är</p><p>\\[A(x)=\\frac{x^2}{16}+\\frac{(80-x)^2}{4\\pi}.\\]</p><p>För att använda de vanliga deriveringsreglerna utvecklar vi kvadraten:</p><p>\\[A(x)=\\frac{x^2}{16}+\\frac{x^2-160x+6400}{4\\pi}.\\]</p><p>Då blir</p><p>\\[A^{\\prime}(x)=\\frac{x}{8}+\\frac{2x-160}{4\\pi}.\\]</p><p>Ur \\(A^{\\prime}(x)=0\\) fås \\(x=\\frac{320}{\\pi+4}\\approx44,81\\) cm.</p><p>Alltså ska ungefär 44,81 cm användas till kvadraten och \\(80-44,81\\approx35,19\\) cm till cirkeln. Andraderivatan är positiv, så detta ger en minimipunkt.</p>",
+    "familj": "maxmin_model_wire"
+  },
+  {
+    "id": "3.395",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>En rektangel ska ha arean 144 cm². Bestäm rektangelns mått så att omkretsen blir så liten som möjligt.</p>",
+    "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra blir \\(144/x\\) cm.</p><p>Omkretsen blir</p><p>\\[O(x)=2x+\\frac{288}x.\\]</p><p>Derivatan är \\(O^{\\prime}(x)=2-\\frac{288}{x^2}\\). Nollstället ger \\(x=12\\).</p><p>Då är den andra sidan också \\(12\\). Andraderivatan är positiv för \\(x&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara en kvadrat med sidan \\(12\\) cm.</p>",
+    "familj": "maxmin_model_fixedarea_1"
+  },
+  {
+    "id": "3.396",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>En rektangel ska ha arean 200 cm². Bestäm rektangelns mått så att omkretsen blir så liten som möjligt.</p>",
+    "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra blir \\(200/x\\) cm.</p><p>Omkretsen blir</p><p>\\[O(x)=2x+\\frac{400}x.\\]</p><p>Derivatan är \\(O^{\\prime}(x)=2-\\frac{400}{x^2}\\). Nollstället ger \\(x=10 \\sqrt{2}\\).</p><p>Då är den andra sidan också \\(10 \\sqrt{2}\\). Andraderivatan är positiv för \\(x&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara en kvadrat med sidan \\(14,14\\) cm.</p>",
+    "familj": "maxmin_model_fixedarea_2"
+  },
+  {
+    "id": "3.397",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Summan av två positiva tal är 24. Bestäm talen så att deras produkt blir så stor som möjligt.</p>",
+    "s": "<p>Låt det ena talet vara \\(x\\). Det andra är då \\(24-x\\).</p><p>Produkten blir \\(P(x)=x(24-x)=24x-x^2\\).</p><p>\\(P^{\\prime}(x)=24-2x\\), så derivatans nollställe är \\(x=12\\).</p><p>Tecknet går från positivt till negativt, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> talen är \\(\\boxed{12\\text{ och }12}\\).</p>",
+    "familj": "maxmin_model_numbers_1"
+  },
+  {
+    "id": "3.398",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Summan av två positiva tal är 50. Bestäm talen så att deras produkt blir så stor som möjligt.</p>",
+    "s": "<p>Låt det ena talet vara \\(x\\). Det andra är då \\(50-x\\).</p><p>Produkten blir \\(P(x)=x(50-x)=50x-x^2\\).</p><p>\\(P^{\\prime}(x)=50-2x\\), så derivatans nollställe är \\(x=25\\).</p><p>Tecknet går från positivt till negativt, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> talen är \\(\\boxed{25\\text{ och }25}\\).</p>",
+    "familj": "maxmin_model_numbers_2"
+  },
+  {
+    "id": "3.399",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Biljetten till en konsert kostar 120 kr och då väntas 400 besökare. För varje höjning med 10 kr beräknas antalet besökare minska med 20.</p><p>Bestäm det biljettpris som ger största möjliga biljettintäkt enligt modellen.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 10 kr. Priset blir \\(120+10x\\) och antalet besökare \\(400-20x\\).</p><p>Intäkten blir</p><p>\\[I(x)=(120+10x)(400-20x)=- 200 x^{2} + 1600 x + 48000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=1600 - 400 x\\). Nollstället är \\(x=4\\).</p><p>Eftersom derivatan byter från positiv till negativ fås största intäkt.</p><p><strong>Svar:</strong> biljettpriset bör vara \\(\\boxed{160\\text{ kr}}\\). Då blir intäkten \\(51200\\) kr.</p>",
+    "familj": "maxmin_model_ticket_1"
+  },
+  {
+    "id": "3.400",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Biljetten till en teaterföreställning kostar 90 kr och då väntas 600 besökare. För varje höjning med 5 kr beräknas antalet besökare minska med 30.</p><p>Bestäm det biljettpris som ger största möjliga biljettintäkt enligt modellen.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 5 kr. Priset blir \\(90+5x\\) och antalet besökare \\(600-30x\\).</p><p>Intäkten blir</p><p>\\[I(x)=(90+5x)(600-30x)=- 150 x^{2} + 300 x + 54000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=300 - 300 x\\). Nollstället är \\(x=1\\).</p><p>Eftersom derivatan byter från positiv till negativ fås största intäkt.</p><p><strong>Svar:</strong> biljettpriset bör vara \\(\\boxed{95\\text{ kr}}\\). Då blir intäkten \\(54150\\) kr.</p>",
+    "familj": "maxmin_model_ticket_2"
+  },
+  {
+    "id": "3.401",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En rektangel är symmetriskt placerad under parabeln \\(y=12-x^2\\), med den nedre sidan på \\(x\\)-axeln och de övre hörnen på parabeln.</p><span class=\"fig smal\"><svg width=\"390\" height=\"280\" viewBox=\"0 0 390 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel inskriven under en parabel\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"238\" x2=\"350\" y2=\"238\" stroke=\"#333\"/><line x1=\"195\" y1=\"30\" x2=\"195\" y2=\"245\" stroke=\"#333\"/><path d=\"M 62.0 241.8 L 63.7 237.2 L 65.3 232.7 L 67.0 228.2 L 68.6 223.8 L 70.3 219.5 L 72.0 215.2 L 73.6 211.0 L 75.3 206.8 L 77.0 202.7 L 78.6 198.7 L 80.3 194.7 L 82.0 190.8 L 83.6 186.9 L 85.3 183.1 L 86.9 179.3 L 88.6 175.6 L 90.3 172.0 L 91.9 168.4 L 93.6 164.8 L 95.2 161.4 L 96.9 157.9 L 98.6 154.6 L 100.2 151.3 L 101.9 148.0 L 103.6 144.9 L 105.2 141.7 L 106.9 138.6 L 108.5 135.6 L 110.2 132.7 L 111.9 129.8 L 113.5 126.9 L 115.2 124.2 L 116.9 121.4 L 118.5 118.8 L 120.2 116.1 L 121.8 113.6 L 123.5 111.1 L 125.2 108.6 L 126.8 106.3 L 128.5 103.9 L 130.2 101.7 L 131.8 99.5 L 133.5 97.3 L 135.2 95.2 L 136.8 93.2 L 138.5 91.2 L 140.1 89.3 L 141.8 87.4 L 143.5 85.6 L 145.1 83.8 L 146.8 82.1 L 148.4 80.5 L 150.1 78.9 L 151.8 77.4 L 153.4 75.9 L 155.1 74.5 L 156.8 73.2 L 158.4 71.9 L 160.1 70.7 L 161.8 69.5 L 163.4 68.4 L 165.1 67.3 L 166.7 66.3 L 168.4 65.3 L 170.1 64.5 L 171.7 63.6 L 173.4 62.9 L 175.1 62.1 L 176.7 61.5 L 178.4 60.9 L 180.0 60.3 L 181.7 59.8 L 183.4 59.4 L 185.0 59.0 L 186.7 58.7 L 188.3 58.5 L 190.0 58.3 L 191.7 58.1 L 193.3 58.0 L 195.0 58.0 L 196.7 58.0 L 198.3 58.1 L 200.0 58.3 L 201.7 58.5 L 203.3 58.7 L 205.0 59.0 L 206.6 59.4 L 208.3 59.8 L 210.0 60.3 L 211.6 60.9 L 213.3 61.5 L 215.0 62.1 L 216.6 62.9 L 218.3 63.6 L 219.9 64.5 L 221.6 65.3 L 223.3 66.3 L 224.9 67.3 L 226.6 68.4 L 228.2 69.5 L 229.9 70.7 L 231.6 71.9 L 233.2 73.2 L 234.9 74.5 L 236.6 75.9 L 238.2 77.4 L 239.9 78.9 L 241.5 80.5 L 243.2 82.1 L 244.9 83.8 L 246.5 85.6 L 248.2 87.4 L 249.9 89.3 L 251.5 91.2 L 253.2 93.2 L 254.9 95.2 L 256.5 97.3 L 258.2 99.5 L 259.8 101.7 L 261.5 103.9 L 263.2 106.3 L 264.8 108.6 L 266.5 111.1 L 268.1 113.6 L 269.8 116.1 L 271.5 118.8 L 273.1 121.4 L 274.8 124.1 L 276.5 126.9 L 278.1 129.8 L 279.8 132.7 L 281.5 135.6 L 283.1 138.6 L 284.8 141.7 L 286.4 144.9 L 288.1 148.0 L 289.8 151.3 L 291.4 154.6 L 293.1 157.9 L 294.8 161.4 L 296.4 164.8 L 298.1 168.4 L 299.7 172.0 L 301.4 175.6 L 303.1 179.3 L 304.7 183.1 L 306.4 186.9 L 308.0 190.8 L 309.7 194.7 L 311.4 198.7 L 313.0 202.7 L 314.7 206.8 L 316.4 211.0 L 318.0 215.2 L 319.7 219.5 L 321.4 223.8 L 323.0 228.2 L 324.7 232.7 L 326.3 237.2 L 328.0 241.8\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><rect x=\"119\" y=\"118\" width=\"152\" height=\"120\" fill=\"#E8F0FB\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"306\" y=\"52\" font-size=\"13\" fill=\"#C74440\">y = 12 - x²</text><text x=\"195\" y=\"267\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">Rektangelns övre hörn ligger på parabeln.</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
+    "s": "<p>Låt det högra övre hörnet ha \\(x\\)-koordinaten \\(x&gt;0\\). Rektangelns bredd är då \\(2x\\) och höjden \\(12-x^2\\).</p><p>\\[A(x)=2x(12-x^2)=24x-2x^3.\\]</p><p>\\[A^{\\prime}(x)=24-6x^2.\\]</p><p>Derivatans nollställe i intervallet är \\(x=2\\). Tecknet går från positivt till negativt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{32}\\) areaenheter.</p>",
+    "familj": "maxmin_unique_parabola_rect"
+  },
+  {
+    "id": "3.402",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Bestäm den punkt på grafen \\(y=x^2\\) som ligger närmast punkten \\((0,3)\\).</p>",
+    "s": "<p>En punkt på parabeln har koordinaterna \\((x,x^2)\\). Kvadraten på avståndet till \\((0,3)\\) är</p><p>\\[D(x)=x^2+(x^2-3)^2=x^4-5x^2+9.\\]</p><p>Det räcker att minimera \\(D\\). Derivatan är \\(D^{\\prime}(x)=4x^3-10x=2x(2x^2-5)\\).</p><p>Derivatans nollställen är \\(x=0\\) och \\(x=\\pm\\sqrt{5/2}\\). En teckentabell visar att minimipunkterna fås vid \\(x=\\pm\\sqrt{5/2}\\).</p><p>Punkterna är \\(\\boxed{(\\pm\\sqrt{5/2};\\,5/2)}\\).</p>",
+    "familj": "maxmin_unique_distance"
+  },
+  {
+    "id": "3.403",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>Två cyklister startar samtidigt. Deras sträckor från startpunkten i kilometer beskrivs under de första 6 timmarna av</p><p>\\[s_1(t)=t^3-9t^2+24t,\\qquad s_2(t)=8t.\\]</p><p>Bestäm när skillnaden \\(s_1(t)-s_2(t)\\) är som störst och som minst på intervallet \\(0\\le t\\le6\\).</p>",
+    "s": "<p>Skillnaden är</p><p>\\[D(t)=s_1(t)-s_2(t)=t^3-9t^2+16t.\\]</p><p>Derivatan är \\(D^{\\prime}(t)=3t^2-18t+16\\). Vi bestämmer derivatans nollställen och jämför även med intervallets ändpunkter.</p><p>Det största värdet blir \\(8,04\\) km vid \\(t=1,09\\), och det minsta värdet \\(-20,04\\) km vid \\(t=4,91\\).</p>",
+    "familj": "maxmin_unique_cyclists"
+  },
+  {
+    "id": "3.404",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En låda med kvadratisk botten ska rymma 1200 cm³. Bottenmaterialet kostar 1,20 kr/cm², medan lock och sidor kostar 0,40 kr/cm².</p><p>Bestäm lådans mått så att materialkostnaden blir så liten som möjligt.</p>",
+    "s": "<p>Låt bottensidan vara \\(x\\) cm och höjden \\(h\\) cm. Volymvillkoret ger \\(x^2h=1200\\), alltså \\(h=1200/x^2\\).</p><p>Kostnaden blir</p><p>\\[K(x)=1,20x^2+0,40x^2+4\\cdot0,40xh=1,60x^2+\\frac{1920}x.\\]</p><p>Derivatan är \\(K^{\\prime}(x)=3,20x-\\frac{1920}{x^2}\\).</p><p>Nollstället ger \\(x^3=600\\), alltså \\(x=\\sqrt[3]{600}\\approx 8,43\\) cm. Då blir \\(h\\approx 16,87\\) cm.</p><p>Andraderivatan är positiv för \\(x&gt;0\\), så detta ger minsta kostnad.</p>",
+    "familj": "maxmin_unique_costbox"
+  },
+  {
+    "id": "3.405",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Tre lika stora rektangulära hundrastgårdar ska byggas bredvid varandra mot en lång vägg. Totalt finns 120 m stängsel. Väggen utgör ena långsidan.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">120 - 4x</text><line x1=\"163.3\" y1=\"65\" x2=\"163.3\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"231.7\" y1=\"65\" x2=\"231.7\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/></svg></span><p>Bestäm måtten som ger största sammanlagda area.</p>",
+    "s": "<p>Låt djupet vara \\(x\\) m. Fyra stängseldelar med längden \\(x\\) behövs vinkelrätt mot väggen. Den sammanlagda frontlängden blir därför \\(120-4x\\).</p><p>Den totala arean blir</p><p>\\[A(x)=x(120-4x)=120x-4x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=120-8x\\), så nollstället är \\(x=15\\).</p><p>Derivatan byter från positiv till negativ. Frontlängden blir 60 m, alltså blir varje rastgård 20 m bred och 15 m djup.</p><p><strong>Svar:</strong> största sammanlagda area är \\(\\boxed{900\\text{ m}^2}\\).</p>",
+    "familj": "maxmin_unique_threepens"
+  },
+  {
+    "id": "3.406",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>En rektangel har omkretsen 72 cm. Bestäm de sidlängder som gör rektangelns diagonal så kort som möjligt.</p>",
+    "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra är \\(36-x\\) cm.</p><p>Enligt Pythagoras sats gäller \\(d^2=x^2+(36-x)^2\\). Eftersom \\(d&gt;0\\) blir diagonalen minst när \\(d^2\\) är minst.</p><p>\\[D(x)=x^2+(36-x)^2=2x^2-72x+1296.\\]</p><p>\\(D^{\\prime}(x)=4x-72\\), så nollstället är \\(x=18\\).</p><p>Andraderivatan är \\(4&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara \\(\\boxed{18\\text{ cm}\\times18\\text{ cm}}\\).</p>",
+    "familj": "maxmin_unique_diagonal"
+  },
+  {
+    "id": "3.407",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En öppen låda med kvadratisk botten ska ha volymen 864 cm³. Bestäm bottenkant och höjd så att lådans begränsningsarea blir så liten som möjligt.</p>",
+    "s": "<p>Låt bottenkanten vara \\(x\\) cm och höjden \\(h\\) cm. Volymen ger \\(x^2h=864\\), alltså \\(h=864/x^2\\).</p><p>Begränsningsarean utan lock är</p><p>\\[A(x)=x^2+4xh=x^2+\\frac{3456}x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=2x-\\frac{3456}{x^2}\\). Nollstället ger \\(x^3=1728\\), alltså \\(x=12\\) cm.</p><p>Då blir \\(h=6\\) cm. Andraderivatan är positiv, så detta ger minsta area.</p>",
+    "familj": "maxmin_unique_openboxfixed"
+  },
+  {
+    "id": "3.408",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>En rektangulär odlingsyta ligger längs en rak kanal. Sidan mot kanalen behöver inget stängsel. Dessutom ska en skiljevägg dras vinkelrätt mot kanalen. Totalt finns 100 m stängsel.</p><p>Bestäm största möjliga area.</p>",
+    "s": "<p>Låt djupet vara \\(x\\) m. Tre stängseldelar med längden \\(x\\) behövs: två ytterkanter och skiljeväggen. Sidan parallell med kanalen blir \\(100-3x\\).</p><p>\\[A(x)=x(100-3x)=100x-3x^2.\\]</p><p>\\(A^{\\prime}(x)=100-6x\\), alltså \\(x=50/3\\).</p><p>Derivatan byter från positiv till negativ, så detta ger en maximipunkt.</p><p>Den andra sidan blir 50 m och största arean \\(\\boxed{2500/3\\text{ m}^2\\approx833,33\\text{ m}^2}\\).</p>",
+    "familj": "maxmin_unique_canaldivider"
+  },
+  {
+    "id": "3.409",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Ett café säljer normalt 300 luncher per dag för 110 kr styck. En undersökning tyder på att antalet sålda luncher minskar med 10 för varje prishöjning på 5 kr.</p><p>Bestäm det pris som ger största möjliga dagsintäkt enligt modellen.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 5 kr. Då blir priset \\(110+5x\\) och antalet luncher \\(300-10x\\).</p><p>\\[I(x)=(110+5x)(300-10x)=- 50 x^{2} + 400 x + 33000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=400 - 100 x\\). Nollstället är \\(x=4\\).</p><p>Derivatan byter från positiv till negativ, så detta ger största intäkt.</p><p><strong>Svar:</strong> priset bör vara \\(\\boxed{130\\text{ kr}}\\), vilket ger en intäkt på \\(33800\\) kr.</p>",
+    "familj": "maxmin_unique_cafe"
+  },
+  {
+    "id": "3.410",
+    "kap": 3,
+    "omr": "extremvardesproblem",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>I en förenklad modell för en balk är ett hållfasthetsmått proportionellt mot \\(H(x)=x(12-x)^2\\) för \\(0&lt;x&lt;12\\).</p><p>Bestäm det värde på \\(x\\) som ger störst hållfasthetsmått. Motivera med teckentabell.</p>",
+    "s": "<p>Utveckla vid behov: \\(H(x)=x^3-24x^2+144x\\).</p><p>Derivatan är \\(H^{\\prime}(x)=3 \\left(x - 12\\right) \\left(x - 4\\right)\\), med nollställena \\(x=4\\) och \\(x=12\\).</p><p>I det öppna intervallet \\(0&lt;x&lt;12\\) är \\(x=4\\) det relevanta nollstället. Derivatan är positiv före 4 och negativ efter 4.</p><p>Därför har \\(H\\) en maximipunkt vid \\(x=4\\).</p>",
+    "familj": "maxmin_unique_beam"
   }
 ];
