@@ -1,15 +1,14 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Samtliga Venn-diagram är renderingskontrollerade efter den senaste korrigeringen.
-   Alla SVG-id:n är unika per figur, vilket förhindrar clipPath-kollisioner när flera
-   inline-SVG:er visas samtidigt på samma sida.
-   C-cirkeln ligger helt innanför diagramytan.
-   Facitdiagram används bara när de markerar ett område som är relevant för lösningen.
+   Områdestaggarna är sammanslagna så att strukturen använder större,
+   pedagogiskt meningsfulla block.
+   Samtliga Venn-diagram är renderingskontrollerade.
+   Alla SVG-id:n är unika per figur.
    Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
 
 window.BANKMATF1 = [
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "skriva mängd med mängdbyggarnotation",
     "poang": "1/0/0",
@@ -19,7 +18,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "bestämma element ur mängdbyggarnotation",
     "poang": "1/0/0",
@@ -29,7 +28,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "skriva mängder på listform",
     "poang": "3/0/0",
@@ -39,7 +38,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "snitt och union av ändliga mängder",
     "poang": "2/0/0",
@@ -49,7 +48,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "tolka antal i Venn-diagram",
     "poang": "3/0/0",
@@ -59,7 +58,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "räkna med union, snitt och tom mängd",
     "poang": "4/0/0",
@@ -69,7 +68,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "markera mängder i Venn-diagram",
     "poang": "4/0/0",
@@ -79,7 +78,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "komplement och differens i ändliga mängder",
     "poang": "5/0/0",
@@ -89,7 +88,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "beskriva skuggat Venn-område med symboler",
     "poang": "2/1/0",
@@ -99,7 +98,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "symmetrisk differens med union och snitt",
     "poang": "2/1/0",
@@ -109,7 +108,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "beskriva samma mängd på flera sätt",
     "poang": "2/1/0",
@@ -119,7 +118,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "skriva mängd med mängdbyggare",
     "poang": "2/0/0",
@@ -129,7 +128,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "bestämma element i given mängd",
     "poang": "2/0/0",
@@ -139,7 +138,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangder_notation",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "mängdbyggare för intervall",
     "poang": "2/0/0",
@@ -149,7 +148,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "översätta områdesbeskrivning till mängdsymboler",
     "poang": "1/1/0",
@@ -159,7 +158,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "tre mängder med villkor",
     "poang": "1/1/0",
@@ -169,7 +168,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "tolka sektorer i Venn-diagram",
     "poang": "1/1/0",
@@ -179,7 +178,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "tolka markerat område i Venn-diagram",
     "poang": "0/2/0",
@@ -189,7 +188,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "avläsa antal i Venn-diagram",
     "poang": "2/0/0",
@@ -199,7 +198,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "tre mängder med inklusion-exklusion",
     "poang": "0/2/0",
@@ -209,7 +208,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "avläsa element i Venn-diagram",
     "poang": "2/0/0",
@@ -219,7 +218,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "tolka markerat område i Venn-diagram",
     "poang": "2/0/0",
@@ -229,7 +228,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "tolka markerat område i Venn-diagram med tre mängder",
     "poang": "0/2/0",
@@ -239,7 +238,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "venndiagram",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "rita och tolka område med tre mängder",
     "poang": "0/2/0",
@@ -249,7 +248,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "skillnad mellan delmängd och element",
     "poang": "2/0/0",
@@ -259,7 +258,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "C",
     "typ": "De Morgans lag i konkret mängd",
     "poang": "0/2/0",
@@ -269,7 +268,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "union och snitt av två mängder",
     "poang": "2/0/0",
@@ -279,7 +278,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "differens och komplement",
     "poang": "2/0/0",
@@ -289,7 +288,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "mangdoperationer",
+    "omr": "mangder_venn",
     "niva": "E",
     "typ": "symmetrisk differens via operationer",
     "poang": "2/0/0",
@@ -379,7 +378,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen",
     "poang": "1/0/0",
@@ -389,7 +388,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja och ordna utan återläggning",
     "poang": "1/0/0",
@@ -399,7 +398,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja grupp utan ordning",
     "poang": "1/0/0",
@@ -419,7 +418,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "produktprincipen med kortlek",
     "poang": "1/0/0",
@@ -429,7 +428,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "pinkod med återläggning",
     "poang": "2/0/0",
@@ -439,7 +438,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "produktprincipen i klädval",
     "poang": "2/0/0",
@@ -449,7 +448,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "ordna grupper i block",
     "poang": "2/0/0",
@@ -459,7 +458,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "antal pokerhänder",
     "poang": "2/0/0",
@@ -469,7 +468,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "tolka och använda kombinationsformel",
     "poang": "2/0/0",
@@ -479,7 +478,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "beräkna kombinationstal",
     "poang": "3/0/0",
@@ -509,7 +508,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "jämföra ordnade och oordnade urval",
     "poang": "4/0/0",
@@ -519,7 +518,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "stora kombinationstal och symmetri",
     "poang": "6/0/0",
@@ -559,7 +558,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "räkna nya registreringskombinationer",
     "poang": "1/2/0",
@@ -569,7 +568,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen månader",
     "poang": "1/0/0",
@@ -579,7 +578,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "lådprincipen med parindelning",
     "poang": "0/2/0",
@@ -589,7 +588,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "samma begynnelsebokstav",
     "poang": "1/0/0",
@@ -599,7 +598,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "strumpor och färger",
     "poang": "1/0/0",
@@ -609,7 +608,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "födelsemånader",
     "poang": "1/0/0",
@@ -619,7 +618,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "samma rest modulo",
     "poang": "0/2/0",
@@ -629,7 +628,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "avrundade mätvärden",
     "poang": "0/2/0",
@@ -639,7 +638,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "komplementära talpar",
     "poang": "0/2/0",
@@ -649,7 +648,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "två på varandra följande tal",
     "poang": "0/2/0",
@@ -659,7 +658,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "workshopfördelning",
     "poang": "0/2/0",
@@ -669,7 +668,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "A",
     "typ": "geometrisk lådprincip",
     "poang": "0/1/2",
@@ -679,7 +678,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "A",
     "typ": "generellt bevis med restklasser",
     "poang": "0/1/2",
@@ -689,7 +688,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "filer i mappar",
     "poang": "0/2/0",
@@ -699,7 +698,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen med månader",
     "poang": "2/0/0",
@@ -709,7 +708,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen med strumpor",
     "poang": "2/0/0",
@@ -719,7 +718,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen med veckodagar",
     "poang": "2/0/0",
@@ -729,7 +728,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen med rester",
     "poang": "2/0/0",
@@ -739,7 +738,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "lådprincipen med minsta garanterade antal",
     "poang": "0/2/0",
@@ -749,7 +748,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "lådprincipen färger",
     "poang": "2/0/0",
@@ -759,7 +758,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "ladprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "lådprincipen heltal inom intervall",
     "poang": "0/2/0",
@@ -769,7 +768,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "koder med villkor",
     "poang": "2/0/0",
@@ -779,7 +778,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "kod med flera val",
     "poang": "2/0/0",
@@ -789,7 +788,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "produktprincip i spelkontext",
     "poang": "2/0/0",
@@ -799,7 +798,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "produktprincip med förbjudna kombinationer",
     "poang": "0/2/0",
@@ -809,7 +808,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "färgning med närliggande villkor",
     "poang": "0/2/0",
@@ -819,7 +818,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "antal val med multiplikationsprincipen",
     "poang": "2/0/0",
@@ -829,7 +828,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "kod med villkor",
     "poang": "2/0/0",
@@ -839,7 +838,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "val i flera steg",
     "poang": "2/0/0",
@@ -849,7 +848,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "registreringskod med begränsad första position",
     "poang": "2/0/0",
@@ -859,7 +858,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "kombinera additions- och multiplikationsprincipen",
     "poang": "0/2/0",
@@ -869,7 +868,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "E",
     "typ": "flaggor med färgval",
     "poang": "2/0/0",
@@ -879,7 +878,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "multiplikationsprincipen",
+    "omr": "kombinatoriska_principer",
     "niva": "C",
     "typ": "koder utan upprepning",
     "poang": "0/2/0",
@@ -889,7 +888,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "permutationer med upprepade objekt",
     "poang": "0/2/0",
@@ -899,7 +898,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "prispall",
     "poang": "1/0/0",
@@ -909,7 +908,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "spellista",
     "poang": "1/0/0",
@@ -919,7 +918,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "ordningsvillkor före",
     "poang": "0/2/0",
@@ -929,7 +928,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "två objekt intill",
     "poang": "0/2/0",
@@ -939,7 +938,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "upprepade bokstäver",
     "poang": "0/2/0",
@@ -949,7 +948,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "inte bredvid varandra",
     "poang": "0/2/0",
@@ -959,7 +958,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "personer på ändplatser",
     "poang": "0/2/0",
@@ -969,7 +968,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "inga särskilda böcker intill",
     "poang": "0/1/2",
@@ -979,7 +978,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "två föredrag i bestämd följd",
     "poang": "0/2/0",
@@ -989,7 +988,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "kod utan upprepning och nollrestriktion",
     "poang": "0/2/0",
@@ -999,7 +998,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "permutation av olika bokstäver",
     "poang": "2/0/0",
@@ -1009,7 +1008,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "lexikografisk ordning av permutationer",
     "poang": "0/1/2",
@@ -1019,7 +1018,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "permutationer med grannvillkor",
     "poang": "0/1/2",
@@ -1029,7 +1028,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "ordna personer i rad",
     "poang": "2/0/0",
@@ -1039,7 +1038,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "permutation med upprepade bokstäver",
     "poang": "2/0/0",
@@ -1049,7 +1048,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "två personer ska stå tillsammans",
     "poang": "0/2/0",
@@ -1059,7 +1058,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "cirkulär placering introduktion",
     "poang": "2/0/0",
@@ -1069,7 +1068,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "permutationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "ordna med två block",
     "poang": "0/2/0",
@@ -1079,7 +1078,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "gruppval med minst-villkor",
     "poang": "0/2/0",
@@ -1089,7 +1088,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "fördela personer i olika grupper",
     "poang": "0/2/0",
@@ -1099,7 +1098,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "kombinatoriskt bevis",
     "poang": "0/0/3",
@@ -1109,7 +1108,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "kombinationer med minst-villkor",
     "poang": "0/2/0",
@@ -1119,7 +1118,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja sensorer",
     "poang": "1/0/0",
@@ -1129,7 +1128,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja toppings",
     "poang": "1/0/0",
@@ -1139,7 +1138,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "kommitté med minstvillkor",
     "poang": "0/3/0",
@@ -1149,7 +1148,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "lag med positionskategori",
     "poang": "0/2/0",
@@ -1159,7 +1158,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "minst en från varje kategori",
     "poang": "0/2/0",
@@ -1169,7 +1168,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "minst en av två specialister",
     "poang": "0/2/0",
@@ -1179,7 +1178,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "oförenligt par",
     "poang": "0/2/0",
@@ -1189,7 +1188,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "flera kategorier med minstvillkor",
     "poang": "0/1/2",
@@ -1199,7 +1198,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja två representanter",
     "poang": "1/0/0",
@@ -1209,7 +1208,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "exakt antal erfarna",
     "poang": "0/2/0",
@@ -1219,7 +1218,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "högst en från kategori",
     "poang": "0/2/0",
@@ -1229,7 +1228,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "lika många från två kategorier",
     "poang": "0/2/0",
@@ -1239,7 +1238,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "laguttagning med tre positionstyper",
     "poang": "0/1/2",
@@ -1249,7 +1248,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "exakt en av två personer",
     "poang": "0/2/0",
@@ -1259,7 +1258,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "kortaste vägar i rutnät",
     "poang": "0/2/0",
@@ -1269,7 +1268,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "obligatoriska uppgifter",
     "poang": "0/2/0",
@@ -1279,7 +1278,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja grupp utan ordning",
     "poang": "2/0/0",
@@ -1289,7 +1288,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "A",
     "typ": "kombinationer med upprepning och villkor",
     "poang": "0/1/2",
@@ -1299,7 +1298,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja arbetsgrupp",
     "poang": "2/0/0",
@@ -1309,7 +1308,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja glasskulor utan ordning",
     "poang": "2/0/0",
@@ -1319,7 +1318,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "grupp med exakt fördelning",
     "poang": "0/2/0",
@@ -1329,7 +1328,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "grupp med minst-villkor",
     "poang": "0/2/0",
@@ -1339,7 +1338,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "kortval",
     "poang": "2/0/0",
@@ -1349,7 +1348,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "E",
     "typ": "välja två representanter",
     "poang": "2/0/0",
@@ -1359,7 +1358,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 1,
-    "omr": "kombinationer",
+    "omr": "permutationer_kombinationer",
     "niva": "C",
     "typ": "val med förbjudet par",
     "poang": "0/2/0",
@@ -1669,7 +1668,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "identifiera geometrisk talföljd",
     "poang": "2/0/0",
@@ -1679,7 +1678,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "skriva ut och beräkna sigma-summa",
     "poang": "2/0/0",
@@ -1689,7 +1688,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "identifiera geometriska följder inklusive negativ kvot",
     "poang": "2/0/0",
@@ -1699,7 +1698,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "tolka geometrisk sigma-summa",
     "poang": "2/0/0",
@@ -1709,7 +1708,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "explicit formel och geometrisk summa",
     "poang": "2/0/0",
@@ -1719,7 +1718,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "upprepade insättningar och geometrisk summa",
     "poang": "2/0/0",
@@ -1729,7 +1728,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "sista termer och aritmetisk summa",
     "poang": "2/0/0",
@@ -1749,7 +1748,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "klassificera aritmetisk och geometrisk talföljd",
     "poang": "3/0/0",
@@ -1759,7 +1758,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "C",
     "typ": "hitta explicit formel ur differensmönster",
     "poang": "0/2/0",
@@ -1769,7 +1768,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "bestäm nästa termer",
     "poang": "2/0/0",
@@ -1779,7 +1778,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "identifiera aritmetisk eller geometrisk",
     "poang": "2/0/0",
@@ -1789,7 +1788,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "bestäm följande termer från mönster",
     "poang": "2/0/0",
@@ -1799,7 +1798,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "C",
     "typ": "explicit formel från andradifferenser",
     "poang": "0/2/0",
@@ -1809,7 +1808,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "talfoljder_begrepp",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "explicit formel enkel",
     "poang": "2/0/0",
@@ -1819,7 +1818,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "rekursiv och explicit formel samt lång summa",
     "poang": "3/0/0",
@@ -1829,7 +1828,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "geometrisk summa med bråkkvot",
     "poang": "1/1/0",
@@ -1839,7 +1838,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "beskriva induktionsbevisets struktur",
     "poang": "1/1/0",
@@ -1849,7 +1848,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "bestämma antal termer från sista term",
     "poang": "0/2/0",
@@ -1859,7 +1858,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "beräkna n:te termen",
     "poang": "2/0/0",
@@ -1869,7 +1868,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "summa av aritmetisk talföljd",
     "poang": "2/0/0",
@@ -1879,7 +1878,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "n:te term",
     "poang": "2/0/0",
@@ -1889,7 +1888,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "summa n termer",
     "poang": "2/0/0",
@@ -1899,7 +1898,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "bestäm antal termer från summa",
     "poang": "0/2/0",
@@ -1909,7 +1908,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "bestäm första term från senare term",
     "poang": "2/0/0",
@@ -1919,7 +1918,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "två okända från två termer",
     "poang": "0/2/0",
@@ -1929,7 +1928,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "aritmetiska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "bestäm senare term från två termer",
     "poang": "2/0/0",
@@ -2029,7 +2028,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "C",
     "typ": "omskriva sigma-summa till sluten form",
     "poang": "0/2/0",
@@ -2039,7 +2038,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "skriva ut sigma-summa",
     "poang": "2/0/0",
@@ -2049,7 +2048,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "skriva summa med sigma-notation",
     "poang": "2/0/0",
@@ -2059,7 +2058,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "skriva ut sigma",
     "poang": "2/0/0",
@@ -2069,7 +2068,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "skriva med sigma",
     "poang": "2/0/0",
@@ -2079,7 +2078,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "C",
     "typ": "dela upp och beräkna sigma",
     "poang": "0/2/0",
@@ -2089,7 +2088,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "E",
     "typ": "ändra index",
     "poang": "2/0/0",
@@ -2099,7 +2098,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "summor_sigma",
+    "omr": "talfoljder_sigma",
     "niva": "C",
     "typ": "geometrisk summa med sigma",
     "poang": "0/2/0",
@@ -2109,7 +2108,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "upprepad medicindos som geometrisk summa",
     "poang": "0/2/0",
@@ -2119,7 +2118,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "A",
     "typ": "bestämma dos från målvärde",
     "poang": "0/1/2",
@@ -2129,7 +2128,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "bestämma n:te term i geometrisk talföljd",
     "poang": "2/0/0",
@@ -2139,7 +2138,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "summa av geometrisk talföljd",
     "poang": "2/0/0",
@@ -2149,7 +2148,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "n:te term geometrisk",
     "poang": "2/0/0",
@@ -2159,7 +2158,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "geometrisk summa",
     "poang": "2/0/0",
@@ -2169,7 +2168,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "upprepad procentuell minskning",
     "poang": "0/2/0",
@@ -2179,7 +2178,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "bestäm kvot",
     "poang": "2/0/0",
@@ -2189,7 +2188,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "C",
     "typ": "summa till oändlighet",
     "poang": "0/2/0",
@@ -2199,7 +2198,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "geometriska_talfoljder",
+    "omr": "aritmetiska_geometriska",
     "niva": "E",
     "typ": "bestäm tidigare term",
     "poang": "2/0/0",
@@ -2219,7 +2218,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "förenkla produkt modulo",
     "poang": "1/0/0",
@@ -2239,7 +2238,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "multiplikation modulo",
     "poang": "1/0/0",
@@ -2259,7 +2258,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "veckodag med modulo 7",
     "poang": "1/0/0",
@@ -2329,7 +2328,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "klockaritmetik",
     "poang": "2/0/0",
@@ -2339,7 +2338,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "blandad kongruensberäkning",
     "poang": "2/1/0",
@@ -2359,7 +2358,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "flera modularitetsberäkningar med potenser",
     "poang": "2/2/0",
@@ -2369,7 +2368,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "bestämma slutsiffra med modularitet",
     "poang": "0/2/0",
@@ -2379,7 +2378,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "stor veckodagsberäkning modulo 7",
     "poang": "0/2/0",
@@ -2389,7 +2388,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "veckodag med stor exponent",
     "poang": "0/2/0",
@@ -2399,7 +2398,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "A",
     "typ": "kongruenser med flera villkor",
     "poang": "0/1/2",
@@ -2409,7 +2408,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "klocka modulo 12",
     "poang": "2/0/0",
@@ -2419,7 +2418,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "veckodag med exponent",
     "poang": "0/2/0",
@@ -2429,7 +2428,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "slutsiffra",
     "poang": "2/0/0",
@@ -2439,7 +2438,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruens_tillampningar",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "två restvillkor",
     "poang": "0/2/0",
@@ -2449,7 +2448,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "A",
     "typ": "lösa simultana kongruenser",
     "poang": "0/1/2",
@@ -2459,7 +2458,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "stor exponent modulo",
     "poang": "0/2/0",
@@ -2469,7 +2468,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "förenkla modulouttryck",
     "poang": "2/0/0",
@@ -2479,7 +2478,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "summa modulo",
     "poang": "2/0/0",
@@ -2489,7 +2488,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "potens modulo med kort period",
     "poang": "2/0/0",
@@ -2499,7 +2498,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "produkt modulo",
     "poang": "2/0/0",
@@ -2509,7 +2508,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "stor exponent med cykel",
     "poang": "0/2/0",
@@ -2519,7 +2518,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "subtraktion modulo",
     "poang": "2/0/0",
@@ -2529,7 +2528,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "C",
     "typ": "potenssumma modulo",
     "poang": "0/2/0",
@@ -2539,7 +2538,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "kongruensrakning",
+    "omr": "kongruens",
     "niva": "E",
     "typ": "negativa tal modulo",
     "poang": "2/0/0",
@@ -2769,7 +2768,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för geometrisk summa",
     "poang": "1/1/1",
@@ -2779,7 +2778,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis av delbarhet",
     "poang": "1/1/1",
@@ -2789,7 +2788,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för aritmetisk summa",
     "poang": "1/1/1",
@@ -2799,7 +2798,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för udda aritmetisk serie",
     "poang": "1/1/1",
@@ -2809,7 +2808,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för summan 1 till n",
     "poang": "1/1/1",
@@ -2819,7 +2818,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för sigmaformel",
     "poang": "1/1/1",
@@ -2829,7 +2828,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "förklara induktionsbevis",
     "poang": "0/1/1",
@@ -2839,7 +2838,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för explicit form av rekursiv följd",
     "poang": "0/1/2",
@@ -2849,7 +2848,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis av exponentialdelbarhet",
     "poang": "0/1/2",
@@ -2859,7 +2858,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för kubsumma",
     "poang": "1/1/3",
@@ -2869,7 +2868,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis för Fibonacci-summa",
     "poang": "0/1/3",
@@ -2879,7 +2878,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "induktionsbevis för linjär summa",
     "poang": "0/2/0",
@@ -2889,7 +2888,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis av olikhet",
     "poang": "0/1/2",
@@ -2899,7 +2898,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktionsbevis av delbarhet med faktoruppdelning",
     "poang": "0/1/2",
@@ -2909,7 +2908,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "hitta fel i induktionsbevis",
     "poang": "0/0/3",
@@ -2919,7 +2918,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "induktionsbevis av delbarhet",
     "poang": "0/2/0",
@@ -2929,7 +2928,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "E",
     "typ": "enkel induktion med tydlig struktur",
     "poang": "2/0/0",
@@ -2939,7 +2938,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "induktion med delbarhet",
     "poang": "0/1/2",
@@ -2949,7 +2948,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "E",
     "typ": "induktion för aritmetisk summa",
     "poang": "2/0/0",
@@ -2959,7 +2958,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "induktion för delbarhet",
     "poang": "0/2/0",
@@ -2969,7 +2968,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "E",
     "typ": "induktion kvadratsumma enkel identitet",
     "poang": "2/0/0",
@@ -2979,7 +2978,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "induktionsbevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "induktion geometrisk summa",
     "poang": "0/2/0",
@@ -2989,7 +2988,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "motsägelsebevis av irrationalitet",
     "poang": "0/2/0",
@@ -2999,7 +2998,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "motsägelsebevis om oändligt många primtal",
     "poang": "0/1/2",
@@ -3009,7 +3008,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "A",
     "typ": "Euklides bevis för oändligt många primtal",
     "poang": "0/1/3",
@@ -3019,7 +3018,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "irrationalitetsbevis",
     "poang": "0/2/0",
@@ -3029,7 +3028,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "E",
     "typ": "klassisk irrationalitetsbevis",
     "poang": "2/0/0",
@@ -3039,7 +3038,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "motsägelsebevis om jämn/udda",
     "poang": "0/2/0",
@@ -3049,7 +3048,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "E",
     "typ": "motsägelse om minsta rationella positiva tal",
     "poang": "2/0/0",
@@ -3059,7 +3058,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 2,
-    "omr": "motsagelsebevis",
+    "omr": "bevismetoder",
     "niva": "C",
     "typ": "irrationalitet roten ur 5",
     "poang": "0/2/0",
@@ -3389,7 +3388,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "linjär approximation kring punkt",
     "poang": "1/1/0",
@@ -3399,7 +3398,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "A",
     "typ": "felbedömning för linjär approximation",
     "poang": "0/1/2",
@@ -3409,7 +3408,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "linjär approximation nära känt värde",
     "poang": "2/0/0",
@@ -3419,7 +3418,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "linjär approximation med figur",
     "poang": "2/0/0",
@@ -3429,7 +3428,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "linjär approximation av kvadratrot",
     "poang": "2/0/0",
@@ -3439,7 +3438,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "linjär approximation av invers",
     "poang": "2/0/0",
@@ -3449,7 +3448,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "linjär approximation av kubikrot",
     "poang": "2/0/0",
@@ -3459,7 +3458,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "bedöma över- eller underskattning",
     "poang": "0/2/0",
@@ -3469,7 +3468,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "approximation sin nära noll",
     "poang": "2/0/0",
@@ -3479,7 +3478,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "approximation e^x",
     "poang": "2/0/0",
@@ -3489,7 +3488,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "bestäm tangentapproximation symboliskt",
     "poang": "0/2/0",
@@ -3499,7 +3498,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "linjar_approximation",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "approximation cos nära noll",
     "poang": "2/0/0",
@@ -3509,7 +3508,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "relaterade förändringshastigheter två fordon",
     "poang": "0/3/0",
@@ -3519,7 +3518,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "relaterade förändringshastigheter ballong",
     "poang": "0/2/1",
@@ -3529,7 +3528,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "A",
     "typ": "relaterade förändringshastigheter konisk tank",
     "poang": "0/2/1",
@@ -3539,7 +3538,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "relaterade förändringshastigheter stege",
     "poang": "0/3/0",
@@ -3549,7 +3548,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "relaterade förändringshastigheter växande cirkel",
     "poang": "0/2/0",
@@ -3559,7 +3558,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "A",
     "typ": "relaterade förändringshastigheter konisk tank",
     "poang": "0/1/2",
@@ -3569,7 +3568,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "relaterade förändringshastigheter för kvadrat",
     "poang": "2/0/0",
@@ -3579,7 +3578,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "cirkelns area",
     "poang": "2/0/0",
@@ -3589,7 +3588,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "sfärens volym",
     "poang": "2/0/0",
@@ -3599,7 +3598,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "kubens volym",
     "poang": "2/0/0",
@@ -3609,7 +3608,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "stege mot vägg",
     "poang": "0/2/0",
@@ -3619,7 +3618,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "kon med likformighet",
     "poang": "0/2/0",
@@ -3629,7 +3628,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "rektangel area",
     "poang": "2/0/0",
@@ -3639,7 +3638,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "cylinder volym",
     "poang": "2/0/0",
@@ -3649,7 +3648,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "skugga likformiga trianglar",
     "poang": "0/2/0",
@@ -3659,7 +3658,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "C",
     "typ": "sfär area mot volym",
     "poang": "0/2/0",
@@ -3669,7 +3668,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "forandringshastigheter",
+    "omr": "derivata_tillampningar",
     "niva": "E",
     "typ": "omkrets cirkel",
     "poang": "2/0/0",
@@ -3799,7 +3798,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "C",
     "typ": "värdera CAS-resultat för generaliserad integral",
     "poang": "0/2/0",
@@ -3809,7 +3808,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "C",
     "typ": "granska felaktigt CAS-resultat för generaliserad integral",
     "poang": "0/2/0",
@@ -3819,7 +3818,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "E",
     "typ": "tolka derivata från CAS-utdata",
     "poang": "2/0/0",
@@ -3829,7 +3828,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "E",
     "typ": "tolka numeriskt integralvärde",
     "poang": "2/0/0",
@@ -3839,7 +3838,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "C",
     "typ": "granska CAS-antagande",
     "poang": "0/2/0",
@@ -3849,7 +3848,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "E",
     "typ": "numerisk nollpunkt från verktyg",
     "poang": "2/0/0",
@@ -3859,7 +3858,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 3,
-    "omr": "digitala_verktyg_analys",
+    "omr": "fordjupad_analys",
     "niva": "C",
     "typ": "numerisk derivata och tolkning",
     "poang": "0/2/0",
@@ -3869,7 +3868,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens homogen med begynnelsevillkor",
     "poang": "1/0/0",
@@ -3879,7 +3878,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "bestäm funktion från andra ordningens begynnelsevärde",
     "poang": "1/0/0",
@@ -3889,7 +3888,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "allmän lösning separabel linjär differentialekvation",
     "poang": "1/0/0",
@@ -3899,7 +3898,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "lösa enkel homogen differentialekvation",
     "poang": "2/0/0",
@@ -3909,7 +3908,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "begynnelsevärde till homogen differentialekvation",
     "poang": "2/0/0",
@@ -3919,7 +3918,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "lösa y prim lika med ky",
     "poang": "2/0/0",
@@ -3929,7 +3928,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "begynnelsevärde exponential",
     "poang": "2/0/0",
@@ -3939,7 +3938,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "C",
     "typ": "bestäm parameter från två värden",
     "poang": "0/2/0",
@@ -3949,7 +3948,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "halveringstid från k",
     "poang": "2/0/0",
@@ -3959,7 +3958,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "C",
     "typ": "bestäm halveringstid",
     "poang": "0/2/0",
@@ -3969,7 +3968,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_homogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "bestäm konstant C",
     "poang": "2/0/0",
@@ -3979,7 +3978,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens homogen med två reella rötter",
     "poang": "2/0/0",
@@ -3989,7 +3988,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "ange en partikulär lösning till homogen differentialekvation",
     "poang": "2/0/0",
@@ -3999,7 +3998,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens homogen med reella rötter",
     "poang": "2/0/0",
@@ -4009,7 +4008,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "karakteristisk ekvation med två rötter",
     "poang": "2/0/0",
@@ -4019,7 +4018,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningen reella negativa rötter",
     "poang": "2/0/0",
@@ -4029,7 +4028,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "reella rötter 1 och -4",
     "poang": "2/0/0",
@@ -4039,7 +4038,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_reella",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "begynnelsevillkor reella rötter",
     "poang": "0/2/0",
@@ -4119,7 +4118,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "linjär inhomogen första ordningens differentialekvation",
     "poang": "2/0/0",
@@ -4129,7 +4128,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "linjär inhomogen första ordningens differentialekvation med polynom",
     "poang": "3/0/0",
@@ -4139,7 +4138,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens homogen med dubbelrot",
     "poang": "3/0/0",
@@ -4149,7 +4148,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "E",
     "typ": "radioaktivt sönderfall som differentialekvation",
     "poang": "4/0/0",
@@ -4159,7 +4158,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "komplexa rötter i karakteristisk ekvation",
     "poang": "2/2/0",
@@ -4169,7 +4168,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "A",
     "typ": "allmän lösning med komplexa rötter",
     "poang": "1/1/1",
@@ -4179,7 +4178,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera given lösning",
     "poang": "2/0/0",
@@ -4189,7 +4188,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera lösning till inhomogen differentialekvation",
     "poang": "2/0/0",
@@ -4199,7 +4198,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera lösning genom insättning",
     "poang": "2/0/0",
@@ -4209,7 +4208,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera exponentiallösning",
     "poang": "2/0/0",
@@ -4219,7 +4218,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera trigonometrisk lösning",
     "poang": "2/0/0",
@@ -4229,7 +4228,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "verifiera_losningar",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "verifiera konstant plus exponential",
     "poang": "2/0/0",
@@ -4239,7 +4238,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "differentialekvation_begrepp",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "ordning och homogenitet",
     "poang": "2/0/0",
@@ -4249,7 +4248,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "differentialekvation_begrepp",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "identifiera differentialekvation",
     "poang": "2/0/0",
@@ -4259,7 +4258,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "differentialekvation_begrepp",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "ordning hos differentialekvation",
     "poang": "2/0/0",
@@ -4269,7 +4268,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "differentialekvation_begrepp",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "homogen eller inhomogen",
     "poang": "2/0/0",
@@ -4279,7 +4278,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "differentialekvation_begrepp",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "identifiera beroende variabel",
     "poang": "2/0/0",
@@ -4289,7 +4288,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "C",
     "typ": "tolka tecken i Newtons avsvalningslag",
     "poang": "0/2/0",
@@ -4299,7 +4298,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "C",
     "typ": "jämföra homogen och inhomogen ekvation",
     "poang": "0/2/0",
@@ -4309,7 +4308,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "tolka lösningsfamilj",
     "poang": "2/0/0",
@@ -4319,7 +4318,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "jämviktslösning",
     "poang": "2/0/0",
@@ -4329,7 +4328,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "C",
     "typ": "tolka tecken på derivata",
     "poang": "0/2/0",
@@ -4339,7 +4338,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "E",
     "typ": "tecken på tillväxt",
     "poang": "2/0/0",
@@ -4349,7 +4348,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "tolka_diffekv",
+    "omr": "diffekv_grunder",
     "niva": "C",
     "typ": "jämviktspunkter logistisk modell",
     "poang": "0/2/0",
@@ -4359,7 +4358,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "Newtons avsvalningslag från mätdata",
     "poang": "0/2/1",
@@ -4369,7 +4368,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "blandningsproblem med differentialekvation",
     "poang": "1/1/1",
@@ -4379,7 +4378,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "Eulersteg flera steg",
     "poang": "2/0/0",
@@ -4389,7 +4388,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "Eulersteg och jämförelse med riktningsfält",
     "poang": "0/2/0",
@@ -4399,7 +4398,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "ett Eulersteg med figur",
     "poang": "2/0/0",
@@ -4409,7 +4408,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "två Eulersteg",
     "poang": "2/0/0",
@@ -4419,7 +4418,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "tre Eulersteg",
     "poang": "2/0/0",
@@ -4429,7 +4428,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "eulers_stegmetod",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "jämföra steglängder",
     "poang": "0/2/0",
@@ -4439,7 +4438,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "tolka lutningar i riktningsfält utan figur",
     "poang": "0/2/0",
@@ -4449,7 +4448,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "identifiera differentialekvation från riktningsfält",
     "poang": "2/0/0",
@@ -4459,7 +4458,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "bestämma lösningskurva ur riktningsfält och allmän lösning",
     "poang": "0/2/0",
@@ -4469,7 +4468,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "avläsa lutning i riktningsfält",
     "poang": "2/0/0",
@@ -4479,7 +4478,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "tolka stabil jämvikt ur riktningsfält",
     "poang": "0/2/0",
@@ -4489,7 +4488,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "E",
     "typ": "identifiera jämviktslinje",
     "poang": "2/0/0",
@@ -4499,7 +4498,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "riktningsfalt",
+    "omr": "riktningsfalt_euler",
     "niva": "C",
     "typ": "skissa kvalitativ lösning",
     "poang": "0/2/0",
@@ -4509,7 +4508,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "C",
     "typ": "inhomogen första ordningens differentialekvation med exponentialterm",
     "poang": "1/2/0",
@@ -4519,7 +4518,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "första ordningens inhomogen differentialekvation",
     "poang": "3/0/0",
@@ -4529,7 +4528,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "A",
     "typ": "temperaturmodell med Newtons avsvalningslag",
     "poang": "0/1/3",
@@ -4539,7 +4538,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "konstant högerled",
     "poang": "2/0/0",
@@ -4549,7 +4548,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "begynnelsevillkor inhomogen",
     "poang": "2/0/0",
@@ -4559,7 +4558,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "C",
     "typ": "bestäm ekvation från lösningsfamilj",
     "poang": "0/2/0",
@@ -4569,7 +4568,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "lös med jämviktsvärde",
     "poang": "2/0/0",
@@ -4579,7 +4578,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "E",
     "typ": "initialvärde mot jämvikt",
     "poang": "2/0/0",
@@ -4589,7 +4588,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "forsta_ordningen_inhomogena",
+    "omr": "forsta_ordningen",
     "niva": "C",
     "typ": "bestäm tid till nivå",
     "poang": "0/2/0",
@@ -4599,7 +4598,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "begynnelsevillkor vid dubbelrot",
     "poang": "1/2/0",
@@ -4609,7 +4608,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "tolka lösningsform vid dubbelrot",
     "poang": "0/2/0",
@@ -4619,7 +4618,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "dubbelrot",
     "poang": "2/0/0",
@@ -4629,7 +4628,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "homogen med dubbelrot",
     "poang": "2/0/0",
@@ -4639,7 +4638,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "bestäm differentialekvation från lösning",
     "poang": "0/2/0",
@@ -4649,7 +4648,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "dubbelrot negativ",
     "poang": "2/0/0",
@@ -4659,7 +4658,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_dubbelrot",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "begynnelsevillkor dubbelrot",
     "poang": "0/2/0",
@@ -4669,7 +4668,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "A",
     "typ": "begynnelsevillkor med komplexa rötter",
     "poang": "0/2/2",
@@ -4679,7 +4678,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "komplexa rötter",
     "poang": "2/0/0",
@@ -4689,7 +4688,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "komplexa rötter med dämpning",
     "poang": "2/0/0",
@@ -4699,7 +4698,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "bestäm ekvation från sinuslösning",
     "poang": "0/2/0",
@@ -4709,7 +4708,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "ren harmonisk svängning",
     "poang": "2/0/0",
@@ -4719,7 +4718,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_komplexa",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "begynnelsevillkor dämpad svängning",
     "poang": "0/2/0",
@@ -4729,7 +4728,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens inhomogen med konstant högerled",
     "poang": "2/0/0",
@@ -4739,7 +4738,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "andra ordningens inhomogen med linjärt polynom",
     "poang": "3/0/0",
@@ -4749,7 +4748,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "andra ordningens inhomogen med exponentialterm",
     "poang": "1/2/0",
@@ -4759,7 +4758,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "resonans med exponentialterm",
     "poang": "0/3/0",
@@ -4769,7 +4768,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "andra ordningens inhomogen med trigonometriskt högerled",
     "poang": "0/2/0",
@@ -4779,7 +4778,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "välja ansats vid dubbel resonans",
     "poang": "0/2/0",
@@ -4789,7 +4788,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "A",
     "typ": "inhomogent begynnelsevärdesproblem med polynom",
     "poang": "0/1/2",
@@ -4799,7 +4798,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "A",
     "typ": "resonans vid periodisk kraft och begynnelsevillkor",
     "poang": "0/1/3",
@@ -4809,7 +4808,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "bestämma högerled från partikulärlösning",
     "poang": "0/2/0",
@@ -4819,7 +4818,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "konstant partikulärlösning",
     "poang": "2/0/0",
@@ -4829,7 +4828,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "polynom som högerled",
     "poang": "2/0/0",
@@ -4839,7 +4838,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "resonans med sinus",
     "poang": "0/2/0",
@@ -4849,7 +4848,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "exponential utan resonans",
     "poang": "2/0/0",
@@ -4859,7 +4858,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "cosinus utan resonans",
     "poang": "2/0/0",
@@ -4869,7 +4868,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "linjärt polynom partikulär",
     "poang": "0/2/0",
@@ -4879,7 +4878,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "C",
     "typ": "resonans exponential",
     "poang": "0/2/0",
@@ -4889,7 +4888,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "andra_ordningen_inhomogena",
+    "omr": "andra_ordningen",
     "niva": "E",
     "typ": "konstant högerled dubbelrot",
     "poang": "2/0/0",
@@ -4899,7 +4898,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "terminalhastighet med linjär luftmotståndsmodell",
     "poang": "0/2/2",
@@ -4909,7 +4908,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "blandningsproblem med figur",
     "poang": "0/3/0",
@@ -4919,7 +4918,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "massa-fjäder med periodisk kraft",
     "poang": "0/1/2",
@@ -4929,7 +4928,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "dämpat system med konstant yttre kraft",
     "poang": "0/1/2",
@@ -4939,7 +4938,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "saltblandning och maxvärde",
     "poang": "0/1/3",
@@ -4949,7 +4948,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "Newtonsk avsvalning enkel modell",
     "poang": "0/2/0",
@@ -4959,7 +4958,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "E",
     "typ": "formulera enkel tillväxtmodell",
     "poang": "2/0/0",
@@ -4969,7 +4968,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "medicin kontinuerlig elimination",
     "poang": "0/2/0",
@@ -4979,7 +4978,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "blandning med konstant volym",
     "poang": "0/2/0",
@@ -4989,7 +4988,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "modellering_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "temperatur från två mätningar",
     "poang": "0/2/0",
@@ -4999,7 +4998,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "kontrollera digital lösning till differentialekvation",
     "poang": "0/2/0",
@@ -5009,7 +5008,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "A",
     "typ": "jämföra Eulerapproximation med exakt lösning",
     "poang": "0/1/2",
@@ -5019,7 +5018,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "kontroll av digital lösning till inhomogen andra ordningens ekvation",
     "poang": "0/2/0",
@@ -5029,7 +5028,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "E",
     "typ": "tolka CAS-lösning till differentialekvation",
     "poang": "2/0/0",
@@ -5039,7 +5038,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "E",
     "typ": "kontrollera numerisk lösning",
     "poang": "2/0/0",
@@ -5049,7 +5048,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "E",
     "typ": "tolka numerisk lösning",
     "poang": "2/0/0",
@@ -5059,7 +5058,7 @@ window.BANKMATF1 = [
   },
   {
     "kap": 4,
-    "omr": "digitala_verktyg_diffekv",
+    "omr": "modellering_digitalt",
     "niva": "C",
     "typ": "jämföra numerisk och analytisk lösning",
     "poang": "0/2/0",
