@@ -663,7 +663,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   padding:16px 12px 40px;
   transition:background .22s ease,border-color .22s ease;
 }
-.sök{position:relative;margin:0 4px 14px}
+.kort{content-visibility:auto;contain-intrinsic-size:auto 280px}\n.sök{position:relative;margin:0 4px 14px}
 .sök input{width:100%;border:1px solid var(--sidebar-line);background:color-mix(in oklab,var(--sidebar-bg) 58%,#fff);border-radius:var(--r-s);
   padding:9px 12px 9px 33px;font-size:13.5px;transition:background .15s,border-color .15s,box-shadow .15s}
 .sök input::placeholder{color:var(--muted)}
@@ -3066,7 +3066,15 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   b.setAttribute('aria-pressed',state.nivåer.has(n));
   rita();
 }));
-$('#sökfält').addEventListener('input',e=>{state.sök=normaliseraSök(e.target.value);rita();});
+let sökTimer=null;
+$('#sökfält').addEventListener('input',e=>{
+  const värde=e.target.value;
+  clearTimeout(sökTimer);
+  sökTimer=setTimeout(()=>{
+    state.sök=normaliseraSök(värde);
+    rita();
+  },140);
+});
 $('#sorteraKnapp').addEventListener('click',()=>{
   state.sorteraNivå=!state.sorteraNivå;
   $('#sorteraKnapp').setAttribute('aria-pressed',state.sorteraNivå);
@@ -3089,29 +3097,41 @@ function normaliseraSök(värde){
     .replace(/\s+/g,' ')
     .trim();
 }
+const SÖKINDEX=new WeakMap();
 function söktextFör(x){
+  if(SÖKINDEX.has(x)) return SÖKINDEX.get(x);
   const områdesnamn=DB.omr?.[x.kap]?.[x.omr]||'';
   const familj=Array.isArray(x.familj)?x.familj.join(' '):(x.familj||'');
   const taggar=[x.taggar,x.tags,x.etiketter]
     .flatMap(v=>Array.isArray(v)?v:(v?[v]:[]))
     .join(' ');
-  return normaliseraSök([
-    x.t, x.id,
+  /* Figurer kan innehålla mycket SVG-kod. Den behövs inte för textsökning
+     och gjorde tidigare varje tangenttryckning betydligt dyrare. */
+  const uppgiftUtanFigur=utanFigur(x.t||'');
+  const söktext=normaliseraSök([
+    uppgiftUtanFigur, x.id,
     x.omr, områdesnamn,
     kapitelNamn(x.kap),
     familj, taggar,
     x.typ||'', x.kategori||''
   ].join(' '));
+  SÖKINDEX.set(x,söktext);
+  return söktext;
 }
+function förvärmSökindex(){
+  const jobb=()=>{ try{ variantBank().forEach(söktextFör); }catch(_){} };
+  if('requestIdleCallback' in window) requestIdleCallback(jobb,{timeout:1200});
+  else setTimeout(jobb,250);
+}
+
 function urval(){
+  const termer=state.sök ? state.sök.split(' ').filter(Boolean) : [];
   return variantBank().filter(x=>{
     if(!state.nivåer.has(x.niva)) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
-    if(state.sök){
+    if(termer.length){
       const t=söktextFör(x);
-      /* Flera sökord behöver inte ligga bredvid varandra. Exempelvis
-         "linjär regression" matchar så länge båda orden finns i text/taggar. */
-      const termer=state.sök.split(' ').filter(Boolean);
+      /* Flera sökord behöver inte ligga bredvid varandra. */
       if(!termer.every(term=>t.includes(term))) return false;
     }
     return true;
@@ -3152,12 +3172,13 @@ function rita(){
         </div>
         <div class="kroppen">${x.t}</div>
         <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
-        <div class="facit" data-fbox="${x.id}">${LOS(x.s)}</div>
+        <div class="facit" data-fbox="${x.id}"></div>
       </div>
     </article>`).join('');
 
-  /* Renderar KaTeX i uppgiftstexterna. */
-  renderKatex($('#lista'));
+  /* KaTeX renderas endast för kort som är nära den synliga delen av sidan.
+     Det gör stor skillnad när banken innehåller hundratals uppgifter. */
+  renderKatexLista($('#lista'));
 
   $$('.kort').forEach(k=>{
     const växla=()=>vippa(k.dataset.id);
@@ -3175,10 +3196,16 @@ function rita(){
   });
   $$('.facitknapp').forEach(b=>b.addEventListener('click',e=>{
     e.stopPropagation();
-    const box=document.querySelector(`[data-fbox="${b.dataset.facit}"]`);
+    const id=b.dataset.facit;
+    const box=document.querySelector(`[data-fbox="${id}"]`);
     const på=box.classList.toggle('öppen');
     b.textContent=på?'Dölj facit':'Visa facit';
-    if(på) renderKatex(box);
+    if(på && box.dataset.laddad!=='1'){
+      const uppgift=DB.bank.find(x=>x.id===id);
+      box.innerHTML=LOS(uppgift?.s||'');
+      box.dataset.laddad='1';
+      renderKatex(box);
+    }
   }));
 }
 
@@ -4033,6 +4060,33 @@ $('#expWord').addEventListener('click',()=>{
   document.body.appendChild(a); a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},400);
 });
+
+/* ── KaTeX · snabb rendering av uppgiftslistan ── */
+let katexListaObserver=null;
+function renderKatexLista(root){
+  if(!root || !window.renderMathInElement) return;
+  if(katexListaObserver) katexListaObserver.disconnect();
+
+  const kroppar=[...root.querySelectorAll('.kort .kroppen')];
+  if(!('IntersectionObserver' in window)){
+    kroppar.forEach(el=>renderKatex(el));
+    return;
+  }
+
+  katexListaObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el=entry.target;
+      if(el.dataset.katexKlar!=='1'){
+        renderKatex(el);
+        el.dataset.katexKlar='1';
+      }
+      katexListaObserver.unobserve(el);
+    });
+  },{root:null,rootMargin:'700px 0px'});
+
+  kroppar.forEach(el=>katexListaObserver.observe(el));
+}
 
 /* ── KaTeX · öppna facit efter omrendering ── */
 function renderKatex(root){
