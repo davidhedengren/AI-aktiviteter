@@ -487,7 +487,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p>Man vill approximera ett nollställe till</p><p>\\[f(x)=x^3-x-1\\]</p><p>genom att stegvis halvera ett intervall där funktionsvärdena har olika tecken. Startintervallet är \\([1,2]\\), och programidén är:</p><pre style=\"font-family:IBM Plex Mono,monospace;font-size:12px;line-height:1,55;background:#F4F5F7;border:1px solid #E4E3E6;border-radius:8px;padding:10px 12px;overflow:auto\">a = 1\nb = 2\nwhile b-a &gt; 0,01:\n    m = (a+b)/2\n    if f(a)*f(m) &lt;= 0:\n        b = m\n    else:\n        a = m</pre><p>a) Vilken egenskap hos \\(f(a)\\) och \\(f(b)\\) gör att intervallet är lämpligt som startintervall?<br>b) Genomför de två första varven för hand och ange intervallet efter varje varv.</p>",
+    "t": "<p>Man vill approximera ett nollställe till</p><p>\\[f(x)=x^3-x-1\\]</p><p>genom att stegvis halvera ett intervall där funktionsvärdena har olika tecken. Startintervallet är \\([1,2]\\), och programidén är:</p><pre style=\"font-family:IBM Plex Mono,monospace;font-size:12px;line-height:1,55;background:#F4F5F7;border:1px solid #E4E3E6;border-radius:8px;padding:10px 12px;overflow:auto\">a = 1\nb = 2\nwhile b-a &gt; 0,01: m = (a+b)/2 if f(a)*f(m) &lt;= 0: b = m else: a = m</pre><p>a) Vilken egenskap hos \\(f(a)\\) och \\(f(b)\\) gör att intervallet är lämpligt som startintervall?<br>b) Genomför de två första varven för hand och ange intervallet efter varje varv.</p>",
     "s": "<p><strong>a)</strong> Funktionen är kontinuerlig och</p><p>\\[f(1)=1-1-1=-1,\\qquad f(2)=8-2-1=5.\\]</p><p>Värdena har olika tecken, alltså finns minst ett nollställe mellan 1 och 2.</p><p><strong>b) Varv 1:</strong> Mittpunkten är \\(m=1,5\\).</p><p>\\[f(1,5)=1,5^3-1,5-1=0,875&gt;0.\\]</p><p>Eftersom \\(f(1)&lt;0\\) och \\(f(1,5)&gt;0\\) ligger nollstället i intervallet <strong>\\(1\\le x\\le1,5\\)</strong>.</p><p><strong>Varv 2:</strong> Mittpunkten blir \\(m=1,25\\).</p><p>\\[f(1,25)=1,25^3-1,25-1=-0,296875&lt;0.\\]</p><p>Teckenbytet finns nu mellan 1,25 och 1,5. Intervallet efter två varv är därför <strong>\\(1,25\\le x\\le1,5\\)</strong>.</p><p><strong>Tänk så här:</strong> Varje varv behåller den halva där funktionsvärdena har olika tecken. Intervallängden halveras därför varje gång.</p>",
     "familj": "mato1_programmering_intervallhalvering_tva_varv",
     "miniräknare": true,
@@ -1340,7 +1340,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>För funktionen \\(f(x)=|x+1|+|x-3|\\), bestäm funktionens minsta värde och alla x-värden där detta minsta värde antas. Motivera utan digitalt verktyg.</p>",
+    "t": "<p>För funktionen \\(f(x)=|x+1|+|x-3|\\), bestäm funktionens minsta värde och alla \\(x\\)-värden där detta minsta värde antas. Motivera.</p>",
     "s": "<p><strong>Tolkning:</strong> \\(|x+1|\\) är avståndet från \\(x\\) till \\(-1\\), och \\(|x-3|\\) är avståndet från \\(x\\) till \\(3\\).</p><p>Om \\(x\\) ligger mellan \\(-1\\) och 3 är summan av avstånden precis avståndet mellan ändpunkterna:</p><p>\\[(x+1)+(3-x)=4.\\]</p><p>Utanför intervallet blir summan större än 4.</p><p><strong>Svar:</strong> Minsta värdet är \\(\\boxed{4}\\), och det antas för alla \\(\\boxed{-1\\le x\\le3}\\).</p>",
     "familj": "abs_summa_avstand",
     "miniräknare": false,
@@ -2152,7 +2152,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "1/2/0",
-    "t": "<p>Bestäm \\(\\lim_{x\\to2}\\frac{x^3-8}{x-2}\\) utan digitalt verktyg.</p>",
+    "t": "<p>Bestäm \\(\\lim_{x\\to2}\\frac{x^3-8}{x-2}\\).</p>",
     "s": "<p>Använd kubdifferensen: \\(x^3-8=(x-2)(x^2+2x+4)\\). För \\(x\\neq2\\) blir kvoten \\(x^2+2x+4\\), och gränsvärdet är \\(4+4+4=12\\).</p>",
     "familj": "r2_lim_H_2",
     "id": "1.136",
@@ -2264,7 +2264,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "1/2/0",
-    "t": "<p>Polynomet p(x)=x^4-5x^2+4 har fyra nollställen. Bestäm dem utan digitalt verktyg.</p>",
+    "t": "<p>Polynomet \\(p(x)=x^4-5x^2+4\\) har fyra nollställen. Bestäm dem.</p>",
     "s": "<p>Sätt \\(u=x^2\\): \\(u^2-5u+4=(u-1)(u-4)=0\\). Alltså \\(x^2=1\\) eller \\(x^2=4\\).</p><p><strong>Svar:</strong> \\(x=-2,-1,1,2\\).</p>",
     "familj": "r2_polynom_C_6",
     "id": "1.143",
@@ -3288,7 +3288,7 @@ window.BANKMATO1 = [
     "t": "<p>Skriv om funktionen</p><p>\\[f(x)=5e^{0,4x}\\]</p><p>på formen \\(f(x)=5\\cdot a^x\\). Bestäm värdet på \\(a\\).</p>",
     "s": "<p>Vi använder sambandet</p><p>\\[e^{0,4x}=(e^{0,4})^x.\\]</p><p>Därför kan funktionen skrivas</p><p>\\[f(x)=5\\cdot (e^{0,4})^x.\\]</p><p>Alltså är</p><p>\\[a=e^{0,4}.\\]</p><p>Med räknare får man</p><p>\\[e^{0,4}\\approx 1,492.\\]</p><p><strong>Svar:</strong> \\(\\boxed{a=e^{0,4}\\approx 1,49}\\).</p>",
     "familj": "mato1_talet_e_skriv_om_bas_a",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -3493,7 +3493,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Använd ett digitalt verktyg för att bestämma alla \\(x\\)-värden där tangenten till grafen för</p><p>\\[f(x)=x^3-6x^2+9x+1\\]</p><p>är horisontell. Ange också koordinaterna för motsvarande punkter på grafen. Beskriv kort hur du gjorde i ditt digitala verktyg.</p>",
+    "t": "<p>Bestäm alla \\(x\\)-värden där tangenten till grafen för</p><p>\\[f(x)=x^3-6x^2+9x+1\\]</p><p>är horisontell. Ange också koordinaterna för motsvarande punkter på grafen.</p>",
     "s": "<p><strong>Exempel på metod i digitalt verktyg:</strong> Man kan skriva in \\(f(x)=x^3-6x^2+9x+1\\) och sedan antingen derivera till \\(f^{\\prime}(x)\\) och lösa \\(f^{\\prime}(x)=0\\), eller använda ett kommando som hittar extrempunkter.</p><p>Algebraiskt får man</p><p>\\[f^{\\prime}(x)=3x^2-12x+9.\\]</p><p>Lös ekvationen:</p><p>\\[3x^2-12x+9=0\\]</p><p>\\[x^2-4x+3=0\\]</p><p>\\[(x-1)(x-3)=0.\\]</p><p>Alltså är \\(x=1\\) eller \\(x=3\\).</p><p>Beräkna funktionsvärdena:</p><p>\\[f(1)=1-6+9+1=5\\]</p><p>\\[f(3)=27-54+27+1=1.\\]</p><p><strong>Svar:</strong> Tangenten är horisontell i punkterna \\(\\boxed{(1,5)}\\) och \\(\\boxed{(3,1)}\\).</p>",
     "familj": "mato1_derivering_digitala_horisontell_tangent",
     "miniräknare": true,
@@ -3557,7 +3557,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Följande programidé använder ändringskvoten för att approximera derivatan av en funktion \\(f\\) i punkten \\(x=a\\).</p><pre style=\"font-family:IBM Plex Mono,monospace;font-size:12px;line-height:1,55;background:#F4F5F7;border:1px solid #E4E3E6;border-radius:8px;padding:10px 12px;overflow:auto\">def derivata(f, a, h):\n    return ( ________ ) / h</pre><p>a) Fyll i det saknade uttrycket.<br>b) Använd sedan programidén för att approximera derivatan av \\(f(x)=x^2+1\\) i punkten \\(x=3\\) med \\(h=0,1\\).</p>",
+    "t": "<p>Följande programidé använder ändringskvoten för att approximera derivatan av en funktion \\(f\\) i punkten \\(x=a\\).</p><pre style=\"font-family:IBM Plex Mono,monospace;font-size:12px;line-height:1,55;background:#F4F5F7;border:1px solid #E4E3E6;border-radius:8px;padding:10px 12px;overflow:auto\">def derivata(f, a, h): return ( ________ ) / h</pre><p>a) Fyll i det saknade uttrycket.<br>b) Använd sedan programidén för att approximera derivatan av \\(f(x)=x^2+1\\) i punkten \\(x=3\\) med \\(h=0,1\\).</p>",
     "s": "<p><strong>a)</strong> En framåtriktad ändringskvot skrivs</p><p>\\[\\frac{f(a+h)-f(a)}{h}.\\]</p><p>Det saknade uttrycket är alltså <code>f(a+h) - f(a)</code>.</p><p><strong>b)</strong> Här är \\(f(x)=x^2+1\\), \\(a=3\\) och \\(h=0,1\\).</p><p>Först beräknar vi</p><p>\\[f(3,1)=3,1^2+1=9,61+1=10,61\\]</p><p>och</p><p>\\[f(3)=3^2+1=10.\\]</p><p>Då blir approximationen</p><p>\\[\\frac{10,61-10}{0,1}=\\frac{0,61}{0,1}=6,1.\\]</p><p>Detta ligger nära det exakta värdet \\(f^{\\prime}(3)=6\\).</p><p><strong>Svar:</strong> a) <code>f(a+h) - f(a)</code> &nbsp;&nbsp; b) \\(\\boxed{6,1}\\).</p>",
     "familj": "mato1_programmering_derivering_diffkvot",
     "miniräknare": false,
@@ -4536,7 +4536,7 @@ window.BANKMATO1 = [
     "s": "<p>Använd ändringskvoten \\(\\Delta y/\\Delta x\\). Insättning ger <strong>120 besökare/h</strong>.</p>",
     "familj": "r2_derbeg_E_2",
     "id": "2.86",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -5864,7 +5864,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[f^{\\prime}(0)=\\ln2\\approx0,693,\\qquad g^{\\prime}(0)=1.\\]</p><p>Alltså har \\(e^x\\) större tangentlutning vid 0 och växer där initialt snabbare.</p>",
     "familj": "r2_exp_A_1",
     "id": "2.169",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -6584,7 +6584,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm det \\(x\\)-värde där funktionen \\(f(x)=2^x\\) har derivatan 10.</p>",
     "s": "<p>\\[f^{\\prime}(x)=2^x\\ln2.\\]</p><p>Sätt lika med 10:</p><p>\\[2^x=\\frac{10}{\\ln2}.\\]</p><p>Logaritmera:</p><p>\\[x\\ln2=\\ln\\!\\left(\\frac{10}{\\ln2}\\right).\\]</p><p>\\[\\boxed{x=\\frac{\\ln(10/\\ln2)}{\\ln2}\\approx3,85}.\\]</p>",
     "familj": "ref_exp_deriv_threshold",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -6664,7 +6664,7 @@ window.BANKMATO1 = [
     "t": "<p>En exponentialfunktion har formen \\(f(x)=C\\cdot 4^x\\). Det gäller att \\(f(0)=3\\).</p><p>Bestäm \\(f^{\\prime}(2)\\).</p>",
     "s": "<p>Från \\(f(0)=C=3\\) fås \\(f(x)=3\\cdot4^x\\).</p><p>\\[f^{\\prime}(x)=3\\cdot4^x\\ln4.\\]</p><p>\\[\\boxed{f^{\\prime}(2)=48\\ln4\\approx66,5}.\\]</p>",
     "familj": "ref_exp_bestam_C",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -6984,7 +6984,7 @@ window.BANKMATO1 = [
     "t": "<p>En exponentialfunktion \\(f(x)=C\\cdot a^x\\), där \\(C>0\\) och \\(a>1\\), uppfyller</p><p>\\[f(2)=50\\quad\\text{och}\\quad f^{\\prime}(2)=20.\\]</p><p>Bestäm basen \\(a\\).</p>",
     "s": "<p>För en exponentialfunktion gäller</p><p>\\[f^{\\prime}(x)=f(x)\\ln a.\\]</p><p>Vid \\(x=2\\):</p><p>\\[20=50\\ln a\\Rightarrow \\ln a=0,4.\\]</p><p>Alltså \\(\\boxed{a=e^{0,4}\\approx1,492}\\).</p>",
     "familj": "ref_exp_value_deriv_bas",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7032,7 +7032,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm funktionens största och minsta värde på intervallet \\([-1,3]\\) med hjälp av derivata:</p><p>\\[f(x)=x^{3} - 3 x^{2} + 2.\\]</p>",
     "s": "<p>Derivatan är \\(f^{\\prime}(x)=3 x^{2} - 6 x\\). Derivatans nollställen i intervallet är \\(0, 2\\).</p><p>Kontrollera både derivatans nollställen och intervallets ändpunkter:</p><p>\\[f(-1)=-2\\]</p><p>\\[f(3)=2\\]</p><p>\\[f(0)=2\\]</p><p>\\[f(2)=-2\\]</p><p><strong>Största värde:</strong> \\(2\\) vid \\(x=3\\).</p><p><strong>Minsta värde:</strong> \\(-2\\) vid \\(x=-1\\).</p>",
     "familj": "extrem_intervall_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7096,7 +7096,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklists hastighet beskrivs av \\(v(t)=4+0,5t\\), där \\(t\\) mäts i sekunder och \\(v\\) i m/s.</p><p>Hur långt färdas cyklisten mellan \\(t=0\\) och \\(t=10\\)?</p>",
     "s": "<p>Sträckan fås genom att integrera hastigheten:</p><p>\\[s=\\int_{0}^{10}\\frac{t}{2} + 4\\,dt.\\]</p><p>\\[s=65.\\]</p><p><strong>Svar:</strong> \\(\\boxed{65\\text{ m}}\\).</p>",
     "familj": "intapp_hastighet_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7128,7 +7128,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm funktionens största och minsta värde på intervallet \\([-3,2]\\) med hjälp av derivata:</p><p>\\[f(x)=x^{4} - 4 x^{2}.\\]</p>",
     "s": "<p>Derivatan är \\(f^{\\prime}(x)=4 x^{3} - 8 x\\). Derivatans nollställen i intervallet är \\(0, - \\sqrt{2}, \\sqrt{2}\\).</p><p>Kontrollera både derivatans nollställen och intervallets ändpunkter:</p><p>\\[f(-3)=45\\]</p><p>\\[f(2)=0\\]</p><p>\\[f(0)=0\\]</p><p>\\[f(- \\sqrt{2})=-4\\]</p><p>\\[f(\\sqrt{2})=-4\\]</p><p><strong>Största värde:</strong> \\(45\\) vid \\(x=-3\\).</p><p><strong>Minsta värde:</strong> \\(-4\\) vid \\(x=- \\sqrt{2}\\).</p>",
     "familj": "extrem_intervall_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7192,7 +7192,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett tågs hastighet beskrivs av \\(v(t)=20-0,4t\\), där \\(t\\) mäts i sekunder och \\(v\\) i m/s.</p><p>Hur långt färdas tåget mellan \\(t=0\\) och \\(t=20\\)?</p>",
     "s": "<p>Sträckan fås genom att integrera hastigheten:</p><p>\\[s=\\int_{0}^{20}20 - \\frac{2 t}{5}\\,dt.\\]</p><p>\\[s=320.\\]</p><p><strong>Svar:</strong> \\(\\boxed{320\\text{ m}}\\).</p>",
     "familj": "intapp_hastighet_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7224,7 +7224,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm funktionens största och minsta värde på intervallet \\([0,5]\\) med hjälp av derivata:</p><p>\\[f(x)=- x^{2} + 6 x - 5.\\]</p>",
     "s": "<p>Derivatan är \\(f^{\\prime}(x)=6 - 2 x\\). Derivatans nollställen i intervallet är \\(3\\).</p><p>Kontrollera både derivatans nollställen och intervallets ändpunkter:</p><p>\\[f(0)=-5\\]</p><p>\\[f(5)=0\\]</p><p>\\[f(3)=4\\]</p><p><strong>Största värde:</strong> \\(4\\) vid \\(x=3\\).</p><p><strong>Minsta värde:</strong> \\(-5\\) vid \\(x=0\\).</p>",
     "familj": "extrem_intervall_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7288,7 +7288,7 @@ window.BANKMATO1 = [
     "t": "<p>Flödet av vatten beskrivs av</p><p>\\[q(t)=0,8-0,02t\\]</p><p>där \\(q\\) mäts i m³/min. Bestäm den totala mängden som passerar under de första 20 minuterna.</p>",
     "s": "<p>Total mängd är integralen av flödeshastigheten:</p><p>\\[V=\\int_0^{20}(0,8-0,02t)\\,dt=12.\\]</p><p><strong>Svar:</strong> \\(12\\) m³.</p>",
     "familj": "intapp_flode_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7320,7 +7320,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 40 cm.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"96\" y=\"62\" width=\"205\" height=\"126\" fill=\"#F5F8FC\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"198\" y=\"209\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">x</text><text x=\"62\" y=\"128\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">20-x</text></svg></span><p>Bestäm rektangelns största möjliga area med hjälp av derivata.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) cm. Om den andra sidan är \\(y\\) gäller</p><p>\\[2x+2y=40\\Rightarrow y=20-x.\\]</p><p>Arean blir</p><p>\\[A(x)=x(20-x)=20x-x^2.\\]</p><p>\\[A^{\\prime}(x)=20-2x.\\]</p><p>\\[20-2x=0\\Rightarrow x=10.\\]</p><p>Då är även \\(y=20-10=10\\). Eftersom \\(A^{\\prime\\prime}(x)=-2&lt;0\\) ger punkten ett maximum.</p><p><strong>Svar:</strong> sidlängderna är \\(10\\) cm och \\(10\\) cm och största arean är \\(\\boxed{100\\text{ cm}^2}\\).</p>",
     "familj": "extrem_rektangel_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7416,7 +7416,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 52 cm.</p><p>Bestäm rektangelns största möjliga area med hjälp av derivata.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) cm. Då är den andra sidan \\(26-x\\) eftersom \\(2x+2y=52\\).</p><p>Arean blir</p><p>\\[A(x)=x(26-x)=26x-x^2.\\]</p><p>\\[A^{\\prime}(x)=26-2x.\\]</p><p>Sätt derivatan lika med noll:</p><p>\\[26-2x=0\\Rightarrow x=13.\\]</p><p>Andraderivatan är \\(A^{\\prime\\prime}(x)=-2&lt;0\\), alltså är det ett maximum.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{169\\text{ cm}^2}\\), och rektangeln är en kvadrat.</p>",
     "familj": "extrem_rektangel_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7480,7 +7480,7 @@ window.BANKMATO1 = [
     "t": "<p>En tanks volym \\(V(t)\\) förändras med hastigheten \\(V^{\\prime}(t)=12-0,5t\\) liter/minut. Vid \\(t=0\\) finns 80 liter i tanken.</p><p>Hur mycket finns i tanken efter 10 minuter?</p>",
     "s": "<p>Volymförändringen under de första 10 minuterna är</p><p>\\[\\int_0^{10}(12-0,5t)dt=\\left[12t-0,25t^2\\right]_0^{10}=120-25=95.\\]</p><p>Startvolymen var 80 liter, alltså</p><p>\\[V(10)=80+95=175.\\]</p><p><strong>Svar:</strong> \\(\\boxed{175\\text{ liter}}\\).</p>",
     "familj": "intapp_startvarde",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7512,7 +7512,7 @@ window.BANKMATO1 = [
     "t": "<p>Från en kvadratisk kartong med sidan 24 cm klipps lika stora kvadrater med sidan \\(x\\) bort i varje hörn. Kanterna viks upp till en öppen låda.</p><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
     "s": "<p>Lådans höjd blir \\(x\\) och botten får sidan \\(24-2x\\). Volymen är</p><p>\\[V(x)=x(24-2x)^2.\\]</p><p>Derivera:</p><p>\\[V^{\\prime}(x)=(24-2x)(24-6x).\\]</p><p>I det fysiskt relevanta intervallet \\(0&lt;x&lt;12,0\\) ger \\(24-6x=0\\):</p><p>\\[x=24/6=4.\\]</p><p>Ändpunkterna ger volym 0 och teckenstudium visar att denna punkt ger maximum.</p><p><strong>Svar:</strong> \\(\\boxed{x=4\\text{ cm}}\\).</p>",
     "familj": "extrem_lada_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7608,7 +7608,7 @@ window.BANKMATO1 = [
     "t": "<p>Från en kvadratisk kartong med sidan 30 cm klipps lika stora kvadrater med sidan \\(x\\) bort i varje hörn. Kanterna viks upp till en öppen låda.</p><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
     "s": "<p>Lådans höjd blir \\(x\\) och botten får sidan \\(30-2x\\). Volymen är</p><p>\\[V(x)=x(30-2x)^2.\\]</p><p>Derivera:</p><p>\\[V^{\\prime}(x)=(30-2x)(30-6x).\\]</p><p>I det fysiskt relevanta intervallet \\(0&lt;x&lt;15,0\\) ger \\(30-6x=0\\):</p><p>\\[x=30/6=5.\\]</p><p>Ändpunkterna ger volym 0 och teckenstudium visar att denna punkt ger maximum.</p><p><strong>Svar:</strong> \\(\\boxed{x=5\\text{ cm}}\\).</p>",
     "familj": "extrem_lada_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7768,7 +7768,7 @@ window.BANKMATO1 = [
     "t": "<p>Två vägar i en förenklad karta beskrivs av \\(y=4-x^2\\) och \\(y=x\\).</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"250\" viewBox=\"0 0 390 250\" role=\"img\" aria-label=\"Området mellan parabeln y=4-x^2 och linjen y=x är markerat\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"248\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"18\" x2=\"45.0\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"98.3\" y1=\"18\" x2=\"98.3\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"151.7\" y1=\"18\" x2=\"151.7\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"205.0\" y1=\"18\" x2=\"205.0\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"258.3\" y1=\"18\" x2=\"258.3\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"311.7\" y1=\"18\" x2=\"311.7\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"365.0\" y1=\"18\" x2=\"365.0\" y2=\"215\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"215.0\" x2=\"365\" y2=\"215.0\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"190.4\" x2=\"365\" y2=\"190.4\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"165.8\" x2=\"365\" y2=\"165.8\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"141.1\" x2=\"365\" y2=\"141.1\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"116.5\" x2=\"365\" y2=\"116.5\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"91.9\" x2=\"365\" y2=\"91.9\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"67.2\" x2=\"365\" y2=\"67.2\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"42.6\" x2=\"365\" y2=\"42.6\" stroke=\"#EEEDEF\"/><line x1=\"45\" y1=\"18.0\" x2=\"365\" y2=\"18.0\" stroke=\"#EEEDEF\"/><polygon points=\"68.4,204.2 71.1,197.8 73.9,191.5 76.6,185.3 79.4,179.2 82.1,173.3 84.9,167.5 87.6,161.9 90.4,156.4 93.1,151.0 95.9,145.7 98.6,140.6 101.4,135.6 104.1,130.7 106.9,126.0 109.6,121.4 112.4,116.9 115.1,112.6 117.9,108.4 120.6,104.3 123.4,100.3 126.1,96.5 128.9,92.8 131.6,89.3 134.4,85.8 137.1,82.5 139.9,79.4 142.6,76.3 145.3,73.4 148.1,70.7 150.8,68.0 153.6,65.5 156.3,63.1 159.1,60.9 161.8,58.8 164.6,56.8 167.3,54.9 170.1,53.2 172.8,51.6 175.6,50.1 178.3,48.8 181.1,47.6 183.8,46.5 186.6,45.6 189.3,44.8 192.1,44.1 194.8,43.5 197.6,43.1 200.3,42.8 203.1,42.7 205.8,42.6 208.6,42.7 211.3,43.0 214.1,43.3 216.8,43.8 219.6,44.5 222.3,45.2 225.1,46.1 227.8,47.1 230.6,48.3 233.3,49.6 236.1,51.0 238.8,52.5 241.6,54.2 244.3,56.0 247.1,57.9 249.8,60.0 252.5,62.2 255.3,64.5 258.0,67.0 260.8,69.6 263.5,72.3 266.3,75.1 269.0,78.1 271.8,81.2 274.5,84.5 277.3,87.9 280.0,91.4 282.8,95.0 285.5,98.8 288.3,102.7 288.3,102.7 285.5,103.9 282.8,105.2 280.0,106.5 277.3,107.7 274.5,109.0 271.8,110.3 269.0,111.6 266.3,112.8 263.5,114.1 260.8,115.4 258.0,116.6 255.3,117.9 252.5,119.2 249.8,120.4 247.1,121.7 244.3,123.0 241.6,124.2 238.8,125.5 236.1,126.8 233.3,128.1 230.6,129.3 227.8,130.6 225.1,131.9 222.3,133.1 219.6,134.4 216.8,135.7 214.1,136.9 211.3,138.2 208.6,139.5 205.8,140.7 203.1,142.0 200.3,143.3 197.6,144.6 194.8,145.8 192.1,147.1 189.3,148.4 186.6,149.6 183.8,150.9 181.1,152.2 178.3,153.4 175.6,154.7 172.8,156.0 170.1,157.2 167.3,158.5 164.6,159.8 161.8,161.1 159.1,162.3 156.3,163.6 153.6,164.9 150.8,166.1 148.1,167.4 145.3,168.7 142.6,169.9 139.9,171.2 137.1,172.5 134.4,173.7 131.6,175.0 128.9,176.3 126.1,177.6 123.4,178.8 120.6,180.1 117.9,181.4 115.1,182.6 112.4,183.9 109.6,185.2 106.9,186.4 104.1,187.7 101.4,189.0 98.6,190.2 95.9,191.5 93.1,192.8 90.4,194.1 87.6,195.3 84.9,196.6 82.1,197.9 79.4,199.1 76.6,200.4 73.9,201.7 71.1,202.9 68.4,204.2\" fill=\"#EAF0F8\" opacity=\"0.9\"/><line x1=\"205.0\" y1=\"18\" x2=\"205.0\" y2=\"215\" stroke=\"#2B2527\"/><line x1=\"45\" y1=\"141.1\" x2=\"365\" y2=\"141.1\" stroke=\"#2B2527\"/><path d=\"M 45.0 264.2 L 46.8 259.4 L 48.6 254.5 L 50.3 249.7 L 52.1 245.0 L 53.9 240.3 L 55.7 235.7 L 57.4 231.1 L 59.2 226.6 L 61.0 222.1 L 62.8 217.7 L 64.6 213.4 L 66.3 209.1 L 68.1 204.8 L 69.9 200.7 L 71.7 196.5 L 73.4 192.5 L 75.2 188.4 L 77.0 184.5 L 78.8 180.6 L 80.6 176.7 L 82.3 172.9 L 84.1 169.1 L 85.9 165.4 L 87.7 161.8 L 89.4 158.2 L 91.2 154.7 L 93.0 151.2 L 94.8 147.8 L 96.6 144.4 L 98.3 141.1 L 100.1 137.9 L 101.9 134.7 L 103.7 131.5 L 105.4 128.4 L 107.2 125.4 L 109.0 122.4 L 110.8 119.5 L 112.6 116.6 L 114.3 113.8 L 116.1 111.0 L 117.9 108.3 L 119.7 105.7 L 121.4 103.1 L 123.2 100.5 L 125.0 98.0 L 126.8 95.6 L 128.6 93.2 L 130.3 90.9 L 132.1 88.6 L 133.9 86.4 L 135.7 84.2 L 137.4 82.1 L 139.2 80.1 L 141.0 78.1 L 142.8 76.1 L 144.6 74.3 L 146.3 72.4 L 148.1 70.6 L 149.9 68.9 L 151.7 67.2 L 153.4 65.6 L 155.2 64.1 L 157.0 62.6 L 158.8 61.1 L 160.6 59.7 L 162.3 58.4 L 164.1 57.1 L 165.9 55.9 L 167.7 54.7 L 169.4 53.6 L 171.2 52.5 L 173.0 51.5 L 174.8 50.5 L 176.6 49.6 L 178.3 48.8 L 180.1 48.0 L 181.9 47.2 L 183.7 46.6 L 185.4 45.9 L 187.2 45.4 L 189.0 44.8 L 190.8 44.4 L 192.6 44.0 L 194.3 43.6 L 196.1 43.3 L 197.9 43.1 L 199.7 42.9 L 201.4 42.7 L 203.2 42.7 L 205.0 42.6 L 206.8 42.7 L 208.6 42.7 L 210.3 42.9 L 212.1 43.1 L 213.9 43.3 L 215.7 43.6 L 217.4 44.0 L 219.2 44.4 L 221.0 44.8 L 222.8 45.4 L 224.6 45.9 L 226.3 46.6 L 228.1 47.2 L 229.9 48.0 L 231.7 48.8 L 233.4 49.6 L 235.2 50.5 L 237.0 51.5 L 238.8 52.5 L 240.6 53.6 L 242.3 54.7 L 244.1 55.9 L 245.9 57.1 L 247.7 58.4 L 249.4 59.7 L 251.2 61.1 L 253.0 62.6 L 254.8 64.1 L 256.6 65.6 L 258.3 67.2 L 260.1 68.9 L 261.9 70.6 L 263.7 72.4 L 265.4 74.3 L 267.2 76.1 L 269.0 78.1 L 270.8 80.1 L 272.6 82.1 L 274.3 84.2 L 276.1 86.4 L 277.9 88.6 L 279.7 90.9 L 281.4 93.2 L 283.2 95.6 L 285.0 98.0 L 286.8 100.5 L 288.6 103.1 L 290.3 105.7 L 292.1 108.3 L 293.9 111.0 L 295.7 113.8 L 297.4 116.6 L 299.2 119.5 L 301.0 122.4 L 302.8 125.4 L 304.6 128.4 L 306.3 131.5 L 308.1 134.7 L 309.9 137.9 L 311.7 141.1 L 313.4 144.4 L 315.2 147.8 L 317.0 151.2 L 318.8 154.7 L 320.6 158.2 L 322.3 161.8 L 324.1 165.4 L 325.9 169.1 L 327.7 172.9 L 329.4 176.7 L 331.2 180.6 L 333.0 184.5 L 334.8 188.4 L 336.6 192.5 L 338.3 196.5 L 340.1 200.7 L 341.9 204.8 L 343.7 209.1 L 345.4 213.4 L 347.2 217.7 L 349.0 222.1 L 350.8 226.6 L 352.6 231.1 L 354.3 235.7 L 356.1 240.3 L 357.9 245.0 L 359.7 249.7 L 361.4 254.5 L 363.2 259.4 L 365.0 264.2\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/><path d=\"M 45.0 215.0 L 46.8 214.2 L 48.6 213.4 L 50.3 212.5 L 52.1 211.7 L 53.9 210.9 L 55.7 210.1 L 57.4 209.3 L 59.2 208.4 L 61.0 207.6 L 62.8 206.8 L 64.6 206.0 L 66.3 205.2 L 68.1 204.3 L 69.9 203.5 L 71.7 202.7 L 73.4 201.9 L 75.2 201.0 L 77.0 200.2 L 78.8 199.4 L 80.6 198.6 L 82.3 197.8 L 84.1 196.9 L 85.9 196.1 L 87.7 195.3 L 89.4 194.5 L 91.2 193.7 L 93.0 192.8 L 94.8 192.0 L 96.6 191.2 L 98.3 190.4 L 100.1 189.6 L 101.9 188.7 L 103.7 187.9 L 105.4 187.1 L 107.2 186.3 L 109.0 185.4 L 110.8 184.6 L 112.6 183.8 L 114.3 183.0 L 116.1 182.2 L 117.9 181.3 L 119.7 180.5 L 121.4 179.7 L 123.2 178.9 L 125.0 178.1 L 126.8 177.2 L 128.6 176.4 L 130.3 175.6 L 132.1 174.8 L 133.9 174.0 L 135.7 173.1 L 137.4 172.3 L 139.2 171.5 L 141.0 170.7 L 142.8 169.9 L 144.6 169.0 L 146.3 168.2 L 148.1 167.4 L 149.9 166.6 L 151.7 165.8 L 153.4 164.9 L 155.2 164.1 L 157.0 163.3 L 158.8 162.5 L 160.6 161.6 L 162.3 160.8 L 164.1 160.0 L 165.9 159.2 L 167.7 158.4 L 169.4 157.5 L 171.2 156.7 L 173.0 155.9 L 174.8 155.1 L 176.6 154.3 L 178.3 153.4 L 180.1 152.6 L 181.9 151.8 L 183.7 151.0 L 185.4 150.2 L 187.2 149.3 L 189.0 148.5 L 190.8 147.7 L 192.6 146.9 L 194.3 146.1 L 196.1 145.2 L 197.9 144.4 L 199.7 143.6 L 201.4 142.8 L 203.2 141.9 L 205.0 141.1 L 206.8 140.3 L 208.6 139.5 L 210.3 138.7 L 212.1 137.8 L 213.9 137.0 L 215.7 136.2 L 217.4 135.4 L 219.2 134.6 L 221.0 133.7 L 222.8 132.9 L 224.6 132.1 L 226.3 131.3 L 228.1 130.5 L 229.9 129.6 L 231.7 128.8 L 233.4 128.0 L 235.2 127.2 L 237.0 126.3 L 238.8 125.5 L 240.6 124.7 L 242.3 123.9 L 244.1 123.1 L 245.9 122.2 L 247.7 121.4 L 249.4 120.6 L 251.2 119.8 L 253.0 119.0 L 254.8 118.1 L 256.6 117.3 L 258.3 116.5 L 260.1 115.7 L 261.9 114.9 L 263.7 114.0 L 265.4 113.2 L 267.2 112.4 L 269.0 111.6 L 270.8 110.8 L 272.6 109.9 L 274.3 109.1 L 276.1 108.3 L 277.9 107.5 L 279.7 106.6 L 281.4 105.8 L 283.2 105.0 L 285.0 104.2 L 286.8 103.4 L 288.6 102.5 L 290.3 101.7 L 292.1 100.9 L 293.9 100.1 L 295.7 99.3 L 297.4 98.4 L 299.2 97.6 L 301.0 96.8 L 302.8 96.0 L 304.6 95.2 L 306.3 94.3 L 308.1 93.5 L 309.9 92.7 L 311.7 91.9 L 313.4 91.1 L 315.2 90.2 L 317.0 89.4 L 318.8 88.6 L 320.6 87.8 L 322.3 86.9 L 324.1 86.1 L 325.9 85.3 L 327.7 84.5 L 329.4 83.7 L 331.2 82.8 L 333.0 82.0 L 334.8 81.2 L 336.6 80.4 L 338.3 79.6 L 340.1 78.7 L 341.9 77.9 L 343.7 77.1 L 345.4 76.3 L 347.2 75.5 L 349.0 74.6 L 350.8 73.8 L 352.6 73.0 L 354.3 72.2 L 356.1 71.4 L 357.9 70.5 L 359.7 69.7 L 361.4 68.9 L 363.2 68.1 L 365.0 67.2\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.4\"/><text x=\"250\" y=\"54\" font-size=\"11\" fill=\"#B43123\">y = 4 - x²</text><text x=\"288\" y=\"122\" font-size=\"11\" fill=\"#2A5D9E\">y = x</text><text x=\"192\" y=\"117\" font-size=\"11\" fill=\"#5C575E\">sökt area</text></svg></span><p>Bestäm arean mellan kurvorna mellan deras skärningspunkter.</p>",
     "s": "<p>Skärningspunkternas x-värden fås av</p><p>\\[4-x^2=x\\Rightarrow x^2+x-4=0,\\]</p><p>så</p><p>\\[x_1=\\frac{-1-\\sqrt{17}}2,\\qquad x_2=\\frac{-1+\\sqrt{17}}2.\\]</p><p>Mellan dessa punkter ligger parabeln \\(y=4-x^2\\) ovanför linjen \\(y=x\\). Arean är därför</p><p>\\[A=\\int_{x_1}^{x_2}(4-x^2-x)\\,dx=\\frac{17\\sqrt{17}}6.\\]</p><p><strong>Svar:</strong> \\(\\boxed{\\frac{17\\sqrt{17}}6}\\) areaenheter.</p>",
     "familj": "intapp_area_mellan_kurvor",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7800,7 +7800,7 @@ window.BANKMATO1 = [
     "t": "<p>På parabeln \\(y=x^2\\) ligger en punkt \\(P=(x,x^2)\\). Bestäm den punkt på parabeln som ligger närmast punkten \\(Q=(0,3)\\).</p>",
     "s": "<p>Minimera kvadraten av avståndet; det ger samma punkt men enklare derivata:</p><p>\\[D(x)=x^2+(x^2-3)^2.\\]</p><p>\\[D^{\\prime}(x)=2x+4x(x^2-3)=2x(2x^2-5).\\]</p><p>Derivatan är noll för \\(x=0\\) eller \\(x=\\pm\\sqrt{5/2}\\).</p><p>Vid \\(x=0\\) är \\(D=9\\). Vid \\(x=\\pm\\sqrt{5/2}\\) är \\(x^2=5/2\\) och</p><p>\\[D=\\frac52+\\left(-\\frac12\\right)^2=\\frac{11}{4}.\\]</p><p>Alltså är de närmaste punkterna</p><p>\\[\\boxed{\\left(\\pm\\sqrt{\\frac52},\\frac52\\right)}.\\]</p>",
     "familj": "extrem_narmaste_punkt",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7864,7 +7864,7 @@ window.BANKMATO1 = [
     "t": "<p>En funktion \\(r(t)\\) mäts i personer/minut och beskriver hur snabbt besökare går in på en arena.</p><p>Förklara vad uttrycket \\(\\int_{15}^{45}r(t)dt\\) betyder och vilken enhet resultatet har.</p>",
     "s": "<p>Integralen summerar inflödet från minut 15 till minut 45. Den beskriver alltså <strong>det totala antalet personer som går in under detta tidsintervall</strong>.</p><p>Enheten blir</p><p>\\[\\frac{personer}{minut}\\cdot minut=personer.\\]</p>",
     "familj": "intapp_tolka_enhet",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7896,8 +7896,8 @@ window.BANKMATO1 = [
     "t": "<p>Undersök hur antalet extrempunkter för funktionen</p><p>\\[f(x)=x^3-3ax\\]</p><p>beror på konstanten \\(a\\).</p>",
     "s": "<p>Derivatan är</p><p>\\[f^{\\prime}(x)=3x^2-3a=3(x^2-a).\\]</p><p>Om \\(a>0\\) har derivatan två nollställen, \\(x=\\pm\\sqrt a\\). Derivatan byter tecken i båda, så grafen har två extrempunkter.</p><p>Om \\(a=0\\) är \\(f^{\\prime}(x)=3x^2\\). Derivatan är positiv på båda sidor om \\(x=0\\), så punkten är en terrasspunkt och inte en extrempunkt.</p><p>Om \\(a<0\\) saknar ekvationen \\(x^2=a\\) reella lösningar. Då finns inga extrempunkter.</p>",
     "familj": "extrem_parameter_antal",
-    "miniräknare": false,
-    "geogebra": false
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "id": "3.57",
@@ -7941,7 +7941,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Använd ett digitalt verktyg för att bestämma</p><p>\\[\\int_0^2 e^{-x^2}\\,dx\\]</p><p>med tre decimaler. Förklara varför en vanlig primitiv funktion inom kursens metoder inte används här.</p>",
+    "t": "<p>Bestäm</p><p>\\[\\int_0^2 e^{-x^2}\\,dx\\]</p><p>med tre decimaler. Förklara varför en vanlig primitiv funktion inom kursens metoder inte används här.</p>",
     "s": "<p>Ett digitalt verktyg ger</p><p>\\[\\int_0^2 e^{-x^2}\\,dx\\approx0,882.\\]</p><p>Formlerna för primitiva funktioner på formelbladet kan inte användas direkt på \\(e^{-x^2}\\). Därför är det lämpligt att bestämma integralen med ett digitalt verktyg.</p><p><strong>Svar:</strong> \\(\\boxed{0,882}\\).</p>",
     "familj": "integral_digital_gauss",
     "miniräknare": true,
@@ -7960,7 +7960,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklists hastighet ges under de första 3 sekunderna av \\(v(t)=4+t\\) m/s.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" role=\"img\" aria-label=\"Hastighet-tid-diagram med markerad area under grafen\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"20\" x2=\"48.0\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"127.2\" y1=\"20\" x2=\"127.2\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"206.5\" y1=\"20\" x2=\"206.5\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"285.8\" y1=\"20\" x2=\"285.8\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"365.0\" y1=\"20\" x2=\"365.0\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"195.0\" x2=\"365\" y2=\"195.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"151.2\" x2=\"365\" y2=\"151.2\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"107.5\" x2=\"365\" y2=\"107.5\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"63.8\" x2=\"365\" y2=\"63.8\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"20.0\" x2=\"365\" y2=\"20.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"195\" x2=\"370\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"48\" y1=\"195\" x2=\"48\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polygon points=\"48.0,195.0 48.0,117.2 365.0,58.9 365.0,195.0\" fill=\"#EAF0F8\" opacity=\"0.85\"/><line x1=\"48.0\" y1=\"117.2\" x2=\"365.0\" y2=\"58.9\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"365\" y=\"217\" text-anchor=\"end\" font-size=\"11\">t (s)</text><text x=\"54\" y=\"30\" font-size=\"11\">v (m/s)</text><text x=\"365.0\" y=\"211\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"40\" y=\"120.2\" text-anchor=\"end\" font-size=\"10\">4</text></svg></span><p>Hur långt färdas cyklisten under tidsintervallet?</p>",
     "s": "<p>Sträckan motsvarar arean under hastighetsgrafen:</p><p>\\[s=\\int_0^3(4+t)\\,dt=\\left[4t+\\frac{t^2}{2}\\right]_0^3=16,5\\text{ m}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{16,5\\text{ m}}\\).</p>",
     "familj": "topup_intapp_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -7992,7 +7992,7 @@ window.BANKMATO1 = [
     "t": "<p>Två cyklister rör sig längs samma sträcka. Deras positioner beskrivs av</p><p>\\[s_1(t)=30 x,\\qquad s_2(t)=x^{3} - 6 x^{2} + 36 x.\\]</p><p>Bestäm när avståndet mellan dem är störst på intervallet \\(0\\le t\\le 3\\).</p>",
     "s": "<p>Bilda skillnaden \\(h(t)=s_1(t)-s_2(t)=- x^{3} + 6 x^{2} - 6 x\\). Avståndet är \\(|h(t)|\\).</p><p>Undersök derivatans nollställen från \\(h^{\\prime}(t)=- 3 x^{2} + 12 x - 6=0\\) samt intervallets ändpunkter.</p><p>Relevanta kandidater är \\(0, 3, 2 - \\sqrt{2}\\).</p><p>Största avståndet fås vid \\(t=3\\), då avståndet är ungefär \\(9\\) längdenheter.</p>",
     "familj": "extrem_avstand_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8056,7 +8056,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklists hastighet ges under 4 sekunder av \\(v(t)=5+2t\\) m/s. Hur långt färdas cyklisten under tidsintervallet?</p>",
     "s": "<p>Sträckan är integralen av hastigheten:</p><p>\\[s=\\int_0^4(5+2t)\\,dt=36\\text{ m}.\\]</p><p><strong>Svar:</strong> \\(36\\) m.</p>",
     "familj": "topup_intapp_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8088,7 +8088,7 @@ window.BANKMATO1 = [
     "t": "<p>Två drönare rör sig längs samma sträcka. Deras positioner beskrivs av</p><p>\\[s_1(t)=20 x + 5,\\qquad s_2(t)=- x^{2} + 24 x.\\]</p><p>Bestäm när avståndet mellan dem är störst på intervallet \\(0\\le t\\le 8\\).</p>",
     "s": "<p>Bilda skillnaden \\(h(t)=s_1(t)-s_2(t)=x^{2} - 4 x + 5\\). Avståndet är \\(|h(t)|\\).</p><p>Undersök derivatans nollställen från \\(h^{\\prime}(t)=2 x - 4=0\\) samt intervallets ändpunkter.</p><p>Relevanta kandidater är \\(0, 8, 2\\).</p><p>Största avståndet fås vid \\(t=8\\), då avståndet är ungefär \\(37\\) längdenheter.</p>",
     "familj": "extrem_avstand_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8152,7 +8152,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklists hastighet ges under 5 sekunder av \\(v(t)=6+3t\\) m/s. Hur långt färdas cyklisten under tidsintervallet?</p>",
     "s": "<p>Sträckan motsvarar arean under hastighetsgrafen, alltså integralen av hastigheten:</p><p>\\[s=\\int_0^5(6+3t)\\,dt=\\left[6t+\\frac{3t^2}{2}\\right]_0^5=30+37,5=67,5\\text{ m}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{67,5\\text{ m}}\\).</p>",
     "familj": "topup_intapp_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8248,7 +8248,7 @@ window.BANKMATO1 = [
     "t": "<p>Effekten från en liten solpanel under ett test beskrivs under 30 sekunder av \\(P(t)=120+4t\\) watt.</p><p>Hur mycket energi levererar panelen under testet? Svara i joule.</p>",
     "s": "<p>Energi är integralen av effekt över tid:</p><p>\\[E=\\int_0^{30}(120+4t)\\,dt.\\]</p><p>\\[E=\\left[120t+2t^2\\right]_0^{30}=3600+1800=5400\\text{ J}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{5400\\text{ J}}\\).</p>",
     "familj": "intapp_effekt_energi",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8280,7 +8280,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hundrastgård ska byggas intill en rak flod. Sidan mot floden behöver inget stängsel. Till de övriga tre sidorna finns 60 m stängsel.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><text x=\"195\" y=\"48\" text-anchor=\"middle\" font-size=\"11\" fill=\"#2A5D9E\">flod - inget stängsel</text><rect x=\"96\" y=\"62\" width=\"205\" height=\"126\" fill=\"#F5F8FC\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"198\" y=\"209\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">x</text><text x=\"62\" y=\"128\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">(60-x)/2</text></svg></span><p>Bestäm måtten som ger största möjliga area.</p>",
     "s": "<p>Låt sidan parallell med floden vara \\(x\\). De två andra sidorna får då vardera längden \\((60-x)/2\\).</p><p>\\[A(x)=x\\frac{60-x}2=30x-\\frac{x^2}2.\\]</p><p>\\[A^{\\prime}(x)=30-x.\\]</p><p>Maximum fås när \\(30-x=0\\), alltså \\(x=30\\). De två övriga sidorna blir \\(15\\) m. Andraderivatan är \\(-1&lt;0\\).</p><p><strong>Svar:</strong> \\(\\boxed{30\\text{ m}\\times15\\text{ m}}\\).</p>",
     "familj": "extrem_stangsel_flod",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8376,7 +8376,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel är symmetrisk kring y-axeln. Dess övre hörn ligger på parabeln \\(y=9-x^2\\) och dess undre sida ligger på x-axeln.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"250\" viewBox=\"0 0 390 250\" role=\"img\" aria-label=\"Parabeln y=9-x^2\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"248\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"67.3\" y1=\"20\" x2=\"67.3\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"67.3\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">-3</text><line x1=\"113.9\" y1=\"20\" x2=\"113.9\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"113.9\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">-2</text><line x1=\"160.4\" y1=\"20\" x2=\"160.4\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"160.4\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">-1</text><line x1=\"207.0\" y1=\"20\" x2=\"207.0\" y2=\"216\" stroke=\"#EEEDEF\"/><line x1=\"253.6\" y1=\"20\" x2=\"253.6\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"253.6\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">1</text><line x1=\"300.1\" y1=\"20\" x2=\"300.1\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"300.1\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">2</text><line x1=\"346.7\" y1=\"20\" x2=\"346.7\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"346.7\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">3</text><line x1=\"44\" y1=\"216.0\" x2=\"370\" y2=\"216.0\" stroke=\"#EEEDEF\"/><line x1=\"44\" y1=\"196.4\" x2=\"370\" y2=\"196.4\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"199.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">1</text><line x1=\"44\" y1=\"176.8\" x2=\"370\" y2=\"176.8\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"179.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">2</text><line x1=\"44\" y1=\"157.2\" x2=\"370\" y2=\"157.2\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"160.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">3</text><line x1=\"44\" y1=\"137.6\" x2=\"370\" y2=\"137.6\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"140.6\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">4</text><line x1=\"44\" y1=\"118.0\" x2=\"370\" y2=\"118.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"121.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">5</text><line x1=\"44\" y1=\"98.4\" x2=\"370\" y2=\"98.4\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"101.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">6</text><line x1=\"44\" y1=\"78.8\" x2=\"370\" y2=\"78.8\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"81.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">7</text><line x1=\"44\" y1=\"59.2\" x2=\"370\" y2=\"59.2\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"62.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">8</text><line x1=\"44\" y1=\"39.6\" x2=\"370\" y2=\"39.6\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"42.6\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">9</text><line x1=\"44\" y1=\"20.0\" x2=\"370\" y2=\"20.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"23.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">10</text><line x1=\"207.0\" y1=\"20\" x2=\"207.0\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"216.0\" x2=\"370\" y2=\"216.0\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 60.3 234.1 L 61.7 230.5 L 63.0 226.9 L 64.4 223.4 L 65.7 219.9 L 67.1 216.5 L 68.4 213.1 L 69.8 209.7 L 71.2 206.3 L 72.5 203.0 L 73.9 199.7 L 75.2 196.5 L 76.6 193.3 L 78.0 190.1 L 79.3 186.9 L 80.7 183.8 L 82.0 180.7 L 83.4 177.7 L 84.8 174.7 L 86.1 171.7 L 87.5 168.7 L 88.8 165.8 L 90.2 162.9 L 91.5 160.1 L 92.9 157.2 L 94.3 154.5 L 95.6 151.7 L 97.0 149.0 L 98.3 146.3 L 99.7 143.7 L 101.1 141.0 L 102.4 138.5 L 103.8 135.9 L 105.1 133.4 L 106.5 130.9 L 107.8 128.5 L 109.2 126.0 L 110.6 123.7 L 111.9 121.3 L 113.3 119.0 L 114.6 116.7 L 116.0 114.4 L 117.4 112.2 L 118.7 110.0 L 120.1 107.9 L 121.4 105.8 L 122.8 103.7 L 124.1 101.6 L 125.5 99.6 L 126.9 97.6 L 128.2 95.7 L 129.6 93.8 L 130.9 91.9 L 132.3 90.0 L 133.7 88.2 L 135.0 86.4 L 136.4 84.7 L 137.7 83.0 L 139.1 81.3 L 140.4 79.6 L 141.8 78.0 L 143.2 76.4 L 144.5 74.9 L 145.9 73.4 L 147.2 71.9 L 148.6 70.4 L 149.9 69.0 L 151.3 67.6 L 152.7 66.3 L 154.0 65.0 L 155.4 63.7 L 156.7 62.4 L 158.1 61.2 L 159.5 60.0 L 160.8 58.9 L 162.2 57.8 L 163.5 56.7 L 164.9 55.6 L 166.2 54.6 L 167.6 53.6 L 169.0 52.7 L 170.3 51.8 L 171.7 50.9 L 173.0 50.0 L 174.4 49.2 L 175.8 48.4 L 177.1 47.7 L 178.5 47.0 L 179.8 46.3 L 181.2 45.6 L 182.5 45.0 L 183.9 44.4 L 185.3 43.9 L 186.6 43.4 L 188.0 42.9 L 189.3 42.4 L 190.7 42.0 L 192.1 41.6 L 193.4 41.3 L 194.8 41.0 L 196.1 40.7 L 197.5 40.4 L 198.9 40.2 L 200.2 40.0 L 201.6 39.9 L 202.9 39.8 L 204.3 39.7 L 205.6 39.6 L 207.0 39.6 L 208.4 39.6 L 209.7 39.7 L 211.1 39.8 L 212.4 39.9 L 213.8 40.0 L 215.2 40.2 L 216.5 40.4 L 217.9 40.7 L 219.2 41.0 L 220.6 41.3 L 221.9 41.6 L 223.3 42.0 L 224.7 42.4 L 226.0 42.9 L 227.4 43.4 L 228.7 43.9 L 230.1 44.4 L 231.5 45.0 L 232.8 45.6 L 234.2 46.3 L 235.5 47.0 L 236.9 47.7 L 238.2 48.4 L 239.6 49.2 L 241.0 50.0 L 242.3 50.9 L 243.7 51.8 L 245.0 52.7 L 246.4 53.6 L 247.8 54.6 L 249.1 55.6 L 250.5 56.7 L 251.8 57.8 L 253.2 58.9 L 254.5 60.0 L 255.9 61.2 L 257.3 62.4 L 258.6 63.7 L 260.0 65.0 L 261.3 66.3 L 262.7 67.6 L 264.0 69.0 L 265.4 70.4 L 266.8 71.9 L 268.1 73.4 L 269.5 74.9 L 270.8 76.4 L 272.2 78.0 L 273.6 79.6 L 274.9 81.3 L 276.3 83.0 L 277.6 84.7 L 279.0 86.4 L 280.4 88.2 L 281.7 90.0 L 283.1 91.9 L 284.4 93.8 L 285.8 95.7 L 287.1 97.6 L 288.5 99.6 L 289.9 101.6 L 291.2 103.7 L 292.6 105.8 L 293.9 107.9 L 295.3 110.0 L 296.6 112.2 L 298.0 114.4 L 299.4 116.7 L 300.7 119.0 L 302.1 121.3 L 303.4 123.7 L 304.8 126.0 L 306.2 128.5 L 307.5 130.9 L 308.9 133.4 L 310.2 135.9 L 311.6 138.5 L 313.0 141.0 L 314.3 143.7 L 315.7 146.3 L 317.0 149.0 L 318.4 151.7 L 319.7 154.5 L 321.1 157.2 L 322.5 160.1 L 323.8 162.9 L 325.2 165.8 L 326.5 168.7 L 327.9 171.7 L 329.2 174.7 L 330.6 177.7 L 332.0 180.7 L 333.3 183.8 L 334.7 186.9 L 336.0 190.1 L 337.4 193.3 L 338.8 196.5 L 340.1 199.7 L 341.5 203.0 L 342.8 206.3 L 344.2 209.7 L 345.5 213.1 L 346.9 216.5 L 348.3 219.9 L 349.6 223.4 L 351.0 226.9 L 352.3 230.5 L 353.7 234.1\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Låt det övre högra hörnet vara \\((x,9-x^2)\\), där \\(0&lt;x&lt;3\\). Rektangelns bredd är då \\(2x\\) och höjden \\(9-x^2\\).</p><p>\\[A(x)=2x(9-x^2)=18x-2x^3.\\]</p><p>\\[A^{\\prime}(x)=18-6x^2.\\]</p><p>\\[18-6x^2=0\\Rightarrow x=\\sqrt3.\\]</p><p>Då är höjden \\(9-3=6\\) och bredden \\(2\\sqrt3\\). Arean blir</p><p>\\[A_{\\max}=12\\sqrt3\\approx20,8.\\]</p><p><strong>Svar:</strong> \\(\\boxed{12\\sqrt3}\\) areaenheter.</p>",
     "familj": "extrem_rektangel_under_parabel",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8440,7 +8440,7 @@ window.BANKMATO1 = [
     "t": "<p>Regnintensiteten under ett två timmar långt regn modelleras av \\(r(t)=4+3t\\) mm/h, där \\(t\\) mäts i timmar.</p><p>Bestäm den totala nederbörden under de två timmarna.</p>",
     "s": "<p>Total nederbörd fås genom att integrera intensiteten:</p><p>\\[R=\\int_0^2(4+3t)\\,dt=\\left[4t+\\frac{3t^2}{2}\\right]_0^2=8+6=14\\text{ mm}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{14\\text{ mm}}\\).</p>",
     "familj": "intapp_regn",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8472,7 +8472,7 @@ window.BANKMATO1 = [
     "t": "<p>En affisch ska ha en tryckt rektangel med arean 600 cm². Marginalen ska vara 2 cm på vardera sidan och 3 cm upptill och nedtill.</p><p>Bestäm den tryckta rektangelns mått så att hela affischens area blir så liten som möjligt.</p>",
     "s": "<p>Låt den tryckta rektangelns bredd vara \\(x\\) cm. Höjden blir då \\(600/x\\).</p><p>Hela affischens mått är \\(x+4\\) och \\(600/x+6\\), så</p><p>\\[A(x)=(x+4)\\left(\\frac{600}{x}+6\\right)=624+6x+\\frac{2400}{x}.\\]</p><p>\\[A^{\\prime}(x)=6-\\frac{2400}{x^2}.\\]</p><p>\\[6-\\frac{2400}{x^2}=0\\Rightarrow x^2=400\\Rightarrow x=20.\\]</p><p>Höjden blir \\(600/20=30\\) cm. Derivatan byter från negativ till positiv, så detta ger minimum.</p><p><strong>Svar:</strong> den tryckta ytan ska vara \\(\\boxed{20\\text{ cm}\\times30\\text{ cm}}\\).</p>",
     "familj": "extrem_affisch_marginal",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8536,7 +8536,7 @@ window.BANKMATO1 = [
     "t": "<p>En vagns hastighet är \\(v(t)=2t-4\\) m/s under \\(0\\le t\\le5\\).</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"250\" viewBox=\"0 0 390 250\" role=\"img\" aria-label=\"Hastighetsgraf som korsar tidsaxeln vid t=2\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"248\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"44.0\" y1=\"20\" x2=\"44.0\" y2=\"216\" stroke=\"#EEEDEF\"/><line x1=\"109.2\" y1=\"20\" x2=\"109.2\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"109.2\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">1</text><line x1=\"174.4\" y1=\"20\" x2=\"174.4\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"174.4\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">2</text><line x1=\"239.6\" y1=\"20\" x2=\"239.6\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"239.6\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">3</text><line x1=\"304.8\" y1=\"20\" x2=\"304.8\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"304.8\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">4</text><line x1=\"370.0\" y1=\"20\" x2=\"370.0\" y2=\"216\" stroke=\"#EEEDEF\"/><text x=\"370.0\" y=\"233\" text-anchor=\"middle\" font-size=\"10\" fill=\"#77727A\">5</text><line x1=\"44\" y1=\"216.0\" x2=\"370\" y2=\"216.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"219.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">-5</text><line x1=\"44\" y1=\"199.7\" x2=\"370\" y2=\"199.7\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"202.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">-4</text><line x1=\"44\" y1=\"183.3\" x2=\"370\" y2=\"183.3\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"186.3\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">-3</text><line x1=\"44\" y1=\"167.0\" x2=\"370\" y2=\"167.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"170.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">-2</text><line x1=\"44\" y1=\"150.7\" x2=\"370\" y2=\"150.7\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"153.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">-1</text><line x1=\"44\" y1=\"134.3\" x2=\"370\" y2=\"134.3\" stroke=\"#EEEDEF\"/><line x1=\"44\" y1=\"118.0\" x2=\"370\" y2=\"118.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"121.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">1</text><line x1=\"44\" y1=\"101.7\" x2=\"370\" y2=\"101.7\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"104.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">2</text><line x1=\"44\" y1=\"85.3\" x2=\"370\" y2=\"85.3\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"88.3\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">3</text><line x1=\"44\" y1=\"69.0\" x2=\"370\" y2=\"69.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"72.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">4</text><line x1=\"44\" y1=\"52.7\" x2=\"370\" y2=\"52.7\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"55.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">5</text><line x1=\"44\" y1=\"36.3\" x2=\"370\" y2=\"36.3\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"39.3\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">6</text><line x1=\"44\" y1=\"20.0\" x2=\"370\" y2=\"20.0\" stroke=\"#EEEDEF\"/><text x=\"37\" y=\"23.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#77727A\">7</text><line x1=\"44.0\" y1=\"20\" x2=\"44.0\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"44\" y1=\"134.3\" x2=\"370\" y2=\"134.3\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 44.0 199.7 L 45.4 199.0 L 46.7 198.3 L 48.1 197.6 L 49.4 196.9 L 50.8 196.3 L 52.1 195.6 L 53.5 194.9 L 54.9 194.2 L 56.2 193.5 L 57.6 192.9 L 58.9 192.2 L 60.3 191.5 L 61.7 190.8 L 63.0 190.1 L 64.4 189.5 L 65.7 188.8 L 67.1 188.1 L 68.5 187.4 L 69.8 186.7 L 71.2 186.1 L 72.5 185.4 L 73.9 184.7 L 75.2 184.0 L 76.6 183.3 L 78.0 182.7 L 79.3 182.0 L 80.7 181.3 L 82.0 180.6 L 83.4 179.9 L 84.8 179.2 L 86.1 178.6 L 87.5 177.9 L 88.8 177.2 L 90.2 176.5 L 91.5 175.8 L 92.9 175.2 L 94.3 174.5 L 95.6 173.8 L 97.0 173.1 L 98.3 172.4 L 99.7 171.8 L 101.0 171.1 L 102.4 170.4 L 103.8 169.7 L 105.1 169.0 L 106.5 168.4 L 107.8 167.7 L 109.2 167.0 L 110.6 166.3 L 111.9 165.6 L 113.3 165.0 L 114.6 164.3 L 116.0 163.6 L 117.4 162.9 L 118.7 162.2 L 120.1 161.6 L 121.4 160.9 L 122.8 160.2 L 124.1 159.5 L 125.5 158.8 L 126.9 158.2 L 128.2 157.5 L 129.6 156.8 L 130.9 156.1 L 132.3 155.4 L 133.7 154.8 L 135.0 154.1 L 136.4 153.4 L 137.7 152.7 L 139.1 152.0 L 140.4 151.3 L 141.8 150.7 L 143.2 150.0 L 144.5 149.3 L 145.9 148.6 L 147.2 147.9 L 148.6 147.3 L 149.9 146.6 L 151.3 145.9 L 152.7 145.2 L 154.0 144.5 L 155.4 143.9 L 156.7 143.2 L 158.1 142.5 L 159.5 141.8 L 160.8 141.1 L 162.2 140.5 L 163.5 139.8 L 164.9 139.1 L 166.2 138.4 L 167.6 137.7 L 169.0 137.1 L 170.3 136.4 L 171.7 135.7 L 173.0 135.0 L 174.4 134.3 L 175.8 133.7 L 177.1 133.0 L 178.5 132.3 L 179.8 131.6 L 181.2 130.9 L 182.5 130.2 L 183.9 129.6 L 185.3 128.9 L 186.6 128.2 L 188.0 127.5 L 189.3 126.8 L 190.7 126.2 L 192.1 125.5 L 193.4 124.8 L 194.8 124.1 L 196.1 123.4 L 197.5 122.8 L 198.8 122.1 L 200.2 121.4 L 201.6 120.7 L 202.9 120.0 L 204.3 119.4 L 205.6 118.7 L 207.0 118.0 L 208.4 117.3 L 209.7 116.6 L 211.1 116.0 L 212.4 115.3 L 213.8 114.6 L 215.2 113.9 L 216.5 113.2 L 217.9 112.6 L 219.2 111.9 L 220.6 111.2 L 221.9 110.5 L 223.3 109.8 L 224.7 109.2 L 226.0 108.5 L 227.4 107.8 L 228.7 107.1 L 230.1 106.4 L 231.4 105.8 L 232.8 105.1 L 234.2 104.4 L 235.5 103.7 L 236.9 103.0 L 238.2 102.3 L 239.6 101.7 L 241.0 101.0 L 242.3 100.3 L 243.7 99.6 L 245.0 98.9 L 246.4 98.3 L 247.8 97.6 L 249.1 96.9 L 250.5 96.2 L 251.8 95.5 L 253.2 94.9 L 254.5 94.2 L 255.9 93.5 L 257.3 92.8 L 258.6 92.1 L 260.0 91.5 L 261.3 90.8 L 262.7 90.1 L 264.1 89.4 L 265.4 88.7 L 266.8 88.1 L 268.1 87.4 L 269.5 86.7 L 270.8 86.0 L 272.2 85.3 L 273.6 84.7 L 274.9 84.0 L 276.3 83.3 L 277.6 82.6 L 279.0 81.9 L 280.4 81.2 L 281.7 80.6 L 283.1 79.9 L 284.4 79.2 L 285.8 78.5 L 287.1 77.8 L 288.5 77.2 L 289.9 76.5 L 291.2 75.8 L 292.6 75.1 L 293.9 74.4 L 295.3 73.8 L 296.6 73.1 L 298.0 72.4 L 299.4 71.7 L 300.7 71.0 L 302.1 70.4 L 303.4 69.7 L 304.8 69.0 L 306.2 68.3 L 307.5 67.6 L 308.9 67.0 L 310.2 66.3 L 311.6 65.6 L 312.9 64.9 L 314.3 64.2 L 315.7 63.6 L 317.0 62.9 L 318.4 62.2 L 319.7 61.5 L 321.1 60.8 L 322.5 60.2 L 323.8 59.5 L 325.2 58.8 L 326.5 58.1 L 327.9 57.4 L 329.2 56.8 L 330.6 56.1 L 332.0 55.4 L 333.3 54.7 L 334.7 54.0 L 336.0 53.3 L 337.4 52.7 L 338.8 52.0 L 340.1 51.3 L 341.5 50.6 L 342.8 49.9 L 344.2 49.3 L 345.6 48.6 L 346.9 47.9 L 348.3 47.2 L 349.6 46.5 L 351.0 45.9 L 352.3 45.2 L 353.7 44.5 L 355.1 43.8 L 356.4 43.1 L 357.8 42.5 L 359.1 41.8 L 360.5 41.1 L 361.8 40.4 L 363.2 39.7 L 364.6 39.1 L 365.9 38.4 L 367.3 37.7 L 368.6 37.0 L 370.0 36.3\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/></svg></span><p>a) Bestäm vagnens förflyttning.<br>b) Bestäm den totala sträcka vagnen färdas.</p>",
     "s": "<p>a) Förflyttningen fås av integralen. Hastighet under noll ger ett negativt bidrag:</p><p>\\[\\int_0^5(2t-4)\\,dt=\\left[t^2-4t\\right]_0^5=5\\text{ m}.\\]</p><p>b) Hastigheten byter tecken vid \\(t=2\\). Sträckan blir därför</p><p>\\[s=-\\int_0^2(2t-4)\\,dt+\\int_2^5(2t-4)\\,dt=4+9=13\\text{ m}.\\]</p><p><strong>Svar:</strong> förflyttning \\(5\\) m, total sträcka \\(\\boxed{13\\text{ m}}\\).</p>",
     "familj": "intapp_forflyttning_stracka",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8568,7 +8568,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett mindre företags vinst per dag modelleras av</p><p>\\[V(x)=-2x^2+48x-100,\\]</p><p>där \\(x\\) är antalet producerade tiotal enheter och \\(V\\) mäts i hundratal kronor.</p><p>Bestäm med derivata vilket \\(x\\)-värde som ger störst vinst och ange den största vinsten enligt modellen.</p>",
     "s": "<p>Derivera vinstfunktionen:</p><p>\\[V^{\\prime}(x)=-4x+48.\\]</p><p>Sätt derivatan lika med noll:</p><p>\\[-4x+48=0\\Rightarrow x=12.\\]</p><p>Eftersom \\(V^{\\prime\\prime}(x)=-4&lt;0\\) är detta ett maximum.</p><p>\\[V(12)=-2\\cdot12^2+48\\cdot12-100=188.\\]</p><p>Eftersom \\(x\\) anger tiotal enheter betyder \\(x=12\\) att företaget producerar 120 enheter. Eftersom \\(V\\) mäts i hundratal kronor motsvarar \\(V(12)=188\\) en vinst på 18 800 kr.</p><p><strong>Svar:</strong> \\(\\boxed{120\\text{ enheter}}\\) och största vinsten är \\(\\boxed{18\\,800\\text{ kr}}\\).</p>",
     "familj": "extrem_vinst_parabel",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8632,7 +8632,7 @@ window.BANKMATO1 = [
     "t": "<p>En maskin producerar komponenter med hastigheten \\(p(t)=80+5t\\) komponenter per timme under ett 6 timmar långt arbetspass.</p><p>Hur många komponenter produceras enligt modellen?</p>",
     "s": "<p>Antalet producerade komponenter är integralen av produktionshastigheten:</p><p>\\[N=\\int_0^6(80+5t)\\,dt=\\left[80t+\\frac{5t^2}{2}\\right]_0^6=480+90=570.\\]</p><p><strong>Svar:</strong> \\(\\boxed{570}\\) komponenter.</p>",
     "familj": "intapp_produktion",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8728,7 +8728,7 @@ window.BANKMATO1 = [
     "t": "<p>Diagrammet visar en löpares hastighet under de första 4 sekunderna. Hastigheten ökar linjärt från 2 m/s till 10 m/s.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" role=\"img\" aria-label=\"Hastighet-tid-diagram med markerad area under grafen\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"20\" x2=\"48.0\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"127.2\" y1=\"20\" x2=\"127.2\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"206.5\" y1=\"20\" x2=\"206.5\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"285.8\" y1=\"20\" x2=\"285.8\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"365.0\" y1=\"20\" x2=\"365.0\" y2=\"195\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"195.0\" x2=\"365\" y2=\"195.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"151.2\" x2=\"365\" y2=\"151.2\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"107.5\" x2=\"365\" y2=\"107.5\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"63.8\" x2=\"365\" y2=\"63.8\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"20.0\" x2=\"365\" y2=\"20.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"195\" x2=\"370\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"48\" y1=\"195\" x2=\"48\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polygon points=\"48.0,195.0 48.0,165.8 365.0,49.2 365.0,195.0\" fill=\"#EAF0F8\" opacity=\"0.85\"/><line x1=\"48.0\" y1=\"165.8\" x2=\"365.0\" y2=\"49.2\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"365\" y=\"217\" text-anchor=\"end\" font-size=\"11\">t (s)</text><text x=\"54\" y=\"30\" font-size=\"11\">v (m/s)</text><text x=\"365.0\" y=\"211\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"40\" y=\"168.8\" text-anchor=\"end\" font-size=\"10\">2</text></svg></span><p>Bestäm sträckan både genom geometrisk area och med en integral.</p>",
     "s": "<p><strong>Geometriskt:</strong> området är ett parallelltrapets med parallella sidor 2 och 10 samt bredd 4:</p><p>\\[s=\\frac{2+10}{2}\\cdot4=24\\text{ m}.\\]</p><p><strong>Med integral:</strong> \\(v(t)=2+2t\\), så</p><p>\\[s=\\int_0^4(2+2t)\\,dt=\\left[2t+t^2\\right]_0^4=24\\text{ m}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{24\\text{ m}}\\).</p>",
     "familj": "intapp_graf_geometri_integral",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8760,7 +8760,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hundrastgård ska omges av totalt 48 m stängsel. Bestäm med hjälp av derivata de sidlängder som ger största möjliga area.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) meter. Då måste den andra sidan vara \\(24-x\\), eftersom \\(2x+2y=48\\).</p><p>Arean är</p><p>\\[A(x)=x(24-x)=24x-x^2.\\]</p><p>Derivera:</p><p>\\[A^{\\prime}(x)=24-2x.\\]</p><p>\\[24-2x=0\\Rightarrow x=12.\\]</p><p>Andraderivatan är \\(A^{\\prime\\prime}(x)=-2&lt;0\\), så punkten ger ett maximum. Den andra sidan blir också 12 m.</p><p><strong>Svar:</strong> \\(\\boxed{12\\text{ m}\\times 12\\text{ m}}\\).</p>",
     "familj": "topup_extrem_6",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8856,7 +8856,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hundrastgård ska omges av totalt 52 m stängsel. Bestäm med hjälp av derivata de sidlängder som ger största möjliga area.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) meter. Då måste den andra sidan vara \\(26-x\\), eftersom \\(2x+2y=52\\).</p><p>Arean är</p><p>\\[A(x)=x(26-x)=26x-x^2.\\]</p><p>Derivera:</p><p>\\[A^{\\prime}(x)=26-2x.\\]</p><p>\\[26-2x=0\\Rightarrow x=13.\\]</p><p>Andraderivatan är \\(A^{\\prime\\prime}(x)=-2&lt;0\\), så punkten ger ett maximum. Den andra sidan blir också 13 m.</p><p><strong>Svar:</strong> \\(\\boxed{13\\text{ m}\\times 13\\text{ m}}\\).</p>",
     "familj": "topup_extrem_7",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8920,7 +8920,7 @@ window.BANKMATO1 = [
     "t": "<p>En idrottsförening registrerar hur många personer som kommer in i en hall varje hel timme. En elev anpassar en kontinuerlig funktion \\(r(t)\\) till mätvärdena och använder \\(\\int_0^6 r(t)\\,dt\\) för att uppskatta antalet besökare under sex timmar.</p><p>Förklara vad som måste vara sant för att metoden ska vara rimlig och ge två olika orsaker till att integralvärdet ändå kan avvika från det faktiska antalet besökare.</p>",
     "s": "<p>Integralen kan tolkas som ett antal besökare bara om \\(r(t)\\) verkligen beskriver en <strong>ankomsthastighet</strong>, till exempel personer per timme, och om den kontinuerliga modellen är en rimlig approximation mellan mättillfällena.</p><p>Två möjliga felkällor är:</p><p>• ankomster sker diskret, medan modellen antar ett kontinuerligt flöde,<br>• värdena mellan heltimmarna är inte observerade och den valda kurvan mellan mätpunkterna kan missa korta toppar eller dalar.</p><p>Även mätfel eller personer som registreras flera gånger kan påverka.</p><p><strong>Slutsats:</strong> integralen är en modellbaserad uppskattning, inte automatiskt ett exakt antal personer.</p>",
     "familj": "intapp_modellkritik_diskret_kontinuerligt",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8936,7 +8936,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[f^{\\prime}(x)=-2x+6=0\\Rightarrow x=3.\\] Eftersom andraderivatan är -2 är det maximum. \\(f(3)=10\\).</p>",
     "familj": "r2_ext_1",
     "id": "3.121",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -8984,7 +8984,7 @@ window.BANKMATO1 = [
     "s": "<p>Sträckan är integralen av hastigheten: \\(s=\\int_0^5(4+2t)dt=[4t+t^2]_0^5=45\\) m.</p>",
     "familj": "r2_intapp_1",
     "id": "3.124",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9000,7 +9000,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[f^{\\prime}(x)=4x-8=0\\Rightarrow x=2.\\] Andraderivatan är 4&gt;0, så \\(f(2)=-5\\) är minimum.</p>",
     "familj": "r2_ext_2",
     "id": "3.125",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9048,7 +9048,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[V=\\int_0^{10}(6-0,2t)dt=[6t-0,1t^2]_0^{10}=50\\text{ liter}.\\]</p>",
     "familj": "r2_intapp_2",
     "id": "3.128",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9064,7 +9064,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt ena sidan vara \\(x\\). Den andra är \\(26-x\\). \\(A=x(26-x)\\), så \\(A^{\\prime}=26-2x=0\\Rightarrow x=13\\). Arean blir \\(169\\text{ cm}^2\\).</p>",
     "familj": "r2_ext_3",
     "id": "3.129",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9112,7 +9112,7 @@ window.BANKMATO1 = [
     "s": "<p>Förflyttningen är \\(\\int_0^5(2t-4)dt=5\\) m. Hastigheten byter tecken vid \\(t=2\\). Total sträcka är \\(-\\int_0^2(2t-4)dt+\\int_2^5(2t-4)dt=4+9=13\\) m.</p>",
     "familj": "r2_intapp_3",
     "id": "3.132",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9128,7 +9128,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt sidan parallell med floden vara \\(x\\). De andra två blir \\((80-x)/2\\). Arean är \\(A=x(80-x)/2=40x-x^2/2\\). Derivatan \\(40-x\\) är noll vid \\(x=40\\). De andra sidorna blir 20 m.</p>",
     "familj": "r2_ext_4",
     "id": "3.133",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9176,7 +9176,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[N=\\int_0^6(100+20t)dt=[100t+10t^2]_0^6=960.\\]</p>",
     "familj": "r2_intapp_4",
     "id": "3.136",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9192,7 +9192,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[V(x)=x(24-2x)^2,\\quad0&lt;x&lt;12.\\]</p><p>Utveckla: \\(V=576x-96x^2+4x^3\\). Derivatan är \\(576-192x+12x^2=12(x^2-16x+48)\\), vilket ger \\(x=4\\) eller 12. Endast den inre nollstället till derivatan \\(x=4\\) ger positiv maximal volym.</p>",
     "familj": "r2_ext_5",
     "id": "3.137",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9256,7 +9256,7 @@ window.BANKMATO1 = [
     "s": "<p>Undersök ändpunkter och derivatans nollställen. \\(f^{\\prime}=3x^2-3=0\\Rightarrow x=\\pm1\\). Värden: \\(f(-2)=-2,f(-1)=2,f(1)=-2,f(2)=2\\). Största värde 2 och minsta -2.</p>",
     "familj": "r2_ext_6",
     "id": "3.141",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9304,7 +9304,7 @@ window.BANKMATO1 = [
     "s": "<p>Geometriskt är området ett parallelltrapets: \\((3+9)\\cdot4/2=24\\) m. Modellen är \\(v(t)=3+1,5t\\), och integralen ger samma värde 24 m.</p>",
     "familj": "r2_intapp_6",
     "id": "3.144",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9320,7 +9320,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt tryckbredden vara \\(x\\), höjden \\(600/x\\). Hela arean är \\(A=(x+4)(600/x+6)=624+6x+2400/x\\). Derivatan \\(6-2400/x^2=0\\) ger \\(x=20\\), och höjden 30 cm.</p>",
     "familj": "r2_extC_7",
     "id": "3.145",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9368,7 +9368,7 @@ window.BANKMATO1 = [
     "s": "<p>Vi löser \\(\\int_0^T(12-t)dt=40\\): \\(12T-T^2/2=40\\). Detta ger \\(T^2-24T+80=0\\), alltså \\(T=4\\) eller 20. Modellen har positivt flöde bara till t=12, så \\(T=4\\) min är relevant.</p>",
     "familj": "r2_intapp_7",
     "id": "3.148",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9432,7 +9432,7 @@ window.BANKMATO1 = [
     "s": "<p>Förändringen är \\(\\int_0^6(50-5t)dt=300-90=210\\). Därför \\(P(6)=800+210=1010\\).</p>",
     "familj": "r2_intapp_8",
     "id": "3.152",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9448,7 +9448,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt högra hörnets x-koordinat vara \\(x&gt;0\\). Bredden är \\(2x\\) och höjden \\(9-x^2\\). \\(A=18x-2x^3\\). Derivatan \\(18-6x^2=0\\) ger \\(x=\\sqrt3\\). Arean blir \\(12\\sqrt3\\).</p>",
     "familj": "r2_extC_9",
     "id": "3.153",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9496,7 +9496,7 @@ window.BANKMATO1 = [
     "s": "<p>Bränsleåtgången är den sammanlagda förbrukningen längs sträckan, alltså \\(\\boxed{\\int_0^D(0,4+0,2\\cdot2^{-x})dx}\\) liter.</p>",
     "familj": "r2_intappC_9",
     "id": "3.156",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9512,7 +9512,7 @@ window.BANKMATO1 = [
     "s": "<p>Sätt \\(y=64/x\\). Summan \\(S=x+64/x\\). \\(S^{\\prime}=1-64/x^2\\), vilket ger \\(x=8\\). Då \\(y=8\\).</p>",
     "familj": "r2_extC_10",
     "id": "3.157",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9560,7 +9560,7 @@ window.BANKMATO1 = [
     "s": "<p>Eftersom q är flöde (volym per tidsenhet) representerar integralen/arean den totala volym som passerat under tidsintervallet.</p>",
     "familj": "r2_intappC_10",
     "id": "3.160",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9576,7 +9576,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[V^{\\prime}=-6x+180=0\\Rightarrow x=30.\\] Andraderivatan är negativ, så maximum. Modellen bör inte användas för alla reella x: negativa produktionstal saknar mening och en kvadratisk modell är normalt bara rimlig inom ett angivet produktionsintervall.</p>",
     "familj": "r2_extC_11",
     "id": "3.161",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9624,7 +9624,7 @@ window.BANKMATO1 = [
     "s": "<p>Färdriktningen byts när hastigheten byter tecken. \\(v=(t-1)(t-3)\\), så byten sker vid \\(t=1\\) och \\(t=3\\) s.</p>",
     "familj": "r2_intappC_11",
     "id": "3.164",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9640,7 +9640,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[h^{\\prime}=-10t+18=0\\Rightarrow t=1,8\\text{ s}.\\] \\(h(1,8)=17,7\\) m. Andraderivatan är -10, så detta är maximum.</p>",
     "familj": "r2_extC_12",
     "id": "3.165",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9704,7 +9704,7 @@ window.BANKMATO1 = [
     "s": "<p>\\(y=12-2x\\), så \\(A=x(12-2x)=12x-2x^2\\). \\(A^{\\prime}=12-4x=0\\Rightarrow x=3,y=6\\). Maxarea 18.</p>",
     "familj": "r2_extC_13",
     "id": "3.169",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9752,7 +9752,7 @@ window.BANKMATO1 = [
     "s": "<p>Integralen av hastigheten ger förflyttningen, där bakåtrörelse räknas negativt. Total sträcka fås genom att integrera \\(|v(t)|\\), eller dela intervallet vid hastighetens nollställen och byta tecken på de negativa delarna.</p>",
     "familj": "r2_intappC_13",
     "id": "3.172",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9768,7 +9768,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt bottenkanten vara \\(x\\), höjden \\(h=108/x^2\\). Materialarean är \\(A=x^2+4xh=x^2+432/x\\). \\(A^{\\prime}=2x-432/x^2=0\\Rightarrow2x^3=432\\Rightarrow x=6\\). Då \\(h=3\\).</p>",
     "familj": "r2_extC_14",
     "id": "3.173",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9816,7 +9816,7 @@ window.BANKMATO1 = [
     "s": "<p>\\[h(8)-h(0)=\\int_0^8(0,12-0,01t)dt=0,96-0,32=0,64\\text{ m}.\\]</p>",
     "familj": "r2_intappC_14",
     "id": "3.176",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9832,7 +9832,7 @@ window.BANKMATO1 = [
     "s": "<p>Sätt \\(y=100/x\\). Omkretsen \\(P=2x+200/x\\). \\(P^{\\prime}=2-200/x^2=0\\Rightarrow x=10\\), och då \\(y=10\\).</p>",
     "familj": "r2_extC_15",
     "id": "3.177",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9880,7 +9880,7 @@ window.BANKMATO1 = [
     "s": "<p>Medelhastigheten är \\(\\frac1{4}\\int_0^4(6+t)dt=\\frac1{4}(24+8)=8\\) m/s.</p>",
     "familj": "r2_intappC_15",
     "id": "3.180",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -9960,7 +9960,7 @@ window.BANKMATO1 = [
     "s": "<p>Med volym \\(V=\\pi r^2h\\) är \\(h=V/(\\pi r^2)\\). Ytan \\(A=2\\pi r^2+2\\pi rh=2\\pi r^2+2V/r\\). Derivatan \\(4\\pi r-2V/r^2=0\\) ger \\(2\\pi r^3=V\\). Då \\(h=V/(\\pi r^2)=2r\\). Alltså är höjden lika med diametern.</p>",
     "familj": "r2_extA_2",
     "id": "3.185",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10008,7 +10008,7 @@ window.BANKMATO1 = [
     "s": "<p>Nollställena är t=1 och t=3. Förflyttningen är \\(\\int_0^5v(t)dt=[t^3-6t^2+9t]_0^5=20\\) m. För total sträcka delas integralen vid 1 och 3 och negativa delar tas med positivt tecken. Det ger \\(4+4+20=28\\) m.</p>",
     "familj": "r2_intappA_2",
     "id": "3.188",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10072,7 +10072,7 @@ window.BANKMATO1 = [
     "s": "<p>Eftersom p är ökande ligger varje högerändpunktsrektangel över grafen på sitt delintervall. Höger-Riemannsumman överskattar därför integralen, alltså den exakta totalproduktionen.</p>",
     "familj": "r2_intappA_3",
     "id": "3.192",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10088,7 +10088,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt \\(x\\) meter gå till kvadraten. Kvadratens area är \\(x^2/16\\). Cirkeln får omkrets \\(20-x\\), radie \\((20-x)/(2\\pi)\\) och area \\((20-x)^2/(4\\pi)\\). Derivera summan och lös \\(x/8-(20-x)/(2\\pi)=0\\). Detta ger \\(x=80/(\\pi+4)\\) meter till kvadraten.</p>",
     "familj": "r2_extA_4",
     "id": "3.193",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10200,7 +10200,7 @@ window.BANKMATO1 = [
     "s": "<p>Nej. Integralen 0 betyder bara att den sammanlagda ökningen och minskningen tar ut varandra så att slutvärdet är lika med startvärdet. r(t) kan ha varit både positiv och negativ under perioden.</p>",
     "familj": "r2_intappA_5",
     "id": "3.200",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10712,7 +10712,7 @@ window.BANKMATO1 = [
     "t": "<p>Figuren visar grafen till \\(f\\).</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"270\" viewBox=\"0 0 400 270\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Graf till f som också är derivata till en familj primitiva funktioner\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"268\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"46.0\" y1=\"18\" x2=\"46.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"46.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-3</text><line x1=\"94.0\" y1=\"18\" x2=\"94.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"94.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-2</text><line x1=\"142.0\" y1=\"18\" x2=\"142.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"142.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-1</text><line x1=\"190.0\" y1=\"18\" x2=\"190.0\" y2=\"236\" stroke=\"#EEEDEF\"/><line x1=\"238.0\" y1=\"18\" x2=\"238.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"238.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"286.0\" y1=\"18\" x2=\"286.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"286.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"334.0\" y1=\"18\" x2=\"334.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"334.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"382.0\" y1=\"18\" x2=\"382.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"382.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">4</text><line x1=\"46\" y1=\"236.0\" x2=\"382\" y2=\"236.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"239.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-5</text><line x1=\"46\" y1=\"219.2\" x2=\"382\" y2=\"219.2\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"222.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-4</text><line x1=\"46\" y1=\"202.5\" x2=\"382\" y2=\"202.5\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"205.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-3</text><line x1=\"46\" y1=\"185.7\" x2=\"382\" y2=\"185.7\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"188.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-2</text><line x1=\"46\" y1=\"168.9\" x2=\"382\" y2=\"168.9\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"171.9\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-1</text><line x1=\"46\" y1=\"152.2\" x2=\"382\" y2=\"152.2\" stroke=\"#EEEDEF\"/><line x1=\"46\" y1=\"135.4\" x2=\"382\" y2=\"135.4\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"138.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"46\" y1=\"118.6\" x2=\"382\" y2=\"118.6\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"121.6\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"46\" y1=\"101.8\" x2=\"382\" y2=\"101.8\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"104.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"46\" y1=\"85.1\" x2=\"382\" y2=\"85.1\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"88.1\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">4</text><line x1=\"46\" y1=\"68.3\" x2=\"382\" y2=\"68.3\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"71.3\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">5</text><line x1=\"46\" y1=\"51.5\" x2=\"382\" y2=\"51.5\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"54.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">6</text><line x1=\"46\" y1=\"34.8\" x2=\"382\" y2=\"34.8\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"37.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">7</text><line x1=\"46\" y1=\"18.0\" x2=\"382\" y2=\"18.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"21.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">8</text><line x1=\"190.0\" y1=\"18\" x2=\"190.0\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"46\" y1=\"152.2\" x2=\"382\" y2=\"152.2\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M46.0,-15.5 L46.9,-13.3 L47.9,-11.0 L48.8,-8.7 L49.7,-6.5 L50.7,-4.3 L51.6,-2.1 L52.5,0.1 L53.5,2.3 L54.4,4.5 L55.3,6.7 L56.3,8.8 L57.2,10.9 L58.1,13.1 L59.1,15.2 L60.0,17.3 L60.9,19.4 L61.9,21.4 L62.8,23.5 L63.7,25.5 L64.7,27.6 L65.6,29.6 L66.5,31.6 L67.5,33.6 L68.4,35.6 L69.3,37.6 L70.3,39.5 L71.2,41.5 L72.1,43.4 L73.1,45.3 L74.0,47.2 L74.9,49.1 L75.9,51.0 L76.8,52.9 L77.7,54.7 L78.7,56.6 L79.6,58.4 L80.5,60.2 L81.5,62.0 L82.4,63.8 L83.3,65.6 L84.3,67.4 L85.2,69.1 L86.1,70.9 L87.1,72.6 L88.0,74.3 L88.9,76.0 L89.9,77.7 L90.8,79.4 L91.7,81.1 L92.7,82.7 L93.6,84.4 L94.5,86.0 L95.5,87.6 L96.4,89.2 L97.3,90.8 L98.3,92.4 L99.2,94.0 L100.1,95.5 L101.1,97.1 L102.0,98.6 L102.9,100.1 L103.9,101.6 L104.8,103.1 L105.7,104.6 L106.7,106.0 L107.6,107.5 L108.5,108.9 L109.5,110.4 L110.4,111.8 L111.3,113.2 L112.3,114.6 L113.2,115.9 L114.1,117.3 L115.1,118.6 L116.0,120.0 L116.9,121.3 L117.9,122.6 L118.8,123.9 L119.7,125.2 L120.7,126.5 L121.6,127.7 L122.5,129.0 L123.5,130.2 L124.4,131.5 L125.3,132.7 L126.3,133.9 L127.2,135.0 L128.1,136.2 L129.1,137.4 L130.0,138.5 L130.9,139.7 L131.9,140.8 L132.8,141.9 L133.7,143.0 L134.7,144.1 L135.6,145.1 L136.5,146.2 L137.5,147.3 L138.4,148.3 L139.3,149.3 L140.3,150.3 L141.2,151.3 L142.1,152.3 L143.1,153.3 L144.0,154.2 L144.9,155.2 L145.9,156.1 L146.8,157.0 L147.7,157.9 L148.7,158.8 L149.6,159.7 L150.5,160.6 L151.5,161.4 L152.4,162.3 L153.3,163.1 L154.3,163.9 L155.2,164.7 L156.1,165.5 L157.1,166.3 L158.0,167.1 L158.9,167.8 L159.9,168.6 L160.8,169.3 L161.7,170.0 L162.7,170.7 L163.6,171.4 L164.5,172.1 L165.5,172.7 L166.4,173.4 L167.3,174.0 L168.3,174.7 L169.2,175.3 L170.1,175.9 L171.1,176.5 L172.0,177.0 L172.9,177.6 L173.9,178.2 L174.8,178.7 L175.7,179.2 L176.7,179.7 L177.6,180.2 L178.5,180.7 L179.5,181.2 L180.4,181.7 L181.3,182.1 L182.3,182.6 L183.2,183.0 L184.1,183.4 L185.1,183.8 L186.0,184.2 L186.9,184.6 L187.9,184.9 L188.8,185.3 L189.7,185.6 L190.7,185.9 L191.6,186.2 L192.5,186.5 L193.5,186.8 L194.4,187.1 L195.3,187.3 L196.3,187.6 L197.2,187.8 L198.1,188.1 L199.1,188.3 L200.0,188.5 L200.9,188.6 L201.9,188.8 L202.8,189.0 L203.7,189.1 L204.7,189.3 L205.6,189.4 L206.5,189.5 L207.5,189.6 L208.4,189.7 L209.3,189.7 L210.3,189.8 L211.2,189.8 L212.1,189.9 L213.1,189.9 L214.0,189.9 L214.9,189.9 L215.9,189.9 L216.8,189.8 L217.7,189.8 L218.7,189.7 L219.6,189.7 L220.5,189.6 L221.5,189.5 L222.4,189.4 L223.3,189.3 L224.3,189.1 L225.2,189.0 L226.1,188.8 L227.1,188.6 L228.0,188.5 L228.9,188.3 L229.9,188.1 L230.8,187.8 L231.7,187.6 L232.7,187.3 L233.6,187.1 L234.5,186.8 L235.5,186.5 L236.4,186.2 L237.3,185.9 L238.3,185.6 L239.2,185.3 L240.1,184.9 L241.1,184.6 L242.0,184.2 L242.9,183.8 L243.9,183.4 L244.8,183.0 L245.7,182.6 L246.7,182.1 L247.6,181.7 L248.5,181.2 L249.5,180.7 L250.4,180.2 L251.3,179.7 L252.3,179.2 L253.2,178.7 L254.1,178.2 L255.1,177.6 L256.0,177.0 L256.9,176.5 L257.9,175.9 L258.8,175.3 L259.7,174.7 L260.7,174.0 L261.6,173.4 L262.5,172.7 L263.5,172.1 L264.4,171.4 L265.3,170.7 L266.3,170.0 L267.2,169.3 L268.1,168.6 L269.1,167.8 L270.0,167.1 L270.9,166.3 L271.9,165.5 L272.8,164.7 L273.7,163.9 L274.7,163.1 L275.6,162.3 L276.5,161.4 L277.5,160.6 L278.4,159.7 L279.3,158.8 L280.3,157.9 L281.2,157.0 L282.1,156.1 L283.1,155.2 L284.0,154.2 L284.9,153.3 L285.9,152.3 L286.8,151.3 L287.7,150.3 L288.7,149.3 L289.6,148.3 L290.5,147.3 L291.5,146.2 L292.4,145.1 L293.3,144.1 L294.3,143.0 L295.2,141.9 L296.1,140.8 L297.1,139.7 L298.0,138.5 L298.9,137.4 L299.9,136.2 L300.8,135.0 L301.7,133.9 L302.7,132.7 L303.6,131.5 L304.5,130.2 L305.5,129.0 L306.4,127.7 L307.3,126.5 L308.3,125.2 L309.2,123.9 L310.1,122.6 L311.1,121.3 L312.0,120.0 L312.9,118.6 L313.9,117.3 L314.8,115.9 L315.7,114.6 L316.7,113.2 L317.6,111.8 L318.5,110.4 L319.5,108.9 L320.4,107.5 L321.3,106.0 L322.3,104.6 L323.2,103.1 L324.1,101.6 L325.1,100.1 L326.0,98.6 L326.9,97.1 L327.9,95.5 L328.8,94.0 L329.7,92.4 L330.7,90.8 L331.6,89.2 L332.5,87.6 L333.5,86.0 L334.4,84.4 L335.3,82.7 L336.3,81.1 L337.2,79.4 L338.1,77.7 L339.1,76.0 L340.0,74.3 L340.9,72.6 L341.9,70.9 L342.8,69.1 L343.7,67.4 L344.7,65.6 L345.6,63.8 L346.5,62.0 L347.5,60.2 L348.4,58.4 L349.3,56.6 L350.3,54.7 L351.2,52.9 L352.1,51.0 L353.1,49.1 L354.0,47.2 L354.9,45.3 L355.9,43.4 L356.8,41.5 L357.7,39.5 L358.7,37.6 L359.6,35.6 L360.5,33.6 L361.5,31.6 L362.4,29.6 L363.3,27.6 L364.3,25.5 L365.2,23.5 L366.1,21.4 L367.1,19.4 L368.0,17.3 L368.9,15.2 L369.9,13.1 L370.8,10.9 L371.7,8.8 L372.7,6.7 L373.6,4.5 L374.5,2.3 L375.5,0.1 L376.4,-2.1 L377.3,-4.3 L378.3,-6.5 L379.2,-8.7 L380.1,-11.0 L381.1,-13.3 L382.0,-15.5\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"380\" y=\"145.2\" text-anchor=\"end\" font-size=\"11\">x</text><text x=\"198.0\" y=\"30\" font-size=\"11\">y</text></svg></span><p>Skissa två olika primitiva funktioner \\(F\\) till \\(f\\). Förklara varför de måste ha samma form men kan ligga på olika höjd.</p>",
     "s": "<p>Alla primitiva funktioner till \\(f\\) har derivatan \\(F^{\\prime}=f\\). De får därför samma växande/avtagande beteende och horisontell tangent vid samma x-värden.</p><p>Två primitiva funktioner skiljer sig bara med en konstant: \\(F_2(x)=F_1(x)+C\\). Graferna är alltså vertikala förskjutningar av varandra.</p>",
     "familj": "ref_primitive_family_graph",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -10728,7 +10728,7 @@ window.BANKMATO1 = [
     "t": "<p>Figuren visar derivatan \\(f^{\\prime}\\), som är en andragradsfunktion.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"270\" viewBox=\"0 0 400 270\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Nedåtriktad parabel som föreställer derivatan\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"268\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"46.0\" y1=\"18\" x2=\"46.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"46.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-3</text><line x1=\"102.0\" y1=\"18\" x2=\"102.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"102.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-2</text><line x1=\"158.0\" y1=\"18\" x2=\"158.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"158.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">-1</text><line x1=\"214.0\" y1=\"18\" x2=\"214.0\" y2=\"236\" stroke=\"#EEEDEF\"/><line x1=\"270.0\" y1=\"18\" x2=\"270.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"270.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"326.0\" y1=\"18\" x2=\"326.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"326.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"382.0\" y1=\"18\" x2=\"382.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"382.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"46\" y1=\"236.0\" x2=\"382\" y2=\"236.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"239.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-6</text><line x1=\"46\" y1=\"216.2\" x2=\"382\" y2=\"216.2\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"219.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-5</text><line x1=\"46\" y1=\"196.4\" x2=\"382\" y2=\"196.4\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"199.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-4</text><line x1=\"46\" y1=\"176.5\" x2=\"382\" y2=\"176.5\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"179.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-3</text><line x1=\"46\" y1=\"156.7\" x2=\"382\" y2=\"156.7\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"159.7\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-2</text><line x1=\"46\" y1=\"136.9\" x2=\"382\" y2=\"136.9\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"139.9\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-1</text><line x1=\"46\" y1=\"117.1\" x2=\"382\" y2=\"117.1\" stroke=\"#EEEDEF\"/><line x1=\"46\" y1=\"97.3\" x2=\"382\" y2=\"97.3\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"100.3\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"46\" y1=\"77.5\" x2=\"382\" y2=\"77.5\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"80.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"46\" y1=\"57.6\" x2=\"382\" y2=\"57.6\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"60.6\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"46\" y1=\"37.8\" x2=\"382\" y2=\"37.8\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"40.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">4</text><line x1=\"46\" y1=\"18.0\" x2=\"382\" y2=\"18.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"21.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">5</text><line x1=\"214.0\" y1=\"18\" x2=\"214.0\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"46\" y1=\"117.1\" x2=\"382\" y2=\"117.1\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M46.0,216.2 L46.9,214.2 L47.9,212.2 L48.8,210.3 L49.7,208.3 L50.7,206.4 L51.6,204.5 L52.5,202.6 L53.5,200.7 L54.4,198.8 L55.3,196.9 L56.3,195.0 L57.2,193.2 L58.1,191.3 L59.1,189.5 L60.0,187.7 L60.9,185.9 L61.9,184.1 L62.8,182.3 L63.7,180.5 L64.7,178.7 L65.6,177.0 L66.5,175.2 L67.5,173.5 L68.4,171.8 L69.3,170.1 L70.3,168.4 L71.2,166.7 L72.1,165.0 L73.1,163.3 L74.0,161.7 L74.9,160.0 L75.9,158.4 L76.8,156.8 L77.7,155.2 L78.7,153.6 L79.6,152.0 L80.5,150.4 L81.5,148.8 L82.4,147.3 L83.3,145.7 L84.3,144.2 L85.2,142.7 L86.1,141.1 L87.1,139.6 L88.0,138.1 L88.9,136.7 L89.9,135.2 L90.8,133.7 L91.7,132.3 L92.7,130.9 L93.6,129.4 L94.5,128.0 L95.5,126.6 L96.4,125.2 L97.3,123.8 L98.3,122.5 L99.2,121.1 L100.1,119.8 L101.1,118.4 L102.0,117.1 L102.9,115.8 L103.9,114.5 L104.8,113.2 L105.7,111.9 L106.7,110.6 L107.6,109.4 L108.5,108.1 L109.5,106.9 L110.4,105.6 L111.3,104.4 L112.3,103.2 L113.2,102.0 L114.1,100.8 L115.1,99.7 L116.0,98.5 L116.9,97.4 L117.9,96.2 L118.8,95.1 L119.7,94.0 L120.7,92.9 L121.6,91.8 L122.5,90.7 L123.5,89.6 L124.4,88.6 L125.3,87.5 L126.3,86.5 L127.2,85.4 L128.1,84.4 L129.1,83.4 L130.0,82.4 L130.9,81.4 L131.9,80.4 L132.8,79.5 L133.7,78.5 L134.7,77.6 L135.6,76.7 L136.5,75.7 L137.5,74.8 L138.4,73.9 L139.3,73.1 L140.3,72.2 L141.2,71.3 L142.1,70.5 L143.1,69.6 L144.0,68.8 L144.9,68.0 L145.9,67.2 L146.8,66.4 L147.7,65.6 L148.7,64.8 L149.6,64.0 L150.5,63.3 L151.5,62.5 L152.4,61.8 L153.3,61.1 L154.3,60.4 L155.2,59.7 L156.1,59.0 L157.1,58.3 L158.0,57.6 L158.9,57.0 L159.9,56.3 L160.8,55.7 L161.7,55.1 L162.7,54.5 L163.6,53.9 L164.5,53.3 L165.5,52.7 L166.4,52.1 L167.3,51.6 L168.3,51.0 L169.2,50.5 L170.1,50.0 L171.1,49.5 L172.0,49.0 L172.9,48.5 L173.9,48.0 L174.8,47.5 L175.7,47.1 L176.7,46.6 L177.6,46.2 L178.5,45.8 L179.5,45.4 L180.4,45.0 L181.3,44.6 L182.3,44.2 L183.2,43.8 L184.1,43.5 L185.1,43.1 L186.0,42.8 L186.9,42.4 L187.9,42.1 L188.8,41.8 L189.7,41.5 L190.7,41.3 L191.6,41.0 L192.5,40.7 L193.5,40.5 L194.4,40.2 L195.3,40.0 L196.3,39.8 L197.2,39.6 L198.1,39.4 L199.1,39.2 L200.0,39.1 L200.9,38.9 L201.9,38.7 L202.8,38.6 L203.7,38.5 L204.7,38.4 L205.6,38.3 L206.5,38.2 L207.5,38.1 L208.4,38.0 L209.3,38.0 L210.3,37.9 L211.2,37.9 L212.1,37.8 L213.1,37.8 L214.0,37.8 L214.9,37.8 L215.9,37.8 L216.8,37.9 L217.7,37.9 L218.7,38.0 L219.6,38.0 L220.5,38.1 L221.5,38.2 L222.4,38.3 L223.3,38.4 L224.3,38.5 L225.2,38.6 L226.1,38.7 L227.1,38.9 L228.0,39.1 L228.9,39.2 L229.9,39.4 L230.8,39.6 L231.7,39.8 L232.7,40.0 L233.6,40.2 L234.5,40.5 L235.5,40.7 L236.4,41.0 L237.3,41.3 L238.3,41.5 L239.2,41.8 L240.1,42.1 L241.1,42.4 L242.0,42.8 L242.9,43.1 L243.9,43.5 L244.8,43.8 L245.7,44.2 L246.7,44.6 L247.6,45.0 L248.5,45.4 L249.5,45.8 L250.4,46.2 L251.3,46.6 L252.3,47.1 L253.2,47.5 L254.1,48.0 L255.1,48.5 L256.0,49.0 L256.9,49.5 L257.9,50.0 L258.8,50.5 L259.7,51.0 L260.7,51.6 L261.6,52.1 L262.5,52.7 L263.5,53.3 L264.4,53.9 L265.3,54.5 L266.3,55.1 L267.2,55.7 L268.1,56.3 L269.1,57.0 L270.0,57.6 L270.9,58.3 L271.9,59.0 L272.8,59.7 L273.7,60.4 L274.7,61.1 L275.6,61.8 L276.5,62.5 L277.5,63.3 L278.4,64.0 L279.3,64.8 L280.3,65.6 L281.2,66.4 L282.1,67.2 L283.1,68.0 L284.0,68.8 L284.9,69.6 L285.9,70.5 L286.8,71.3 L287.7,72.2 L288.7,73.1 L289.6,73.9 L290.5,74.8 L291.5,75.7 L292.4,76.7 L293.3,77.6 L294.3,78.5 L295.2,79.5 L296.1,80.4 L297.1,81.4 L298.0,82.4 L298.9,83.4 L299.9,84.4 L300.8,85.4 L301.7,86.5 L302.7,87.5 L303.6,88.6 L304.5,89.6 L305.5,90.7 L306.4,91.8 L307.3,92.9 L308.3,94.0 L309.2,95.1 L310.1,96.2 L311.1,97.4 L312.0,98.5 L312.9,99.7 L313.9,100.8 L314.8,102.0 L315.7,103.2 L316.7,104.4 L317.6,105.6 L318.5,106.9 L319.5,108.1 L320.4,109.4 L321.3,110.6 L322.3,111.9 L323.2,113.2 L324.1,114.5 L325.1,115.8 L326.0,117.1 L326.9,118.4 L327.9,119.8 L328.8,121.1 L329.7,122.5 L330.7,123.8 L331.6,125.2 L332.5,126.6 L333.5,128.0 L334.4,129.4 L335.3,130.9 L336.3,132.3 L337.2,133.7 L338.1,135.2 L339.1,136.7 L340.0,138.1 L340.9,139.6 L341.9,141.1 L342.8,142.7 L343.7,144.2 L344.7,145.7 L345.6,147.3 L346.5,148.8 L347.5,150.4 L348.4,152.0 L349.3,153.6 L350.3,155.2 L351.2,156.8 L352.1,158.4 L353.1,160.0 L354.0,161.7 L354.9,163.3 L355.9,165.0 L356.8,166.7 L357.7,168.4 L358.7,170.1 L359.6,171.8 L360.5,173.5 L361.5,175.2 L362.4,177.0 L363.3,178.7 L364.3,180.5 L365.2,182.3 L366.1,184.1 L367.1,185.9 L368.0,187.7 L368.9,189.5 L369.9,191.3 L370.8,193.2 L371.7,195.0 L372.7,196.9 L373.6,198.8 L374.5,200.7 L375.5,202.6 L376.4,204.5 L377.3,206.4 L378.3,208.3 L379.2,210.3 L380.1,212.2 L381.1,214.2 L382.0,216.2\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"281.2\" y=\"57.6\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">y=f&#x27;(x)</text><text x=\"380\" y=\"110.1\" text-anchor=\"end\" font-size=\"11\">x</text><text x=\"222.0\" y=\"30\" font-size=\"11\">y</text></svg></span><p>Skissa två olika möjliga grafer till \\(f\\) i samma koordinatsystem och förklara hur de förhåller sig till varandra.</p>",
     "s": "<p>Eftersom alla primitiva funktioner till samma derivata skiljer sig med en konstant har alla möjliga grafer samma form och är endast förskjutna i y-led.</p><p>Här är \\(f^{\\prime}=0\\) vid \\(x=-2\\) och \\(x=2\\). Funktionen är avtagande för \\(x&lt;-2\\), växande för \\(-2&lt;x&lt;2\\) och avtagande för \\(x&gt;2\\). Därför har varje möjlig \\(f\\) minimum vid \\(-2\\) och maximum vid 2.</p>",
     "familj": "ref_graph_fprime_to_family",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -10744,7 +10744,7 @@ window.BANKMATO1 = [
     "t": "<p>Grafen till \\(f(x)=a-bx^2\\), där \\(a,b>0\\), skär x-axeln i två punkter och omsluter tillsammans med x-axeln arean \\(A\\). En rektangel har sina nedre hörn i nollställena och sin övre sida genom parabelns maximipunkt.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Parabel och omslutande rektangel\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48\" y1=\"210\" x2=\"360\" y2=\"210\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"200\" y1=\"24\" x2=\"200\" y2=\"224\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><path d=\"M60.0,276.6 L61.2,273.0 L62.4,269.4 L63.6,265.8 L64.8,262.3 L66.0,258.8 L67.2,255.3 L68.4,251.9 L69.6,248.5 L70.8,245.1 L72.0,241.8 L73.2,238.5 L74.4,235.2 L75.6,231.9 L76.8,228.7 L78.0,225.5 L79.2,222.3 L80.4,219.2 L81.6,216.1 L82.8,213.0 L84.0,210.0 L85.2,207.0 L86.4,204.0 L87.6,201.1 L88.8,198.1 L90.0,195.2 L91.2,192.4 L92.4,189.6 L93.6,186.8 L94.8,184.0 L96.0,181.3 L97.2,178.5 L98.4,175.9 L99.6,173.2 L100.8,170.6 L102.0,168.0 L103.2,165.5 L104.4,162.9 L105.6,160.4 L106.8,158.0 L108.0,155.5 L109.2,153.1 L110.4,150.7 L111.6,148.4 L112.8,146.1 L114.0,143.8 L115.2,141.5 L116.4,139.3 L117.6,137.1 L118.8,135.0 L120.0,132.8 L121.2,130.7 L122.4,128.7 L123.6,126.6 L124.8,124.6 L126.0,122.6 L127.2,120.7 L128.4,118.7 L129.6,116.9 L130.8,115.0 L132.0,113.2 L133.2,111.4 L134.4,109.6 L135.6,107.9 L136.8,106.1 L138.0,104.5 L139.2,102.8 L140.4,101.2 L141.6,99.6 L142.8,98.0 L144.0,96.5 L145.2,95.0 L146.4,93.6 L147.6,92.1 L148.8,90.7 L150.0,89.3 L151.2,88.0 L152.4,86.7 L153.6,85.4 L154.8,84.1 L156.0,82.9 L157.2,81.7 L158.4,80.5 L159.6,79.4 L160.8,78.3 L162.0,77.2 L163.2,76.2 L164.4,75.2 L165.6,74.2 L166.8,73.2 L168.0,72.3 L169.2,71.4 L170.4,70.6 L171.6,69.7 L172.8,68.9 L174.0,68.2 L175.2,67.4 L176.4,66.7 L177.6,66.0 L178.8,65.4 L180.0,64.7 L181.2,64.2 L182.4,63.6 L183.6,63.1 L184.8,62.6 L186.0,62.1 L187.2,61.7 L188.4,61.3 L189.6,60.9 L190.8,60.5 L192.0,60.2 L193.2,59.9 L194.4,59.7 L195.6,59.4 L196.8,59.2 L198.0,59.1 L199.2,58.9 L200.4,58.8 L201.6,58.8 L202.8,58.7 L204.0,58.7 L205.2,58.7 L206.4,58.8 L207.6,58.8 L208.8,58.9 L210.0,59.1 L211.2,59.2 L212.4,59.4 L213.6,59.7 L214.8,59.9 L216.0,60.2 L217.2,60.5 L218.4,60.9 L219.6,61.3 L220.8,61.7 L222.0,62.1 L223.2,62.6 L224.4,63.1 L225.6,63.6 L226.8,64.2 L228.0,64.7 L229.2,65.4 L230.4,66.0 L231.6,66.7 L232.8,67.4 L234.0,68.2 L235.2,68.9 L236.4,69.7 L237.6,70.6 L238.8,71.4 L240.0,72.3 L241.2,73.2 L242.4,74.2 L243.6,75.2 L244.8,76.2 L246.0,77.2 L247.2,78.3 L248.4,79.4 L249.6,80.5 L250.8,81.7 L252.0,82.9 L253.2,84.1 L254.4,85.4 L255.6,86.7 L256.8,88.0 L258.0,89.3 L259.2,90.7 L260.4,92.1 L261.6,93.6 L262.8,95.0 L264.0,96.5 L265.2,98.0 L266.4,99.6 L267.6,101.2 L268.8,102.8 L270.0,104.5 L271.2,106.1 L272.4,107.9 L273.6,109.6 L274.8,111.4 L276.0,113.2 L277.2,115.0 L278.4,116.9 L279.6,118.7 L280.8,120.7 L282.0,122.6 L283.2,124.6 L284.4,126.6 L285.6,128.7 L286.8,130.7 L288.0,132.8 L289.2,135.0 L290.4,137.1 L291.6,139.3 L292.8,141.5 L294.0,143.8 L295.2,146.1 L296.4,148.4 L297.6,150.7 L298.8,153.1 L300.0,155.5 L301.2,158.0 L302.4,160.4 L303.6,162.9 L304.8,165.5 L306.0,168.0 L307.2,170.6 L308.4,173.2 L309.6,175.9 L310.8,178.5 L312.0,181.3 L313.2,184.0 L314.4,186.8 L315.6,189.6 L316.8,192.4 L318.0,195.2 L319.2,198.1 L320.4,201.1 L321.6,204.0 L322.8,207.0 L324.0,210.0 L325.2,213.0 L326.4,216.1 L327.6,219.2 L328.8,222.3 L330.0,225.5 L331.2,228.7 L332.4,231.9 L333.6,235.2 L334.8,238.5 L336.0,241.8 L337.2,245.1 L338.4,248.5 L339.6,251.9 L340.8,255.3 L342.0,258.8 L343.2,262.3 L344.4,265.8 L345.6,269.4 L346.8,273.0 L348.0,276.6\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/><rect x=\"84.0\" y=\"58.7\" width=\"240.0\" height=\"151.3\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><polygon points=\"84.0,210.0 84.0,210.0 86.0,205.0 88.0,200.1 90.0,195.2 92.0,190.5 94.0,185.8 96.0,181.3 98.0,176.8 100.0,172.3 102.0,168.0 104.0,163.8 106.0,159.6 108.0,155.5 110.0,151.5 112.0,147.6 114.0,143.8 116.0,140.1 118.0,136.4 120.0,132.8 122.0,129.3 124.0,125.9 126.0,122.6 128.0,119.4 130.0,116.2 132.0,113.2 134.0,110.2 136.0,107.3 138.0,104.5 140.0,101.7 142.0,99.1 144.0,96.5 146.0,94.0 148.0,91.6 150.0,89.3 152.0,87.1 154.0,85.0 156.0,82.9 158.0,80.9 160.0,79.0 162.0,77.2 164.0,75.5 166.0,73.9 168.0,72.3 170.0,70.8 172.0,69.5 174.0,68.2 176.0,66.9 178.0,65.8 180.0,64.7 182.0,63.8 184.0,62.9 186.0,62.1 188.0,61.4 190.0,60.8 192.0,60.2 194.0,59.7 196.0,59.4 198.0,59.1 200.0,58.9 202.0,58.7 204.0,58.7 206.0,58.7 208.0,58.9 210.0,59.1 212.0,59.4 214.0,59.7 216.0,60.2 218.0,60.8 220.0,61.4 222.0,62.1 224.0,62.9 226.0,63.8 228.0,64.7 230.0,65.8 232.0,66.9 234.0,68.2 236.0,69.5 238.0,70.8 240.0,72.3 242.0,73.9 244.0,75.5 246.0,77.2 248.0,79.0 250.0,80.9 252.0,82.9 254.0,85.0 256.0,87.1 258.0,89.3 260.0,91.6 262.0,94.0 264.0,96.5 266.0,99.1 268.0,101.7 270.0,104.5 272.0,107.3 274.0,110.2 276.0,113.2 278.0,116.2 280.0,119.4 282.0,122.6 284.0,125.9 286.0,129.3 288.0,132.8 290.0,136.4 292.0,140.1 294.0,143.8 296.0,147.6 298.0,151.5 300.0,155.5 302.0,159.6 304.0,163.8 306.0,168.0 308.0,172.3 310.0,176.8 312.0,181.3 314.0,185.8 316.0,190.5 318.0,195.2 320.0,200.1 322.0,205.0 324.0,210.0 324.0,210.0\" fill=\"#EDE2DE\" opacity=\"0.7\"/><text x=\"275\" y=\"60\" font-size=\"11\" fill=\"#B43123\">y = a − bx²</text><text x=\"210\" y=\"42\" font-size=\"11\" fill=\"#2A5D9E\">rektangel</text></svg></span><p>Bestäm algebraiskt förhållandet mellan \\(A\\) och rektangelns area.</p>",
     "s": "<p>Nollställena uppfyller \\(a-bx^2=0\\), alltså \\(x=\\pm\\sqrt{a/b}\\). Rektangelns bredd är \\(2\\sqrt{a/b}\\) och höjden \\(a\\), så</p><p>\\[R=2a\\sqrt{\\frac ab}.\\]</p><p>Arean under parabeln är</p><p>\\[A=\\int_{-\\sqrt{a/b}}^{\\sqrt{a/b}}(a-bx^2)\\,dx=\\frac43a\\sqrt{\\frac ab}.\\]</p><p>Därför</p><p>\\[\\boxed{\\frac{A}{R}=\\frac23}.\\]</p>",
     "familj": "ref_ext_parabola_ratio",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10808,7 +10808,7 @@ window.BANKMATO1 = [
     "t": "<p>En lantbrukare har 480 m stängsel för ett rektangulärt område som delas i tre lika stora hagar med två stängsel parallella med kortsidan.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"240\" viewBox=\"0 0 400 240\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rektangulärt område indelat i tre hagar\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"238\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"60\" y=\"55\" width=\"280\" height=\"135\" fill=\"#F7FAF7\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"153\" y1=\"55\" x2=\"153\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"247\" y1=\"55\" x2=\"247\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"200\" y=\"218\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">x</text><text x=\"42\" y=\"125\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">y</text></svg></span><p>Bestäm måtten som ger största möjliga totalarea.</p>",
     "s": "<p>Låt längden vara \\(x\\) och kortsidan \\(y\\). Stängslet ger</p><p>\\[2x+4y=480\\Rightarrow y=120-\\frac x2.\\]</p><p>\\[A(x)=xy=120x-\\frac{x^2}{2}.\\]</p><p>\\[A^{\\prime}(x)=120-x=0\\Rightarrow x=120.\\]</p><p>Då \\(y=60\\). Andraderivatan är \\(-1&lt;0\\).</p><p><strong>Svar:</strong> \\(\\boxed{120\\text{ m}\\times60\\text{ m}}\\).</p>",
     "familj": "ref_ext_fence_three",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10872,7 +10872,7 @@ window.BANKMATO1 = [
     "t": "<p>En affisch ska ha tryckyta 600 cm². Sidmarginalerna ska vara 2 cm vardera och marginalerna upptill och nedtill 3 cm vardera.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"250\" viewBox=\"0 0 400 250\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Affisch med marginaler\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"248\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"35\" width=\"230\" height=\"180\" fill=\"#F8F8F8\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"112\" y=\"58\" width=\"176\" height=\"134\" fill=\"#EAF0F8\" stroke=\"#2A5D9E\" stroke-width=\"1.8\"/><text x=\"200\" y=\"128\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2A5D9E\">tryckyta</text><text x=\"200\" y=\"232\" text-anchor=\"middle\" font-size=\"11\">sidmarginal 2 cm, topp/botten 3 cm</text></svg></span><p>Bestäm affischens yttermått så att den totala pappersarean blir så liten som möjligt.</p>",
     "s": "<p>Låt tryckytans bredd vara \\(x\\), då är höjden \\(600/x\\).</p><p>Pappersarean blir</p><p>\\[A(x)=(x+4)\\left(\\frac{600}{x}+6\\right)=624+6x+\\frac{2400}{x}.\\]</p><p>\\[A^{\\prime}(x)=6-\\frac{2400}{x^2}=0\\Rightarrow x^2=400\\Rightarrow x=20.\\]</p><p>Tryckytans höjd är 30 cm. Yttermåtten blir \\(24\\) cm × \\(36\\) cm.</p><p><strong>Svar:</strong> \\(\\boxed{24\\text{ cm}\\times36\\text{ cm}}\\).</p>",
     "familj": "ref_ext_poster",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10936,7 +10936,7 @@ window.BANKMATO1 = [
     "t": "<p>Två positiva tal har summan 10. Bestäm talen så att produkten av det mindre talet, det större talet och deras differens blir så stor som möjligt.</p>",
     "s": "<p>Låt det mindre talet vara \\(x\\), så det större är \\(10-x\\), där \\(0&lt;x&lt;5\\).</p><p>Produkten blir</p><p>\\[P(x)=x(10-x)(10-2x).\\]</p><p>\\[P(x)=100x-30x^2+2x^3,\\quad P^{\\prime}(x)=100-60x+6x^2.\\]</p><p>\\[3x^2-30x+50=0\\Rightarrow x=5\\pm\\frac{5\\sqrt3}{3}.\\]</p><p>Endast</p><p>\\[x=5-\\frac{5\\sqrt3}{3}\\]</p><p>ligger i intervallet. Det större talet är</p><p>\\[5+\\frac{5\\sqrt3}{3}.\\]</p><p>Ändpunkterna ger produkt 0, så punkten där derivatan är noll ger maximum.</p>",
     "familj": "ref_ext_tartaglia_variant",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -10968,7 +10968,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklists hastighet visas i diagrammet.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Hastighet-tid-diagram med acceleration konstant fart och inbromsning\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"20\" x2=\"48.0\" y2=\"200\" stroke=\"#EEEDEF\"/><line x1=\"94.0\" y1=\"20\" x2=\"94.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"94.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"140.0\" y1=\"20\" x2=\"140.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"140.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"186.0\" y1=\"20\" x2=\"186.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"186.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"232.0\" y1=\"20\" x2=\"232.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"232.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"278.0\" y1=\"20\" x2=\"278.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"278.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"324.0\" y1=\"20\" x2=\"324.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"324.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">6</text><line x1=\"370.0\" y1=\"20\" x2=\"370.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"370.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">7</text><line x1=\"48\" y1=\"200.0\" x2=\"370\" y2=\"200.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"174.3\" x2=\"370\" y2=\"174.3\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"148.6\" x2=\"370\" y2=\"148.6\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"122.9\" x2=\"370\" y2=\"122.9\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"97.1\" x2=\"370\" y2=\"97.1\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"71.4\" x2=\"370\" y2=\"71.4\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"45.7\" x2=\"370\" y2=\"45.7\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"20.0\" x2=\"370\" y2=\"20.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"200\" x2=\"376\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"48\" y1=\"200\" x2=\"48\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polygon points=\"48.0,200.0 48.0,200.0 140.0,45.7 278.0,45.7 370.0,200.0 370.0,200.0\" fill=\"#EAF0F8\" opacity=\"0.8\"/><polyline points=\"48.0,200.0 140.0,45.7 278.0,45.7 370.0,200.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linejoin=\"round\"/><text x=\"365\" y=\"225\" text-anchor=\"end\" font-size=\"11\">t</text><text x=\"55\" y=\"32\" font-size=\"11\">v</text></svg></span><p>Bestäm sträckan under de första 7 sekunderna.</p>",
     "s": "<p>Sträckan är arean under v–t-grafen.</p><p>Första triangeln: \\(\\frac12\\cdot2\\cdot6=6\\).</p><p>Rektangeln: \\(3\\cdot6=18\\).</p><p>Sista triangeln: \\(\\frac12\\cdot2\\cdot6=6\\).</p><p>Totalt \\(\\boxed{30\\text{ m}}\\).</p>",
     "familj": "ref_intapp_vt_piecewise",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11000,7 +11000,7 @@ window.BANKMATO1 = [
     "t": "<p>En L-formad rabatt anläggs runt ett hörn. Den fria ytterkanten ska vara 8 m lång och rabatten ska ha samma bredd \\(x\\) längs båda husväggarna.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"250\" viewBox=\"0 0 400 250\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"L-formad rabatt runt ett hörn\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"248\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><path d=\"M78 62 H250 V105 H310 V205 H78 Z\" fill=\"#EEF5EC\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M78 62 H250 V105\" fill=\"none\" stroke=\"#7A7A7A\" stroke-width=\"4\"/><path d=\"M250 105 H310 V205 H78 V62\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><text x=\"190\" y=\"229\" text-anchor=\"middle\" font-size=\"11\" fill=\"#B43123\">gräskant</text><text x=\"62\" y=\"135\" font-size=\"12\" fill=\"#2A5D9E\">x</text></svg></span><p>En modell för arean är \\(A(x)=8x-3x^2\\). Bestäm den största möjliga arean och ange vilka värden på \\(x\\) som är möjliga i situationen.</p>",
     "s": "<p>För att alla längder ska vara positiva krävs \\(0&lt;x&lt;8/3\\).</p><p>\\[A^{\\prime}(x)=8-6x.\\]</p><p>\\[8-6x=0\\Rightarrow x=\\frac43.\\]</p><p>\\[A\\!\\left(\\frac43\\right)=\\frac{16}{3}.\\]</p><p>Eftersom \\(A^{\\prime\\prime}(x)=-6&lt;0\\) är detta maximum.</p><p><strong>Svar:</strong> \\(\\boxed{16/3\\text{ m}^2\\approx5,33\\text{ m}^2}\\).</p>",
     "familj": "ref_ext_corner_bed",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11032,7 +11032,7 @@ window.BANKMATO1 = [
     "t": "<p>Vatten strömmar in i en tank med hastigheten \\(q(t)=3t^2\\) liter/minut under de första 4 minuterna.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"240\" viewBox=\"0 0 400 240\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Graf till inflödeshastigheten q av t lika med tre t kvadrat\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"238\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"205\" x2=\"365\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"50\" y1=\"205\" x2=\"50\" y2=\"22\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"50\" y1=\"169\" x2=\"350\" y2=\"169\" stroke=\"#EEEDEF\"/><line x1=\"50\" y1=\"133\" x2=\"350\" y2=\"133\" stroke=\"#EEEDEF\"/><line x1=\"50\" y1=\"97\" x2=\"350\" y2=\"97\" stroke=\"#EEEDEF\"/><line x1=\"50\" y1=\"61\" x2=\"350\" y2=\"61\" stroke=\"#EEEDEF\"/><line x1=\"50\" y1=\"25\" x2=\"350\" y2=\"25\" stroke=\"#EEEDEF\"/><path d=\"M50 205 C105 201 155 188 200 164 C250 137 300 93 350 32\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"42\" y=\"173\" text-anchor=\"end\" font-size=\"10\">10</text><text x=\"42\" y=\"137\" text-anchor=\"end\" font-size=\"10\">20</text><text x=\"42\" y=\"101\" text-anchor=\"end\" font-size=\"10\">30</text><text x=\"42\" y=\"65\" text-anchor=\"end\" font-size=\"10\">40</text><text x=\"42\" y=\"29\" text-anchor=\"end\" font-size=\"10\">50</text><text x=\"125\" y=\"222\" font-size=\"10\">1</text><text x=\"200\" y=\"222\" font-size=\"10\">2</text><text x=\"275\" y=\"222\" font-size=\"10\">3</text><text x=\"348\" y=\"222\" font-size=\"10\">4</text><text x=\"360\" y=\"222\" font-size=\"11\">t</text><text x=\"58\" y=\"33\" font-size=\"11\">q</text></svg></span><p>Hur mycket vatten tillförs totalt?</p>",
     "s": "<p>Total mängd är integralen av flödeshastigheten:</p><p>\\[V=\\int_0^4 3t^2dt=[t^3]_0^4=\\boxed{64\\text{ liter}}.\\]</p>",
     "familj": "ref_intapp_flow",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11064,7 +11064,7 @@ window.BANKMATO1 = [
     "t": "<p>En likbent triangel har omkretsen 30 cm. Basen är \\(b\\) och de två lika sidorna har längden \\(s\\).</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Likbent triangel med höjd\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><path d=\"M95 190 L200 55 L305 190 Z\" fill=\"#F6F8FB\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"200\" y1=\"55\" x2=\"200\" y2=\"190\" stroke=\"#2A5D9E\" stroke-width=\"1.8\"/><text x=\"210\" y=\"125\" font-size=\"12\" fill=\"#2A5D9E\">h</text><text x=\"144\" y=\"207\" font-size=\"12\" fill=\"#2A5D9E\">b/2</text><text x=\"200\" y=\"230\" text-anchor=\"middle\" font-size=\"11\">likbent triangel, omkrets 30 cm</text></svg></span><p>Bestäm den största möjliga arean.</p>",
     "s": "<p>\\[b+2s=30\\Rightarrow s=15-\\frac b2.\\]</p><p>Höjden uppfyller</p><p>\\[h^2=s^2-\\left(\\frac b2\\right)^2=\\left(15-\\frac b2\\right)^2-\\frac{b^2}{4}=225-15b.\\]</p><p>Arean är \\(A=bh/2\\). Maximera hellre \\(A^2=\\frac{b^2}{4}(225-15b)\\), vilket har samma maximipunkt.</p><p>\\[(A^2)^{\\prime}=\\frac14(450b-45b^2)=\\frac{45b}{4}(10-b).\\]</p><p>Maximum vid \\(b=10\\), då \\(s=10\\). Triangeln blir liksidig med höjd \\(5\\sqrt3\\).</p><p>\\[\\boxed{A_{\\max}=25\\sqrt3\\text{ cm}^2}.\\]</p>",
     "familj": "ref_ext_isosceles",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11096,7 +11096,7 @@ window.BANKMATO1 = [
     "t": "<p>Grafen visar förändringshastigheten \\(Q^{\\prime}(t)\\) för en mängd \\(Q\\).</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Graf över förändringshastighet med positiva värden\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"20\" x2=\"48.0\" y2=\"200\" stroke=\"#EEEDEF\"/><line x1=\"101.7\" y1=\"20\" x2=\"101.7\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"101.7\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"155.3\" y1=\"20\" x2=\"155.3\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"155.3\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"209.0\" y1=\"20\" x2=\"209.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"209.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"262.7\" y1=\"20\" x2=\"262.7\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"262.7\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"316.3\" y1=\"20\" x2=\"316.3\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"316.3\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"370.0\" y1=\"20\" x2=\"370.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"370.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">6</text><line x1=\"48\" y1=\"200.0\" x2=\"370\" y2=\"200.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"164.0\" x2=\"370\" y2=\"164.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"128.0\" x2=\"370\" y2=\"128.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"92.0\" x2=\"370\" y2=\"92.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"56.0\" x2=\"370\" y2=\"56.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"20.0\" x2=\"370\" y2=\"20.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"200\" x2=\"376\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"48\" y1=\"200\" x2=\"48\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polygon points=\"48.0,200.0 48.0,56.0 155.3,56.0 262.7,164.0 370.0,164.0 370.0,200.0\" fill=\"#EAF0F8\" opacity=\"0.8\"/><polyline points=\"48.0,56.0 155.3,56.0 262.7,164.0 370.0,164.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linejoin=\"round\"/><text x=\"365\" y=\"225\" text-anchor=\"end\" font-size=\"11\">t</text><text x=\"55\" y=\"32\" font-size=\"11\">Q′</text></svg></span><p>Om \\(Q(0)=10\\), bestäm \\(Q(6)\\).</p>",
     "s": "<p>Förändringen är arean under grafen.</p><p>Från 0 till 2: \\(2\\cdot4=8\\).</p><p>Från 2 till 4: trapets \\((4+1)\\cdot2/2=5\\).</p><p>Från 4 till 6: \\(2\\cdot1=2\\).</p><p>Total ökning är 15. Därför \\(\\boxed{Q(6)=25}\\).</p>",
     "familj": "ref_intapp_total_change_graph",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11160,7 +11160,7 @@ window.BANKMATO1 = [
     "t": "<p>En båts hastighet varierar enligt diagrammet.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Hastighet-tid-diagram för en båt\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"20\" x2=\"48.0\" y2=\"200\" stroke=\"#EEEDEF\"/><line x1=\"101.7\" y1=\"20\" x2=\"101.7\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"101.7\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"155.3\" y1=\"20\" x2=\"155.3\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"155.3\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"209.0\" y1=\"20\" x2=\"209.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"209.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"262.7\" y1=\"20\" x2=\"262.7\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"262.7\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"316.3\" y1=\"20\" x2=\"316.3\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"316.3\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"370.0\" y1=\"20\" x2=\"370.0\" y2=\"200\" stroke=\"#EEEDEF\"/><text x=\"370.0\" y=\"216\" text-anchor=\"middle\" font-size=\"10\">6</text><line x1=\"48\" y1=\"200.0\" x2=\"370\" y2=\"200.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"170.0\" x2=\"370\" y2=\"170.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"140.0\" x2=\"370\" y2=\"140.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"110.0\" x2=\"370\" y2=\"110.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"80.0\" x2=\"370\" y2=\"80.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"50.0\" x2=\"370\" y2=\"50.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"20.0\" x2=\"370\" y2=\"20.0\" stroke=\"#EEEDEF\"/><line x1=\"48\" y1=\"200\" x2=\"376\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"48\" y1=\"200\" x2=\"48\" y2=\"20\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polygon points=\"48.0,200.0 48.0,140.0 209.0,50.0 370.0,140.0 370.0,200.0\" fill=\"#EAF0F8\" opacity=\"0.8\"/><polyline points=\"48.0,140.0 209.0,50.0 370.0,140.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linejoin=\"round\"/><text x=\"365\" y=\"225\" text-anchor=\"end\" font-size=\"11\">t</text><text x=\"55\" y=\"32\" font-size=\"11\">v</text></svg></span><p>Bestäm båtens medelhastighet under de 6 tidsenheterna.</p>",
     "s": "<p>Total sträcka är arean under grafen. Figuren består av två lika trapetser:</p><p>\\[s=2\\cdot\\frac{2+5}{2}\\cdot3=21.\\]</p><p>Medelhastigheten är \\(s/6=\\boxed{3,5}\\) hastighetsenheter.</p>",
     "familj": "ref_intapp_average_velocity",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11192,7 +11192,7 @@ window.BANKMATO1 = [
     "t": "<p>En 40 cm bred plåtremsa viks längs två linjer så att tvärsnittet blir en symmetrisk öppen ränna. Bottenbredden är \\(x\\) cm och vardera sidstycket har då bredden \\((40-x)/2\\). Sidorna viks 60° mot botten.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"245\" viewBox=\"0 0 400 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"V-format tvärsnitt för en ränna\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><polygon points=\"70,195 200,65 330,195\" fill=\"#EEF3F8\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"135\" y1=\"195\" x2=\"200\" y2=\"65\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"265\" y1=\"195\" x2=\"200\" y2=\"65\" stroke=\"#B43123\" stroke-width=\"2\"/><text x=\"200\" y=\"220\" text-anchor=\"middle\" font-size=\"11\">plåtprofil med två lika vikta sidor</text></svg></span><p>Bestäm den bottenbredd \\(x\\) som maximerar tvärsnittsarean.</p>",
     "s": "<p>Sidstyckets längd är \\(s=(40-x)/2\\). Höjden blir \\(h=s\\sin60^\\circ\\), och den övre bredden är \\(x+2s\\cos60^\\circ=x+s\\).</p><p>Tvärsnittet är en trapets:</p><p>\\[A(x)=\\frac{x+(x+s)}2\\,h.\\]</p><p>Med \\(s=(40-x)/2\\) fås</p><p>\\[A(x)=\\frac{\\sqrt3}{16}(40-x)(3x+40).\\]</p><p>\\[A^{\\prime}(x)=\\frac{\\sqrt3}{16}(80-6x)=0\\Rightarrow \\boxed{x=\\frac{40}{3}\\text{ cm}}.\\]</p>",
     "familj": "ref_ext_gutter",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11224,7 +11224,7 @@ window.BANKMATO1 = [
     "t": "<p>En tanks nettotillflöde modelleras av \\(q(t)=6-2t\\) liter/minut.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"270\" viewBox=\"0 0 400 270\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Flödeshastighet som går från positiv till negativ\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"268\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"46.0\" y1=\"18\" x2=\"46.0\" y2=\"236\" stroke=\"#EEEDEF\"/><line x1=\"130.0\" y1=\"18\" x2=\"130.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"130.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"214.0\" y1=\"18\" x2=\"214.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"214.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"298.0\" y1=\"18\" x2=\"298.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"298.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"382.0\" y1=\"18\" x2=\"382.0\" y2=\"236\" stroke=\"#EEEDEF\"/><text x=\"382.0\" y=\"252\" text-anchor=\"middle\" font-size=\"10\" fill=\"#6B6670\">4</text><line x1=\"46\" y1=\"236.0\" x2=\"382\" y2=\"236.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"239.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-3</text><line x1=\"46\" y1=\"214.2\" x2=\"382\" y2=\"214.2\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"217.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-2</text><line x1=\"46\" y1=\"192.4\" x2=\"382\" y2=\"192.4\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"195.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">-1</text><line x1=\"46\" y1=\"170.6\" x2=\"382\" y2=\"170.6\" stroke=\"#EEEDEF\"/><line x1=\"46\" y1=\"148.8\" x2=\"382\" y2=\"148.8\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"151.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">1</text><line x1=\"46\" y1=\"127.0\" x2=\"382\" y2=\"127.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"130.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">2</text><line x1=\"46\" y1=\"105.2\" x2=\"382\" y2=\"105.2\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"108.2\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">3</text><line x1=\"46\" y1=\"83.4\" x2=\"382\" y2=\"83.4\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"86.4\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">4</text><line x1=\"46\" y1=\"61.6\" x2=\"382\" y2=\"61.6\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"64.6\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">5</text><line x1=\"46\" y1=\"39.8\" x2=\"382\" y2=\"39.8\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"42.8\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">6</text><line x1=\"46\" y1=\"18.0\" x2=\"382\" y2=\"18.0\" stroke=\"#EEEDEF\"/><text x=\"39\" y=\"21.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#6B6670\">7</text><line x1=\"46.0\" y1=\"18\" x2=\"46.0\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"46\" y1=\"170.6\" x2=\"382\" y2=\"170.6\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M46.0,39.8 L46.9,40.3 L47.9,40.8 L48.8,41.3 L49.7,41.7 L50.7,42.2 L51.6,42.7 L52.5,43.2 L53.5,43.7 L54.4,44.2 L55.3,44.6 L56.3,45.1 L57.2,45.6 L58.1,46.1 L59.1,46.6 L60.0,47.1 L60.9,47.6 L61.9,48.0 L62.8,48.5 L63.7,49.0 L64.7,49.5 L65.6,50.0 L66.5,50.5 L67.5,50.9 L68.4,51.4 L69.3,51.9 L70.3,52.4 L71.2,52.9 L72.1,53.4 L73.1,53.8 L74.0,54.3 L74.9,54.8 L75.9,55.3 L76.8,55.8 L77.7,56.3 L78.7,56.8 L79.6,57.2 L80.5,57.7 L81.5,58.2 L82.4,58.7 L83.3,59.2 L84.3,59.7 L85.2,60.1 L86.1,60.6 L87.1,61.1 L88.0,61.6 L88.9,62.1 L89.9,62.6 L90.8,63.1 L91.7,63.5 L92.7,64.0 L93.6,64.5 L94.5,65.0 L95.5,65.5 L96.4,66.0 L97.3,66.4 L98.3,66.9 L99.2,67.4 L100.1,67.9 L101.1,68.4 L102.0,68.9 L102.9,69.4 L103.9,69.8 L104.8,70.3 L105.7,70.8 L106.7,71.3 L107.6,71.8 L108.5,72.3 L109.5,72.7 L110.4,73.2 L111.3,73.7 L112.3,74.2 L113.2,74.7 L114.1,75.2 L115.1,75.6 L116.0,76.1 L116.9,76.6 L117.9,77.1 L118.8,77.6 L119.7,78.1 L120.7,78.6 L121.6,79.0 L122.5,79.5 L123.5,80.0 L124.4,80.5 L125.3,81.0 L126.3,81.5 L127.2,81.9 L128.1,82.4 L129.1,82.9 L130.0,83.4 L130.9,83.9 L131.9,84.4 L132.8,84.9 L133.7,85.3 L134.7,85.8 L135.6,86.3 L136.5,86.8 L137.5,87.3 L138.4,87.8 L139.3,88.2 L140.3,88.7 L141.2,89.2 L142.1,89.7 L143.1,90.2 L144.0,90.7 L144.9,91.2 L145.9,91.6 L146.8,92.1 L147.7,92.6 L148.7,93.1 L149.6,93.6 L150.5,94.1 L151.5,94.5 L152.4,95.0 L153.3,95.5 L154.3,96.0 L155.2,96.5 L156.1,97.0 L157.1,97.4 L158.0,97.9 L158.9,98.4 L159.9,98.9 L160.8,99.4 L161.7,99.9 L162.7,100.4 L163.6,100.8 L164.5,101.3 L165.5,101.8 L166.4,102.3 L167.3,102.8 L168.3,103.3 L169.2,103.7 L170.1,104.2 L171.1,104.7 L172.0,105.2 L172.9,105.7 L173.9,106.2 L174.8,106.7 L175.7,107.1 L176.7,107.6 L177.6,108.1 L178.5,108.6 L179.5,109.1 L180.4,109.6 L181.3,110.0 L182.3,110.5 L183.2,111.0 L184.1,111.5 L185.1,112.0 L186.0,112.5 L186.9,113.0 L187.9,113.4 L188.8,113.9 L189.7,114.4 L190.7,114.9 L191.6,115.4 L192.5,115.9 L193.5,116.3 L194.4,116.8 L195.3,117.3 L196.3,117.8 L197.2,118.3 L198.1,118.8 L199.1,119.2 L200.0,119.7 L200.9,120.2 L201.9,120.7 L202.8,121.2 L203.7,121.7 L204.7,122.2 L205.6,122.6 L206.5,123.1 L207.5,123.6 L208.4,124.1 L209.3,124.6 L210.3,125.1 L211.2,125.5 L212.1,126.0 L213.1,126.5 L214.0,127.0 L214.9,127.5 L215.9,128.0 L216.8,128.5 L217.7,128.9 L218.7,129.4 L219.6,129.9 L220.5,130.4 L221.5,130.9 L222.4,131.4 L223.3,131.8 L224.3,132.3 L225.2,132.8 L226.1,133.3 L227.1,133.8 L228.0,134.3 L228.9,134.8 L229.9,135.2 L230.8,135.7 L231.7,136.2 L232.7,136.7 L233.6,137.2 L234.5,137.7 L235.5,138.1 L236.4,138.6 L237.3,139.1 L238.3,139.6 L239.2,140.1 L240.1,140.6 L241.1,141.0 L242.0,141.5 L242.9,142.0 L243.9,142.5 L244.8,143.0 L245.7,143.5 L246.7,144.0 L247.6,144.4 L248.5,144.9 L249.5,145.4 L250.4,145.9 L251.3,146.4 L252.3,146.9 L253.2,147.3 L254.1,147.8 L255.1,148.3 L256.0,148.8 L256.9,149.3 L257.9,149.8 L258.8,150.3 L259.7,150.7 L260.7,151.2 L261.6,151.7 L262.5,152.2 L263.5,152.7 L264.4,153.2 L265.3,153.6 L266.3,154.1 L267.2,154.6 L268.1,155.1 L269.1,155.6 L270.0,156.1 L270.9,156.6 L271.9,157.0 L272.8,157.5 L273.7,158.0 L274.7,158.5 L275.6,159.0 L276.5,159.5 L277.5,159.9 L278.4,160.4 L279.3,160.9 L280.3,161.4 L281.2,161.9 L282.1,162.4 L283.1,162.8 L284.0,163.3 L284.9,163.8 L285.9,164.3 L286.8,164.8 L287.7,165.3 L288.7,165.8 L289.6,166.2 L290.5,166.7 L291.5,167.2 L292.4,167.7 L293.3,168.2 L294.3,168.7 L295.2,169.1 L296.1,169.6 L297.1,170.1 L298.0,170.6 L298.9,171.1 L299.9,171.6 L300.8,172.1 L301.7,172.5 L302.7,173.0 L303.6,173.5 L304.5,174.0 L305.5,174.5 L306.4,175.0 L307.3,175.4 L308.3,175.9 L309.2,176.4 L310.1,176.9 L311.1,177.4 L312.0,177.9 L312.9,178.4 L313.9,178.8 L314.8,179.3 L315.7,179.8 L316.7,180.3 L317.6,180.8 L318.5,181.3 L319.5,181.7 L320.4,182.2 L321.3,182.7 L322.3,183.2 L323.2,183.7 L324.1,184.2 L325.1,184.6 L326.0,185.1 L326.9,185.6 L327.9,186.1 L328.8,186.6 L329.7,187.1 L330.7,187.6 L331.6,188.0 L332.5,188.5 L333.5,189.0 L334.4,189.5 L335.3,190.0 L336.3,190.5 L337.2,190.9 L338.1,191.4 L339.1,191.9 L340.0,192.4 L340.9,192.9 L341.9,193.4 L342.8,193.9 L343.7,194.3 L344.7,194.8 L345.6,195.3 L346.5,195.8 L347.5,196.3 L348.4,196.8 L349.3,197.2 L350.3,197.7 L351.2,198.2 L352.1,198.7 L353.1,199.2 L354.0,199.7 L354.9,200.2 L355.9,200.6 L356.8,201.1 L357.7,201.6 L358.7,202.1 L359.6,202.6 L360.5,203.1 L361.5,203.5 L362.4,204.0 L363.3,204.5 L364.3,205.0 L365.2,205.5 L366.1,206.0 L367.1,206.4 L368.0,206.9 L368.9,207.4 L369.9,207.9 L370.8,208.4 L371.7,208.9 L372.7,209.4 L373.6,209.8 L374.5,210.3 L375.5,210.8 L376.4,211.3 L377.3,211.8 L378.3,212.3 L379.2,212.7 L380.1,213.2 L381.1,213.7 L382.0,214.2\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"380\" y=\"163.6\" text-anchor=\"end\" font-size=\"11\">t</text><text x=\"54.0\" y=\"30\" font-size=\"11\">q</text></svg></span><p>Tanken innehåller 20 liter vid \\(t=0\\). När under intervallet \\(0\\le t\\le4\\) är vattenmängden som störst, och hur stor är den då?</p>",
     "s": "<p>Vattenmängdens derivata är \\(q(t)\\). Den är positiv före \\(t=3\\) och negativ efter, så mängden är störst vid \\(t=3\\).</p><p>Ökningen fram till dess är</p><p>\\[\\int_0^3(6-2t)dt=[6t-t^2]_0^3=9.\\]</p><p>Maximal mängd: \\(20+9=\\boxed{29\\text{ liter}}\\).</p>",
     "familj": "ref_intapp_rate_max_amount",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11288,7 +11288,7 @@ window.BANKMATO1 = [
     "t": "<p>Två maskiner producerar detaljer med hastigheterna</p><p>\\[p_1(t)=2t+4,\\qquad p_2(t)=10-t\\]</p><p>detaljer per minut, för \\(0\\le t\\le4\\).</p><p>Hur många fler detaljer producerar den maskin som producerar mest totalt under intervallet?</p>",
     "s": "<p>Total produktion:</p><p>\\[P_1=\\int_0^4(2t+4)dt=[t^2+4t]_0^4=32.\\]</p><p>\\[P_2=\\int_0^4(10-t)dt=[10t-t^2/2]_0^4=32.\\]</p><p>De producerar alltså lika många. <strong>Skillnaden är \\(\\boxed0\\)</strong>. Uppgiften visar att olika produktionshastigheter vid olika tidpunkter kan ge samma totalmängd.</p>",
     "familj": "ref_intapp_compare_rates",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11395,7 +11395,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna den geometriska summan</p><p>\\[3+6+12+\\cdots\\]</p><p>med totalt 6 termer och kvoten \\(k=2\\).</p>",
     "s": "<p>På formelbladet står</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1},\\qquad k\\neq1.\\]</p><p>Här är \\(a=3\\), \\(k=2\\) och \\(n=6\\). Insättning ger \\(S_6=189\\).</p><p><strong>Svar:</strong> \\(\\boxed{189}\\).</p>",
     "familj": "geosum_rutin_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11470,7 +11470,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna den geometriska summan</p><p>\\[5+2,5+1,25+\\cdots\\]</p><p>med totalt 5 termer och kvoten \\(k=0,5\\).</p>",
     "s": "<p>På formelbladet står</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1},\\qquad k\\neq1.\\]</p><p>Här är \\(a=5\\), \\(k=0,5\\) och \\(n=5\\). Insättning ger \\(S_5=9,688\\).</p><p><strong>Svar:</strong> \\(\\boxed{9,688}\\).</p>",
     "familj": "geosum_rutin_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11530,7 +11530,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett bageri gör två produkter, A och B. Varje A kräver 2 kg mjöl och 1 arbetstimme. Varje B kräver 1 kg mjöl och 2 arbetstimmar. Det finns högst 40 kg mjöl och 50 arbetstimmar.</p><p>Vinsten är 60 kr per A och 80 kr per B. Bestäm hur många av varje produkt som bör tillverkas för maximal vinst enligt en kontinuerlig linjär modell.</p>",
     "s": "<p>Låt \\(x\\) vara antal A och \\(y\\) antal B.</p><p>Villkoren är</p><p>\\[2x+y\\le40,\\qquad x+2y\\le50,\\qquad x,y\\ge0.\\]</p><p>Målfunktionen är \\(V=60x+80y\\).</p><p>Hörnpunkterna är \\((0,0),(0,25),(10,20),(20,0)\\). Värden:</p><p>0, 2000, 2200, 1200 kr.</p><p><strong>Svar:</strong> modellen ger maximum vid \\(\\boxed{x=10,y=20}\\), med vinst \\(\\boxed{2200\\text{ kr}}\\).</p>",
     "familj": "linopt_bageri",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -11605,7 +11605,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett företag planerar två produkter \\(x\\) och \\(y\\). Begränsningarna är</p><p>\\[3x+1y\\le 60,\\qquad 2x+4y\\le 96,\\qquad x,y\\ge0.\\]</p><p>Intäkten är \\(I=500x+700y\\). Bestäm den lösningen som ger största eller minsta värdet.</p>",
     "s": "<p>Undersök hörnpunkterna till det tillåtna området. De relevanta hörnen är ungefär (0,0), (0,24), (14,4; 16,8), (20,0).</p><p>I punkten \\((0,0)\\) är \\(I\\approx 0\\).</p><p>I punkten \\((0,24)\\) är \\(I\\approx 16800\\).</p><p>I punkten \\((14,4; 16,8)\\) är \\(I\\approx 18960\\).</p><p>I punkten \\((20,0)\\) är \\(I\\approx 10000\\).</p><p><strong>Maximum:</strong> \\(I\\approx 18960\\) vid \\((x,y)\\approx(14,4; 16,8)\\).</p>",
     "familj": "linopt_constraints_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -11620,7 +11620,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna den geometriska summan</p><p>\\[2-1+0,5-0,25+\\cdots\\]</p><p>med totalt 6 termer och kvoten \\(k=-0,5\\).</p>",
     "s": "<p>På formelbladet står</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1},\\qquad k\\neq1.\\]</p><p>Här är \\(a=2\\), \\(k=-0,5\\) och \\(n=6\\). Insättning ger \\(S_6=1,312\\).</p><p><strong>Svar:</strong> \\(\\boxed{1,312}\\).</p>",
     "familj": "geosum_rutin_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11665,7 +11665,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett fartyg seglar 18 km österut och därefter 25 km i en riktning som ligger 60° norr om öst. Hur långt är fartyget då från startpunkten?</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" role=\"img\" aria-label=\"Fartygets två förflyttningar och resultanten\"><rect x=\"0\" y=\"0\" width=\"390\" height=\"245\" fill=\"#fff\"/><rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"8\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"60\" y1=\"195\" x2=\"195\" y2=\"195\" stroke=\"#2A5D9E\" stroke-width=\"4\"/><line x1=\"195\" y1=\"195\" x2=\"315\" y2=\"91\" stroke=\"#0F6B4F\" stroke-width=\"4\"/><line x1=\"60\" y1=\"195\" x2=\"315\" y2=\"91\" stroke=\"#B43123\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/><text x=\"118\" y=\"216\" font-size=\"12\" fill=\"#2A5D9E\">18 km österut</text><text x=\"244\" y=\"131\" font-size=\"12\" fill=\"#0F6B4F\">25 km</text><path d=\"M225 195 A30 30 0 0 0 211 171\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"224\" y=\"174\" font-size=\"12\">60°</text><text x=\"279\" y=\"193\" font-size=\"11\" fill=\"#5C575E\">öst</text><text x=\"57\" y=\"181\" font-size=\"11\">start</text><text x=\"319\" y=\"86\" font-size=\"11\">slut</text></svg></span>",
     "s": "<p>De två förflyttningarna bildar vinkeln 60°. Resultantens längd kan bestämmas med cosinussatsen (med plus eftersom trianglens inre vinkel motsvarande blir 120°):</p><p>\\[d^2=18^2+25^2+2\\cdot18\\cdot25\\cos60^\\circ.\\]</p><p>\\[d\\approx 37,4\\text{ km}.\\]</p>",
     "familj": "trigapp_navigation",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -11680,7 +11680,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett företag planerar två produkter \\(x\\) och \\(y\\). Begränsningarna är</p><p>\\[2x+1y\\le 40,\\qquad x+3y\\le 45,\\qquad x,y\\ge0.\\]</p><p>Intäkten är \\(I=120x+150y\\). Bestäm den lösningen som ger största eller minsta värdet.</p>",
     "s": "<p>Undersök hörnpunkterna till det tillåtna området. De relevanta hörnen är ungefär (0,0), (0,15), (15,10), (20,0).</p><p>I punkten \\((0,0)\\) är \\(I\\approx 0\\).</p><p>I punkten \\((0,15)\\) är \\(I\\approx 2250\\).</p><p>I punkten \\((15,10)\\) är \\(I\\approx 3300\\).</p><p>I punkten \\((20,0)\\) är \\(I\\approx 2400\\).</p><p><strong>Maximum:</strong> \\(I\\approx 3300\\) vid \\((x,y)\\approx(15,10)\\).</p>",
     "familj": "linopt_constraints_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -12040,7 +12040,7 @@ window.BANKMATO1 = [
     "t": "<p>Från en punkt 25 m från foten av ett torn mäts höjdvinkeln till tornets topp till 30°. Marken antas plan. Bestäm tornets höjd.</p>",
     "s": "<p>Situationen ger en rätvinklig triangel där</p><p>\\[\\tan 30^\\circ=\\frac h{25}.\\]</p><p>Alltså \\(h=25\\tan 30^\\circ\\approx 14,4\\) m.</p>",
     "familj": "topup_trigapp_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12145,7 +12145,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första 4 termerna i den geometriska talföljden med första termen 2 och kvoten 2.</p>",
     "s": "<p>Använd</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1}.\\]</p><p>Insättning ger \\(S_4=30\\).</p>",
     "familj": "topup_geosum_0",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12205,7 +12205,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett skolkök gör två salladsblandningar A och B. Ett kg A kräver 2 min arbetstid och 4 dl av en viss råvara. Ett kg B kräver 4 min arbetstid och 2 dl råvara. Under en period finns högst 120 min arbetstid och 120 dl råvara. Vinsten är 18 kr per kg A och 22 kr per kg B.</p><p>Formulera ett linjärt optimeringsproblem och bestäm den största möjliga vinsten enligt modellen.</p>",
     "s": "<p>Låt \\(x\\) och \\(y\\) vara kilogram A respektive B.</p><p>Begränsningarna blir</p><p>\\[2x+4y\\le120,\\quad4x+2y\\le120,\\quad x,y\\ge0.\\]</p><p>Målfunktionen är \\(V=18x+22y\\).</p><p>Hörnpunkterna är \\( (0,0), (30,0), (20,20), (0,30) \\).</p><p>\\[V(0,0)=0,\\quad V(30,0)=540,\\quad V(20,20)=800,\\quad V(0,30)=660.\\]</p><p><strong>Svar:</strong> maximum är \\(\\boxed{800\\text{ kr}}\\) vid \\( (x,y)=(20,20) \\).</p>",
     "familj": "linopt_formulera_skolkok",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -12220,7 +12220,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första 5 termerna i den geometriska talföljden med första termen 3 och kvoten 3.</p>",
     "s": "<p>Använd</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1}.\\]</p><p>Insättning ger \\(S_5=363\\).</p>",
     "familj": "topup_geosum_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12295,7 +12295,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första 6 termerna i den geometriska talföljden med första termen 4 och kvoten 0,5.</p>",
     "s": "<p>Använd</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1}.\\]</p><p>Insättning ger \\(S_6=7,875\\).</p>",
     "familj": "topup_geosum_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12370,7 +12370,7 @@ window.BANKMATO1 = [
     "t": "<p>På första raden i en läktarsektion finns 18 stolar. Varje ny rad har 2 stolar fler än den föregående.</p><p>Är detta en geometrisk talföljd? Motivera.</p>",
     "s": "<p>Nej. I en geometrisk talföljd ska kvoten mellan två på varandra följande termer vara konstant. Här ökar antalet med en konstant <em>differens</em> 2, så följden är aritmetisk, inte geometrisk.</p>",
     "familj": "geosum_unik_4_70",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12520,7 +12520,7 @@ window.BANKMATO1 = [
     "t": "<p>I ett bildmönster består första figuren av 6 små trianglar. I varje ny figur blir antalet trianglar tre gånger så stort.</p><p>Hur många små trianglar har använts totalt när figur 1 till och med figur 7 har byggts?</p>",
     "s": "<p>Antalet i varje figur bildar en geometrisk följd med \\(a=6\\), \\(k=3\\) och \\(n=7\\).</p><p>\\[S_7=\\frac{6((3^7)-1)}{(3)-1}=6558.\\]</p><p><strong>Svar:</strong> \\(\\boxed{6558}\\) trianglar.</p>",
     "familj": "geosum_unik_4_80",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12565,7 +12565,7 @@ window.BANKMATO1 = [
     "t": "<p>En triangelformad tomt har sidorna 42 m, 55 m och 63 m.</p><p>Bestäm tomtens area. Välj själv lämplig triangelsats och redovisa mellanleden.</p>",
     "s": "<p>Bestäm först vinkeln \\(C\\) mellan sidorna 42 m och 55 m med cosinussatsen:</p><p>\\[\\cos C=\\frac{42^2+55^2-63^2}{2\\cdot42\\cdot55}.\\]</p><p>Det ger \\(C\\approx79,8^\\circ\\). Areasatsen ger sedan</p><p>\\[T=\\frac12\\cdot42\\cdot55\\sin79,8^\\circ\\approx1137\\text{ m}^2.\\]</p><p><strong>Svar:</strong> cirka \\(\\boxed{1140\\text{ m}^2}\\).</p>",
     "familj": "trig_unik_4_83",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12640,7 +12640,7 @@ window.BANKMATO1 = [
     "t": "<p>En triangel har sidorna 9 cm och 13 cm samt arean 45 cm².</p><p>Bestäm alla möjliga värden på vinkeln mellan de två givna sidorna.</p>",
     "s": "<p>Areasatsen ger</p><p>\\[45=\\frac12\\cdot9\\cdot13\\sin C.\\]</p><p>\\[\\sin C=\\frac{90}{117}=\\frac{10}{13}.\\]</p><p>En vinkel i intervallet \\((0^\\circ,180^\\circ)\\) kan därför vara</p><p>\\[C_1\\approx50,3^\\circ\\quad\\text{eller}\\quad C_2=180^\\circ-C_1\\approx129,7^\\circ.\\]</p><p><strong>Svar:</strong> \\(\\boxed{50,3^\\circ\\text{ eller }129,7^\\circ}\\).</p>",
     "familj": "trig_unik_4_88",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12670,7 +12670,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk summa har första termen \\(a\\) och kvoten \\(k\\), där \\(k\\neq1\\). Summan av de första 4 termerna är 30 och summan av de första 8 termerna är 510.</p><p>Bestäm \\(a\\) och \\(k\\).</p>",
     "s": "<p>Skriv \\(S_4=\\frac{a(k^4-1)}{k-1}=30\\). De fyra nästa termerna är de fyra första multiplicerade med \\(k^4\\), så</p><p>\\[S_8=S_4+k^4S_4=30(1+k^4)=510.\\]</p><p>\\[1+k^4=17\\Rightarrow k^4=16.\\]</p><p>För en reell geometrisk följd kan \\(k=2\\) eller \\(k=-2\\). Sätt in i \\(S_4\\):</p><p>För \\(k=2\\): \\(30=a(1+2+4+8)=15a\\Rightarrow a=2\\).</p><p>För \\(k=-2\\): \\(30=a(1-2+4-8)=-5a\\Rightarrow a=-6\\).</p><p><strong>Svar:</strong> \\(\\boxed{(a,k)=(2,2)\\text{ eller }(-6,-2)}\\).</p>",
     "familj": "geosum_unik_4_90",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12925,7 +12925,7 @@ window.BANKMATO1 = [
     "s": "<p>Cosinussatsen ger</p><p>\\[c^2=6^2+10^2-2\\cdot6\\cdot10\\cos 90^\\circ.\\]</p><p><strong>Svar:</strong> \\(c\\approx 11,66\\) cm.</p>",
     "familj": "r2_tri_E_4",
     "id": "4.107",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12940,7 +12940,7 @@ window.BANKMATO1 = [
     "s": "<p>Förflyttningsvektorerna har 60° mellan sig. Resultantens längd uppfyller \\(d^2=18^2+25^2+2\\cdot18\\cdot25\\cos60^\\circ\\), vilket ger \\(d\\approx37,4\\) km.</p>",
     "familj": "r2_trigapp_4",
     "id": "4.108",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -12970,7 +12970,7 @@ window.BANKMATO1 = [
     "s": "<p>Bestäm först vinkeln mellan sidorna 42 och 55 med cosinussatsen: \\(\\cos C=(42^2+55^2-63^2)/(2\\cdot42\\cdot55)\\). Det ger \\(C\\approx79,8^\\circ\\). Areasatsen ger sedan cirka 1137 m².</p>",
     "familj": "r2_trigapp_5",
     "id": "4.110",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13105,7 +13105,7 @@ window.BANKMATO1 = [
     "s": "<p>Areasatsen ger \\(40=\\frac12\\cdot9\\cdot13\\sin C\\), alltså \\(\\sin C=80/117\\approx0,6838\\). Därför \\(C\\approx43,1^\\circ\\) eller \\(136,9^\\circ\\).</p>",
     "familj": "r2_tri_C_2",
     "id": "4.119",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13120,7 +13120,7 @@ window.BANKMATO1 = [
     "s": "<p>\\(A=35\\sin C\\). På intervallet når sinus maximum 1 vid 90°. Minsta värdet fås vid 30° eftersom \\(\\sin30=0,5&lt;\\sin120\\). Alltså \\(17,5\\le A\\le35\\) m².</p>",
     "familj": "r2_trigapp_10",
     "id": "4.120",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13165,7 +13165,7 @@ window.BANKMATO1 = [
     "s": "<p>Största vinkeln ligger mot sidan 10. Cosinussatsen ger \\(\\cos C=(5^2+7^2-10^2)/(2\\cdot5\\cdot7)=-13/35\\). Därför \\(C\\approx111,8^\\circ\\).</p>",
     "familj": "r2_tri_C_4",
     "id": "4.123",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13225,7 +13225,7 @@ window.BANKMATO1 = [
     "s": "<p>Låt C vara vinkeln mot sidan 13. \\(13^2=5^2+12^2\\), så cosinussatsen ger \\(169=25+144-120\\cos C\\), alltså \\(\\cos C=0\\) och \\(C=90^\\circ\\).</p>",
     "familj": "r2_tri_A_1",
     "id": "4.127",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13240,7 +13240,7 @@ window.BANKMATO1 = [
     "s": "<p>Jämför den längsta sidans kvadrat med summan av de andra två: \\(14^2=196\\) och \\(8^2+10^2=164\\). Eftersom \\(196&gt;164\\) är vinkeln mot sidan 14 större än 90°, alltså är triangeln trubbig.</p>",
     "familj": "r2_trigapp_14",
     "id": "4.128",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13255,7 +13255,7 @@ window.BANKMATO1 = [
     "s": "<p>Areasatsen ger \\(A=70\\sin C\\). För \\(0^\\circ&lt;C&lt;180^\\circ\\) är sinus störst vid 90°, så maximal area fås när vinkeln är 90°.</p>",
     "familj": "r2_tri_A_2",
     "id": "4.129",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13285,7 +13285,7 @@ window.BANKMATO1 = [
     "s": "<p>Dra höjden från hörnet \\(C\\) mot sidan \\(b\\). Höjden blir</p><p>\\[h=b\\sin A=12\\cdot0,5=6.\\]</p><p>Här gäller \\(h<a<b\\), alltså \\(6<8<12\\). Då kan sidan med längden 8 nå sidan \\(b\\) i två olika lägen. Därför finns två möjliga trianglar.</p>",
     "familj": "r2_tri_A_3",
     "id": "4.131",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13300,7 +13300,7 @@ window.BANKMATO1 = [
     "s": "<p>Vinkeln 120° är riktad från samma referensriktning som vid A. Triangelns sida BA pekar i motsatt riktning mot AB, så den inre vinkeln vid B blir \\(180^\\circ-120^\\circ=60^\\circ\\).</p>",
     "familj": "r2_trigapp_16",
     "id": "4.132",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13360,7 +13360,7 @@ window.BANKMATO1 = [
     "s": "<p>Cosinussatsen med \\(C=90^\\circ\\) ger \\(c^2=6^2+9^2=117\\), alltså \\(c=3\\sqrt{13}\\).</p>",
     "familj": "r2_trigapp_18",
     "id": "4.136",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13375,7 +13375,7 @@ window.BANKMATO1 = [
     "s": "<p>Cosinussatsen ger \\(c^2=a^2+b^2-2ab\\cos C\\). När C ökar från 0° till 180° minskar cos C från 1 till -1, så högerledet ökar. I gränsfallet C→180° fås \\(c^2→(a+b)^2\\), alltså \\(c→a+b\\).</p>",
     "familj": "r2_tri_A_6",
     "id": "4.137",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13405,7 +13405,7 @@ window.BANKMATO1 = [
     "s": "<p>Areasatsen ger \\(24=30\\sin C\\), alltså \\(\\sin C=0,8\\). Detta är möjligt och ger \\(C\\approx53,1^\\circ\\) eller \\(126,9^\\circ\\).</p>",
     "familj": "r2_tri_A_7",
     "id": "4.139",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13465,7 +13465,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första \\(7\\) termerna i en geometrisk talföljd med första termen \\(3\\) och kvoten \\(2\\).</p>",
     "s": "<p>Använd \\(S_n=\\frac{a(k^n-1)}{k-1}\\):</p><p>\\[S_7=\\frac{3((2^7)-1)}{(2)-1}=381.\\]</p><p><strong>Svar:</strong> \\(\\boxed{381}\\).</p>",
     "familj": "r3_geosum_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13510,7 +13510,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första \\(6\\) termerna i en geometrisk talföljd med första termen \\(5\\) och kvoten \\(\\frac{1}{2}\\).</p>",
     "s": "<p>Använd \\(S_n=\\frac{a(k^n-1)}{k-1}\\):</p><p>\\[S_6=\\frac{5((\\frac12)^6-1)}{\\frac12-1}=\\frac{315}{32}.\\]</p><p><strong>Svar:</strong> \\(\\boxed{\\frac{315}{32}}\\).</p>",
     "familj": "r3_geosum_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13555,7 +13555,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första \\(5\\) termerna i en geometrisk talföljd med första termen \\(80\\) och kvoten \\(\\frac{11}{10}\\).</p>",
     "s": "<p>Använd \\(S_n=\\frac{a(k^n-1)}{k-1}\\):</p><p>\\[S_5=\\frac{80((1,1^5)-1)}{(1,1)-1}=488,408.\\]</p><p><strong>Svar:</strong> \\(\\boxed{488,408}\\).</p>",
     "familj": "r3_geosum_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13600,7 +13600,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första \\(5\\) termerna i en geometrisk talföljd med första termen \\(4\\) och kvoten \\(-2\\).</p>",
     "s": "<p>Använd \\(S_n=\\frac{a(k^n-1)}{k-1}\\):</p><p>\\[S_5=\\frac{4(((-2)^5)-1)}{((-2))-1}=44.\\]</p><p><strong>Svar:</strong> \\(\\boxed{44}\\).</p>",
     "familj": "r3_geosum_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13645,7 +13645,7 @@ window.BANKMATO1 = [
     "t": "<p>Beräkna summan av de första \\(6\\) termerna i en geometrisk talföljd med första termen \\(120\\) och kvoten \\(\\frac{4}{5}\\).</p>",
     "s": "<p>Använd \\(S_n=\\frac{a(k^n-1)}{k-1}\\):</p><p>\\[S_6=\\frac{120((0,8^6)-1)}{(0,8)-1}=442,7136.\\]</p><p><strong>Svar:</strong> \\(\\boxed{442,7136}\\).</p>",
     "familj": "r3_geosum_5",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13690,7 +13690,7 @@ window.BANKMATO1 = [
     "t": "<p>Följden \\(2,6,18,54,\\ldots\\) är geometrisk.</p><p>a) Bestäm kvoten.<br>b) Skriv den sjätte termen.</p>",
     "s": "<p>a) Kvoten är \\(k=6/2=3\\).</p><p>b) \\(a_6=2\\cdot3^5=486\\).</p>",
     "familj": "r3_geosum_6",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13735,7 +13735,7 @@ window.BANKMATO1 = [
     "t": "<p>Avgör vilken av följderna som är geometrisk och ange i så fall kvoten.</p><p>A: \\(4,8,12,16,\\ldots\\)<br>B: \\(81,27,9,3,\\ldots\\)</p>",
     "s": "<p>A har konstant differens men inte konstant kvot och är därför inte geometrisk.</p><p>B har kvoten \\(27/81=1/3\\) mellan varje par av termer. Alltså är B geometrisk med \\(k=1/3\\).</p>",
     "familj": "r3_geosum_7",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13780,7 +13780,7 @@ window.BANKMATO1 = [
     "t": "<p>Första dagen läser en elev 20 sidor. Varje följande dag läser eleven 10 % fler sidor än dagen före.</p><p>Skriv de fyra första termerna i den geometriska följden.</p>",
     "s": "<p>Kvoten är \\(1,10\\). Termerna blir</p><p>\\[\\boxed{20;\\ 22;\\ 24,2;\\ 26,62}.\\]</p>",
     "familj": "r3_geosum_8",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13810,7 +13810,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett kafé säljer smörgåsar \\(x\\) och sallader \\(y\\). En smörgås kräver 2 min arbete och 3 råvaruenheter, en sallad 4 min och 2 råvaruenheter. Det finns 80 min arbete och 72 råvaruenheter.</p><p>Vinsten är 35 kr per smörgås och 50 kr per sallad. Formulera problemet som ett linjärt optimeringsproblem och bestäm den största möjliga vinsten.</p>",
     "s": "<p>Villkoren är \\(2x+4y\\le80\\), \\(3x+2y\\le72\\), \\(x,y\\ge0\\). Målfunktionen är \\(V=35x+50y\\).</p><p>Hörnen är \\((0,0),(0,20),(16,12),(24,0)\\). Värdena blir 0, 1000, 1160 och 840.</p><p><strong>Svar:</strong> modellen ger maximum \\(\\boxed{1160\\text{ kr}}\\) vid \\(\\boxed{(16,12)}\\).</p>",
     "familj": "r3_linopt_9",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -13825,7 +13825,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk summa är \\(10+15+22,5+\\cdots\\). Bestäm första termen och kvoten.</p>",
     "s": "<p>Första termen är \\(a=10\\). Kvoten är \\(15/10=1,5\\), vilket också stämmer eftersom \\(22,5/15=1,5\\).</p>",
     "familj": "r3_geosum_9",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -13900,7 +13900,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett tillåtet område bestäms av \\(x+y\\le8\\), \\(2x+y\\le12\\), \\(x,y\\ge0\\). Bestäm hörnpunkterna och maximera \\(Z=3x+5y\\).</p>",
     "s": "<p>Hörnpunkterna på koordinataxlarna är \\((0,0),(0,8),(6,0)\\). Skärningen mellan linjerna: subtraktion ger \\(x=4\\), och då \\(y=4\\). Hörnet är \\((4,4)\\).</p><p>\\(Z\\)-värden: 0, 40, 18 och 32. Maximum är \\(\\boxed{40}\\) i \\(\\boxed{(0,8)}\\).</p>",
     "familj": "r3_linopt_11",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -14035,7 +14035,7 @@ window.BANKMATO1 = [
     "t": "<p>En modell för två produkter har villkoren \\(x+2y\\le20\\), \\(3x+y\\le24\\), \\(x,y\\ge0\\). Vinsten är \\(V=80x+50y\\).</p><p>Bestäm om det är mest lönsamt att använda alla resurser i skärningspunkten eller i en hörnpunkt på en koordinataxel.</p>",
     "s": "<p>Skärningen fås av \\(x+2y=20\\) och \\(3x+y=24\\): \\(x=5,6\\), \\(y=7,2\\), alltså \\((5,6;\\,7,2)\\). Hörnpunkterna på koordinataxlarna är \\((0,10)\\) och \\((8,0)\\).</p><p>Värdena blir \\(V(0,10)=500\\), \\(V(8,0)=640\\) och \\(V=808\\) i skärningspunkten.</p><p><strong>Svar:</strong> skärningspunkten \\(\\boxed{(5,6;\\,7,2)}\\) ger störst vinst i den kontinuerliga modellen.</p>",
     "familj": "r3_linopt_14",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -14080,7 +14080,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett företag vill minimera kostnaden \\(K=4x+7y\\) under villkoren \\(2x+y\\ge10\\), \\(x+3y\\ge12\\), \\(x,y\\ge0\\).</p><p>Förklara varför detta fortfarande är ett linjärt optimeringsproblem trots att olikheterna pekar åt andra hållet, och ange hur du skulle lösa det.</p>",
     "s": "<p>Både målfunktion och begränsningar är linjära. Skillnaden är att det tillåtna området ligger på andra sidan begränsningslinjerna och kan vara obegränsat uppåt. För att minimera kostnaden undersöker man de relevanta hörnpunkterna närmast origo, inklusive skärningen mellan linjerna och axelskärningarna som uppfyller båda villkoren.</p>",
     "familj": "r3_linopt_15",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -14095,7 +14095,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk följd har första termen 5 och den fjärde termen 40. Kvoten är positiv.</p><p>Bestäm kvoten och summan av de första sex termerna.</p>",
     "s": "<p>Om första termen är \\(a=5\\), så är den fjärde termen \\(ak^3\\). Därför</p><p>\\[40=5k^3\\Rightarrow k^3=8\\Rightarrow k=2.\\]</p><p>Använd formeln från formelbladet:</p><p>\\[S_6=\\frac{5(2^6-1)}{2-1}=315.\\]</p><p><strong>Svar:</strong> \\(\\boxed{k=2,\\ S_6=315}\\).</p>",
     "familj": "r3_geosum_15",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -14140,7 +14140,7 @@ window.BANKMATO1 = [
     "t": "<p>På formelbladet står</p><p>\\[S_n=\\frac{a(k^n-1)}{k-1},\\qquad k\\neq1.\\]</p><p>Förklara vad som är speciellt med fallet \\(k=1\\) och ange summan av \\(n\\) termer då.</p>",
     "s": "<p>När \\(k=1\\) är alla termer lika med den första termen \\(a\\):</p><p>\\[a+a+\\cdots+a.\\]</p><p>Det finns \\(n\\) sådana termer, så</p><p>\\[\\boxed{S_n=na}.\\]</p><p>Det är därför formeln på formelbladet anger villkoret \\(k\\neq1\\).</p>",
     "familj": "r3_geosum_16",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -14185,7 +14185,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk summa har positiva termer. Summan av de första 3 termerna är 21 och summan av de första 6 termerna är 189.</p><p>Bestäm första termen och kvoten.</p>",
     "s": "<p>Låt \\(S_3=a(1+k+k^2)=21\\). De följande tre termerna är \\(k^3\\) gånger de första tre, så \\(S_6=S_3+k^3S_3=21(1+k^3)=189\\).</p><p>Därför \\(1+k^3=9\\Rightarrow k=2\\). Då \\(a(1+2+4)=21\\Rightarrow7a=21\\Rightarrow a=3\\).</p><p><strong>Svar:</strong> \\(\\boxed{a=3,k=2}\\).</p>",
     "familj": "r3_geosum_17",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -14305,8 +14305,8 @@ window.BANKMATO1 = [
     "t": "<p>Ett företag har modellen \\(2x+y\\le18\\), \\(x+2y\\le18\\), \\(x,y\\ge0\\) och målfunktionen \\(Z=px+y\\), där \\(p&gt;0\\).</p><p>Bestäm för vilka \\(p\\) skärningspunkten mellan de två resurslinjerna är en lösning som ger största eller minsta värdet.</p>",
     "s": "<p>Skärningspunkten är \\((6,6)\\). De relevanta hörnpunkterna på koordinataxlarna är \\((9,0)\\) och \\((0,9)\\).</p><p>För att \\((6,6)\\) ska vara minst lika bra som \\((9,0)\\): \\(6p+6\\ge9p\\Rightarrow p\\le2\\).</p><p>Jämfört med \\((0,9)\\): \\(6p+6\\ge9\\Rightarrow p\\ge1/2\\).</p><p><strong>Svar:</strong> \\(\\boxed{\\frac12\\le p\\le2}\\). Vid ändvärdena finns fler än en punkt som ger bäst värde.</p>",
     "familj": "r3_linopt_20",
-    "miniräknare": false,
-    "geogebra": false
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "id": "4.200",
@@ -15296,7 +15296,7 @@ window.BANKMATO1 = [
     "t": "<p>En låda har höjden \\(x\\) dm och kvadratisk botten med sidan \\(14-x\\) dm.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"380\" height=\"235\" viewBox=\"0 0 380 235\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rätblock med höjd x och kvadratisk botten med sidan 14 minus x\">\\n<polygon points=\"90,65 245,65 300,105 145,105\" fill=\"#E7D4BA\" stroke=\"#2B2527\" stroke-width=\"2\"/><polygon points=\"145,105 300,105 300,190 145,190\" fill=\"#D9BD96\" stroke=\"#2B2527\" stroke-width=\"2\"/><polygon points=\"90,65 145,105 145,190 90,150\" fill=\"#CFAE80\" stroke=\"#2B2527\" stroke-width=\"2\"/>\\n<text x=\"112\" y=\"130\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\">x</text><text x=\"188\" y=\"207\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\">14 - x</text><text x=\"266\" y=\"157\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\">14 - x</text></svg></span><p>Bestäm med derivata den största möjliga volymen för \\(0&lt;x&lt;14\\).</p>",
     "s": "<p>Volymen är</p><p>\\[V(x)=x(14-x)^2.\\]</p><p>Derivera:</p><p>\\[V^{\\prime}(x)=(14-x)(14-3x).\\]</p><p>Nollställena är \\(x=14\\), som ligger vid gränsen och ger volymen 0 och \\(x=14/3\\). Den inre nollstället till derivatan ger maximum.</p><p>\\[V\\left(\\frac{14}{3}\\right)=\\frac{14}{3}\\left(\\frac{28}{3}\\right)^2=\\frac{10976}{27}\\approx406,5.\\]</p><p><strong>Svar:</strong> \\(\\boxed{V_{\\max}\\approx406,5\\text{ dm}^3}\\).</p>",
     "familj": "ref2_ext_box_max",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -15344,7 +15344,7 @@ window.BANKMATO1 = [
     "t": "<p>En låda med kvadratisk botten ska ha volymen \\(250\\text{ cm}^3\\). Bottenmaterialet kostar 1,20 kr/cm², medan lock och sidor kostar 0,40 kr/cm².</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"330\" height=\"270\" viewBox=\"0 0 330 270\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Låda med kvadratisk botten, sidlängd x och höjd h\"><polygon points=\"80,70 220,70 275,110 135,110\" fill=\"#E7D4BA\" stroke=\"#2B2527\" stroke-width=\"2\"/><polygon points=\"135,110 275,110 275,220 135,220\" fill=\"#D9BD96\" stroke=\"#2B2527\" stroke-width=\"2\"/><polygon points=\"80,70 135,110 135,220 80,180\" fill=\"#CFAE80\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"182\" y=\"240\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\">x</text><text x=\"285\" y=\"168\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\">h</text><text x=\"105\" y=\"200\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\">x</text></svg></span><p>Bestäm lådans mått så att materialkostnaden blir minimal, och ange minsta kostnaden.</p>",
     "s": "<p>Låt botten ha sidan \\(x\\) och höjden \\(h\\). Volymvillkoret ger \\(x^2h=250\\Rightarrow h=250/x^2\\).</p><p>Kostnaden är botten \\(1,20x^2\\), lock \\(0,40x^2\\) och fyra sidor \\(0,40\\cdot4xh\\):</p><p>\\[K(x)=1,60x^2+1,60xh=1,60x^2+\\frac{400}{x}.\\]</p><p>\\[K^{\\prime}(x)=3,20x-\\frac{400}{x^2}=0\\Rightarrow3,20x^3=400\\Rightarrow x^3=125.\\]</p><p>Alltså \\(x=5\\) cm och \\(h=250/25=10\\) cm. Kostnaden:</p><p>\\[K(5)=1,60\\cdot25+400/5=40+80=120.\\]</p><p><strong>Svar:</strong> \\(\\boxed{5\\times5\\times10\\text{ cm}}\\), minsta kostnad \\(\\boxed{120\\text{ kr}}\\).</p>",
     "familj": "ref2_ext_material_cost_box",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -15392,7 +15392,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hage byggs mot en lång vägg. Det finns 50 m stängsel till de tre övriga sidorna.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rektangulär hage mot en vägg\"><rect x=\"60\" y=\"45\" width=\"260\" height=\"22\" fill=\"#D8D8D8\"/><text x=\"170\" y=\"60\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">vägg</text><path d=\"M90 67 V190 H290 V67\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"4\"/><text x=\"73\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\">x</text><text x=\"190\" y=\"210\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\">y</text><text x=\"95\" y=\"100\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#5C575E\">stängsel på tre sidor, totalt 50 m</text></svg></span><p>Bestäm måtten som ger största möjliga area.</p>",
     "s": "<p>Låt de två korta sidorna vara \\(x\\) och sidan parallell med väggen vara \\(y\\). Då \\(2x+y=50\\Rightarrow y=50-2x\\).</p><p>\\[A(x)=x(50-2x)=50x-2x^2.\\]</p><p>\\[A^{\\prime}(x)=50-4x=0\\Rightarrow x=12,5.\\]</p><p>Då \\(y=25\\). Andraderivatan \\(-4&lt;0\\) visar maximum.</p><p><strong>Svar:</strong> \\(\\boxed{12,5\\text{ m}\\times25\\text{ m}}\\).</p>",
     "familj": "ref2_ext_fence_wall",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -15632,7 +15632,7 @@ window.BANKMATO1 = [
     "t": "<p>Grafen visar förändringshastigheten \\(Q^{\\prime}(t)\\) i enheten kg/min.</p><span class=\"fig\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"280\" viewBox=\"0 0 400 280\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Förändringshastighet som ökar linjärt till fyra och sedan minskar linjärt till två\"><rect x=\"48\" y=\"18\" width=\"334\" height=\"224\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48\" y1=\"242\" x2=\"388\" y2=\"242\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"48\" y1=\"242\" x2=\"48\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><g stroke=\"#E9E8EB\"><line x1=\"131.5\" y1=\"18\" x2=\"131.5\" y2=\"242\"/><line x1=\"215\" y1=\"18\" x2=\"215\" y2=\"242\"/><line x1=\"298.5\" y1=\"18\" x2=\"298.5\" y2=\"242\"/><line x1=\"48\" y1=\"178\" x2=\"382\" y2=\"178\"/><line x1=\"48\" y1=\"114\" x2=\"382\" y2=\"114\"/><line x1=\"48\" y1=\"50\" x2=\"382\" y2=\"50\"/></g><path d=\"M48 242 L131.5 114 L298.5 178\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.8\"/><text x=\"118\" y=\"260\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><text x=\"285\" y=\"260\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><text x=\"28\" y=\"118\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><text x=\"28\" y=\"182\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><text x=\"235\" y=\"140\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#2A5D9E\">Q′(t)</text><text x=\"385\" y=\"235\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">t</text></svg></span><p>Bestäm den totala förändringen av \\(Q\\) mellan \\(t=0\\) och \\(t=6\\) minuter genom att tolka arean under grafen.</p>",
     "s": "<p>Från 0 till 2 bildas en triangel med bas 2 och höjd 4: area 4. Från 2 till 6 är grafen en linje från 4 till 2, alltså en trapets med area</p><p>\\[\\frac{4+2}{2}\\cdot4=12.\\]</p><p>Total förändring: \\(4+12=16\\) kg.</p><p><strong>Svar:</strong> \\(\\boxed{16\\text{ kg}}\\).</p>",
     "familj": "ref2_intapp_graph_area",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -15769,7 +15769,7 @@ window.BANKMATO1 = [
     "t": "<p>I en triangel \\(ABC\\) betecknas sidorna mittemot \\(A,B,C\\) med \\(a,b,c\\).</p><span class=\"fig bred\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" role=\"img\" aria-label=\"Triangel ABC med standardbeteckningar\"><rect x=\"0\" y=\"0\" width=\"390\" height=\"260\" fill=\"#fff\"/><polygon points=\"77.6,220 312.4,220 225.2,56\" fill=\"#F7F8FA\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"61\" y=\"231.1\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"13\" fill=\"#2B2527\">A</text><text x=\"328.5\" y=\"232.2\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"13\" fill=\"#2B2527\">B</text><text x=\"228.5\" y=\"42.3\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"13\" fill=\"#2B2527\">C</text><path d=\"M 101.6 220 L 101.5 218.6 L 101.4 217.1 L 101.2 215.7 L 100.9 214.3 L 100.5 212.9 L 100 211.6 L 99.5 210.2 L 98.9 208.9 L 98.2 207.7 L 97.4 206.5 L 96.6 205.3 L 95.6 204.2 L 94.7 203.2 L 93.6 202.2\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.45\" stroke-linecap=\"round\"/><text x=\"114.1\" y=\"207.7\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2B2527\">A</text><path d=\"M 288.4 220 L 288.5 218.1 L 288.7 216.3 L 289.1 214.5 L 289.6 212.7 L 290.2 211 L 291 209.3 L 291.9 207.6 L 292.9 206.1 L 294 204.6 L 295.3 203.2 L 296.6 202 L 298 200.8 L 299.6 199.7 L 301.2 198.8\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.45\" stroke-linecap=\"round\"/><text x=\"278.1\" y=\"203.4\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2B2527\">B</text><path d=\"M 209.2 73.8 L 210.8 75.2 L 212.5 76.4 L 214.3 77.4 L 216.2 78.3 L 218.2 79 L 220.2 79.5 L 222.3 79.8 L 224.4 80 L 226.5 80 L 228.6 79.8 L 230.6 79.4 L 232.6 78.8 L 234.6 78.1 L 236.5 77.2\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.45\" stroke-linecap=\"round\"/><text x=\"220.4\" y=\"99.7\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2B2527\">C</text><text x=\"283.8\" y=\"134\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2A5D9E\">a</text><text x=\"138.8\" y=\"130.6\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2A5D9E\">b</text><text x=\"195\" y=\"241\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12.5\" fill=\"#2A5D9E\">c</text></svg></span><p>Visa med hjälp av sinussatsen och areasatsen att</p><p>\\[A_{\\triangle}=\\frac{a^2}{2}\\cdot\\frac{\\sin B\\sin C}{\\sin A}.\\]</p>",
     "s": "<p>Areasatsen ger</p><p>\\[A_{\\triangle}=\\frac12bc\\sin A.\\]</p><p>Sinussatsen ger</p><p>\\[\\frac{b}{\\sin B}=\\frac{a}{\\sin A}\\Rightarrow b=\\frac{a\\sin B}{\\sin A},\\]</p><p>och på samma sätt</p><p>\\[c=\\frac{a\\sin C}{\\sin A}.\\]</p><p>Sätt in i areaformeln:</p><p>\\[A_{\\triangle}=\\frac12\\frac{a\\sin B}{\\sin A}\\frac{a\\sin C}{\\sin A}\\sin A=\\boxed{\\frac{a^2}{2}\\frac{\\sin B\\sin C}{\\sin A}}.\\]</p>",
     "familj": "ref2_trig_proof_area_sine_law",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16344,7 +16344,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 36 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel för optimering\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><defs><marker id=\"m\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><path d=\"M0,4 L8,0 L6,4 L8,8 Z\" fill=\"#2B2527\"/></marker></defs><rect x=\"92\" y=\"58\" width=\"160\" height=\"88\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"92\" y1=\"43\" x2=\"252\" y2=\"43\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><line x1=\"77\" y1=\"58\" x2=\"77\" y2=\"146\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><text x=\"172.0\" y=\"36\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"68\" y=\"106.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">18 − x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"13\" fill=\"#5B5560\">Omkrets: 36 cm</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm måste den andra vara \\(18-x\\) cm.</p><p>Arean blir</p><p>\\[A(x)=x(18-x)=18x-x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=18-2x\\). När \\(A^{\\prime}(x)=0\\) fås \\(x=9\\).</p><p>Maximal area blir då \\(81\\text{ cm}^2\\).</p>",
     "familj": "r5_ext_rect_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16360,7 +16360,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 44 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel för optimering\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><defs><marker id=\"m\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><path d=\"M0,4 L8,0 L6,4 L8,8 Z\" fill=\"#2B2527\"/></marker></defs><rect x=\"92\" y=\"58\" width=\"160\" height=\"88\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"92\" y1=\"43\" x2=\"252\" y2=\"43\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><line x1=\"77\" y1=\"58\" x2=\"77\" y2=\"146\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><text x=\"172.0\" y=\"36\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"68\" y=\"106.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">22 − x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"13\" fill=\"#5B5560\">Omkrets: 44 cm</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm måste den andra vara \\(22-x\\) cm.</p><p>Arean blir</p><p>\\[A(x)=x(22-x)=22x-x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=22-2x\\). När \\(A^{\\prime}(x)=0\\) fås \\(x=11\\).</p><p>Maximal area blir då \\(121\\text{ cm}^2\\).</p>",
     "familj": "r5_ext_rect_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16376,7 +16376,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 52 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel för optimering\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><defs><marker id=\"m\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><path d=\"M0,4 L8,0 L6,4 L8,8 Z\" fill=\"#2B2527\"/></marker></defs><rect x=\"92\" y=\"58\" width=\"160\" height=\"88\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"92\" y1=\"43\" x2=\"252\" y2=\"43\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><line x1=\"77\" y1=\"58\" x2=\"77\" y2=\"146\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><text x=\"172.0\" y=\"36\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"68\" y=\"106.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">26 − x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"13\" fill=\"#5B5560\">Omkrets: 52 cm</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm måste den andra vara \\(26-x\\) cm.</p><p>Arean blir</p><p>\\[A(x)=x(26-x)=26x-x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=26-2x\\). När \\(A^{\\prime}(x)=0\\) fås \\(x=13\\).</p><p>Maximal area blir då \\(169\\text{ cm}^2\\).</p>",
     "familj": "r5_ext_rect_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16392,7 +16392,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 60 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel för optimering\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><defs><marker id=\"m\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><path d=\"M0,4 L8,0 L6,4 L8,8 Z\" fill=\"#2B2527\"/></marker></defs><rect x=\"92\" y=\"58\" width=\"160\" height=\"88\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"92\" y1=\"43\" x2=\"252\" y2=\"43\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><line x1=\"77\" y1=\"58\" x2=\"77\" y2=\"146\" stroke=\"#2B2527\" marker-start=\"url(#m)\" marker-end=\"url(#m)\"/><text x=\"172.0\" y=\"36\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"68\" y=\"106.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">30 − x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"13\" fill=\"#5B5560\">Omkrets: 60 cm</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm måste den andra vara \\(30-x\\) cm.</p><p>Arean blir</p><p>\\[A(x)=x(30-x)=30x-x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=30-2x\\). När \\(A^{\\prime}(x)=0\\) fås \\(x=15\\).</p><p>Maximal area blir då \\(225\\text{ cm}^2\\).</p>",
     "familj": "r5_ext_rect_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16456,7 +16456,7 @@ window.BANKMATO1 = [
     "t": "<p>En cylinder utan lock ska rymma \\(500\\pi\\) cm\\(^3\\). Bestäm de mått som ger minsta möjliga mantelyta plus bottenyta.</p>",
     "s": "<p>Volymvillkoret är \\(\\pi r^2 h=500\\pi\\), alltså \\(h=500/r^2\\).</p><p>Ytan blir \\(A(r)=2\\pi rh+\\pi r^2=\\frac{1000\\pi}{r}+\\pi r^2\\).</p><p>Derivatan är \\(A^{\\prime}(r)=-\\frac{1000\\pi}{r^2}+2\\pi r\\). Sätt lika med noll:</p><p>\\[2r^3=1000\\Rightarrow r^3=500\\Rightarrow r=\\sqrt[3]{500}.\\]</p><p>Då blir \\(h=500/r^2=r\\). Alltså fås minsta yta när \\(h=r=\\sqrt[3]{500}\\) cm.</p>",
     "familj": "r5_ext_cylinder",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16472,7 +16472,7 @@ window.BANKMATO1 = [
     "t": "<p>En hage ska byggas mot en rak vägg. Endast tre sidor behöver stängsel, totalt 80 m. Bestäm största möjliga area.</p>",
     "s": "<p>Låt de två lika sidorna vara \\(x\\) meter. Då blir den tredje sidan \\(80-2x\\).</p><p>Arean är \\(A(x)=x(80-2x)=80x-2x^2\\).</p><p>Derivatan är \\(A^{\\prime}(x)=80-4x\\), så maximum fås för \\(x=20\\). Då blir den tredje sidan 40 m och arean \\(800\\text{ m}^2\\).</p>",
     "familj": "r5_ext_wall",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16488,7 +16488,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm den punkt på grafen till \\(y=x^2+1\\) som ligger närmast punkten \\((0,3)\\).</p>",
     "s": "<p>En punkt på grafen har koordinaterna \\((x,x^2+1)\\). Kvadraten på avståndet till \\((0,3)\\) blir</p><p>\\[D(x)=x^2+(x^2-2)^2=x^4-3x^2+4.\\]</p><p>Det räcker att minimera \\(D(x)\\). Derivatan är \\(D^{\\prime}(x)=4x^3-6x=2x(2x^2-3)\\).</p><p>Derivatans nollställen är \\(x=0\\) och \\(x=\\pm\\sqrt{3/2}\\). Jämförelse ger minsta avstånd för \\(x=\\pm\\sqrt{3/2}\\). Punkterna är alltså \\(\\left(\\pm\\sqrt{\\frac32},\\frac52\\right)\\).</p>",
     "familj": "r5_ext_distance_parabola",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16824,7 +16824,7 @@ window.BANKMATO1 = [
     "t": "<p>En bils hastighet \\(v\\) i m/s visas i figuren. Bestäm sträckan under de första 4 sekunderna.</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bilens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"126.2\" y1=\"18\" x2=\"126.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"126.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"204.5\" y1=\"18\" x2=\"204.5\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"204.5\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"282.8\" y1=\"18\" x2=\"282.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"282.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"186.0\" x2=\"367\" y2=\"186.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"190.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"48\" y1=\"156.0\" x2=\"367\" y2=\"156.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"160.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"126.0\" x2=\"367\" y2=\"126.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"130.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"96.0\" x2=\"367\" y2=\"96.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"100.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"66.0\" x2=\"367\" y2=\"66.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"70.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 216.0 L 126.2 96.0 L 204.5 36.0 L 361.0 36.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"216.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"126.2\" cy=\"96.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"204.5\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Bilens hastighet: v(t)</text></svg></span>",
     "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(19\\).</p><p><strong>Svar:</strong> \\(\\boxed{19\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16840,7 +16840,7 @@ window.BANKMATO1 = [
     "t": "<p>En cyklist har hastigheten \\(v\\) i m/s enligt figuren. Hur långt cyklar hon under 5 s?</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cyklistens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"110.6\" y1=\"18\" x2=\"110.6\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"110.6\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"173.2\" y1=\"18\" x2=\"173.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"173.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"235.8\" y1=\"18\" x2=\"235.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"235.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"298.4\" y1=\"18\" x2=\"298.4\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"298.4\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"164.6\" x2=\"367\" y2=\"164.6\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"168.6\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"113.1\" x2=\"367\" y2=\"113.1\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"117.1\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"61.7\" x2=\"367\" y2=\"61.7\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"65.7\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 138.9 L 173.2 138.9 L 298.4 36.0 L 361.0 36.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"138.9\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"173.2\" cy=\"138.9\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"298.4\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Cyklistens hastighet: v(t)</text></svg></span>",
     "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(23\\).</p><p><strong>Svar:</strong> \\(\\boxed{23\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16856,7 +16856,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett tåg bromsar enligt figuren. Hur långt rullar tåget under 4 s?</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tågets hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"126.2\" y1=\"18\" x2=\"126.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"126.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"204.5\" y1=\"18\" x2=\"204.5\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"204.5\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"282.8\" y1=\"18\" x2=\"282.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"282.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"171.0\" x2=\"367\" y2=\"171.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"175.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"126.0\" x2=\"367\" y2=\"126.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"130.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"48\" y1=\"81.0\" x2=\"367\" y2=\"81.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"85.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">6</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">8</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 36.0 L 204.5 81.0 L 361.0 171.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"204.5\" cy=\"81.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"171.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Tågets hastighet: v(t)</text></svg></span>",
     "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(22\\).</p><p><strong>Svar:</strong> \\(\\boxed{22\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16872,7 +16872,7 @@ window.BANKMATO1 = [
     "t": "<p>En drönare rör sig rakt fram med hastigheten \\(v\\) i m/s enligt grafen. Bestäm sträckan på 5 s.</p><span class=\"fig smal\"><svg width=\"395\" height=\"250\" viewBox=\"0 0 395 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Drönarens hastighet: v(t)\"><rect x=\"1\" y=\"1\" width=\"393\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"18\" x2=\"48.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">0</text><line x1=\"110.6\" y1=\"18\" x2=\"110.6\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"110.6\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"173.2\" y1=\"18\" x2=\"173.2\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"173.2\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"235.8\" y1=\"18\" x2=\"235.8\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"235.8\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"298.4\" y1=\"18\" x2=\"298.4\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"298.4\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">4</text><line x1=\"361.0\" y1=\"18\" x2=\"361.0\" y2=\"216\" stroke=\"#F0EFF2\"/><text x=\"361.0\" y=\"237\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">5</text><line x1=\"48\" y1=\"216.0\" x2=\"367\" y2=\"216.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"156.0\" x2=\"367\" y2=\"156.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"160.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">1</text><line x1=\"48\" y1=\"96.0\" x2=\"367\" y2=\"96.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"100.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">2</text><line x1=\"48\" y1=\"36.0\" x2=\"367\" y2=\"36.0\" stroke=\"#F0EFF2\"/><text x=\"38\" y=\"40.0\" text-anchor=\"end\" font-size=\"12\" fill=\"#5B5560\">3</text><line x1=\"48\" y1=\"216\" x2=\"367\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"18\" x2=\"48\" y2=\"216\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"377\" y=\"220\" font-size=\"12\" fill=\"#2B2527\">t</text><text x=\"39\" y=\"15\" font-size=\"12\" fill=\"#2B2527\">v</text><path d=\"M 48.0 156.0 L 110.6 36.0 L 235.8 36.0 L 361.0 216.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><circle cx=\"48.0\" cy=\"156.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"110.6\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"235.8\" cy=\"36.0\" r=\"3.6\" fill=\"#2D70B3\"/><circle cx=\"361.0\" cy=\"216.0\" r=\"3.6\" fill=\"#2D70B3\"/><text x=\"197.5\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2B2527\">Drönarens hastighet: v(t)</text></svg></span>",
     "s": "<p>Sträckan motsvarar arean under grafen. Vi delar upp arean under grafen i rektanglar, trianglar och parallelltrapetser.</p><p>Den totala arean blir \\(11\\).</p><p><strong>Svar:</strong> \\(\\boxed{11\\text{ m}}\\).</p>",
     "familj": "r5_intapp_vt_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16888,7 +16888,7 @@ window.BANKMATO1 = [
     "t": "<p>Vattnet strömmar in i en tank med hastigheten \\(f(t)=4t+2\\) liter per minut. Hur mycket vatten strömmar in under de första 5 minuterna?</p>",
     "s": "<p>Volymökningen ges av integralen</p><p>\\[\\int_0^5 (4t+2)\\,dt=\\left[2t^2+2t\\right]_0^5=50+10=60.\\]</p><p><strong>Svar:</strong> \\(\\boxed{60\\text{ liter}}\\).</p>",
     "familj": "r5_intapp_tank",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16904,7 +16904,7 @@ window.BANKMATO1 = [
     "t": "<p>En population växer med förändringshastigheten \\(N^\\prime(t)=6t+10\\) individer per vecka. Hur mycket ökar populationen under de första 4 veckorna?</p>",
     "s": "<p>Ökningen fås genom att integrera förändringshastigheten:</p><p>\\[\\int_0^4 (6t+10)\\,dt=\\left[3t^2+10t\\right]_0^4=48+40=88.\\]</p><p><strong>Svar:</strong> populationen ökar med \\(\\boxed{88}\\) individer.</p>",
     "familj": "r5_intapp_population",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16920,7 +16920,7 @@ window.BANKMATO1 = [
     "t": "<p>Två löpare startar samtidigt. Den första har hastigheten \\(v_1(t)=2t+4\\) m/s och den andra \\(v_2(t)=t+7\\) m/s. Vem har sprungit längst efter 6 s?</p>",
     "s": "<p>Sträckorna blir</p><p>\\[s_1=\\int_0^6(2t+4)\\,dt=\\left[t^2+4t\\right]_0^6=60,\\]</p><p>\\[s_2=\\int_0^6(t+7)\\,dt=\\left[\\frac{t^2}{2}+7t\\right]_0^6=60.\\]</p><p><strong>Svar:</strong> de har sprungit lika långt, nämligen \\(\\boxed{60\\text{ m}}\\).</p>",
     "familj": "r5_intapp_compare",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16936,7 +16936,7 @@ window.BANKMATO1 = [
     "t": "<p>En partikel rör sig längs en linje med hastigheten \\(v(t)=3t^2-6t\\) m/s. Bestäm den totala sträckan under intervallet \\(0\\le t\\le 3\\).</p>",
     "s": "<p>Total sträcka kräver att vi tar hänsyn till när hastigheten byter tecken. Här är \\(v(t)=3t(t-2)\\), så teckenbyte sker vid \\(t=0\\) och \\(t=2\\).</p><p>Mellan 0 och 2 är hastigheten negativ, mellan 2 och 3 positiv. Därför blir totala sträckan</p><p>\\[-\\int_0^2 (3t^2-6t)\\,dt+\\int_2^3 (3t^2-6t)\\,dt=4+5=9.\\]</p><p><strong>Svar:</strong> \\(\\boxed{9\\text{ m}}\\).</p>",
     "familj": "r5_intapp_totaldistance",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -16996,7 +16996,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett bageri bakar bullar \\(x\\) och kakor \\(y\\). Varje bulle ger 8 kr i vinst och varje kaka 5 kr. Produktionen begränsas av \\(x+y\\le 20\\), \\(2x+y\\le 30\\), \\(x\\ge 0\\), \\(y\\ge 0\\). Bestäm största möjliga vinst.</p>",
     "s": "<p>Hörnpunkterna i det tillåtna området är \\((0,0)\\), \\((0,20)\\), \\((10,10)\\) och \\((15,0)\\).</p><p>Beräkna \\(V=8x+5y\\) i dessa punkter: \\(0,100,130,120\\).</p><p><strong>Svar:</strong> största möjliga vinst är \\(\\boxed{130\\text{ kr}}\\), vilket fås för \\((x,y)=(10,10)\\).</p>",
     "familj": "r5_linopt_bakery",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -17026,7 +17026,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett företag tillverkar två produkter. Vinsten är \\(V=40x+30y\\). Begränsningarna är \\(x+2y\\le 14\\), \\(3x+y\\le 18\\), \\(x\\ge 0\\), \\(y\\ge 0\\). Bestäm största möjliga vinst.</p>",
     "s": "<p>Hörnpunkterna är \\((0,0)\\), \\((0,7)\\), \\((18/3,0)=(6,0)\\) samt skärningen mellan \\(x+2y=14\\) och \\(3x+y=18\\).</p><p>Skärningen fås till \\((x,y)=(22/5,24/5)\\).</p><p>Vinstvärdena blir \\(0,210,240,320\\).</p><p><strong>Svar:</strong> största möjliga vinst är \\(\\boxed{320\\text{ kr}}\\).</p>",
     "familj": "r5_linopt_company",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": true
   },
   {
@@ -17086,7 +17086,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk summa har första termen 3 och kvoten 2. Hur många termer behövs för att summan ska bli 189?</p>",
     "s": "<p>Formeln ger \\(S_n=3\\frac{2^n-1}{2-1}=3(2^n-1)\\).</p><p>Ekvationen \\(3(2^n-1)=189\\) ger \\(2^n-1=63\\), alltså \\(2^n=64\\) och \\(\\boxed{n=6}\\).</p>",
     "familj": "r5_geo_C_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17101,7 +17101,7 @@ window.BANKMATO1 = [
     "t": "<p>För en geometrisk summa gäller att första termen är 5 och summan av de fyra första termerna är 75. Bestäm kvoten om den är positiv.</p>",
     "s": "<p>Formeln ger \\(75=5\\frac{k^4-1}{k-1}\\). Dividera med 5:</p><p>\\[15=\\frac{k^4-1}{k-1}=k^3+k^2+k+1.\\]</p><p>Prövning ger \\(k=2\\), eftersom \\(8+4+2+1=15\\).</p><p><strong>Svar:</strong> \\(\\boxed{k=2}\\).</p>",
     "familj": "r5_geo_C_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17531,7 +17531,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- x^{2} + 6 x + 1\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=6 - 2 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=10\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{10}\\) och extrempunkten är \\(\\boxed{(3; 10)}\\).</p>",
     "familj": "r6_ext_func_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17547,7 +17547,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=x^{2} - 8 x + 3\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=2 x - 8\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=4\\).</p><p>\\(f(4)=-13\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-13}\\) och extrempunkten är \\(\\boxed{(4; -13)}\\).</p>",
     "familj": "r6_ext_func_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17563,7 +17563,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- 2 x^{2} + 12 x - 5\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=12 - 4 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=13\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{13}\\) och extrempunkten är \\(\\boxed{(3; 13)}\\).</p>",
     "familj": "r6_ext_func_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17579,7 +17579,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=3 x^{2} - 12 x + 7\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=6 x - 12\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=2\\).</p><p>\\(f(2)=-5\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-5}\\) och extrempunkten är \\(\\boxed{(2; -5)}\\).</p>",
     "familj": "r6_ext_func_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17595,7 +17595,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- x^{2} + 10 x - 9\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=10 - 2 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=5\\).</p><p>\\(f(5)=16\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{16}\\) och extrempunkten är \\(\\boxed{(5; 16)}\\).</p>",
     "familj": "r6_ext_func_5",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17611,7 +17611,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=2 x^{2} - 4 x - 6\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=4 x - 4\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=1\\).</p><p>\\(f(1)=-8\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-8}\\) och extrempunkten är \\(\\boxed{(1; -8)}\\).</p>",
     "familj": "r6_ext_func_6",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17627,7 +17627,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens största värde och ange extrempunktens koordinater.</p><p>\\[f(x)=- 3 x^{2} + 18 x + 2\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=18 - 6 x\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=3\\).</p><p>\\(f(3)=29\\).</p><p><strong>Svar:</strong> det största värdet är \\(\\boxed{29}\\) och extrempunkten är \\(\\boxed{(3; 29)}\\).</p>",
     "familj": "r6_ext_func_7",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17643,7 +17643,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm med derivata funktionens minsta värde och ange extrempunktens koordinater.</p><p>\\[f(x)=x^{2} + 6 x + 4\\]</p>",
     "s": "<p>\\(f^{\\prime}(x)=2 x + 6\\).</p><p>Sätt derivatan lika med noll: \\(f^{\\prime}(x)=0\\Rightarrow x=-3\\).</p><p>\\(f(-3)=-5\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{-5}\\) och extrempunkten är \\(\\boxed{(-3; -5)}\\).</p>",
     "familj": "r6_ext_func_8",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17659,7 +17659,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 28 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">14 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 28</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(14-x\\) cm.</p><p>\\[A(x)=x(14-x)=14x-x^2.\\]</p><p>\\(A^{\\prime}(x)=14-2x\\). Derivatan är noll när \\(x=7\\).</p><p>Då är båda sidorna \\(7\\) cm och största arean är \\(\\boxed{49\\text{ cm}^2}\\).</p>",
     "familj": "r6_ext_rect_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17675,7 +17675,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 32 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">16 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 32</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(16-x\\) cm.</p><p>\\[A(x)=x(16-x)=16x-x^2.\\]</p><p>\\(A^{\\prime}(x)=16-2x\\). Derivatan är noll när \\(x=8\\).</p><p>Då är båda sidorna \\(8\\) cm och största arean är \\(\\boxed{64\\text{ cm}^2}\\).</p>",
     "familj": "r6_ext_rect_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17691,7 +17691,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 40 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">20 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 40</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(20-x\\) cm.</p><p>\\[A(x)=x(20-x)=20x-x^2.\\]</p><p>\\(A^{\\prime}(x)=20-2x\\). Derivatan är noll när \\(x=10\\).</p><p>Då är båda sidorna \\(10\\) cm och största arean är \\(\\boxed{100\\text{ cm}^2}\\).</p>",
     "familj": "r6_ext_rect_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17707,7 +17707,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 48 cm.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"85\" y=\"55\" width=\"180\" height=\"95\" fill=\"#F7F4E8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><text x=\"175.0\" y=\"41\" text-anchor=\"middle\" font-size=\"14\">x</text><text x=\"65\" y=\"102.5\" font-size=\"14\">24 - x</text><text x=\"180.0\" y=\"198\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">omkrets 48</text></svg></span><p>Bestäm med derivata den största möjliga arean.</p>",
     "s": "<p>Om ena sidan är \\(x\\) cm blir den andra \\(24-x\\) cm.</p><p>\\[A(x)=x(24-x)=24x-x^2.\\]</p><p>\\(A^{\\prime}(x)=24-2x\\). Derivatan är noll när \\(x=12\\).</p><p>Då är båda sidorna \\(12\\) cm och största arean är \\(\\boxed{144\\text{ cm}^2}\\).</p>",
     "familj": "r6_ext_rect_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17723,7 +17723,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 30 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">30 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
     "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(30-2x\\) m.</p><p>\\[A(x)=x(30-2x)=30x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=30-4x\\), så derivatan är noll när \\(x=7,5\\).</p><p>Den tredje sidan blir då \\(15\\) m och största arean är \\(\\boxed{112,5\\text{ m}^2}\\).</p>",
     "familj": "r6_ext_wall_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17739,7 +17739,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 36 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">36 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
     "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(36-2x\\) m.</p><p>\\[A(x)=x(36-2x)=36x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=36-4x\\), så derivatan är noll när \\(x=9\\).</p><p>Den tredje sidan blir då \\(18\\) m och största arean är \\(\\boxed{162\\text{ m}^2}\\).</p>",
     "familj": "r6_ext_wall_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17755,7 +17755,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär hage byggs mot en rak vägg. Totalt 50 m stängsel används till de tre övriga sidorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 360 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel med markerade sidlängder\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"85\" y1=\"55\" x2=\"265\" y2=\"55\" stroke=\"#585156\" stroke-width=\"5\"/><line x1=\"85\" y1=\"55\" x2=\"85\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"265\" y1=\"55\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><line x1=\"85\" y1=\"150\" x2=\"265\" y2=\"150\" stroke=\"#2D70B3\" stroke-width=\"2.2\"/><text x=\"67\" y=\"102.5\" font-size=\"14\">x</text><text x=\"273\" y=\"102.5\" font-size=\"14\">x</text><text x=\"175.0\" y=\"172\" text-anchor=\"middle\" font-size=\"14\">50 - 2x</text><text x=\"175.0\" y=\"43\" text-anchor=\"middle\" font-size=\"12\" fill=\"#5B5560\">vägg</text></svg></span><p>Bestäm den största möjliga arean.</p>",
     "s": "<p>Låt de två korta sidorna vara \\(x\\) m. Den tredje stängselsidan blir då \\(50-2x\\) m.</p><p>\\[A(x)=x(50-2x)=50x-2x^2.\\]</p><p>\\(A^{\\prime}(x)=50-4x\\), så derivatan är noll när \\(x=12,5\\).</p><p>Den tredje sidan blir då \\(25\\) m och största arean är \\(\\boxed{312,5\\text{ m}^2}\\).</p>",
     "familj": "r6_ext_wall_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17771,7 +17771,7 @@ window.BANKMATO1 = [
     "t": "<p>En liten teater modellerar dagsintäkten med \\(I(x)=-4x^2+80x+200\\), där \\(x\\) är antalet tiokronors höjningar från ett grundpris och \\(I\\) mäts i kronor. Bestäm det \\(x\\)-värde som ger störst intäkt.</p>",
     "s": "<p>Derivatan är \\(I^{\\prime}(x)=-8x+80\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-8x+80=0\\Rightarrow x=10.\\]</p><p>Det största modellvärdet blir \\(I(10)=600\\) kr.</p><p><strong>Svar:</strong> \\(x=10\\), vilket motsvarar en prishöjning med 100 kr.</p>",
     "familj": "r6_ext_context_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17787,7 +17787,7 @@ window.BANKMATO1 = [
     "t": "<p>Höjden hos en boll modelleras av \\(h(t)=-2t^2+24t+50\\), där \\(h\\) mäts i meter och \\(t\\) i sekunder. När är bollen som högst och vilken är den största höjden?</p>",
     "s": "<p>Derivatan är \\(h^{\\prime}(t)=-4t+24\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-4t+24=0\\Rightarrow t=6.\\]</p><p>Höjden blir \\(h(6)=122\\).</p><p><strong>Svar:</strong> bollen är som högst efter \\(\\boxed{6\\text{ s}}\\), och den största höjden är \\(\\boxed{122\\text{ m}}\\).</p>",
     "familj": "r6_ext_context_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17803,7 +17803,7 @@ window.BANKMATO1 = [
     "t": "<p>En odlares förenklade vinstmodell är \\(V(x)=-5x^2+60x\\), där \\(x\\) anger antal hundratal plantor och \\(V\\) mäts i tusen kronor. Bestäm det \\(x\\)-värde som ger störst vinst.</p>",
     "s": "<p>Derivatan är \\(V^{\\prime}(x)=-10x+60\\).</p><p>Sätt derivatan lika med noll:</p><p>\\[-10x+60=0\\Rightarrow x=6.\\]</p><p>Då blir \\(V(6)=180\\).</p><p><strong>Svar:</strong> \\(x=6\\), alltså 600 plantor, ger enligt modellen störst vinst: \\(\\boxed{180\\,000\\text{ kr}}\\).</p>",
     "familj": "r6_ext_context_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -17976,7 +17976,7 @@ window.BANKMATO1 = [
     "t": "<p>I ett mönster fördubblas antalet rutor i varje steg.</p><span class=\"fig smal\"><svg width=\"400\" height=\"225\" viewBox=\"0 0 400 225\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fyra steg med dubbelt så många rutor för varje steg\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"223\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"35\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"63\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 1</text><text x=\"63\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">1 rutor</text><rect x=\"115\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"133\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"143\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 2</text><text x=\"143\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">2 rutor</text><rect x=\"205\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"223\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"241\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"259\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"233\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 3</text><text x=\"233\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">4 rutor</text><rect x=\"290\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"308\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"326\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"344\" y=\"125\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"290\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"308\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"326\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><rect x=\"344\" y=\"107\" width=\"15\" height=\"15\" fill=\"#E8F0FB\" stroke=\"#2D70B3\"/><text x=\"318\" y=\"175\" text-anchor=\"middle\" font-size=\"11\">steg 4</text><text x=\"318\" y=\"193\" text-anchor=\"middle\" font-size=\"11\">8 rutor</text></svg></span><p>Hur många rutor används sammanlagt i steg 1–8?</p>",
     "s": "<p>Antalen bildar den geometriska summan</p><p>\\[1+2+4+\\cdots+2^7.\\]</p><p>Med \\(a=1\\), \\(k=2\\) och \\(n=8\\) fås</p><p>\\[S_8=\\frac{2^8-1}{2-1}=255.\\]</p><p><strong>Svar:</strong> \\(\\boxed{255}\\) rutor.</p>",
     "familj": "r6_geo_fig_blocks",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18051,7 +18051,7 @@ window.BANKMATO1 = [
     "t": "<p>En geometrisk summa har första termen 4, kvoten 3 och 5 termer. Bestäm summan.</p>",
     "s": "<p>Första termen är \\(4\\), kvoten är \\(3\\) och antalet termer är \\(5\\).</p><p>\\[S=4\\frac{3^{5}-1}{3-1}\\approx 484.\\]</p>",
     "familj": "r6_geo_context_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18259,7 +18259,7 @@ window.BANKMATO1 = [
     "t": "<p>En boll kastas rakt upp. Höjden över marken efter \\(t\\) sekunder beskrivs av \\(h(t)=-5t^2+30t+2\\). Bestäm bollens största höjd och när den nås.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 211.2 L 51.5 208.2 L 53.0 205.2 L 54.6 202.2 L 56.1 199.3 L 57.6 196.4 L 59.1 193.6 L 60.7 190.7 L 62.2 187.9 L 63.7 185.2 L 65.2 182.4 L 66.8 179.7 L 68.3 177.0 L 69.8 174.4 L 71.3 171.8 L 72.9 169.2 L 74.4 166.6 L 75.9 164.1 L 77.5 161.6 L 79.0 159.1 L 80.5 156.7 L 82.0 154.3 L 83.5 151.9 L 85.1 149.6 L 86.6 147.2 L 88.1 145.0 L 89.7 142.7 L 91.2 140.5 L 92.7 138.3 L 94.2 136.1 L 95.8 134.0 L 97.3 131.9 L 98.8 129.8 L 100.3 127.8 L 101.8 125.8 L 103.4 123.8 L 104.9 121.8 L 106.4 119.9 L 107.9 118.0 L 109.5 116.1 L 111.0 114.3 L 112.5 112.5 L 114.0 110.7 L 115.6 109.0 L 117.1 107.3 L 118.6 105.6 L 120.1 104.0 L 121.7 102.3 L 123.2 100.7 L 124.7 99.2 L 126.2 97.7 L 127.8 96.2 L 129.3 94.7 L 130.8 93.3 L 132.4 91.8 L 133.9 90.5 L 135.4 89.1 L 136.9 87.8 L 138.4 86.5 L 140.0 85.3 L 141.5 84.0 L 143.0 82.8 L 144.6 81.7 L 146.1 80.5 L 147.6 79.4 L 149.1 78.4 L 150.7 77.3 L 152.2 76.3 L 153.7 75.3 L 155.2 74.4 L 156.8 73.4 L 158.3 72.5 L 159.8 71.7 L 161.3 70.9 L 162.9 70.1 L 164.4 69.3 L 165.9 68.5 L 167.4 67.8 L 168.9 67.1 L 170.5 66.5 L 172.0 65.9 L 173.5 65.3 L 175.1 64.7 L 176.6 64.2 L 178.1 63.7 L 179.6 63.2 L 181.2 62.8 L 182.7 62.4 L 184.2 62.0 L 185.7 61.6 L 187.2 61.3 L 188.8 61.0 L 190.3 60.8 L 191.8 60.6 L 193.3 60.4 L 194.9 60.2 L 196.4 60.1 L 197.9 60.0 L 199.4 59.9 L 201.0 59.8 L 202.5 59.8 L 204.0 59.8 L 205.6 59.9 L 207.1 60.0 L 208.6 60.1 L 210.1 60.2 L 211.7 60.4 L 213.2 60.6 L 214.7 60.8 L 216.2 61.0 L 217.7 61.3 L 219.3 61.6 L 220.8 62.0 L 222.3 62.4 L 223.8 62.8 L 225.4 63.2 L 226.9 63.7 L 228.4 64.2 L 229.9 64.7 L 231.5 65.3 L 233.0 65.9 L 234.5 66.5 L 236.0 67.1 L 237.6 67.8 L 239.1 68.5 L 240.6 69.3 L 242.2 70.1 L 243.7 70.9 L 245.2 71.7 L 246.7 72.5 L 248.2 73.4 L 249.8 74.4 L 251.3 75.3 L 252.8 76.3 L 254.3 77.3 L 255.9 78.4 L 257.4 79.4 L 258.9 80.5 L 260.4 81.7 L 262.0 82.8 L 263.5 84.0 L 265.0 85.3 L 266.5 86.5 L 268.1 87.8 L 269.6 89.1 L 271.1 90.5 L 272.6 91.8 L 274.2 93.3 L 275.7 94.7 L 277.2 96.2 L 278.8 97.7 L 280.3 99.2 L 281.8 100.7 L 283.3 102.3 L 284.9 104.0 L 286.4 105.6 L 287.9 107.3 L 289.4 109.0 L 291.0 110.7 L 292.5 112.5 L 294.0 114.3 L 295.5 116.1 L 297.1 118.0 L 298.6 119.9 L 300.1 121.8 L 301.6 123.8 L 303.2 125.8 L 304.7 127.8 L 306.2 129.8 L 307.7 131.9 L 309.2 134.0 L 310.8 136.1 L 312.3 138.3 L 313.8 140.5 L 315.4 142.7 L 316.9 145.0 L 318.4 147.2 L 319.9 149.6 L 321.4 151.9 L 323.0 154.3 L 324.5 156.7 L 326.0 159.1 L 327.6 161.6 L 329.1 164.1 L 330.6 166.6 L 332.1 169.2 L 333.7 171.8 L 335.2 174.4 L 336.7 177.0 L 338.2 179.7 L 339.8 182.4 L 341.3 185.2 L 342.8 187.9 L 344.3 190.7 L 345.9 193.6 L 347.4 196.4 L 348.9 199.3 L 350.4 202.2 L 352.0 205.2 L 353.5 208.2 L 355.0 211.2\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
     "s": "<p>Derivatan är \\[- 10 \\left(t - 3\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=3\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(2\\)</li><li>\\(t=6\\): värdet är \\(2\\)</li><li>\\(t=3\\): värdet är \\(47\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{47}\\) m, och det fås för \\(t=3\\).</p>",
     "familj": "maxmin_given_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18275,7 +18275,7 @@ window.BANKMATO1 = [
     "t": "<p>En odlares skörd per hektar modelleras av \\(S(x)=-2x^2+24x+35\\), där \\(x\\) är mängden gödsel i en viss enhet. Bestäm den gödselmängd som ger störst skörd.</p>",
     "s": "<p>Derivatan är \\[- 4 \\left(x - 6\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(35\\)</li><li>\\(x=12\\): värdet är \\(35\\)</li><li>\\(x=6\\): värdet är \\(107\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{107}\\), och det fås för \\(x=6\\).</p>",
     "familj": "maxmin_given_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18291,7 +18291,7 @@ window.BANKMATO1 = [
     "t": "<p>Kostnaden per tillverkad serie modelleras av \\(K(x)=0,5x^2-20x+340\\), där \\(x\\) är antalet serier. Bestäm det minsta värdet på \\(K\\) och för vilket \\(x\\) det fås.</p>",
     "s": "<p>Derivatan är \\[x - 20.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=20\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(340\\)</li><li>\\(x=50\\): värdet är \\(590\\)</li><li>\\(x=20\\): värdet är \\(140\\)</li></ul><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{140}\\) kr, och det fås för \\(x=20\\).</p>",
     "familj": "maxmin_given_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18307,7 +18307,7 @@ window.BANKMATO1 = [
     "t": "<p>Temperaturen i ett växthus under en del av dagen modelleras av \\(T(t)=-0,4t^2+4,8t+18\\), där \\(t\\) är timmar efter kl. 08.00. Bestäm den högsta temperaturen enligt modellen och när den inträffar.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 139.0 L 51.5 137.5 L 53.0 136.1 L 54.6 134.8 L 56.1 133.4 L 57.6 132.0 L 59.1 130.7 L 60.7 129.3 L 62.2 128.0 L 63.7 126.7 L 65.2 125.4 L 66.8 124.2 L 68.3 122.9 L 69.8 121.6 L 71.3 120.4 L 72.9 119.2 L 74.4 118.0 L 75.9 116.8 L 77.5 115.6 L 79.0 114.5 L 80.5 113.3 L 82.0 112.2 L 83.5 111.1 L 85.1 110.0 L 86.6 108.9 L 88.1 107.8 L 89.7 106.7 L 91.2 105.7 L 92.7 104.7 L 94.2 103.6 L 95.8 102.6 L 97.3 101.6 L 98.8 100.7 L 100.3 99.7 L 101.8 98.8 L 103.4 97.8 L 104.9 96.9 L 106.4 96.0 L 107.9 95.1 L 109.5 94.2 L 111.0 93.4 L 112.5 92.5 L 114.0 91.7 L 115.6 90.9 L 117.1 90.1 L 118.6 89.3 L 120.1 88.5 L 121.7 87.7 L 123.2 87.0 L 124.7 86.3 L 126.2 85.5 L 127.8 84.8 L 129.3 84.1 L 130.8 83.5 L 132.4 82.8 L 133.9 82.2 L 135.4 81.5 L 136.9 80.9 L 138.4 80.3 L 140.0 79.7 L 141.5 79.1 L 143.0 78.6 L 144.6 78.0 L 146.1 77.5 L 147.6 77.0 L 149.1 76.5 L 150.7 76.0 L 152.2 75.5 L 153.7 75.0 L 155.2 74.6 L 156.8 74.1 L 158.3 73.7 L 159.8 73.3 L 161.3 72.9 L 162.9 72.5 L 164.4 72.2 L 165.9 71.8 L 167.4 71.5 L 168.9 71.2 L 170.5 70.9 L 172.0 70.6 L 173.5 70.3 L 175.1 70.0 L 176.6 69.8 L 178.1 69.6 L 179.6 69.3 L 181.2 69.1 L 182.7 68.9 L 184.2 68.8 L 185.7 68.6 L 187.2 68.4 L 188.8 68.3 L 190.3 68.2 L 191.8 68.1 L 193.3 68.0 L 194.9 67.9 L 196.4 67.8 L 197.9 67.8 L 199.4 67.8 L 201.0 67.7 L 202.5 67.7 L 204.0 67.7 L 205.6 67.8 L 207.1 67.8 L 208.6 67.8 L 210.1 67.9 L 211.7 68.0 L 213.2 68.1 L 214.7 68.2 L 216.2 68.3 L 217.7 68.4 L 219.3 68.6 L 220.8 68.8 L 222.3 68.9 L 223.8 69.1 L 225.4 69.3 L 226.9 69.6 L 228.4 69.8 L 229.9 70.0 L 231.5 70.3 L 233.0 70.6 L 234.5 70.9 L 236.0 71.2 L 237.6 71.5 L 239.1 71.8 L 240.6 72.2 L 242.2 72.5 L 243.7 72.9 L 245.2 73.3 L 246.7 73.7 L 248.2 74.1 L 249.8 74.6 L 251.3 75.0 L 252.8 75.5 L 254.3 76.0 L 255.9 76.5 L 257.4 77.0 L 258.9 77.5 L 260.4 78.0 L 262.0 78.6 L 263.5 79.1 L 265.0 79.7 L 266.5 80.3 L 268.1 80.9 L 269.6 81.5 L 271.1 82.2 L 272.6 82.8 L 274.2 83.5 L 275.7 84.1 L 277.2 84.8 L 278.8 85.5 L 280.3 86.3 L 281.8 87.0 L 283.3 87.7 L 284.9 88.5 L 286.4 89.3 L 287.9 90.1 L 289.4 90.9 L 291.0 91.7 L 292.5 92.5 L 294.0 93.4 L 295.5 94.2 L 297.1 95.1 L 298.6 96.0 L 300.1 96.9 L 301.6 97.8 L 303.2 98.8 L 304.7 99.7 L 306.2 100.7 L 307.7 101.6 L 309.2 102.6 L 310.8 103.6 L 312.3 104.7 L 313.8 105.7 L 315.4 106.7 L 316.9 107.8 L 318.4 108.9 L 319.9 110.0 L 321.4 111.1 L 323.0 112.2 L 324.5 113.3 L 326.0 114.5 L 327.6 115.6 L 329.1 116.8 L 330.6 118.0 L 332.1 119.2 L 333.7 120.4 L 335.2 121.6 L 336.7 122.9 L 338.2 124.2 L 339.8 125.4 L 341.3 126.7 L 342.8 128.0 L 344.3 129.3 L 345.9 130.7 L 347.4 132.0 L 348.9 133.4 L 350.4 134.8 L 352.0 136.1 L 353.5 137.5 L 355.0 139.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
     "s": "<p>Derivatan är \\[- \\frac{4 \\left(t - 6\\right)}{5}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(18\\)</li><li>\\(t=12\\): värdet är \\(18\\)</li><li>\\(t=6\\): värdet är \\(32,4\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{32,4}\\) °C, och det fås för \\(t=6\\).</p>",
     "familj": "maxmin_given_4",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18323,7 +18323,7 @@ window.BANKMATO1 = [
     "t": "<p>Arean av ett rektangulärt område beskrivs av \\(A(x)=30x-x^2\\) för \\(0&lt;x&lt;30\\). Bestäm den största möjliga arean.</p>",
     "s": "<p>Derivatan är \\[- 2 \\left(x - 15\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=15\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(0\\)</li><li>\\(x=30\\): värdet är \\(0\\)</li><li>\\(x=15\\): värdet är \\(225\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{225}\\) m², och det fås för \\(x=15\\).</p>",
     "familj": "maxmin_given_5",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18339,7 +18339,7 @@ window.BANKMATO1 = [
     "t": "<p>En högtalares beräknade energiförbrukning under ett test beskrivs av \\(E(x)=x^2-14x+80\\). Bestäm funktionens minsta värde.</p>",
     "s": "<p>Derivatan är \\[2 \\left(x - 7\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=7\\).</p><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{31}\\), och det fås för \\(x=7\\).</p>",
     "familj": "maxmin_given_6",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18355,7 +18355,7 @@ window.BANKMATO1 = [
     "t": "<p>En fontänstråles höjd i meter kan modelleras med \\(h(x)=-0,25x^2+2x+0,5\\), där \\(x\\) är det horisontella avståndet i meter. Bestäm strålens största höjd.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 133.1 L 51.5 132.2 L 53.0 131.3 L 54.6 130.3 L 56.1 129.4 L 57.6 128.5 L 59.1 127.6 L 60.7 126.8 L 62.2 125.9 L 63.7 125.1 L 65.2 124.2 L 66.8 123.4 L 68.3 122.6 L 69.8 121.8 L 71.3 121.0 L 72.9 120.2 L 74.4 119.5 L 75.9 118.7 L 77.5 118.0 L 79.0 117.2 L 80.5 116.5 L 82.0 115.8 L 83.6 115.1 L 85.1 114.4 L 86.6 113.8 L 88.1 113.1 L 89.7 112.5 L 91.2 111.8 L 92.7 111.2 L 94.2 110.6 L 95.8 110.0 L 97.3 109.4 L 98.8 108.8 L 100.3 108.3 L 101.8 107.7 L 103.4 107.2 L 104.9 106.7 L 106.4 106.1 L 108.0 105.6 L 109.5 105.1 L 111.0 104.7 L 112.5 104.2 L 114.1 103.7 L 115.6 103.3 L 117.1 102.9 L 118.6 102.4 L 120.1 102.0 L 121.7 101.6 L 123.2 101.3 L 124.7 100.9 L 126.2 100.5 L 127.8 100.2 L 129.3 99.8 L 130.8 99.5 L 132.4 99.2 L 133.9 98.9 L 135.4 98.6 L 136.9 98.3 L 138.4 98.0 L 140.0 97.8 L 141.5 97.6 L 143.0 97.3 L 144.6 97.1 L 146.1 96.9 L 147.6 96.7 L 149.1 96.5 L 150.6 96.3 L 152.2 96.2 L 153.7 96.0 L 155.2 95.9 L 156.8 95.8 L 158.3 95.7 L 159.8 95.6 L 161.3 95.5 L 162.8 95.4 L 164.4 95.3 L 165.9 95.3 L 167.4 95.2 L 168.9 95.2 L 170.5 95.2 L 172.0 95.2 L 173.5 95.2 L 175.1 95.2 L 176.6 95.2 L 178.1 95.3 L 179.6 95.3 L 181.2 95.4 L 182.7 95.5 L 184.2 95.6 L 185.7 95.7 L 187.2 95.8 L 188.8 95.9 L 190.3 96.0 L 191.8 96.2 L 193.4 96.3 L 194.9 96.5 L 196.4 96.7 L 197.9 96.9 L 199.5 97.1 L 201.0 97.3 L 202.5 97.6 L 204.0 97.8 L 205.6 98.0 L 207.1 98.3 L 208.6 98.6 L 210.1 98.9 L 211.7 99.2 L 213.2 99.5 L 214.7 99.8 L 216.2 100.2 L 217.8 100.5 L 219.3 100.9 L 220.8 101.3 L 222.3 101.6 L 223.9 102.0 L 225.4 102.4 L 226.9 102.9 L 228.4 103.3 L 230.0 103.7 L 231.5 104.2 L 233.0 104.7 L 234.5 105.1 L 236.0 105.6 L 237.6 106.1 L 239.1 106.7 L 240.6 107.2 L 242.2 107.7 L 243.7 108.3 L 245.2 108.8 L 246.7 109.4 L 248.2 110.0 L 249.8 110.6 L 251.3 111.2 L 252.8 111.8 L 254.4 112.5 L 255.9 113.1 L 257.4 113.8 L 258.9 114.4 L 260.5 115.1 L 262.0 115.8 L 263.5 116.5 L 265.0 117.2 L 266.5 118.0 L 268.1 118.7 L 269.6 119.5 L 271.1 120.2 L 272.6 121.0 L 274.2 121.8 L 275.7 122.6 L 277.2 123.4 L 278.8 124.2 L 280.3 125.1 L 281.8 125.9 L 283.3 126.8 L 284.9 127.6 L 286.4 128.5 L 287.9 129.4 L 289.4 130.3 L 291.0 131.3 L 292.5 132.2 L 294.0 133.1 L 295.5 134.1 L 297.0 135.0 L 298.6 136.0 L 300.1 137.0 L 301.6 138.0 L 303.2 139.0 L 304.7 140.1 L 306.2 141.1 L 307.7 142.1 L 309.2 143.2 L 310.8 144.3 L 312.3 145.4 L 313.8 146.5 L 315.3 147.6 L 316.9 148.7 L 318.4 149.8 L 319.9 151.0 L 321.4 152.1 L 323.0 153.3 L 324.5 154.5 L 326.0 155.7 L 327.5 156.9 L 329.1 158.1 L 330.6 159.3 L 332.1 160.6 L 333.7 161.8 L 335.2 163.1 L 336.7 164.3 L 338.2 165.6 L 339.8 166.9 L 341.3 168.2 L 342.8 169.6 L 344.3 170.9 L 345.8 172.2 L 347.4 173.6 L 348.9 175.0 L 350.4 176.3 L 351.9 177.7 L 353.5 179.1 L 355.0 180.6\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
     "s": "<p>Derivatan är \\[- \\frac{x - 4}{2}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=4\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(0,5\\)</li><li>\\(x=10\\): värdet är \\(-4,5\\)</li><li>\\(x=4\\): värdet är \\(4,5\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{4,5}\\) m, och det fås för \\(x=4\\).</p>",
     "familj": "maxmin_given_7",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18371,7 +18371,7 @@ window.BANKMATO1 = [
     "t": "<p>Vinsten i tusentals kronor för en produkt modelleras av \\(V(x)=-x^2+18x-45\\), där \\(x\\) är antalet hundratal sålda produkter. Bestäm den största vinsten.</p>",
     "s": "<p>Derivatan är \\[- 2 \\left(x - 9\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=9\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(-45\\)</li><li>\\(x=18\\): värdet är \\(-45\\)</li><li>\\(x=9\\): värdet är \\(36\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{36}\\) tusen kr, och det fås för \\(x=9\\).</p>",
     "familj": "maxmin_given_8",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18387,7 +18387,7 @@ window.BANKMATO1 = [
     "t": "<p>En plants höjdökning per vecka modelleras under en period av \\(H(t)=-0,1t^2+2t+4\\). När är modellens värde som störst?</p>",
     "s": "<p>Derivatan är \\[- \\frac{t - 10}{5}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=10\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(4\\)</li><li>\\(t=20\\): värdet är \\(4\\)</li><li>\\(t=10\\): värdet är \\(14\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{14}\\), och det fås för \\(t=10\\).</p>",
     "familj": "maxmin_given_9",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18403,7 +18403,7 @@ window.BANKMATO1 = [
     "t": "<p>Bränsleförbrukningen i en modellstudie beskrivs av \\(B(x)=0,01x^2-1,6x+90\\), där \\(x\\) är hastigheten i km/h. Bestäm vid vilken hastighet modellen ger minst förbrukning.</p>",
     "s": "<p>Derivatan är \\[\\frac{x - 80}{50}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=80\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(90\\)</li><li>\\(x=160\\): värdet är \\(90\\)</li><li>\\(x=80\\): värdet är \\(26\\)</li></ul><p><strong>Svar:</strong> det minsta värdet är \\(\\boxed{26}\\), och det fås för \\(x=80\\).</p>",
     "familj": "maxmin_given_10",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18419,7 +18419,7 @@ window.BANKMATO1 = [
     "t": "<p>En brobåges höjd över körbanan modelleras av \\(h(x)=-0,02x^2+0,8x+3\\). Bestäm bågens största höjd.</p><span class=\"fig smal\"><svg width=\"390\" height=\"270\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Modellens graf\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"228\" x2=\"355\" y2=\"228\" stroke=\"#333\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"228\" stroke=\"#333\"/><path d=\"M 50.0 176.6 L 51.5 175.0 L 53.0 173.4 L 54.6 171.8 L 56.1 170.2 L 57.6 168.6 L 59.1 167.0 L 60.7 165.5 L 62.2 164.0 L 63.7 162.5 L 65.2 161.0 L 66.8 159.5 L 68.3 158.1 L 69.8 156.6 L 71.3 155.2 L 72.9 153.8 L 74.4 152.4 L 75.9 151.0 L 77.5 149.7 L 79.0 148.3 L 80.5 147.0 L 82.0 145.7 L 83.6 144.4 L 85.1 143.1 L 86.6 141.9 L 88.1 140.6 L 89.7 139.4 L 91.2 138.2 L 92.7 137.0 L 94.2 135.8 L 95.8 134.7 L 97.3 133.5 L 98.8 132.4 L 100.3 131.3 L 101.8 130.2 L 103.4 129.1 L 104.9 128.1 L 106.4 127.0 L 108.0 126.0 L 109.5 125.0 L 111.0 124.0 L 112.5 123.0 L 114.1 122.0 L 115.6 121.1 L 117.1 120.2 L 118.6 119.3 L 120.1 118.4 L 121.7 117.5 L 123.2 116.6 L 124.7 115.8 L 126.2 114.9 L 127.8 114.1 L 129.3 113.3 L 130.8 112.6 L 132.4 111.8 L 133.9 111.0 L 135.4 110.3 L 136.9 109.6 L 138.4 108.9 L 140.0 108.2 L 141.5 107.5 L 143.0 106.9 L 144.6 106.3 L 146.1 105.6 L 147.6 105.0 L 149.1 104.5 L 150.6 103.9 L 152.2 103.3 L 153.7 102.8 L 155.2 102.3 L 156.8 101.8 L 158.3 101.3 L 159.8 100.8 L 161.3 100.4 L 162.8 99.9 L 164.4 99.5 L 165.9 99.1 L 167.4 98.7 L 168.9 98.4 L 170.5 98.0 L 172.0 97.7 L 173.5 97.4 L 175.1 97.1 L 176.6 96.8 L 178.1 96.5 L 179.6 96.2 L 181.2 96.0 L 182.7 95.8 L 184.2 95.6 L 185.7 95.4 L 187.2 95.2 L 188.8 95.1 L 190.3 94.9 L 191.8 94.8 L 193.4 94.7 L 194.9 94.6 L 196.4 94.5 L 197.9 94.5 L 199.5 94.4 L 201.0 94.4 L 202.5 94.4 L 204.0 94.4 L 205.6 94.4 L 207.1 94.5 L 208.6 94.5 L 210.1 94.6 L 211.7 94.7 L 213.2 94.8 L 214.7 94.9 L 216.2 95.1 L 217.8 95.2 L 219.3 95.4 L 220.8 95.6 L 222.3 95.8 L 223.9 96.0 L 225.4 96.2 L 226.9 96.5 L 228.4 96.8 L 230.0 97.1 L 231.5 97.4 L 233.0 97.7 L 234.5 98.0 L 236.0 98.4 L 237.6 98.7 L 239.1 99.1 L 240.6 99.5 L 242.2 99.9 L 243.7 100.4 L 245.2 100.8 L 246.7 101.3 L 248.2 101.8 L 249.8 102.3 L 251.3 102.8 L 252.8 103.3 L 254.4 103.9 L 255.9 104.5 L 257.4 105.0 L 258.9 105.6 L 260.5 106.3 L 262.0 106.9 L 263.5 107.5 L 265.0 108.2 L 266.5 108.9 L 268.1 109.6 L 269.6 110.3 L 271.1 111.0 L 272.6 111.8 L 274.2 112.6 L 275.7 113.3 L 277.2 114.1 L 278.8 114.9 L 280.3 115.8 L 281.8 116.6 L 283.3 117.5 L 284.9 118.4 L 286.4 119.3 L 287.9 120.2 L 289.4 121.1 L 291.0 122.0 L 292.5 123.0 L 294.0 124.0 L 295.5 125.0 L 297.0 126.0 L 298.6 127.0 L 300.1 128.1 L 301.6 129.1 L 303.2 130.2 L 304.7 131.3 L 306.2 132.4 L 307.7 133.5 L 309.2 134.7 L 310.8 135.8 L 312.3 137.0 L 313.8 138.2 L 315.3 139.4 L 316.9 140.6 L 318.4 141.9 L 319.9 143.1 L 321.4 144.4 L 323.0 145.7 L 324.5 147.0 L 326.0 148.3 L 327.5 149.7 L 329.1 151.0 L 330.6 152.4 L 332.1 153.8 L 333.7 155.2 L 335.2 156.6 L 336.7 158.1 L 338.2 159.5 L 339.8 161.0 L 341.3 162.5 L 342.8 164.0 L 344.3 165.5 L 345.8 167.0 L 347.4 168.6 L 348.9 170.2 L 350.4 171.8 L 351.9 173.4 L 353.5 175.0 L 355.0 176.6\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.5\"/><text x=\"200\" y=\"18\" text-anchor=\"middle\" font-size=\"13\">Modellens graf</text></svg></span>",
     "s": "<p>Derivatan är \\[- \\frac{x - 20}{25}.\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(x=20\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(x=0\\): värdet är \\(3\\)</li><li>\\(x=40\\): värdet är \\(3\\)</li><li>\\(x=20\\): värdet är \\(11\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{11}\\) m, och det fås för \\(x=20\\).</p>",
     "familj": "maxmin_given_11",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18435,7 +18435,7 @@ window.BANKMATO1 = [
     "t": "<p>Ljudnivån i en förenklad modell beskrivs av \\(L(t)=-t^2+10t+58\\) under intervallet \\(0\\le t\\le 8\\). Bestäm modellens största värde på intervallet.</p>",
     "s": "<p>Derivatan är \\[- 2 \\left(t - 5\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=5\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(58\\)</li><li>\\(t=8\\): värdet är \\(74\\)</li><li>\\(t=5\\): värdet är \\(83\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{83}\\), och det fås för \\(t=5\\).</p>",
     "familj": "maxmin_given_12",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18451,7 +18451,7 @@ window.BANKMATO1 = [
     "t": "<p>En behållares fyllnadsgrad modelleras av \\(F(t)=-2t^3+15t^2+12\\) för \\(0\\le t\\le 5\\). Bestäm funktionens största värde på intervallet. Använd en teckentabell eller andraderivatan för att motivera.</p>",
     "s": "<p>Derivatan är \\[- 6 t \\left(t - 5\\right).\\]</p><p>Derivatans nollställen i det aktuella intervallet är \\(t=0\\), \\(t=5\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi funktionens värden i derivatans nollställen och i intervallets ändpunkter.</p><ul><li>\\(t=0\\): värdet är \\(12\\)</li><li>\\(t=5\\): värdet är \\(137\\)</li><li>\\(t=0\\): värdet är \\(12\\)</li><li>\\(t=5\\): värdet är \\(137\\)</li></ul><p><strong>Svar:</strong> det största värdet är \\(\\boxed{137}\\), och det fås för \\(t=5\\).</p>",
     "familj": "maxmin_given_13",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18467,7 +18467,7 @@ window.BANKMATO1 = [
     "t": "<p>En produktionskostnad modelleras av \\(K(x)=x^3-12x^2+36x+90\\) för \\(0\\le x\\le 8\\). Bestäm funktionens största och minsta värde på intervallet.</p>",
     "s": "<p>Derivatan är \\[3(x-6)(x-2).\\]</p><p>Derivatans nollställen i intervallet är \\(x=2\\) och \\(x=6\\).</p><p>För att bestämma största och minsta värde på intervallet jämför vi även med ändpunkterna:</p><ul><li>\\(K(0)=90\\)</li><li>\\(K(2)=122\\)</li><li>\\(K(6)=90\\)</li><li>\\(K(8)=122\\)</li></ul><p><strong>Svar:</strong> minsta värdet är \\(\\boxed{90}\\) och fås vid \\(x=0\\) och \\(x=6\\). Största värdet är \\(\\boxed{122}\\) och fås vid \\(x=2\\) och \\(x=8\\).</p>",
     "familj": "maxmin_given_14",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18483,7 +18483,7 @@ window.BANKMATO1 = [
     "t": "<p>Man ska bygga en rektangulär hage mot en rak vägg. Totalt finns 60 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">60 - 2x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
     "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(60-2x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(60-2x)=- 2 x^{2} + 60 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=60 - 4 x\\). Derivatans nollställe är \\(x=15\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{450\\text{ m}^2}\\).</p>",
     "familj": "maxmin_model_fence_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18499,7 +18499,7 @@ window.BANKMATO1 = [
     "t": "<p>Man ska bygga en rektangulär hage mot en rak vägg. Totalt finns 84 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">84 - 2x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
     "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(84-2x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(84-2x)=- 2 x^{2} + 84 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=84 - 4 x\\). Derivatans nollställe är \\(x=21\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{882\\text{ m}^2}\\).</p>",
     "familj": "maxmin_model_fence_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18515,7 +18515,7 @@ window.BANKMATO1 = [
     "t": "<p>Man ska bygga två lika stora hagar bredvid varandra mot en rak vägg. Totalt finns 96 m stängsel och väggen behöver inget stängsel.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"197.5\" y1=\"65\" x2=\"197.5\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">96 - 3x</text></svg></span><p>Bestäm de mått som ger största möjliga area. Ställ först upp en funktion för arean.</p>",
     "s": "<p>Låt djupet vara \\(x\\) m. Då återstår \\(96-3x\\) m till den sida som är parallell med väggen.</p><p>Arean blir</p><p>\\[A(x)=x(96-3x)=- 3 x^{2} + 96 x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=96 - 6 x\\). Derivatans nollställe är \\(x=16\\).</p><p>Derivatan byter tecken från positiv till negativ där, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{768\\text{ m}^2}\\).</p>",
     "familj": "maxmin_model_fence_3",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18531,7 +18531,7 @@ window.BANKMATO1 = [
     "t": "<p>En affisch ska innehålla en tryckt yta på 384 cm². Sidmarginalerna ska vara 2 cm och marginalerna upptill och nedtill 3 cm.</p><span class=\"fig smal\"><svg width=\"330\" height=\"245\" viewBox=\"0 0 330 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Affisch med marginaler\"><rect x=\"1\" y=\"1\" width=\"328\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"65\" y=\"34\" width=\"200\" height=\"170\" fill=\"#F4F4F4\" stroke=\"#333\" stroke-width=\"2\"/><rect x=\"91\" y=\"64\" width=\"148\" height=\"110\" fill=\"#E6F0FA\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"165\" y=\"121\" text-anchor=\"middle\" font-size=\"13\" fill=\"#2D70B3\">tryckt yta</text><text x=\"165\" y=\"226\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">sidmarginal 2 cm, över/under 3 cm</text></svg></span><p>Bestäm affischens mått så att hela affischens area blir så liten som möjligt.</p>",
     "s": "<p>Låt den tryckta bredden vara \\(x\\) cm. Den tryckta höjden blir då \\(384/x\\) cm.</p><p>Affischens area är</p><p>\\[A(x)=(x+4)\\left(\\frac{384}{x}+6\\right)=408+6x+\\frac{1536}{x}.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=6-\\frac{1536}{x^2}\\).</p><p>\\[A^{\\prime}(x)=0\\Rightarrow x^2=256\\Rightarrow x=16.\\]</p><p>Den tryckta höjden blir 24 cm. Affischens yttermått blir därför \\(20\\text{ cm}\\times30\\text{ cm}\\).</p><p>Andraderivatan är positiv för \\(x&gt;0\\), så detta ger en minimipunkt.</p>",
     "familj": "maxmin_model_poster",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18547,7 +18547,7 @@ window.BANKMATO1 = [
     "t": "<p>Av en kartong som är 32 cm × 20 cm klipps lika stora kvadrater med sidan \\(x\\) bort i hörnen. Kartongen viks sedan till en öppen låda.</p><span class=\"fig smal\"><svg width=\"410\" height=\"250\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kartong där kvadrater klipps bort i hörnen\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"70\" y=\"45\" width=\"270\" height=\"150\" fill=\"#F8E9C8\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"70\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"45\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"70\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><rect x=\"308\" y=\"163\" width=\"32\" height=\"32\" fill=\"#fff\" stroke=\"#C74440\" stroke-dasharray=\"5 4\"/><text x=\"205.0\" y=\"223\" text-anchor=\"middle\" font-size=\"14\">32 cm</text><text x=\"44\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\">20 cm</text><text x=\"86\" y=\"68\" font-size=\"14\" fill=\"#C74440\">x</text></svg></span><p>Bestäm \\(x\\) så att lådans volym blir så stor som möjligt.</p>",
     "s": "<p>Lådans höjd är \\(x\\), längden \\(32-2x\\) och bredden \\(20-2x\\). Därför</p><p>\\[V(x)=x(32-2x)(20-2x)=4 x^{3} - 104 x^{2} + 640 x.\\]</p><p>Derivatan är \\(V^{\\prime}(x)=4 \\left(x - 4\\right) \\left(3 x - 40\\right)\\).</p><p>Det relevanta nollstället är \\(x\\approx 4\\) cm. En teckentabell visar att derivatan går från positiv till negativ, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> \\(x\\approx\\boxed{4\\text{ cm}}\\), vilket ger volymen cirka \\(1152\\text{ cm}^3\\).</p>",
     "familj": "maxmin_model_box_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18611,7 +18611,7 @@ window.BANKMATO1 = [
     "t": "<p>För en kon gäller att summan av radien och höjden är 18 cm.</p><span class=\"fig smal\"><svg width=\"300\" height=\"260\" viewBox=\"0 0 300 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kon med radie r och höjd h\"><rect x=\"1\" y=\"1\" width=\"298\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"150\" cy=\"202\" rx=\"70\" ry=\"22\" fill=\"#F8EFE6\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"80\" y2=\"202\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"220\" y2=\"202\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"150\" y1=\"40\" x2=\"150\" y2=\"202\" stroke=\"#777\" stroke-dasharray=\"5 4\"/><line x1=\"150\" y1=\"202\" x2=\"218\" y2=\"202\" stroke=\"#333\"/><text x=\"183\" y=\"194\" font-size=\"14\">r</text><text x=\"160\" y=\"125\" font-size=\"14\">h</text></svg></span><p>Bestäm den största möjliga volymen.</p>",
     "s": "<p>Eftersom \\(r+h=18\\) är \\(h=18-r\\).</p><p>Volymen blir</p><p>\\[V(r)=\\frac{\\pi r^2(18-r)}{3}=6\\pi r^2-\\frac{\\pi r^3}{3}.\\]</p><p>Nu kan funktionen deriveras term för term:</p><p>\\[V^{\\prime}(r)=12\\pi r-\\pi r^2=\\pi r(12-r).\\]</p><p>I intervallet \\(0&lt;r&lt;18\\) är det relevanta nollstället \\(r=12\\).</p><p>Då är \\(h=6\\) cm och volymen \\(\\boxed{288\\pi\\text{ cm}^3}\\).</p><p>Derivatan är positiv före \\(r=12\\) och negativ efter, så funktionen har en maximipunkt där.</p>",
     "familj": "maxmin_model_cone",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18643,7 +18643,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel ska ha arean 144 cm². Bestäm rektangelns mått så att omkretsen blir så liten som möjligt.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra blir \\(144/x\\) cm.</p><p>Omkretsen blir</p><p>\\[O(x)=2x+\\frac{288}x.\\]</p><p>Derivatan är \\(O^{\\prime}(x)=2-\\frac{288}{x^2}\\). Nollstället ger \\(x=12\\).</p><p>Då är den andra sidan också \\(12\\). Andraderivatan är positiv för \\(x&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara en kvadrat med sidan \\(12\\) cm.</p>",
     "familj": "maxmin_model_fixedarea_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18659,7 +18659,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel ska ha arean 200 cm². Bestäm rektangelns mått så att omkretsen blir så liten som möjligt.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra blir \\(200/x\\) cm.</p><p>Omkretsen blir</p><p>\\[O(x)=2x+\\frac{400}x.\\]</p><p>Derivatan är \\(O^{\\prime}(x)=2-\\frac{400}{x^2}\\). Nollstället ger \\(x=10 \\sqrt{2}\\).</p><p>Då är den andra sidan också \\(10 \\sqrt{2}\\). Andraderivatan är positiv för \\(x&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara en kvadrat med sidan \\(14,14\\) cm.</p>",
     "familj": "maxmin_model_fixedarea_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18675,7 +18675,7 @@ window.BANKMATO1 = [
     "t": "<p>Summan av två positiva tal är 24. Bestäm talen så att deras produkt blir så stor som möjligt.</p>",
     "s": "<p>Låt det ena talet vara \\(x\\). Det andra är då \\(24-x\\).</p><p>Produkten blir \\(P(x)=x(24-x)=24x-x^2\\).</p><p>\\(P^{\\prime}(x)=24-2x\\), så derivatans nollställe är \\(x=12\\).</p><p>Tecknet går från positivt till negativt, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> talen är \\(\\boxed{12\\text{ och }12}\\).</p>",
     "familj": "maxmin_model_numbers_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18691,7 +18691,7 @@ window.BANKMATO1 = [
     "t": "<p>Summan av två positiva tal är 50. Bestäm talen så att deras produkt blir så stor som möjligt.</p>",
     "s": "<p>Låt det ena talet vara \\(x\\). Det andra är då \\(50-x\\).</p><p>Produkten blir \\(P(x)=x(50-x)=50x-x^2\\).</p><p>\\(P^{\\prime}(x)=50-2x\\), så derivatans nollställe är \\(x=25\\).</p><p>Tecknet går från positivt till negativt, alltså fås en maximipunkt.</p><p><strong>Svar:</strong> talen är \\(\\boxed{25\\text{ och }25}\\).</p>",
     "familj": "maxmin_model_numbers_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18707,7 +18707,7 @@ window.BANKMATO1 = [
     "t": "<p>Biljetten till en konsert kostar 120 kr och då väntas 400 besökare. För varje höjning med 10 kr beräknas antalet besökare minska med 20.</p><p>Bestäm det biljettpris som ger största möjliga biljettintäkt enligt modellen.</p>",
     "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 10 kr. Priset blir \\(120+10x\\) och antalet besökare \\(400-20x\\).</p><p>Intäkten blir</p><p>\\[I(x)=(120+10x)(400-20x)=- 200 x^{2} + 1600 x + 48000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=1600 - 400 x\\). Nollstället är \\(x=4\\).</p><p>Eftersom derivatan byter från positiv till negativ fås största intäkt.</p><p><strong>Svar:</strong> biljettpriset bör vara \\(\\boxed{160\\text{ kr}}\\). Då blir intäkten \\(51200\\) kr.</p>",
     "familj": "maxmin_model_ticket_1",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18723,7 +18723,7 @@ window.BANKMATO1 = [
     "t": "<p>Biljetten till en teaterföreställning kostar 90 kr och då väntas 600 besökare. För varje höjning med 5 kr beräknas antalet besökare minska med 30.</p><p>Bestäm det biljettpris som ger största möjliga biljettintäkt enligt modellen.</p>",
     "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 5 kr. Priset blir \\(90+5x\\) och antalet besökare \\(600-30x\\).</p><p>Intäkten blir</p><p>\\[I(x)=(90+5x)(600-30x)=- 150 x^{2} + 300 x + 54000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=300 - 300 x\\). Nollstället är \\(x=1\\).</p><p>Eftersom derivatan byter från positiv till negativ fås största intäkt.</p><p><strong>Svar:</strong> biljettpriset bör vara \\(\\boxed{95\\text{ kr}}\\). Då blir intäkten \\(54150\\) kr.</p>",
     "familj": "maxmin_model_ticket_2",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18739,7 +18739,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel är symmetriskt placerad under parabeln \\(y=12-x^2\\), med den nedre sidan på \\(x\\)-axeln och de övre hörnen på parabeln.</p><span class=\"fig smal\"><svg width=\"390\" height=\"280\" viewBox=\"0 0 390 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel inskriven under en parabel\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"238\" x2=\"350\" y2=\"238\" stroke=\"#333\"/><line x1=\"195\" y1=\"30\" x2=\"195\" y2=\"245\" stroke=\"#333\"/><path d=\"M 62.0 241.8 L 63.7 237.2 L 65.3 232.7 L 67.0 228.2 L 68.6 223.8 L 70.3 219.5 L 72.0 215.2 L 73.6 211.0 L 75.3 206.8 L 77.0 202.7 L 78.6 198.7 L 80.3 194.7 L 82.0 190.8 L 83.6 186.9 L 85.3 183.1 L 86.9 179.3 L 88.6 175.6 L 90.3 172.0 L 91.9 168.4 L 93.6 164.8 L 95.2 161.4 L 96.9 157.9 L 98.6 154.6 L 100.2 151.3 L 101.9 148.0 L 103.6 144.9 L 105.2 141.7 L 106.9 138.6 L 108.5 135.6 L 110.2 132.7 L 111.9 129.8 L 113.5 126.9 L 115.2 124.2 L 116.9 121.4 L 118.5 118.8 L 120.2 116.1 L 121.8 113.6 L 123.5 111.1 L 125.2 108.6 L 126.8 106.3 L 128.5 103.9 L 130.2 101.7 L 131.8 99.5 L 133.5 97.3 L 135.2 95.2 L 136.8 93.2 L 138.5 91.2 L 140.1 89.3 L 141.8 87.4 L 143.5 85.6 L 145.1 83.8 L 146.8 82.1 L 148.4 80.5 L 150.1 78.9 L 151.8 77.4 L 153.4 75.9 L 155.1 74.5 L 156.8 73.2 L 158.4 71.9 L 160.1 70.7 L 161.8 69.5 L 163.4 68.4 L 165.1 67.3 L 166.7 66.3 L 168.4 65.3 L 170.1 64.5 L 171.7 63.6 L 173.4 62.9 L 175.1 62.1 L 176.7 61.5 L 178.4 60.9 L 180.0 60.3 L 181.7 59.8 L 183.4 59.4 L 185.0 59.0 L 186.7 58.7 L 188.3 58.5 L 190.0 58.3 L 191.7 58.1 L 193.3 58.0 L 195.0 58.0 L 196.7 58.0 L 198.3 58.1 L 200.0 58.3 L 201.7 58.5 L 203.3 58.7 L 205.0 59.0 L 206.6 59.4 L 208.3 59.8 L 210.0 60.3 L 211.6 60.9 L 213.3 61.5 L 215.0 62.1 L 216.6 62.9 L 218.3 63.6 L 219.9 64.5 L 221.6 65.3 L 223.3 66.3 L 224.9 67.3 L 226.6 68.4 L 228.2 69.5 L 229.9 70.7 L 231.6 71.9 L 233.2 73.2 L 234.9 74.5 L 236.6 75.9 L 238.2 77.4 L 239.9 78.9 L 241.5 80.5 L 243.2 82.1 L 244.9 83.8 L 246.5 85.6 L 248.2 87.4 L 249.9 89.3 L 251.5 91.2 L 253.2 93.2 L 254.9 95.2 L 256.5 97.3 L 258.2 99.5 L 259.8 101.7 L 261.5 103.9 L 263.2 106.3 L 264.8 108.6 L 266.5 111.1 L 268.1 113.6 L 269.8 116.1 L 271.5 118.8 L 273.1 121.4 L 274.8 124.1 L 276.5 126.9 L 278.1 129.8 L 279.8 132.7 L 281.5 135.6 L 283.1 138.6 L 284.8 141.7 L 286.4 144.9 L 288.1 148.0 L 289.8 151.3 L 291.4 154.6 L 293.1 157.9 L 294.8 161.4 L 296.4 164.8 L 298.1 168.4 L 299.7 172.0 L 301.4 175.6 L 303.1 179.3 L 304.7 183.1 L 306.4 186.9 L 308.0 190.8 L 309.7 194.7 L 311.4 198.7 L 313.0 202.7 L 314.7 206.8 L 316.4 211.0 L 318.0 215.2 L 319.7 219.5 L 321.4 223.8 L 323.0 228.2 L 324.7 232.7 L 326.3 237.2 L 328.0 241.8\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.5\"/><rect x=\"119\" y=\"118\" width=\"152\" height=\"120\" fill=\"#E8F0FB\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"306\" y=\"52\" font-size=\"13\" fill=\"#C74440\">y = 12 - x²</text><text x=\"195\" y=\"267\" text-anchor=\"middle\" font-size=\"12\" fill=\"#555\">Rektangelns övre hörn ligger på parabeln.</text></svg></span><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Låt det högra övre hörnet ha \\(x\\)-koordinaten \\(x&gt;0\\). Rektangelns bredd är då \\(2x\\) och höjden \\(12-x^2\\).</p><p>\\[A(x)=2x(12-x^2)=24x-2x^3.\\]</p><p>\\[A^{\\prime}(x)=24-6x^2.\\]</p><p>Derivatans nollställe i intervallet är \\(x=2\\). Tecknet går från positivt till negativt.</p><p><strong>Svar:</strong> största arean är \\(\\boxed{32}\\) areaenheter.</p>",
     "familj": "maxmin_unique_parabola_rect",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18755,7 +18755,7 @@ window.BANKMATO1 = [
     "t": "<p>Bestäm den punkt på grafen \\(y=x^2\\) som ligger närmast punkten \\((0,3)\\).</p>",
     "s": "<p>En punkt på parabeln har koordinaterna \\((x,x^2)\\). Kvadraten på avståndet till \\((0,3)\\) är</p><p>\\[D(x)=x^2+(x^2-3)^2=x^4-5x^2+9.\\]</p><p>Det räcker att minimera \\(D\\). Derivatan är \\(D^{\\prime}(x)=4x^3-10x=2x(2x^2-5)\\).</p><p>Derivatans nollställen är \\(x=0\\) och \\(x=\\pm\\sqrt{5/2}\\). En teckentabell visar att minimipunkterna fås vid \\(x=\\pm\\sqrt{5/2}\\).</p><p>Punkterna är \\(\\boxed{(\\pm\\sqrt{5/2};\\,5/2)}\\).</p>",
     "familj": "maxmin_unique_distance",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18771,7 +18771,7 @@ window.BANKMATO1 = [
     "t": "<p>Två cyklister startar samtidigt. Deras sträckor från startpunkten i kilometer beskrivs under de första 6 timmarna av</p><p>\\[s_1(t)=t^3-9t^2+24t,\\qquad s_2(t)=8t.\\]</p><p>Bestäm när skillnaden \\(s_1(t)-s_2(t)\\) är som störst och som minst på intervallet \\(0\\le t\\le6\\).</p>",
     "s": "<p>Skillnaden är</p><p>\\[D(t)=s_1(t)-s_2(t)=t^3-9t^2+16t.\\]</p><p>Derivatan är \\(D^{\\prime}(t)=3t^2-18t+16\\). Vi bestämmer derivatans nollställen och jämför även med intervallets ändpunkter.</p><p>Det största värdet blir \\(8,04\\) km vid \\(t=1,09\\), och det minsta värdet \\(-20,04\\) km vid \\(t=4,91\\).</p>",
     "familj": "maxmin_unique_cyclists",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18803,7 +18803,7 @@ window.BANKMATO1 = [
     "t": "<p>Tre lika stora rektangulära hundrastgårdar ska byggas bredvid varandra mot en lång vägg. Totalt finns 120 m stängsel. Väggen utgör ena långsidan.</p><span class=\"fig smal\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangulärt område intill en vägg\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"68\" y1=\"38\" x2=\"330\" y2=\"38\" stroke=\"#777\" stroke-width=\"5\"/><text x=\"199\" y=\"25\" text-anchor=\"middle\" font-size=\"13\" fill=\"#555\">vägg</text><line x1=\"95\" y1=\"65\" x2=\"95\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"95\" y1=\"175\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"300\" y1=\"65\" x2=\"300\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><text x=\"75\" y=\"123\" font-size=\"15\" fill=\"#222\">x</text><text x=\"197\" y=\"199\" text-anchor=\"middle\" font-size=\"14\" fill=\"#222\">120 - 4x</text><line x1=\"163.3\" y1=\"65\" x2=\"163.3\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/><line x1=\"231.7\" y1=\"65\" x2=\"231.7\" y2=\"175\" stroke=\"#355C7D\" stroke-width=\"3\"/></svg></span><p>Bestäm måtten som ger största sammanlagda area.</p>",
     "s": "<p>Låt djupet vara \\(x\\) m. Fyra stängseldelar med längden \\(x\\) behövs vinkelrätt mot väggen. Den sammanlagda frontlängden blir därför \\(120-4x\\).</p><p>Den totala arean blir</p><p>\\[A(x)=x(120-4x)=120x-4x^2.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=120-8x\\), så nollstället är \\(x=15\\).</p><p>Derivatan byter från positiv till negativ. Frontlängden blir 60 m, alltså blir varje rastgård 20 m bred och 15 m djup.</p><p><strong>Svar:</strong> största sammanlagda area är \\(\\boxed{900\\text{ m}^2}\\).</p>",
     "familj": "maxmin_unique_threepens",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18819,7 +18819,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 72 cm. Bestäm de sidlängder som gör rektangelns diagonal så kort som möjligt.</p>",
     "s": "<p>Låt ena sidan vara \\(x\\) cm. Den andra är \\(36-x\\) cm.</p><p>Enligt Pythagoras sats gäller \\(d^2=x^2+(36-x)^2\\). Eftersom \\(d&gt;0\\) blir diagonalen minst när \\(d^2\\) är minst.</p><p>\\[D(x)=x^2+(36-x)^2=2x^2-72x+1296.\\]</p><p>\\(D^{\\prime}(x)=4x-72\\), så nollstället är \\(x=18\\).</p><p>Andraderivatan är \\(4&gt;0\\), alltså fås en minimipunkt.</p><p><strong>Svar:</strong> rektangeln ska vara \\(\\boxed{18\\text{ cm}\\times18\\text{ cm}}\\).</p>",
     "familj": "maxmin_unique_diagonal",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18835,7 +18835,7 @@ window.BANKMATO1 = [
     "t": "<p>En öppen låda med kvadratisk botten ska ha volymen 864 cm³. Bestäm bottenkant och höjd så att lådans begränsningsarea blir så liten som möjligt.</p>",
     "s": "<p>Låt bottenkanten vara \\(x\\) cm och höjden \\(h\\) cm. Volymen ger \\(x^2h=864\\), alltså \\(h=864/x^2\\).</p><p>Begränsningsarean utan lock är</p><p>\\[A(x)=x^2+4xh=x^2+\\frac{3456}x.\\]</p><p>Derivatan är \\(A^{\\prime}(x)=2x-\\frac{3456}{x^2}\\). Nollstället ger \\(x^3=1728\\), alltså \\(x=12\\) cm.</p><p>Då blir \\(h=6\\) cm. Andraderivatan är positiv, så detta ger minsta area.</p>",
     "familj": "maxmin_unique_openboxfixed",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18851,7 +18851,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär odlingsyta ligger längs en rak kanal. Sidan mot kanalen behöver inget stängsel. Dessutom ska en skiljevägg dras vinkelrätt mot kanalen. Totalt finns 100 m stängsel.</p><p>Bestäm största möjliga area.</p>",
     "s": "<p>Låt djupet vara \\(x\\) m. Tre stängseldelar med längden \\(x\\) behövs: två ytterkanter och skiljeväggen. Sidan parallell med kanalen blir \\(100-3x\\).</p><p>\\[A(x)=x(100-3x)=100x-3x^2.\\]</p><p>\\(A^{\\prime}(x)=100-6x\\), alltså \\(x=50/3\\).</p><p>Derivatan byter från positiv till negativ, så detta ger en maximipunkt.</p><p>Den andra sidan blir 50 m och största arean \\(\\boxed{2500/3\\text{ m}^2\\approx833,33\\text{ m}^2}\\).</p>",
     "familj": "maxmin_unique_canaldivider",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18867,7 +18867,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett café säljer normalt 300 luncher per dag för 110 kr styck. En undersökning tyder på att antalet sålda luncher minskar med 10 för varje prishöjning på 5 kr.</p><p>Bestäm det pris som ger största möjliga dagsintäkt enligt modellen.</p>",
     "s": "<p>Låt \\(x\\) vara antalet prishöjningar med 5 kr. Då blir priset \\(110+5x\\) och antalet luncher \\(300-10x\\).</p><p>\\[I(x)=(110+5x)(300-10x)=- 50 x^{2} + 400 x + 33000.\\]</p><p>Derivatan är \\(I^{\\prime}(x)=400 - 100 x\\). Nollstället är \\(x=4\\).</p><p>Derivatan byter från positiv till negativ, så detta ger största intäkt.</p><p><strong>Svar:</strong> priset bör vara \\(\\boxed{130\\text{ kr}}\\), vilket ger en intäkt på \\(33800\\) kr.</p>",
     "familj": "maxmin_unique_cafe",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18883,7 +18883,7 @@ window.BANKMATO1 = [
     "t": "<p>I en förenklad modell för en balk är ett hållfasthetsmått proportionellt mot \\(H(x)=x(12-x)^2\\) för \\(0&lt;x&lt;12\\).</p><p>Bestäm det värde på \\(x\\) som ger störst hållfasthetsmått. Motivera med teckentabell.</p>",
     "s": "<p>Utveckla vid behov: \\(H(x)=x^3-24x^2+144x\\).</p><p>Derivatan är \\(H^{\\prime}(x)=3 \\left(x - 12\\right) \\left(x - 4\\right)\\), med nollställena \\(x=4\\) och \\(x=12\\).</p><p>I det öppna intervallet \\(0&lt;x&lt;12\\) är \\(x=4\\) det relevanta nollstället. Derivatan är positiv före 4 och negativ efter 4.</p><p>Därför har \\(H\\) en maximipunkt vid \\(x=4\\).</p>",
     "familj": "maxmin_unique_beam",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -18896,7 +18896,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm samtliga reella nollställen till \\(p(x)=x^{3} - 4 x - 1\\). Ange svar med tre decimaler och beskriv hur du använde grafen.</p>",
+    "t": "<p>Bestäm samtliga reella nollställen till \\(p(x)=x^{3} - 4 x - 1\\). Ange svar med tre decimaler.</p>",
     "s": "<p>Rita grafen till \\(y=x^{3} - 4 x - 1\\) och använd verktyget för nollställen eller läs av skärningarna med \\(x\\)-axeln.</p><p><strong>Svar:</strong> \\(x\\approx -1,861, -0,254, 2,115\\).</p>",
     "familj": "geo6_poly_roots1",
     "miniräknare": true,
@@ -18912,7 +18912,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm samtliga reella nollställen till \\(p(x)=x^{4} - 5 x^{2} + 1\\). Ange svar med tre decimaler och beskriv hur du använde grafen.</p>",
+    "t": "<p>Bestäm samtliga reella nollställen till \\(p(x)=x^{4} - 5 x^{2} + 1\\). Ange svar med tre decimaler.</p>",
     "s": "<p>Rita grafen till \\(y=x^{4} - 5 x^{2} + 1\\) och använd verktyget för nollställen eller läs av skärningarna med \\(x\\)-axeln.</p><p><strong>Svar:</strong> \\(x\\approx -2,189, -0,457, 0,457, 2,189\\).</p>",
     "familj": "geo6_poly_roots2",
     "miniräknare": true,
@@ -18928,7 +18928,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare för \\(a\\) och undersök funktionerna \\(p_a(x)=x^3-3x+a\\).</p><p>För vilka värden på \\(a\\) har ekvationen \\(p_a(x)=0\\) tre olika reella lösningar? Ange gränsvärdena exakt när du har hittat dem digitalt.</p>",
+    "t": "<p>Undersök funktionerna \\(p_a(x)=x^3-3x+a\\).</p><p>För vilka värden på \\(a\\) har ekvationen \\(p_a(x)=0\\) tre olika reella lösningar? Ange gränsvärdena exakt.</p>",
     "s": "<p>Med en glidare ser man att tre skärningar med \\(x\\)-axeln finns mellan två gränslägen. Gränslägena uppstår när grafen tangerar \\(x\\)-axeln i en extrempunkt.</p><p>Derivatan är \\(p_a^{\\prime}(x)=3x^2-3\\), så extrempunkterna ligger vid \\(x=\\pm1\\). Funktionsvärdena där är \\(a-2\\) respektive \\(a+2\\).</p><p>Tre olika reella nollställen fås när \\(a-2&lt;0\\) och \\(a+2&gt;0\\), alltså \\(\\boxed{-2&lt;a&lt;2}\\).</p>",
     "familj": "geo6_poly_param",
     "miniräknare": true,
@@ -18944,7 +18944,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita graferna till \\(f(x)=x^3-2x^2-3x+2\\) och \\(g(x)=x-1\\). Bestäm deras skärningspunkter med två decimaler.</p>",
+    "t": "<p>Rita graferna till \\(f(x)=x^3-2x^2-3x+2\\) och \\(g(x)=x-1\\). Bestäm deras skärningspunkter med två decimaler.</p>",
     "s": "<p>Skärningspunkterna fås digitalt genom att rita båda graferna och använda verktyget <em>Skärning mellan två objekt</em>.</p><p>Skärningspunkterna är ungefär \\((-1,62; -2,62)\\), \\((0,62; -0,38)\\), \\((3,0; 2,0)\\).</p>",
     "familj": "geo6_poly_intersect",
     "miniräknare": true,
@@ -18960,7 +18960,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare för \\(k\\) i \\(q(x)=x^2+kx+9\\). Bestäm de två värden på \\(k\\) för vilka grafen precis tangerar \\(x\\)-axeln.</p>",
+    "t": "<p>Undersök funktionen \\(q(x)=x^2+kx+9\\) när parametern \\(k\\) varierar. Bestäm de två värden på \\(k\\) för vilka grafen precis tangerar \\(x\\)-axeln.</p>",
     "s": "<p>Med glidaren hittar man gränslägena \\(k=-6\\) och \\(k=6\\). Då har andragradsekvationen exakt ett nollställe och grafen tangerar \\(x\\)-axeln.</p><p>Kontroll med andragradsformeln: uttrycket under rottecknet blir noll när \\(k^2-36=0\\), alltså \\(\\boxed{k=\\pm6}\\).</p>",
     "familj": "geo6_poly_tangent_param",
     "miniräknare": true,
@@ -18976,7 +18976,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Jämför modellerna \\(f(x)=1,8x+6\\) och \\(g(x)=0,12x^2+2\\). När ger modellerna samma värde? Ange positiva \\(x\\)-värden med två decimaler.</p>",
+    "t": "<p>Jämför modellerna \\(f(x)=1,8x+6\\) och \\(g(x)=0,12x^2+2\\). När ger modellerna samma värde? Ange positiva \\(x\\)-värden med två decimaler.</p>",
     "s": "<p>Rita båda funktionerna i samma koordinatsystem och använd skärningsverktyget. De positiva skärningsvärdena är ungefär \\(x=16,96\\).</p>",
     "familj": "geo6_func_compare_1",
     "miniräknare": true,
@@ -18992,7 +18992,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Jämför modellerna \\(f(x)=40+3x\\) och \\(g(x)=12\\cdot1,12^x\\). När är modellerna lika stora? Ange positiva \\(x\\)-värden med två decimaler.</p>",
+    "t": "<p>Jämför modellerna \\(f(x)=40+3x\\) och \\(g(x)=12\\cdot1,12^x\\). När är modellerna lika stora? Ange positiva \\(x\\)-värden med två decimaler.</p>",
     "s": "<p>Rita båda funktionerna i samma koordinatsystem och använd skärningsverktyget. De positiva skärningsvärdena är ungefär \\(x=18,23\\).</p>",
     "familj": "geo6_func_compare_2",
     "miniräknare": true,
@@ -19008,7 +19008,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2\\). Skapa sedan en glidare \\(a\\) och rita \\(g(x)=(x-a)^2+2\\).</p><p>Beskriv vad som händer med grafen när \\(a\\) ändras. Vilka koordinater har minimipunkten?</p>",
+    "t": "<p>Undersök funktionerna \\(f(x)=x^2\\) och \\(g(x)=(x-a)^2+2\\) när parametern \\(a\\) varierar.</p><p>Beskriv vad som händer med grafen till \\(g\\). Vilka koordinater har minimipunkten?</p>",
     "s": "<p>När \\(a\\) ändras flyttas parabeln horisontellt. Formen ändras inte. Minimipunkten är alltid \\(\\boxed{(a,2)}\\).</p>",
     "familj": "geo6_func_slider_shift",
     "miniräknare": true,
@@ -19024,7 +19024,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm en andragradsfunktion som går genom punkterna \\((-1,6)\\), \\((1,2)\\) och \\((3,6)\\). Använd GeoGebra för att bestämma funktionen och kontrollera resultatet grafiskt.</p>",
+    "t": "<p>Bestäm en andragradsfunktion som går genom punkterna \\((-1,6)\\), \\((1,2)\\) och \\((3,6)\\). Bestäm funktionen.</p>",
     "s": "<p>Lägg in de tre punkterna och använd ett kommando som bestämmer ett andragradspolynom genom punkterna.</p><p>Resultatet blir \\(\\boxed{f(x)=x^2-2x+3}\\).</p><p>Kontroll: \\(f(-1)=6\\), \\(f(1)=2\\) och \\(f(3)=6\\).</p>",
     "familj": "geo6_func_fit_quad",
     "miniräknare": true,
@@ -19040,7 +19040,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x\\). Bestäm grafiskt de \\(x\\)-värden där \\(f(x)=3\\). Ange med två decimaler.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-4x\\). Bestäm grafiskt de \\(x\\)-värden där \\(f(x)=3\\). Ange med två decimaler.</p>",
     "s": "<p>Rita även linjen \\(y=3\\). Skärningarna mellan linjen och funktionsgrafen ger lösningarna.</p><p>Man får ungefär \\(\\boxed{x\\approx -1,30;\\,-1,00;\\,2,30}\\).</p>",
     "familj": "geo6_func_level",
     "miniräknare": true,
@@ -19055,7 +19055,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\[\\frac{x+2}{x-1}=3.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
+    "t": "<p>Lös ekvationen grafiskt: \\[\\frac{x+2}{x-1}=3.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
     "s": "<p>Rita den rationella funktionen och den horisontella linjen \\(y=3\\). Skärningen ger \\(\\boxed{x=\\frac52}\\).</p><p>Uttrycket är inte definierat när nämnaren är noll, alltså vid \\(\\boxed{x=1}\\).</p>",
     "familj": "geo6_rat_eq1",
     "miniräknare": true,
@@ -19070,7 +19070,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\[\\frac{2x-1}{x+3}=-1.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
+    "t": "<p>Lös ekvationen grafiskt: \\[\\frac{2x-1}{x+3}=-1.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
     "s": "<p>Rita den rationella funktionen och den horisontella linjen \\(y=-1\\). Skärningen ger \\(\\boxed{x=-\\frac23}\\).</p><p>Uttrycket är inte definierat när nämnaren är noll, alltså vid \\(\\boxed{x=-3}\\).</p>",
     "familj": "geo6_rat_eq2",
     "miniräknare": true,
@@ -19085,7 +19085,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita funktionerna \\(f(x)=\\frac{x^2-4}{x-2}\\) och \\(g(x)=x+2\\) i samma koordinatsystem. Zooma kring \\(x=2\\).</p><p>Förklara varför graferna ser nästan likadana ut men funktionerna ändå inte är samma funktion.</p>",
+    "t": "<p>Rita funktionerna \\(f(x)=\\frac{x^2-4}{x-2}\\) och \\(g(x)=x+2\\) i samma koordinatsystem. Zooma kring \\(x=2\\).</p><p>Förklara varför graferna ser nästan likadana ut men funktionerna ändå inte är samma funktion.</p>",
     "s": "<p>Uttrycket \\(x^2-4=(x-2)(x+2)\\), så för \\(x\\ne2\\) gäller \\(f(x)=x+2\\).</p><p>Men \\(f\\) är inte definierad när \\(x=2\\), medan \\(g(2)=4\\). Därför skiljer sig funktionernas definitionsmängder trots att graferna sammanfaller i övrigt.</p>",
     "familj": "geo6_rat_hole",
     "miniräknare": true,
@@ -19100,7 +19100,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och undersök \\(f_a(x)=\\frac{1}{x-a}+2\\).</p><p>Beskriv hur grafen förändras när \\(a\\) ändras och ange det \\(x\\)-värde som alltid saknas i definitionsmängden.</p>",
+    "t": "<p>Undersök funktionen \\(f_a(x)=\\frac{1}{x-a}+2\\) när parametern \\(a\\) varierar.</p><p>Beskriv hur grafen förändras och ange det \\(x\\)-värde som saknas i definitionsmängden.</p>",
     "s": "<p>När \\(a\\) ändras flyttas grafen horisontellt. Den är inte definierad när nämnaren är noll, alltså när \\(x-a=0\\).</p><p>Det uteslutna värdet är därför \\(\\boxed{x=a}\\).</p>",
     "familj": "geo6_rat_slider",
     "miniräknare": true,
@@ -19115,7 +19115,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm med GeoGebra skärningspunkterna mellan \\(f(x)=\\frac{4}{x}\\) och \\(g(x)=x-1\\). Ange koordinaterna med två decimaler.</p>",
+    "t": "<p>Bestäm skärningspunkterna mellan \\(f(x)=\\frac{4}{x}\\) och \\(g(x)=x-1\\). Ange koordinaterna med två decimaler.</p>",
     "s": "<p>Rita båda graferna och använd skärningsverktyget. Ekvationen är \\(4/x=x-1\\), vilket motsvarar \\(x^2-x-4=0\\).</p><p>Skärningspunkterna är ungefär \\(\\boxed{(-1,56;-2,56)}\\) och \\(\\boxed{(2,56;1,56)}\\).</p>",
     "familj": "geo6_rat_intersections",
     "miniräknare": true,
@@ -19131,7 +19131,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=\\frac{x^2-9}{x-3}\\). Funktionen är inte definierad för \\(x=3\\).</p><p>Zooma in kring \\(x=3\\) och uppskatta \\(\\lim_{x\\to3}f(x)\\). Förklara resultatet.</p>",
+    "t": "<p>Rita \\(f(x)=\\frac{x^2-9}{x-3}\\). Funktionen är inte definierad för \\(x=3\\).</p><p>Zooma in kring \\(x=3\\) och uppskatta \\(\\lim_{x\\to3}f(x)\\). Förklara resultatet.</p>",
     "s": "<p>Grafen närmar sig \\(y=6\\) från båda håll. Algebraiskt gäller \\(f(x)=x+3\\) för \\(x\\ne3\\), så \\(\\boxed{\\lim_{x\\to3}f(x)=6}\\).</p>",
     "familj": "geo6_limit_hole",
     "miniräknare": true,
@@ -19147,7 +19147,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita den styckvis definierade funktionen</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\ ax-1,&x&gt;2.\\end{cases}\\]</p><p>Bestäm med GeoGebra det värde på \\(a\\) som gör funktionen kontinuerlig vid \\(x=2\\). Kontrollera sedan algebraiskt.</p>",
+    "t": "<p>Den styckvis definierade funktionen</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\\\ ax-1,&x&gt;2.\\end{cases}\\]</p><p>Bestäm det värde på \\(a\\) som gör funktionen kontinuerlig vid \\(x=2\\). Kontrollera sedan algebraiskt.</p>",
     "s": "<p>Vänster del ger \\(f(2)=5\\). För kontinuitet måste den högra delen närma sig samma värde: \\(2a-1=5\\).</p><p>Därför är \\(\\boxed{a=3}\\).</p>",
     "familj": "geo6_cont_slider",
     "miniräknare": true,
@@ -19163,7 +19163,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-2x+1\\). Skapa en punkt \\(A=(1,f(1))\\) och en punkt \\(B=(1+h,f(1+h))\\) med glidaren \\(h\\).</p><p>Rita sekanten genom \\(A\\) och \\(B\\). Vad närmar sig sekantens lutning när \\(h\\) går mot 0?</p>",
+    "t": "<p>För \\(f(x)=x^3-2x+1\\) betraktas punkterna \\(A=(1,f(1))\\) och \\(B=(1+h,f(1+h))\\).</p><p>Bestäm sekantens lutning och undersök vad den närmar sig när \\(h\\) går mot 0.</p>",
     "s": "<p>När \\(h\\) blir liten närmar sig sekanten tangenten vid \\(x=1\\). Lutningen närmar sig \\(f^{\\prime}(1)\\).</p><p>\\(f^{\\prime}(x)=3x^2-2\\), alltså \\(f^{\\prime}(1)=1\\). Sekantens lutning närmar sig därför \\(\\boxed{1}\\).</p>",
     "familj": "geo6_secant_slider",
     "miniräknare": true,
@@ -19179,7 +19179,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=\\frac{x+1}{x^2-4}\\) och undersök grafen nära de \\(x\\)-värden där nämnaren är noll.</p><p>Ange vid vilka \\(x\\)-värden funktionen inte är kontinuerlig och motivera med definitionsmängden.</p>",
+    "t": "<p>Rita \\(f(x)=\\frac{x+1}{x^2-4}\\) och undersök grafen nära de \\(x\\)-värden där nämnaren är noll.</p><p>Ange vid vilka \\(x\\)-värden funktionen inte är kontinuerlig och motivera med definitionsmängden.</p>",
     "s": "<p>Nämnaren är noll när \\(x^2-4=0\\), alltså vid \\(x=-2\\) och \\(x=2\\). Funktionen är inte definierad där och är därför inte kontinuerlig i dessa punkter.</p>",
     "familj": "geo6_cont_rational",
     "miniräknare": true,
@@ -19195,7 +19195,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x+1,&x&lt;1,\\ ax+b,&x\\ge1.\\end{cases}\\]</p><p>Hitta flera par \\((a,b)\\) som ger en kontinuerlig funktion. Beskriv sambandet mellan \\(a\\) och \\(b\\).</p>",
+    "t": "<p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x+1,&x&lt;1,\\ ax+b,&x\\ge1.\\end{cases}\\]</p><p>Hitta flera par \\((a,b)\\) som ger en kontinuerlig funktion. Beskriv sambandet mellan \\(a\\) och \\(b\\).</p>",
     "s": "<p>Kontinuitet vid \\(x=1\\) kräver att grenarna har samma värde där.</p><p>Vänstergrenen närmar sig \\(2\\), medan högergrenen ger \\(a+b\\).</p><p>Alltså måste \\(\\boxed{a+b=2}\\), eller \\(\\boxed{b=2-a}\\).</p>",
     "familj": "geo6_cont_param_family",
     "miniräknare": true,
@@ -19210,7 +19210,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|x-2|=0,5x+3\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "t": "<p>Lös ekvationen grafiskt: \\(|x-2|=0,5x+3\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
     "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(- \\frac{2}{3},\\;10\\).</p>",
     "familj": "geo6_abs_eq_1",
     "miniräknare": true,
@@ -19225,7 +19225,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|2x+1|=4\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "t": "<p>Lös ekvationen grafiskt: \\(|2x+1|=4\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
     "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(- \\frac{5}{2},\\;\\frac{3}{2}\\).</p>",
     "familj": "geo6_abs_eq_2",
     "miniräknare": true,
@@ -19240,7 +19240,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|x+1|=x^2-1\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "t": "<p>Lös ekvationen grafiskt: \\(|x+1|=x^2-1\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
     "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(-1,\\;2\\).</p>",
     "familj": "geo6_abs_eq_3",
     "miniräknare": true,
@@ -19255,7 +19255,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=|x-a|+2\\). Beskriv hur minimipunkten beror på \\(a\\).</p>",
+    "t": "<p>Undersök funktionen \\(f_a(x)=|x-a|+2\\) när parametern \\(a\\) varierar. Beskriv hur minimipunkten beror på \\(a\\).</p>",
     "s": "<p>Grafen är V-formad och flyttas horisontellt när \\(a\\) ändras. Minsta värdet är alltid 2 och minimipunkten är \\(\\boxed{(a,2)}\\).</p>",
     "familj": "geo6_abs_slider",
     "miniräknare": true,
@@ -19270,7 +19270,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och undersök antalet lösningar till \\(|x|=ax+1\\).</p><p>För vilka värden på \\(a\\) får ekvationen två lösningar?</p>",
+    "t": "<p>Undersök antalet lösningar till \\(|x|=ax+1\\) när parametern \\(a\\) varierar.</p><p>För vilka värden på \\(a\\) får ekvationen två lösningar?</p>",
     "s": "<p>Linjen \\(y=ax+1\\) skär båda grenarna av \\(y=|x|\\) när dess lutning ligger mellan grenarnas lutningar \\(-1\\) och \\(1\\).</p><p>Därför fås två lösningar när \\(\\boxed{-1&lt;a&lt;1}\\). Vid \\(a=\\pm1\\) fås en lösning och utanför intervallet en lösning.</p>",
     "familj": "geo6_abs_param_count",
     "miniräknare": true,
@@ -19286,7 +19286,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x\\) och använd tangentverktyget i punkten där \\(x=2\\). Bestäm \\(f^{\\prime}(2)\\) med två olika digitala metoder.</p>",
+    "t": "<p>För \\(f(x)=x^3-3x\\), bestäm \\(f^{\\prime}(2)\\) och ekvationen för tangenten till grafen i punkten där \\(x=2\\).</p>",
     "s": "<p>Tangentens lutning blir 9. Med derivataverktyget fås \\(f^{\\prime}(x)=3x^2-3\\), och \\(f^{\\prime}(2)=9\\). Båda metoderna ger \\(\\boxed{9}\\).</p>",
     "familj": "geo6_deriv_tangent",
     "miniräknare": true,
@@ -19302,7 +19302,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>För \\(f(x)=x^2\\), skapa glidaren \\(h\\) och uttrycket \\(k(h)=\\frac{f(3+h)-f(3)}{h}\\).</p><p>Undersök vad \\(k(h)\\) närmar sig när \\(h\\) närmar sig 0. Förklara kopplingen till derivatan.</p>",
+    "t": "<p>För \\(f(x)=x^2\\) definieras</p><p>\\[k(h)=\\frac{f(3+h)-f(3)}{h}.\\]</p><p>Undersök vad \\(k(h)\\) närmar sig när \\(h\\) närmar sig 0. Förklara kopplingen till derivatan.</p>",
     "s": "<p>GeoGebra visar att \\(k(h)\\) närmar sig 6. Det är derivatans definition i punkten \\(x=3\\).</p><p>Alltså är \\(\\boxed{f^{\\prime}(3)=6}\\).</p>",
     "familj": "geo6_deriv_diffquot",
     "miniräknare": true,
@@ -19318,7 +19318,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett föremåls läge ges av \\(s(t)=t^3-6t^2+9t\\), där \\(t\\) mäts i sekunder.</p><p>Använd GeoGebra för att bestämma när hastigheten är noll under intervallet \\(0\\le t\\le5\\).</p>",
+    "t": "<p>Ett föremåls läge ges av \\(s(t)=t^3-6t^2+9t\\), där \\(t\\) mäts i sekunder.</p><p>Bestäm när hastigheten är noll under intervallet \\(0\\le t\\le5\\).</p>",
     "s": "<p>Hastigheten är derivatan \\(s^{\\prime}(t)=3t^2-12t+9\\). Rita derivatan eller använd nollställeverktyget.</p><p>Man får \\(\\boxed{t=1\\text{ s}}\\) och \\(\\boxed{t=3\\text{ s}}\\).</p>",
     "familj": "geo6_deriv_motion",
     "miniräknare": true,
@@ -19334,7 +19334,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x+1\\) och dess derivata i samma koordinatsystem.</p><p>Bestäm grafiskt de \\(x\\)-värden där tangentens lutning är 5.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-4x+1\\) och dess derivata i samma koordinatsystem.</p><p>Bestäm grafiskt de \\(x\\)-värden där tangentens lutning är 5.</p>",
     "s": "<p>Tangentens lutning är \\(f^{\\prime}(x)\\). Rita därför även linjen \\(y=5\\) och bestäm skärningarna med derivatans graf.</p><p>\\(f^{\\prime}(x)=3x^2-4\\), så \\(3x^2-4=5\\) ger \\(x=\\pm\\sqrt3\\approx\\boxed{\\pm1,73}\\).</p>",
     "familj": "geo6_deriv_slope5",
     "miniräknare": true,
@@ -19350,7 +19350,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(a\\) och funktionen \\(f_a(x)=x^3-3ax\\). Rita även derivatan.</p><p>Undersök hur antalet punkter med horisontell tangent beror på \\(a\\).</p>",
+    "t": "<p>För familjen \\(f_a(x)=x^3-3ax\\), undersök hur antalet punkter med horisontell tangent beror på parametern \\(a\\).</p>",
     "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=3x^2-3a\\).</p><p>Om \\(a&gt;0\\) finns två nollställen \\(x=\\pm\\sqrt a\\). Om \\(a=0\\) finns ett nollställe \\(x=0\\). Om \\(a&lt;0\\) saknas reella nollställen.</p>",
     "familj": "geo6_deriv_param",
     "miniräknare": true,
@@ -19366,7 +19366,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-2x+1\\) och tangenten i punkten där \\(x=1\\). Ange tangentens ekvation.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-2x+1\\) och tangenten i punkten där \\(x=1\\). Ange tangentens ekvation.</p>",
     "s": "<p>GeoGebra ger tangenten \\(\\boxed{y=x-1}\\). Kontroll: \\(f(1)=0\\) och \\(f^{\\prime}(1)=1\\).</p>",
     "familj": "geo6_tan_eq",
     "miniräknare": true,
@@ -19382,7 +19382,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x^2+2\\). Bestäm de punkter där tangenten är parallell med linjen \\(y=3x-5\\).</p>",
+    "t": "<p>Rita \\(f(x)=x^3-3x^2+2\\). Bestäm de punkter där tangenten är parallell med linjen \\(y=3x-5\\).</p>",
     "s": "<p>Parallella linjer har samma lutning, alltså ska \\(f^{\\prime}(x)=3\\).</p><p>\\(f^{\\prime}(x)=3x^2-6x\\), så \\(3x^2-6x=3\\). GeoGebra ger \\(x=1\\pm\\sqrt2\\).</p><p>Punkterna är \\(\\boxed{(1 - \\sqrt{2};\\sqrt{2})}\\) och \\(\\boxed{(1 + \\sqrt{2};- \\sqrt{2})}\\).</p>",
     "familj": "geo6_tan_parallel",
     "miniräknare": true,
@@ -19398,7 +19398,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2+2x-3\\). Bestäm med tangentverktyget tangenterna vid \\(x=-2\\) och \\(x=2\\), och bestäm deras skärningspunkt.</p>",
+    "t": "<p>Rita \\(f(x)=x^2+2x-3\\). Bestäm tangenterna vid \\(x=-2\\) och \\(x=2\\), och bestäm deras skärningspunkt.</p>",
     "s": "<p>Tangenterna blir \\(y=-2x-7\\) och \\(y=6x-7\\). De skär varandra när \\(-2x-7=6x-7\\), alltså vid \\(x=0\\), \\(y=-7\\).</p><p><strong>Svar:</strong> \\(\\boxed{(0,-7)}\\).</p>",
     "familj": "geo6_tan_intersection",
     "miniräknare": true,
@@ -19414,7 +19414,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2\\) och punkten \\(P=(0,-4)\\). Undersök med GeoGebra hur många tangenter till parabeln som går genom \\(P\\). Bestäm tangentpunkterna.</p>",
+    "t": "<p>Rita \\(f(x)=x^2\\) och punkten \\(P=(0,-4)\\). Undersök hur många tangenter till parabeln som går genom \\(P\\). Bestäm tangentpunkterna.</p>",
     "s": "<p>En tangent i \\(x=a\\) har lutningen \\(2a\\) och går genom \\((a,a^2)\\). Dess ekvation är \\(y=2ax-a^2\\).</p><p>För att gå genom \\((0,-4)\\) krävs \\(-a^2=-4\\), alltså \\(a=\\pm2\\).</p><p>Tangentpunkterna är \\(\\boxed{(-2,4)}\\) och \\(\\boxed{(2,4)}\\).</p>",
     "familj": "geo6_tan_external",
     "miniräknare": true,
@@ -19430,7 +19430,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=2^x\\) och tangenten vid \\(x=1\\). Bestäm tangentens lutning och ekvation med tre decimaler.</p>",
+    "t": "<p>Rita \\(f(x)=2^x\\) och tangenten vid \\(x=1\\). Bestäm tangentens lutning och ekvation med tre decimaler.</p>",
     "s": "<p>Derivatan är \\(f^{\\prime}(x)=2^x\\ln2\\). Vid \\(x=1\\) är lutningen \\(2\\ln2\\approx1,386\\), och punkten är \\((1,2)\\).</p><p>Tangenten kan skrivas \\(y-2=1,386(x-1)\\), alltså ungefär \\(\\boxed{y=1,386x+0,614}\\).</p>",
     "familj": "geo6_tan_exp",
     "miniräknare": true,
@@ -19446,7 +19446,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En bakterieodling beskrivs av \\(N(t)=800\\cdot1,18^t\\). När passerar antalet 3000? Bestäm tiden grafiskt och ange med en decimal.</p>",
+    "t": "<p>En bakterieodling beskrivs av \\(N(t)=800\\cdot1,18^t\\). När passerar antalet 3000? Bestäm tiden grafiskt och ange med en decimal.</p>",
     "s": "<p>Rita modellen och den horisontella linjen som motsvarar tröskelvärdet. Skärningen ger \\(t\\approx\\boxed{8\\text{ timmar}}\\).</p>",
     "familj": "geo6_exp_threshold_1",
     "miniräknare": true,
@@ -19462,7 +19462,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En investering beskrivs av \\(V(t)=25000\\cdot1,045^t\\). När passerar värdet 40000 kr? Bestäm tiden grafiskt och ange med en decimal.</p>",
+    "t": "<p>En investering beskrivs av \\(V(t)=25000\\cdot1,045^t\\). När passerar värdet 40000 kr? Bestäm tiden grafiskt och ange med en decimal.</p>",
     "s": "<p>Rita modellen och den horisontella linjen som motsvarar tröskelvärdet. Skärningen ger \\(t\\approx\\boxed{10,7\\text{ år}}\\).</p>",
     "familj": "geo6_exp_threshold_2",
     "miniräknare": true,
@@ -19478,7 +19478,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En population beskrivs av \\(P(t)=1200e^{0,08t}\\). När är tillväxthastigheten 150 individer per år? Använd GeoGebra och ange svaret med en decimal.</p>",
+    "t": "<p>En population beskrivs av \\(P(t)=1200e^{0,08t}\\). När är tillväxthastigheten 150 individer per år? Ange svaret med en decimal.</p>",
     "s": "<p>Derivatan är \\(P^{\\prime}(t)=96e^{0,08t}\\). Rita derivatan och linjen \\(y=150\\).</p><p>Skärningen ger \\(\\boxed{t\\approx5,6\\text{ år}}\\).</p>",
     "familj": "geo6_exp_rate",
     "miniräknare": true,
@@ -19494,7 +19494,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita modellerna \\(f(t)=60\\cdot1,08^t\\) och \\(g(t)=100\\cdot1,03^t\\). Bestäm när \\(f\\) blir större än \\(g\\) för första gången. Ange tiden med en decimal.</p>",
+    "t": "<p>Rita modellerna \\(f(t)=60\\cdot1,08^t\\) och \\(g(t)=100\\cdot1,03^t\\). Bestäm när \\(f\\) blir större än \\(g\\) för första gången. Ange tiden med en decimal.</p>",
     "s": "<p>Bestäm skärningspunkten mellan graferna. Den ligger vid \\(t\\approx10,8\\). Efter denna tid ligger grafen till \\(f\\) över grafen till \\(g\\).</p><p><strong>Svar:</strong> efter ungefär \\(\\boxed{10,8}\\) tidsenheter.</p>",
     "familj": "geo6_exp_compare",
     "miniräknare": true,
@@ -19510,7 +19510,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a&gt;0\\) och rita \\(f_a(x)=a^x\\) samt derivatan.</p><p>Undersök för vilket värde på \\(a\\) graferna till \\(f_a\\) och \\(f_a^{\\prime}\\) sammanfaller.</p>",
+    "t": "<p>För familjen \\(f_a(x)=a^x\\), \\(a&gt;0\\), undersök för vilket värde på \\(a\\) graferna till \\(f_a\\) och \\(f_a^{\\prime}\\) sammanfaller.</p>",
     "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=a^x\\ln a\\). För att den ska vara lika med \\(a^x\\) för alla \\(x\\) krävs \\(\\ln a=1\\).</p><p>Alltså \\(\\boxed{a=e\\approx2,718}\\).</p>",
     "familj": "geo6_exp_e",
     "miniräknare": true,
@@ -19526,7 +19526,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{3} - 3 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "t": "<p>Rita \\(f(x)=x^{3} - 3 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
     "s": "<p>Derivatan är \\(3 \\left(x - 1\\right) \\left(x + 1\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> maximipunkt \\((-1;2)\\); minimipunkt \\((1;-2)\\).</p><p>Funktionen är växande för \\(x&lt;-1\\), \\(x&gt;1\\) och avtagande för \\(-1&lt;x&lt;1\\).</p>",
     "familj": "geo6_graph_analysis_1",
     "miniräknare": true,
@@ -19542,7 +19542,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{4} - 4 x^{2} + 1\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "t": "<p>Rita \\(f(x)=x^{4} - 4 x^{2} + 1\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
     "s": "<p>Derivatan är \\(4 x \\left(x^{2} - 2\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> minimipunkt \\((- \\sqrt{2};-3)\\); maximipunkt \\((0;1)\\); minimipunkt \\((\\sqrt{2};-3)\\).</p><p>Funktionen är växande för \\(- \\sqrt{2}&lt;x&lt;0\\), \\(x&gt;\\sqrt{2}\\) och avtagande för \\(x&lt;- \\sqrt{2}\\), \\(0&lt;x&lt;\\sqrt{2}\\).</p>",
     "familj": "geo6_graph_analysis_2",
     "miniräknare": true,
@@ -19558,7 +19558,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=- x^{3} + 6 x^{2} - 9 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "t": "<p>Rita \\(f(x)=- x^{3} + 6 x^{2} - 9 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
     "s": "<p>Derivatan är \\(- 3 \\left(x - 3\\right) \\left(x - 1\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> minimipunkt \\((1;-4)\\); maximipunkt \\((3;0)\\).</p><p>Funktionen är växande för \\(1&lt;x&lt;3\\) och avtagande för \\(x&lt;1\\), \\(x&gt;3\\).</p>",
     "familj": "geo6_graph_analysis_3",
     "miniräknare": true,
@@ -19574,7 +19574,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{5} - 5 x^{3}\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "t": "<p>Rita \\(f(x)=x^{5} - 5 x^{3}\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
     "s": "<p>Derivatan är \\(5x^2(x^2-3)\\). Nollställena är \\(x=-\\sqrt3\\), \\(x=0\\) och \\(x=\\sqrt3\\).</p><p><strong>Extrempunkter:</strong> maximipunkt \\((-\\sqrt3;6\\sqrt3)\\) och minimipunkt \\((\\sqrt3;-6\\sqrt3)\\).</p><p>Funktionen är växande för \\(x&lt;-\\sqrt3\\) och \\(x&gt;\\sqrt3\\), samt avtagande för \\(-\\sqrt3&lt;x&lt;\\sqrt3\\).</p><p>Vid \\(x=0\\) är derivatan noll, men den byter inte tecken. Där finns därför ingen extrempunkt.</p>",
     "familj": "geo6_graph_analysis_4",
     "miniräknare": true,
@@ -19590,7 +19590,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3ax\\) tillsammans med derivatan.</p><p>Beskriv hur antalet extrempunkter förändras när \\(a\\) passerar 0.</p>",
+    "t": "<p>För familjen \\(f_a(x)=x^3-3ax\\), undersök hur antalet extrempunkter förändras när \\(a\\) passerar 0.</p>",
     "s": "<p>Derivatan är \\(3x^2-3a\\). För \\(a&gt;0\\) finns två nollställen och därmed två extrempunkter. För \\(a=0\\) är derivatan noll endast vid \\(x=0\\), men den byter inte tecken där, så ingen extrempunkt uppstår. För \\(a&lt;0\\) saknas nollställen och funktionen är växande överallt.</p>",
     "familj": "geo6_graph_param_extrema",
     "miniräknare": true,
@@ -19606,7 +19606,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En biograf tar 120 kr per biljett och säljer då 300 biljetter. För varje höjning med 5 kr minskar försäljningen med 8 biljetter. Låt \\(x\\) vara antalet femkronorshöjningar. Ställ upp intäktsfunktionen och använd GeoGebra för att bestämma största möjliga intäkt enligt modellen.</p>",
+    "t": "<p>En biograf tar 120 kr per biljett och säljer då 300 biljetter. För varje höjning med 5 kr minskar försäljningen med 8 biljetter. Låt \\(x\\) vara antalet femkronorshöjningar. Ställ upp intäktsfunktionen och Bestäm största möjliga intäkt enligt modellen.</p>",
     "s": "<p>Om priset höjs med \\(5x\\) kr blir priset \\(120+5x\\), medan antalet sålda biljetter blir \\(300-8x\\).</p><p>Intäkten är därför \\[I(x)=(120+5x)(300-8x)=-40x^2+540x+36000.\\]</p><p>Rita funktionen för \\(0\\le x\\le37,5\\). GeoGebra ger maximum vid \\(x=6,75\\), med intäkten \\(\\boxed{37\\,822,5\\text{ kr}}\\).</p>",
     "familj": "geo6_ext_app_1",
     "miniräknare": true,
@@ -19622,7 +19622,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En rektangulär hage byggs mot en lång vägg. Det finns 120 m stängsel till de tre övriga sidorna. Låt \\(x\\) vara längden på de två lika sidorna. Ställ upp areafunktionen och bestäm största möjliga area med GeoGebra.</p>",
+    "t": "<p>En rektangulär hage byggs mot en lång vägg. Det finns 120 m stängsel till de tre övriga sidorna. Låt \\(x\\) vara längden på de två lika sidorna. Ställ upp areafunktionen och bestäm största möjliga area.</p>",
     "s": "<p>Om de två lika sidorna är \\(x\\) meter blir den tredje sidan \\(120-2x\\) meter.</p><p>Arean är \\[A(x)=x(120-2x)=-2x^2+120x.\\]</p><p>GeoGebra ger maximum vid \\(x=30\\). Den tredje sidan blir 60 m och den största arean är \\(\\boxed{1800\\text{ m}^2}\\).</p>",
     "familj": "geo6_ext_app_2",
     "miniräknare": true,
@@ -19638,7 +19638,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En öppen låda görs av en kartong 32 cm × 20 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen. Ställ upp volymfunktionen och bestäm maximal volym med GeoGebra.</p>",
+    "t": "<p>En öppen låda görs av en kartong 32 cm × 20 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen. Ställ upp volymfunktionen och bestäm maximal volym.</p>",
     "s": "<p>Efter att kvadraterna klippts bort blir lådans mått \\(x\\), \\(32-2x\\) och \\(20-2x\\).</p><p>Volymen är \\[V(x)=x(32-2x)(20-2x)=4x^3-104x^2+640x.\\]</p><p>Rita funktionen för \\(0\\le x\\le10\\). GeoGebra ger maximum vid \\(x=4\\) cm och volymen \\(\\boxed{1152\\text{ cm}^3}\\).</p>",
     "familj": "geo6_ext_app_3",
     "miniräknare": true,
@@ -19654,7 +19654,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Kostnaden per dag för att köra en maskin med hastigheten \\(x\\) enheter per timme modelleras av \\(K(x)=0,04x^3-2,4x^2+60x+500\\) för \\(10\\le x\\le40\\). Bestäm minsta kostnad i intervallet med GeoGebra.</p>",
+    "t": "<p>Kostnaden per dag för att köra en maskin med hastigheten \\(x\\) enheter per timme modelleras av \\(K(x)=0,04x^3-2,4x^2+60x+500\\) för \\(10\\le x\\le40\\). Bestäm minsta kostnad i intervallet.</p>",
     "s": "<p>Rita \\(K(x)=0,04x^3-2,4x^2+60x+500\\) för \\(10\\le x\\le40\\).</p><p>Grafen är växande i intervallet, så minsta värdet ligger vid vänstra ändpunkten \\(x=10\\).</p><p>\\[K(10)=900.\\]</p><p><strong>Svar:</strong> den minsta kostnaden enligt modellen är \\(\\boxed{900}\\) kostnadsenheter.</p>",
     "familj": "geo6_ext_app_4",
     "miniräknare": true,
@@ -19670,7 +19670,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En rektangel har ena hörnet i origo och det motsatta hörnet på parabeln \\(y=12-x^2\\) i första kvadranten. Ställ upp rektangelns area som funktion av \\(x\\) och bestäm största area med GeoGebra.</p>",
+    "t": "<p>En rektangel har ena hörnet i origo och det motsatta hörnet på parabeln \\(y=12-x^2\\) i första kvadranten. Ställ upp rektangelns area som funktion av \\(x\\) och bestäm största area.</p>",
     "s": "<p>Rektangelns höjd är \\(12-x^2\\), så arean är</p><p>\\[A(x)=x(12-x^2)=12x-x^3.\\]</p><p>På intervallet \\(0\\le x\\le\\sqrt{12}\\) ger GeoGebra maximum vid \\(x=2\\).</p><p>Den största arean är \\(A(2)=16\\), alltså \\(\\boxed{16}\\) areaenheter.</p>",
     "familj": "geo6_ext_app_5",
     "miniräknare": true,
@@ -19686,7 +19686,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=|x|\\) och zooma kraftigt kring origo. Rita tangenter på punkter strax till vänster och strax till höger om \\(x=0\\).</p><p>Förklara varför funktionen inte är deriverbar i \\(x=0\\).</p>",
+    "t": "<p>Rita \\(f(x)=|x|\\) och zooma kraftigt kring origo. Rita tangenter på punkter strax till vänster och strax till höger om \\(x=0\\).</p><p>Förklara varför funktionen inte är deriverbar i \\(x=0\\).</p>",
     "s": "<p>Tangenternas lutningar närmar sig \\(-1\\) från vänster och \\(1\\) från höger. Eftersom lutningarna inte närmar sig samma värde finns ingen derivata i \\(x=0\\).</p>",
     "familj": "geo6_diff_abs",
     "miniräknare": true,
@@ -19702,7 +19702,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x|x|\\) och undersök grafen kring \\(x=0\\). Använd tangentverktyget på båda sidor.</p><p>Är funktionen deriverbar i origo? Motivera.</p>",
+    "t": "<p>Undersök grafen till \\(f(x)=x|x|\\) kring \\(x=0\\), särskilt tangenternas lutning från vänster och från höger.</p><p>Är funktionen deriverbar i origo? Motivera.</p>",
     "s": "<p>För \\(x&gt;0\\) är \\(f(x)=x^2\\) och för \\(x&lt;0\\) är \\(f(x)=-x^2\\). Derivatan från båda håll närmar sig 0 vid origo. Funktionen är därför deriverbar i \\(x=0\\), med \\(f^{\\prime}(0)=0\\).</p>",
     "familj": "geo6_diff_xabs",
     "miniräknare": true,
@@ -19718,7 +19718,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(a\\) och rita</p><p>\\[f(x)=\\begin{cases}x^2,&x\\le1,\\ ax+1-a,&x&gt;1.\\end{cases}\\]</p><p>Bestäm det värde på \\(a\\) som gör funktionen deriverbar vid \\(x=1\\).</p>",
+    "t": "<p>Funktionen</p><p>\\[f(x)=\\begin{cases}x^2,&x\\le1,\\\\ ax+1-a,&x&gt;1\\end{cases}\\]</p><p>innehåller parametern \\(a\\). Bestäm det värde på \\(a\\) som gör funktionen deriverbar vid \\(x=1\\).</p>",
     "s": "<p>Funktionen är kontinuerlig vid \\(x=1\\) för alla \\(a\\), eftersom båda grenarna ger värdet 1.</p><p>Derivatan från vänster är \\(2x\\), alltså 2 vid \\(x=1\\). Derivatan från höger är \\(a\\). Deriverbarhet kräver \\(a=2\\).</p><p><strong>Svar:</strong> \\(\\boxed{a=2}\\).</p>",
     "familj": "geo6_diff_piece_param",
     "miniräknare": true,
@@ -19734,7 +19734,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita funktionen \\(f(x)=\\sqrt{x^2}\\) och jämför grafen med \\(g(x)=x\\).</p><p>Undersök med tangentverktyget om \\(f\\) är deriverbar i origo.</p>",
+    "t": "<p>Rita funktionen \\(f(x)=\\sqrt{x^2}\\) och jämför grafen med \\(g(x)=x\\).</p><p>Undersök om \\(f\\) är deriverbar i origo.</p>",
     "s": "<p>Eftersom \\(\\sqrt{x^2}=|x|\\) får grafen ett hörn i origo. Lutningen från vänster är \\(-1\\) och från höger \\(1\\). Funktionen är därför inte deriverbar i origo.</p>",
     "familj": "geo6_diff_sqrtx2",
     "miniräknare": true,
@@ -19750,7 +19750,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\ ax+b,&x&gt;2.\\end{cases}\\]</p><p>Bestäm sambandet mellan \\(a\\) och \\(b\\) som krävs för att funktionen ska vara både kontinuerlig och deriverbar vid \\(x=2\\).</p>",
+    "t": "<p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\ ax+b,&x&gt;2.\\end{cases}\\]</p><p>Bestäm sambandet mellan \\(a\\) och \\(b\\) som krävs för att funktionen ska vara både kontinuerlig och deriverbar vid \\(x=2\\).</p>",
     "s": "<p>Kontinuitet kräver \\(2a+b=5\\). Deriverbarhet kräver att lutningarna är lika. Vänstergrenens derivata är \\(2x\\), alltså 4 vid \\(x=2\\), så \\(a=4\\).</p><p>Då ger kontinuiteten \\(8+b=5\\), alltså \\(b=-3\\).</p><p><strong>Svar:</strong> \\(\\boxed{a=4,\\;b=-3}\\).</p>",
     "familj": "geo6_diff_ab",
     "miniräknare": true,
@@ -19766,7 +19766,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(F_1(x)=x^3-3x\\) och \\(F_2(x)=x^3-3x+4\\). Rita också deras derivator.</p><p>Vad upptäcker du? Förklara varför.</p>",
+    "t": "<p>Rita \\(F_1(x)=x^3-3x\\) och \\(F_2(x)=x^3-3x+4\\). Rita också deras derivator.</p><p>Vad upptäcker du? Förklara varför.</p>",
     "s": "<p>Derivatorna sammanfaller: \\(F_1^{\\prime}(x)=F_2^{\\prime}(x)=3x^2-3\\). Konstanten 4 försvinner vid derivering. Därför är båda funktionerna primitiva funktioner till samma funktion.</p>",
     "familj": "geo6_prim_shift",
     "miniräknare": true,
@@ -19782,7 +19782,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(C\\) och rita funktionerna \\(F_C(x)=x^2-4x+C\\).</p><p>Bestäm vilket värde på \\(C\\) som gör att grafen går genom punkten \\((3,5)\\). Kontrollera grafiskt.</p>",
+    "t": "<p>Undersök familjen \\(F_C(x)=x^2-4x+C\\). Bestäm det värde på \\(C\\) som gör att grafen går genom punkten \\((3,5)\\).</p>",
     "s": "<p>Villkoret ger \\(F_C(3)=9-12+C=5\\), alltså \\(C=8\\). GeoGebra visar då att grafen passerar \\((3,5)\\).</p>",
     "familj": "geo6_prim_Cpoint",
     "miniräknare": true,
@@ -19798,7 +19798,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=3x^2-6x\\). Använd GeoGebra för att skapa en primitiv funktion \\(F\\) och flytta den vertikalt så att \\(F(0)=2\\).</p><p>Bestäm den färdiga funktionen.</p>",
+    "t": "<p>Bestäm den primitiva funktion \\(F\\) till \\(f(x)=3x^2-6x\\) som uppfyller \\(F(0)=2\\).</p>",
     "s": "<p>En primitiv funktion är \\(x^3-3x^2+C\\). Villkoret \\(F(0)=2\\) ger \\(C=2\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=x^3-3x^2+2}\\).</p>",
     "familj": "geo6_prim_construct",
     "miniräknare": true,
@@ -19814,7 +19814,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(F(x)=\\frac{x^3}{3}-2x^2+3x\\) och dess derivata.</p><p>Använd graferna för att bestämma var \\(F\\) är växande respektive avtagande.</p>",
+    "t": "<p>Rita \\(F(x)=\\frac{x^3}{3}-2x^2+3x\\) och dess derivata.</p><p>Använd graferna för att bestämma var \\(F\\) är växande respektive avtagande.</p>",
     "s": "<p>Derivatan är \\(F^{\\prime}(x)=x^2-4x+3=(x-1)(x-3)\\).</p><p>Den är positiv för \\(x&lt;1\\) och \\(x&gt;3\\), negativ för \\(1&lt;x&lt;3\\). Alltså är \\(F\\) växande på de yttre intervallen och avtagande mellan 1 och 3.</p>",
     "familj": "geo6_prim_graph_deriv",
     "miniräknare": true,
@@ -19830,7 +19830,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(C\\) och rita \\(F_C(x)=\\frac{x^3}{3}-x+C\\). Undersök för vilka värden på \\(C\\) grafen har tre nollställen.</p>",
+    "t": "<p>Undersök familjen \\(F_C(x)=\\frac{x^3}{3}-x+C\\). För vilka värden på \\(C\\) har grafen tre nollställen?</p>",
     "s": "<p>Extrempunkterna ligger där \\(F_C^{\\prime}(x)=x^2-1=0\\), alltså vid \\(x=\\pm1\\).</p><p>Funktionsvärdena är \\(F_C(-1)=C+\\frac23\\) och \\(F_C(1)=C-\\frac23\\).</p><p>Tre nollställen kräver att maximipunkten ligger över \\(x\\)-axeln och minimipunkten under: \\(C+\\frac23&gt;0\\) och \\(C-\\frac23&lt;0\\).</p><p>Alltså \\(\\boxed{-\\frac23&lt;C&lt;\\frac23}\\).</p>",
     "familj": "geo6_prim_param_roots",
     "miniräknare": true,
@@ -19846,7 +19846,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm med GeoGebra \\[\\int_0^2 \\sqrt{1+x^3}\\,dx\\] med tre decimaler.</p>",
+    "t": "<p>Bestäm \\[\\int_0^2 \\sqrt{1+x^3}\\,dx\\] med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\boxed{3,241}\\) med tre decimaler.</p><p>Den primitiva funktionen kan inte bestämmas med de vanliga formlerna på kursens formelblad, så en digital bestämning av den bestämda integralen är lämplig här.</p>",
     "familj": "geo6_int_numeric_root",
     "miniräknare": true,
@@ -19862,7 +19862,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x\\). Bestäm integralens värde \\(\\int_{-2}^{2}f(x)\\,dx\\) digitalt och förklara varför resultatet blir som det blir trots att grafen inte sammanfaller med \\(x\\)-axeln.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-4x\\). Bestäm integralens värde \\(\\int_{-2}^{2}f(x)\\,dx\\) digitalt och förklara varför resultatet blir som det blir trots att grafen inte sammanfaller med \\(x\\)-axeln.</p>",
     "s": "<p>GeoGebra ger integralvärdet 0.</p><p>Grafen är symmetrisk kring origo på så sätt att \\(f(-x)=-f(x)\\). Bidraget under \\(x\\)-axeln på ena sidan tar därför ut det lika stora bidraget över \\(x\\)-axeln på den andra sidan.</p>",
     "familj": "geo6_int_cancel",
     "miniräknare": true,
@@ -19878,7 +19878,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x+2\\) och \\(g(x)=x^2\\). Bestäm arean mellan graferna med GeoGebra.</p>",
+    "t": "<p>Rita \\(f(x)=x+2\\) och \\(g(x)=x^2\\). Bestäm arean mellan graferna.</p>",
     "s": "<p>Graferna skär varandra vid \\(x=-1\\) och \\(x=2\\). På intervallet ligger linjen över parabeln.</p><p>Arean blir \\(\\int_{-1}^{2}(x+2-x^2)\\,dx=\\boxed{4,5}\\).</p>",
     "familj": "geo6_int_between",
     "miniräknare": true,
@@ -19894,7 +19894,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a&gt;0\\). Bestäm det värde på \\(a\\) som gör att \\[\\int_0^a (x^2+1)\\,dx=10.\\] Använd GeoGebra för att hitta värdet med tre decimaler.</p>",
+    "t": "<p>Bestäm det positiva talet \\(a\\) som gör att</p><p>\\[\\int_0^a (x^2+1)\\,dx=10.\\]</p><p>Ange värdet med tre decimaler.</p>",
     "s": "<p>Skapa funktionen \\(A(a)=\\int_0^a(x^2+1)\\,dx\\) och skär den med linjen \\(y=10\\).</p><p>Ekvationen är \\(a^3/3+a=10\\), vilket ger \\(\\boxed{a\\approx2,786}\\).</p>",
     "familj": "geo6_int_upperlimit",
     "miniräknare": true,
@@ -19910,7 +19910,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=4-x^2\\). Bestäm med GeoGebra arean mellan grafen och \\(x\\)-axeln.</p>",
+    "t": "<p>Rita \\(f(x)=4-x^2\\). Bestäm arean mellan grafen och \\(x\\)-axeln.</p>",
     "s": "<p>Nollställena är \\(x=-2\\) och \\(x=2\\). Arean blir \\(\\int_{-2}^{2}(4-x^2)\\,dx=\\boxed{\\frac{32}{3}\\approx10,67}\\).</p>",
     "familj": "geo6_int_parabola_area",
     "miniräknare": true,
@@ -19926,7 +19926,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Vattenflödet in i en tank beskrivs av \\(q(t)=4+1,5\\cdot1,2^t\\) liter/minut för \\(0\\le t\\le6\\). Bestäm hur mycket vatten som tillförs under perioden.</p>",
+    "t": "<p>Vattenflödet in i en tank beskrivs av \\(q(t)=4+1,5\\cdot1,2^t\\) liter/minut för \\(0\\le t\\le6\\). Bestäm hur mycket vatten som tillförs under perioden.</p>",
     "s": "<p>Den tillförda volymen ges av arean under flödesgrafen:</p><p>\\[V=\\int_0^6(4+1,5\\cdot1,2^t)\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{40,34\\text{ liter}}\\).</p>",
     "familj": "geo6_intapp_1",
     "miniräknare": true,
@@ -19942,7 +19942,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En bils hastighet beskrivs av \\(v(t)=8+2,4t-0,18t^2\\) m/s för \\(0\\le t\\le10\\). Bestäm sträckan under de första 10 sekunderna.</p>",
+    "t": "<p>En bils hastighet beskrivs av \\(v(t)=8+2,4t-0,18t^2\\) m/s för \\(0\\le t\\le10\\). Bestäm sträckan under de första 10 sekunderna.</p>",
     "s": "<p>Sträckan är arean under hastighetsgrafen:</p><p>\\[s=\\int_0^{10}(8+2,4t-0,18t^2)\\,dt.\\]</p><p>GeoGebra ger \\(\\boxed{140,0\\text{ m}}\\).</p>",
     "familj": "geo6_intapp_2",
     "miniräknare": true,
@@ -19958,7 +19958,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En population ökar med hastigheten \\(P^{\\prime}(t)=80e^{0,15t}\\) individer/år. Bestäm ökningen under de första 5 åren med GeoGebra.</p>",
+    "t": "<p>En population ökar med hastigheten \\(P^{\\prime}(t)=80e^{0,15t}\\) individer/år. Bestäm ökningen under de första 5 åren.</p>",
     "s": "<p>Den sammanlagda förändringen ges av integralen över tidsintervallet. GeoGebra ger ungefär \\(\\boxed{595,73\\text{ individer}}\\).</p>",
     "familj": "geo6_intapp_3",
     "miniräknare": true,
@@ -19974,7 +19974,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En partikel har hastigheten \\(v(t)=t^3-6t^2+8t\\) m/s för \\(0\\le t\\le5\\). Bestäm med GeoGebra partikelns totala sträcka under intervallet.</p>",
+    "t": "<p>En partikel har hastigheten \\(v(t)=t^3-6t^2+8t\\) m/s för \\(0\\le t\\le5\\). Bestäm partikelns totala sträcka under intervallet.</p>",
     "s": "<p>För total sträcka måste intervallen där hastigheten är negativ hanteras separat. Nollställena är \\(t=0,2,4\\).</p><p>Integralerna på delintervallen \\([0,2]\\), \\([2,4]\\) och \\([4,5]\\) är 4, -4 respektive 6,25.</p><p>Total sträcka blir därför \\(4+4+6,25=\\boxed{14,25\\text{ m}}\\).</p>",
     "familj": "geo6_intapp_totaldistance",
     "miniräknare": true,
@@ -19990,7 +19990,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Två pumpar arbetar samtidigt. Pump A fyller med \\(q_A(t)=6+0,8t\\) liter/minut och pump B tömmer med \\(q_B(t)=2e^{0,12t}\\) liter/minut. Bestäm nettomängden vatten som tillförs under de första 8 minuterna.</p>",
+    "t": "<p>Två pumpar arbetar samtidigt. Pump A fyller med \\(q_A(t)=6+0,8t\\) liter/minut och pump B tömmer med \\(q_B(t)=2e^{0,12t}\\) liter/minut. Bestäm nettomängden vatten som tillförs under de första 8 minuterna.</p>",
     "s": "<p>Nettotakten är \\(q_A(t)-q_B(t)\\). Nettomängden blir</p><p>\\[\\int_0^8(6+0,8t-2e^{0,12t})\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{46,74\\text{ liter}}\\).</p>",
     "familj": "geo6_intapp_netflow",
     "miniräknare": true,
@@ -20005,7 +20005,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Använd enhetscirkeln i GeoGebra eller graferna till sinus och cosinus för att lösa \\(\\sin v=0,62\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
+    "t": "<p>Använd enhetscirkeln eller graferna till sinus och cosinus för att lösa \\(\\sin v=0,62\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
     "s": "<p>GeoGebra ger lösningarna \\(\\boxed{v\\approx 38,3^\\circ}\\) och \\(\\boxed{v\\approx 141,7^\\circ}\\).</p>",
     "familj": "geo6_unit_eq_1",
     "miniräknare": true,
@@ -20020,7 +20020,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Använd enhetscirkeln i GeoGebra eller graferna till sinus och cosinus för att lösa \\(\\cos v=-0,35\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
+    "t": "<p>Använd enhetscirkeln eller graferna till sinus och cosinus för att lösa \\(\\cos v=-0,35\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
     "s": "<p>GeoGebra ger lösningarna \\(\\boxed{v\\approx 110,5^\\circ}\\) och \\(\\boxed{v\\approx 249,5^\\circ}\\).</p>",
     "familj": "geo6_unit_eq_2",
     "miniräknare": true,
@@ -20035,7 +20035,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Skapa en punkt på enhetscirkeln som motsvarar vinkeln \\(37^\\circ\\). Läs av punktens koordinater med tre decimaler och ange därmed \\(\\cos37^\\circ\\) och \\(\\sin37^\\circ\\).</p>",
+    "t": "<p>På enhetscirkeln motsvarar en punkt vinkeln \\(37^\\circ\\). Bestäm punktens koordinater med tre decimaler och ange därmed \\(\\cos37^\\circ\\) och \\(\\sin37^\\circ\\).</p>",
     "s": "<p>Punktens koordinater är ungefär \\((0,799;0,602)\\).</p><p>Alltså \\(\\cos37^\\circ\\approx0,799\\) och \\(\\sin37^\\circ\\approx0,602\\).</p>",
     "familj": "geo6_unit_point",
     "miniräknare": true,
@@ -20050,7 +20050,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Rita \\(y=\\sin v\\) och \\(y=\\cos v\\) för \\(0^\\circ\\le v\\le360^\\circ\\). Bestäm de vinklar där funktionerna har samma värde.</p>",
+    "t": "<p>Undersök graferna till \\(y=\\sin v\\) och \\(y=\\cos v\\) för \\(0^\\circ\\le v\\le360^\\circ\\). Bestäm de vinklar där funktionerna har samma värde.</p>",
     "s": "<p>Skärningspunkterna ger \\(\\boxed{v=45^\\circ}\\) och \\(\\boxed{v=225^\\circ}\\).</p>",
     "familj": "geo6_unit_sincos",
     "miniräknare": true,
@@ -20065,7 +20065,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Skapa en glidare \\(a\\) mellan \\(-1\\) och 1 och undersök ekvationen \\(\\sin v=a\\) för \\(0^\\circ\\le v\\le360^\\circ\\).</p><p>Beskriv hur antalet lösningar beror på \\(a\\).</p>",
+    "t": "<p>Undersök ekvationen \\(\\sin v=a\\) för \\(0^\\circ\\le v\\le360^\\circ\\) när parametern \\(a\\) varierar mellan \\(-1\\) och \\(1\\).</p><p>Beskriv hur antalet lösningar beror på \\(a\\).</p>",
     "s": "<p>För \\(-1&lt;a&lt;1\\), \\(a\\ne0\\), fås två lösningar. För \\(a=1\\) och \\(a=-1\\) fås en lösning. För \\(a=0\\) fås tre lösningar om båda ändpunkterna 0° och 360° räknas med: 0°, 180° och 360°.</p>",
     "familj": "geo6_unit_param",
     "miniräknare": true,
@@ -20080,7 +20080,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel där \\(A=35^\\circ\\), \\(a=7,0\\) cm och \\(b=9,0\\) cm. Undersök hur många olika trianglar som är möjliga och bestäm de återstående vinklarna.</p>",
+    "t": "<p>Konstruera en triangel där \\(A=35^\\circ\\), \\(a=7,0\\) cm och \\(b=9,0\\) cm. Undersök hur många olika trianglar som är möjliga och bestäm de återstående vinklarna.</p>",
     "s": "<p>Sinussatsen ger \\(\\sin B=\\frac{b\\sin A}{a}\\). GeoGebra visar att två olika lägen för det tredje hörnet är möjliga.</p><p>Man får ungefär \\(B=47,5^\\circ\\) eller \\(132,5^\\circ\\). Då blir \\(C\\approx97,5^\\circ\\) respektive \\(12,5^\\circ\\).</p>",
     "familj": "geo6_tri_ambiguous1",
     "miniräknare": true,
@@ -20095,7 +20095,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel med sidorna 5,2 cm, 7,1 cm och 9,0 cm. Mät vinklarna i GeoGebra och kontrollera en av dem med cosinussatsen.</p>",
+    "t": "<p>Konstruera en triangel med sidorna 5,2 cm, 7,1 cm och 9,0 cm. Mät vinklarna och kontrollera en av dem med cosinussatsen.</p>",
     "s": "<p>GeoGebra ger vinklarna ungefär \\(35,2^\\circ\\), \\(52,0^\\circ\\) och \\(92,8^\\circ\\).</p><p>En vinkel kan kontrolleras med cosinussatsen genom att sätta den motstående sidan i vänsterledet.</p>",
     "familj": "geo6_tri_sss",
     "miniräknare": true,
@@ -20110,7 +20110,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel där två sidor är 6,0 cm och 8,0 cm och den mellanliggande vinkeln är \\(73^\\circ\\). Mät den tredje sidan och kontrollera med cosinussatsen.</p>",
+    "t": "<p>Konstruera en triangel där två sidor är 6,0 cm och 8,0 cm och den mellanliggande vinkeln är \\(73^\\circ\\). Mät den tredje sidan och kontrollera med cosinussatsen.</p>",
     "s": "<p>GeoGebra ger den tredje sidan till ungefär \\(\\boxed{8,48\\text{ cm}}\\). Cosinussatsen ger samma resultat.</p>",
     "familj": "geo6_tri_sas",
     "miniräknare": true,
@@ -20125,7 +20125,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel med \\(A=42^\\circ\\), \\(B=68^\\circ\\) och sidan \\(a=7,5\\) cm. Bestäm sidorna \\(b\\) och \\(c\\) med GeoGebra och kontrollera med sinussatsen.</p>",
+    "t": "<p>Konstruera en triangel med \\(A=42^\\circ\\), \\(B=68^\\circ\\) och sidan \\(a=7,5\\) cm. Bestäm sidorna \\(b\\) och \\(c\\) och kontrollera med sinussatsen.</p>",
     "s": "<p>Först är \\(C=70^\\circ\\). Sinussatsen ger ungefär \\(\\boxed{b=10,39\\text{ cm}}\\) och \\(\\boxed{c=10,53\\text{ cm}}\\), vilket stämmer med mätningen i GeoGebra.</p>",
     "familj": "geo6_tri_asa",
     "miniräknare": true,
@@ -20140,7 +20140,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera två fasta sträckor med längderna 5 cm och 8 cm som möts i en vinkel \\(v\\). Skapa en glidare för \\(v\\) från \\(10^\\circ\\) till \\(170^\\circ\\) och låt GeoGebra mäta triangelns area.</p><p>Vid vilken vinkel blir arean störst? Förklara med areasatsen.</p>",
+    "t": "<p>I en triangel är två sidor 5 cm och 8 cm och den mellanliggande vinkeln \\(v\\) varierar mellan \\(10^\\circ\\) och \\(170^\\circ\\).</p><p>Undersök hur triangelns area beror på \\(v\\). Vid vilken vinkel blir arean störst? Förklara med areasatsen.</p>",
     "s": "<p>Arean följer \\(T=\\frac{5\\cdot8\\sin v}{2}=20\\sin v\\). Den blir störst när \\(\\sin v=1\\), alltså vid \\(\\boxed{v=90^\\circ}\\). Då är största arean \\(20\\text{ cm}^2\\).</p>",
     "familj": "geo6_tri_area_slider",
     "miniräknare": true,
@@ -20155,7 +20155,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Två observationspunkter \\(A\\) och \\(B\\) ligger 120 m från varandra på en rak linje. Ett torn \\(T\\) ligger på samma sida om linjen. Vinklarna \\(\\angle BAT=48^\\circ\\) och \\(\\angle ABT=67^\\circ\\).</p><p>Konstruera situationen i GeoGebra och bestäm avståndet \\(AT\\).</p>",
+    "t": "<p>Två observationspunkter \\(A\\) och \\(B\\) ligger 120 m från varandra på en rak linje. Ett torn \\(T\\) ligger på samma sida om linjen. Vinklarna \\(\\angle BAT=48^\\circ\\) och \\(\\angle ABT=67^\\circ\\).</p><p>Konstruera situationen och bestäm avståndet \\(AT\\).</p>",
     "s": "<p>Triangelns tredje vinkel är \\(65^\\circ\\). Med sinussatsen fås \\(AT/\\sin67^\\circ=120/\\sin65^\\circ\\).</p><p>Alltså \\(\\boxed{AT\\approx121,9\\text{ m}}\\).</p>",
     "familj": "geo6_trig_survey",
     "miniräknare": true,
@@ -20170,7 +20170,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett fartyg seglar först 18 km österut och därefter 25 km i riktningen \\(40^\\circ\\) norr om öst. Konstruera färdvägen i GeoGebra och bestäm avståndet från startpunkten till slutpunkten.</p>",
+    "t": "<p>Ett fartyg seglar först 18 km österut och därefter 25 km i riktningen \\(40^\\circ\\) norr om öst. Konstruera färdvägen och bestäm avståndet från startpunkten till slutpunkten.</p>",
     "s": "<p>Den inre vinkeln mellan den första sträckan bakåt och den andra är \\(140^\\circ\\). Med cosinussatsen fås avståndet ungefär \\(\\boxed{40,5\\text{ km}}\\).</p>",
     "familj": "geo6_trig_navigation",
     "miniräknare": true,
@@ -20185,7 +20185,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En mast står lodrätt. Från en punkt 35 m från mastens fot mäts höjdvinkeln till toppen till \\(58^\\circ\\). Konstruera situationen i GeoGebra och bestäm mastens höjd.</p>",
+    "t": "<p>En mast står lodrätt. Från en punkt 35 m från mastens fot mäts höjdvinkeln till toppen till \\(58^\\circ\\). Konstruera situationen och bestäm mastens höjd.</p>",
     "s": "<p>I den rätvinkliga triangeln gäller \\(\\tan58^\\circ=h/35\\). Därför \\(h=35\\tan58^\\circ\\approx\\boxed{56,0\\text{ m}}\\).</p>",
     "familj": "geo6_trig_height",
     "miniräknare": true,
@@ -20200,7 +20200,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera valfri triangel \\(ABC\\) i GeoGebra. Mät sidor och vinklar och beräkna kvoterna \\(a/\\sin A\\), \\(b/\\sin B\\) och \\(c/\\sin C\\). Flytta ett hörn och upprepa.</p><p>Formulera den regel som undersökningen stödjer.</p>",
+    "t": "<p>Konstruera valfri triangel \\(ABC\\). Mät sidor och vinklar och beräkna kvoterna \\(a/\\sin A\\), \\(b/\\sin B\\) och \\(c/\\sin C\\). Flytta ett hörn och upprepa.</p><p>Formulera den regel som undersökningen stödjer.</p>",
     "s": "<p>Kvoterna blir lika inom avrundningsnoggrannheten när triangeln förändras. Undersökningen stödjer sinussatsen:</p><p>\\[\\boxed{\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}}.\\]</p><p>En digital undersökning är inte i sig ett algebraiskt bevis, men den ger stöd för regeln.</p>",
     "familj": "geo6_trig_investigate_sine",
     "miniräknare": true,
@@ -20215,7 +20215,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera två sidor med fasta längder \\(a=6\\) och \\(b=9\\) och en glidare för den mellanliggande vinkeln \\(C\\). Låt GeoGebra mäta den tredje sidan \\(c\\).</p><p>Undersök hur \\(c\\) förändras när \\(C\\) ökar från \\(20^\\circ\\) till \\(160^\\circ\\). Förklara sambandet med cosinussatsen.</p>",
+    "t": "<p>I en triangel är \\(a=6\\), \\(b=9\\) och den mellanliggande vinkeln \\(C\\) varierar mellan \\(20^\\circ\\) och \\(160^\\circ\\).</p><p>Undersök hur den tredje sidan \\(c\\) förändras när \\(C\\) ökar. Förklara sambandet med cosinussatsen.</p>",
     "s": "<p>Cosinussatsen är \\(c^2=a^2+b^2-2ab\\cos C\\). När \\(C\\) ökar från 20° till 160° minskar \\(\\cos C\\), vilket gör att \\(c^2\\) och därmed \\(c\\) ökar. GeoGebra visar samma utveckling.</p>",
     "familj": "geo6_trig_cos_slider",
     "miniräknare": true,
@@ -20230,7 +20230,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett skolkök gör två rätter, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le60\\), \\(x+3y\\le72\\), \\(x,y\\ge0\\). Vinsten är \\(V=25x+30y\\). Rita det tillåtna området i GeoGebra och bestäm största möjliga vinst.</p>",
+    "t": "<p>Ett skolkök gör två rätter, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le60\\), \\(x+3y\\le72\\), \\(x,y\\ge0\\). Vinsten är \\(V=25x+30y\\). Rita det tillåtna området och bestäm största möjliga vinst.</p>",
     "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Hörnpunkterna är \\((0;0)\\), \\((0;24)\\), \\((21,6;16,8)\\) och \\((30;0)\\).</p><p>Vinsten \\(V=25x+30y\\) blir störst i \\(\\boxed{(21,6;16,8)}\\), där \\(\\boxed{V=1044}\\).</p>",
     "familj": "geo6_linopt_1",
     "miniräknare": true,
@@ -20245,7 +20245,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett företag tillverkar två modeller, \\(x\\) och \\(y\\). Villkoren är \\(x+y\\le40\\), \\(3x+2y\\le90\\), \\(x,y\\ge0\\). Vinsten är \\(V=70x+55y\\). Lös problemet grafiskt i GeoGebra.</p>",
+    "t": "<p>Ett företag tillverkar två modeller, \\(x\\) och \\(y\\). Villkoren är \\(x+y\\le40\\), \\(3x+2y\\le90\\), \\(x,y\\ge0\\). Vinsten är \\(V=70x+55y\\). Lös problemet grafiskt.</p>",
     "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Hörnpunkterna är \\((0;0)\\), \\((0;40)\\), \\((10;30)\\) och \\((30;0)\\).</p><p>Vinsten \\(V=70x+55y\\) blir störst i \\(\\boxed{(10;30)}\\), där \\(\\boxed{V=2350}\\).</p>",
     "familj": "geo6_linopt_2",
     "miniräknare": true,
@@ -20260,7 +20260,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En odlare planterar två grödor, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le50\\), \\(x+2y\\le56\\), \\(x,y\\ge0\\). Intäkten är \\(I=400x+500y\\). Bestäm maximum med GeoGebra.</p>",
+    "t": "<p>En odlare planterar två grödor, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le50\\), \\(x+2y\\le56\\), \\(x,y\\ge0\\). Intäkten är \\(I=400x+500y\\). Bestäm maximum.</p>",
     "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Den inre skärningspunkten är \\(\\left(\\frac{44}{3};\\frac{62}{3}\\right)\\).</p><p>Intäkten \\(I=400x+500y\\) blir störst där och är \\(\\boxed{I=16200}\\).</p>",
     "familj": "geo6_linopt_3",
     "miniräknare": true,
@@ -20275,7 +20275,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita området som ges av \\(x+y\\le10\\), \\(2x+y\\le14\\), \\(x,y\\ge0\\). Skapa en glidare \\(k\\) och uttrycket \\(Z=3x+ky\\).</p><p>Bestäm det värde på \\(k\\) där hela kanten mellan \\((4,6)\\) och \\((0,10)\\) ger samma värde på \\(Z\\).</p>",
+    "t": "<p>Det tillåtna området ges av \\(x+y\\le10\\), \\(2x+y\\le14\\), \\(x\\ge0\\) och \\(y\\ge0\\). För uttrycket \\(Z=3x+ky\\), bestäm det värde på \\(k\\) där hela kanten mellan \\((4,6)\\) och \\((0,10)\\) ger samma värde på \\(Z\\).</p>",
     "s": "<p>På kanten gäller \\(x+y=10\\), vars lutning är \\(-1\\).</p><p>Linjerna \\(3x+ky=c\\), där \\(c\\) är ett konstant värde, har lutningen \\(-3/k\\). För att en sådan linje ska vara parallell med kanten krävs \\(-3/k=-1\\).</p><p>Alltså \\(\\boxed{k=3}\\).</p>",
     "familj": "geo6_linopt_slider_objective",
     "miniräknare": true,
@@ -20290,7 +20290,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita området som uppfyller \\(x+2y\\ge12\\), \\(3x+y\\ge15\\), \\(x,y\\ge0\\). Kostnaden är \\(K=4x+5y\\).</p><p>Bestäm med GeoGebra den minsta kostnaden i området.</p>",
+    "t": "<p>Rita området som uppfyller \\(x+2y\\ge12\\), \\(3x+y\\ge15\\), \\(x,y\\ge0\\). Kostnaden är \\(K=4x+5y\\).</p><p>Bestäm den minsta kostnaden i området.</p>",
     "s": "<p>Rita begränsningslinjerna och välj rätt sida av varje linje. Den relevanta skärningspunkten mellan \\(x+2y=12\\) och \\(3x+y=15\\) är \\((18/5,21/5)\\).</p><p>Där blir \\(K=4\\cdot18/5+5\\cdot21/5=177/5=\\boxed{35,4}\\).</p>",
     "familj": "geo6_linopt_min",
     "miniräknare": true,
@@ -20306,7 +20306,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=x^{3} - 4 x + 1\\). Bestäm \\(f^{\\prime}(2)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=2\\).</p>",
+    "t": "<p>Rita \\(f(x)=x^{3} - 4 x + 1\\). Bestäm \\(f^{\\prime}(2)\\) och kontrollera resultatet med tangenten i punkten där \\(x=2\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=3 x^{2} - 4\\). Vid \\(x=2\\) blir tangentens lutning \\(f^{\\prime}(2)\\approx 8\\). Tangentverktyget ger samma lutning.</p>",
     "familj": "digital_deriv_value_1",
     "miniräknare": true,
@@ -20322,7 +20322,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/1/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=2 x^{4} - 3 x^{2} + 5\\). Bestäm \\(f^{\\prime}(-1)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=-1\\).</p>",
+    "t": "<p>Rita \\(f(x)=2 x^{4} - 3 x^{2} + 5\\). Bestäm \\(f^{\\prime}(-1)\\) och kontrollera resultatet med tangenten i punkten där \\(x=-1\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=8 x^{3} - 6 x\\). Vid \\(x=-1\\) blir tangentens lutning \\(f^{\\prime}(-1)\\approx -2\\). Tangentverktyget ger samma lutning.</p>",
     "familj": "digital_deriv_value_2",
     "miniräknare": true,
@@ -20338,7 +20338,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=\\sqrt{x} + \\frac{2}{x}\\). Bestäm \\(f^{\\prime}(4)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=4\\).</p>",
+    "t": "<p>Rita \\(f(x)=\\sqrt{x} + \\frac{2}{x}\\). Bestäm \\(f^{\\prime}(4)\\) och kontrollera resultatet med tangenten i punkten där \\(x=4\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=- \\frac{2}{x^{2}} + \\frac{1}{2 \\sqrt{x}}\\). Vid \\(x=4\\) blir tangentens lutning \\(f^{\\prime}(4)\\approx 0,125\\). Tangentverktyget ger samma lutning.</p>",
     "familj": "digital_deriv_value_3",
     "miniräknare": true,
@@ -20354,7 +20354,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=3^{x}\\). Bestäm \\(f^{\\prime}(1)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=1\\).</p>",
+    "t": "<p>Rita \\(f(x)=3^{x}\\). Bestäm \\(f^{\\prime}(1)\\) och kontrollera resultatet med tangenten i punkten där \\(x=1\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=3^{x} \\ln{\\left(3 \\right)}\\). Vid \\(x=1\\) blir tangentens lutning \\(f^{\\prime}(1)\\approx 3,296\\). Tangentverktyget ger samma lutning.</p>",
     "familj": "digital_deriv_value_4",
     "miniräknare": true,
@@ -20370,7 +20370,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=e^{\\frac{2 x}{5}}\\). Bestäm \\(f^{\\prime}(3)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=3\\).</p>",
+    "t": "<p>Rita \\(f(x)=e^{\\frac{2 x}{5}}\\). Bestäm \\(f^{\\prime}(3)\\) och kontrollera resultatet med tangenten i punkten där \\(x=3\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=\\frac{2 e^{\\frac{2 x}{5}}}{5}\\). Vid \\(x=3\\) blir tangentens lutning \\(f^{\\prime}(3)\\approx 1,328\\). Tangentverktyget ger samma lutning.</p>",
     "familj": "digital_deriv_value_5",
     "miniräknare": true,
@@ -20386,7 +20386,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{3} - 6 x^{2} + 9 x + 2\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "t": "<p>För \\(f(x)=x^{3}-6x^{2}+9x+2\\), bestäm alla punkter där grafens tangent är horisontell.</p>",
     "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena 1, 3. Motsvarande punkter är \\((1; 6)\\), \\((3; 2)\\).</p>",
     "familj": "digital_deriv_horizontal_1",
     "miniräknare": true,
@@ -20402,7 +20402,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{4} - 5 x^{2} + 4\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "t": "<p>För \\(f(x)=x^{4}-5x^{2}+4\\), bestäm alla punkter där grafens tangent är horisontell.</p>",
     "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena 0, - \\frac{\\sqrt{10}}{2}, \\frac{\\sqrt{10}}{2}. Motsvarande punkter är \\((0; 4)\\), \\((- \\frac{\\sqrt{10}}{2}; - \\frac{9}{4})\\), \\((\\frac{\\sqrt{10}}{2}; - \\frac{9}{4})\\).</p>",
     "familj": "digital_deriv_horizontal_2",
     "miniräknare": true,
@@ -20418,7 +20418,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=- x^{3} + 3 x^{2} + 9 x - 2\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "t": "<p>För \\(f(x)=-x^{3}+3x^{2}+9x-2\\), bestäm alla punkter där grafens tangent är horisontell.</p>",
     "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -1, 3. Motsvarande punkter är \\((-1; -7)\\), \\((3; 25)\\).</p>",
     "familj": "digital_deriv_horizontal_3",
     "miniräknare": true,
@@ -20434,7 +20434,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{4} - 8 x^{2} + 3\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "t": "<p>För \\(f(x)=x^{4}-8x^{2}+3\\), bestäm alla punkter där grafens tangent är horisontell.</p>",
     "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -2, 0, 2. Motsvarande punkter är \\((-2; -13)\\), \\((0; 3)\\), \\((2; -13)\\).</p>",
     "familj": "digital_deriv_horizontal_4",
     "miniräknare": true,
@@ -20450,7 +20450,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{3} - 12 x + 4\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "t": "<p>För \\(f(x)=x^{3}-12x+4\\), bestäm alla punkter där grafens tangent är horisontell.</p>",
     "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -2, 2. Motsvarande punkter är \\((-2; 20)\\), \\((2; -12)\\).</p>",
     "familj": "digital_deriv_horizontal_5",
     "miniräknare": true,
@@ -20466,7 +20466,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-4\\le x\\le 5\\) för</p><p>\\[f(x)=x^{3} - 3 x^{2} - 9 x + 4.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "t": "<p>Bestäm funktionens största och minsta värde i intervallet \\(-4\\le x\\le 5\\) för</p><p>\\[f(x)=x^{3} - 3 x^{2} - 9 x + 4.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
     "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-4\\) och \\(x=5\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-72\\) vid \\(x\\approx -4\\), och största värdet ungefär \\(9\\) vid \\(x\\approx 5\\).</p>",
     "familj": "digital_deriv_interval_1",
     "miniräknare": true,
@@ -20482,7 +20482,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=x^{4} - 4 x^{2} + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "t": "<p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=x^{4} - 4 x^{2} + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
     "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=3\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-2\\) vid \\(x\\approx -1,414\\), och största värdet ungefär \\(47\\) vid \\(x\\approx -3\\).</p>",
     "familj": "digital_deriv_interval_2",
     "miniräknare": true,
@@ -20498,7 +20498,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(0\\le x\\le 5\\) för</p><p>\\[f(x)=- x^{3} + 6 x^{2} - 9 x + 5.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "t": "<p>Bestäm funktionens största och minsta värde i intervallet \\(0\\le x\\le 5\\) för</p><p>\\[f(x)=- x^{3} + 6 x^{2} - 9 x + 5.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
     "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=0\\) och \\(x=5\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-15\\) vid \\(x\\approx 5\\), och största värdet ungefär \\(5\\) vid \\(x\\approx 0\\).</p>",
     "familj": "digital_deriv_interval_3",
     "miniräknare": true,
@@ -20514,7 +20514,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 4\\) för</p><p>\\[f(x)=x^{3} - 6 x + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "t": "<p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 4\\) för</p><p>\\[f(x)=x^{3} - 6 x + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
     "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=4\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-7\\) vid \\(x\\approx -3\\), och största värdet ungefär \\(42\\) vid \\(x\\approx 4\\).</p>",
     "familj": "digital_deriv_interval_4",
     "miniräknare": true,
@@ -20530,7 +20530,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=\\frac{x^{4}}{4} - 2 x^{2} + x.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "t": "<p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=\\frac{x^{4}}{4} - 2 x^{2} + x.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
     "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=3\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-6,059\\) vid \\(x\\approx -2,115\\), och största värdet ungefär \\(5,25\\) vid \\(x\\approx 3\\).</p>",
     "familj": "digital_deriv_interval_5",
     "miniräknare": true,
@@ -20546,7 +20546,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(1)\\) för \\(f(x)=x^{4} - 2 x^{2} + 3\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "t": "<p>Bestäm \\(f^{\\prime\\prime}(1)\\) för \\(f(x)=x^{4} - 2 x^{2} + 3\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=4 \\left(3 x^{2} - 1\\right)\\). Insättning ger \\(f^{\\prime\\prime}(1)\\approx 8\\).</p>",
     "familj": "digital_deriv_second_1",
     "miniräknare": true,
@@ -20562,7 +20562,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=x^{5} - 5 x^{3} + 2\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "t": "<p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=x^{5} - 5 x^{3} + 2\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=10 x \\left(2 x^{2} - 3\\right)\\). Insättning ger \\(f^{\\prime\\prime}(2)\\approx 100\\).</p>",
     "familj": "digital_deriv_second_2",
     "miniräknare": true,
@@ -20578,7 +20578,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=3^{x}\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "t": "<p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=3^{x}\\).</p>",
     "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=3^{x} \\ln{\\left(3 \\right)}^{2}\\). Insättning ger \\(f^{\\prime\\prime}(2)\\approx 10,863\\).</p>",
     "familj": "digital_deriv_second_3",
     "miniräknare": true,
@@ -20594,7 +20594,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3ax\\). Undersök för vilka positiva värden på \\(a\\) grafen har två extrempunkter.</p>",
+    "t": "<p>För familjen \\(f_a(x)=x^3-3ax\\), undersök för vilka positiva värden på \\(a\\) grafen har två extrempunkter.</p>",
     "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=3x^2-3a\\). För \\(a&gt;0\\) finns två olika nollställen \\(x=\\pm\\sqrt a\\), alltså två extrempunkter. För \\(a=0\\) sammanfaller nollställena och för \\(a&lt;0\\) saknas reella nollställen.</p>",
     "familj": "digital_deriv_investigate_1",
     "miniräknare": true,
@@ -20610,7 +20610,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3x+a\\). Undersök hur extrempunkternas \\(y\\)-värden förändras när \\(a\\) ändras.</p>",
+    "t": "<p>För familjen \\(f_a(x)=x^3-3x+a\\), undersök hur extrempunkternas \\(y\\)-värden förändras när \\(a\\) ändras.</p>",
     "s": "<p>Derivatan är \\(3x^2-3\\), så extrempunkternas x-värden är alltid \\(-1\\) och \\(1\\). Parametern \\(a\\) flyttar bara grafen vertikalt, så båda extrempunkternas y-värden ökar lika mycket som \\(a\\).</p>",
     "familj": "digital_deriv_investigate_2",
     "miniräknare": true,
@@ -20626,7 +20626,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x+1\\). Bestäm ekvationerna för tangenterna till grafen vid \\(x=-1\\) och \\(x=2\\) och bestäm deras skärningspunkt med GeoGebra.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-3x+1\\). Bestäm ekvationerna för tangenterna till grafen vid \\(x=-1\\) och \\(x=2\\) och bestäm deras skärningspunkt.</p>",
     "s": "<p>GeoGebra ger tangenternas ekvationer genom tangentverktyget. Vid \\(x=-1\\) är lutningen 0 och punkten \\((-1;3)\\), så tangenten är \\(y=3\\). Vid \\(x=2\\) är lutningen 9 och punkten \\((2;3)\\), så tangenten är \\(y=9x-15\\). Skärningspunkten är \\((2;3)\\).</p>",
     "familj": "digital_deriv_investigate_3",
     "miniräknare": true,
@@ -20642,7 +20642,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^4-4x^2\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem. Förklara hur nollställena till derivatan hänger ihop med grafens extrempunkter.</p>",
+    "t": "<p>Rita \\(f(x)=x^4-4x^2\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem. Förklara hur nollställena till derivatan hänger ihop med grafens extrempunkter.</p>",
     "s": "<p>Derivatan är \\(4x(x^2-2)\\) och har nollställena \\(-\\sqrt2,0,\\sqrt2\\). I dessa x-värden har f två minimipunkter och en maximipunkt. Teckenbytet hos derivatan avgör punktens karaktär.</p>",
     "familj": "digital_deriv_investigate_4",
     "miniräknare": true,
@@ -20658,7 +20658,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3\\) och skapa en sekant genom punkterna med x-koordinaterna 1 och \\(1+h\\). Låt \\(h\\) närma sig 0 och undersök sekantens lutning.</p>",
+    "t": "<p>Rita \\(f(x)=x^3\\) och skapa en sekant genom punkterna med x-koordinaterna 1 och \\(1+h\\). Låt \\(h\\) närma sig 0 och undersök sekantens lutning.</p>",
     "s": "<p>Sekantlutningen närmar sig 3. Det är derivatan \\(f^{\\prime}(1)=3\\). Uppgiften visualiserar derivatans definition.</p>",
     "familj": "digital_deriv_investigate_5",
     "miniräknare": true,
@@ -20677,7 +20677,7 @@ window.BANKMATO1 = [
     "t": "<p>Intäkten från en föreställning beskrivs av \\(I(x)=-2x^2+800x\\), där \\(x\\) är biljettpriset i kronor.</p><p>a) Bestäm det biljettpris som ger maximal intäkt.<br>b) Bestäm den maximala intäkten.</p>",
     "s": "<p>Derivatan är \\(I^{\\prime}(x)=-4x+800\\). Sätt \\(I^{\\prime}(x)=0\\): \\(x=200\\).</p><p>Eftersom \\(I^{\\prime\\prime}(x)=-4&lt;0\\) är det en maximipunkt. Den maximala intäkten är \\(I(200)=80\\,000\\) kr.</p>",
     "familj": "deriv_app_revenue",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20693,7 +20693,7 @@ window.BANKMATO1 = [
     "t": "<p>I en triangel är summan av basen och höjden 36 cm. Bestäm triangelns största möjliga area.</p>",
     "s": "<p>Låt basen vara \\(x\\) cm. Då är höjden \\(36-x\\) cm.</p><p>Arean blir \\(A(x)=\\frac{x(36-x)}{2}=18x-\\frac{x^2}{2}\\).</p><p>\\(A^{\\prime}(x)=18-x\\), så maximum fås för \\(x=18\\). Då är även höjden 18 cm och arean \\(162\\text{ cm}^2\\).</p>",
     "familj": "deriv_app_triangle",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20709,7 +20709,7 @@ window.BANKMATO1 = [
     "t": "<p>Två positiva tal har produkten 45. Bestäm talens minsta möjliga summa.</p>",
     "s": "<p>Låt det ena talet vara \\(x\\). Då är det andra \\(45/x\\).</p><p>Summan är \\(S(x)=x+45/x\\), \\(x&gt;0\\).</p><p>\\(S^{\\prime}(x)=1-45/x^2\\). Nollstället är \\(x=3\\sqrt5\\). Då är båda talen \\(3\\sqrt5\\), och minsta summan är \\(6\\sqrt5\\).</p>",
     "familj": "deriv_app_product",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20722,7 +20722,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Antalet djur i ett reservat modelleras under 12 år av</p><p>\\[N(t)=t^3-18t^2+72t+900,\\qquad 0\\le t\\le12.\\]</p><p>Bestäm det största och minsta antalet djur under perioden.</p>",
+    "t": "<p>Antalet djur i ett reservat modelleras under 12 år av</p><p>\\[N(t)=t^3-18t^2+72t+900,\\qquad 0\\le t\\le12.\\]</p><p>Bestäm det största och minsta antalet djur under perioden.</p>",
     "s": "<p>Rita funktionen i intervallet och bestäm derivatans nollställen. Derivatan är \\(N^{\\prime}(t)=3t^2-36t+72\\), så nollställena är \\(t=6-2\\sqrt3\\approx2,536\\) och \\(t=6+2\\sqrt3\\approx9,464\\).</p><p>Jämför funktionsvärdena där med värdena vid intervallets ändpunkter. Det största antalet är ungefär \\(983\\) djur vid \\(t\\approx2,536\\), och det minsta ungefär \\(817\\) djur vid \\(t\\approx9,464\\).</p>",
     "familj": "deriv_app_population_interval",
     "miniräknare": true,
@@ -20738,7 +20738,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Funktionerna \\(f(x)=x^3-4x+2\\) och \\(g(x)=2x^2-1\\) är givna. Bestäm det största avståndet i y-led mellan graferna i intervallet \\(-2\\le x\\le3\\).</p>",
+    "t": "<p>Funktionerna \\(f(x)=x^3-4x+2\\) och \\(g(x)=2x^2-1\\) är givna. Bestäm det största avståndet i y-led mellan graferna i intervallet \\(-2\\le x\\le3\\).</p>",
     "s": "<p>Avståndet i y-led är \\(|f(x)-g(x)|\\), alltså \\[d(x)=|x^3-2x^2-4x+3|.\\]</p><p>Rita \\(d\\) i intervallet \\(-2\\le x\\le3\\) och bestäm maximum. GeoGebra ger största avståndet \\(\\boxed{5}\\), vilket fås vid \\(x=-2\\) och \\(x=2\\).</p>",
     "familj": "deriv_app_vertical_distance",
     "miniräknare": true,
@@ -20789,7 +20789,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett rektangulärt hyllplan ska ha arean 24 dm² och tre kanter av glas, två korta och en lång. Glasets höjd är 0,7 dm och tjockleken kan försummas i modellen.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rektangulärt hyllplan med tre glaskanter\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><polygon points=\"76,74 275,74 315,111 115,111\" fill=\"#EFEFEF\" stroke=\"#5B5560\" stroke-width=\"2\"/><polygon points=\"76,74 115,111 115,157 76,119\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><polygon points=\"115,111 315,111 315,157 115,157\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><polygon points=\"275,74 315,111 315,157 275,120\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"178\" y=\"181\" font-size=\"14\" fill=\"#2B2527\">y</text><text x=\"288\" y=\"93\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"205\" y=\"207\" font-size=\"13\" fill=\"#6B6670\">Hyllplanets area: 24 dm²</text></svg></span><p>Bestäm måtten \\(x\\) och \\(y\\) så att den sammanlagda glasarean blir så liten som möjligt.</p>",
     "s": "<p>Villkoret är \\(xy=24\\), alltså \\(y=24/x\\).</p><p>Glaslängden är \\(2x+y\\), så glasarean är proportionell mot \\(L(x)=2x+24/x\\).</p><p>\\(L^{\\prime}(x)=2-24/x^2\\). Nollstället ger \\(x^2=12\\), alltså \\(x=2\\sqrt3\\) dm. Då är \\(y=24/x=4\\sqrt3\\) dm. Andraderivatan är positiv, så värdet är ett minimum.</p>",
     "familj": "deriv_app_shelf",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20805,7 +20805,7 @@ window.BANKMATO1 = [
     "t": "<p>En konferens kostar 2400 kr och brukar ha 320 deltagare. För varje höjning med 100 kr minskar antalet deltagare med 20. För varje sänkning med 100 kr ökar antalet med 20.</p><p>Vilket pris ger störst intäkt enligt modellen?</p>",
     "s": "<p>Låt \\(x\\) vara antalet hundrakronorshöjningar. Då är priset \\(2400+100x\\) och antalet deltagare \\(320-20x\\).</p><p>\\[I(x)=(2400+100x)(320-20x)=-2000x^2-16000x+768000.\\]</p><p>\\(I^{\\prime}(x)=-4000x-16000\\), så maximum fås för \\(x=-4\\). Priset ska alltså sänkas med 400 kr till \\(2000\\) kr.</p>",
     "familj": "deriv_app_conference",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20866,7 +20866,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En öppen låda görs av en kartong som är 36 cm × 24 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Kartong 36 cm gånger 24 cm med kvadrater i hörnen\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"64\" y=\"46\" width=\"260\" height=\"150\" fill=\"#F8F3E7\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"64\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"64\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><text x=\"194.0\" y=\"32\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">36 cm</text><text x=\"45\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\" transform=\"rotate(-90 45 121.0)\">24 cm</text><text x=\"79\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text><text x=\"305\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text></svg></span><p>Ställ upp volymfunktionen och bestäm med GeoGebra lådans största möjliga volym.</p>",
+    "t": "<p>En öppen låda görs av en kartong som är 36 cm × 24 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Kartong 36 cm gånger 24 cm med kvadrater i hörnen\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"64\" y=\"46\" width=\"260\" height=\"150\" fill=\"#F8F3E7\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"64\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"64\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><text x=\"194.0\" y=\"32\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">36 cm</text><text x=\"45\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\" transform=\"rotate(-90 45 121.0)\">24 cm</text><text x=\"79\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text><text x=\"305\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text></svg></span><p>Ställ upp volymfunktionen och Bestäm lådans största möjliga volym.</p>",
     "s": "<p>Volymen är \\[V(x)=x(36-2x)(24-2x),\\qquad0&lt;x&lt;12.\\]</p><p>Rita funktionen i GeoGebra och använd extrempunktverktyget. Maximum fås vid \\(x\\approx4,708\\) cm och volymen blir ungefär \\(\\boxed{1825,3\\text{ cm}^3}\\).</p>",
     "familj": "deriv_app_open_box",
     "miniräknare": true,
@@ -20885,7 +20885,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel har omkretsen 56 cm. Bestäm största möjliga area.</p>",
     "s": "<p>Låt ena sidan vara x. Den andra blir 28-x. A(x)=x(28-x). A'(x)=28-2x, så x=14 och maxarean är 196 cm².</p>",
     "familj": "deriv_app_rect_perimeter",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20901,7 +20901,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangel ska ha arean 72 cm². Bestäm den minsta möjliga omkretsen.</p>",
     "s": "<p>Låt sidorna vara x och 72/x. O(x)=2x+144/x. O'(x)=2-144/x²=0 ger x=6√2, vilket även ger den andra sidan 6√2. Minsta omkrets är 24√2 cm.</p>",
     "familj": "deriv_app_rect_area",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20917,7 +20917,7 @@ window.BANKMATO1 = [
     "t": "<p>En hage byggs mot en sjö. Det finns 150 m stängsel till de tre övriga sidorna. Bestäm största möjliga area.</p>",
     "s": "<p>A(x)=x(150-2x). A'(x)=150-4x=0 ger x=37,5. Den tredje sidan blir 75 m och maxarean 2812,5 m².</p>",
     "familj": "deriv_app_fence_lake",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20930,7 +20930,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Ett företag har kostnaden K(x)=0,02x^3-1,2x^2+40x+800 för 0≤x≤50. Bestäm minsta kostnad i intervallet med GeoGebra.</p>",
+    "t": "<p>Ett företag har kostnaden \\(K(x)=0,02x^3-1,2x^2+40x+800\\) för \\(0\\le x\\le 50\\). Bestäm den minsta kostnaden i intervallet.</p>",
     "s": "<p>Rita K på intervallet och jämför extrempunkter med ändpunkter. GeoGebra ger minsta värdet K(0)=800.</p>",
     "familj": "deriv_app_cost_cubic",
     "miniräknare": true,
@@ -20946,10 +20946,10 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Vinsten från en produkt modelleras av V(x)=-0,5x²+60x-500. Bestäm största möjliga vinst och det x-värde där den fås.</p>",
+    "t": "<p>Vinsten från en produkt modelleras av \\(V(x)=-0,5x^2+60x-500\\). Bestäm den största möjliga vinsten och det \\(x\\)-värde där den fås.</p>",
     "s": "<p>V'(x)=-x+60. Maximum fås vid x=60. V(60)=1300.</p>",
     "familj": "deriv_app_profit_quad",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20962,7 +20962,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p>En läkemedelskoncentration modelleras av C(t)=5t·e^{-0,4t} för t≥0. Använd GeoGebra för att bestämma när koncentrationen är som störst och det största värdet.</p>",
+    "t": "<p>En läkemedelskoncentration modelleras av \\(C(t)=5t\\cdot e^{-0,4t}\\) för \\(t\\ge 0\\). Bestäm när koncentrationen är som störst och bestäm det största värdet.</p>",
     "s": "<p>Rita C(t) för t≥0 och använd extrempunktverktyget. Maximum fås vid t=2,5 och C≈4,598.</p>",
     "familj": "deriv_app_drug_geo",
     "miniräknare": true,
@@ -20978,10 +20978,10 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En rektangel skrivs in under parabeln y=9-x² med basen på x-axeln och symmetri kring y-axeln. Bestäm största möjliga area.</p>",
+    "t": "<p>En rektangel skrivs in under parabeln \\(y=9-x^2\\), med basen på \\(x\\)-axeln och symmetri kring \\(y\\)-axeln. Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Låt högra hörnets x-koordinat vara x. Bredden är 2x och höjden 9-x². A(x)=2x(9-x²)=18x-2x³. A'(x)=18-6x²=0 ger x=√3. Maxarean är 12√3.</p>",
     "familj": "deriv_app_sym_rect_parabola",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -20994,7 +20994,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p>Ett slutet cylindriskt kärl ska rymma 1000 cm³. Bestäm med GeoGebra den radie och höjd som ger minsta totala yta.</p>",
+    "t": "<p>Ett slutet cylindriskt kärl ska rymma \\(1000\\text{ cm}^3\\). Bestäm den radie och höjd som ger minsta möjliga totala yta.</p>",
     "s": "<p>Volymvillkoret ger h=1000/(πr²). Ytan blir A(r)=2πr²+2000/r. GeoGebra ger minimum vid r≈5,42 cm och h≈10,84 cm.</p>",
     "familj": "deriv_app_closed_cylinder",
     "miniräknare": true,
@@ -21013,7 +21013,7 @@ window.BANKMATO1 = [
     "t": "<p>En affisch ska ha 400 cm² tryckyta. Sidmarginalerna är 2 cm och marginalerna upptill och nedtill 3 cm. Bestäm minsta möjliga pappersarea.</p>",
     "s": "<p>Låt tryckbredden vara \\(x\\) cm. Då är tryckhöjden \\(400/x\\) cm.</p><p>Pappersarean blir \\[A(x)=(x+4)\\left(\\frac{400}{x}+6\\right)=424+6x+\\frac{1600}{x}.\\]</p><p>\\(A^{\\prime}(x)=6-1600/x^2\\). Nollstället ger \\(x=20\\sqrt{2/3}\\approx16,33\\) cm. Den minsta pappersarean blir ungefär \\(\\boxed{619,96\\text{ cm}^2}\\).</p>",
     "familj": "deriv_app_poster",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -21029,7 +21029,7 @@ window.BANKMATO1 = [
     "t": "<p>En rektangulär inhägnad delas i fyra lika delar med tre stängsel parallella med ena sidan. Totalt finns 180 m stängsel. Bestäm största möjliga area.</p>",
     "s": "<p>Låt de fem parallella stängseldelarna ha längden \\(x\\) meter. Då återstår \\(180-5x\\) meter till de två andra sidorna, så \\(y=(180-5x)/2\\).</p><p>Arean blir \\[A(x)=xy=90x-2,5x^2.\\]</p><p>\\(A^{\\prime}(x)=90-5x\\), så maximum fås för \\(x=18\\) m. Då är \\(y=45\\) m och den största arean \\(\\boxed{810\\text{ m}^2}\\).</p>",
     "familj": "deriv_app_four_pens",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -21045,7 +21045,7 @@ window.BANKMATO1 = [
     "t": "<p>En båtuthyrare tar 500 kr per dag och hyr då ut 40 båtar. För varje prishöjning med 20 kr minskar antalet uthyrda båtar med 1. Vilket pris maximerar intäkten enligt modellen?</p>",
     "s": "<p>Låt x vara antalet tjugokronorshöjningar. I(x)=(500+20x)(40-x)=-20x²+300x+20000. I'= -40x+300=0 ger x=7,5. Modellen ger optimalt pris 650 kr.</p>",
     "familj": "deriv_app_boat_rental",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -21058,7 +21058,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Temperaturen i en ugn modelleras under 0≤t≤8 av T(t)=-0,5t³+4t²+20. Bestäm största och minsta temperatur under intervallet med GeoGebra.</p>",
+    "t": "<p>Temperaturen i en ugn modelleras under \\(0\\le t\\le 8\\) av \\(T(t)=-0,5t^3+4t^2+20\\). Bestäm den största och minsta temperaturen under intervallet.</p>",
     "s": "<p>Rita funktionen på intervallet och bestäm derivatans nollställen. \\(T^{\\prime}(t)=-1,5t^2+8t=t(8-1,5t)\\), så det relevanta inre nollstället är \\(t=16/3\\approx5,33\\).</p><p>Jämför med ändpunkterna: \\(T(0)=20\\), \\(T(8)=20\\) och \\(T(16/3)\\approx57,93\\). <strong>Svar:</strong> minsta temperatur är \\(20\\) och största ungefär \\(57,93\\).</p>",
     "familj": "deriv_app_oven_interval",
     "miniräknare": true,
@@ -21074,7 +21074,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} e^{- x^{2}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{0}^{2} e^{- x^{2}}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}e^{- x^{2}}\\,dx\\approx 0,882\\).</p>",
     "familj": "digital_integral_numeric_1",
     "miniräknare": true,
@@ -21090,7 +21090,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\sqrt{x^{3} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\sqrt{x^{3} + 1}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}\\sqrt{x^{3} + 1}\\,dx\\approx 3,241\\).</p>",
     "familj": "digital_integral_numeric_2",
     "miniräknare": true,
@@ -21106,7 +21106,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\frac{1}{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\frac{1}{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{3}\\frac{1}{x^{2} + 1}\\,dx\\approx 1,249\\).</p>",
     "familj": "digital_integral_numeric_3",
     "miniräknare": true,
@@ -21122,7 +21122,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{-2}^{2} \\sqrt{4 - x^{2}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{-2}^{2} \\sqrt{4 - x^{2}}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{-2}^{2}\\sqrt{4 - x^{2}}\\,dx\\approx 6,283\\).</p>",
     "familj": "digital_integral_numeric_4",
     "miniräknare": true,
@@ -21138,7 +21138,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{-2}^{4} \\left|{x - 1}\\right|\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{-2}^{4} \\left|{x - 1}\\right|\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{-2}^{4}\\left|{x - 1}\\right|\\,dx\\approx 9\\).</p>",
     "familj": "digital_integral_numeric_5",
     "miniräknare": true,
@@ -21154,7 +21154,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^5 1{,}2^x\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_0^5 1{,}2^x\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^5 1{,}2^x\\,dx\\approx8,163\\).</p>",
     "familj": "digital_integral_numeric_6",
     "miniräknare": true,
@@ -21170,7 +21170,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^2 e^{-x^3}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_0^2 e^{-x^3}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^2 e^{-x^3}\\,dx\\approx0,893\\).</p>",
     "familj": "digital_integral_numeric_7",
     "miniräknare": true,
@@ -21186,7 +21186,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^{1,5}\\frac{1}{2+x^3}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_0^{1,5}\\frac{1}{2+x^3}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^{1,5}\\frac{1}{2+x^3}\\,dx\\approx0,578\\).</p>",
     "familj": "digital_integral_numeric_8",
     "miniräknare": true,
@@ -21202,7 +21202,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\frac{1}{\\sqrt{x^{4} + 1}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\frac{1}{\\sqrt{x^{4} + 1}}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}\\frac{1}{\\sqrt{x^{4} + 1}}\\,dx\\approx 1,357\\).</p>",
     "familj": "digital_integral_numeric_9",
     "miniräknare": true,
@@ -21218,7 +21218,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\sqrt{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\sqrt{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler.</p>",
     "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{3}\\sqrt{x^{2} + 1}\\,dx\\approx 5,653\\).</p>",
     "familj": "digital_integral_numeric_10",
     "miniräknare": true,
@@ -21234,7 +21234,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x + 3\\) och \\(g(x)=x^{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "t": "<p>Rita \\(f(x)=x + 3\\) och \\(g(x)=x^{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
     "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=\\frac{1}{2} - \\frac{\\sqrt{13}}{2}\\) och \\(x=\\frac{1}{2} + \\frac{\\sqrt{13}}{2}\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(\\frac{13 \\sqrt{13}}{6}\\), alltså ungefär \\(7,812\\).</p>",
     "familj": "digital_integral_between_1",
     "miniräknare": true,
@@ -21250,7 +21250,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=4 - x\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "t": "<p>Rita \\(f(x)=4 - x\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
     "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=-4\\) och \\(x=2\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(18\\), alltså ungefär \\(18,0\\).</p>",
     "familj": "digital_integral_between_2",
     "miniräknare": true,
@@ -21266,7 +21266,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=2 x + 1\\) och \\(g(x)=x^{2} - 2\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "t": "<p>Rita \\(f(x)=2 x + 1\\) och \\(g(x)=x^{2} - 2\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
     "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=-1\\) och \\(x=3\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(\\frac{32}{3}\\), alltså ungefär \\(10,667\\).</p>",
     "familj": "digital_integral_between_3",
     "miniräknare": true,
@@ -21282,7 +21282,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=3\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "t": "<p>Rita \\(f(x)=3\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
     "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=- \\sqrt{6}\\) och \\(x=\\sqrt{6}\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(4 \\sqrt{6}\\), alltså ungefär \\(9,798\\).</p>",
     "familj": "digital_integral_between_4",
     "miniräknare": true,
@@ -21298,7 +21298,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a x^{2} + 1\\,dx=10.\\]</p><p>Svara med tre decimaler.</p>",
+    "t": "<p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a x^{2} + 1\\,dx=10.\\]</p><p>Svara med tre decimaler.</p>",
     "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a x^{2} + 1\\,dx\\) och lös \\(A(a)=10\\). GeoGebra ger \\(a\\approx 2,787\\).</p>",
     "familj": "digital_integral_upper_1",
     "miniräknare": true,
@@ -21314,7 +21314,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a 2 x + 3\\,dx=18.\\]</p><p>Svara med tre decimaler.</p>",
+    "t": "<p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a 2 x + 3\\,dx=18.\\]</p><p>Svara med tre decimaler.</p>",
     "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a 2 x + 3\\,dx\\) och lös \\(A(a)=18\\). GeoGebra ger \\(a\\approx 3\\).</p>",
     "familj": "digital_integral_upper_2",
     "miniräknare": true,
@@ -21330,7 +21330,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a e^{\\frac{x}{2}}\\,dx=5.\\]</p><p>Svara med tre decimaler.</p>",
+    "t": "<p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a e^{\\frac{x}{2}}\\,dx=5.\\]</p><p>Svara med tre decimaler.</p>",
     "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a e^{\\frac{x}{2}}\\,dx\\) och lös \\(A(a)=5\\). GeoGebra ger \\(a\\approx 2,506\\).</p>",
     "familj": "digital_integral_upper_3",
     "miniräknare": true,
@@ -21346,7 +21346,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x^3-4x\\) och bestäm både \\(\\int_{-2}^{2}f(x)\\,dx\\) och arean mellan grafen och x-axeln på samma intervall. Förklara varför svaren skiljer sig.</p>",
+    "t": "<p>Rita \\(f(x)=x^3-4x\\) och bestäm både \\(\\int_{-2}^{2}f(x)\\,dx\\) och arean mellan grafen och x-axeln på samma intervall. Förklara varför svaren skiljer sig.</p>",
     "s": "<p>Integralen blir 0 eftersom positiva och negativa bidrag tar ut varandra. Den geometriska arean fås genom att dela vid nollställena och summera beloppen av delintegralerna.</p>",
     "familj": "digital_integral_signed_1",
     "miniräknare": true,
@@ -21362,7 +21362,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x^2-4\\). Bestäm integralens värde på \\([-3,3]\\) och den geometriska arean mellan grafen och x-axeln.</p>",
+    "t": "<p>Rita \\(f(x)=x^2-4\\). Bestäm integralens värde på \\([-3,3]\\) och den geometriska arean mellan grafen och x-axeln.</p>",
     "s": "<p>Grafen skär x-axeln vid x=±2. Integralen tar hänsyn till tecken medan geometrisk area räknas positiv. Dela därför intervallet vid -2 och 2.</p>",
     "familj": "digital_integral_signed_2",
     "miniräknare": true,
@@ -21378,7 +21378,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=\\frac{x}{1+x^2}\\) på intervallet \\([-3,3]\\). Bestäm integralvärdet digitalt och förklara resultatet utifrån grafen.</p>",
+    "t": "<p>Rita \\(f(x)=\\frac{x}{1+x^2}\\) på intervallet \\([-3,3]\\). Bestäm integralvärdet digitalt och förklara resultatet utifrån grafen.</p>",
     "s": "<p>GeoGebra ger integralvärdet \\(0\\). Grafen har lika stora bidrag ovanför och under \\(x\\)-axeln på symmetriska intervall, så de tar ut varandra i integralen.</p>",
     "familj": "digital_integral_signed_3",
     "miniräknare": true,
@@ -21474,7 +21474,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Ett företag investerar 30 miljoner kronor per år vid start och investeringstakten ökar enligt \\(I(t)=30\\cdot1,03^t\\) miljoner kr/år. Uppskatta den totala investeringen under de första 8 åren med GeoGebra.</p>",
+    "t": "<p>Ett företag investerar 30 miljoner kronor per år vid start och investeringstakten ökar enligt \\(I(t)=30\\cdot1,03^t\\) miljoner kr/år. Uppskatta den totala investeringen under de första 8 åren.</p>",
     "s": "<p>Den totala investeringen ges av \\[\\int_0^8 30\\cdot1,03^t\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{270,75}\\) miljoner kronor.</p>",
     "familj": "integral_app_investment",
     "miniräknare": true,
@@ -21490,7 +21490,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Den elektriska fältstyrkan längs en sträcka modelleras av \\(E(r)=12/r^2\\) V/m. Bestäm spänningen mellan punkterna r=0,2 m och r=1,0 m om \\(U=\\int E(r)dr\\).</p>",
+    "t": "<p>Den elektriska fältstyrkan längs en sträcka modelleras av \\(E(r)=12/r^2\\) V/m. Bestäm spänningen mellan punkterna r=0,2 m och r=1,0 m om \\(U=\\int E(r)dr\\).</p>",
     "s": "<p>\\(U=\\int_{0,2}^{1,0}12/r^2\\,dr=[-12/r]_{0,2}^{1}=48\\) V.</p>",
     "familj": "integral_app_electric_field",
     "miniräknare": true,
@@ -21554,7 +21554,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Effekten från en solpanel under sex timmar modelleras av \\(P(t)=0,6t(6-t)\\) kW. Hur mycket energi produceras?</p>",
+    "t": "<p>Effekten från en solpanel under sex timmar modelleras av \\(P(t)=0,6t(6-t)\\) kW. Hur mycket energi produceras?</p>",
     "s": "<p>Energin är \\(\\int_0^6 0,6t(6-t)dt=21,6\\) kWh.</p>",
     "familj": "integral_app_solar",
     "miniräknare": true,
@@ -21570,7 +21570,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Trafikflödet förbi en mätpunkt modelleras av \\(f(t)=500+120\\cdot1{,}05^t\\) bilar/timme under \\(0\\le t\\le6\\). Bestäm hur många bilar som passerar under perioden.</p>",
+    "t": "<p>Trafikflödet förbi en mätpunkt modelleras av \\(f(t)=500+120\\cdot1{,}05^t\\) bilar/timme under \\(0\\le t\\le6\\). Bestäm hur många bilar som passerar under perioden.</p>",
     "s": "<p>Antalet bilar ges av \\[\\int_0^6\\left(500+120\\cdot1{,}05^t\\right)\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{3836}\\) bilar.</p>",
     "familj": "integral_app_traffic",
     "miniräknare": true,
@@ -21586,7 +21586,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Regnintensiteten under ett oväder modelleras av \\(r(t)=6te^{-0,5t}\\) mm/h för 0≤t≤8. Bestäm den totala nederbörden med GeoGebra.</p>",
+    "t": "<p>Regnintensiteten under ett oväder modelleras av \\(r(t)=6te^{-0,5t}\\) mm/h för 0≤t≤8. Bestäm den totala nederbörden.</p>",
     "s": "<p>Den totala nederbörden är \\[\\int_0^8 6te^{-0,5t}\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{21,80\\text{ mm}}\\).</p>",
     "familj": "integral_app_rain",
     "miniräknare": true,
@@ -21602,7 +21602,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En bils hastighet är \\(v(t)=20-0,4t^2\\) m/s tills bilen stannar. Bestäm bromssträckan.</p>",
+    "t": "<p>En bils hastighet är \\(v(t)=20-0,4t^2\\) m/s tills bilen stannar. Bestäm bromssträckan.</p>",
     "s": "<p>Stopp sker när 20-0,4t²=0, alltså t=√50. Bromssträckan är \\(\\int_0^{\\sqrt{50}}(20-0,4t²)dt\\approx94,28\\) m.</p>",
     "familj": "integral_app_braking_numeric",
     "miniräknare": true,
@@ -21618,7 +21618,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En maskin producerar med hastigheten \\(p(t)=100+15t-2t^2\\) enheter/timme under 0≤t≤6. Hur många enheter produceras?</p>",
+    "t": "<p>En maskin producerar med hastigheten \\(p(t)=100+15t-2t^2\\) enheter/timme under 0≤t≤6. Hur många enheter produceras?</p>",
     "s": "<p>Produktionen ges av \\[\\int_0^6(100+15t-2t^2)\\,dt=726.\\]</p><p><strong>Svar:</strong> \\(\\boxed{726}\\) enheter.</p>",
     "familj": "integral_app_production",
     "miniräknare": true,
@@ -21634,7 +21634,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En medicinpump ger läkemedel med hastigheten \\(q(t)=4e^{-0,2t}\\) ml/h. Hur stor volym ges under de första 10 timmarna?</p>",
+    "t": "<p>En medicinpump ger läkemedel med hastigheten \\(q(t)=4e^{-0,2t}\\) ml/h. Hur stor volym ges under de första 10 timmarna?</p>",
     "s": "<p>\\(\\int_0^{10}4e^{-0,2t}dt=20(1-e^{-2})\\approx17,29\\) ml.</p>",
     "familj": "integral_app_medicine",
     "miniräknare": true,
@@ -21650,7 +21650,7 @@ window.BANKMATO1 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En partikel har hastigheten \\(v(t)=t^2-4t+3\\) m/s för 0≤t≤5. Bestäm den totala sträckan, inte bara förflyttningen.</p>",
+    "t": "<p>En partikel har hastigheten \\(v(t)=t^2-4t+3\\) m/s för 0≤t≤5. Bestäm den totala sträckan, inte bara förflyttningen.</p>",
     "s": "<p>Nollställena är t=1 och t=3. Dela integralen vid dessa och summera absolutbeloppen av delintegralerna. Total sträcka blir 28/3≈9,33 m.</p>",
     "familj": "integral_app_total_distance",
     "miniräknare": true,
@@ -21685,7 +21685,7 @@ window.BANKMATO1 = [
     "t": "<p>Ett föremåls acceleration visas i grafen. Vid \\(t=0\\) är hastigheten \\(2\\text{ m/s}\\). Bestäm hastigheten vid \\(t=5\\text{ s}\\).</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"255\" viewBox=\"0 0 400 255\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Acceleration som funktion av tiden\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"253\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50.0\" y1=\"28\" x2=\"50.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"50.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"113.0\" y1=\"28\" x2=\"113.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"113.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"176.0\" y1=\"28\" x2=\"176.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"176.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"239.0\" y1=\"28\" x2=\"239.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"239.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"302.0\" y1=\"28\" x2=\"302.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"302.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"365.0\" y1=\"28\" x2=\"365.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"365.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"50\" y1=\"218.0\" x2=\"365\" y2=\"218.0\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"222.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"50\" y1=\"161.3\" x2=\"365\" y2=\"161.3\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"165.3\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"50\" y1=\"104.7\" x2=\"365\" y2=\"104.7\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"108.7\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"50\" y1=\"48.0\" x2=\"365\" y2=\"48.0\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"52.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"50\" y1=\"218\" x2=\"370\" y2=\"218\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"28\" x2=\"50\" y2=\"218\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 50.0 218.0 L 176.0 48.0 L 302.0 161.3 L 365.0 104.7\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.7\"/><circle cx=\"50.0\" cy=\"218.0\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"176.0\" cy=\"48.0\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"302.0\" cy=\"161.3\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"365.0\" cy=\"104.7\" r=\"4\" fill=\"#2D70B3\"/><text x=\"12\" y=\"20\" font-size=\"12\" fill=\"#2B2527\">a (m/s²)</text><text x=\"374\" y=\"221\" font-size=\"12\" fill=\"#2B2527\">t (s)</text></svg></span>",
     "s": "<p>Hastighetsändringen är arean under accelerationsgrafen. Dela upp området i tre parallelltrapetser:</p><p>\\[\\Delta v=\\frac{0+3}{2}\\cdot2+\\frac{3+1}{2}\\cdot2+\\frac{1+2}{2}\\cdot1=3+4+1,5=8,5.\\]</p><p>Hastigheten blir därför \\(v(5)=2+8,5=\\boxed{10,5\\text{ m/s}}\\).</p>",
     "familj": "integral_app_acc_graph",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   },
   {
@@ -21698,7 +21698,7 @@ window.BANKMATO1 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En fabrik har kostnadstakten \\(K(t)=12+0,5t^2\\) tusen kr/månad. Hur stor är den sammanlagda kostnaden under de första 4 månaderna?</p>",
+    "t": "<p>En fabrik har kostnadstakten \\(K(t)=12+0,5t^2\\) tusen kr/månad. Hur stor är den sammanlagda kostnaden under de första 4 månaderna?</p>",
     "s": "<p>\\(\\int_0^4(12+0,5t²)dt=48+32/3\\approx58,67\\) tusen kr.</p>",
     "familj": "integral_app_cost_rate",
     "miniräknare": true,
@@ -21714,7 +21714,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^3(2x+1)\\,dx\\]</p>",
+    "t": "<p>Bestäm integralens värde och illustrera det område som hör till integralen:</p><p>\\[\\int_0^3(2x+1)\\,dx\\]</p>",
     "s": "<p>GeoGebra ger \\(\\int_0^3(2x+1)\\,dx=12\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
     "familj": "digital_integral_tool_E_1",
     "miniräknare": true,
@@ -21730,7 +21730,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_1^4 x^2\\,dx\\]</p>",
+    "t": "<p>Bestäm integralens värde och illustrera det område som hör till integralen:</p><p>\\[\\int_1^4x^2\\,dx\\]</p>",
     "s": "<p>GeoGebra ger \\(\\int_1^4 x^2\\,dx=21\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
     "familj": "digital_integral_tool_E_2",
     "miniräknare": true,
@@ -21746,7 +21746,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^2 3^x\\,dx\\]</p>",
+    "t": "<p>Bestäm integralens värde och illustrera det område som hör till integralen:</p><p>\\[\\int_0^2 3^x\\,dx\\]</p>",
     "s": "<p>GeoGebra ger \\(\\int_0^2 3^x\\,dx=\\frac{8}{\\ln3}\\approx7,282\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
     "familj": "digital_integral_tool_E_3",
     "miniräknare": true,
@@ -21762,7 +21762,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^4(4-x)\\,dx\\]</p>",
+    "t": "<p>Bestäm integralens värde och illustrera det område som hör till integralen:</p><p>\\[\\int_0^4(4-x)\\,dx\\]</p>",
     "s": "<p>GeoGebra ger \\(\\int_0^4(4-x)\\,dx=8\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
     "familj": "digital_integral_tool_E_4",
     "miniräknare": true,
@@ -21778,7 +21778,7 @@ window.BANKMATO1 = [
     ],
     "niva": "E",
     "poang": "1/0/0",
-    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_{-1}^{2}(x+2)\\,dx\\]</p>",
+    "t": "<p>Bestäm integralens värde och illustrera det område som hör till integralen:</p><p>\\[\\int_{-1}^{2}(x+2)\\,dx\\]</p>",
     "s": "<p>GeoGebra ger \\(\\int_{-1}^{2}(x+2)\\,dx=7,5\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
     "familj": "digital_integral_tool_E_5",
     "miniräknare": true,
@@ -21797,7 +21797,7 @@ window.BANKMATO1 = [
     "t": "<p>Beskriv vilken storhet arean under grafen motsvarar och ange enhet.</p><p>a)</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"350\" height=\"220\" viewBox=\"0 0 350 220\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Kraft som funktion av sträcka\"><rect x=\"1\" y=\"1\" width=\"348\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"30\" x2=\"48.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"138.0\" y1=\"30\" x2=\"138.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"138.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"228.0\" y1=\"30\" x2=\"228.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"228.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"318.0\" y1=\"30\" x2=\"318.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"318.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"185.0\" x2=\"320\" y2=\"185.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"162.5\" x2=\"320\" y2=\"162.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"166.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"48\" y1=\"140.0\" x2=\"320\" y2=\"140.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"144.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"48\" y1=\"117.5\" x2=\"320\" y2=\"117.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"121.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"95.0\" x2=\"320\" y2=\"95.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"99.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"48\" y1=\"72.5\" x2=\"320\" y2=\"72.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"76.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"48\" y1=\"50.0\" x2=\"320\" y2=\"50.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"54.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">6</text><line x1=\"48\" y1=\"185\" x2=\"324\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"28\" x2=\"48\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 48.0 185.0 L 138.0 140.0 L 228.0 95.0 L 318.0 50.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><text x=\"10\" y=\"18\" font-size=\"12\" fill=\"#2B2527\">kraft (N)</text><text x=\"260\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2B2527\">sträcka (m)</text></svg></span><p>b)</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"350\" height=\"220\" viewBox=\"0 0 350 220\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Hastighet som funktion av tid\"><rect x=\"1\" y=\"1\" width=\"348\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"30\" x2=\"48.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"138.0\" y1=\"30\" x2=\"138.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"138.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"228.0\" y1=\"30\" x2=\"228.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"228.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"318.0\" y1=\"30\" x2=\"318.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"318.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"185.0\" x2=\"320\" y2=\"185.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"158.0\" x2=\"320\" y2=\"158.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"48\" y1=\"131.0\" x2=\"320\" y2=\"131.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"135.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"48\" y1=\"104.0\" x2=\"320\" y2=\"104.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"108.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"77.0\" x2=\"320\" y2=\"77.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"81.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"48\" y1=\"50.0\" x2=\"320\" y2=\"50.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"54.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"48\" y1=\"185\" x2=\"324\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"28\" x2=\"48\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 48.0 131.0 L 138.0 104.0 L 228.0 77.0 L 318.0 50.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><text x=\"10\" y=\"18\" font-size=\"12\" fill=\"#2B2527\">hastighet (m/s)</text><text x=\"260\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2B2527\">tid (s)</text></svg></span>",
     "s": "<p>a) Area under en kraft–sträcka-graf motsvarar <strong>arbete</strong>. Enheten är \\(\\text{N}\\cdot\\text{m}=\\text{Nm}\\).</p><p>b) Area under en hastighet–tid-graf motsvarar <strong>sträcka</strong>. Enheten är \\(\\text{m/s}\\cdot\\text{s}=\\text{m}\\).</p>",
     "familj": "integral_app_area_interpretation",
-    "miniräknare": false,
+    "miniräknare": true,
     "geogebra": false
   }
 ];
