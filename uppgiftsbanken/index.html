@@ -2686,8 +2686,8 @@ function byggHjälpmedelsfilter(){
 }
 function verktygsIkoner(x){
   const delar=[];
-  if(x?.['miniräknare']) delar.push(`<span class="verktygsikon räknare" title="Miniräknare behövs" aria-label="Miniräknare behövs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
-  if(x?.geogebra) delar.push(`<span class="verktygsikon geogebra" title="GeoGebra behövs" aria-label="GeoGebra behövs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>`);
+  if(x?.['miniräknare']) delar.push(`<span class="verktygsikon räknare" title="Miniräknare tillåten" aria-label="Miniräknare tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
+  if(x?.geogebra) delar.push(`<span class="verktygsikon geogebra" title="GeoGebra tillåtet" aria-label="GeoGebra tillåtet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>`);
   return delar.length?`<span class="verktygsikoner">${delar.join('')}</span>`:'';
 }
 
