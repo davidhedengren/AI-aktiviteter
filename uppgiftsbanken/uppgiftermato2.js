@@ -780,6 +780,21 @@ window.BANKMATO2 = [
     "familj": "sin_cos_5_12_kombination"
   },
   {
+    "id": "1.331",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionerna ges av</p><p>\\[f(x)=2\\sin(1,4x)+1\\qquad\\text{och}\\qquad g(x)=0,35x+0,5.\\]</p><p>Bestäm alla skärningspunkters x-koordinater för \\(0\\le x\\le8\\). Svara med tre decimaler.</p>",
+    "s": "<p>Skärningspunkterna fås när \\(f(x)=g(x)\\):</p><p>\\[2\\sin(1,4x)+1=0,35x+0,5.\\]</p><p>En grafisk lösning ger tre skärningar i intervallet:</p><p>\\[\\boxed{x\\approx2,153;\\ 4,965;\\ 6,058}.\\]</p>",
+    "familj": "geogebra_trig_skarning_sinus_linje_1"
+  },
+  {
     "id": "1.49",
     "kap": 1,
     "omr": "trig_formler",
@@ -975,6 +990,21 @@ window.BANKMATO2 = [
     "familj": "stralkastare_tangensmodell_svg"
   },
   {
+    "id": "1.336",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Vattendjupet i en hamn modelleras under ett dygn av</p><p>\\[d(t)=2,8+1,1\\sin\\left(\\frac{\\pi}{6}(t-1,5)\\right),\\qquad0\\le t\\le24,\\]</p><p>där \\(d\\) mäts i meter och \\(t\\) i timmar efter midnatt.</p><p>Under vilka tidsintervall är djupet större än \\(3,4\\) m? Hur lång är den sammanlagda tiden?</p>",
+    "s": "<p>Gränserna fås när \\(d(t)=3,4\\). Det ger</p><p>\\[t\\approx2,602;\\ 6,398;\\ 14,602;\\ 18,398.\\]</p><p>Grafen ligger över \\(3,4\\) m mellan den första och andra samt mellan den tredje och fjärde skärningen.</p><p>\\[\\boxed{2,602&lt;t&lt;6,398\\quad\\text{eller}\\quad14,602&lt;t&lt;18,398}.\\]</p><p>Sammanlagd tid:</p><p>\\[2(6,398-2,602)\\approx\\boxed{7,59\\text{ h}}.\\]</p>",
+    "familj": "geogebra_trigmodell_tidvatten_grans_1"
+  },
+  {
     "id": "1.61",
     "kap": 1,
     "omr": "trig_formler",
@@ -1138,6 +1168,21 @@ window.BANKMATO2 = [
     "t": "<p>Lös i intervallet \\(0\\le x&lt;2\\pi\\).</p><p>a) \\(\\cos x=\\frac12\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sin x=-\\frac{\\sqrt2}{2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos x=0\\)</p>",
     "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(x=\\pi/3,5\\pi/3\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x=5\\pi/4,7\\pi/4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(x=\\pi/4,5\\pi/4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x=\\pi/2,3\\pi/2\\)</strong>.</p>",
     "familj": "proc_trigekv_radian_standard_3"
+  },
+  {
+    "id": "1.341",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[\\sin x=0,18x\\]</p><p>för \\(0\\le x\\le10\\). Svara med tre decimaler.</p>",
+    "s": "<p>Skärningarna mellan \\(y=\\sin x\\) och \\(y=0,18x\\) ger lösningarna.</p><p>\\[\\boxed{x=0\\quad\\text{och}\\quad x\\approx2,645}.\\]</p>",
+    "familj": "geogebra_trigekv_sinus_linje_1"
   },
   {
     "id": "1.72",
@@ -1378,6 +1423,21 @@ window.BANKMATO2 = [
     "t": "<p>Figuren visar grafen till y = sin x. Punkten P ligger på x-axeln.</p><span class=\"fig\"><svg width=\"500\" height=\"420\" viewBox=\"0 0 500 420\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" role=\"img\" aria-label=\"Grafen till y = sin x med nollstället P markerat, samt ett tomt graderat koordinatsystem för egen skiss\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"418\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><text x=\"54.0\" y=\"26.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">y = sin x</text><line x1=\"54.0\" y1=\"40.0\" x2=\"54.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"104.0\" y1=\"40.0\" x2=\"104.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"154.0\" y1=\"40.0\" x2=\"154.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"204.0\" y1=\"40.0\" x2=\"204.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"254.0\" y1=\"40.0\" x2=\"254.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"304.0\" y1=\"40.0\" x2=\"304.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"354.0\" y1=\"40.0\" x2=\"354.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"404.0\" y1=\"40.0\" x2=\"404.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"454.0\" y1=\"40.0\" x2=\"454.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"190.0\" x2=\"454.0\" y2=\"190.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"143.1\" x2=\"454.0\" y2=\"143.1\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"96.2\" x2=\"454.0\" y2=\"96.2\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"49.4\" x2=\"454.0\" y2=\"49.4\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"115.0\" x2=\"454.0\" y2=\"115.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M454.0 115.0 l-8 -4 v8 z\" fill=\"#2B2527\"/><line x1=\"54.0\" y1=\"190.0\" x2=\"54.0\" y2=\"40.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M54.0 40.0 l-4 8 h8 z\" fill=\"#2B2527\"/><text x=\"458.0\" y=\"106.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#2B2527\">x</text><text x=\"62.0\" y=\"51.0\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#2B2527\">y</text><line x1=\"104.0\" y1=\"111.5\" x2=\"104.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"104.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">π/2</text><text x=\"104.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">π/2</text><line x1=\"154.0\" y1=\"111.5\" x2=\"154.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"154.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">π</text><text x=\"154.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">π</text><line x1=\"204.0\" y1=\"111.5\" x2=\"204.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"204.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">3π/2</text><text x=\"204.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3π/2</text><line x1=\"254.0\" y1=\"111.5\" x2=\"254.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"254.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">2π</text><text x=\"254.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2π</text><line x1=\"304.0\" y1=\"111.5\" x2=\"304.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"304.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">5π/2</text><text x=\"304.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">5π/2</text><line x1=\"354.0\" y1=\"111.5\" x2=\"354.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"354.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">3π</text><text x=\"354.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3π</text><line x1=\"404.0\" y1=\"111.5\" x2=\"404.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"404.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">7π/2</text><text x=\"404.0\" y=\"130.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">7π/2</text><line x1=\"454.0\" y1=\"111.5\" x2=\"454.0\" y2=\"118.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"50.5\" y1=\"161.9\" x2=\"57.5\" y2=\"161.9\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"46.0\" y=\"165.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−1</text><text x=\"46.0\" y=\"165.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−1</text><line x1=\"50.5\" y1=\"68.1\" x2=\"57.5\" y2=\"68.1\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"46.0\" y=\"71.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">1</text><text x=\"46.0\" y=\"71.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text><path d=\"M 54.00,115.00 L 54.67,114.02 L 55.33,113.04 L 56.00,112.06 L 56.67,111.08 L 57.33,110.10 L 58.00,109.13 L 58.67,108.15 L 59.33,107.18 L 60.00,106.22 L 60.67,105.25 L 61.33,104.30 L 62.00,103.34 L 62.67,102.39 L 63.33,101.45 L 64.00,100.51 L 64.67,99.58 L 65.33,98.66 L 66.00,97.74 L 66.67,96.84 L 67.33,95.93 L 68.00,95.04 L 68.67,94.16 L 69.33,93.28 L 70.00,92.42 L 70.67,91.56 L 71.33,90.72 L 72.00,89.88 L 72.67,89.06 L 73.33,88.25 L 74.00,87.45 L 74.67,86.66 L 75.33,85.88 L 76.00,85.12 L 76.67,84.37 L 77.33,83.63 L 78.00,82.91 L 78.67,82.20 L 79.33,81.51 L 80.00,80.83 L 80.67,80.17 L 81.33,79.52 L 82.00,78.88 L 82.67,78.26 L 83.33,77.66 L 84.00,77.08 L 84.67,76.51 L 85.33,75.96 L 86.00,75.42 L 86.67,74.90 L 87.33,74.41 L 88.00,73.92 L 88.67,73.46 L 89.33,73.01 L 90.00,72.59 L 90.67,72.18 L 91.33,71.79 L 92.00,71.42 L 92.67,71.06 L 93.33,70.73 L 94.00,70.42 L 94.67,70.13 L 95.33,69.85 L 96.00,69.60 L 96.67,69.36 L 97.33,69.15 L 98.00,68.96 L 98.67,68.78 L 99.33,68.63 L 100.00,68.49 L 100.67,68.38 L 101.33,68.29 L 102.00,68.22 L 102.67,68.17 L 103.33,68.14 L 104.00,68.12 L 104.67,68.14 L 105.33,68.17 L 106.00,68.22 L 106.67,68.29 L 107.33,68.38 L 108.00,68.49 L 108.67,68.63 L 109.33,68.78 L 110.00,68.96 L 110.67,69.15 L 111.33,69.36 L 112.00,69.60 L 112.67,69.85 L 113.33,70.13 L 114.00,70.42 L 114.67,70.73 L 115.33,71.06 L 116.00,71.42 L 116.67,71.79 L 117.33,72.18 L 118.00,72.59 L 118.67,73.01 L 119.33,73.46 L 120.00,73.92 L 120.67,74.41 L 121.33,74.90 L 122.00,75.42 L 122.67,75.96 L 123.33,76.51 L 124.00,77.08 L 124.67,77.66 L 125.33,78.26 L 126.00,78.88 L 126.67,79.52 L 127.33,80.17 L 128.00,80.83 L 128.67,81.51 L 129.33,82.20 L 130.00,82.91 L 130.67,83.63 L 131.33,84.37 L 132.00,85.12 L 132.67,85.88 L 133.33,86.66 L 134.00,87.45 L 134.67,88.25 L 135.33,89.06 L 136.00,89.88 L 136.67,90.72 L 137.33,91.56 L 138.00,92.42 L 138.67,93.28 L 139.33,94.16 L 140.00,95.04 L 140.67,95.93 L 141.33,96.84 L 142.00,97.74 L 142.67,98.66 L 143.33,99.58 L 144.00,100.51 L 144.67,101.45 L 145.33,102.39 L 146.00,103.34 L 146.67,104.30 L 147.33,105.25 L 148.00,106.22 L 148.67,107.18 L 149.33,108.15 L 150.00,109.13 L 150.67,110.10 L 151.33,111.08 L 152.00,112.06 L 152.67,113.04 L 153.33,114.02 L 154.00,115.00 L 154.67,115.98 L 155.33,116.96 L 156.00,117.94 L 156.67,118.92 L 157.33,119.90 L 158.00,120.87 L 158.67,121.85 L 159.33,122.82 L 160.00,123.78 L 160.67,124.75 L 161.33,125.70 L 162.00,126.66 L 162.67,127.61 L 163.33,128.55 L 164.00,129.49 L 164.67,130.42 L 165.33,131.34 L 166.00,132.26 L 166.67,133.16 L 167.33,134.07 L 168.00,134.96 L 168.67,135.84 L 169.33,136.72 L 170.00,137.58 L 170.67,138.44 L 171.33,139.28 L 172.00,140.12 L 172.67,140.94 L 173.33,141.75 L 174.00,142.55 L 174.67,143.34 L 175.33,144.12 L 176.00,144.88 L 176.67,145.63 L 177.33,146.37 L 178.00,147.09 L 178.67,147.80 L 179.33,148.49 L 180.00,149.17 L 180.67,149.83 L 181.33,150.48 L 182.00,151.12 L 182.67,151.74 L 183.33,152.34 L 184.00,152.92 L 184.67,153.49 L 185.33,154.04 L 186.00,154.58 L 186.67,155.10 L 187.33,155.59 L 188.00,156.08 L 188.67,156.54 L 189.33,156.99 L 190.00,157.41 L 190.67,157.82 L 191.33,158.21 L 192.00,158.58 L 192.67,158.94 L 193.33,159.27 L 194.00,159.58 L 194.67,159.87 L 195.33,160.15 L 196.00,160.40 L 196.67,160.64 L 197.33,160.85 L 198.00,161.04 L 198.67,161.22 L 199.33,161.37 L 200.00,161.51 L 200.67,161.62 L 201.33,161.71 L 202.00,161.78 L 202.67,161.83 L 203.33,161.86 L 204.00,161.88 L 204.67,161.86 L 205.33,161.83 L 206.00,161.78 L 206.67,161.71 L 207.33,161.62 L 208.00,161.51 L 208.67,161.37 L 209.33,161.22 L 210.00,161.04 L 210.67,160.85 L 211.33,160.64 L 212.00,160.40 L 212.67,160.15 L 213.33,159.87 L 214.00,159.58 L 214.67,159.27 L 215.33,158.94 L 216.00,158.58 L 216.67,158.21 L 217.33,157.82 L 218.00,157.41 L 218.67,156.99 L 219.33,156.54 L 220.00,156.08 L 220.67,155.59 L 221.33,155.10 L 222.00,154.58 L 222.67,154.04 L 223.33,153.49 L 224.00,152.92 L 224.67,152.34 L 225.33,151.74 L 226.00,151.12 L 226.67,150.48 L 227.33,149.83 L 228.00,149.17 L 228.67,148.49 L 229.33,147.80 L 230.00,147.09 L 230.67,146.37 L 231.33,145.63 L 232.00,144.88 L 232.67,144.12 L 233.33,143.34 L 234.00,142.55 L 234.67,141.75 L 235.33,140.94 L 236.00,140.12 L 236.67,139.28 L 237.33,138.44 L 238.00,137.58 L 238.67,136.72 L 239.33,135.84 L 240.00,134.96 L 240.67,134.07 L 241.33,133.16 L 242.00,132.26 L 242.67,131.34 L 243.33,130.42 L 244.00,129.49 L 244.67,128.55 L 245.33,127.61 L 246.00,126.66 L 246.67,125.70 L 247.33,124.75 L 248.00,123.78 L 248.67,122.82 L 249.33,121.85 L 250.00,120.87 L 250.67,119.90 L 251.33,118.92 L 252.00,117.94 L 252.67,116.96 L 253.33,115.98 L 254.00,115.00 L 254.67,114.02 L 255.33,113.04 L 256.00,112.06 L 256.67,111.08 L 257.33,110.10 L 258.00,109.13 L 258.67,108.15 L 259.33,107.18 L 260.00,106.22 L 260.67,105.25 L 261.33,104.30 L 262.00,103.34 L 262.67,102.39 L 263.33,101.45 L 264.00,100.51 L 264.67,99.58 L 265.33,98.66 L 266.00,97.74 L 266.67,96.84 L 267.33,95.93 L 268.00,95.04 L 268.67,94.16 L 269.33,93.28 L 270.00,92.42 L 270.67,91.56 L 271.33,90.72 L 272.00,89.88 L 272.67,89.06 L 273.33,88.25 L 274.00,87.45 L 274.67,86.66 L 275.33,85.88 L 276.00,85.12 L 276.67,84.37 L 277.33,83.63 L 278.00,82.91 L 278.67,82.20 L 279.33,81.51 L 280.00,80.83 L 280.67,80.17 L 281.33,79.52 L 282.00,78.88 L 282.67,78.26 L 283.33,77.66 L 284.00,77.08 L 284.67,76.51 L 285.33,75.96 L 286.00,75.42 L 286.67,74.90 L 287.33,74.41 L 288.00,73.92 L 288.67,73.46 L 289.33,73.01 L 290.00,72.59 L 290.67,72.18 L 291.33,71.79 L 292.00,71.42 L 292.67,71.06 L 293.33,70.73 L 294.00,70.42 L 294.67,70.13 L 295.33,69.85 L 296.00,69.60 L 296.67,69.36 L 297.33,69.15 L 298.00,68.96 L 298.67,68.78 L 299.33,68.63 L 300.00,68.49 L 300.67,68.38 L 301.33,68.29 L 302.00,68.22 L 302.67,68.17 L 303.33,68.14 L 304.00,68.12 L 304.67,68.14 L 305.33,68.17 L 306.00,68.22 L 306.67,68.29 L 307.33,68.38 L 308.00,68.49 L 308.67,68.63 L 309.33,68.78 L 310.00,68.96 L 310.67,69.15 L 311.33,69.36 L 312.00,69.60 L 312.67,69.85 L 313.33,70.13 L 314.00,70.42 L 314.67,70.73 L 315.33,71.06 L 316.00,71.42 L 316.67,71.79 L 317.33,72.18 L 318.00,72.59 L 318.67,73.01 L 319.33,73.46 L 320.00,73.92 L 320.67,74.41 L 321.33,74.90 L 322.00,75.42 L 322.67,75.96 L 323.33,76.51 L 324.00,77.08 L 324.67,77.66 L 325.33,78.26 L 326.00,78.88 L 326.67,79.52 L 327.33,80.17 L 328.00,80.83 L 328.67,81.51 L 329.33,82.20 L 330.00,82.91 L 330.67,83.63 L 331.33,84.37 L 332.00,85.12 L 332.67,85.88 L 333.33,86.66 L 334.00,87.45 L 334.67,88.25 L 335.33,89.06 L 336.00,89.88 L 336.67,90.72 L 337.33,91.56 L 338.00,92.42 L 338.67,93.28 L 339.33,94.16 L 340.00,95.04 L 340.67,95.93 L 341.33,96.84 L 342.00,97.74 L 342.67,98.66 L 343.33,99.58 L 344.00,100.51 L 344.67,101.45 L 345.33,102.39 L 346.00,103.34 L 346.67,104.30 L 347.33,105.25 L 348.00,106.22 L 348.67,107.18 L 349.33,108.15 L 350.00,109.13 L 350.67,110.10 L 351.33,111.08 L 352.00,112.06 L 352.67,113.04 L 353.33,114.02 L 354.00,115.00 L 354.67,115.98 L 355.33,116.96 L 356.00,117.94 L 356.67,118.92 L 357.33,119.90 L 358.00,120.87 L 358.67,121.85 L 359.33,122.82 L 360.00,123.78 L 360.67,124.75 L 361.33,125.70 L 362.00,126.66 L 362.67,127.61 L 363.33,128.55 L 364.00,129.49 L 364.67,130.42 L 365.33,131.34 L 366.00,132.26 L 366.67,133.16 L 367.33,134.07 L 368.00,134.96 L 368.67,135.84 L 369.33,136.72 L 370.00,137.58 L 370.67,138.44 L 371.33,139.28 L 372.00,140.12 L 372.67,140.94 L 373.33,141.75 L 374.00,142.55 L 374.67,143.34 L 375.33,144.12 L 376.00,144.88 L 376.67,145.63 L 377.33,146.37 L 378.00,147.09 L 378.67,147.80 L 379.33,148.49 L 380.00,149.17 L 380.67,149.83 L 381.33,150.48 L 382.00,151.12 L 382.67,151.74 L 383.33,152.34 L 384.00,152.92 L 384.67,153.49 L 385.33,154.04 L 386.00,154.58 L 386.67,155.10 L 387.33,155.59 L 388.00,156.08 L 388.67,156.54 L 389.33,156.99 L 390.00,157.41 L 390.67,157.82 L 391.33,158.21 L 392.00,158.58 L 392.67,158.94 L 393.33,159.27 L 394.00,159.58 L 394.67,159.87 L 395.33,160.15 L 396.00,160.40 L 396.67,160.64 L 397.33,160.85 L 398.00,161.04 L 398.67,161.22 L 399.33,161.37 L 400.00,161.51 L 400.67,161.62 L 401.33,161.71 L 402.00,161.78 L 402.67,161.83 L 403.33,161.86 L 404.00,161.88 L 404.67,161.86 L 405.33,161.83 L 406.00,161.78 L 406.67,161.71 L 407.33,161.62 L 408.00,161.51 L 408.67,161.37 L 409.33,161.22 L 410.00,161.04 L 410.67,160.85 L 411.33,160.64 L 412.00,160.40 L 412.67,160.15 L 413.33,159.87 L 414.00,159.58 L 414.67,159.27 L 415.33,158.94 L 416.00,158.58 L 416.67,158.21 L 417.33,157.82 L 418.00,157.41 L 418.67,156.99 L 419.33,156.54 L 420.00,156.08 L 420.67,155.59 L 421.33,155.10 L 422.00,154.58 L 422.67,154.04 L 423.33,153.49 L 424.00,152.92 L 424.67,152.34 L 425.33,151.74 L 426.00,151.12 L 426.67,150.48 L 427.33,149.83 L 428.00,149.17 L 428.67,148.49 L 429.33,147.80 L 430.00,147.09 L 430.67,146.37 L 431.33,145.63 L 432.00,144.88 L 432.67,144.12 L 433.33,143.34 L 434.00,142.55 L 434.67,141.75 L 435.33,140.94 L 436.00,140.12 L 436.67,139.28 L 437.33,138.44 L 438.00,137.58 L 438.67,136.72 L 439.33,135.84 L 440.00,134.96 L 440.67,134.07 L 441.33,133.16 L 442.00,132.26 L 442.67,131.34 L 443.33,130.42 L 444.00,129.49 L 444.67,128.55 L 445.33,127.61 L 446.00,126.66 L 446.67,125.70 L 447.33,124.75 L 448.00,123.78 L 448.67,122.82 L 449.33,121.85 L 450.00,120.87 L 450.67,119.90 L 451.33,118.92 L 452.00,117.94 L 452.67,116.96 L 453.33,115.98 L 454.00,115.00\" fill=\"none\" stroke=\"#C93A2B\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"354.0\" cy=\"115.0\" r=\"5\" fill=\"#268FA3\"/><text x=\"354.0\" y=\"103.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">P</text><text x=\"354.0\" y=\"103.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">P</text><text x=\"54.0\" y=\"222.0\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">Skissa den nya kurvan här.</text><line x1=\"54.0\" y1=\"236.0\" x2=\"54.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"104.0\" y1=\"236.0\" x2=\"104.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"154.0\" y1=\"236.0\" x2=\"154.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"204.0\" y1=\"236.0\" x2=\"204.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"254.0\" y1=\"236.0\" x2=\"254.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"304.0\" y1=\"236.0\" x2=\"304.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"354.0\" y1=\"236.0\" x2=\"354.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"404.0\" y1=\"236.0\" x2=\"404.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"454.0\" y1=\"236.0\" x2=\"454.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"386.0\" x2=\"454.0\" y2=\"386.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"339.1\" x2=\"454.0\" y2=\"339.1\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"292.2\" x2=\"454.0\" y2=\"292.2\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"245.4\" x2=\"454.0\" y2=\"245.4\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"54.0\" y1=\"311.0\" x2=\"454.0\" y2=\"311.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M454.0 311.0 l-8 -4 v8 z\" fill=\"#2B2527\"/><line x1=\"54.0\" y1=\"386.0\" x2=\"54.0\" y2=\"236.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M54.0 236.0 l-4 8 h8 z\" fill=\"#2B2527\"/><text x=\"458.0\" y=\"302.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#2B2527\">x</text><text x=\"62.0\" y=\"247.0\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#2B2527\">y</text><line x1=\"104.0\" y1=\"307.5\" x2=\"104.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"104.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">π/2</text><text x=\"104.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">π/2</text><line x1=\"154.0\" y1=\"307.5\" x2=\"154.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"154.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">π</text><text x=\"154.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">π</text><line x1=\"204.0\" y1=\"307.5\" x2=\"204.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"204.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">3π/2</text><text x=\"204.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3π/2</text><line x1=\"254.0\" y1=\"307.5\" x2=\"254.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"254.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">2π</text><text x=\"254.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2π</text><line x1=\"304.0\" y1=\"307.5\" x2=\"304.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"304.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">5π/2</text><text x=\"304.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">5π/2</text><line x1=\"354.0\" y1=\"307.5\" x2=\"354.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"354.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">3π</text><text x=\"354.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3π</text><line x1=\"404.0\" y1=\"307.5\" x2=\"404.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"404.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">7π/2</text><text x=\"404.0\" y=\"326.0\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">7π/2</text><line x1=\"454.0\" y1=\"307.5\" x2=\"454.0\" y2=\"314.5\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"50.5\" y1=\"357.9\" x2=\"57.5\" y2=\"357.9\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"46.0\" y=\"361.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−1</text><text x=\"46.0\" y=\"361.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−1</text><line x1=\"50.5\" y1=\"264.1\" x2=\"57.5\" y2=\"264.1\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"46.0\" y=\"267.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">1</text><text x=\"46.0\" y=\"267.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text></svg></span><p>a) Ange x-koordinaten för P.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Skissa \\(y=\\sin(x/2)\\) i det undre koordinatsystemet.</p>",
     "s": "<p>a) Punkten är markerad vid <strong>\\(x=3\\pi\\)</strong>.</p><p>b) <strong>Metod:</strong> Nollställena ligger vid \\(x=2n\\pi\\). En korrekt skiss ska ha rätt period, rätt amplitud och rätt läge i förhållande till x-axeln.</p><p>För den nya funktionen är perioden <strong>\\(4\\pi\\)</strong>.</p>",
     "familj": "npstil_triggraf_skissa_1"
+  },
+  {
+    "id": "1.332",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=3\\cos(0,8x-0,6)-1.\\]</p><p>Bestäm de intervall i \\(0\\le x\\le10\\) där \\(f(x)&gt;1,5\\). Ange gränserna med tre decimaler.</p>",
+    "s": "<p>Gränserna fås ur \\(f(x)=1,5\\):</p><p>\\[3\\cos(0,8x-0,6)-1=1,5.\\]</p><p>I intervallet fås</p><p>\\[x\\approx0,018;\\ 1,482;\\ 7,872;\\ 9,336.\\]</p><p>Av grafen ser man att kurvan ligger över nivån \\(1,5\\) mellan den första och andra skärningen samt mellan den tredje och fjärde.</p><p>\\[\\boxed{0,018&lt;x&lt;1,482\\quad\\text{eller}\\quad7,872&lt;x&lt;9,336}.\\]</p>",
+    "familj": "geogebra_trig_olikhet_cosinus_1"
   },
   {
     "id": "1.164",
@@ -2040,6 +2100,21 @@ window.BANKMATO2 = [
     "familj": "problem_trig_tva_modeller"
   },
   {
+    "id": "1.337",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Antalet timmar dagsljus på en plats modelleras med</p><p>\\[L(t)=12,4+5,2\\sin\\left(\\frac{2\\pi}{365}(t-80)\\right),\\qquad0\\le t\\le365,\\]</p><p>där \\(t=1\\) motsvarar årets första dag.</p><p>Bestäm mellan vilka ungefärliga dagnummer modellen ger mer än 16 timmars dagsljus.</p>",
+    "s": "<p>Gränserna fås när \\(L(t)=16\\):</p><p>\\[12,4+5,2\\sin\\left(\\frac{2\\pi}{365}(t-80)\\right)=16.\\]</p><p>De två lösningarna under året är</p><p>\\[t\\approx124,422\\quad\\text{och}\\quad t\\approx218,078.\\]</p><p>Mellan dessa tidpunkter ligger kurvan över 16.</p><p>\\[\\boxed{124&lt;t&lt;218\\text{ ungefär}}.\\]</p>",
+    "familj": "geogebra_trigmodell_dagsljus_1"
+  },
+  {
     "id": "1.128",
     "kap": 1,
     "omr": "trig_funktioner",
@@ -2053,6 +2128,21 @@ window.BANKMATO2 = [
     "t": "<p>Skriv \\(8\\sin x+15\\cos x\\) på formen \\(R\\sin(x+v)\\), där \\(R&gt;0\\)<br>för \\(0&lt;v&lt;\\pi/2\\).</p><p>Bestäm också uttryckets största värde.</p>",
     "s": "<p>Utveckla \\(R\\sin(x+v)=R\\sin x\\cos v+R\\cos x\\sin v\\).</p><p>Jämför koefficienterna:</p><p>\\[R\\cos v=8,\\qquad R\\sin v=15.\\]</p><p>Därför \\(R=\\sqrt{8^2+15^2}=17\\), \\(\\cos v=8/17\\) och \\(\\sin v=15/17\\). Alltså kan \\(v\\) skrivas \\(\\arctan(15/8)\\).</p><p><strong>\\(8\\sin x+15\\cos x=17\\sin(x+v)\\)</strong> och största värdet är <strong>17</strong>.</p>",
     "familj": "gap_sincos_kombination_3_4"
+  },
+  {
+    "id": "1.333",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>För \\(f(x)=1,8\\sin(1,3x+0,4)+0,7\\), bestäm de två minsta positiva värdena på \\(x\\) som uppfyller \\(f(x)=2\\).</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Vi löser</p><p>\\[1,8\\sin(1,3x+0,4)+0,7=2.\\]</p><p>De två minsta positiva lösningarna är</p><p>\\[\\boxed{x\\approx0,313\\quad\\text{och}\\quad x\\approx1,488}.\\]</p>",
+    "familj": "geogebra_trig_niva_sinus_1"
   },
   {
     "id": "1.129",
@@ -2143,6 +2233,21 @@ window.BANKMATO2 = [
     "t": "<p>Ange alla lösningar till ekvationen</p>\n<p>\\[\\sin 2x=\\cos x,\\]</p>\n<p>där \\(x\\) mäts i grader.</p>",
     "s": "<p>Använd formeln \\(\\sin2x=2\\sin x\\cos x\\):</p>\n<p>\\[\n2\\sin x\\cos x=\\cos x\n\\]</p>\n<p>\\[\n\\cos x(2\\sin x-1)=0.\n\\]</p>\n<p>Alltså gäller antingen</p>\n<p>\\[\n\\cos x=0 \\Rightarrow x=90^\\circ+180^\\circ n,\n\\]</p>\n<p>eller</p>\n<p>\\[\n\\sin x=\\frac12 \\Rightarrow\nx=30^\\circ+360^\\circ n \\quad\\text{eller}\\quad\nx=150^\\circ+360^\\circ n.\n\\]</p>\n<p><strong>Alla lösningar fås av dessa tre olika lösningar, där \\(n\\in\\mathbb Z\\).</strong></p>",
     "familj": "kallmaterial_trigekv_sin2x_cosx"
+  },
+  {
+    "id": "1.342",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[\\cos(1,7x)=0,25x-0,4\\]</p><p>för \\(0\\le x\\le6\\). Svara med tre decimaler.</p>",
+    "s": "<p>En grafisk lösning ger tre skärningar:</p><p>\\[\\boxed{x\\approx1,011;\\ 2,979;\\ 4,203}.\\]</p>",
+    "familj": "geogebra_trigekv_cos_linje_1"
   },
   {
     "id": "1.135",
@@ -2910,6 +3015,21 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_exp_2"
   },
   {
+    "id": "2.274",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=\\ln x+0,4x^2,\\qquad x&gt;0.\\]</p><p>Bestäm de punkter på kurvan där tangenten har lutningen 2. Ange även tangenternas ekvationer. Svara med tre decimaler.</p>",
+    "s": "<p>\\[f'(x)=\\frac1x+0,8x.\\]</p><p>Sätt \\(f'(x)=2\\). Då fås två lösningar:</p><p>\\[x\\approx0,691\\quad\\text{och}\\quad x\\approx1,809.\\]</p><p>Punkternas y-värden är ungefär \\(-0,179\\) respektive \\(1,902\\).</p><p>Tangenterna har formen \\(y=2x+m\\). Därför fås</p><p>\\[\\boxed{y\\approx2x-1,561}\\]</p><p>och</p><p>\\[\\boxed{y\\approx2x-1,716}.\\]</p>",
+    "familj": "geogebra_derivata_ln_tangent_lutning_1"
+  },
+  {
     "id": "2.28",
     "kap": 2,
     "omr": "derivator_specialfunktioner",
@@ -3028,6 +3148,21 @@ window.BANKMATO2 = [
     "t": "<p>Derivera med kedjeregeln.</p><p>a) \\((3x+1)^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((2-x)^7\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sqrt{4x+3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((x^2+1)^4\\)</p>",
     "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(15(3x+1)^4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-7(2-x)^6\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{2}{\\sqrt{4x+3}}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(8x(x^2+1)^3\\)</strong>.</p>",
     "familj": "proc_kedja_potenser_1"
+  },
+  {
+    "id": "2.279",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[f(u)=\\sin u,\\qquad g(x)=\\frac{x^2}{3}+0,5x.\\]</p><p>Funktionen \\(h\\) definieras av \\(h(x)=f(g(x))\\).</p><p>a) Bestäm alla lösningar till \\(h(x)=0,6\\) för \\(0\\le x\\le4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(h'(x)\\) i den minsta av lösningarna.</p>",
+    "s": "<p>a) \\[h(x)=\\sin\\left(\\frac{x^2}{3}+0,5x\\right).\\]</p><p>En grafisk lösning ger</p><p>\\[x\\approx0,829;\\ 2,088;\\ 3,870.\\]</p><p>b) Kedjeregeln ger</p><p>\\[h'(x)=\\cos(g(x))\\left(\\frac{2x}{3}+0,5\\right).\\]</p><p>Vid \\(x\\approx0,829\\) fås</p><p>\\[\\boxed{h'(x)\\approx0,842}.\\]</p>",
+    "familj": "geogebra_sammansatt_sinus_kvadrat_1"
   },
   {
     "id": "2.36",
@@ -3300,6 +3435,21 @@ window.BANKMATO2 = [
     "familj": "gap_asymptot_parametrar"
   },
   {
+    "id": "2.264",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=2x-1+\\frac{4}{x+1}.\\]</p><p>a) Ange funktionens asymptoter.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm funktionens maximi- och minimipunkt med tre decimaler.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Har funktionen några reella nollställen?</p>",
+    "s": "<p>a) Nämnaren ger den lodräta asymptoten \\(\\boxed{x=-1}\\). När \\(|x|\\) blir stor går bråktermen mot 0, så den sneda asymptoten är \\(\\boxed{y=2x-1}\\).</p><p>b) \\[f'(x)=2-\\frac{4}{(x+1)^2}.\\]</p><p>\\(f'(x)=0\\) ger \\(x=-1\\pm\\sqrt2\\). Punkterna blir ungefär</p><p>\\[\\boxed{(-2,414;-8,657)}\\quad\\text{maximipunkt}\\]</p><p>och</p><p>\\[\\boxed{(0,414;2,657)}\\quad\\text{minimipunkt}.\\]</p><p>c) Grafen skär inte x-axeln. Algebraiskt ger \\(f(x)=0\\) ekvationen \\(2x^2+x+3=0\\), som saknar reella lösningar.</p>",
+    "familj": "geogebra_asymptot_snedd_extrema_1"
+  },
+  {
     "id": "2.53",
     "kap": 2,
     "omr": "deriveringsregler",
@@ -3375,6 +3525,21 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_trig_kedja"
   },
   {
+    "id": "2.275",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen</p><p>\\[f(x)=e^{-0,3x}\\sin x\\]</p><p>har flera extrempunkter.</p><p>Bestäm den första maximipunkten för \\(x&gt;0\\). Svara med tre decimaler.</p>",
+    "s": "<p>Produktregeln ger</p><p>\\[f'(x)=e^{-0,3x}(\\cos x-0,3\\sin x).\\]</p><p>Eftersom exponentialfaktorn aldrig är noll får vi</p><p>\\[\\cos x-0,3\\sin x=0.\\]</p><p>Den första positiva lösningen är \\(x\\approx1,279\\). Då</p><p>\\[f(x)\\approx0,653.\\]</p><p>Den första maximipunkten är \\(\\boxed{(1,279;0,653)}\\).</p>",
+    "familj": "geogebra_derivata_exp_sin_max_1"
+  },
+  {
     "id": "2.57",
     "kap": 2,
     "omr": "deriveringsregler",
@@ -3403,6 +3568,21 @@ window.BANKMATO2 = [
     "t": "<p>En förenklad modell för effekten från en vindturbin är</p><p>\\[P(v)=v(20-v)^2,\\qquad0\\le v\\le20,\\]</p><p>där \\(v\\) är vindhastigheten i en viss skala.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"500\" height=\"290\" viewBox=\"0 0 500 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"funktionsgraf\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"288\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55.0\" y1=\"25\" x2=\"55.0\" y2=\"248\" stroke=\"#D9E6E9\"/><text x=\"55.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0</text><line x1=\"160.0\" y1=\"25\" x2=\"160.0\" y2=\"248\" stroke=\"#D9E6E9\"/><text x=\"160.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">5</text><line x1=\"265.0\" y1=\"25\" x2=\"265.0\" y2=\"248\" stroke=\"#D9E6E9\"/><text x=\"265.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">10</text><line x1=\"370.0\" y1=\"25\" x2=\"370.0\" y2=\"248\" stroke=\"#D9E6E9\"/><text x=\"370.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">15</text><line x1=\"475.0\" y1=\"25\" x2=\"475.0\" y2=\"248\" stroke=\"#D9E6E9\"/><text x=\"475.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">20</text><line x1=\"55\" y1=\"248.0\" x2=\"475\" y2=\"248.0\" stroke=\"#D9E6E9\"/><text x=\"47\" y=\"251.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0</text><line x1=\"55\" y1=\"179.4\" x2=\"475\" y2=\"179.4\" stroke=\"#D9E6E9\"/><text x=\"47\" y=\"182.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">400</text><line x1=\"55\" y1=\"110.8\" x2=\"475\" y2=\"110.8\" stroke=\"#D9E6E9\"/><text x=\"47\" y=\"113.8\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">800</text><line x1=\"55\" y1=\"42.2\" x2=\"475\" y2=\"42.2\" stroke=\"#D9E6E9\"/><text x=\"47\" y=\"45.2\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1200</text><line x1=\"55\" y1=\"248.0\" x2=\"480\" y2=\"248.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"55.0\" y1=\"20\" x2=\"55.0\" y2=\"248\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><polyline fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.3\" points=\"55.0,248.0 56.0,244.6 57.1,241.2 58.1,237.9 59.2,234.6 60.2,231.3 61.3,228.0 62.4,224.8 63.4,221.6 64.5,218.5 65.5,215.4 66.5,212.3 67.6,209.3 68.7,206.3 69.7,203.3 70.8,200.3 71.8,197.4 72.8,194.5 73.9,191.7 75.0,188.9 76.0,186.1 77.0,183.3 78.1,180.6 79.2,177.9 80.2,175.2 81.2,172.6 82.3,170.0 83.3,167.5 84.4,164.9 85.5,162.4 86.5,159.9 87.6,157.5 88.6,155.1 89.7,152.7 90.7,150.3 91.8,148.0 92.8,145.7 93.8,143.5 94.9,141.2 95.9,139.0 97.0,136.8 98.0,134.7 99.1,132.6 100.2,130.5 101.2,128.4 102.2,126.4 103.3,124.4 104.3,122.4 105.4,120.5 106.5,118.6 107.5,116.7 108.5,114.8 109.6,113.0 110.7,111.2 111.7,109.4 112.8,107.6 113.8,105.9 114.8,104.2 115.9,102.5 117.0,100.9 118.0,99.3 119.0,97.7 120.1,96.1 121.1,94.6 122.2,93.1 123.2,91.6 124.3,90.1 125.4,88.7 126.4,87.3 127.5,85.9 128.5,84.5 129.6,83.2 130.6,81.9 131.6,80.6 132.7,79.4 133.8,78.1 134.8,76.9 135.9,75.7 136.9,74.6 137.9,73.5 139.0,72.3 140.1,71.3 141.1,70.2 142.2,69.2 143.2,68.1 144.2,67.2 145.3,66.2 146.3,65.2 147.4,64.3 148.4,63.4 149.5,62.5 150.6,61.7 151.6,60.9 152.7,60.1 153.7,59.3 154.8,58.5 155.8,57.8 156.8,57.0 157.9,56.3 158.9,55.7 160.0,55.0 161.1,54.4 162.1,53.8 163.2,53.2 164.2,52.6 165.2,52.1 166.3,51.5 167.3,51.0 168.4,50.5 169.4,50.1 170.5,49.6 171.6,49.2 172.6,48.8 173.7,48.4 174.7,48.1 175.8,47.7 176.8,47.4 177.8,47.1 178.9,46.8 179.9,46.5 181.0,46.3 182.1,46.0 183.1,45.8 184.2,45.6 185.2,45.5 186.2,45.3 187.3,45.2 188.3,45.0 189.4,44.9 190.5,44.9 191.5,44.8 192.5,44.7 193.6,44.7 194.7,44.7 195.7,44.7 196.8,44.7 197.8,44.8 198.8,44.8 199.9,44.9 201.0,45.0 202.0,45.1 203.0,45.2 204.1,45.3 205.2,45.5 206.2,45.6 207.2,45.8 208.3,46.0 209.3,46.2 210.4,46.5 211.5,46.7 212.5,47.0 213.5,47.3 214.6,47.5 215.7,47.8 216.7,48.2 217.8,48.5 218.8,48.9 219.8,49.2 220.9,49.6 222.0,50.0 223.0,50.4 224.1,50.8 225.1,51.2 226.2,51.7 227.2,52.1 228.2,52.6 229.3,53.1 230.3,53.6 231.4,54.1 232.4,54.6 233.5,55.2 234.6,55.7 235.6,56.3 236.7,56.9 237.7,57.4 238.8,58.0 239.8,58.6 240.8,59.3 241.9,59.9 242.9,60.5 244.0,61.2 245.1,61.9 246.1,62.5 247.2,63.2 248.2,63.9 249.2,64.6 250.3,65.4 251.3,66.1 252.4,66.8 253.4,67.6 254.5,68.3 255.6,69.1 256.6,69.9 257.6,70.7 258.7,71.5 259.8,72.3 260.8,73.1 261.9,73.9 262.9,74.8 263.9,75.6 265.0,76.5 266.1,77.3 267.1,78.2 268.1,79.1 269.2,80.0 270.2,80.9 271.3,81.8 272.4,82.7 273.4,83.6 274.4,84.5 275.5,85.4 276.6,86.4 277.6,87.3 278.6,88.3 279.7,89.3 280.8,90.2 281.8,91.2 282.9,92.2 283.9,93.2 284.9,94.2 286.0,95.2 287.1,96.2 288.1,97.2 289.1,98.2 290.2,99.2 291.2,100.2 292.3,101.3 293.4,102.3 294.4,103.4 295.4,104.4 296.5,105.5 297.6,106.5 298.6,107.6 299.6,108.7 300.7,109.7 301.8,110.8 302.8,111.9 303.9,113.0 304.9,114.1 305.9,115.2 307.0,116.3 308.1,117.4 309.1,118.5 310.1,119.6 311.2,120.7 312.2,121.8 313.3,122.9 314.3,124.0 315.4,125.1 316.4,126.3 317.5,127.4 318.6,128.5 319.6,129.6 320.7,130.8 321.7,131.9 322.8,133.0 323.8,134.2 324.8,135.3 325.9,136.5 326.9,137.6 328.0,138.7 329.1,139.9 330.1,141.0 331.2,142.2 332.2,143.3 333.2,144.4 334.3,145.6 335.3,146.7 336.4,147.9 337.4,149.0 338.5,150.2 339.6,151.3 340.6,152.4 341.7,153.6 342.7,154.7 343.8,155.9 344.8,157.0 345.8,158.1 346.9,159.3 347.9,160.4 349.0,161.5 350.1,162.7 351.1,163.8 352.2,164.9 353.2,166.1 354.2,167.2 355.3,168.3 356.3,169.4 357.4,170.5 358.4,171.6 359.5,172.8 360.6,173.9 361.6,175.0 362.7,176.1 363.7,177.2 364.8,178.3 365.8,179.4 366.8,180.4 367.9,181.5 368.9,182.6 370.0,183.7 371.1,184.7 372.1,185.8 373.2,186.9 374.2,187.9 375.2,189.0 376.3,190.0 377.3,191.1 378.4,192.1 379.4,193.1 380.5,194.2 381.6,195.2 382.6,196.2 383.7,197.2 384.7,198.2 385.8,199.2 386.8,200.2 387.8,201.2 388.9,202.2 389.9,203.1 391.0,204.1 392.1,205.0 393.1,206.0 394.1,206.9 395.2,207.9 396.2,208.8 397.3,209.7 398.4,210.6 399.4,211.5 400.4,212.4 401.5,213.3 402.6,214.2 403.6,215.1 404.6,215.9 405.7,216.8 406.8,217.7 407.8,218.5 408.9,219.3 409.9,220.1 410.9,221.0 412.0,221.8 413.1,222.5 414.1,223.3 415.1,224.1 416.2,224.9 417.2,225.6 418.3,226.4 419.4,227.1 420.4,227.8 421.4,228.5 422.5,229.2 423.6,229.9 424.6,230.6 425.6,231.3 426.7,231.9 427.8,232.6 428.8,233.2 429.9,233.8 430.9,234.5 431.9,235.1 433.0,235.6 434.1,236.2 435.1,236.8 436.1,237.3 437.2,237.9 438.2,238.4 439.3,238.9 440.4,239.4 441.4,239.9 442.4,240.4 443.5,240.9 444.6,241.3 445.6,241.7 446.6,242.2 447.7,242.6 448.8,243.0 449.8,243.4 450.9,243.7 451.9,244.1 452.9,244.4 454.0,244.7 455.1,245.1 456.1,245.3 457.1,245.6 458.2,245.9 459.2,246.1 460.3,246.4 461.4,246.6 462.4,246.8 463.4,247.0 464.5,247.2 465.6,247.3 466.6,247.5 467.6,247.6 468.7,247.7 469.8,247.8 470.8,247.9 471.9,247.9 472.9,248.0 473.9,248.0 475.0,248.0\"/><text x=\"467\" y=\"43\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">P(v)</text></svg></span><p>Bestäm den vindhastighet som ger maximal effekt och beräkna maxeffekten.</p>",
     "s": "<p>\\[P'(v)=(20-v)^2-2v(20-v)=(20-v)(20-3v).\\]</p><p>Derivatan är 0 för \\(v=20\\) och \\(v=20/3\\). Ändpunkterna ger \\(P(0)=P(20)=0\\), medan</p><p>\\[P(20/3)=\\frac{20}{3}\\left(\\frac{40}{3}\\right)^2=\\frac{32000}{27}\\approx1185,2.\\]</p><p><strong>Maximal effekt fås vid \\(\\boxed{v=20/3\\approx6,67}\\).</strong></p>",
     "familj": "vindturbin_optimering_modell"
+  },
+  {
+    "id": "2.269",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En regnränna tillverkas av en plåt med en 20 cm bred botten och två sidostycken som vardera är 10 cm breda. Sidostyckena viks upp med vinkeln \\(v\\) mot botten.</p><p>Tvärsnittsarean kan skrivas</p><p>\\[A(v)=200\\sin v+100\\sin v\\cos v,\\qquad0&lt;v&lt;\\frac\\pi2.\\]</p><p>Bestäm den vinkel som ger största möjliga tvärsnittsarea och ange även arean.</p>",
+    "s": "<p>Vi söker maximum för \\(A(v)\\) i intervallet.</p><p>\\[A'(v)=200\\cos v+100\\cos2v.\\]</p><p>Ekvationen \\(A'(v)=0\\) ger den relevanta lösningen</p><p>\\[v\\approx1,196\\text{ rad}\\approx68,5^\\circ.\\]</p><p>Då är</p><p>\\[A(v)\\approx220,18.\\]</p><p>Alltså \\(\\boxed{v\\approx68,5^\\circ}\\) och största arean är cirka \\(\\boxed{220\\text{ cm}^2}\\).</p>",
+    "familj": "geogebra_optimering_regnranna_1"
   },
   {
     "id": "2.59",
@@ -3855,6 +4035,21 @@ window.BANKMATO2 = [
     "familj": "asymptot_konstruera"
   },
   {
+    "id": "2.265",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>För \\(x&gt;1\\) ges</p><p>\\[f(x)=\\ln(x-1)+\\frac{2}{x-1}.\\]</p><p>a) Ange den lodräta asymptoten.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm funktionens minsta värde.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm skärningarna med linjen \\(y=2\\). Svara med tre decimaler.</p>",
+    "s": "<p>a) \\(\\boxed{x=1}\\).</p><p>b) Derivatan är</p><p>\\[f'(x)=\\frac1{x-1}-\\frac2{(x-1)^2}=\\frac{x-3}{(x-1)^2}.\\]</p><p>Minimum fås vid \\(x=3\\):</p><p>\\[f(3)=\\ln2+1\\approx\\boxed{1,693}.\\]</p><p>c) Ekvationen \\(f(x)=2\\) ger två lösningar:</p><p>\\[\\boxed{x=2,000\\quad\\text{och}\\quad x\\approx5,922}.\\]</p>",
+    "familj": "geogebra_log_asymptot_skarning_1"
+  },
+  {
     "id": "2.87",
     "kap": 2,
     "omr": "derivator_specialfunktioner",
@@ -3943,6 +4138,21 @@ window.BANKMATO2 = [
     "t": "<p>Derivera.</p><p>a) \\(\\sin(4x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos(3x-1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin(x^2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos(2x^2+1)\\)</p>",
     "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(4\\cos4x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-3\\sin(3x-1)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(2x\\cos(x^2)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-4x\\sin(2x^2+1)\\)</strong>.</p>",
     "familj": "proc_kedja_trig_1"
+  },
+  {
+    "id": "2.280",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[g(x)=0,2x^2+\\sin x\\]</p><p>och</p><p>\\[h(x)=e^{-g(x)}.\\]</p><p>Bestäm maximipunkten för \\(h\\) för \\(-4\\le x\\le4\\).</p>",
+    "s": "<p>Kedjeregeln ger</p><p>\\[h'(x)=-e^{-g(x)}g'(x).\\]</p><p>Eftersom exponentialfaktorn är positiv fås extrempunkter när</p><p>\\[g'(x)=0,4x+\\cos x=0.\\]</p><p>I intervallet finns lösningen</p><p>\\[x\\approx-1,111.\\]</p><p>Då är</p><p>\\[h(x)\\approx1,914.\\]</p><p>Detta är intervallets maximipunkt: \\(\\boxed{(-1,111;1,914)}\\).</p>",
+    "familj": "geogebra_sammansatt_exp_max_1"
   },
   {
     "id": "2.93",
@@ -4125,6 +4335,21 @@ window.BANKMATO2 = [
     "familj": "gap_deriv_trig_stationara"
   },
   {
+    "id": "2.276",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=e^{0,2x}-\\ln(x+2),\\qquad x&gt;-2.\\]</p><p>Bestäm funktionens extrempunkt och avgör om den är en maximi- eller minimipunkt.</p>",
+    "s": "<p>\\[f'(x)=0,2e^{0,2x}-\\frac1{x+2}.\\]</p><p>Ekvationen \\(f'(x)=0\\) ger</p><p>\\[x\\approx1,618.\\]</p><p>Då är \\(f(x)\\approx0,096\\).</p><p>Derivatan går från negativ till positiv, så punkten är en minimipunkt:</p><p>\\[\\boxed{(1,618;0,096)}.\\]</p>",
+    "familj": "geogebra_derivata_exp_ln_extrem_1"
+  },
+  {
     "id": "2.105",
     "kap": 2,
     "omr": "grafer_asymptoter",
@@ -4258,6 +4483,21 @@ window.BANKMATO2 = [
     "t": "<p>En kurva ges av</p><p>\\[y=\\frac{2}{x-1}+x+2.\\]</p><p>Rita in kurvans asymptoter i koordinatsystemet.</p><span class=\"fig\"><svg width=\"510\" height=\"340\" viewBox=\"0 0 510 340\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" role=\"img\" aria-label=\"Graderat koordinatsystem för att skissa y = 2/(x − 1) + x + 2\"><rect x=\"1\" y=\"1\" width=\"508\" height=\"338\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"46.0\" y1=\"30.0\" x2=\"46.0\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"80.8\" y1=\"30.0\" x2=\"80.8\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"115.7\" y1=\"30.0\" x2=\"115.7\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"150.5\" y1=\"30.0\" x2=\"150.5\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"185.3\" y1=\"30.0\" x2=\"185.3\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"220.2\" y1=\"30.0\" x2=\"220.2\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"255.0\" y1=\"30.0\" x2=\"255.0\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"289.8\" y1=\"30.0\" x2=\"289.8\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"324.7\" y1=\"30.0\" x2=\"324.7\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"359.5\" y1=\"30.0\" x2=\"359.5\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"394.3\" y1=\"30.0\" x2=\"394.3\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"429.2\" y1=\"30.0\" x2=\"429.2\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"464.0\" y1=\"30.0\" x2=\"464.0\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"302.0\" x2=\"464.0\" y2=\"302.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"271.8\" x2=\"464.0\" y2=\"271.8\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"241.6\" x2=\"464.0\" y2=\"241.6\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"211.3\" x2=\"464.0\" y2=\"211.3\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"181.1\" x2=\"464.0\" y2=\"181.1\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"150.9\" x2=\"464.0\" y2=\"150.9\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"120.7\" x2=\"464.0\" y2=\"120.7\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"90.4\" x2=\"464.0\" y2=\"90.4\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"60.2\" x2=\"464.0\" y2=\"60.2\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"30.0\" x2=\"464.0\" y2=\"30.0\" stroke=\"#EEF1F3\" stroke-width=\"1\"/><line x1=\"46.0\" y1=\"181.1\" x2=\"464.0\" y2=\"181.1\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"255.0\" y1=\"302.0\" x2=\"255.0\" y2=\"30.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><path d=\"M464.0 181.1 l-8 -4 v8 z\" fill=\"#2B2527\"/><path d=\"M255.0 30.0 l-4 8 h8 z\" fill=\"#2B2527\"/><text x=\"468.0\" y=\"172.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">x</text><text x=\"264.0\" y=\"41.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">y</text><line x1=\"46.0\" y1=\"177.6\" x2=\"46.0\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"46.0\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−6</text><text x=\"46.0\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−6</text><line x1=\"80.8\" y1=\"177.6\" x2=\"80.8\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"80.8\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−5</text><text x=\"80.8\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−5</text><line x1=\"115.7\" y1=\"177.6\" x2=\"115.7\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"115.7\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−4</text><text x=\"115.7\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−4</text><line x1=\"150.5\" y1=\"177.6\" x2=\"150.5\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"150.5\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−3</text><text x=\"150.5\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−3</text><line x1=\"185.3\" y1=\"177.6\" x2=\"185.3\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"185.3\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−2</text><text x=\"185.3\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−2</text><line x1=\"220.2\" y1=\"177.6\" x2=\"220.2\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"220.2\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−1</text><text x=\"220.2\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−1</text><line x1=\"289.8\" y1=\"177.6\" x2=\"289.8\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"289.8\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">1</text><text x=\"289.8\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text><line x1=\"324.7\" y1=\"177.6\" x2=\"324.7\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"324.7\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">2</text><text x=\"324.7\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2</text><line x1=\"359.5\" y1=\"177.6\" x2=\"359.5\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"359.5\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">3</text><text x=\"359.5\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3</text><line x1=\"394.3\" y1=\"177.6\" x2=\"394.3\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"394.3\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">4</text><text x=\"394.3\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">4</text><line x1=\"429.2\" y1=\"177.6\" x2=\"429.2\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"429.2\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">5</text><text x=\"429.2\" y=\"196.1\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">5</text><line x1=\"464.0\" y1=\"177.6\" x2=\"464.0\" y2=\"184.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"251.5\" y1=\"302.0\" x2=\"258.5\" y2=\"302.0\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"305.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−8</text><text x=\"247.0\" y=\"305.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−8</text><line x1=\"251.5\" y1=\"271.8\" x2=\"258.5\" y2=\"271.8\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"275.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−6</text><text x=\"247.0\" y=\"275.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−6</text><line x1=\"251.5\" y1=\"241.6\" x2=\"258.5\" y2=\"241.6\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"245.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−4</text><text x=\"247.0\" y=\"245.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−4</text><line x1=\"251.5\" y1=\"211.3\" x2=\"258.5\" y2=\"211.3\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"214.8\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">−2</text><text x=\"247.0\" y=\"214.8\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">−2</text><line x1=\"251.5\" y1=\"150.9\" x2=\"258.5\" y2=\"150.9\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"154.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">2</text><text x=\"247.0\" y=\"154.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2</text><line x1=\"251.5\" y1=\"120.7\" x2=\"258.5\" y2=\"120.7\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"124.2\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">4</text><text x=\"247.0\" y=\"124.2\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">4</text><line x1=\"251.5\" y1=\"90.4\" x2=\"258.5\" y2=\"90.4\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"93.9\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">6</text><text x=\"247.0\" y=\"93.9\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">6</text><line x1=\"251.5\" y1=\"60.2\" x2=\"258.5\" y2=\"60.2\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"63.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">8</text><text x=\"247.0\" y=\"63.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"251.5\" y1=\"30.0\" x2=\"258.5\" y2=\"30.0\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"247.0\" y=\"33.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linejoin=\"round\" fill=\"#fff\">10</text><text x=\"247.0\" y=\"33.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">10</text></svg></span>",
     "s": "<p>Den lodräta asymptoten fås där nämnaren blir 0: <strong>\\(x=1\\)</strong>.</p><p>Bråktermen går mot 0 när \\(|x|\\) blir stor. Därför närmar sig kurvan linjen <strong>\\(y=x+2\\)</strong>.</p>",
     "familj": "npstil_asymptoter_rita_1"
+  },
+  {
+    "id": "2.266",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=e^{-x}+0,5x.\\]</p><p>a) Bestäm funktionens minimipunkt.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm alla lösningar till \\(f(x)=1\\). Svara med tre decimaler.</p>",
+    "s": "<p>a) \\[f'(x)=-e^{-x}+0,5.\\]</p><p>\\(f'(x)=0\\) ger \\(e^{-x}=0,5\\), alltså \\(x=\\ln2\\approx0,693\\). Då</p><p>\\[f(x)\\approx0,847.\\]</p><p>Minimipunkten är \\(\\boxed{(0,693;0,847)}\\).</p><p>b) Skärningarna med \\(y=1\\) är</p><p>\\[\\boxed{x=0\\quad\\text{och}\\quad x\\approx1,594}.\\]</p>",
+    "familj": "geogebra_exp_linje_min_skarning_1"
   },
   {
     "id": "2.112",
@@ -4423,6 +4663,21 @@ window.BANKMATO2 = [
     "t": "<p>En rektangulär kartong ska göras av ett papper som är 30 cm × 20 cm. Kvadrater med sidan \\(x\\) cm klipps bort i hörnen och kanterna viks upp.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"430\" height=\"280\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n\n<rect x=\"65\" y=\"45\" width=\"300\" height=\"190\" fill=\"#F4F5F7\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<g fill=\"#FBF0EE\" stroke=\"#B43123\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\">\n<rect x=\"65\" y=\"45\" width=\"42\" height=\"42\"/><rect x=\"323\" y=\"45\" width=\"42\" height=\"42\"/><rect x=\"65\" y=\"193\" width=\"42\" height=\"42\"/><rect x=\"323\" y=\"193\" width=\"42\" height=\"42\"/>\n</g>\n<line x1=\"65\" y1=\"250\" x2=\"365\" y2=\"250\" stroke=\"#268FA3\" stroke-width=\"1.6\"/>\n<text x=\"215\" y=\"269\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">30 cm</text>\n<line x1=\"385\" y1=\"45\" x2=\"385\" y2=\"235\" stroke=\"#268FA3\" stroke-width=\"1.6\"/>\n<text x=\"352\" y=\"144\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">20 cm</text>\n<text x=\"85\" y=\"70\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">x</text>\n<text x=\"215\" y=\"145\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">hörnen klipps bort</text>\n\n</svg></span><p>Bestäm \\(x\\) så att kartongens volym blir så stor som möjligt. Svara med två decimaler.</p>",
     "s": "<p>Efter vikningen blir höjden \\(x\\), längden \\(30-2x\\) och bredden \\(20-2x\\). Därför</p><p>\\[V(x)=x(30-2x)(20-2x),\\qquad 0&lt;x&lt;10.\\]</p><p>Utveckla eller derivera som produkt:</p><p>\\[V'(x)=4(3x^2-50x+150).\\]</p><p>Sätt \\(V'(x)=0\\):</p><p>\\[3x^2-50x+150=0.\\]</p><p>\\[x=\\frac{25\\pm5\\sqrt7}{3}.\\]</p><p>Den större lösningen ligger utanför intervallet \\(0&lt;x&lt;10\\). Den användbara lösningen är</p><p>\\[x=\\frac{25-5\\sqrt7}{3}\\approx3,92.\\]</p><p>Volymen går mot 0 vid intervallets ändar, så denna inre extrempunkt ger maximum.</p><p><strong>\\(\\boxed{x\\approx3,92\\text{ cm}}\\).</strong></p>",
     "familj": "problem_derivata_kartong"
+  },
+  {
+    "id": "2.270",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Ett akvarium utan lock ska rymma 120 liter och ha kvadratisk botten. Låt bottensidan vara \\(x\\) cm.</p><p>Bestäm de mått som gör glasytan så liten som möjligt.</p>",
+    "s": "<p>Volymen är \\(120\\text{ liter}=120000\\text{ cm}^3\\). Om höjden är \\(h\\) gäller</p><p>\\[x^2h=120000\\Rightarrow h=\\frac{120000}{x^2}.\\]</p><p>Glasytan består av botten och fyra sidoytor:</p><p>\\[A(x)=x^2+4xh=x^2+\\frac{480000}{x}.\\]</p><p>Minimum för \\(x&gt;0\\) fås vid</p><p>\\[x\\approx62,145\\text{ cm}.\\]</p><p>Då är</p><p>\\[h\\approx31,072\\text{ cm}.\\]</p><p>Alltså ungefär \\(\\boxed{62,1\\times62,1\\text{ cm}}\\) i botten och \\(\\boxed{31,1\\text{ cm}}\\) högt.</p>",
+    "familj": "geogebra_optimering_akvarium_1"
   },
   {
     "id": "2.122",
@@ -4785,6 +5040,21 @@ window.BANKMATO2 = [
     "familj": "proc_sammansatta_funktioner_eval"
   },
   {
+    "id": "2.281",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[f(u)=\\sqrt{u+4},\\qquad g(x)=\\cos x+\\frac{x}{2}.\\]</p><p>Bestäm lösningarna till \\(f(g(x))=2,2\\) för \\(0\\le x\\le5\\). Svara med tre decimaler.</p>",
+    "s": "<p>Vi söker skärningarna för</p><p>\\[\\sqrt{\\cos x+\\frac{x}{2}+4}=2,2.\\]</p><p>I intervallet fås två lösningar:</p><p>\\[\\boxed{x\\approx1,461\\quad\\text{och}\\quad x\\approx3,531}.\\]</p>",
+    "familj": "geogebra_sammansatt_rot_cos_1"
+  },
+  {
     "id": "2.145",
     "kap": 2,
     "omr": "kedjeregel_sammansatta",
@@ -4813,6 +5083,21 @@ window.BANKMATO2 = [
     "t": "<p>Visa med hjälp av derivata att</p><p>\\[\\ln x\\le x-1\\]</p><p>för alla \\(x&gt;0\\), och bestäm när likhet gäller.</p>",
     "s": "<p>Sätt \\(g(x)=x-1-\\ln x\\), \\(x&gt;0\\).</p><p>\\[g'(x)=1-\\frac1x=\\frac{x-1}{x}.\\]</p><p>Derivatan är negativ för \\(0&lt;x&lt;1\\), noll vid \\(x=1\\) och positiv för \\(x&gt;1\\). Därför har \\(g\\) ett minsta värde på hela definitionsmängden vid \\(x=1\\).</p><p>\\(g(1)=0\\), alltså \\(g(x)\\ge0\\). Då</p><p>\\[\\boxed{\\ln x\\le x-1}.\\]</p><p>Likhet gäller endast för \\(\\boxed{x=1}\\).</p>",
     "familj": "bevis_ln_olikhet_derivata_a"
+  },
+  {
+    "id": "2.277",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>För</p><p>\\[f(x)=\\ln(x^2+1)+0,1x\\]</p><p>bestäm alla punkter där tangentens lutning är \\(0,8\\). Svara med tre decimaler.</p>",
+    "s": "<p>\\[f'(x)=\\frac{2x}{x^2+1}+0,1.\\]</p><p>Vi löser \\(f'(x)=0,8\\). Det ger</p><p>\\[x\\approx0,408\\quad\\text{och}\\quad x\\approx2,449.\\]</p><p>Y-värdena är ungefär \\(0,195\\) och \\(2,190\\).</p><p>Punkterna är alltså</p><p>\\[\\boxed{(0,408;0,195)\\quad\\text{och}\\quad(2,449;2,190)}.\\]</p>",
+    "familj": "geogebra_derivata_ln_kvadrat_lutning_1"
   },
   {
     "id": "2.147",
@@ -4993,6 +5278,21 @@ window.BANKMATO2 = [
     "t": "<p>För \\(f(x)=x^4-4x^2\\):</p><p>a) bestäm \\(f''(x)\\),<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm intervallen där \\(f''(x)&gt;0\\) respektive \\(f''(x)&lt;0\\),<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) bestäm de \\(x\\)-värden där \\(f''\\) byter tecken.</p>",
     "s": "<p>\\(f'(x)=4x^3-8x\\) och</p><p>\\[f''(x)=12x^2-8.\\]</p><p>Sätt \\(f''(x)=0\\):</p><p>\\[12x^2-8=0\\Rightarrow x^2=\\frac23\\Rightarrow x=\\pm\\sqrt{\\frac23}.\\]</p><p>För \\(|x|&gt;\\sqrt{2/3}\\) är \\(f''(x)&gt;0\\). För \\(|x|&lt;\\sqrt{2/3}\\) är \\(f''(x)&lt;0\\).</p><p>Tecknet på \\(f''\\) ändras vid båda dessa \\(x\\)-värden.</p><p><strong>\\(\\boxed{x=\\pm\\sqrt{2/3}}\\)</strong>.</p>",
     "familj": "proc_andraderivata_konkavitet_2"
+  },
+  {
+    "id": "2.267",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=\\frac{x^2+1}{x-2}.\\]</p><p>a) Bestäm funktionens lodräta och sneda asymptot.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm funktionens två extrempunkter. Svara med tre decimaler.</p>",
+    "s": "<p>Polynomdivision ger</p><p>\\[f(x)=x+2+\\frac5{x-2}.\\]</p><p>Alltså är asymptoterna \\(\\boxed{x=2}\\) och \\(\\boxed{y=x+2}\\).</p><p>Derivatan är</p><p>\\[f'(x)=1-\\frac5{(x-2)^2}.\\]</p><p>\\(f'(x)=0\\) ger \\(x=2\\pm\\sqrt5\\). Punkterna blir</p><p>\\[\\boxed{(-0,236;-0,472)}\\quad\\text{och}\\quad\\boxed{(4,236;8,472)}.\\]</p>",
+    "familj": "geogebra_rationell_asymptot_extrema_1"
   },
   {
     "id": "2.159",
@@ -5355,6 +5655,21 @@ window.BANKMATO2 = [
     "familj": "proc_area_teckenbyte_1"
   },
   {
+    "id": "3.239",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Kurvorna</p><p>\\[y=\\sin x\\qquad\\text{och}\\qquad y=0,2x+0,2\\]</p><p>skär varandra två gånger för \\(0&lt;x&lt;3\\).</p><p>Bestäm arean som begränsas av kurvorna. Svara med tre decimaler.</p>",
+    "s": "<p>Skärningspunkternas x-koordinater är</p><p>\\[x\\approx0,253\\quad\\text{och}\\quad x\\approx2,395.\\]</p><p>Mellan dem ligger sinuskurvan över linjen. Arean blir</p><p>\\[A=\\int_{0,253}^{2,395}\\left(\\sin x-(0,2x+0,2)\\right)dx\\approx\\boxed{0,707}.\\]</p>",
+    "familj": "geogebra_area_sinus_linje_numerisk_1"
+  },
+  {
     "id": "3.23",
     "kap": 3,
     "omr": "integralberakning",
@@ -5490,6 +5805,21 @@ window.BANKMATO2 = [
     "familj": "problem_tathet_parabel"
   },
   {
+    "id": "3.254",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En kontinuerlig slumpvariabel \\(X\\) har täthetsfunktionen</p><p>\\[f(x)=ke^{-0,5x},\\qquad0\\le x\\le4,\\]</p><p>och \\(f(x)=0\\) annars.</p><p>a) Bestäm \\(k\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(P(X&gt;2,5)\\).</p>",
+    "s": "<p>a) Arean under en täthetsfunktion ska vara 1:</p><p>\\[k\\int_0^4e^{-0,5x}dx=1.\\]</p><p>Det ger \\(\\boxed{k\\approx0,5783}\\).</p><p>b)</p><p>\\[P(X&gt;2,5)=\\int_{2,5}^4f(x)dx\\approx\\boxed{0,175}.\\]</p>",
+    "familj": "geogebra_tathet_exp_avkortad_1"
+  },
+  {
     "id": "3.31",
     "kap": 3,
     "omr": "area_integraler",
@@ -5548,6 +5878,21 @@ window.BANKMATO2 = [
     "t": "<p>Beräkna.</p><p>a) \\(\\int_0^2(3x^2+1)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^{\\pi/2}\\cos x\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_1^e\\frac1x\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_0^1e^x\\,dx\\)</p>",
     "s": "<p><strong>Metod:</strong> Bestäm först en primitiv funktion och sätt sedan in den övre och den undre gränsen.</p><p>a) \\(\\int(3x^2+1)dx=x^3+x\\), så \\([x^3+x]_0^2=8+2=\\boxed{10}\\).</p><p>b) \\(\\int\\cos x\\,dx=\\sin x\\), så \\([\\sin x]_0^{\\pi/2}=1-0=\\boxed{1}\\).</p><p>c) För \\(x&gt;0\\) är \\(\\int\\frac1x dx=\\ln x\\), så \\([\\ln x]_1^e=1-0=\\boxed{1}\\).</p><p>d) \\([e^x]_0^1=e-1=\\boxed{e-1}\\).</p>",
     "familj": "integral_rutin_fyra"
+  },
+  {
+    "id": "3.234",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_0^2 e^{-x^2}\\,dx\\]</p><p>med tre decimaler.</p>",
+    "s": "<p>Integralen saknar en enkel primitiv funktion med de vanliga funktioner som används i kursen. En numerisk beräkning ger</p><p>\\[\\boxed{\\int_0^2 e^{-x^2}\\,dx\\approx0,882}.\\]</p>",
+    "familj": "geogebra_integral_numerisk_gauss_1"
   },
   {
     "id": "3.148",
@@ -5790,6 +6135,21 @@ window.BANKMATO2 = [
     "familj": "npstil_integral_produktregel_1"
   },
   {
+    "id": "3.235",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm integralen</p><p>\\[\\int_0^\\pi \\sin\\left(\\frac{x^2}{2}\\right)\\,dx\\]</p><p>med tre decimaler.</p>",
+    "s": "<p>En numerisk beräkning ger</p><p>\\[\\boxed{\\int_0^\\pi \\sin\\left(\\frac{x^2}{2}\\right)\\,dx\\approx0,846}.\\]</p>",
+    "familj": "geogebra_integral_numerisk_sin_x2_1"
+  },
+  {
     "id": "3.45",
     "kap": 3,
     "omr": "integralberakning",
@@ -5895,6 +6255,21 @@ window.BANKMATO2 = [
     "familj": "reservoar_nettoflode_c"
   },
   {
+    "id": "3.244",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Regnets intensitet under ett tiotimmarsregn modelleras av</p><p>\\[r(t)=3,2\\sin\\left(\\frac{\\pi t}{10}\\right)+0,4t,\\qquad0\\le t\\le10,\\]</p><p>där \\(r\\) mäts i mm/h och \\(t\\) i timmar.</p><p>Beräkna hur mycket regn som faller totalt.</p>",
+    "s": "<p>Den totala regnmängden fås genom att integrera intensiteten:</p><p>\\[R=\\int_0^{10}r(t)\\,dt.\\]</p><p>Numeriskt fås</p><p>\\[R\\approx\\boxed{40,37\\text{ mm}}.\\]</p>",
+    "familj": "geogebra_integral_regnmodell_1"
+  },
+  {
     "id": "3.52",
     "kap": 3,
     "omr": "rotationsvolymer",
@@ -5923,6 +6298,21 @@ window.BANKMATO2 = [
     "t": "<p>Ett område i första kvadranten begränsas av kurvan \\(y=x^4\\), linjen \\(y=2\\) och y-axeln. Området roteras kring y-axeln.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Område i första kvadranten som ska roteras kring y-axeln\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><polygon points=\"55.0,260.0 55.0,125.7 173.9,125.7 173.9,125.7 172.9,130.2 171.9,134.5 170.9,138.8 169.9,142.9 168.9,146.9 167.9,150.8 166.9,154.6 165.9,158.3 164.9,162.0 163.9,165.5 162.9,168.9 161.9,172.2 160.9,175.5 159.9,178.6 158.9,181.7 157.9,184.6 156.9,187.5 155.9,190.3 154.9,193.0 153.9,195.7 152.9,198.2 151.9,200.7 150.9,203.1 149.9,205.5 148.9,207.7 147.9,209.9 146.9,212.0 145.9,214.1 144.9,216.1 143.9,218.0 142.9,219.8 141.9,221.6 140.9,223.4 139.9,225.0 138.9,226.7 137.9,228.2 136.9,229.7 135.9,231.2 134.9,232.6 133.9,233.9 132.9,235.2 131.9,236.5 130.9,237.7 130.0,238.8 129.0,239.9 128.0,241.0 127.0,242.0 126.0,243.0 125.0,243.9 124.0,244.8 123.0,245.7 122.0,246.5 121.0,247.3 120.0,248.0 119.0,248.8 118.0,249.5 117.0,250.1 116.0,250.7 115.0,251.3 114.0,251.9 113.0,252.4 112.0,252.9 111.0,253.4 110.0,253.9 109.0,254.3 108.0,254.7 107.0,255.1 106.0,255.5 105.0,255.8 104.0,256.1 103.0,256.4 102.0,256.7 101.0,257.0 100.0,257.3 99.0,257.5 98.0,257.7 97.0,257.9 96.0,258.1 95.0,258.3 94.0,258.5 93.0,258.6 92.0,258.7 91.0,258.9 90.0,259.0 89.0,259.1 88.0,259.2 87.0,259.3 86.0,259.4 85.0,259.5 84.0,259.5 83.0,259.6 82.0,259.6 81.0,259.7 80.0,259.7 79.0,259.8 78.0,259.8 77.0,259.8 76.0,259.9 75.0,259.9 74.0,259.9 73.0,259.9 72.0,259.9 71.0,260.0 70.0,260.0 69.0,260.0 68.0,260.0 67.0,260.0 66.0,260.0 65.0,260.0 64.0,260.0 63.0,260.0 62.0,260.0 61.0,260.0 60.0,260.0 59.0,260.0 58.0,260.0 57.0,260.0 56.0,260.0 55.0,260.0\" fill=\"#E7F1F3\"/><line x1=\"55.0\" y1=\"260.0\" x2=\"55.0\" y2=\"25\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"55.0\" y1=\"260.0\" x2=\"375\" y2=\"260.0\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"55.0\" y1=\"125.7\" x2=\"173.9\" y2=\"125.7\" stroke=\"#65707B\" stroke-width=\"1.6\"/><polyline points=\"55.0,260.0 56.0,260.0 57.0,260.0 58.0,260.0 59.0,260.0 60.0,260.0 61.0,260.0 62.0,260.0 63.0,260.0 64.0,260.0 65.0,260.0 66.0,260.0 67.0,260.0 68.0,260.0 69.0,260.0 70.0,260.0 71.0,260.0 72.0,259.9 73.0,259.9 74.0,259.9 75.0,259.9 76.0,259.9 77.0,259.8 78.0,259.8 79.0,259.8 80.0,259.7 81.0,259.7 82.0,259.6 83.0,259.6 84.0,259.5 85.0,259.5 86.0,259.4 87.0,259.3 88.0,259.2 89.0,259.1 90.0,259.0 91.0,258.9 92.0,258.7 93.0,258.6 94.0,258.5 95.0,258.3 96.0,258.1 97.0,257.9 98.0,257.7 99.0,257.5 100.0,257.3 101.0,257.0 102.0,256.7 103.0,256.4 104.0,256.1 105.0,255.8 106.0,255.5 107.0,255.1 108.0,254.7 109.0,254.3 110.0,253.9 111.0,253.4 112.0,252.9 113.0,252.4 114.0,251.9 115.0,251.3 116.0,250.7 117.0,250.1 118.0,249.5 119.0,248.8 120.0,248.0 121.0,247.3 122.0,246.5 123.0,245.7 124.0,244.8 125.0,243.9 126.0,243.0 127.0,242.0 128.0,241.0 129.0,239.9 130.0,238.8 130.9,237.7 131.9,236.5 132.9,235.2 133.9,233.9 134.9,232.6 135.9,231.2 136.9,229.7 137.9,228.2 138.9,226.7 139.9,225.0 140.9,223.4 141.9,221.6 142.9,219.8 143.9,218.0 144.9,216.1 145.9,214.1 146.9,212.0 147.9,209.9 148.9,207.7 149.9,205.5 150.9,203.1 151.9,200.7 152.9,198.2 153.9,195.7 154.9,193.0 155.9,190.3 156.9,187.5 157.9,184.6 158.9,181.7 159.9,178.6 160.9,175.5 161.9,172.2 162.9,168.9 163.9,165.5 164.9,162.0 165.9,158.3 166.9,154.6 167.9,150.8 168.9,146.9 169.9,142.9 170.9,138.8 171.9,134.5 172.9,130.2 173.9,125.7\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.3\"/><text x=\"63.0\" y=\"118.7\" font-family=\"sans-serif\" font-size=\"12\">y=2</text><text x=\"367\" y=\"253.0\" font-family=\"sans-serif\" font-size=\"11\">x</text><text x=\"62.0\" y=\"36\" font-family=\"sans-serif\" font-size=\"11\">y</text></svg></span><p>Volymen kan skrivas</p><p>\\[V=\\pi\\int_{0}^{2}g(y)\\,dy.\\]</p><p>Bestäm funktionen \\(g\\).</p>",
     "s": "<p>När området roteras kring y-axeln är radien av en skiva lika med x-värdet. Skriv därför först \\(x\\) som funktion av \\(y\\):</p><p>\\[x=y^{1/4}.\\]</p><p>Skivans area är \\(\\pi x^2\\), så uttrycket inne i integralen blir</p><p>\\[g(y)=x^2=\\boxed{\\sqrt y}.\\]</p>",
     "familj": "npstil_rotation_bestam_g_5"
+  },
+  {
+    "id": "3.249",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området under kurvan</p><p>\\[y=e^{-x^2},\\qquad0\\le x\\le1,5\\]</p><p>roteras ett varv kring x-axeln.</p><p>Bestäm rotationskroppens volym med tre decimaler.</p>",
+    "s": "<p>Vid rotation kring x-axeln gäller</p><p>\\[V=\\pi\\int_0^{1,5}y^2\\,dx=\\pi\\int_0^{1,5}e^{-2x^2}\\,dx.\\]</p><p>Numeriskt:</p><p>\\[\\boxed{V\\approx1,963}.\\]</p>",
+    "familj": "geogebra_rotation_exp_x2_1"
   },
   {
     "id": "3.53",
@@ -6073,6 +6463,21 @@ window.BANKMATO2 = [
     "t": "<p>Området under \\(y=4-x^2\\) från \\(x=0\\) till \\(x=2\\) ska delas i två lika stora areor av linjen \\(x=a\\).</p><p>Bestäm \\(a\\) med minst tre decimaler. Digitalt verktyg får användas.</p>",
     "s": "<p>Hela arean är</p><p>\\[\\int_0^2(4-x^2)\\,dx=\\left[4x-\\frac{x^3}{3}\\right]_0^2=\\frac{16}{3}.\\]</p><p>Halva arean är därför \\(8/3\\), så</p><p>\\[4a-\\frac{a^3}{3}=\\frac83.\\]</p><p>Detta ger \\(a^3-12a+8=0\\). Den lösning som ligger i \\([0,2]\\) är</p><p><strong>\\(\\boxed{a\\approx0,695}\\)</strong>.</p>",
     "familj": "area_halvering_parameter_c"
+  },
+  {
+    "id": "3.240",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området begränsas av y-axeln och kurvorna</p><p>\\[y=e^{-x}\\qquad\\text{och}\\qquad y=0,25x.\\]</p><p>Bestäm områdets area med tre decimaler.</p>",
+    "s": "<p>Kurvorna skär varandra vid</p><p>\\[x\\approx1,202.\\]</p><p>På intervallet från 0 till skärningen ligger \\(e^{-x}\\) över linjen. Därför</p><p>\\[A=\\int_0^{1,202}\\left(e^{-x}-0,25x\\right)dx\\approx\\boxed{0,519}.\\]</p>",
+    "familj": "geogebra_area_exp_linje_1"
   },
   {
     "id": "3.63",
@@ -6315,6 +6720,21 @@ window.BANKMATO2 = [
     "familj": "npstil_integral_produktregel_2"
   },
   {
+    "id": "3.236",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm</p><p>\\[\\int_1^4 \\frac{\\ln(x^2+1)}{x+1}\\,dx\\]</p><p>med tre decimaler.</p>",
+    "s": "<p>Funktionen som integreras är kontinuerlig på intervallet. Numerisk integration ger</p><p>\\[\\boxed{1,597}.\\]</p>",
+    "familj": "geogebra_integral_numerisk_ln_kvot_1"
+  },
+  {
     "id": "3.76",
     "kap": 3,
     "omr": "integral_tillampningar",
@@ -6343,6 +6763,21 @@ window.BANKMATO2 = [
     "t": "<p>En slumpvariabel har täthetsfunktionen \\(f(x)=2x\\) för \\(0\\le x\\le1\\).</p><p>Bestäm \\(P(0,2\\le X\\le0,7)\\).</p>",
     "s": "<p>\\[P(0,2\\le X\\le0,7)=\\int_{0,2}^{0,7}2x dx=[x^2]_{0,2}^{0,7}=0,49-0,04=\\boxed{0,45}.\\]</p>",
     "familj": "tathet_2x_intervall"
+  },
+  {
+    "id": "3.255",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En kontinuerlig slumpvariabel har täthetsfunktionen</p><p>\\[f(x)=k(1+x^2),\\qquad0\\le x\\le2,\\]</p><p>och \\(f(x)=0\\) annars.</p><p>a) Bestäm \\(k\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm medianen \\(m\\), alltså det tal som uppfyller \\(P(X\\le m)=0,5\\). Svara med tre decimaler.</p>",
+    "s": "<p>a) \\[k\\int_0^2(1+x^2)dx=1\\Rightarrow k=\\boxed{\\frac3{14}\\approx0,2143}.\\]</p><p>b) Medianen uppfyller</p><p>\\[\\int_0^m\\frac3{14}(1+x^2)dx=0,5.\\]</p><p>Numerisk lösning ger</p><p>\\[\\boxed{m\\approx1,406}.\\]</p>",
+    "familj": "geogebra_tathet_median_kubik_1"
   },
   {
     "id": "3.78",
@@ -6390,6 +6825,21 @@ window.BANKMATO2 = [
     "familj": "area_triangel_integral"
   },
   {
+    "id": "3.241",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Kurvorna</p><p>\\[y=\\ln(x+1)\\qquad\\text{och}\\qquad y=0,4x\\]</p><p>begränsar tillsammans ett område för \\(x\\ge0\\).</p><p>Bestäm arean med tre decimaler.</p>",
+    "s": "<p>Kurvorna skär varandra vid \\(x=0\\) och</p><p>\\[x\\approx4,047.\\]</p><p>Mellan skärningarna ligger \\(\\ln(x+1)\\) över linjen. Alltså</p><p>\\[A=\\int_0^{4,047}\\left(\\ln(x+1)-0,4x\\right)dx\\approx\\boxed{0,847}.\\]</p>",
+    "familj": "geogebra_area_ln_linje_1"
+  },
+  {
     "id": "3.81",
     "kap": 3,
     "omr": "integral_tillampningar",
@@ -6433,6 +6883,21 @@ window.BANKMATO2 = [
     "t": "<p>Inflödet till en tank är \\(q(t)=30-2t\\) liter/minut<br>för \\(0\\le t\\le10\\).</p><p>a) Hur många liter rinner in under de 10 minuterna?<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Om tanken innehåller 200 liter från början, hur mycket finns efter 10 minuter om inget rinner ut?</p>",
     "s": "<p>a) \\(\\int_0^{10}(30-2t)dt=[30t-t^2]_0^{10}=300-100=\\boxed{200\\text{ L}}\\).</p><p>b) \\(200+200=\\boxed{400\\text{ L}}\\).</p>",
     "familj": "proc_integral_inflode_2"
+  },
+  {
+    "id": "3.245",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Effekten hos en maskin under åtta timmar modelleras av</p><p>\\[P(t)=2,5+1,2\\sin\\left(\\frac{\\pi t}{6}\\right)+0,08t^2\\]</p><p>kW.</p><p>Bestäm den energi som maskinen använder under de åtta timmarna.</p>",
+    "s": "<p>Energin i kWh fås av</p><p>\\[E=\\int_0^8P(t)\\,dt.\\]</p><p>Beräkningen ger</p><p>\\[\\boxed{E\\approx37,09\\text{ kWh}}.\\]</p>",
+    "familj": "geogebra_integral_effekt_blandad_1"
   },
   {
     "id": "3.84",
@@ -6735,6 +7200,21 @@ window.BANKMATO2 = [
     "familj": "gap_tathet_triangel_svg"
   },
   {
+    "id": "3.256",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En kontinuerlig slumpvariabel har täthetsfunktionen</p><p>\\[f(x)=\\frac12\\sin x,\\qquad0\\le x\\le\\pi.\\]</p><p>Bestäm den 75:e percentilen \\(q\\), alltså det tal som uppfyller \\(P(X\\le q)=0,75\\).</p>",
+    "s": "<p>Vi löser</p><p>\\[\\int_0^q\\frac12\\sin x\\,dx=0,75.\\]</p><p>Det ger</p><p>\\[\\frac12(1-\\cos q)=0,75\\Rightarrow\\cos q=-0,5.\\]</p><p>På intervallet är</p><p>\\[\\boxed{q=\\frac{2\\pi}{3}\\approx2,094}.\\]</p>",
+    "familj": "geogebra_tathet_percentil_sinus_1"
+  },
+  {
     "id": "3.104",
     "kap": 3,
     "omr": "integralberakning",
@@ -6793,6 +7273,21 @@ window.BANKMATO2 = [
     "t": "<p>Området i första kvadranten mellan kurvorna</p>\n<p>\\[\ny=x\n\\quad\\text{och}\\quad\ny=x^3\n\\]</p>\n<p>roteras ett varv kring y-axeln.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"440\" height=\"270\" viewBox=\"0 0 440 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Område mellan y lika med x och y lika med x kubik som roteras kring y-axeln\">\n<rect x=\"1\" y=\"1\" width=\"438\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"60.0\" y1=\"25\" x2=\"60.0\" y2=\"230\" stroke=\"#D9E6E9\"/>\n<text x=\"60.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0</text>\n<line x1=\"60\" y1=\"230.0\" x2=\"400\" y2=\"230.0\" stroke=\"#D9E6E9\"/>\n<line x1=\"190.8\" y1=\"25\" x2=\"190.8\" y2=\"230\" stroke=\"#D9E6E9\"/>\n<text x=\"190.8\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0,5</text>\n<line x1=\"60\" y1=\"148.0\" x2=\"400\" y2=\"148.0\" stroke=\"#D9E6E9\"/>\n<text x=\"52\" y=\"151.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0,5</text>\n<line x1=\"321.5\" y1=\"25\" x2=\"321.5\" y2=\"230\" stroke=\"#D9E6E9\"/>\n<text x=\"321.5\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text>\n<line x1=\"60\" y1=\"66.0\" x2=\"400\" y2=\"66.0\" stroke=\"#D9E6E9\"/>\n<text x=\"52\" y=\"69.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text>\n<line x1=\"60\" y1=\"230\" x2=\"400\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<line x1=\"60\" y1=\"25\" x2=\"60\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<polygon points=\"60.0,230.0 61.3,229.2 62.6,228.4 63.9,227.5 65.2,226.7 66.5,225.9 67.8,225.1 69.2,224.3 70.5,223.4 71.8,222.6 73.1,221.8 74.4,221.0 75.7,220.2 77.0,219.3 78.3,218.5 79.6,217.7 80.9,216.9 82.2,216.1 83.5,215.2 84.8,214.4 86.2,213.6 87.5,212.8 88.8,212.0 90.1,211.1 91.4,210.3 92.7,209.5 94.0,208.7 95.3,207.9 96.6,207.0 97.9,206.2 99.2,205.4 100.5,204.6 101.8,203.8 103.2,202.9 104.5,202.1 105.8,201.3 107.1,200.5 108.4,199.7 109.7,198.8 111.0,198.0 112.3,197.2 113.6,196.4 114.9,195.6 116.2,194.7 117.5,193.9 118.8,193.1 120.2,192.3 121.5,191.5 122.8,190.6 124.1,189.8 125.4,189.0 126.7,188.2 128.0,187.4 129.3,186.5 130.6,185.7 131.9,184.9 133.2,184.1 134.5,183.3 135.8,182.4 137.2,181.6 138.5,180.8 139.8,180.0 141.1,179.2 142.4,178.3 143.7,177.5 145.0,176.7 146.3,175.9 147.6,175.1 148.9,174.2 150.2,173.4 151.5,172.6 152.8,171.8 154.2,171.0 155.5,170.1 156.8,169.3 158.1,168.5 159.4,167.7 160.7,166.9 162.0,166.0 163.3,165.2 164.6,164.4 165.9,163.6 167.2,162.8 168.5,161.9 169.8,161.1 171.2,160.3 172.5,159.5 173.8,158.7 175.1,157.8 176.4,157.0 177.7,156.2 179.0,155.4 180.3,154.6 181.6,153.7 182.9,152.9 184.2,152.1 185.5,151.3 186.8,150.5 188.2,149.6 189.5,148.8 190.8,148.0 192.1,147.2 193.4,146.4 194.7,145.5 196.0,144.7 197.3,143.9 198.6,143.1 199.9,142.3 201.2,141.4 202.5,140.6 203.8,139.8 205.2,139.0 206.5,138.2 207.8,137.3 209.1,136.5 210.4,135.7 211.7,134.9 213.0,134.1 214.3,133.2 215.6,132.4 216.9,131.6 218.2,130.8 219.5,130.0 220.8,129.1 222.2,128.3 223.5,127.5 224.8,126.7 226.1,125.9 227.4,125.0 228.7,124.2 230.0,123.4 231.3,122.6 232.6,121.8 233.9,120.9 235.2,120.1 236.5,119.3 237.8,118.5 239.2,117.7 240.5,116.8 241.8,116.0 243.1,115.2 244.4,114.4 245.7,113.6 247.0,112.7 248.3,111.9 249.6,111.1 250.9,110.3 252.2,109.5 253.5,108.6 254.8,107.8 256.2,107.0 257.5,106.2 258.8,105.4 260.1,104.5 261.4,103.7 262.7,102.9 264.0,102.1 265.3,101.3 266.6,100.4 267.9,99.6 269.2,98.8 270.5,98.0 271.8,97.2 273.2,96.3 274.5,95.5 275.8,94.7 277.1,93.9 278.4,93.1 279.7,92.2 281.0,91.4 282.3,90.6 283.6,89.8 284.9,89.0 286.2,88.1 287.5,87.3 288.8,86.5 290.2,85.7 291.5,84.9 292.8,84.0 294.1,83.2 295.4,82.4 296.7,81.6 298.0,80.8 299.3,79.9 300.6,79.1 301.9,78.3 303.2,77.5 304.5,76.7 305.8,75.8 307.2,75.0 308.5,74.2 309.8,73.4 311.1,72.6 312.4,71.7 313.7,70.9 315.0,70.1 316.3,69.3 317.6,68.5 318.9,67.6 320.2,66.8 321.5,66.0 321.5,66.0 320.2,68.4 318.9,70.9 317.6,73.3 316.3,75.6 315.0,78.0 313.7,80.3 312.4,82.6 311.1,84.9 309.8,87.2 308.5,89.4 307.2,91.6 305.8,93.8 304.5,95.9 303.2,98.1 301.9,100.2 300.6,102.3 299.3,104.4 298.0,106.4 296.7,108.4 295.4,110.4 294.1,112.4 292.8,114.4 291.5,116.3 290.2,118.2 288.8,120.1 287.5,122.0 286.2,123.9 284.9,125.7 283.6,127.5 282.3,129.3 281.0,131.1 279.7,132.8 278.4,134.5 277.1,136.2 275.8,137.9 274.5,139.6 273.2,141.2 271.8,142.8 270.5,144.4 269.2,146.0 267.9,147.6 266.6,149.1 265.3,150.7 264.0,152.2 262.7,153.7 261.4,155.1 260.1,156.6 258.8,158.0 257.5,159.4 256.2,160.8 254.8,162.2 253.5,163.5 252.2,164.9 250.9,166.2 249.6,167.5 248.3,168.8 247.0,170.1 245.7,171.3 244.4,172.5 243.1,173.7 241.8,174.9 240.5,176.1 239.2,177.3 237.8,178.4 236.5,179.6 235.2,180.7 233.9,181.8 232.6,182.9 231.3,183.9 230.0,185.0 228.7,186.0 227.4,187.0 226.1,188.0 224.8,189.0 223.5,190.0 222.2,190.9 220.8,191.9 219.5,192.8 218.2,193.7 216.9,194.6 215.6,195.5 214.3,196.3 213.0,197.2 211.7,198.0 210.4,198.8 209.1,199.6 207.8,200.4 206.5,201.2 205.2,202.0 203.8,202.7 202.5,203.5 201.2,204.2 199.9,204.9 198.6,205.6 197.3,206.3 196.0,206.9 194.7,207.6 193.4,208.2 192.1,208.9 190.8,209.5 189.5,210.1 188.2,210.7 186.8,211.3 185.5,211.9 184.2,212.4 182.9,213.0 181.6,213.5 180.3,214.0 179.0,214.6 177.7,215.1 176.4,215.5 175.1,216.0 173.8,216.5 172.5,217.0 171.2,217.4 169.8,217.8 168.5,218.3 167.2,218.7 165.9,219.1 164.6,219.5 163.3,219.9 162.0,220.3 160.7,220.6 159.4,221.0 158.1,221.4 156.8,221.7 155.5,222.0 154.2,222.3 152.8,222.7 151.5,223.0 150.2,223.3 148.9,223.6 147.6,223.8 146.3,224.1 145.0,224.4 143.7,224.6 142.4,224.9 141.1,225.1 139.8,225.3 138.5,225.6 137.2,225.8 135.8,226.0 134.5,226.2 133.2,226.4 131.9,226.6 130.6,226.8 129.3,226.9 128.0,227.1 126.7,227.3 125.4,227.4 124.1,227.6 122.8,227.7 121.5,227.9 120.2,228.0 118.8,228.1 117.5,228.3 116.2,228.4 114.9,228.5 113.6,228.6 112.3,228.7 111.0,228.8 109.7,228.9 108.4,229.0 107.1,229.0 105.8,229.1 104.5,229.2 103.2,229.3 101.8,229.3 100.5,229.4 99.2,229.4 97.9,229.5 96.6,229.5 95.3,229.6 94.0,229.6 92.7,229.7 91.4,229.7 90.1,229.8 88.8,229.8 87.5,229.8 86.2,229.8 84.8,229.9 83.5,229.9 82.2,229.9 80.9,229.9 79.6,229.9 78.3,229.9 77.0,230.0 75.7,230.0 74.4,230.0 73.1,230.0 71.8,230.0 70.5,230.0 69.2,230.0 67.8,230.0 66.5,230.0 65.2,230.0 63.9,230.0 62.6,230.0 61.3,230.0 60.0,230.0\" fill=\"#DCEFF2\" stroke=\"none\"/>\n<polyline points=\"60.00,230.00 61.31,229.18 62.62,228.36 63.92,227.54 65.23,226.72 66.54,225.90 67.85,225.08 69.15,224.26 70.46,223.44 71.77,222.62 73.08,221.80 74.38,220.98 75.69,220.16 77.00,219.34 78.31,218.52 79.62,217.70 80.92,216.88 82.23,216.06 83.54,215.24 84.85,214.42 86.15,213.60 87.46,212.78 88.77,211.96 90.08,211.14 91.38,210.32 92.69,209.50 94.00,208.68 95.31,207.86 96.62,207.04 97.92,206.22 99.23,205.40 100.54,204.58 101.85,203.76 103.15,202.94 104.46,202.12 105.77,201.30 107.08,200.48 108.38,199.66 109.69,198.84 111.00,198.02 112.31,197.20 113.62,196.38 114.92,195.56 116.23,194.74 117.54,193.92 118.85,193.10 120.15,192.28 121.46,191.46 122.77,190.64 124.08,189.82 125.38,189.00 126.69,188.18 128.00,187.36 129.31,186.54 130.62,185.72 131.92,184.90 133.23,184.08 134.54,183.26 135.85,182.44 137.15,181.62 138.46,180.80 139.77,179.98 141.08,179.16 142.38,178.34 143.69,177.52 145.00,176.70 146.31,175.88 147.62,175.06 148.92,174.24 150.23,173.42 151.54,172.60 152.85,171.78 154.15,170.96 155.46,170.14 156.77,169.32 158.08,168.50 159.38,167.68 160.69,166.86 162.00,166.04 163.31,165.22 164.62,164.40 165.92,163.58 167.23,162.76 168.54,161.94 169.85,161.12 171.15,160.30 172.46,159.48 173.77,158.66 175.08,157.84 176.38,157.02 177.69,156.20 179.00,155.38 180.31,154.56 181.62,153.74 182.92,152.92 184.23,152.10 185.54,151.28 186.85,150.46 188.15,149.64 189.46,148.82 190.77,148.00 192.08,147.18 193.38,146.36 194.69,145.54 196.00,144.72 197.31,143.90 198.62,143.08 199.92,142.26 201.23,141.44 202.54,140.62 203.85,139.80 205.15,138.98 206.46,138.16 207.77,137.34 209.08,136.52 210.38,135.70 211.69,134.88 213.00,134.06 214.31,133.24 215.62,132.42 216.92,131.60 218.23,130.78 219.54,129.96 220.85,129.14 222.15,128.32 223.46,127.50 224.77,126.68 226.08,125.86 227.38,125.04 228.69,124.22 230.00,123.40 231.31,122.58 232.62,121.76 233.92,120.94 235.23,120.12 236.54,119.30 237.85,118.48 239.15,117.66 240.46,116.84 241.77,116.02 243.08,115.20 244.38,114.38 245.69,113.56 247.00,112.74 248.31,111.92 249.62,111.10 250.92,110.28 252.23,109.46 253.54,108.64 254.85,107.82 256.15,107.00 257.46,106.18 258.77,105.36 260.08,104.54 261.38,103.72 262.69,102.90 264.00,102.08 265.31,101.26 266.62,100.44 267.92,99.62 269.23,98.80 270.54,97.98 271.85,97.16 273.15,96.34 274.46,95.52 275.77,94.70 277.08,93.88 278.38,93.06 279.69,92.24 281.00,91.42 282.31,90.60 283.62,89.78 284.92,88.96 286.23,88.14 287.54,87.32 288.85,86.50 290.15,85.68 291.46,84.86 292.77,84.04 294.08,83.22 295.38,82.40 296.69,81.58 298.00,80.76 299.31,79.94 300.62,79.12 301.92,78.30 303.23,77.48 304.54,76.66 305.85,75.84 307.15,75.02 308.46,74.20 309.77,73.38 311.08,72.56 312.38,71.74 313.69,70.92 315.00,70.10 316.31,69.28 317.62,68.46 318.92,67.64 320.23,66.82 321.54,66.00\" fill=\"none\" stroke=\"#5C575E\" stroke-width=\"1.8\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n<polyline points=\"60.00,230.00 61.31,230.00 62.62,230.00 63.92,230.00 65.23,230.00 66.54,230.00 67.85,230.00 69.15,229.99 70.46,229.99 71.77,229.99 73.08,229.98 74.38,229.97 75.69,229.96 77.00,229.95 78.31,229.94 79.62,229.93 80.92,229.92 82.23,229.90 83.54,229.88 84.85,229.86 86.15,229.84 87.46,229.81 88.77,229.78 90.08,229.75 91.38,229.72 92.69,229.68 94.00,229.64 95.31,229.60 96.62,229.55 97.92,229.50 99.23,229.45 100.54,229.39 101.85,229.33 103.15,229.26 104.46,229.19 105.77,229.12 107.08,229.04 108.38,228.96 109.69,228.88 111.00,228.78 112.31,228.69 113.62,228.59 114.92,228.48 116.23,228.37 117.54,228.25 118.85,228.13 120.15,228.00 121.46,227.87 122.77,227.73 124.08,227.59 125.38,227.44 126.69,227.28 128.00,227.12 129.31,226.95 130.62,226.77 131.92,226.59 133.23,226.40 134.54,226.20 135.85,226.00 137.15,225.79 138.46,225.57 139.77,225.35 141.08,225.11 142.38,224.87 143.69,224.63 145.00,224.37 146.31,224.11 147.62,223.83 148.92,223.55 150.23,223.27 151.54,222.97 152.85,222.66 154.15,222.35 155.46,222.03 156.77,221.69 158.08,221.35 159.38,221.00 160.69,220.64 162.00,220.27 163.31,219.89 164.62,219.50 165.92,219.11 167.23,218.70 168.54,218.28 169.85,217.85 171.15,217.41 172.46,216.96 173.77,216.50 175.08,216.03 176.38,215.55 177.69,215.06 179.00,214.55 180.31,214.04 181.62,213.51 182.92,212.97 184.23,212.42 185.54,211.86 186.85,211.29 188.15,210.71 189.46,210.11 190.77,209.50 192.08,208.88 193.38,208.25 194.69,207.60 196.00,206.94 197.31,206.27 198.62,205.58 199.92,204.89 201.23,204.18 202.54,203.45 203.85,202.71 205.15,201.96 206.46,201.20 207.77,200.42 209.08,199.63 210.38,198.82 211.69,198.00 213.00,197.17 214.31,196.32 215.62,195.45 216.92,194.58 218.23,193.68 219.54,192.78 220.85,191.85 222.15,190.91 223.46,189.96 224.77,188.99 226.08,188.01 227.38,187.01 228.69,185.99 230.00,184.96 231.31,183.91 232.62,182.85 233.92,181.77 235.23,180.67 236.54,179.56 237.85,178.43 239.15,177.29 240.46,176.12 241.77,174.94 243.08,173.75 244.38,172.53 245.69,171.30 247.00,170.05 248.31,168.79 249.62,167.50 250.92,166.20 252.23,164.88 253.54,163.54 254.85,162.19 256.15,160.81 257.46,159.42 258.77,158.01 260.08,156.58 261.38,155.13 262.69,153.66 264.00,152.17 265.31,150.67 266.62,149.14 267.92,147.60 269.23,146.03 270.54,144.45 271.85,142.84 273.15,141.22 274.46,139.58 275.77,137.91 277.08,136.23 278.38,134.52 279.69,132.80 281.00,131.05 282.31,129.28 283.62,127.50 284.92,125.69 286.23,123.86 287.54,122.01 288.85,120.13 290.15,118.24 291.46,116.32 292.77,114.39 294.08,112.43 295.38,110.44 296.69,108.44 298.00,106.41 299.31,104.37 300.62,102.30 301.92,100.20 303.23,98.09 304.54,95.95 305.85,93.78 307.15,91.60 308.46,89.39 309.77,87.16 311.08,84.90 312.38,82.62 313.69,80.32 315.00,78.00 316.31,75.64 317.62,73.27 318.92,70.87 320.23,68.45 321.54,66.00\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n<text x=\"235.2\" y=\"95.5\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">y = x</text>\n<text x=\"248.3\" y=\"184.1\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">y = x³</text>\n\n</svg></span><p>Bestäm rotationskroppens volym exakt.</p>",
     "s": "<p>Kurvorna skär varandra vid \\(x=0\\) och \\(x=1\\). För rotation kring y-axeln är det naturligt att integrera med avseende på \\(y\\).</p>\n<p>Skriv kurvorna som</p>\n<p>\\[\nx=y\n\\quad\\text{och}\\quad\nx=\\sqrt[3]{y}.\n\\]</p>\n<p>För \\(0&lt;y&lt;1\\) är den yttre radien \\(R=y^{1/3}\\) och den inre \\(r=y\\).</p>\n<p>\\[\nV=\\pi\\int_0^1(R^2-r^2)\\,dy\n=\\pi\\int_0^1\\left(y^{2/3}-y^2\\right)dy.\n\\]</p>\n<p>\\[\nV=\\pi\\left[\\frac35y^{5/3}-\\frac13y^3\\right]_0^1\n=\\pi\\left(\\frac35-\\frac13\\right)\n=\\frac{4\\pi}{15}.\n\\]</p>\n<p><strong>\\(V=\\frac{4\\pi}{15}\\) volymenheter.</strong></p>",
     "familj": "rotationsvolym_yaxel_a"
+  },
+  {
+    "id": "3.250",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området mellan x-axeln och kurvan</p><p>\\[y=\\ln(x+1),\\qquad0\\le x\\le3\\]</p><p>roteras ett varv kring x-axeln.</p><p>Bestäm volymen med tre decimaler.</p>",
+    "s": "<p>Volymen är</p><p>\\[V=\\pi\\int_0^3\\left(\\ln(x+1)\\right)^2dx.\\]</p><p>Numerisk integration ger</p><p>\\[\\boxed{V\\approx8,158}.\\]</p>",
+    "familj": "geogebra_rotation_ln_1"
   },
   {
     "id": "3.108",
@@ -6975,6 +7470,21 @@ window.BANKMATO2 = [
     "familj": "massdensitet_stang_integral_c"
   },
   {
+    "id": "3.246",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Trafikflödet på en väg modelleras under sex timmar av</p><p>\\[q(t)=500+300e^{-0,2(t-3)^2}\\]</p><p>fordon per timme, där \\(0\\le t\\le6\\).</p><p>Beräkna hur många fordon som passerar under perioden.</p>",
+    "s": "<p>Antalet fordon motsvarar arean under flödeskurvan:</p><p>\\[N=\\int_0^6 q(t)\\,dt.\\]</p><p>Numerisk integration ger</p><p>\\[N\\approx4120,3.\\]</p><p>Alltså passerar ungefär \\(\\boxed{4120\\text{ fordon}}\\).</p>",
+    "familj": "geogebra_integral_trafik_gauss_1"
+  },
+  {
     "id": "3.118",
     "kap": 3,
     "omr": "sannolikhetsintegraler",
@@ -7048,6 +7558,21 @@ window.BANKMATO2 = [
     "t": "<p>Området mellan \\(y=x\\), x-axeln och \\(x=2\\) roteras kring linjen \\(y=3\\).</p><p>Bestäm volymen.</p>",
     "s": "<p>För varje \\(x\\in[0,2]\\) är ytterradien \\(R=3\\) och innerradien \\(r=3-x\\).</p><p>\\[V=\\pi\\int_0^2(9-(3-x)^2)dx=\\pi\\int_0^2(6x-x^2)dx.\\]</p><p>\\[V=\\pi[3x^2-x^3/3]_0^2=\\pi(12-8/3)=\\boxed{28\\pi/3}.\\]</p>",
     "familj": "proc_rotation_forskjuten_axel_2"
+  },
+  {
+    "id": "3.251",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området mellan kurvan \\(y=\\sin x\\) och linjen \\(y=0,3\\) i intervallet \\(0&lt;x&lt;\\pi\\) roteras ett varv kring x-axeln.</p><p>Bestäm volymen av den rotationskropp som bildas. Svara med tre decimaler.</p>",
+    "s": "<p>Skärningarna fås ur \\(\\sin x=0,3\\):</p><p>\\[x\\approx0,305\\quad\\text{och}\\quad x\\approx2,837.\\]</p><p>Vid rotation bildas ringformade tvärsnitt med ytterradie \\(\\sin x\\) och innerradie \\(0,3\\).</p><p>\\[V=\\pi\\int_{0,305}^{2,837}\\left(\\sin^2x-0,3^2\\right)dx\\approx\\boxed{4,161}.\\]</p>",
+    "familj": "geogebra_rotation_sinus_bricka_1"
   },
   {
     "id": "3.123",
@@ -7200,6 +7725,21 @@ window.BANKMATO2 = [
     "familj": "tathet_exponential"
   },
   {
+    "id": "3.257",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En mätstorhet är normalfördelad med medelvärdet 72 och standardavvikelsen 8.</p><p>a) Bestäm sannolikheten att ett värde ligger mellan 65 och 80.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm det värde som 90 % av observationerna ligger under.</p>",
+    "s": "<p>a) Med medelvärdet 72 och standardavvikelsen 8 fås</p><p>\\[P(65&lt;X&lt;80)\\approx\\boxed{0,651}.\\]</p><p>b) Vi söker \\(q\\) med \\(P(X\\le q)=0,90\\). Det ger</p><p>\\[\\boxed{q\\approx82,25}.\\]</p>",
+    "familj": "geogebra_normalfordelning_intervall_percentil_1"
+  },
+  {
     "id": "3.131",
     "kap": 3,
     "omr": "sannolikhetsintegraler",
@@ -7333,6 +7873,21 @@ window.BANKMATO2 = [
     "t": "<p>En partikels hastighet ges av</p><p>\\[v(t)=t^2-4t+3,\\qquad 0\\le t\\le4.\\]</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"420\" height=\"260\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"139.5\" y1=\"20\" x2=\"139.5\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"314.5\" y1=\"20\" x2=\"314.5\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"402.0\" y1=\"20\" x2=\"402.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"188.3\" x2=\"402\" y2=\"188.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"154.7\" x2=\"402\" y2=\"154.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"121.0\" x2=\"402\" y2=\"121.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"87.3\" x2=\"402\" y2=\"87.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"53.7\" x2=\"402\" y2=\"53.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"154.7\" x2=\"402\" y2=\"154.7\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"139.5\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<text x=\"227.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"314.5\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"402.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"192.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−1</text>\n<text x=\"44\" y=\"158.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"44\" y=\"57.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<path d=\"M52.0,53.7 L53.5,55.9 L54.9,58.1 L56.4,60.3 L57.8,62.5 L59.3,64.7 L60.8,66.8 L62.2,68.9 L63.7,71.0 L65.1,73.1 L66.6,75.2 L68.0,77.2 L69.5,79.3 L71.0,81.3 L72.4,83.3 L73.9,85.2 L75.3,87.2 L76.8,89.1 L78.2,91.0 L79.7,92.9 L81.2,94.8 L82.6,96.7 L84.1,98.5 L85.5,100.3 L87.0,102.1 L88.5,103.9 L89.9,105.7 L91.4,107.4 L92.8,109.2 L94.3,110.9 L95.8,112.6 L97.2,114.3 L98.7,115.9 L100.1,117.5 L101.6,119.2 L103.0,120.8 L104.5,122.3 L106.0,123.9 L107.4,125.5 L108.9,127.0 L110.3,128.5 L111.8,130.0 L113.2,131.4 L114.7,132.9 L116.2,134.3 L117.6,135.7 L119.1,137.1 L120.5,138.5 L122.0,139.9 L123.5,141.2 L124.9,142.5 L126.4,143.8 L127.8,145.1 L129.3,146.4 L130.8,147.6 L132.2,148.8 L133.7,150.0 L135.1,151.2 L136.6,152.4 L138.0,153.5 L139.5,154.7 L141.0,155.8 L142.4,156.9 L143.9,157.9 L145.3,159.0 L146.8,160.0 L148.2,161.1 L149.7,162.1 L151.2,163.0 L152.6,164.0 L154.1,165.0 L155.5,165.9 L157.0,166.8 L158.5,167.7 L159.9,168.5 L161.4,169.4 L162.8,170.2 L164.3,171.0 L165.8,171.8 L167.2,172.6 L168.7,173.4 L170.1,174.1 L171.6,174.8 L173.0,175.5 L174.5,176.2 L176.0,176.9 L177.4,177.5 L178.9,178.1 L180.3,178.8 L181.8,179.3 L183.2,179.9 L184.7,180.5 L186.2,181.0 L187.6,181.5 L189.1,182.0 L190.5,182.5 L192.0,182.9 L193.5,183.4 L194.9,183.8 L196.4,184.2 L197.8,184.6 L199.3,185.0 L200.8,185.3 L202.2,185.6 L203.7,185.9 L205.1,186.2 L206.6,186.5 L208.0,186.8 L209.5,187.0 L211.0,187.2 L212.4,187.4 L213.9,187.6 L215.3,187.7 L216.8,187.9 L218.2,188.0 L219.7,188.1 L221.2,188.2 L222.6,188.2 L224.1,188.3 L225.5,188.3 L227.0,188.3 L228.5,188.3 L229.9,188.3 L231.4,188.2 L232.8,188.2 L234.3,188.1 L235.8,188.0 L237.2,187.9 L238.7,187.7 L240.1,187.6 L241.6,187.4 L243.0,187.2 L244.5,187.0 L246.0,186.8 L247.4,186.5 L248.9,186.2 L250.3,185.9 L251.8,185.6 L253.2,185.3 L254.7,185.0 L256.2,184.6 L257.6,184.2 L259.1,183.8 L260.5,183.4 L262.0,182.9 L263.5,182.5 L264.9,182.0 L266.4,181.5 L267.8,181.0 L269.3,180.5 L270.8,179.9 L272.2,179.3 L273.7,178.8 L275.1,178.1 L276.6,177.5 L278.0,176.9 L279.5,176.2 L281.0,175.5 L282.4,174.8 L283.9,174.1 L285.3,173.4 L286.8,172.6 L288.2,171.8 L289.7,171.0 L291.2,170.2 L292.6,169.4 L294.1,168.5 L295.5,167.7 L297.0,166.8 L298.5,165.9 L299.9,165.0 L301.4,164.0 L302.8,163.0 L304.3,162.1 L305.8,161.1 L307.2,160.0 L308.7,159.0 L310.1,157.9 L311.6,156.9 L313.0,155.8 L314.5,154.7 L316.0,153.5 L317.4,152.4 L318.9,151.2 L320.3,150.0 L321.8,148.8 L323.2,147.6 L324.7,146.4 L326.2,145.1 L327.6,143.8 L329.1,142.5 L330.5,141.2 L332.0,139.9 L333.5,138.5 L334.9,137.1 L336.4,135.7 L337.8,134.3 L339.3,132.9 L340.8,131.4 L342.2,130.0 L343.7,128.5 L345.1,127.0 L346.6,125.5 L348.0,123.9 L349.5,122.3 L351.0,120.8 L352.4,119.2 L353.9,117.5 L355.3,115.9 L356.8,114.3 L358.2,112.6 L359.7,110.9 L361.2,109.2 L362.6,107.4 L364.1,105.7 L365.5,103.9 L367.0,102.1 L368.5,100.3 L369.9,98.5 L371.4,96.7 L372.8,94.8 L374.3,92.9 L375.8,91.0 L377.2,89.1 L378.7,87.2 L380.1,85.2 L381.6,83.3 L383.0,81.3 L384.5,79.3 L386.0,77.2 L387.4,75.2 L388.9,73.1 L390.3,71.0 L391.8,68.9 L393.2,66.8 L394.7,64.7 L396.2,62.5 L397.6,60.3 L399.1,58.1 L400.5,55.9 L402.0,53.7\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<text x=\"60\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">v(t)</text>\n</svg></span><p>a) Bestäm partikelns förflyttning under tidsintervallet.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm den totala sträcka som partikeln rör sig.</p>",
     "s": "<p>a) Förflyttningen fås genom att integrera hastigheten. När hastigheten är negativ bidrar den negativt:</p><p>\\[\\int_0^4(t^2-4t+3)dt=\\left[\\frac{t^3}{3}-2t^2+3t\\right]_0^4=\\boxed{\\frac43}.\\]</p><p>b) För den totala sträckan måste vi ta hänsyn till när hastigheten är negativ.</p><p>\\[v(t)=(t-1)(t-3),\\]</p><p>så \\(v&gt;0\\) på \\([0,1]\\) och \\([3,4]\\), medan \\(v&lt;0\\) på \\([1,3]\\).</p><p>Sträckan blir därför</p><p>\\[\\int_0^1v(t)dt-\\int_1^3v(t)dt+\\int_3^4v(t)dt=\\boxed{4}.\\]</p><p><strong>Förflyttning: \\(4/3\\). Total sträcka: 4.</strong></p>",
     "familj": "problem_integral_forflyttning_stracka"
+  },
+  {
+    "id": "3.247",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Ett läkemedel tillförs kroppen med hastigheten</p><p>\\[r(t)=12te^{-0,6t},\\qquad0\\le t\\le8,\\]</p><p>där \\(r\\) mäts i mg/h.</p><p>a) Hur stor mängd tillförs under de åtta timmarna?<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Vid vilken tidpunkt har hälften av denna mängd tillförts?</p>",
+    "s": "<p>a) Den totala mängden är</p><p>\\[M=\\int_0^8 12te^{-0,6t}\\,dt\\approx\\boxed{31,74\\text{ mg}}.\\]</p><p>b) Vi söker \\(T\\) som uppfyller</p><p>\\[\\int_0^T12te^{-0,6t}\\,dt=\\frac{31,74}{2}.\\]</p><p>Den numeriska lösningen är</p><p>\\[\\boxed{T\\approx2,67\\text{ h}}.\\]</p>",
+    "familj": "geogebra_integral_lakemedel_halva_1"
   },
   {
     "id": "3.140",
@@ -7830,6 +8385,21 @@ window.BANKMATO2 = [
     "familj": "problem_complex_avbildning_triangel"
   },
   {
+    "id": "4.315",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm de komplexa tal \\(z=x+iy\\) som uppfyller båda villkoren</p><p>\\[|z-(1+i)|=2\\]</p><p>och</p><p>\\[\\operatorname{Im}z=0,5\\operatorname{Re}z.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Det första villkoret är en cirkel med centrum \\((1,1)\\) och radie 2. Det andra är linjen \\(y=0,5x\\).</p><p>Skärningspunkterna är ungefär</p><p>\\[(-0,544;-0,272)\\quad\\text{och}\\quad(2,944;1,472).\\]</p><p>Alltså</p><p>\\[\\boxed{z\\approx-0,544-0,272i\\quad\\text{eller}\\quad z\\approx2,944+1,472i}.\\]</p>",
+    "familj": "geogebra_komplexplan_cirkel_linje_1"
+  },
+  {
     "id": "4.32",
     "kap": 4,
     "omr": "potenser_rotter",
@@ -8235,6 +8805,21 @@ window.BANKMATO2 = [
     "familj": "proc_polar_till_rect_3"
   },
   {
+    "id": "4.320",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>De komplexa talen ges i polär form av</p><p>\\[z=2,3(\\cos1,1+i\\sin1,1)\\]</p><p>och</p><p>\\[w=1,7(\\cos2,4+i\\sin2,4).\\]</p><p>Bestäm produkten \\(zw\\) på rektangulär form med tre decimaler.</p>",
+    "s": "<p>Vid multiplikation multipliceras absolutbeloppen och argumenten adderas:</p><p>\\[|zw|=2,3\\cdot1,7=3,91\\]</p><p>och argumentet blir \\(1,1+2,4=3,5\\) rad.</p><p>\\[zw=3,91(\\cos3,5+i\\sin3,5).\\]</p><p>På rektangulär form:</p><p>\\[\\boxed{zw\\approx-3,662-1,372i}.\\]</p>",
+    "familj": "geogebra_polar_produkt_rektangular_numerisk_1"
+  },
+  {
     "id": "4.56",
     "kap": 4,
     "omr": "polar_exponentiell",
@@ -8278,6 +8863,21 @@ window.BANKMATO2 = [
     "t": "<p>För \\(p(x)=x^3+2x^2-5x-6\\):</p><p>a) Beräkna \\(p(2)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Avgör om \\(x-2\\) är en faktor.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Beräkna \\(p(-1)\\) och avgör om \\(x+1\\) är en faktor.</p>",
     "s": "<p><strong>Metod:</strong> Sätt in det nollställe som hör ihop med faktorn. Om värdet blir 0 är uttrycket en faktor.</p><p>a) \\(8+8-10-6=\\)<strong>0</strong>.</p><p>b) Eftersom \\(p(2)=0\\) är <strong>\\(x-2\\) en faktor</strong>.</p><p>c) \\(-1+2+5-6=0\\), så <strong>\\(x+1\\) är också en faktor</strong>.</p>",
     "familj": "faktorsats_rutin_e2"
+  },
+  {
+    "id": "4.330",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Polynomet ges av</p><p>\\[P(x)=x^5-2x^4-5x^3+8x^2+4x-6.\\]</p><p>Bestäm samtliga reella nollställen med tre decimaler.</p>",
+    "s": "<p>Grafen skär x-axeln fem gånger. Nollställena är</p><p>\\[\\boxed{x\\approx-1,866;\\ -1,000;\\ 1,000;\\ 1,211;\\ 2,655}.\\]</p>",
+    "familj": "geogebra_polynom_fem_reella_rotter_1"
   },
   {
     "id": "4.59",
@@ -8370,6 +8970,21 @@ window.BANKMATO2 = [
     "familj": "talplan_rutin_e2"
   },
   {
+    "id": "4.316",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm de komplexa tal \\(z\\) som ligger lika långt från \\(2-i\\) som från \\(-1+2i\\) och samtidigt uppfyller \\(|z|=3\\).</p>",
+    "s": "<p>Punkter som ligger lika långt från \\((2,-1)\\) och \\((-1,2)\\) ligger på den linje som går vinkelrätt genom sträckans mittpunkt. Här är den linjen \\(y=x\\).</p><p>Tillsammans med \\(x^2+y^2=9\\) fås</p><p>\\[2x^2=9.\\]</p><p>Alltså</p><p>\\[\\boxed{z=\\frac{3\\sqrt2}{2}(1+i)\\quad\\text{eller}\\quad z=-\\frac{3\\sqrt2}{2}(1+i)}.\\]</p>",
+    "familj": "geogebra_komplexplan_mittnormal_cirkel_1"
+  },
+  {
     "id": "4.64",
     "kap": 4,
     "omr": "polar_exponentiell",
@@ -8458,6 +9073,21 @@ window.BANKMATO2 = [
     "t": "<p>Använd de Moivres formel.</p><p>a) \\((2\\left(\\cos(\\pi/6)+i\\sin(\\pi/6)\\right))^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((\\sqrt2\\left(\\cos(\\pi/4)+i\\sin(\\pi/4)\\right))^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((3\\left(\\cos(2\\pi/3)+i\\sin(2\\pi/3)\\right))^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((2\\left(\\cos(5\\pi/6)+i\\sin(5\\pi/6)\\right))^6\\)</p>",
     "s": "<p>a) \\(8\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=\\boxed{8i}\\).</p><p>b) \\(4\\left(\\cos(\\pi)+i\\sin(\\pi)\\right)=\\boxed{-4}\\).</p><p>c) \\(9\\left(\\cos(4\\pi/3)+i\\sin(4\\pi/3)\\right)=\\boxed{-\\frac92-\\frac{9\\sqrt3}{2}i}\\).</p><p>d) \\(64\\left(\\cos(5\\pi)+i\\sin(5\\pi)\\right)=\\boxed{-64}\\).</p>",
     "familj": "proc_demoivre_potenser_3"
+  },
+  {
+    "id": "4.325",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[z^5=32i.\\]</p><p>Bestäm därefter vilken rot som ligger närmast punkten \\(2+2i\\). Svara med tre decimaler för den roten.</p>",
+    "s": "<p>\\(32i\\) har absolutbelopp 32 och argument \\(\\pi/2\\). Femterötterna får absolutbelopp 2 och argument</p><p>\\[v_k=\\frac{\\pi/2+2k\\pi}{5},\\qquad k=0,1,2,3,4.\\]</p><p>När rötterna markeras i talplanet ligger roten med \\(k=0\\) närmast \\(2+2i\\):</p><p>\\[\\boxed{z\\approx1,902+0,618i}.\\]</p>",
+    "familj": "geogebra_rotter_femte_narmast_1"
   },
   {
     "id": "4.69",
@@ -8985,6 +9615,21 @@ window.BANKMATO2 = [
     "familj": "proc_faktorsatsen_kontroll_3"
   },
   {
+    "id": "4.331",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Polynomet ges av</p><p>\\[P(x)=x^5-4x^3+x+1.\\]</p><p>a) Bestäm de reella nollställena med tre decimaler.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm därefter de två komplexa rötterna på rektangulär form med tre decimaler.</p>",
+    "s": "<p>a) De reella nollställena är</p><p>\\[\\boxed{x\\approx-1,968;\\ 0,817;\\ 1,890}.\\]</p><p>b) De återstående rötterna är ett konjugerat par:</p><p>\\[\\boxed{z\\approx-0,369+0,439i\\quad\\text{och}\\quad z\\approx-0,369-0,439i}.\\]</p>",
+    "familj": "geogebra_polynom_reella_komplexa_numerisk_1"
+  },
+  {
     "id": "4.102",
     "kap": 4,
     "omr": "potenser_rotter",
@@ -8998,6 +9643,21 @@ window.BANKMATO2 = [
     "t": "<p>Beräkna exakt med de Moivres formel.</p><p>a) \\((1+i)^8\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((\\sqrt3-i)^6\\)</p>",
     "s": "<p>a) \\(1+i=\\sqrt2(\\cos\\frac\\pi4+i\\sin\\frac\\pi4)\\). Därför</p><p>\\[(1+i)^8=(\\sqrt2)^8(\\cos2\\pi+i\\sin2\\pi)=16.\\]</p><p><strong>16</strong>.</p>\n<p>b) \\(\\sqrt3-i=2(\\cos(-\\pi/6)+i\\sin(-\\pi/6))\\). Därför</p><p>\\[(\\sqrt3-i)^6=2^6(\\cos(-\\pi)+i\\sin(-\\pi))=-64.\\]</p><p><strong>−64</strong>.</p>",
     "familj": "demoivre_exakta_potenser_c"
+  },
+  {
+    "id": "4.326",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen \\(z^8=16\\).</p><p>Hur många av lösningarna har realdel större än 1?</p>",
+    "s": "<p>Rötternas absolutbelopp är</p><p>\\[\\sqrt[8]{16}=\\sqrt2.\\]</p><p>Argumenten är \\(k\\pi/4\\), \\(k=0,1,\\ldots,7\\). När rötterna markeras i talplanet ser man att endast roten med argument 0 har realdel strikt större än 1:</p><p>\\[z=\\sqrt2.\\]</p><p>Alltså är antalet \\(\\boxed{1}\\).</p>",
+    "familj": "geogebra_rotter_attonde_realdel_1"
   },
   {
     "id": "4.103",
@@ -9030,6 +9690,21 @@ window.BANKMATO2 = [
     "familj": "komplex_plan_konjugat_i_svg"
   },
   {
+    "id": "4.317",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Triangeln i det komplexa talplanet har hörnen</p><p>\\[z_1=0,\\qquad z_2=2,\\qquad z_3=1+2i.\\]</p><p>Varje punkt avbildas enligt</p><p>\\[w=(1+i)z-2.\\]</p><p>a) Bestäm de tre nya hörnen.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm den nya triangelns area.</p>",
+    "s": "<p>a)</p><p>\\[w_1=-2,\\qquad w_2=2i,\\qquad w_3=-3+3i.\\]</p><p>b) Multiplikation med \\(1+i\\) förstorar alla längder med \\(|1+i|=\\sqrt2\\). Arean multipliceras därför med \\((\\sqrt2)^2=2\\). Ursprungstriangelns area är 2, så den nya arean är</p><p>\\[\\boxed{4}.\\]</p>",
+    "familj": "geogebra_komplexplan_affin_avbildning_1"
+  },
+  {
     "id": "4.105",
     "kap": 4,
     "omr": "polar_exponentiell",
@@ -9043,6 +9718,21 @@ window.BANKMATO2 = [
     "t": "<p>Det komplexa talet är \\(z=-1+\\sqrt3\\,i\\).</p><p>a) Skriv \\(z\\) på exponentiell form \\(re^{iv}\\), där \\(0\\le v&lt;2\\pi\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z^3\\) exakt med exponentiell formen.</p>",
     "s": "<p>a) Absolutbeloppet är</p><p>\\[r=\\sqrt{(-1)^2+(\\sqrt3)^2}=2.\\]</p><p>Talet ligger i andra kvadranten och har argument \\(2\\pi/3\\). Alltså</p><p><strong>\\(z=2e^{i2\\pi/3}\\)</strong>.</p>\n<p>b)</p><p>\\[z^3=2^3e^{i2\\pi}=8(\\cos2\\pi+i\\sin2\\pi)=\\boxed{8}.\\]</p>",
     "familj": "eulerform_potens_c"
+  },
+  {
+    "id": "4.321",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[z=1,08(\\cos0,52+i\\sin0,52).\\]</p><p>Bestäm det minsta positiva heltalet \\(n\\) för vilket realdelen av \\(z^n\\) är mindre än \\(-2\\).</p>",
+    "s": "<p>Enligt de Moivres formel</p><p>\\[z^n=1,08^n(\\cos(0,52n)+i\\sin(0,52n)).\\]</p><p>Genom att undersöka heltalen i ordning fås första träffen vid \\(n=17\\):</p><p>\\[z^{17}\\approx-3,085+2,042i.\\]</p><p>Alltså \\(\\boxed{n=17}\\).</p>",
+    "familj": "geogebra_polar_potenser_realdel_1"
   },
   {
     "id": "4.106",
@@ -9390,6 +10080,21 @@ window.BANKMATO2 = [
     "familj": "de_moivre_potens_sex"
   },
   {
+    "id": "4.327",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Rötterna till ekvationen</p><p>\\[z^6=-64\\]</p><p>markeras i det komplexa talplanet.</p><p>a) Vilken regelbunden polygon bildar rötterna?<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm polygonens area exakt.</p>",
+    "s": "<p>Rötternas absolutbelopp är \\(\\sqrt[6]{64}=2\\), och argumenten skiljer sig med \\(2\\pi/6=\\pi/3\\). De ligger därför som hörn i en regelbunden sexhörning på en cirkel med radien 2.</p><p>I en regelbunden sexhörning är sidan lika med radien, alltså 2. Arean är sex liksidiga trianglar:</p><p>\\[6\\cdot\\frac{\\sqrt3}{4}\\cdot2^2=\\boxed{6\\sqrt3}.\\]</p>",
+    "familj": "geogebra_rotter_sexhorning_area_1"
+  },
+  {
     "id": "4.126",
     "kap": 4,
     "omr": "polynom_komplexa",
@@ -9675,6 +10380,21 @@ window.BANKMATO2 = [
     "familj": "npstil_modul_exponential_4"
   },
   {
+    "id": "4.322",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[z=1,1(\\cos0,7+i\\sin0,7).\\]</p><p>Av talen \\(z,z^2,\\ldots,z^{12}\\), vilket ligger närmast punkten \\(-2+i\\) i det komplexa talplanet?</p>",
+    "s": "<p>Beräkna eller markera potenserna och jämför avstånden till \\(-2+i\\).</p><p>Det minsta avståndet fås för \\(n=4\\). Då</p><p>\\[z^4\\approx-1,380+0,490i.\\]</p><p>Avståndet till \\(-2+i\\) är ungefär \\(0,803\\).</p><p>Alltså är \\(\\boxed{z^4}\\) närmast.</p>",
+    "familj": "geogebra_polar_potenser_narmast_punkt_1"
+  },
+  {
     "id": "4.141",
     "kap": 4,
     "omr": "polynom_komplexa",
@@ -9718,6 +10438,21 @@ window.BANKMATO2 = [
     "t": "<p>Lös ekvationen \\(x^2-4x+13=0\\) i de komplexa talen.</p>",
     "s": "<p><strong>Metod:</strong> När uttrycket under rottecknet i andragradsformeln är negativ, skriv \\(\\sqrt{-k}=i\\sqrt{k}\\) och fortsätt med den vanliga andragradsformeln.</p><p>Uttrycket under rottecknet i andragradsformeln är \\(16-52=-36\\). Därför</p><p>\\[x=\\frac{4\\pm6i}{2}=2\\pm3i.\\]</p><p><strong>\\(x=2\\pm3i\\)</strong>.</p>",
     "familj": "andragrad_komplex"
+  },
+  {
+    "id": "4.332",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>För</p><p>\\[P(x)=x^4-2x^3-7x^2+8x+12\\]</p><p>bestäm de intervall där \\(P(x)&lt;0\\).</p>",
+    "s": "<p>Nollställena är</p><p>\\[x=-2,-1,2,3.\\]</p><p>Grafen eller ett teckenstudium visar att polynomet är negativt mellan det första och andra samt mellan det tredje och fjärde nollstället.</p><p>\\[\\boxed{-2&lt;x&lt;-1\\quad\\text{eller}\\quad2&lt;x&lt;3}.\\]</p>",
+    "familj": "geogebra_polynom_teckenintervall_1"
   },
   {
     "id": "4.144",
@@ -10050,6 +10785,21 @@ window.BANKMATO2 = [
     "familj": "trig_modell_bestam_funktion_4"
   },
   {
+    "id": "1.338",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Höjden för en stol i en åkattraktion modelleras av</p><p>\\[h(t)=14+11\\cos\\left(\\frac{\\pi}{18}(t-5)\\right),\\qquad0\\le t\\le36,\\]</p><p>där \\(h\\) mäts i meter och \\(t\\) i sekunder.</p><p>Bestäm de tidpunkter då stolen är 20 m över marken. Svara med två decimaler.</p>",
+    "s": "<p>Vi löser \\(h(t)=20\\):</p><p>\\[14+11\\cos\\left(\\frac{\\pi}{18}(t-5)\\right)=20.\\]</p><p>De två lösningarna under varvet är</p><p>\\[\\boxed{t\\approx10,69\\text{ s}\\quad\\text{och}\\quad t\\approx35,31\\text{ s}}.\\]</p>",
+    "familj": "geogebra_trigmodell_akattraktion_niva_1"
+  },
+  {
     "id": "1.176",
     "kap": 1,
     "omr": "trig_modeller",
@@ -10185,6 +10935,21 @@ window.BANKMATO2 = [
     "familj": "normalfordelning_en_sigma_1"
   },
   {
+    "id": "3.258",
+    "kap": 3,
+    "omr": "sannolikhetsintegraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En kontinuerlig slumpvariabel har täthetsfunktionen</p><p>\\[f(x)=ke^{-x^2/2},\\qquad-2\\le x\\le2,\\]</p><p>och \\(f(x)=0\\) annars.</p><p>a) Bestäm \\(k\\) med fyra decimaler.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(P(|X|&lt;1)\\) med tre decimaler.</p>",
+    "s": "<p>a) Normaliseringsvillkoret är</p><p>\\[k\\int_{-2}^{2}e^{-x^2/2}dx=1.\\]</p><p>Numeriskt fås</p><p>\\[\\boxed{k\\approx0,4180}.\\]</p><p>b)</p><p>\\[P(|X|&lt;1)=\\int_{-1}^{1}ke^{-x^2/2}dx\\approx\\boxed{0,715}.\\]</p>",
+    "familj": "geogebra_tathet_avkortad_normalform_1"
+  },
+  {
     "id": "3.160",
     "kap": 3,
     "omr": "sannolikhetsintegraler",
@@ -10245,6 +11010,21 @@ window.BANKMATO2 = [
     "familj": "area_mellan_tva_parabler_3"
   },
   {
+    "id": "3.242",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området begränsas av y-axeln, linjen \\(y=x-1\\) och kurvan \\(y=2\\cos x\\).</p><p>Bestäm områdets area. Svara med tre decimaler.</p>",
+    "s": "<p>Linjen och kurvan skär varandra vid</p><p>\\[x\\approx1,380.\\]</p><p>För \\(0\\le x\\le1,380\\) ligger \\(2\\cos x\\) över linjen. Arean är</p><p>\\[A=\\int_0^{1,380}\\left(2\\cos x-(x-1)\\right)dx\\approx\\boxed{2,392}.\\]</p>",
+    "familj": "geogebra_area_cos_linje_1"
+  },
+  {
     "id": "3.164",
     "kap": 3,
     "omr": "rotationsvolymer",
@@ -10258,6 +11038,21 @@ window.BANKMATO2 = [
     "t": "<p>Området i första kvadranten begränsas av \\(x=y^2\\), y-axeln och linjen \\(y=2\\). Området roteras kring y-axeln.</p><p>Bestäm rotationskroppens volym.</p>",
     "s": "<p><strong>Formel från formelbladet:</strong> Vid rotation kring y-axeln gäller \\(V=\\pi\\int_a^b x^2\\,dy\\).</p><p>Här är \\(x=y^2\\), så</p><p>\\[V=\\pi\\int_0^2(y^2)^2\\,dy=\\pi\\int_0^2y^4\\,dy.\\]</p><p>\\[V=\\pi\\left[\\frac{y^5}{5}\\right]_0^2=\\boxed{\\frac{32\\pi}{5}}.\\]</p>",
     "familj": "rotation_yaxel_yvariabel_4"
+  },
+  {
+    "id": "3.252",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Området under kurvan</p><p>\\[y=\\sqrt{1+x^2}-1,\\qquad0\\le x\\le2\\]</p><p>roteras ett varv kring x-axeln.</p><p>Bestäm volymen med tre decimaler.</p>",
+    "s": "<p>\\[V=\\pi\\int_0^2\\left(\\sqrt{1+x^2}-1\\right)^2dx.\\]</p><p>Numeriskt fås</p><p>\\[\\boxed{V\\approx2,359}.\\]</p>",
+    "familj": "geogebra_rotation_rotfunktion_1"
   },
   {
     "id": "4.165",
@@ -10423,6 +11218,21 @@ window.BANKMATO2 = [
     "t": "<p>Vid en polynomdivision är divisorn \\(x-2\\), kvoten \\(3x^2+x-4\\) och resten 5.</p><p>Bestäm polynomet \\(P(x)\\) som dividerades.</p>",
     "s": "<p>Divisionen innebär</p><p>\\[P(x)=(x-2)(3x^2+x-4)+5.\\]</p><p>Multiplicera:</p><p>\\[(x-2)(3x^2+x-4)=3x^3-5x^2-6x+8.\\]</p><p>Lägg till resten:</p><p>\\[\\boxed{P(x)=3x^3-5x^2-6x+13}.\\]</p>",
     "familj": "polynomdivision_baklanges_1"
+  },
+  {
+    "id": "4.333",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm samtliga lösningar till</p><p>\\[x^5-4x^3+x+1=2,5.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Ekvationen motsvarar skärningarna mellan grafen till \\(y=x^5-4x^3+x+1\\) och linjen \\(y=2,5\\).</p><p>Numerisk lösning ger tre reella lösningar:</p><p>\\[\\boxed{x\\approx-1,866;\\ -0,914;\\ 1,984}.\\]</p>",
+    "familj": "geogebra_polynom_nivaskarning_1"
   },
   {
     "id": "4.176",
@@ -10603,6 +11413,21 @@ window.BANKMATO2 = [
     "t": "<p>Skissa kurvan \\(y=2\\sin x\\) i koordinatsystemet.</p><p>för \\(0\\le x\\le2\\pi\\)</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"500\" height=\"310\" viewBox=\"0 0 500 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Koordinatsystem för att skissa en trigonometrisk graf\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"308\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"58\" y1=\"247.1\" x2=\"468\" y2=\"247.1\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"251.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-3</text><line x1=\"58\" y1=\"213.4\" x2=\"468\" y2=\"213.4\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"217.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-2</text><line x1=\"58\" y1=\"179.7\" x2=\"468\" y2=\"179.7\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"183.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-1</text><line x1=\"58\" y1=\"146.0\" x2=\"468\" y2=\"146.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"58\" y1=\"112.3\" x2=\"468\" y2=\"112.3\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"116.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"58\" y1=\"78.6\" x2=\"468\" y2=\"78.6\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"82.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"58\" y1=\"44.9\" x2=\"468\" y2=\"44.9\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"48.9\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"58.0\" y1=\"28\" x2=\"58.0\" y2=\"264\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><text x=\"58.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">0</text><line x1=\"160.5\" y1=\"28\" x2=\"160.5\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"160.5\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">π/2</text><line x1=\"263.0\" y1=\"28\" x2=\"263.0\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"263.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">π</text><line x1=\"365.5\" y1=\"28\" x2=\"365.5\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"365.5\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">3π/2</text><line x1=\"468.0\" y1=\"28\" x2=\"468.0\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"468.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">2π</text><path d=\"M468 146.0 l-9 -5 v10 z\" fill=\"#2B2527\"/><path d=\"M58.0 28 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"464\" y=\"138.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\">x</text><text x=\"67.0\" y=\"41\" font-family=\"sans-serif\" font-size=\"11\">y</text></svg></span>",
     "s": "<p><strong>Kontrollpunkter:</strong> Amplituden är 2 och perioden \\(2\\pi\\). Grafen går genom \\((0,0)\\), har maximum \\(2\\) vid \\(x=\\pi/2\\), minimum \\(-2\\) vid \\(x=3\\pi/2\\) och nollställen vid \\(0,\\pi,2\\pi\\).</p><p>Markera först medellinje, amplitud och period. Placera därefter maxpunkter, minpunkter och nollställen och dra en jämn trigonometrisk kurva genom punkterna.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"500\" height=\"310\" viewBox=\"0 0 500 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facit till trigonometrisk graf\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"308\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"58\" y1=\"247.1\" x2=\"468\" y2=\"247.1\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"251.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-3</text><line x1=\"58\" y1=\"213.4\" x2=\"468\" y2=\"213.4\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"217.4\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-2</text><line x1=\"58\" y1=\"179.7\" x2=\"468\" y2=\"179.7\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"183.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">-1</text><line x1=\"58\" y1=\"146.0\" x2=\"468\" y2=\"146.0\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><line x1=\"58\" y1=\"112.3\" x2=\"468\" y2=\"112.3\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"116.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"58\" y1=\"78.6\" x2=\"468\" y2=\"78.6\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"82.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"58\" y1=\"44.9\" x2=\"468\" y2=\"44.9\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"49\" y=\"48.9\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"58.0\" y1=\"28\" x2=\"58.0\" y2=\"264\" stroke=\"#2B2527\" stroke-width=\"1.7\"/><text x=\"58.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">0</text><line x1=\"160.5\" y1=\"28\" x2=\"160.5\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"160.5\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">π/2</text><line x1=\"263.0\" y1=\"28\" x2=\"263.0\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"263.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">π</text><line x1=\"365.5\" y1=\"28\" x2=\"365.5\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"365.5\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">3π/2</text><line x1=\"468.0\" y1=\"28\" x2=\"468.0\" y2=\"264\" stroke=\"#DDE5E8\" stroke-width=\"1\"/><text x=\"468.0\" y=\"284\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">2π</text><path d=\"M468 146.0 l-9 -5 v10 z\" fill=\"#2B2527\"/><path d=\"M58.0 28 l-5 9 h10 z\" fill=\"#2B2527\"/><text x=\"464\" y=\"138.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\">x</text><text x=\"67.0\" y=\"41\" font-family=\"sans-serif\" font-size=\"11\">y</text><polyline points=\"58.0,146.0 58.8,145.2 59.6,144.3 60.5,143.5 61.3,142.6 62.1,141.8 62.9,140.9 63.7,140.1 64.6,139.2 65.4,138.4 66.2,137.5 67.0,136.7 67.8,135.9 68.7,135.0 69.5,134.2 70.3,133.4 71.1,132.5 71.9,131.7 72.8,130.9 73.6,130.1 74.4,129.2 75.2,128.4 76.0,127.6 76.9,126.8 77.7,126.0 78.5,125.2 79.3,124.4 80.1,123.6 81.0,122.8 81.8,122.0 82.6,121.2 83.4,120.4 84.2,119.6 85.1,118.8 85.9,118.1 86.7,117.3 87.5,116.5 88.3,115.8 89.2,115.0 90.0,114.3 90.8,113.5 91.6,112.8 92.4,112.0 93.3,111.3 94.1,110.6 94.9,109.9 95.7,109.2 96.5,108.5 97.4,107.7 98.2,107.1 99.0,106.4 99.8,105.7 100.6,105.0 101.5,104.3 102.3,103.7 103.1,103.0 103.9,102.4 104.7,101.7 105.6,101.1 106.4,100.5 107.2,99.8 108.0,99.2 108.8,98.6 109.7,98.0 110.5,97.4 111.3,96.8 112.1,96.3 112.9,95.7 113.8,95.1 114.6,94.6 115.4,94.0 116.2,93.5 117.0,93.0 117.9,92.5 118.7,92.0 119.5,91.4 120.3,91.0 121.1,90.5 122.0,90.0 122.8,89.5 123.6,89.1 124.4,88.6 125.2,88.2 126.1,87.7 126.9,87.3 127.7,86.9 128.5,86.5 129.3,86.1 130.2,85.7 131.0,85.4 131.8,85.0 132.6,84.6 133.4,84.3 134.3,84.0 135.1,83.6 135.9,83.3 136.7,83.0 137.5,82.7 138.4,82.4 139.2,82.1 140.0,81.9 140.8,81.6 141.6,81.4 142.5,81.1 143.3,80.9 144.1,80.7 144.9,80.5 145.7,80.3 146.6,80.1 147.4,79.9 148.2,79.8 149.0,79.6 149.8,79.5 150.7,79.3 151.5,79.2 152.3,79.1 153.1,79.0 153.9,78.9 154.8,78.8 155.6,78.8 156.4,78.7 157.2,78.7 158.0,78.6 158.9,78.6 159.7,78.6 160.5,78.6 161.3,78.6 162.1,78.6 163.0,78.6 163.8,78.7 164.6,78.7 165.4,78.8 166.2,78.8 167.1,78.9 167.9,79.0 168.7,79.1 169.5,79.2 170.3,79.3 171.2,79.5 172.0,79.6 172.8,79.8 173.6,79.9 174.4,80.1 175.3,80.3 176.1,80.5 176.9,80.7 177.7,80.9 178.5,81.1 179.4,81.4 180.2,81.6 181.0,81.9 181.8,82.1 182.6,82.4 183.5,82.7 184.3,83.0 185.1,83.3 185.9,83.6 186.7,84.0 187.6,84.3 188.4,84.6 189.2,85.0 190.0,85.4 190.8,85.7 191.7,86.1 192.5,86.5 193.3,86.9 194.1,87.3 194.9,87.7 195.8,88.2 196.6,88.6 197.4,89.1 198.2,89.5 199.0,90.0 199.9,90.5 200.7,91.0 201.5,91.4 202.3,92.0 203.1,92.5 204.0,93.0 204.8,93.5 205.6,94.0 206.4,94.6 207.2,95.1 208.1,95.7 208.9,96.3 209.7,96.8 210.5,97.4 211.3,98.0 212.2,98.6 213.0,99.2 213.8,99.8 214.6,100.5 215.4,101.1 216.3,101.7 217.1,102.4 217.9,103.0 218.7,103.7 219.5,104.3 220.4,105.0 221.2,105.7 222.0,106.4 222.8,107.1 223.6,107.7 224.5,108.5 225.3,109.2 226.1,109.9 226.9,110.6 227.7,111.3 228.6,112.0 229.4,112.8 230.2,113.5 231.0,114.3 231.8,115.0 232.7,115.8 233.5,116.5 234.3,117.3 235.1,118.1 235.9,118.8 236.8,119.6 237.6,120.4 238.4,121.2 239.2,122.0 240.0,122.8 240.9,123.6 241.7,124.4 242.5,125.2 243.3,126.0 244.1,126.8 245.0,127.6 245.8,128.4 246.6,129.2 247.4,130.1 248.2,130.9 249.1,131.7 249.9,132.5 250.7,133.4 251.5,134.2 252.3,135.0 253.2,135.9 254.0,136.7 254.8,137.5 255.6,138.4 256.4,139.2 257.3,140.1 258.1,140.9 258.9,141.8 259.7,142.6 260.5,143.5 261.4,144.3 262.2,145.2 263.0,146.0 263.8,146.8 264.6,147.7 265.5,148.5 266.3,149.4 267.1,150.2 267.9,151.1 268.7,151.9 269.6,152.8 270.4,153.6 271.2,154.5 272.0,155.3 272.8,156.1 273.7,157.0 274.5,157.8 275.3,158.6 276.1,159.5 276.9,160.3 277.8,161.1 278.6,161.9 279.4,162.8 280.2,163.6 281.0,164.4 281.9,165.2 282.7,166.0 283.5,166.8 284.3,167.6 285.1,168.4 286.0,169.2 286.8,170.0 287.6,170.8 288.4,171.6 289.2,172.4 290.1,173.2 290.9,173.9 291.7,174.7 292.5,175.5 293.3,176.2 294.2,177.0 295.0,177.7 295.8,178.5 296.6,179.2 297.4,180.0 298.3,180.7 299.1,181.4 299.9,182.1 300.7,182.8 301.5,183.5 302.4,184.3 303.2,184.9 304.0,185.6 304.8,186.3 305.6,187.0 306.5,187.7 307.3,188.3 308.1,189.0 308.9,189.6 309.7,190.3 310.6,190.9 311.4,191.5 312.2,192.2 313.0,192.8 313.8,193.4 314.7,194.0 315.5,194.6 316.3,195.2 317.1,195.7 317.9,196.3 318.8,196.9 319.6,197.4 320.4,198.0 321.2,198.5 322.0,199.0 322.9,199.5 323.7,200.0 324.5,200.6 325.3,201.0 326.1,201.5 327.0,202.0 327.8,202.5 328.6,202.9 329.4,203.4 330.2,203.8 331.1,204.3 331.9,204.7 332.7,205.1 333.5,205.5 334.3,205.9 335.2,206.3 336.0,206.6 336.8,207.0 337.6,207.4 338.4,207.7 339.3,208.0 340.1,208.4 340.9,208.7 341.7,209.0 342.5,209.3 343.4,209.6 344.2,209.9 345.0,210.1 345.8,210.4 346.6,210.6 347.5,210.9 348.3,211.1 349.1,211.3 349.9,211.5 350.7,211.7 351.6,211.9 352.4,212.1 353.2,212.2 354.0,212.4 354.8,212.5 355.7,212.7 356.5,212.8 357.3,212.9 358.1,213.0 358.9,213.1 359.8,213.2 360.6,213.2 361.4,213.3 362.2,213.3 363.0,213.4 363.9,213.4 364.7,213.4 365.5,213.4 366.3,213.4 367.1,213.4 368.0,213.4 368.8,213.3 369.6,213.3 370.4,213.2 371.2,213.2 372.1,213.1 372.9,213.0 373.7,212.9 374.5,212.8 375.3,212.7 376.2,212.5 377.0,212.4 377.8,212.2 378.6,212.1 379.4,211.9 380.3,211.7 381.1,211.5 381.9,211.3 382.7,211.1 383.5,210.9 384.4,210.6 385.2,210.4 386.0,210.1 386.8,209.9 387.6,209.6 388.5,209.3 389.3,209.0 390.1,208.7 390.9,208.4 391.7,208.0 392.6,207.7 393.4,207.4 394.2,207.0 395.0,206.6 395.8,206.3 396.7,205.9 397.5,205.5 398.3,205.1 399.1,204.7 399.9,204.3 400.8,203.8 401.6,203.4 402.4,202.9 403.2,202.5 404.0,202.0 404.9,201.5 405.7,201.0 406.5,200.6 407.3,200.0 408.1,199.5 409.0,199.0 409.8,198.5 410.6,198.0 411.4,197.4 412.2,196.9 413.1,196.3 413.9,195.7 414.7,195.2 415.5,194.6 416.3,194.0 417.2,193.4 418.0,192.8 418.8,192.2 419.6,191.5 420.4,190.9 421.3,190.3 422.1,189.6 422.9,189.0 423.7,188.3 424.5,187.7 425.4,187.0 426.2,186.3 427.0,185.6 427.8,184.9 428.6,184.3 429.5,183.5 430.3,182.8 431.1,182.1 431.9,181.4 432.7,180.7 433.6,180.0 434.4,179.2 435.2,178.5 436.0,177.7 436.8,177.0 437.7,176.2 438.5,175.5 439.3,174.7 440.1,173.9 440.9,173.2 441.8,172.4 442.6,171.6 443.4,170.8 444.2,170.0 445.0,169.2 445.9,168.4 446.7,167.6 447.5,166.8 448.3,166.0 449.1,165.2 450.0,164.4 450.8,163.6 451.6,162.8 452.4,161.9 453.2,161.1 454.1,160.3 454.9,159.5 455.7,158.6 456.5,157.8 457.3,157.0 458.2,156.1 459.0,155.3 459.8,154.5 460.6,153.6 461.4,152.8 462.3,151.9 463.1,151.1 463.9,150.2 464.7,149.4 465.5,148.5 466.4,147.7 467.2,146.8 468.0,146.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/></svg></span>",
     "familj": "skissa_triggraf_3"
+  },
+  {
+    "id": "1.334",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionerna</p><p>\\[f(x)=2,5\\sin(0,9x)+1\\]</p><p>och</p><p>\\[g(x)=2\\cos(0,6x)-0,5\\]</p><p>är definierade för \\(0\\le x\\le12\\).</p><p>Bestäm samtliga skärningspunkter. Svara med tre decimaler.</p>",
+    "s": "<p>Skärningspunkterna fås genom att lösa \\(f(x)=g(x)\\). En grafisk lösning ger</p><p>\\[x\\approx0,216\\quad\\text{och}\\quad x\\approx10,256.\\]</p><p>I båda punkterna är y-koordinaten ungefär \\(1,483\\).</p><p>\\[\\boxed{(0,216;1,483)\\ \\text{och}\\ (10,256;1,483)}.\\]</p>",
+    "familj": "geogebra_trig_tva_kurvor_1"
   },
   {
     "id": "1.182",
@@ -10888,6 +11713,21 @@ window.BANKMATO2 = [
     "t": "<p>Lös ekvationen \\(2\\cos^2x-3\\cos x+1=0\\)<br>för \\(0\\le x&lt;2\\pi\\).</p>",
     "s": "<p>Sätt \\(u=\\cos x\\). Då \\(2u^2-3u+1=(2u-1)(u-1)=0\\). Alltså \\(\\cos x=1/2\\) eller \\(\\cos x=1\\). Lösningarna är \\(\\boxed{x=0,\\pi/3,5\\pi/3}\\).</p>",
     "familj": "trig_ekvation_np_traning_12"
+  },
+  {
+    "id": "1.343",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[2\\sin x+\\cos(2,3x)=0,7\\]</p><p>för \\(0\\le x&lt;2\\pi\\). Svara med tre decimaler.</p>",
+    "s": "<p>Studera vänsterledet som en funktion och bestäm dess skärning med nivån \\(0,7\\).</p><p>I intervallet finns en lösning:</p><p>\\[\\boxed{x\\approx3,112}.\\]</p>",
+    "familj": "geogebra_trigekv_summa_frekvenser_1"
   },
   {
     "id": "1.201",
@@ -11520,6 +12360,21 @@ window.BANKMATO2 = [
     "familj": "polar_argument_normalisera_2"
   },
   {
+    "id": "4.323",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[z=1,35(\\cos0,4+i\\sin0,4).\\]</p><p>Bestäm det minsta positiva heltalet \\(n\\) för vilket \\(|z^n|&gt;10\\).</p>",
+    "s": "<p>Absolutbeloppet av en potens är</p><p>\\[|z^n|=|z|^n=1,35^n.\\]</p><p>Vi söker första heltalet med \\(1,35^n&gt;10\\). Man får</p><p>\\[1,35^7\\approx8,17\\quad\\text{och}\\quad1,35^8\\approx11,03.\\]</p><p>Alltså \\(\\boxed{n=8}\\).</p>",
+    "familj": "geogebra_polar_potens_absolutbelopp_1"
+  },
+  {
     "id": "4.207",
     "kap": 4,
     "omr": "polar_exponentiell",
@@ -11655,6 +12510,21 @@ window.BANKMATO2 = [
     "familj": "komplex_z3_8i"
   },
   {
+    "id": "4.328",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm alla komplexa tal som samtidigt uppfyller</p><p>\\[z^4=16\\]</p><p>och</p><p>\\[z^6=64.\\]</p>",
+    "s": "<p>Båda ekvationerna ger rötter med absolutbelopp 2.</p><p>Rötterna till \\(z^4=16\\) har argument \\(0,\\pi/2,\\pi,3\\pi/2\\).</p><p>Rötterna till \\(z^6=64\\) har argument \\(k\\pi/3\\).</p><p>Gemensamma argument är 0 och \\(\\pi\\). Alltså</p><p>\\[\\boxed{z=2\\quad\\text{eller}\\quad z=-2}.\\]</p>",
+    "familj": "geogebra_rotter_gemensamma_1"
+  },
+  {
     "id": "4.216",
     "kap": 4,
     "omr": "potenser_rotter",
@@ -11713,6 +12583,21 @@ window.BANKMATO2 = [
     "t": "<p>I det komplexa talplanet motsvarar punkterna A, B och C koordinaterna \\((2,-3)\\), \\((-4,1)\\) och \\((0,5)\\).</p><p>Skriv de tre komplexa talen på formen \\(a+bi\\).</p>",
     "s": "<p>A: \\(\\boxed{2-3i}\\). B: \\(\\boxed{-4+i}\\). C: \\(\\boxed{5i}\\).</p>",
     "familj": "komplexplan_koordinater_rutin_7"
+  },
+  {
+    "id": "4.318",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm de komplexa tal \\(z\\) som uppfyller</p><p>\\[|z-2|=|z+1-i|\\]</p><p>och</p><p>\\[|z|=4.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Det första villkoret beskriver punkter som ligger lika långt från \\((2,0)\\) och \\((-1,1)\\). De ligger på en rät linje, och förenkling ger</p><p>\\[y=3x-1.\\]</p><p>Skärning med cirkeln \\(x^2+y^2=16\\) ger två punkter:</p><p>\\[(-0,961;-3,883)\\quad\\text{och}\\quad(1,561;3,683).\\]</p><p>Alltså</p><p>\\[\\boxed{z\\approx-0,961-3,883i\\quad\\text{eller}\\quad z\\approx1,561+3,683i}.\\]</p>",
+    "familj": "geogebra_komplexplan_mittnormal_radie_1"
   },
   {
     "id": "4.220",
@@ -11788,6 +12673,21 @@ window.BANKMATO2 = [
     "t": "<p>En tunn oljefläck på vattenytan antas vara cirkelformad. Vid ett visst ögonblick är radien 8,0 m och fläckens area ökar med 40 m²/min.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMidYMid meet\" width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt radien ökar vid detta ögonblick.</p>",
     "s": "<p>För cirkeln gäller \\(A=\\pi r^2\\).</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dA/dt=40\\) och \\(r=8\\):</p><p>\\[40=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{40}{16\\pi}=\\frac{2,5}{\\pi}\\approx0,80.\\]</p><p><strong>Radien ökar med ungefär \\(\\boxed{0,80\\text{ m/min}}\\).</strong></p>",
     "familj": "forandringshastighet_cirkel_radie_2"
+  },
+  {
+    "id": "2.271",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>En livräddare står på stranden. En person i vattnet befinner sig 60 m längs stranden från livräddaren och 40 m ut i vattnet. Livräddaren springer 4,0 m/s på stranden och simmar 2,0 m/s.</p><p>Livräddaren springer först \\(x\\) meter längs stranden och simmar sedan raka vägen till personen.</p><p>Bestäm \\(x\\) så att den totala tiden blir så liten som möjligt.</p>",
+    "s": "<p>Löpsträckan är \\(x\\). Simsträckan blir</p><p>\\[\\sqrt{(60-x)^2+40^2}.\\]</p><p>Tiden är därför</p><p>\\[T(x)=\\frac{x}{4}+\\frac{\\sqrt{(60-x)^2+1600}}{2},\\qquad0\\le x\\le60.\\]</p><p>Funktionens minimum fås vid</p><p>\\[\\boxed{x\\approx36,9\\text{ m}}.\\]</p><p>Den minsta tiden är ungefär \\(32,32\\) s.</p>",
+    "familj": "geogebra_optimering_livraddare_1"
   },
   {
     "id": "2.181",
@@ -12045,6 +12945,21 @@ window.BANKMATO2 = [
     "familj": "graf_sin_half_1000"
   },
   {
+    "id": "1.335",
+    "kap": 1,
+    "omr": "trig_funktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen</p><p>\\[h(x)=2\\sin x+\\cos(1,7x)\\]</p><p>studeras för \\(0\\le x\\le2\\pi\\).</p><p>Bestäm funktionens största värde och det x-värde där detta inträffar. Svara med tre decimaler.</p>",
+    "s": "<p>Eftersom funktionens två trigonometriska delar har olika faktorer framför \\(x\\) är maximum inte direkt avläsbart ur en vanlig amplitud.</p><p>Genom att studera grafen och bestämma dess högsta punkt i intervallet fås</p><p>\\[x\\approx0,680.\\]</p><p>Då är</p><p>\\[h(0,680)\\approx1,661.\\]</p><p>Alltså är det största värdet \\(\\boxed{1,661}\\), vid \\(\\boxed{x\\approx0,680}\\).</p>",
+    "familj": "geogebra_trig_summa_maximum_1"
+  },
+  {
     "id": "1.230",
     "kap": 1,
     "omr": "trig_funktioner",
@@ -12163,6 +13078,21 @@ window.BANKMATO2 = [
     "t": "<p>Lös ekvationen</p><p>\\[\\cos(3x)=0.\\]</p><p>för \\(0\\le x&lt;2\\pi\\).</p>",
     "s": "<p>Förenkla ekvationen med de trigonometriska formler som behövs och bestäm först möjliga värden på sinus, cosinus eller tangens. Använd sedan enhetscirkeln och intervallet.</p><p><strong>Svar:</strong> \\(x=\\pi/6,\\pi/2,\\ 5\\pi/6,\\ 7\\pi/6,\\ 3\\pi/2,\\ 11\\pi/6\\).</p>",
     "familj": "trigekv_npserie_5"
+  },
+  {
+    "id": "1.344",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[\\tan(0,8x)=0,3x\\]</p><p>för \\(0\\le x\\le8\\). Var uppmärksam på tangensfunktionens asymptoter.</p>",
+    "s": "<p>Grafen till \\(\\tan(0,8x)\\) har asymptoter där \\(0,8x=\\pi/2+n\\pi\\). I intervallet ligger asymptoter vid ungefär \\(1,963\\) och \\(5,890\\).</p><p>Skärningarna med \\(y=0,3x\\) som verkligen ligger på kurvan är</p><p>\\[\\boxed{x=0\\quad\\text{och}\\quad x\\approx5,175}.\\]</p><p>Skärningar som bara uppstår över ett hopp vid en asymptot ska inte räknas.</p>",
+    "familj": "geogebra_trigekv_tangens_asymptoter_1"
   },
   {
     "id": "1.238",
@@ -12600,6 +13530,21 @@ window.BANKMATO2 = [
     "familj": "modell_temp_param_a2"
   },
   {
+    "id": "1.339",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Temperaturen på två platser modelleras under ett år av</p><p>\\[T_1(t)=8+10\\sin\\left(\\frac{2\\pi}{365}(t-100)\\right)\\]</p><p>och</p><p>\\[T_2(t)=5+13\\sin\\left(\\frac{2\\pi}{365}(t-115)\\right),\\]</p><p>där \\(t\\) är dagnummer.</p><p>Bestäm de två tidpunkter under året då modellerna ger samma temperatur.</p>",
+    "s": "<p>Vi söker skärningarna mellan modellerna, alltså lösningarna till \\(T_1(t)=T_2(t)\\).</p><p>Under ett år fås</p><p>\\[\\boxed{t\\approx199,2\\quad\\text{och}\\quad t\\approx289,2}.\\]</p>",
+    "familj": "geogebra_trigmodell_tva_temperaturer_1"
+  },
+  {
     "id": "1.267",
     "kap": 1,
     "omr": "enhetscirkeln",
@@ -12748,6 +13693,21 @@ window.BANKMATO2 = [
     "t": "<p>Derivera.</p><p>a) \\((x^2+1)/(x-1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((2x+1)/(x+2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin x/x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln x/x\\)</p>",
     "s": "<p>Använd lämplig regel från formelbladet. Visa särskilt produkt-, kvot- eller kedjeregel när den behövs.</p><p>a) \\(\\boxed{(x^2-2x-1)/(x-1)^2}\\).</p><p>b) \\(\\boxed{3/(x+2)^2}\\).</p><p>c) \\(\\boxed{(x \\cos x-\\sin x)/x^2}\\).</p><p>d) \\(\\boxed{(1-\\ln x)/x^2}\\).</p>",
     "familj": "deriv_mangd_6"
+  },
+  {
+    "id": "2.282",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[h(x)=\\ln\\left(2+e^{-x^2}\\right).\\]</p><p>Bestäm alla x-värden där \\(h(x)=0,8\\). Svara med tre decimaler och förklara varför lösningarna är symmetriska.</p>",
+    "s": "<p>En grafisk lösning ger</p><p>\\[\\boxed{x\\approx-1,220\\quad\\text{och}\\quad x\\approx1,220}.\\]</p><p>Uttrycket innehåller bara \\(x^2\\), så \\(h(-x)=h(x)\\). Funktionen är därför symmetrisk kring y-axeln, vilket förklarar att lösningarna kommer parvis med motsatta tecken.</p>",
+    "familj": "geogebra_sammansatt_ln_exp_symmetri_1"
   },
   {
     "id": "2.195",
@@ -12915,6 +13875,21 @@ window.BANKMATO2 = [
     "familj": "optimering_lada_a2"
   },
   {
+    "id": "2.272",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Koncentrationen av ett läkemedel i blodet modelleras av</p><p>\\[C(t)=20\\left(e^{-0,15t}-e^{-0,80t}\\right),\\qquad t\\ge0,\\]</p><p>där \\(C\\) mäts i mg/L och \\(t\\) i timmar.</p><p>Bestäm när koncentrationen är som störst och ange det största värdet.</p>",
+    "s": "<p>Derivatan är</p><p>\\[C'(t)=20\\left(-0,15e^{-0,15t}+0,80e^{-0,80t}\\right).\\]</p><p>Maximum fås när \\(C'(t)=0\\). Den positiva lösningen är</p><p>\\[t\\approx2,575\\text{ h}.\\]</p><p>Då är</p><p>\\[C(t)\\approx11,043\\text{ mg/L}.\\]</p><p>Alltså \\(\\boxed{t\\approx2,58\\text{ h}}\\) och \\(\\boxed{C_{\\max}\\approx11,0\\text{ mg/L}}\\).</p>",
+    "familj": "geogebra_optimering_lakemedel_1"
+  },
+  {
     "id": "2.206",
     "kap": 2,
     "omr": "tillampningar_derivata",
@@ -12943,6 +13918,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm tangentens ekvation till \\(y=\\ln x+x\\) vid \\(x=1\\).</p>",
     "s": "<p>\\[f'(x)=1/x+1.\\] Vid \\(x=1\\) är lutningen 2 och punkten är \\((1,1)\\). Alltså \\(y-1=2(x-1)\\), dvs \\(\\boxed{y=2x-1}\\).</p>",
     "familj": "tangent_ln_c"
+  },
+  {
+    "id": "2.278",
+    "kap": 2,
+    "omr": "derivator_specialfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[f(x)=x^2e^{-x/2},\\qquad x\\ge0.\\]</p><p>Bestäm alla positiva x-värden där tangentens lutning är \\(0,5\\). Förklara med hjälp av grafens form varför det finns två sådana punkter.</p>",
+    "s": "<p>Produktregeln ger</p><p>\\[f'(x)=e^{-x/2}\\left(2x-\\frac{x^2}{2}\\right).\\]</p><p>Vi löser</p><p>\\[e^{-x/2}\\left(2x-\\frac{x^2}{2}\\right)=0,5.\\]</p><p>Det ger</p><p>\\[\\boxed{x\\approx0,319\\quad\\text{och}\\quad x\\approx2,590}.\\]</p><p>Derivatan börjar vid 0, stiger över 0,5 och sjunker sedan tillbaka. Därför skär grafen till \\(f'\\) nivån 0,5 två gånger.</p>",
+    "familj": "geogebra_derivata_exp_polynom_lutning_1"
   },
   {
     "id": "2.208",
@@ -13063,6 +14053,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\(\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1/x\\)</p>",
     "s": "<p>Använd tabellen över primitiva funktioner i formelbladet och kontrollera gärna genom derivering.</p><p>a) En primitiv funktion är \\(\\boxed{-\\cos x}\\). Lägg till konstanten C vid obestämd integral.</p><p>b) En primitiv funktion är \\(\\boxed{\\sin x}\\). Lägg till konstanten C vid obestämd integral.</p><p>c) En primitiv funktion är \\(\\boxed{e^x}\\). Lägg till konstanten C vid obestämd integral.</p><p>d) En primitiv funktion är \\(\\boxed{\\ln x}\\). Lägg till konstanten C vid obestämd integral.</p>",
     "familj": "integral_mangd_2"
+  },
+  {
+    "id": "3.237",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm</p><p>\\[\\int_0^3 \\sqrt{1+x^3}\\,dx\\]</p><p>med tre decimaler.</p>",
+    "s": "<p>Numerisk integration ger</p><p>\\[\\boxed{7,341}.\\]</p>",
+    "familj": "geogebra_integral_numerisk_rot_1"
   },
   {
     "id": "3.167",
@@ -13213,6 +14218,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm en primitiv funktion till varje funktion.</p><p>a) \\((4x+1)^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{5x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos(x/2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac1{3x-1}\\), \\(x&gt;1/3\\)</p>",
     "s": "<p>a) \\(\\boxed{\\frac{(4x+1)^4}{16}}\\).</p><p>b) \\(\\boxed{\\frac15e^{5x}}\\).</p><p>c) \\(\\boxed{2\\sin(x/2)}\\).</p><p>d) \\(\\boxed{\\frac13\\ln(3x-1)}\\).</p><p>En godtycklig konstant kan läggas till.</p>",
     "familj": "integral_mangd_12"
+  },
+  {
+    "id": "3.238",
+    "kap": 3,
+    "omr": "integralberakning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Bestäm</p><p>\\[\\int_0^5 |\\sin x-0,2x|\\,dx\\]</p><p>med tre decimaler. Förklara varför det är viktigt att ta hänsyn till var uttrycket innanför absolutbeloppet byter tecken.</p>",
+    "s": "<p>Förutom \\(x=0\\) byter \\(\\sin x-0,2x\\) tecken vid</p><p>\\[x\\approx2,596.\\]</p><p>Därför kan integralen delas upp där, eller beräknas direkt med absolutbeloppet.</p><p>\\[\\boxed{\\int_0^5 |\\sin x-0,2x|\\,dx\\approx4,145}.\\]</p><p>Utan absolutbelopp skulle positiva och negativa delar delvis ta ut varandra.</p>",
+    "familj": "geogebra_integral_absolutbelopp_numerisk_1"
   },
   {
     "id": "3.177",
@@ -13905,6 +14925,21 @@ window.BANKMATO2 = [
     "familj": "polar_op_batch_3"
   },
   {
+    "id": "4.324",
+    "kap": 4,
+    "omr": "polar_exponentiell",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Låt</p><p>\\[z=1,15(\\cos0,55+i\\sin0,55).\\]</p><p>Bestäm det minsta positiva heltalet \\(n\\) för vilket \\(z^n\\) både ligger i tredje kvadranten och har absolutbelopp större än 2.</p>",
+    "s": "<p>Med de Moivres formel kan potenserna följas genom att argumentet ökar med \\(0,55\\) rad och absolutbeloppet multipliceras med \\(1,15\\) för varje steg.</p><p>Första talet som uppfyller båda villkoren är</p><p>\\[z^6\\approx-2,284-0,365i.\\]</p><p>Det ligger i tredje kvadranten och \\(|z^6|\\approx2,313&gt;2\\).</p><p>Alltså \\(\\boxed{n=6}\\).</p>",
+    "familj": "geogebra_polar_potenser_kvadrant_1"
+  },
+  {
     "id": "4.256",
     "kap": 4,
     "omr": "polar_exponentiell",
@@ -14025,6 +15060,21 @@ window.BANKMATO2 = [
     "familj": "demoivre_1i8"
   },
   {
+    "id": "4.329",
+    "kap": 4,
+    "omr": "potenser_rotter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Lös ekvationen</p><p>\\[z^7=3-4i.\\]</p><p>Bestäm den rot som har störst imaginärdel och skriv den på rektangulär form med tre decimaler.</p>",
+    "s": "<p>Talet \\(3-4i\\) har absolutbelopp 5 och argument \\(v\\approx-0,9273\\).</p><p>Sjunderötterna har absolutbelopp</p><p>\\[5^{1/7}\\approx1,2585\\]</p><p>och argument</p><p>\\[\\frac{v+2k\\pi}{7},\\qquad k=0,1,\\ldots,6.\\]</p><p>När rötterna jämförs fås störst imaginärdel för \\(k=2\\):</p><p>\\[\\boxed{z\\approx-0,116+1,253i}.\\]</p>",
+    "familj": "geogebra_rotter_sjunde_max_im_1"
+  },
+  {
     "id": "4.264",
     "kap": 4,
     "omr": "potenser_rotter",
@@ -14098,6 +15148,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm \\(a\\) så att polynomet \\(P(x)=x^3+ax^2-4x-4\\) är delbart med \\(x+1\\). Faktorisera sedan polynomet.</p>",
     "s": "<p>Faktorsatsen ger \\(P(-1)=-1+a+4-4=a-1\\). Därför \\(a=1\\).</p><p>Då \\(P=x^3+x^2-4x-4=(x+1)(x^2-4)\\), alltså \\(\\boxed{(x+1)(x-2)(x+2)}\\).</p>",
     "familj": "poly_parameter_factor_new"
+  },
+  {
+    "id": "4.334",
+    "kap": 4,
+    "omr": "polynom_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Polynomet</p><p>\\[P(x)=x^5-4x^3+x+1\\]</p><p>har tre reella nollställen och två icke-reella komplexa rötter.</p><p>Bestäm en andragradsfaktor med reella koefficienter som har de två komplexa rötterna som nollställen. Svara med koefficienter med tre decimaler.</p>",
+    "s": "<p>De komplexa rötterna är ungefär</p><p>\\[z=-0,369441\\pm0,438890i.\\]</p><p>En andragradsfaktor med dessa rötter är</p><p>\\[(x-z)(x-\\overline z)=x^2-2\\operatorname{Re}(z)x+|z|^2.\\]</p><p>Här är</p><p>\\[-2\\operatorname{Re}(z)\\approx0,739\\]</p><p>och</p><p>\\[|z|^2\\approx0,329.\\]</p><p>Alltså kan faktorn skrivas</p><p>\\[\\boxed{x^2+0,739x+0,329}.\\]</p>",
+    "familj": "geogebra_polynom_komplext_par_faktor_1"
   },
   {
     "id": "4.269",
@@ -14188,6 +15253,21 @@ window.BANKMATO2 = [
     "t": "<p>Lös \\(2\\cos x+1=0\\) för \\(0\\le x&lt;2\\pi\\).</p>",
     "s": "<p>\\(\\cos x=-1/2\\). Enhetscirkeln ger \\(\\boxed{x=2\\pi/3,4\\pi/3}\\).</p>",
     "familj": "trig_final_e2"
+  },
+  {
+    "id": "1.345",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Linjen</p><p>\\[y=a(x-2)\\]</p><p>tangerar kurvan \\(y=\\sin x\\) i en punkt där \\(0&lt;x&lt;2\\pi\\).</p><p>Bestäm \\(a\\) och tangentpunktens x-koordinat. Svara med tre decimaler.</p>",
+    "s": "<p>I tangentpunkten måste linjen och kurvan ha både samma y-värde och samma lutning.</p><p>Alltså</p><p>\\[\\sin x=a(x-2)\\qquad\\text{och}\\qquad a=\\cos x.\\]</p><p>Eliminera \\(a\\):</p><p>\\[\\sin x=(x-2)\\cos x.\\]</p><p>Den relevanta lösningen är \\(x\\approx4,303\\). Då</p><p>\\[a=\\cos(4,303)\\approx-0,398.\\]</p><p>\\[\\boxed{x\\approx4,303,\\qquad a\\approx-0,398}.\\]</p>",
+    "familj": "geogebra_trigekv_tangent_parameter_1"
   },
   {
     "id": "1.273",
@@ -14445,6 +15525,21 @@ window.BANKMATO2 = [
     "familj": "deriv_chain_final"
   },
   {
+    "id": "2.283",
+    "kap": 2,
+    "omr": "kedjeregel_sammansatta",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen ges av</p><p>\\[h(x)=\\sin\\left(e^{0,4x}\\right),\\qquad x\\ge0.\\]</p><p>Bestäm den första maximipunkten och den första minimipunkten för \\(x&gt;0\\). Svara med tre decimaler.</p>",
+    "s": "<p>Kedjeregeln ger</p><p>\\[h'(x)=0,4e^{0,4x}\\cos\\left(e^{0,4x}\\right).\\]</p><p>Eftersom \\(0,4e^{0,4x}&gt;0\\) fås extrempunkter när</p><p>\\[\\cos(e^{0,4x})=0.\\]</p><p>Första maximum fås när \\(e^{0,4x}=\\pi/2\\):</p><p>\\[x=\\frac{\\ln(\\pi/2)}{0,4}\\approx1,129.\\]</p><p>Då är \\(h=1\\).</p><p>Första minimum fås när \\(e^{0,4x}=3\\pi/2\\):</p><p>\\[x\\approx3,875,\\qquad h=-1.\\]</p><p>Alltså \\(\\boxed{(1,129;1)}\\) och \\(\\boxed{(3,875;-1)}\\).</p>",
+    "familj": "geogebra_sammansatt_sin_exp_extrema_1"
+  },
+  {
     "id": "2.219",
     "kap": 2,
     "omr": "grafer_asymptoter",
@@ -14458,6 +15553,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm extrempunkterna till \\(f(x)=x^3-6x^2+9x\\).</p>",
     "s": "<p>\\(f'=3x^2-12x+9=3(x-1)(x-3)\\). Undersök tecknet på \\(f'(x)\\): derivatan byter från positiv till negativ vid \\(x=1\\), vilket ger en maximipunkt, och från negativ till positiv vid \\(x=3\\), vilket ger en minimipunkt. \\(f(1)=4\\), \\(f(3)=0\\). Punkter \\(\\boxed{(1,4),(3,0)}\\).</p>",
     "familj": "deriv_extrem_final"
+  },
+  {
+    "id": "2.268",
+    "kap": 2,
+    "omr": "grafer_asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Funktionen</p><p>\\[f(x)=3x+2+\\frac{2}{(x-1)^2}\\]</p><p>har en lodrät asymptot vid \\(x=1\\).</p><p>a) Bestäm det minsta värdet på den högra grenen \\(x&gt;1\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm samtliga lösningar till \\(f(x)=10\\). Svara med tre decimaler.</p>",
+    "s": "<p>a) \\[f'(x)=3-\\frac4{(x-1)^3}.\\]</p><p>På den högra grenen ger \\(f'(x)=0\\)</p><p>\\[x=1+\\sqrt[3]{\\frac43}\\approx2,101.\\]</p><p>Då är \\(f(x)\\approx\\boxed{9,953}\\).</p><p>b) Grafen visar tre skärningar med nivån 10:</p><p>\\[\\boxed{x\\approx0,451;\\ 2,000;\\ 2,215}.\\]</p>",
+    "familj": "geogebra_rationell_tre_skarningar_1"
   },
   {
     "id": "2.220",
@@ -14745,6 +15855,21 @@ window.BANKMATO2 = [
     "familj": "integral_population_c"
   },
   {
+    "id": "3.248",
+    "kap": 3,
+    "omr": "integral_tillampningar",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Vatten strömmar in och ut ur en reservoar. Nettoflödet, alltså inflöde minus utflöde, modelleras av</p><p>\\[q(t)=-10+2t+20\\sin\\left(\\frac{\\pi t}{6}\\right),\\qquad0\\le t\\le12,\\]</p><p>där \\(q\\) mäts i m³/h.</p><p>Vid vilken tidpunkt är den tillförda nettovolymen sedan \\(t=0\\) som störst, och hur stor är den då?</p>",
+    "s": "<p>Låt</p><p>\\[V(t)=\\int_0^tq(u)\\,du.\\]</p><p>Då är \\(V'(t)=q(t)\\). Kandidater till största värdet fås därför när \\(q(t)=0\\) samt i intervallets ändpunkter.</p><p>Nollställena är ungefär</p><p>\\[t\\approx0,823;\\ 6,237;\\ 10,815.\\]</p><p>Beräkning av \\(V(t)\\) i dessa punkter och vid ändpunkterna visar att det största värdet fås vid</p><p>\\[\\boxed{t\\approx6,237\\text{ h}}\\]</p><p>och är</p><p>\\[\\boxed{V\\approx52,63\\text{ m}^3}.\\]</p>",
+    "familj": "geogebra_integral_nettoflode_max_1"
+  },
+  {
     "id": "3.201",
     "kap": 3,
     "omr": "sannolikhetsintegraler",
@@ -14788,6 +15913,21 @@ window.BANKMATO2 = [
     "t": "<p>Området under \\(y=2-x\\) mellan \\(x=0\\) och \\(x=2\\) roteras kring x-axeln. Bestäm volymen.</p>",
     "s": "<p>\\[V=\\pi\\int_0^2(2-x)^2dx=\\pi\\cdot\\frac83=\\boxed{8\\pi/3}.\\]</p>",
     "familj": "rotation_triangle_final"
+  },
+  {
+    "id": "3.253",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Kurvorna</p><p>\\[y=e^{-x}\\qquad\\text{och}\\qquad y=0,2x\\]</p><p>skär varandra för ett positivt x-värde. Området mellan kurvorna och y-axeln roteras ett varv kring x-axeln.</p><p>Bestäm rotationskroppens volym med tre decimaler.</p>",
+    "s": "<p>Skärningen fås ur \\(e^{-x}=0,2x\\):</p><p>\\[x\\approx1,327.\\]</p><p>På intervallet ligger exponentialkurvan över linjen, så tvärsnittsarean är</p><p>\\[\\pi\\left(e^{-2x}-(0,2x)^2\\right).\\]</p><p>Därför</p><p>\\[V=\\pi\\int_0^{1,327}\\left(e^{-2x}-0,04x^2\\right)dx\\approx\\boxed{1,362}.\\]</p>",
+    "familj": "geogebra_rotation_exp_linje_1"
   },
   {
     "id": "4.273",
@@ -14953,6 +16093,21 @@ window.BANKMATO2 = [
     "t": "<p>Beskriv mängden \\(|z+2-i|&lt;3\\) geometriskt.</p>",
     "s": "<p>Uttrycket är avståndet från punkten \\(-2+i\\). Villkoret betyder alla punkter med avstånd mindre än 3: insidan av cirkeln med centrum \\((-2,1)\\) och radie 3, utan rand.</p>",
     "familj": "complex_disk_final"
+  },
+  {
+    "id": "4.319",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Två cirklar i det komplexa talplanet beskrivs av</p><p>\\[|z-(2+i)|=3\\]</p><p>och</p><p>\\[|z+1+i|=2.\\]</p><p>Bestäm deras skärningspunkter. Svara med tre decimaler.</p>",
+    "s": "<p>Skriv \\(z=x+iy\\). Då fås ekvationssystemet</p><p>\\[(x-2)^2+(y-1)^2=9\\]</p><p>och</p><p>\\[(x+1)^2+(y+1)^2=4.\\]</p><p>Skärningspunkterna är</p><p>\\[(-1;1)\\quad\\text{och}\\quad(0,846;-1,769).\\]</p><p>Alltså</p><p>\\[\\boxed{z=-1+i\\quad\\text{eller}\\quad z\\approx0,846-1,769i}.\\]</p>",
+    "familj": "geogebra_komplexplan_tva_cirklar_1"
   },
   {
     "id": "4.284",
@@ -15255,6 +16410,21 @@ window.BANKMATO2 = [
     "familj": "tangent_polynom_c_6"
   },
   {
+    "id": "2.273",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Effekten från en solcellsanläggning under en del av dagen modelleras av</p><p>\\[P(t)=t(12-t)e^{-0,08t},\\qquad0\\le t\\le12,\\]</p><p>där \\(P\\) mäts i kW och \\(t\\) i timmar efter soluppgång.</p><p>Bestäm när effekten är som störst och hur stor den då är.</p>",
+    "s": "<p>Derivera produkten:</p><p>\\[P'(t)=e^{-0,08t}\\left(12-2t-0,08t(12-t)\\right).\\]</p><p>Eftersom exponentialfaktorn är positiv bestäms extrempunkten av parentesen. Den relevanta lösningen är</p><p>\\[t\\approx4,635.\\]</p><p>Då är</p><p>\\[P(t)\\approx23,561.\\]</p><p>Effekten är alltså som störst cirka \\(\\boxed{4,63\\text{ h}}\\) efter soluppgång och är då \\(\\boxed{23,6\\text{ kW}}\\).</p>",
+    "familj": "geogebra_optimering_solcell_1"
+  },
+  {
     "id": "2.235",
     "kap": 2,
     "omr": "derivator_specialfunktioner",
@@ -15343,6 +16513,21 @@ window.BANKMATO2 = [
     "t": "<p>Bestäm arean mellan kurvorna \\(y=x^2-2x\\) och \\(y=2x\\).</p>",
     "s": "<p>Skärningspunkterna fås ur \\(x^2-2x=2x\\):</p><p>\\[x^2-4x=0\\Rightarrow x=0\\text{ eller }x=4.\\]</p><p>På intervallet ligger \\(y=2x\\) ovanför den andra kurvan. Arean blir</p><p>\\[A=\\int_0^4(2x-(x^2-2x))\\,dx=\\int_0^4(4x-x^2)\\,dx.\\]</p><p>\\[A=\\left[2x^2-\\frac{x^3}{3}\\right]_0^4=32-\\frac{64}{3}=\\boxed{\\frac{32}{3}}.\\]</p>",
     "familj": "area_mellan_kurvor_skarning_8"
+  },
+  {
+    "id": "3.243",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>För \\(0&lt;k&lt;1\\) betraktas området mellan kurvan \\(y=\\sin x\\) och linjen \\(y=k\\) för \\(0\\le x\\le\\pi\\).</p><p>Bestäm det värde på \\(k\\) som gör den sammanlagda arean mellan kurvan och linjen lika med \\(1,20\\) areaenheter. Svara med tre decimaler.</p>",
+    "s": "<p>För ett givet \\(k\\) skär linjen sinuskurvan två gånger. Den sammanlagda arean kan skrivas</p><p>\\[A(k)=\\int_0^\\pi|\\sin x-k|\\,dx.\\]</p><p>Vi söker \\(A(k)=1,20\\). Numerisk lösning ger</p><p>\\[\\boxed{k\\approx0,321}.\\]</p><p>Kontroll ger \\(A(0,321)\\approx1,20\\).</p>",
+    "familj": "geogebra_area_parameter_sinus_niva_1"
   },
   {
     "id": "3.207",
@@ -15778,6 +16963,21 @@ window.BANKMATO2 = [
     "t": "<p>Under ett dygn modelleras temperaturen i ett växthus av</p><p>\\[T(t)=18+5\\cos(\\pi(t-14)/12),\\qquad 0\\le t\\le24.\\]</p><p>a) När är temperaturen som högst?<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm den lägsta temperaturen enligt modellen.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm temperaturen klockan 08.00.</p>",
     "s": "<p>a) Cosinus är 1 när vinkeln är 0. Det sker vid \\(t=14\\), alltså <strong>kl. 14.00</strong>.</p><p>b) Minvärdet är \\(18-5=\\)<strong>13 °C</strong>.</p><p>c) \\(T(8)=18+5\\cos(-\\pi/2)=\\)<strong>18 °C</strong>.</p>",
     "familj": "trig_modell_vaxthus_1"
+  },
+  {
+    "id": "1.340",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "miniräknare": true,
+    "geogebra": true,
+    "t": "<p>Våghöjden vid en boj beskrivs under 12 sekunder av modellen</p><p>\\[H(t)=1,6+0,9\\sin(0,7t)+0,3\\sin(1,4t),\\qquad0\\le t\\le12.\\]</p><p>Bestäm modellens största våghöjd under intervallet och när den inträffar. Svara med tre decimaler.</p>",
+    "s": "<p>Modellen är en summa av två sinusuttryck, så största värdet kan inte fås genom att bara addera medellinje och amplituder.</p><p>Grafens högsta punkt i intervallet ligger vid</p><p>\\[t\\approx1,616.\\]</p><p>Då är</p><p>\\[H(t)\\approx2,645.\\]</p><p>Alltså \\(\\boxed{H_{\\max}\\approx2,645}\\) vid \\(\\boxed{t\\approx1,616\\text{ s}}\\).</p>",
+    "familj": "geogebra_trigmodell_vag_summa_1"
   },
   {
     "id": "1.311",
