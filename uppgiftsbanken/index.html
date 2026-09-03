@@ -701,6 +701,30 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   box-shadow:0 0 0 1px color-mix(in oklab,var(--nA) 18%,transparent) inset;
 }
 
+
+/* ── hjälpmedelsfilter ── */
+.hjälpfilter{margin:0 4px 18px}
+.hjälpfilter[hidden]{display:none!important}
+.hjälprad{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-top:7px}
+.hjälprad:first-of-type{margin-top:0}
+.hjälpnamn{display:flex;align-items:center;gap:7px;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.hjälpknappar{display:flex;gap:3px;padding:2px;background:color-mix(in oklab,var(--sidebar-bg) 50%,#EDEEF1);border:1px solid var(--sidebar-line);border-radius:8px}
+.hjälpknappar button{border:0;background:transparent;border-radius:6px;padding:4px 7px;min-width:31px;cursor:pointer;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--muted);transition:background .13s,color .13s,box-shadow .13s}
+.hjälpknappar button:hover{color:var(--ink);background:rgba(255,255,255,.6)}
+.hjälpknappar button[aria-pressed="true"]{background:var(--surface);color:var(--ed-dark);box-shadow:var(--sh-1)}
+.verktygsikoner{display:inline-flex;align-items:center;gap:4px;flex:none}
+.verktygsikon{width:21px;height:21px;border-radius:6px;display:inline-grid;place-items:center;border:1px solid var(--line);background:var(--canvas);color:var(--ink-2)}
+.verktygsikon svg{width:12.5px;height:12.5px;display:block}
+.verktygsikon.räknare{background:#F5F1EA;color:#725B38;border-color:#E7DDCD}
+.verktygsikon.geogebra{background:#EDF2F9;color:#315F99;border-color:#DCE5F2}
+.bmeta .verktygsikon{width:18px;height:18px;border-radius:5px}
+.bmeta .verktygsikon svg{width:11px;height:11px}
+@media(max-width:680px){
+  .hjälprad{grid-template-columns:minmax(0,1fr) auto}
+  .hjälpknappar button{padding:5px 7px;min-width:33px}
+  .verktygsikon{width:20px;height:20px}
+}
+
 /* ── matematikspår ── */
 .spar-inriktning{margin:0 4px 18px}
 .spar-inriktning[hidden]{display:none!important}
@@ -2284,6 +2308,21 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
       <button class="C" data-niva="C" aria-pressed="true">C</button>
       <button class="A" data-niva="A" aria-pressed="true">A</button>
     </div>
+    <div class="hjälpfilter" id="hjälpfilter" hidden>
+      <p class="etikett" style="padding-left:4px;margin-bottom:8px">Hjälpmedel</p>
+      <div class="hjälprad">
+        <span class="hjälpnamn"><span class="verktygsikon räknare" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>Miniräknare</span>
+        <span class="hjälpknappar" data-verktyg="miniraknare">
+          <button type="button" data-val="alla" aria-pressed="true">Alla</button><button type="button" data-val="ja" aria-pressed="false">Ja</button><button type="button" data-val="nej" aria-pressed="false">Nej</button>
+        </span>
+      </div>
+      <div class="hjälprad">
+        <span class="hjälpnamn"><span class="verktygsikon geogebra" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>GeoGebra</span>
+        <span class="hjälpknappar" data-verktyg="geogebra">
+          <button type="button" data-val="alla" aria-pressed="true">Alla</button><button type="button" data-val="ja" aria-pressed="false">Ja</button><button type="button" data-val="nej" aria-pressed="false">Nej</button>
+        </span>
+      </div>
+    </div>
     <p class="etikett">Kapitel och område</p>
     <div id="träd"></div>
   </aside>
@@ -2573,7 +2612,7 @@ let LOGO='logo.png';
 /* ═══ tillstånd ═══ */
 let AKTIV=null;                                   /* vald kurs */
 let DB={bank:[],kapnamn:{},omr:{}};               /* kursens data */
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null};
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null,miniraknare:'alla',geogebra:'alla'};
 const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
 const aktivtSpår=()=>AKTIV?.spår?.length?state.spår:null;
@@ -2621,6 +2660,28 @@ function uppdateraKursTema(){
     rot.style.setProperty('--sidebar-line','var(--line)');
   }
 }
+function harHjälpmedelstaggar(){
+  return DB.bank.some(x=>Object.prototype.hasOwnProperty.call(x,'miniräknare')||Object.prototype.hasOwnProperty.call(x,'geogebra'));
+}
+function byggHjälpmedelsfilter(){
+  const wrap=$('#hjälpfilter');
+  if(!wrap)return;
+  const synlig=harHjälpmedelstaggar();
+  wrap.hidden=!synlig;
+  if(!synlig){state.miniraknare='alla';state.geogebra='alla';return;}
+  wrap.querySelectorAll('.hjälpknappar').forEach(grupp=>{
+    const nyckel=grupp.dataset.verktyg;
+    const aktuellt=nyckel==='miniraknare'?state.miniraknare:state.geogebra;
+    grupp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.val===aktuellt));
+  });
+}
+function verktygsIkoner(x){
+  const delar=[];
+  if(x?.['miniräknare']) delar.push(`<span class="verktygsikon räknare" title="Miniräknare behövs" aria-label="Miniräknare behövs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
+  if(x?.geogebra) delar.push(`<span class="verktygsikon geogebra" title="GeoGebra behövs" aria-label="GeoGebra behövs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>`);
+  return delar.length?`<span class="verktygsikoner">${delar.join('')}</span>`:'';
+}
+
 function byggSpårfilter(){
   const wrap=$('#sparInriktning'), låda=$('#sparKnappar');
   const spår=AKTIV?.spår||[];
@@ -2969,6 +3030,7 @@ function startaKurs(kurs){
     });
     state.omr.clear(); state.blad=[]; state.sök='';
     state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
+    state.miniraknare='alla'; state.geogebra='alla';
     state.spår=kurs.defaultSpår||(kurs.spår?.[0]?.id||null);
     $('#sökfält').value=''; $('#visaPoäng').checked=false;
     $('#sorteraKnapp').setAttribute('aria-pressed','false');
@@ -2984,6 +3046,7 @@ function startaKurs(kurs){
   requestAnimationFrame(()=>{
     try{
       byggSpårfilter();
+      byggHjälpmedelsfilter();
       uppdateraKursTema();
       uppdateraKursRubriker();
       byggTräd();
@@ -3066,6 +3129,15 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   b.setAttribute('aria-pressed',state.nivåer.has(n));
   rita();
 }));
+$$('.hjälpknappar button').forEach(b=>b.addEventListener('click',()=>{
+  const grupp=b.closest('.hjälpknappar');
+  const nyckel=grupp.dataset.verktyg;
+  const värde=b.dataset.val;
+  if(nyckel==='miniraknare') state.miniraknare=värde;
+  if(nyckel==='geogebra') state.geogebra=värde;
+  grupp.querySelectorAll('button').forEach(k=>k.setAttribute('aria-pressed',k===b));
+  rita();
+}));
 let sökTimer=null;
 $('#sökfält').addEventListener('input',e=>{
   const värde=e.target.value;
@@ -3113,6 +3185,8 @@ function söktextFör(x){
     x.omr, områdesnamn,
     kapitelNamn(x.kap),
     familj, taggar,
+    x['miniräknare']?'miniräknare räknare':'utan miniräknare',
+    x.geogebra?'geogebra':'utan geogebra',
     x.typ||'', x.kategori||''
   ].join(' '));
   SÖKINDEX.set(x,söktext);
@@ -3128,6 +3202,8 @@ function urval(){
   const termer=state.sök ? state.sök.split(' ').filter(Boolean) : [];
   return variantBank().filter(x=>{
     if(!state.nivåer.has(x.niva)) return false;
+    if(state.miniraknare!=='alla' && Boolean(x['miniräknare'])!==(state.miniraknare==='ja')) return false;
+    if(state.geogebra!=='alla' && Boolean(x.geogebra)!==(state.geogebra==='ja')) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
     if(termer.length){
       const t=söktextFör(x);
@@ -3162,6 +3238,7 @@ function rita(){
           <span class="nivå ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.niva}</span>
           <span class="område">${DB.omr[x.kap][x.omr]}</span>
+          ${verktygsIkoner(x)}
           ${state.visaPoäng?`<span class="poäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
           <button class="kortred" type="button" data-redigera="${x.id}" title="Redigera uppgiften före tillägg">
@@ -3252,6 +3329,7 @@ function ritaBlad(){
           <span class="bid">${x.id}</span>
           <span class="bniva ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.niva}</span>
+          ${verktygsIkoner(x)}
           ${vp?`<span class="bpoäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
         </span>
