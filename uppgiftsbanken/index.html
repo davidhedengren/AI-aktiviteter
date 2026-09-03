@@ -712,13 +712,54 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 /* ── hjälpmedelsfilter ── */
 .hjälpfilter{margin:0 4px 18px}
 .hjälpfilter[hidden]{display:none!important}
-.hjälprad{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-top:7px}
-.hjälprad:first-of-type{margin-top:0}
-.hjälpnamn{display:flex;align-items:center;gap:7px;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-2)}
-.hjälpknappar{display:flex;gap:3px;padding:2px;background:color-mix(in oklab,var(--sidebar-bg) 50%,#EDEEF1);border:1px solid var(--sidebar-line);border-radius:8px}
-.hjälpknappar button{border:0;background:transparent;border-radius:6px;padding:4px 7px;min-width:31px;cursor:pointer;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--muted);transition:background .13s,color .13s,box-shadow .13s}
-.hjälpknappar button:hover{color:var(--ink);background:rgba(255,255,255,.6)}
-.hjälpknappar button[aria-pressed="true"]{background:var(--surface);color:var(--ed-dark);box-shadow:var(--sh-1)}
+/* Två av/på-knappar med samma form som nivåknapparna ovanför. Intryckt
+   knapp betyder "visa bara uppgifter där hjälpmedlet är tillåtet". */
+.hjälpval{display:flex;flex-wrap:wrap;gap:6px}
+.hjälpval+.hjälpval{margin-top:6px}
+.hjälpval button{
+  /* Får krympa till 104 px och lägger sig annars på var sin rad, så att
+     etiketten aldrig behöver klippas i den smalare panelen. */
+  flex:1 1 104px;
+  min-width:0;
+  white-space:nowrap;
+  min-height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border:2px solid color-mix(in oklab,var(--sidebar-line) 72%,transparent);
+  background:color-mix(in oklab,var(--sidebar-bg) 35%,#fff);
+  border-radius:var(--r-s);
+  padding:6px 6px;
+  font-size:11.5px;
+  font-weight:600;
+  line-height:1.1;
+  cursor:pointer;
+  color:var(--muted);
+  transition:background .15s,border-color .15s,color .15s,box-shadow .15s;
+}
+.hjälpval button svg{width:14px;height:14px;flex:none;display:block}
+/* Urtagningen bakom snedstrecket målas i knappens egen bakgrundsfärg. */
+.hjälpval button .urtag{stroke:color-mix(in oklab,var(--sidebar-bg) 35%,#fff)}
+.hjälpval button[aria-pressed="true"] .urtag{stroke:#F1F0F2}
+.hjälpval button:hover{
+  border-color:color-mix(in oklab,var(--ink-2) 28%,var(--sidebar-line));
+  color:var(--ink);
+}
+.hjälpval button[aria-pressed="true"][data-val="ja"]{
+  background:#F5F1EA;color:#725B38;border-color:#B08F55;
+  box-shadow:0 0 0 1px rgba(176,143,85,.18) inset;
+}
+/* "Utan räknare" tonas neutralt i stället för brunt, så att de två
+   räknarlägena inte ser likadana ut i ögonvrån. */
+.hjälpval button[aria-pressed="true"][data-val="nej"]{
+  background:#F1F0F2;color:#4A454C;border-color:#9B949E;
+  box-shadow:0 0 0 1px rgba(155,148,158,.2) inset;
+}
+.hjälpval button[aria-pressed="true"][data-verktyg="geogebra"]{
+  background:#EDF2F9;color:#315F99;border-color:#5486C1;
+  box-shadow:0 0 0 1px rgba(84,134,193,.18) inset;
+}
 .verktygsikoner{display:inline-flex;align-items:center;gap:4px;flex:none}
 .verktygsikon{width:21px;height:21px;border-radius:6px;display:inline-grid;place-items:center;border:1px solid var(--line);background:var(--canvas);color:var(--ink-2)}
 .verktygsikon svg{width:12.5px;height:12.5px;display:block}
@@ -727,8 +768,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .bmeta .verktygsikon{width:18px;height:18px;border-radius:5px}
 .bmeta .verktygsikon svg{width:11px;height:11px}
 @media(max-width:680px){
-  .hjälprad{grid-template-columns:minmax(0,1fr) auto}
-  .hjälpknappar button{padding:5px 7px;min-width:33px}
+  .hjälpval button{padding:7px 6px;font-size:11px}
   .verktygsikon{width:20px;height:20px}
 }
 
@@ -2319,17 +2359,12 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
     </div>
     <div class="hjälpfilter" id="hjälpfilter" hidden>
       <p class="etikett" style="padding-left:4px;margin-bottom:8px">Hjälpmedel</p>
-      <div class="hjälprad">
-        <span class="hjälpnamn"><span class="verktygsikon räknare" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>Miniräknare</span>
-        <span class="hjälpknappar" data-verktyg="miniraknare">
-          <button type="button" data-val="alla" aria-pressed="true">Alla</button><button type="button" data-val="ja" aria-pressed="false">Ja</button><button type="button" data-val="nej" aria-pressed="false">Nej</button>
-        </span>
+      <div class="hjälpval">
+        <button type="button" data-verktyg="miniraknare" data-val="ja" aria-pressed="false" title="Visa bara uppgifter där miniräknare är tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>Miniräknare</button>
+        <button type="button" data-verktyg="miniraknare" data-val="nej" aria-pressed="false" title="Visa bara uppgifter där miniräknare inte är tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/><path d="M2.6 21.4 21.4 2.6" class="urtag" stroke-width="4.4"/><path d="M2.6 21.4 21.4 2.6" stroke-width="2.4"/></svg>Utan räknare</button>
       </div>
-      <div class="hjälprad">
-        <span class="hjälpnamn"><span class="verktygsikon geogebra" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>GeoGebra</span>
-        <span class="hjälpknappar" data-verktyg="geogebra">
-          <button type="button" data-val="alla" aria-pressed="true">Alla</button><button type="button" data-val="ja" aria-pressed="false">Ja</button><button type="button" data-val="nej" aria-pressed="false">Nej</button>
-        </span>
+      <div class="hjälpval">
+        <button type="button" data-verktyg="geogebra" aria-pressed="false" title="Visa bara uppgifter där GeoGebra är tillåtet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>GeoGebra</button>
       </div>
     </div>
     <p class="etikett">Kapitel och område</p>
@@ -2621,7 +2656,10 @@ let LOGO='logo.png';
 /* ═══ tillstånd ═══ */
 let AKTIV=null;                                   /* vald kurs */
 let DB={bank:[],kapnamn:{},omr:{}};               /* kursens data */
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null,miniraknare:'alla',geogebra:'alla'};
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null,
+  /* Hjälpmedelsfiltret är av/på: true = visa bara uppgifter där
+     hjälpmedlet är tillåtet, false = filtrera inte alls. */
+  miniraknare:'alla',geogebra:false};
 const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
 const aktivtSpår=()=>AKTIV?.spår?.length?state.spår:null;
@@ -2677,11 +2715,15 @@ function byggHjälpmedelsfilter(){
   if(!wrap)return;
   const synlig=harHjälpmedelstaggar();
   wrap.hidden=!synlig;
-  if(!synlig){state.miniraknare='alla';state.geogebra='alla';return;}
-  wrap.querySelectorAll('.hjälpknappar').forEach(grupp=>{
-    const nyckel=grupp.dataset.verktyg;
-    const aktuellt=nyckel==='miniraknare'?state.miniraknare:state.geogebra;
-    grupp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.val===aktuellt));
+  if(!synlig){state.miniraknare='alla';state.geogebra=false;return;}
+  synkaHjälpknappar();
+}
+function synkaHjälpknappar(){
+  $$('.hjälpval button').forEach(b=>{
+    const på = b.dataset.verktyg==='geogebra'
+      ? state.geogebra
+      : state.miniraknare===b.dataset.val;
+    b.setAttribute('aria-pressed',på);
   });
 }
 function verktygsIkoner(x){
@@ -3039,7 +3081,7 @@ function startaKurs(kurs){
     });
     state.omr.clear(); state.blad=[]; state.sök='';
     state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
-    state.miniraknare='alla'; state.geogebra='alla';
+    state.miniraknare='alla'; state.geogebra=false;
     state.spår=kurs.defaultSpår||(kurs.spår?.[0]?.id||null);
     $('#sökfält').value=''; $('#visaPoäng').checked=false;
     $('#sorteraKnapp').setAttribute('aria-pressed','false');
@@ -3138,13 +3180,18 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   b.setAttribute('aria-pressed',state.nivåer.has(n));
   rita();
 }));
-$$('.hjälpknappar button').forEach(b=>b.addEventListener('click',()=>{
-  const grupp=b.closest('.hjälpknappar');
-  const nyckel=grupp.dataset.verktyg;
-  const värde=b.dataset.val;
-  if(nyckel==='miniraknare') state.miniraknare=värde;
-  if(nyckel==='geogebra') state.geogebra=värde;
-  grupp.querySelectorAll('button').forEach(k=>k.setAttribute('aria-pressed',k===b));
+$$('.hjälpval button').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.verktyg==='geogebra'){
+    state.geogebra=!state.geogebra;
+    /* GeoGebra rymmer en räknare, så inga uppgifter kan vara både
+       GeoGebra-tillåtna och räknarfria. Undvik det tomma läget. */
+    if(state.geogebra && state.miniraknare==='nej') state.miniraknare='alla';
+  }else{
+    const v=b.dataset.val;
+    state.miniraknare = state.miniraknare===v ? 'alla' : v;
+    if(state.miniraknare==='nej') state.geogebra=false;
+  }
+  synkaHjälpknappar();
   rita();
 }));
 let sökTimer=null;
@@ -3213,7 +3260,7 @@ function urval(){
   return variantBank().filter(x=>{
     if(!state.nivåer.has(x.niva)) return false;
     if(state.miniraknare!=='alla' && Boolean(x['miniräknare'])!==(state.miniraknare==='ja')) return false;
-    if(state.geogebra!=='alla' && Boolean(x.geogebra)!==(state.geogebra==='ja')) return false;
+    if(state.geogebra && !x.geogebra) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
     if(termer.length){
       const t=söktextFör(x);
