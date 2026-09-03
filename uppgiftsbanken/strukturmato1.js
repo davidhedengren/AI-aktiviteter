@@ -36,14 +36,17 @@ window.OMRMATO1 = {
     "derivatabegrepp": "Ändringskvot och derivatabegreppet",
     "deriveringsregler": "Deriveringsregler",
     "tangenter_derivata": "Tangenter och derivata",
-    "exponential_ln_derivata": "Exponentialfunktioner, e, ln och derivata"
+    "exponential_ln_derivata": "Exponentialfunktioner, e, ln och derivata",
+    "derivering_digitalt": "Derivering med digitala verktyg"
   },
   "3": {
     "grafanalys_derivata": "Grafanalys med derivata",
     "extremvardesproblem": "Extremvärdesproblem",
+    "derivata_tillampningar": "Tillämpningar med derivata",
     "deriverbarhet": "Deriverbarhet",
     "primitiva_funktioner": "Primitiva funktioner",
     "integraler": "Integraler och area",
+    "integraler_digitalt": "Integraler med digitala verktyg",
     "integraltillampningar": "Tillämpningar med integraler"
   },
   "4": {
@@ -67,14 +70,17 @@ window.SPARMATO1 = {
     "derivatabegrepp": ["1b","1c"],
     "deriveringsregler": ["1b","1c"],
     "tangenter_derivata": ["1b","1c"],
-    "exponential_ln_derivata": ["1b","1c"]
+    "exponential_ln_derivata": ["1b","1c"],
+    "derivering_digitalt": ["1b","1c"]
   },
   "3": {
     "grafanalys_derivata": ["1b","1c"],
     "extremvardesproblem": ["1b","1c"],
+    "derivata_tillampningar": ["1b","1c"],
     "deriverbarhet": ["1b","1c"],
     "primitiva_funktioner": ["1b","1c"],
     "integraler": ["1b","1c"],
+    "integraler_digitalt": ["1b","1c"],
     "integraltillampningar": ["1b","1c"]
   },
   "4": {

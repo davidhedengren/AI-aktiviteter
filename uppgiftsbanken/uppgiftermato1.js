@@ -3486,7 +3486,7 @@ window.BANKMATO1 = [
   {
     "id": "2.21",
     "kap": 2,
-    "omr": "derivatabegrepp",
+    "omr": "derivering_digitalt",
     "kurs": [
       "1b",
       "1c"
@@ -7934,7 +7934,7 @@ window.BANKMATO1 = [
   {
     "id": "3.59",
     "kap": 3,
-    "omr": "integraler",
+    "omr": "integraler_digitalt",
     "kurs": [
       "1b",
       "1c"
@@ -18883,6 +18883,2920 @@ window.BANKMATO1 = [
     "t": "<p>I en förenklad modell för en balk är ett hållfasthetsmått proportionellt mot \\(H(x)=x(12-x)^2\\) för \\(0&lt;x&lt;12\\).</p><p>Bestäm det värde på \\(x\\) som ger störst hållfasthetsmått. Motivera med teckentabell.</p>",
     "s": "<p>Utveckla vid behov: \\(H(x)=x^3-24x^2+144x\\).</p><p>Derivatan är \\(H^{\\prime}(x)=3 \\left(x - 12\\right) \\left(x - 4\\right)\\), med nollställena \\(x=4\\) och \\(x=12\\).</p><p>I det öppna intervallet \\(0&lt;x&lt;12\\) är \\(x=4\\) det relevanta nollstället. Derivatan är positiv före 4 och negativ efter 4.</p><p>Därför har \\(H\\) en maximipunkt vid \\(x=4\\).</p>",
     "familj": "maxmin_unique_beam",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "1.244",
+    "kap": 1,
+    "omr": "polynom",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm samtliga reella nollställen till \\(p(x)=x^{3} - 4 x - 1\\). Ange svar med tre decimaler och beskriv hur du använde grafen.</p>",
+    "s": "<p>Rita grafen till \\(y=x^{3} - 4 x - 1\\) och använd verktyget för nollställen eller läs av skärningarna med \\(x\\)-axeln.</p><p><strong>Svar:</strong> \\(x\\approx -1,861, -0,254, 2,115\\).</p>",
+    "familj": "geo6_poly_roots1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.245",
+    "kap": 1,
+    "omr": "polynom",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm samtliga reella nollställen till \\(p(x)=x^{4} - 5 x^{2} + 1\\). Ange svar med tre decimaler och beskriv hur du använde grafen.</p>",
+    "s": "<p>Rita grafen till \\(y=x^{4} - 5 x^{2} + 1\\) och använd verktyget för nollställen eller läs av skärningarna med \\(x\\)-axeln.</p><p><strong>Svar:</strong> \\(x\\approx -2,189, -0,457, 0,457, 2,189\\).</p>",
+    "familj": "geo6_poly_roots2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.246",
+    "kap": 1,
+    "omr": "polynom",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare för \\(a\\) och undersök funktionerna \\(p_a(x)=x^3-3x+a\\).</p><p>För vilka värden på \\(a\\) har ekvationen \\(p_a(x)=0\\) tre olika reella lösningar? Ange gränsvärdena exakt när du har hittat dem digitalt.</p>",
+    "s": "<p>Med en glidare ser man att tre skärningar med \\(x\\)-axeln finns mellan två gränslägen. Gränslägena uppstår när grafen tangerar \\(x\\)-axeln i en extrempunkt.</p><p>Derivatan är \\(p_a^{\\prime}(x)=3x^2-3\\), så extrempunkterna ligger vid \\(x=\\pm1\\). Funktionsvärdena där är \\(a-2\\) respektive \\(a+2\\).</p><p>Tre olika reella nollställen fås när \\(a-2&lt;0\\) och \\(a+2&gt;0\\), alltså \\(\\boxed{-2&lt;a&lt;2}\\).</p>",
+    "familj": "geo6_poly_param",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.247",
+    "kap": 1,
+    "omr": "polynom",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita graferna till \\(f(x)=x^3-2x^2-3x+2\\) och \\(g(x)=x-1\\). Bestäm deras skärningspunkter med två decimaler.</p>",
+    "s": "<p>Skärningspunkterna fås digitalt genom att rita båda graferna och använda verktyget <em>Skärning mellan två objekt</em>.</p><p>Skärningspunkterna är ungefär \\((-1,62; -2,62)\\), \\((0,62; -0,38)\\), \\((3,0; 2,0)\\).</p>",
+    "familj": "geo6_poly_intersect",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.248",
+    "kap": 1,
+    "omr": "polynom",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare för \\(k\\) i \\(q(x)=x^2+kx+9\\). Bestäm de två värden på \\(k\\) för vilka grafen precis tangerar \\(x\\)-axeln.</p>",
+    "s": "<p>Med glidaren hittar man gränslägena \\(k=-6\\) och \\(k=6\\). Då har andragradsekvationen exakt ett nollställe och grafen tangerar \\(x\\)-axeln.</p><p>Kontroll med andragradsformeln: uttrycket under rottecknet blir noll när \\(k^2-36=0\\), alltså \\(\\boxed{k=\\pm6}\\).</p>",
+    "familj": "geo6_poly_tangent_param",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.249",
+    "kap": 1,
+    "omr": "funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Jämför modellerna \\(f(x)=1,8x+6\\) och \\(g(x)=0,12x^2+2\\). När ger modellerna samma värde? Ange positiva \\(x\\)-värden med två decimaler.</p>",
+    "s": "<p>Rita båda funktionerna i samma koordinatsystem och använd skärningsverktyget. De positiva skärningsvärdena är ungefär \\(x=16,96\\).</p>",
+    "familj": "geo6_func_compare_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.250",
+    "kap": 1,
+    "omr": "funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Jämför modellerna \\(f(x)=40+3x\\) och \\(g(x)=12\\cdot1,12^x\\). När är modellerna lika stora? Ange positiva \\(x\\)-värden med två decimaler.</p>",
+    "s": "<p>Rita båda funktionerna i samma koordinatsystem och använd skärningsverktyget. De positiva skärningsvärdena är ungefär \\(x=18,23\\).</p>",
+    "familj": "geo6_func_compare_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.251",
+    "kap": 1,
+    "omr": "funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2\\). Skapa sedan en glidare \\(a\\) och rita \\(g(x)=(x-a)^2+2\\).</p><p>Beskriv vad som händer med grafen när \\(a\\) ändras. Vilka koordinater har minimipunkten?</p>",
+    "s": "<p>När \\(a\\) ändras flyttas parabeln horisontellt. Formen ändras inte. Minimipunkten är alltid \\(\\boxed{(a,2)}\\).</p>",
+    "familj": "geo6_func_slider_shift",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.252",
+    "kap": 1,
+    "omr": "funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm en andragradsfunktion som går genom punkterna \\((-1,6)\\), \\((1,2)\\) och \\((3,6)\\). Använd GeoGebra för att bestämma funktionen och kontrollera resultatet grafiskt.</p>",
+    "s": "<p>Lägg in de tre punkterna och använd ett kommando som bestämmer ett andragradspolynom genom punkterna.</p><p>Resultatet blir \\(\\boxed{f(x)=x^2-2x+3}\\).</p><p>Kontroll: \\(f(-1)=6\\), \\(f(1)=2\\) och \\(f(3)=6\\).</p>",
+    "familj": "geo6_func_fit_quad",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.253",
+    "kap": 1,
+    "omr": "funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x\\). Bestäm grafiskt de \\(x\\)-värden där \\(f(x)=3\\). Ange med två decimaler.</p>",
+    "s": "<p>Rita även linjen \\(y=3\\). Skärningarna mellan linjen och funktionsgrafen ger lösningarna.</p><p>Man får ungefär \\(\\boxed{x\\approx -1,30;\\,-1,00;\\,2,30}\\).</p>",
+    "familj": "geo6_func_level",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.254",
+    "kap": 1,
+    "omr": "rationella_uttryck",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\[\\frac{x+2}{x-1}=3.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
+    "s": "<p>Rita den rationella funktionen och den horisontella linjen \\(y=3\\). Skärningen ger \\(\\boxed{x=\\frac52}\\).</p><p>Uttrycket är inte definierat när nämnaren är noll, alltså vid \\(\\boxed{x=1}\\).</p>",
+    "familj": "geo6_rat_eq1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.255",
+    "kap": 1,
+    "omr": "rationella_uttryck",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\[\\frac{2x-1}{x+3}=-1.\\] Ange även vilket \\(x\\)-värde som inte tillhör uttryckets definitionsmängd.</p>",
+    "s": "<p>Rita den rationella funktionen och den horisontella linjen \\(y=-1\\). Skärningen ger \\(\\boxed{x=-\\frac23}\\).</p><p>Uttrycket är inte definierat när nämnaren är noll, alltså vid \\(\\boxed{x=-3}\\).</p>",
+    "familj": "geo6_rat_eq2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.256",
+    "kap": 1,
+    "omr": "rationella_uttryck",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita funktionerna \\(f(x)=\\frac{x^2-4}{x-2}\\) och \\(g(x)=x+2\\) i samma koordinatsystem. Zooma kring \\(x=2\\).</p><p>Förklara varför graferna ser nästan likadana ut men funktionerna ändå inte är samma funktion.</p>",
+    "s": "<p>Uttrycket \\(x^2-4=(x-2)(x+2)\\), så för \\(x\\ne2\\) gäller \\(f(x)=x+2\\).</p><p>Men \\(f\\) är inte definierad när \\(x=2\\), medan \\(g(2)=4\\). Därför skiljer sig funktionernas definitionsmängder trots att graferna sammanfaller i övrigt.</p>",
+    "familj": "geo6_rat_hole",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.257",
+    "kap": 1,
+    "omr": "rationella_uttryck",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och undersök \\(f_a(x)=\\frac{1}{x-a}+2\\).</p><p>Beskriv hur grafen förändras när \\(a\\) ändras och ange det \\(x\\)-värde som alltid saknas i definitionsmängden.</p>",
+    "s": "<p>När \\(a\\) ändras flyttas grafen horisontellt. Den är inte definierad när nämnaren är noll, alltså när \\(x-a=0\\).</p><p>Det uteslutna värdet är därför \\(\\boxed{x=a}\\).</p>",
+    "familj": "geo6_rat_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.258",
+    "kap": 1,
+    "omr": "rationella_uttryck",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm med GeoGebra skärningspunkterna mellan \\(f(x)=\\frac{4}{x}\\) och \\(g(x)=x-1\\). Ange koordinaterna med två decimaler.</p>",
+    "s": "<p>Rita båda graferna och använd skärningsverktyget. Ekvationen är \\(4/x=x-1\\), vilket motsvarar \\(x^2-x-4=0\\).</p><p>Skärningspunkterna är ungefär \\(\\boxed{(-1,56;-2,56)}\\) och \\(\\boxed{(2,56;1,56)}\\).</p>",
+    "familj": "geo6_rat_intersections",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.259",
+    "kap": 1,
+    "omr": "gransvarde_kontinuitet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=\\frac{x^2-9}{x-3}\\). Funktionen är inte definierad för \\(x=3\\).</p><p>Zooma in kring \\(x=3\\) och uppskatta \\(\\lim_{x\\to3}f(x)\\). Förklara resultatet.</p>",
+    "s": "<p>Grafen närmar sig \\(y=6\\) från båda håll. Algebraiskt gäller \\(f(x)=x+3\\) för \\(x\\ne3\\), så \\(\\boxed{\\lim_{x\\to3}f(x)=6}\\).</p>",
+    "familj": "geo6_limit_hole",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.260",
+    "kap": 1,
+    "omr": "gransvarde_kontinuitet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita den styckvis definierade funktionen</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\ ax-1,&x&gt;2.\\end{cases}\\]</p><p>Bestäm med GeoGebra det värde på \\(a\\) som gör funktionen kontinuerlig vid \\(x=2\\). Kontrollera sedan algebraiskt.</p>",
+    "s": "<p>Vänster del ger \\(f(2)=5\\). För kontinuitet måste den högra delen närma sig samma värde: \\(2a-1=5\\).</p><p>Därför är \\(\\boxed{a=3}\\).</p>",
+    "familj": "geo6_cont_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.261",
+    "kap": 1,
+    "omr": "gransvarde_kontinuitet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-2x+1\\). Skapa en punkt \\(A=(1,f(1))\\) och en punkt \\(B=(1+h,f(1+h))\\) med glidaren \\(h\\).</p><p>Rita sekanten genom \\(A\\) och \\(B\\). Vad närmar sig sekantens lutning när \\(h\\) går mot 0?</p>",
+    "s": "<p>När \\(h\\) blir liten närmar sig sekanten tangenten vid \\(x=1\\). Lutningen närmar sig \\(f^{\\prime}(1)\\).</p><p>\\(f^{\\prime}(x)=3x^2-2\\), alltså \\(f^{\\prime}(1)=1\\). Sekantens lutning närmar sig därför \\(\\boxed{1}\\).</p>",
+    "familj": "geo6_secant_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.262",
+    "kap": 1,
+    "omr": "gransvarde_kontinuitet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=\\frac{x+1}{x^2-4}\\) och undersök grafen nära de \\(x\\)-värden där nämnaren är noll.</p><p>Ange vid vilka \\(x\\)-värden funktionen inte är kontinuerlig och motivera med definitionsmängden.</p>",
+    "s": "<p>Nämnaren är noll när \\(x^2-4=0\\), alltså vid \\(x=-2\\) och \\(x=2\\). Funktionen är inte definierad där och är därför inte kontinuerlig i dessa punkter.</p>",
+    "familj": "geo6_cont_rational",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.263",
+    "kap": 1,
+    "omr": "gransvarde_kontinuitet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x+1,&x&lt;1,\\ ax+b,&x\\ge1.\\end{cases}\\]</p><p>Hitta flera par \\((a,b)\\) som ger en kontinuerlig funktion. Beskriv sambandet mellan \\(a\\) och \\(b\\).</p>",
+    "s": "<p>Kontinuitet vid \\(x=1\\) kräver att grenarna har samma värde där.</p><p>Vänstergrenen närmar sig \\(2\\), medan högergrenen ger \\(a+b\\).</p><p>Alltså måste \\(\\boxed{a+b=2}\\), eller \\(\\boxed{b=2-a}\\).</p>",
+    "familj": "geo6_cont_param_family",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.264",
+    "kap": 1,
+    "omr": "absolutbelopp",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|x-2|=0,5x+3\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(- \\frac{2}{3},\\;10\\).</p>",
+    "familj": "geo6_abs_eq_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.265",
+    "kap": 1,
+    "omr": "absolutbelopp",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|2x+1|=4\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(- \\frac{5}{2},\\;\\frac{3}{2}\\).</p>",
+    "familj": "geo6_abs_eq_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.266",
+    "kap": 1,
+    "omr": "absolutbelopp",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Lös ekvationen grafiskt: \\(|x+1|=x^2-1\\). Kontrollera att alla avlästa lösningar verkligen fungerar.</p>",
+    "s": "<p>Rita vänsterled och högerled som två funktioner och bestäm deras skärningspunkter. Lösningarna är \\(-1,\\;2\\).</p>",
+    "familj": "geo6_abs_eq_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.267",
+    "kap": 1,
+    "omr": "absolutbelopp",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=|x-a|+2\\). Beskriv hur minimipunkten beror på \\(a\\).</p>",
+    "s": "<p>Grafen är V-formad och flyttas horisontellt när \\(a\\) ändras. Minsta värdet är alltid 2 och minimipunkten är \\(\\boxed{(a,2)}\\).</p>",
+    "familj": "geo6_abs_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "1.268",
+    "kap": 1,
+    "omr": "absolutbelopp",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och undersök antalet lösningar till \\(|x|=ax+1\\).</p><p>För vilka värden på \\(a\\) får ekvationen två lösningar?</p>",
+    "s": "<p>Linjen \\(y=ax+1\\) skär båda grenarna av \\(y=|x|\\) när dess lutning ligger mellan grenarnas lutningar \\(-1\\) och \\(1\\).</p><p>Därför fås två lösningar när \\(\\boxed{-1&lt;a&lt;1}\\). Vid \\(a=\\pm1\\) fås en lösning och utanför intervallet en lösning.</p>",
+    "familj": "geo6_abs_param_count",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.309",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x\\) och använd tangentverktyget i punkten där \\(x=2\\). Bestäm \\(f^{\\prime}(2)\\) med två olika digitala metoder.</p>",
+    "s": "<p>Tangentens lutning blir 9. Med derivataverktyget fås \\(f^{\\prime}(x)=3x^2-3\\), och \\(f^{\\prime}(2)=9\\). Båda metoderna ger \\(\\boxed{9}\\).</p>",
+    "familj": "geo6_deriv_tangent",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.310",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>För \\(f(x)=x^2\\), skapa glidaren \\(h\\) och uttrycket \\(k(h)=\\frac{f(3+h)-f(3)}{h}\\).</p><p>Undersök vad \\(k(h)\\) närmar sig när \\(h\\) närmar sig 0. Förklara kopplingen till derivatan.</p>",
+    "s": "<p>GeoGebra visar att \\(k(h)\\) närmar sig 6. Det är derivatans definition i punkten \\(x=3\\).</p><p>Alltså är \\(\\boxed{f^{\\prime}(3)=6}\\).</p>",
+    "familj": "geo6_deriv_diffquot",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.311",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett föremåls läge ges av \\(s(t)=t^3-6t^2+9t\\), där \\(t\\) mäts i sekunder.</p><p>Använd GeoGebra för att bestämma när hastigheten är noll under intervallet \\(0\\le t\\le5\\).</p>",
+    "s": "<p>Hastigheten är derivatan \\(s^{\\prime}(t)=3t^2-12t+9\\). Rita derivatan eller använd nollställeverktyget.</p><p>Man får \\(\\boxed{t=1\\text{ s}}\\) och \\(\\boxed{t=3\\text{ s}}\\).</p>",
+    "familj": "geo6_deriv_motion",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.312",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x+1\\) och dess derivata i samma koordinatsystem.</p><p>Bestäm grafiskt de \\(x\\)-värden där tangentens lutning är 5.</p>",
+    "s": "<p>Tangentens lutning är \\(f^{\\prime}(x)\\). Rita därför även linjen \\(y=5\\) och bestäm skärningarna med derivatans graf.</p><p>\\(f^{\\prime}(x)=3x^2-4\\), så \\(3x^2-4=5\\) ger \\(x=\\pm\\sqrt3\\approx\\boxed{\\pm1,73}\\).</p>",
+    "familj": "geo6_deriv_slope5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.313",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(a\\) och funktionen \\(f_a(x)=x^3-3ax\\). Rita även derivatan.</p><p>Undersök hur antalet punkter med horisontell tangent beror på \\(a\\).</p>",
+    "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=3x^2-3a\\).</p><p>Om \\(a&gt;0\\) finns två nollställen \\(x=\\pm\\sqrt a\\). Om \\(a=0\\) finns ett nollställe \\(x=0\\). Om \\(a&lt;0\\) saknas reella nollställen.</p>",
+    "familj": "geo6_deriv_param",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.314",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-2x+1\\) och tangenten i punkten där \\(x=1\\). Ange tangentens ekvation.</p>",
+    "s": "<p>GeoGebra ger tangenten \\(\\boxed{y=x-1}\\). Kontroll: \\(f(1)=0\\) och \\(f^{\\prime}(1)=1\\).</p>",
+    "familj": "geo6_tan_eq",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.315",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x^2+2\\). Bestäm de punkter där tangenten är parallell med linjen \\(y=3x-5\\).</p>",
+    "s": "<p>Parallella linjer har samma lutning, alltså ska \\(f^{\\prime}(x)=3\\).</p><p>\\(f^{\\prime}(x)=3x^2-6x\\), så \\(3x^2-6x=3\\). GeoGebra ger \\(x=1\\pm\\sqrt2\\).</p><p>Punkterna är \\(\\boxed{(1 - \\sqrt{2};\\sqrt{2})}\\) och \\(\\boxed{(1 + \\sqrt{2};- \\sqrt{2})}\\).</p>",
+    "familj": "geo6_tan_parallel",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.316",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2+2x-3\\). Bestäm med tangentverktyget tangenterna vid \\(x=-2\\) och \\(x=2\\), och bestäm deras skärningspunkt.</p>",
+    "s": "<p>Tangenterna blir \\(y=-2x-7\\) och \\(y=6x-7\\). De skär varandra när \\(-2x-7=6x-7\\), alltså vid \\(x=0\\), \\(y=-7\\).</p><p><strong>Svar:</strong> \\(\\boxed{(0,-7)}\\).</p>",
+    "familj": "geo6_tan_intersection",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.317",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^2\\) och punkten \\(P=(0,-4)\\). Undersök med GeoGebra hur många tangenter till parabeln som går genom \\(P\\). Bestäm tangentpunkterna.</p>",
+    "s": "<p>En tangent i \\(x=a\\) har lutningen \\(2a\\) och går genom \\((a,a^2)\\). Dess ekvation är \\(y=2ax-a^2\\).</p><p>För att gå genom \\((0,-4)\\) krävs \\(-a^2=-4\\), alltså \\(a=\\pm2\\).</p><p>Tangentpunkterna är \\(\\boxed{(-2,4)}\\) och \\(\\boxed{(2,4)}\\).</p>",
+    "familj": "geo6_tan_external",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.318",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=2^x\\) och tangenten vid \\(x=1\\). Bestäm tangentens lutning och ekvation med tre decimaler.</p>",
+    "s": "<p>Derivatan är \\(f^{\\prime}(x)=2^x\\ln2\\). Vid \\(x=1\\) är lutningen \\(2\\ln2\\approx1,386\\), och punkten är \\((1,2)\\).</p><p>Tangenten kan skrivas \\(y-2=1,386(x-1)\\), alltså ungefär \\(\\boxed{y=1,386x+0,614}\\).</p>",
+    "familj": "geo6_tan_exp",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.319",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En bakterieodling beskrivs av \\(N(t)=800\\cdot1,18^t\\). När passerar antalet 3000? Bestäm tiden grafiskt och ange med en decimal.</p>",
+    "s": "<p>Rita modellen och den horisontella linjen som motsvarar tröskelvärdet. Skärningen ger \\(t\\approx\\boxed{8\\text{ timmar}}\\).</p>",
+    "familj": "geo6_exp_threshold_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.320",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En investering beskrivs av \\(V(t)=25000\\cdot1,045^t\\). När passerar värdet 40000 kr? Bestäm tiden grafiskt och ange med en decimal.</p>",
+    "s": "<p>Rita modellen och den horisontella linjen som motsvarar tröskelvärdet. Skärningen ger \\(t\\approx\\boxed{10,7\\text{ år}}\\).</p>",
+    "familj": "geo6_exp_threshold_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.321",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En population beskrivs av \\(P(t)=1200e^{0,08t}\\). När är tillväxthastigheten 150 individer per år? Använd GeoGebra och ange svaret med en decimal.</p>",
+    "s": "<p>Derivatan är \\(P^{\\prime}(t)=96e^{0,08t}\\). Rita derivatan och linjen \\(y=150\\).</p><p>Skärningen ger \\(\\boxed{t\\approx5,6\\text{ år}}\\).</p>",
+    "familj": "geo6_exp_rate",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.322",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita modellerna \\(f(t)=60\\cdot1,08^t\\) och \\(g(t)=100\\cdot1,03^t\\). Bestäm när \\(f\\) blir större än \\(g\\) för första gången. Ange tiden med en decimal.</p>",
+    "s": "<p>Bestäm skärningspunkten mellan graferna. Den ligger vid \\(t\\approx10,8\\). Efter denna tid ligger grafen till \\(f\\) över grafen till \\(g\\).</p><p><strong>Svar:</strong> efter ungefär \\(\\boxed{10,8}\\) tidsenheter.</p>",
+    "familj": "geo6_exp_compare",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.323",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a&gt;0\\) och rita \\(f_a(x)=a^x\\) samt derivatan.</p><p>Undersök för vilket värde på \\(a\\) graferna till \\(f_a\\) och \\(f_a^{\\prime}\\) sammanfaller.</p>",
+    "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=a^x\\ln a\\). För att den ska vara lika med \\(a^x\\) för alla \\(x\\) krävs \\(\\ln a=1\\).</p><p>Alltså \\(\\boxed{a=e\\approx2,718}\\).</p>",
+    "familj": "geo6_exp_e",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.324",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{3} - 3 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "s": "<p>Derivatan är \\(3 \\left(x - 1\\right) \\left(x + 1\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> maximipunkt \\((-1;2)\\); minimipunkt \\((1;-2)\\).</p><p>Funktionen är växande för \\(x&lt;-1\\), \\(x&gt;1\\) och avtagande för \\(-1&lt;x&lt;1\\).</p>",
+    "familj": "geo6_graph_analysis_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.325",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{4} - 4 x^{2} + 1\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "s": "<p>Derivatan är \\(4 x \\left(x^{2} - 2\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> minimipunkt \\((- \\sqrt{2};-3)\\); maximipunkt \\((0;1)\\); minimipunkt \\((\\sqrt{2};-3)\\).</p><p>Funktionen är växande för \\(- \\sqrt{2}&lt;x&lt;0\\), \\(x&gt;\\sqrt{2}\\) och avtagande för \\(x&lt;- \\sqrt{2}\\), \\(0&lt;x&lt;\\sqrt{2}\\).</p>",
+    "familj": "geo6_graph_analysis_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.326",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=- x^{3} + 6 x^{2} - 9 x\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "s": "<p>Derivatan är \\(- 3 \\left(x - 3\\right) \\left(x - 1\\right)\\). Nollställena till derivatan läses av i GeoGebra och tecknet kontrolleras mellan dem.</p><p><strong>Extrempunkter:</strong> minimipunkt \\((1;-4)\\); maximipunkt \\((3;0)\\).</p><p>Funktionen är växande för \\(1&lt;x&lt;3\\) och avtagande för \\(x&lt;1\\), \\(x&gt;3\\).</p>",
+    "familj": "geo6_graph_analysis_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.327",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^{5} - 5 x^{3}\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem.</p><p>Bestäm funktionens extrempunkter och ange på vilka intervall den är växande respektive avtagande.</p>",
+    "s": "<p>Derivatan är \\(5x^2(x^2-3)\\). Nollställena är \\(x=-\\sqrt3\\), \\(x=0\\) och \\(x=\\sqrt3\\).</p><p><strong>Extrempunkter:</strong> maximipunkt \\((-\\sqrt3;6\\sqrt3)\\) och minimipunkt \\((\\sqrt3;-6\\sqrt3)\\).</p><p>Funktionen är växande för \\(x&lt;-\\sqrt3\\) och \\(x&gt;\\sqrt3\\), samt avtagande för \\(-\\sqrt3&lt;x&lt;\\sqrt3\\).</p><p>Vid \\(x=0\\) är derivatan noll, men den byter inte tecken. Där finns därför ingen extrempunkt.</p>",
+    "familj": "geo6_graph_analysis_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.328",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3ax\\) tillsammans med derivatan.</p><p>Beskriv hur antalet extrempunkter förändras när \\(a\\) passerar 0.</p>",
+    "s": "<p>Derivatan är \\(3x^2-3a\\). För \\(a&gt;0\\) finns två nollställen och därmed två extrempunkter. För \\(a=0\\) är derivatan noll endast vid \\(x=0\\), men den byter inte tecken där, så ingen extrempunkt uppstår. För \\(a&lt;0\\) saknas nollställen och funktionen är växande överallt.</p>",
+    "familj": "geo6_graph_param_extrema",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.411",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En biograf tar 120 kr per biljett och säljer då 300 biljetter. För varje höjning med 5 kr minskar försäljningen med 8 biljetter. Låt \\(x\\) vara antalet femkronorshöjningar. Ställ upp intäktsfunktionen och använd GeoGebra för att bestämma största möjliga intäkt enligt modellen.</p>",
+    "s": "<p>Om priset höjs med \\(5x\\) kr blir priset \\(120+5x\\), medan antalet sålda biljetter blir \\(300-8x\\).</p><p>Intäkten är därför \\[I(x)=(120+5x)(300-8x)=-40x^2+540x+36000.\\]</p><p>Rita funktionen för \\(0\\le x\\le37,5\\). GeoGebra ger maximum vid \\(x=6,75\\), med intäkten \\(\\boxed{37\\,822,5\\text{ kr}}\\).</p>",
+    "familj": "geo6_ext_app_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.412",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En rektangulär hage byggs mot en lång vägg. Det finns 120 m stängsel till de tre övriga sidorna. Låt \\(x\\) vara längden på de två lika sidorna. Ställ upp areafunktionen och bestäm största möjliga area med GeoGebra.</p>",
+    "s": "<p>Om de två lika sidorna är \\(x\\) meter blir den tredje sidan \\(120-2x\\) meter.</p><p>Arean är \\[A(x)=x(120-2x)=-2x^2+120x.\\]</p><p>GeoGebra ger maximum vid \\(x=30\\). Den tredje sidan blir 60 m och den största arean är \\(\\boxed{1800\\text{ m}^2}\\).</p>",
+    "familj": "geo6_ext_app_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.413",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En öppen låda görs av en kartong 32 cm × 20 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen. Ställ upp volymfunktionen och bestäm maximal volym med GeoGebra.</p>",
+    "s": "<p>Efter att kvadraterna klippts bort blir lådans mått \\(x\\), \\(32-2x\\) och \\(20-2x\\).</p><p>Volymen är \\[V(x)=x(32-2x)(20-2x)=4x^3-104x^2+640x.\\]</p><p>Rita funktionen för \\(0\\le x\\le10\\). GeoGebra ger maximum vid \\(x=4\\) cm och volymen \\(\\boxed{1152\\text{ cm}^3}\\).</p>",
+    "familj": "geo6_ext_app_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.414",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Kostnaden per dag för att köra en maskin med hastigheten \\(x\\) enheter per timme modelleras av \\(K(x)=0,04x^3-2,4x^2+60x+500\\) för \\(10\\le x\\le40\\). Bestäm minsta kostnad i intervallet med GeoGebra.</p>",
+    "s": "<p>Rita \\(K(x)=0,04x^3-2,4x^2+60x+500\\) för \\(10\\le x\\le40\\).</p><p>Grafen är växande i intervallet, så minsta värdet ligger vid vänstra ändpunkten \\(x=10\\).</p><p>\\[K(10)=900.\\]</p><p><strong>Svar:</strong> den minsta kostnaden enligt modellen är \\(\\boxed{900}\\) kostnadsenheter.</p>",
+    "familj": "geo6_ext_app_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.415",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En rektangel har ena hörnet i origo och det motsatta hörnet på parabeln \\(y=12-x^2\\) i första kvadranten. Ställ upp rektangelns area som funktion av \\(x\\) och bestäm största area med GeoGebra.</p>",
+    "s": "<p>Rektangelns höjd är \\(12-x^2\\), så arean är</p><p>\\[A(x)=x(12-x^2)=12x-x^3.\\]</p><p>På intervallet \\(0\\le x\\le\\sqrt{12}\\) ger GeoGebra maximum vid \\(x=2\\).</p><p>Den största arean är \\(A(2)=16\\), alltså \\(\\boxed{16}\\) areaenheter.</p>",
+    "familj": "geo6_ext_app_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.416",
+    "kap": 3,
+    "omr": "deriverbarhet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=|x|\\) och zooma kraftigt kring origo. Rita tangenter på punkter strax till vänster och strax till höger om \\(x=0\\).</p><p>Förklara varför funktionen inte är deriverbar i \\(x=0\\).</p>",
+    "s": "<p>Tangenternas lutningar närmar sig \\(-1\\) från vänster och \\(1\\) från höger. Eftersom lutningarna inte närmar sig samma värde finns ingen derivata i \\(x=0\\).</p>",
+    "familj": "geo6_diff_abs",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.417",
+    "kap": 3,
+    "omr": "deriverbarhet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x|x|\\) och undersök grafen kring \\(x=0\\). Använd tangentverktyget på båda sidor.</p><p>Är funktionen deriverbar i origo? Motivera.</p>",
+    "s": "<p>För \\(x&gt;0\\) är \\(f(x)=x^2\\) och för \\(x&lt;0\\) är \\(f(x)=-x^2\\). Derivatan från båda håll närmar sig 0 vid origo. Funktionen är därför deriverbar i \\(x=0\\), med \\(f^{\\prime}(0)=0\\).</p>",
+    "familj": "geo6_diff_xabs",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.418",
+    "kap": 3,
+    "omr": "deriverbarhet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(a\\) och rita</p><p>\\[f(x)=\\begin{cases}x^2,&x\\le1,\\ ax+1-a,&x&gt;1.\\end{cases}\\]</p><p>Bestäm det värde på \\(a\\) som gör funktionen deriverbar vid \\(x=1\\).</p>",
+    "s": "<p>Funktionen är kontinuerlig vid \\(x=1\\) för alla \\(a\\), eftersom båda grenarna ger värdet 1.</p><p>Derivatan från vänster är \\(2x\\), alltså 2 vid \\(x=1\\). Derivatan från höger är \\(a\\). Deriverbarhet kräver \\(a=2\\).</p><p><strong>Svar:</strong> \\(\\boxed{a=2}\\).</p>",
+    "familj": "geo6_diff_piece_param",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.419",
+    "kap": 3,
+    "omr": "deriverbarhet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita funktionen \\(f(x)=\\sqrt{x^2}\\) och jämför grafen med \\(g(x)=x\\).</p><p>Undersök med tangentverktyget om \\(f\\) är deriverbar i origo.</p>",
+    "s": "<p>Eftersom \\(\\sqrt{x^2}=|x|\\) får grafen ett hörn i origo. Lutningen från vänster är \\(-1\\) och från höger \\(1\\). Funktionen är därför inte deriverbar i origo.</p>",
+    "familj": "geo6_diff_sqrtx2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.420",
+    "kap": 3,
+    "omr": "deriverbarhet",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidarna \\(a\\) och \\(b\\) och rita</p><p>\\[f(x)=\\begin{cases}x^2+1,&x\\le2,\\ ax+b,&x&gt;2.\\end{cases}\\]</p><p>Bestäm sambandet mellan \\(a\\) och \\(b\\) som krävs för att funktionen ska vara både kontinuerlig och deriverbar vid \\(x=2\\).</p>",
+    "s": "<p>Kontinuitet kräver \\(2a+b=5\\). Deriverbarhet kräver att lutningarna är lika. Vänstergrenens derivata är \\(2x\\), alltså 4 vid \\(x=2\\), så \\(a=4\\).</p><p>Då ger kontinuiteten \\(8+b=5\\), alltså \\(b=-3\\).</p><p><strong>Svar:</strong> \\(\\boxed{a=4,\\;b=-3}\\).</p>",
+    "familj": "geo6_diff_ab",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.421",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(F_1(x)=x^3-3x\\) och \\(F_2(x)=x^3-3x+4\\). Rita också deras derivator.</p><p>Vad upptäcker du? Förklara varför.</p>",
+    "s": "<p>Derivatorna sammanfaller: \\(F_1^{\\prime}(x)=F_2^{\\prime}(x)=3x^2-3\\). Konstanten 4 försvinner vid derivering. Därför är båda funktionerna primitiva funktioner till samma funktion.</p>",
+    "familj": "geo6_prim_shift",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.422",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(C\\) och rita funktionerna \\(F_C(x)=x^2-4x+C\\).</p><p>Bestäm vilket värde på \\(C\\) som gör att grafen går genom punkten \\((3,5)\\). Kontrollera grafiskt.</p>",
+    "s": "<p>Villkoret ger \\(F_C(3)=9-12+C=5\\), alltså \\(C=8\\). GeoGebra visar då att grafen passerar \\((3,5)\\).</p>",
+    "familj": "geo6_prim_Cpoint",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.423",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=3x^2-6x\\). Använd GeoGebra för att skapa en primitiv funktion \\(F\\) och flytta den vertikalt så att \\(F(0)=2\\).</p><p>Bestäm den färdiga funktionen.</p>",
+    "s": "<p>En primitiv funktion är \\(x^3-3x^2+C\\). Villkoret \\(F(0)=2\\) ger \\(C=2\\).</p><p><strong>Svar:</strong> \\(\\boxed{F(x)=x^3-3x^2+2}\\).</p>",
+    "familj": "geo6_prim_construct",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.424",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(F(x)=\\frac{x^3}{3}-2x^2+3x\\) och dess derivata.</p><p>Använd graferna för att bestämma var \\(F\\) är växande respektive avtagande.</p>",
+    "s": "<p>Derivatan är \\(F^{\\prime}(x)=x^2-4x+3=(x-1)(x-3)\\).</p><p>Den är positiv för \\(x&lt;1\\) och \\(x&gt;3\\), negativ för \\(1&lt;x&lt;3\\). Alltså är \\(F\\) växande på de yttre intervallen och avtagande mellan 1 och 3.</p>",
+    "familj": "geo6_prim_graph_deriv",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.425",
+    "kap": 3,
+    "omr": "primitiva_funktioner",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa glidaren \\(C\\) och rita \\(F_C(x)=\\frac{x^3}{3}-x+C\\). Undersök för vilka värden på \\(C\\) grafen har tre nollställen.</p>",
+    "s": "<p>Extrempunkterna ligger där \\(F_C^{\\prime}(x)=x^2-1=0\\), alltså vid \\(x=\\pm1\\).</p><p>Funktionsvärdena är \\(F_C(-1)=C+\\frac23\\) och \\(F_C(1)=C-\\frac23\\).</p><p>Tre nollställen kräver att maximipunkten ligger över \\(x\\)-axeln och minimipunkten under: \\(C+\\frac23&gt;0\\) och \\(C-\\frac23&lt;0\\).</p><p>Alltså \\(\\boxed{-\\frac23&lt;C&lt;\\frac23}\\).</p>",
+    "familj": "geo6_prim_param_roots",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.426",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Bestäm med GeoGebra \\[\\int_0^2 \\sqrt{1+x^3}\\,dx\\] med tre decimaler.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\boxed{3,241}\\) med tre decimaler.</p><p>Den primitiva funktionen kan inte bestämmas med de vanliga formlerna på kursens formelblad, så en digital bestämning av den bestämda integralen är lämplig här.</p>",
+    "familj": "geo6_int_numeric_root",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.427",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-4x\\). Bestäm integralens värde \\(\\int_{-2}^{2}f(x)\\,dx\\) digitalt och förklara varför resultatet blir som det blir trots att grafen inte sammanfaller med \\(x\\)-axeln.</p>",
+    "s": "<p>GeoGebra ger integralvärdet 0.</p><p>Grafen är symmetrisk kring origo på så sätt att \\(f(-x)=-f(x)\\). Bidraget under \\(x\\)-axeln på ena sidan tar därför ut det lika stora bidraget över \\(x\\)-axeln på den andra sidan.</p>",
+    "familj": "geo6_int_cancel",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.428",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x+2\\) och \\(g(x)=x^2\\). Bestäm arean mellan graferna med GeoGebra.</p>",
+    "s": "<p>Graferna skär varandra vid \\(x=-1\\) och \\(x=2\\). På intervallet ligger linjen över parabeln.</p><p>Arean blir \\(\\int_{-1}^{2}(x+2-x^2)\\,dx=\\boxed{4,5}\\).</p>",
+    "familj": "geo6_int_between",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.429",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a&gt;0\\). Bestäm det värde på \\(a\\) som gör att \\[\\int_0^a (x^2+1)\\,dx=10.\\] Använd GeoGebra för att hitta värdet med tre decimaler.</p>",
+    "s": "<p>Skapa funktionen \\(A(a)=\\int_0^a(x^2+1)\\,dx\\) och skär den med linjen \\(y=10\\).</p><p>Ekvationen är \\(a^3/3+a=10\\), vilket ger \\(\\boxed{a\\approx2,786}\\).</p>",
+    "familj": "geo6_int_upperlimit",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.430",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=4-x^2\\). Bestäm med GeoGebra arean mellan grafen och \\(x\\)-axeln.</p>",
+    "s": "<p>Nollställena är \\(x=-2\\) och \\(x=2\\). Arean blir \\(\\int_{-2}^{2}(4-x^2)\\,dx=\\boxed{\\frac{32}{3}\\approx10,67}\\).</p>",
+    "familj": "geo6_int_parabola_area",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.431",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Vattenflödet in i en tank beskrivs av \\(q(t)=4+1,5\\cdot1,2^t\\) liter/minut för \\(0\\le t\\le6\\). Bestäm hur mycket vatten som tillförs under perioden.</p>",
+    "s": "<p>Den tillförda volymen ges av arean under flödesgrafen:</p><p>\\[V=\\int_0^6(4+1,5\\cdot1,2^t)\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{40,34\\text{ liter}}\\).</p>",
+    "familj": "geo6_intapp_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.432",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En bils hastighet beskrivs av \\(v(t)=8+2,4t-0,18t^2\\) m/s för \\(0\\le t\\le10\\). Bestäm sträckan under de första 10 sekunderna.</p>",
+    "s": "<p>Sträckan är arean under hastighetsgrafen:</p><p>\\[s=\\int_0^{10}(8+2,4t-0,18t^2)\\,dt.\\]</p><p>GeoGebra ger \\(\\boxed{140,0\\text{ m}}\\).</p>",
+    "familj": "geo6_intapp_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.433",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En population ökar med hastigheten \\(P^{\\prime}(t)=80e^{0,15t}\\) individer/år. Bestäm ökningen under de första 5 åren med GeoGebra.</p>",
+    "s": "<p>Den sammanlagda förändringen ges av integralen över tidsintervallet. GeoGebra ger ungefär \\(\\boxed{595,73\\text{ individer}}\\).</p>",
+    "familj": "geo6_intapp_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.434",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En partikel har hastigheten \\(v(t)=t^3-6t^2+8t\\) m/s för \\(0\\le t\\le5\\). Bestäm med GeoGebra partikelns totala sträcka under intervallet.</p>",
+    "s": "<p>För total sträcka måste intervallen där hastigheten är negativ hanteras separat. Nollställena är \\(t=0,2,4\\).</p><p>Integralerna på delintervallen \\([0,2]\\), \\([2,4]\\) och \\([4,5]\\) är 4, -4 respektive 6,25.</p><p>Total sträcka blir därför \\(4+4+6,25=\\boxed{14,25\\text{ m}}\\).</p>",
+    "familj": "geo6_intapp_totaldistance",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.435",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Två pumpar arbetar samtidigt. Pump A fyller med \\(q_A(t)=6+0,8t\\) liter/minut och pump B tömmer med \\(q_B(t)=2e^{0,12t}\\) liter/minut. Bestäm nettomängden vatten som tillförs under de första 8 minuterna.</p>",
+    "s": "<p>Nettotakten är \\(q_A(t)-q_B(t)\\). Nettomängden blir</p><p>\\[\\int_0^8(6+0,8t-2e^{0,12t})\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{46,74\\text{ liter}}\\).</p>",
+    "familj": "geo6_intapp_netflow",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.238",
+    "kap": 4,
+    "omr": "enhetscirkeln_trig",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Använd enhetscirkeln i GeoGebra eller graferna till sinus och cosinus för att lösa \\(\\sin v=0,62\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
+    "s": "<p>GeoGebra ger lösningarna \\(\\boxed{v\\approx 38,3^\\circ}\\) och \\(\\boxed{v\\approx 141,7^\\circ}\\).</p>",
+    "familj": "geo6_unit_eq_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.239",
+    "kap": 4,
+    "omr": "enhetscirkeln_trig",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Använd enhetscirkeln i GeoGebra eller graferna till sinus och cosinus för att lösa \\(\\cos v=-0,35\\) i intervallet \\(0^\\circ\\le v\\le360^\\circ\\). Ange med en decimal.</p>",
+    "s": "<p>GeoGebra ger lösningarna \\(\\boxed{v\\approx 110,5^\\circ}\\) och \\(\\boxed{v\\approx 249,5^\\circ}\\).</p>",
+    "familj": "geo6_unit_eq_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.240",
+    "kap": 4,
+    "omr": "enhetscirkeln_trig",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Skapa en punkt på enhetscirkeln som motsvarar vinkeln \\(37^\\circ\\). Läs av punktens koordinater med tre decimaler och ange därmed \\(\\cos37^\\circ\\) och \\(\\sin37^\\circ\\).</p>",
+    "s": "<p>Punktens koordinater är ungefär \\((0,799;0,602)\\).</p><p>Alltså \\(\\cos37^\\circ\\approx0,799\\) och \\(\\sin37^\\circ\\approx0,602\\).</p>",
+    "familj": "geo6_unit_point",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.241",
+    "kap": 4,
+    "omr": "enhetscirkeln_trig",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Rita \\(y=\\sin v\\) och \\(y=\\cos v\\) för \\(0^\\circ\\le v\\le360^\\circ\\). Bestäm de vinklar där funktionerna har samma värde.</p>",
+    "s": "<p>Skärningspunkterna ger \\(\\boxed{v=45^\\circ}\\) och \\(\\boxed{v=225^\\circ}\\).</p>",
+    "familj": "geo6_unit_sincos",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.242",
+    "kap": 4,
+    "omr": "enhetscirkeln_trig",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg. Ställ in vinkelmåttet på grader när det behövs.</em></p><p>Skapa en glidare \\(a\\) mellan \\(-1\\) och 1 och undersök ekvationen \\(\\sin v=a\\) för \\(0^\\circ\\le v\\le360^\\circ\\).</p><p>Beskriv hur antalet lösningar beror på \\(a\\).</p>",
+    "s": "<p>För \\(-1&lt;a&lt;1\\), \\(a\\ne0\\), fås två lösningar. För \\(a=1\\) och \\(a=-1\\) fås en lösning. För \\(a=0\\) fås tre lösningar om båda ändpunkterna 0° och 360° räknas med: 0°, 180° och 360°.</p>",
+    "familj": "geo6_unit_param",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.243",
+    "kap": 4,
+    "omr": "triangelsatser",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel där \\(A=35^\\circ\\), \\(a=7,0\\) cm och \\(b=9,0\\) cm. Undersök hur många olika trianglar som är möjliga och bestäm de återstående vinklarna.</p>",
+    "s": "<p>Sinussatsen ger \\(\\sin B=\\frac{b\\sin A}{a}\\). GeoGebra visar att två olika lägen för det tredje hörnet är möjliga.</p><p>Man får ungefär \\(B=47,5^\\circ\\) eller \\(132,5^\\circ\\). Då blir \\(C\\approx97,5^\\circ\\) respektive \\(12,5^\\circ\\).</p>",
+    "familj": "geo6_tri_ambiguous1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.244",
+    "kap": 4,
+    "omr": "triangelsatser",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel med sidorna 5,2 cm, 7,1 cm och 9,0 cm. Mät vinklarna i GeoGebra och kontrollera en av dem med cosinussatsen.</p>",
+    "s": "<p>GeoGebra ger vinklarna ungefär \\(35,2^\\circ\\), \\(52,0^\\circ\\) och \\(92,8^\\circ\\).</p><p>En vinkel kan kontrolleras med cosinussatsen genom att sätta den motstående sidan i vänsterledet.</p>",
+    "familj": "geo6_tri_sss",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.245",
+    "kap": 4,
+    "omr": "triangelsatser",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel där två sidor är 6,0 cm och 8,0 cm och den mellanliggande vinkeln är \\(73^\\circ\\). Mät den tredje sidan och kontrollera med cosinussatsen.</p>",
+    "s": "<p>GeoGebra ger den tredje sidan till ungefär \\(\\boxed{8,48\\text{ cm}}\\). Cosinussatsen ger samma resultat.</p>",
+    "familj": "geo6_tri_sas",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.246",
+    "kap": 4,
+    "omr": "triangelsatser",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera en triangel med \\(A=42^\\circ\\), \\(B=68^\\circ\\) och sidan \\(a=7,5\\) cm. Bestäm sidorna \\(b\\) och \\(c\\) med GeoGebra och kontrollera med sinussatsen.</p>",
+    "s": "<p>Först är \\(C=70^\\circ\\). Sinussatsen ger ungefär \\(\\boxed{b=10,39\\text{ cm}}\\) och \\(\\boxed{c=10,53\\text{ cm}}\\), vilket stämmer med mätningen i GeoGebra.</p>",
+    "familj": "geo6_tri_asa",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.247",
+    "kap": 4,
+    "omr": "triangelsatser",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera två fasta sträckor med längderna 5 cm och 8 cm som möts i en vinkel \\(v\\). Skapa en glidare för \\(v\\) från \\(10^\\circ\\) till \\(170^\\circ\\) och låt GeoGebra mäta triangelns area.</p><p>Vid vilken vinkel blir arean störst? Förklara med areasatsen.</p>",
+    "s": "<p>Arean följer \\(T=\\frac{5\\cdot8\\sin v}{2}=20\\sin v\\). Den blir störst när \\(\\sin v=1\\), alltså vid \\(\\boxed{v=90^\\circ}\\). Då är största arean \\(20\\text{ cm}^2\\).</p>",
+    "familj": "geo6_tri_area_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.248",
+    "kap": 4,
+    "omr": "trig_tillampningar_bevis",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Två observationspunkter \\(A\\) och \\(B\\) ligger 120 m från varandra på en rak linje. Ett torn \\(T\\) ligger på samma sida om linjen. Vinklarna \\(\\angle BAT=48^\\circ\\) och \\(\\angle ABT=67^\\circ\\).</p><p>Konstruera situationen i GeoGebra och bestäm avståndet \\(AT\\).</p>",
+    "s": "<p>Triangelns tredje vinkel är \\(65^\\circ\\). Med sinussatsen fås \\(AT/\\sin67^\\circ=120/\\sin65^\\circ\\).</p><p>Alltså \\(\\boxed{AT\\approx121,9\\text{ m}}\\).</p>",
+    "familj": "geo6_trig_survey",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.249",
+    "kap": 4,
+    "omr": "trig_tillampningar_bevis",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett fartyg seglar först 18 km österut och därefter 25 km i riktningen \\(40^\\circ\\) norr om öst. Konstruera färdvägen i GeoGebra och bestäm avståndet från startpunkten till slutpunkten.</p>",
+    "s": "<p>Den inre vinkeln mellan den första sträckan bakåt och den andra är \\(140^\\circ\\). Med cosinussatsen fås avståndet ungefär \\(\\boxed{40,5\\text{ km}}\\).</p>",
+    "familj": "geo6_trig_navigation",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.250",
+    "kap": 4,
+    "omr": "trig_tillampningar_bevis",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En mast står lodrätt. Från en punkt 35 m från mastens fot mäts höjdvinkeln till toppen till \\(58^\\circ\\). Konstruera situationen i GeoGebra och bestäm mastens höjd.</p>",
+    "s": "<p>I den rätvinkliga triangeln gäller \\(\\tan58^\\circ=h/35\\). Därför \\(h=35\\tan58^\\circ\\approx\\boxed{56,0\\text{ m}}\\).</p>",
+    "familj": "geo6_trig_height",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.251",
+    "kap": 4,
+    "omr": "trig_tillampningar_bevis",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera valfri triangel \\(ABC\\) i GeoGebra. Mät sidor och vinklar och beräkna kvoterna \\(a/\\sin A\\), \\(b/\\sin B\\) och \\(c/\\sin C\\). Flytta ett hörn och upprepa.</p><p>Formulera den regel som undersökningen stödjer.</p>",
+    "s": "<p>Kvoterna blir lika inom avrundningsnoggrannheten när triangeln förändras. Undersökningen stödjer sinussatsen:</p><p>\\[\\boxed{\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}}.\\]</p><p>En digital undersökning är inte i sig ett algebraiskt bevis, men den ger stöd för regeln.</p>",
+    "familj": "geo6_trig_investigate_sine",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.252",
+    "kap": 4,
+    "omr": "trig_tillampningar_bevis",
+    "kurs": [
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Konstruera två sidor med fasta längder \\(a=6\\) och \\(b=9\\) och en glidare för den mellanliggande vinkeln \\(C\\). Låt GeoGebra mäta den tredje sidan \\(c\\).</p><p>Undersök hur \\(c\\) förändras när \\(C\\) ökar från \\(20^\\circ\\) till \\(160^\\circ\\). Förklara sambandet med cosinussatsen.</p>",
+    "s": "<p>Cosinussatsen är \\(c^2=a^2+b^2-2ab\\cos C\\). När \\(C\\) ökar från 20° till 160° minskar \\(\\cos C\\), vilket gör att \\(c^2\\) och därmed \\(c\\) ökar. GeoGebra visar samma utveckling.</p>",
+    "familj": "geo6_trig_cos_slider",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.253",
+    "kap": 4,
+    "omr": "linjar_optimering",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett skolkök gör två rätter, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le60\\), \\(x+3y\\le72\\), \\(x,y\\ge0\\). Vinsten är \\(V=25x+30y\\). Rita det tillåtna området i GeoGebra och bestäm största möjliga vinst.</p>",
+    "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Hörnpunkterna är \\((0;0)\\), \\((0;24)\\), \\((21,6;16,8)\\) och \\((30;0)\\).</p><p>Vinsten \\(V=25x+30y\\) blir störst i \\(\\boxed{(21,6;16,8)}\\), där \\(\\boxed{V=1044}\\).</p>",
+    "familj": "geo6_linopt_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.254",
+    "kap": 4,
+    "omr": "linjar_optimering",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Ett företag tillverkar två modeller, \\(x\\) och \\(y\\). Villkoren är \\(x+y\\le40\\), \\(3x+2y\\le90\\), \\(x,y\\ge0\\). Vinsten är \\(V=70x+55y\\). Lös problemet grafiskt i GeoGebra.</p>",
+    "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Hörnpunkterna är \\((0;0)\\), \\((0;40)\\), \\((10;30)\\) och \\((30;0)\\).</p><p>Vinsten \\(V=70x+55y\\) blir störst i \\(\\boxed{(10;30)}\\), där \\(\\boxed{V=2350}\\).</p>",
+    "familj": "geo6_linopt_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.255",
+    "kap": 4,
+    "omr": "linjar_optimering",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>En odlare planterar två grödor, \\(x\\) och \\(y\\). Villkoren är \\(2x+y\\le50\\), \\(x+2y\\le56\\), \\(x,y\\ge0\\). Intäkten är \\(I=400x+500y\\). Bestäm maximum med GeoGebra.</p>",
+    "s": "<p>Rita begränsningslinjerna och markera det gemensamma tillåtna området. Den inre skärningspunkten är \\(\\left(\\frac{44}{3};\\frac{62}{3}\\right)\\).</p><p>Intäkten \\(I=400x+500y\\) blir störst där och är \\(\\boxed{I=16200}\\).</p>",
+    "familj": "geo6_linopt_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.256",
+    "kap": 4,
+    "omr": "linjar_optimering",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita området som ges av \\(x+y\\le10\\), \\(2x+y\\le14\\), \\(x,y\\ge0\\). Skapa en glidare \\(k\\) och uttrycket \\(Z=3x+ky\\).</p><p>Bestäm det värde på \\(k\\) där hela kanten mellan \\((4,6)\\) och \\((0,10)\\) ger samma värde på \\(Z\\).</p>",
+    "s": "<p>På kanten gäller \\(x+y=10\\), vars lutning är \\(-1\\).</p><p>Linjerna \\(3x+ky=c\\), där \\(c\\) är ett konstant värde, har lutningen \\(-3/k\\). För att en sådan linje ska vara parallell med kanten krävs \\(-3/k=-1\\).</p><p>Alltså \\(\\boxed{k=3}\\).</p>",
+    "familj": "geo6_linopt_slider_objective",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "4.257",
+    "kap": 4,
+    "omr": "linjar_optimering",
+    "kurs": [
+      "1b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita området som uppfyller \\(x+2y\\ge12\\), \\(3x+y\\ge15\\), \\(x,y\\ge0\\). Kostnaden är \\(K=4x+5y\\).</p><p>Bestäm med GeoGebra den minsta kostnaden i området.</p>",
+    "s": "<p>Rita begränsningslinjerna och välj rätt sida av varje linje. Den relevanta skärningspunkten mellan \\(x+2y=12\\) och \\(3x+y=15\\) är \\((18/5,21/5)\\).</p><p>Där blir \\(K=4\\cdot18/5+5\\cdot21/5=177/5=\\boxed{35,4}\\).</p>",
+    "familj": "geo6_linopt_min",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.329",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=x^{3} - 4 x + 1\\). Bestäm \\(f^{\\prime}(2)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=2\\).</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=3 x^{2} - 4\\). Vid \\(x=2\\) blir tangentens lutning \\(f^{\\prime}(2)\\approx 8\\). Tangentverktyget ger samma lutning.</p>",
+    "familj": "digital_deriv_value_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.330",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/1/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=2 x^{4} - 3 x^{2} + 5\\). Bestäm \\(f^{\\prime}(-1)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=-1\\).</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=8 x^{3} - 6 x\\). Vid \\(x=-1\\) blir tangentens lutning \\(f^{\\prime}(-1)\\approx -2\\). Tangentverktyget ger samma lutning.</p>",
+    "familj": "digital_deriv_value_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.331",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=\\sqrt{x} + \\frac{2}{x}\\). Bestäm \\(f^{\\prime}(4)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=4\\).</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=- \\frac{2}{x^{2}} + \\frac{1}{2 \\sqrt{x}}\\). Vid \\(x=4\\) blir tangentens lutning \\(f^{\\prime}(4)\\approx 0,125\\). Tangentverktyget ger samma lutning.</p>",
+    "familj": "digital_deriv_value_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.332",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=3^{x}\\). Bestäm \\(f^{\\prime}(1)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=1\\).</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=3^{x} \\ln{\\left(3 \\right)}\\). Vid \\(x=1\\) blir tangentens lutning \\(f^{\\prime}(1)\\approx 3,296\\). Tangentverktyget ger samma lutning.</p>",
+    "familj": "digital_deriv_value_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.333",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Rita \\(f(x)=e^{\\frac{2 x}{5}}\\). Bestäm \\(f^{\\prime}(3)\\) med derivataverktyget och kontrollera resultatet med tangenten i punkten där \\(x=3\\).</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime}(x)=\\frac{2 e^{\\frac{2 x}{5}}}{5}\\). Vid \\(x=3\\) blir tangentens lutning \\(f^{\\prime}(3)\\approx 1,328\\). Tangentverktyget ger samma lutning.</p>",
+    "familj": "digital_deriv_value_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.334",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{3} - 6 x^{2} + 9 x + 2\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena 1, 3. Motsvarande punkter är \\((1; 6)\\), \\((3; 2)\\).</p>",
+    "familj": "digital_deriv_horizontal_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.335",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{4} - 5 x^{2} + 4\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena 0, - \\frac{\\sqrt{10}}{2}, \\frac{\\sqrt{10}}{2}. Motsvarande punkter är \\((0; 4)\\), \\((- \\frac{\\sqrt{10}}{2}; - \\frac{9}{4})\\), \\((\\frac{\\sqrt{10}}{2}; - \\frac{9}{4})\\).</p>",
+    "familj": "digital_deriv_horizontal_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.336",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=- x^{3} + 3 x^{2} + 9 x - 2\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -1, 3. Motsvarande punkter är \\((-1; -7)\\), \\((3; 25)\\).</p>",
+    "familj": "digital_deriv_horizontal_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.337",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{4} - 8 x^{2} + 3\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -2, 0, 2. Motsvarande punkter är \\((-2; -13)\\), \\((0; 3)\\), \\((2; -13)\\).</p>",
+    "familj": "digital_deriv_horizontal_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.338",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>För \\(f(x)=x^{3} - 12 x + 4\\), bestäm alla punkter där grafens tangent är horisontell. Beskriv vilka GeoGebra-kommandon eller verktyg du använder.</p>",
+    "s": "<p>Rita \\(f\\) och dess derivata. Horisontell tangent betyder \\(f^{\\prime}(x)=0\\). GeoGebra ger nollställena -2, 2. Motsvarande punkter är \\((-2; 20)\\), \\((2; -12)\\).</p>",
+    "familj": "digital_deriv_horizontal_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.339",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-4\\le x\\le 5\\) för</p><p>\\[f(x)=x^{3} - 3 x^{2} - 9 x + 4.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-4\\) och \\(x=5\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-72\\) vid \\(x\\approx -4\\), och största värdet ungefär \\(9\\) vid \\(x\\approx 5\\).</p>",
+    "familj": "digital_deriv_interval_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.340",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=x^{4} - 4 x^{2} + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=3\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-2\\) vid \\(x\\approx -1,414\\), och största värdet ungefär \\(47\\) vid \\(x\\approx -3\\).</p>",
+    "familj": "digital_deriv_interval_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.341",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(0\\le x\\le 5\\) för</p><p>\\[f(x)=- x^{3} + 6 x^{2} - 9 x + 5.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=0\\) och \\(x=5\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-15\\) vid \\(x\\approx 5\\), och största värdet ungefär \\(5\\) vid \\(x\\approx 0\\).</p>",
+    "familj": "digital_deriv_interval_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.342",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 4\\) för</p><p>\\[f(x)=x^{3} - 6 x + 2.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=4\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-7\\) vid \\(x\\approx -3\\), och största värdet ungefär \\(42\\) vid \\(x\\approx 4\\).</p>",
+    "familj": "digital_deriv_interval_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.343",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm funktionens största och minsta värde i intervallet \\(-3\\le x\\le 3\\) för</p><p>\\[f(x)=\\frac{x^{4}}{4} - 2 x^{2} + x.\\]</p><p>Visa i din lösning att du har undersökt både derivatans nollställen och intervallets ändpunkter.</p>",
+    "s": "<p>Rita funktionen och bestäm derivatans nollställen i intervallet. Jämför sedan funktionsvärdena i dessa punkter med värdena vid \\(x=-3\\) och \\(x=3\\).</p><p>GeoGebra ger minsta värdet ungefär \\(-6,059\\) vid \\(x\\approx -2,115\\), och största värdet ungefär \\(5,25\\) vid \\(x\\approx 3\\).</p>",
+    "familj": "digital_deriv_interval_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.344",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(1)\\) för \\(f(x)=x^{4} - 2 x^{2} + 3\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=4 \\left(3 x^{2} - 1\\right)\\). Insättning ger \\(f^{\\prime\\prime}(1)\\approx 8\\).</p>",
+    "familj": "digital_deriv_second_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.345",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=x^{5} - 5 x^{3} + 2\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=10 x \\left(2 x^{2} - 3\\right)\\). Insättning ger \\(f^{\\prime\\prime}(2)\\approx 100\\).</p>",
+    "familj": "digital_deriv_second_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.346",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm \\(f^{\\prime\\prime}(2)\\) för \\(f(x)=3^{x}\\). Beskriv hur du kan kontrollera värdet digitalt.</p>",
+    "s": "<p>GeoGebra ger \\(f^{\\prime\\prime}(x)=3^{x} \\ln{\\left(3 \\right)}^{2}\\). Insättning ger \\(f^{\\prime\\prime}(2)\\approx 10,863\\).</p>",
+    "familj": "digital_deriv_second_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.347",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3ax\\). Undersök för vilka positiva värden på \\(a\\) grafen har två extrempunkter.</p>",
+    "s": "<p>Derivatan är \\(f_a^{\\prime}(x)=3x^2-3a\\). För \\(a&gt;0\\) finns två olika nollställen \\(x=\\pm\\sqrt a\\), alltså två extrempunkter. För \\(a=0\\) sammanfaller nollställena och för \\(a&lt;0\\) saknas reella nollställen.</p>",
+    "familj": "digital_deriv_investigate_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.348",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Skapa en glidare \\(a\\) och rita \\(f_a(x)=x^3-3x+a\\). Undersök hur extrempunkternas \\(y\\)-värden förändras när \\(a\\) ändras.</p>",
+    "s": "<p>Derivatan är \\(3x^2-3\\), så extrempunkternas x-värden är alltid \\(-1\\) och \\(1\\). Parametern \\(a\\) flyttar bara grafen vertikalt, så båda extrempunkternas y-värden ökar lika mycket som \\(a\\).</p>",
+    "familj": "digital_deriv_investigate_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.349",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3-3x+1\\). Bestäm ekvationerna för tangenterna till grafen vid \\(x=-1\\) och \\(x=2\\) och bestäm deras skärningspunkt med GeoGebra.</p>",
+    "s": "<p>GeoGebra ger tangenternas ekvationer genom tangentverktyget. Vid \\(x=-1\\) är lutningen 0 och punkten \\((-1;3)\\), så tangenten är \\(y=3\\). Vid \\(x=2\\) är lutningen 9 och punkten \\((2;3)\\), så tangenten är \\(y=9x-15\\). Skärningspunkten är \\((2;3)\\).</p>",
+    "familj": "digital_deriv_investigate_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.350",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^4-4x^2\\) och \\(f^{\\prime}(x)\\) i samma koordinatsystem. Förklara hur nollställena till derivatan hänger ihop med grafens extrempunkter.</p>",
+    "s": "<p>Derivatan är \\(4x(x^2-2)\\) och har nollställena \\(-\\sqrt2,0,\\sqrt2\\). I dessa x-värden har f två minimipunkter och en maximipunkt. Teckenbytet hos derivatan avgör punktens karaktär.</p>",
+    "familj": "digital_deriv_investigate_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "2.351",
+    "kap": 2,
+    "omr": "derivering_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt grafverktyg.</em></p><p>Rita \\(f(x)=x^3\\) och skapa en sekant genom punkterna med x-koordinaterna 1 och \\(1+h\\). Låt \\(h\\) närma sig 0 och undersök sekantens lutning.</p>",
+    "s": "<p>Sekantlutningen närmar sig 3. Det är derivatan \\(f^{\\prime}(1)=3\\). Uppgiften visualiserar derivatans definition.</p>",
+    "familj": "digital_deriv_investigate_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.436",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Intäkten från en föreställning beskrivs av \\(I(x)=-2x^2+800x\\), där \\(x\\) är biljettpriset i kronor.</p><p>a) Bestäm det biljettpris som ger maximal intäkt.<br>b) Bestäm den maximala intäkten.</p>",
+    "s": "<p>Derivatan är \\(I^{\\prime}(x)=-4x+800\\). Sätt \\(I^{\\prime}(x)=0\\): \\(x=200\\).</p><p>Eftersom \\(I^{\\prime\\prime}(x)=-4&lt;0\\) är det en maximipunkt. Den maximala intäkten är \\(I(200)=80\\,000\\) kr.</p>",
+    "familj": "deriv_app_revenue",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.437",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>I en triangel är summan av basen och höjden 36 cm. Bestäm triangelns största möjliga area.</p>",
+    "s": "<p>Låt basen vara \\(x\\) cm. Då är höjden \\(36-x\\) cm.</p><p>Arean blir \\(A(x)=\\frac{x(36-x)}{2}=18x-\\frac{x^2}{2}\\).</p><p>\\(A^{\\prime}(x)=18-x\\), så maximum fås för \\(x=18\\). Då är även höjden 18 cm och arean \\(162\\text{ cm}^2\\).</p>",
+    "familj": "deriv_app_triangle",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.438",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Två positiva tal har produkten 45. Bestäm talens minsta möjliga summa.</p>",
+    "s": "<p>Låt det ena talet vara \\(x\\). Då är det andra \\(45/x\\).</p><p>Summan är \\(S(x)=x+45/x\\), \\(x&gt;0\\).</p><p>\\(S^{\\prime}(x)=1-45/x^2\\). Nollstället är \\(x=3\\sqrt5\\). Då är båda talen \\(3\\sqrt5\\), och minsta summan är \\(6\\sqrt5\\).</p>",
+    "familj": "deriv_app_product",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.439",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Antalet djur i ett reservat modelleras under 12 år av</p><p>\\[N(t)=t^3-18t^2+72t+900,\\qquad 0\\le t\\le12.\\]</p><p>Bestäm det största och minsta antalet djur under perioden.</p>",
+    "s": "<p>Rita funktionen i intervallet och bestäm derivatans nollställen. Derivatan är \\(N^{\\prime}(t)=3t^2-36t+72\\), så nollställena är \\(t=6-2\\sqrt3\\approx2,536\\) och \\(t=6+2\\sqrt3\\approx9,464\\).</p><p>Jämför funktionsvärdena där med värdena vid intervallets ändpunkter. Det största antalet är ungefär \\(983\\) djur vid \\(t\\approx2,536\\), och det minsta ungefär \\(817\\) djur vid \\(t\\approx9,464\\).</p>",
+    "familj": "deriv_app_population_interval",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.440",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Funktionerna \\(f(x)=x^3-4x+2\\) och \\(g(x)=2x^2-1\\) är givna. Bestäm det största avståndet i y-led mellan graferna i intervallet \\(-2\\le x\\le3\\).</p>",
+    "s": "<p>Avståndet i y-led är \\(|f(x)-g(x)|\\), alltså \\[d(x)=|x^3-2x^2-4x+3|.\\]</p><p>Rita \\(d\\) i intervallet \\(-2\\le x\\le3\\) och bestäm maximum. GeoGebra ger största avståndet \\(\\boxed{5}\\), vilket fås vid \\(x=-2\\) och \\(x=2\\).</p>",
+    "familj": "deriv_app_vertical_distance",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.441",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>Figuren visar kurvan \\(y=16-x^2\\) i första kvadranten. Den skuggade rektangeln har ett hörn på kurvan.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"280\" viewBox=\"0 0 390 280\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rektangel under parabeln y = 16 - x^2\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"54\" y1=\"28\" x2=\"54\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"54\" y=\"254\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"122\" y1=\"28\" x2=\"122\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"122\" y=\"254\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"190\" y1=\"28\" x2=\"190\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"190\" y=\"254\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"258\" y1=\"28\" x2=\"258\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"258\" y=\"254\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"326\" y1=\"28\" x2=\"326\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"326\" y=\"254\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"54\" y1=\"236\" x2=\"350\" y2=\"236\" stroke=\"#F0EFF2\"/><text x=\"45\" y=\"240\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"54\" y1=\"188\" x2=\"350\" y2=\"188\" stroke=\"#F0EFF2\"/><text x=\"45\" y=\"192\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"54\" y1=\"140\" x2=\"350\" y2=\"140\" stroke=\"#F0EFF2\"/><text x=\"45\" y=\"144\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">8</text><line x1=\"54\" y1=\"92\" x2=\"350\" y2=\"92\" stroke=\"#F0EFF2\"/><text x=\"45\" y=\"96\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">12</text><line x1=\"54\" y1=\"44\" x2=\"350\" y2=\"44\" stroke=\"#F0EFF2\"/><text x=\"45\" y=\"48\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">16</text><line x1=\"54\" y1=\"236\" x2=\"355\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><line x1=\"54\" y1=\"24\" x2=\"54\" y2=\"236\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><polyline points=\"54.0,44.0 56.7,44.0 59.4,44.1 62.2,44.2 64.9,44.3 67.6,44.5 70.3,44.7 73.0,44.9 75.8,45.2 78.5,45.6 81.2,45.9 83.9,46.3 86.6,46.8 89.4,47.2 92.1,47.8 94.8,48.3 97.5,48.9 100.2,49.5 103.0,50.2 105.7,50.9 108.4,51.7 111.1,52.5 113.8,53.3 116.6,54.2 119.3,55.1 122.0,56.0 124.7,57.0 127.4,58.0 130.2,59.1 132.9,60.1 135.6,61.3 138.3,62.5 141.0,63.7 143.8,64.9 146.5,66.2 149.2,67.5 151.9,68.9 154.6,70.3 157.4,71.7 160.1,73.2 162.8,74.7 165.5,76.3 168.2,77.9 171.0,79.5 173.7,81.2 176.4,82.9 179.1,84.6 181.8,86.4 184.6,88.2 187.3,90.1 190.0,92.0 192.7,93.9 195.4,95.9 198.2,97.9 200.9,100.0 203.6,102.1 206.3,104.2 209.0,106.4 211.8,108.6 214.5,110.8 217.2,113.1 219.9,115.4 222.6,117.8 225.4,120.2 228.1,122.6 230.8,125.1 233.5,127.6 236.2,130.2 239.0,132.8 241.7,135.4 244.4,138.1 247.1,140.8 249.8,143.5 252.6,146.3 255.3,149.1 258.0,152.0 260.7,154.9 263.4,157.8 266.2,160.8 268.9,163.8 271.6,166.9 274.3,170.0 277.0,173.1 279.8,176.3 282.5,179.5 285.2,182.7 287.9,186.0 290.6,189.3 293.4,192.7 296.1,196.1 298.8,199.5 301.5,203.0 304.2,206.5 307.0,210.1 309.7,213.7 312.4,217.3 315.1,220.9 317.8,224.7 320.6,228.4 323.3,232.2 326.0,236.0\" fill=\"none\" stroke=\"#C74440\" stroke-width=\"2.6\"/><rect x=\"54\" y=\"102.1\" width=\"149.6\" height=\"133.9\" fill=\"#DCEAF8\" stroke=\"#2D70B3\" stroke-width=\"2\"/><circle cx=\"203.6\" cy=\"102.1\" r=\"4\" fill=\"#2D70B3\"/><text x=\"210.6\" y=\"95.1\" font-size=\"12\" fill=\"#2D70B3\">P</text><text x=\"276\" y=\"48\" font-size=\"13\" fill=\"#C74440\">y = 16 − x²</text></svg></span><p>a) Ställ upp ett uttryck \\(A(x)\\) för rektangelns area.<br>b) Bestäm största möjliga area.</p>",
+    "s": "<p>Rektangelns bredd är \\(x\\) och höjden \\(16-x^2\\). Därför</p><p>\\[A(x)=x(16-x^2)=16x-x^3.\\]</p><p>\\(A^{\\prime}(x)=16-3x^2\\). I första kvadranten fås \\(x=4/\\sqrt3\\). Då är största arean \\(128/(3\\sqrt3)\\approx24,63\\).</p>",
+    "familj": "deriv_app_rectangle_parabola",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.442",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "1/2/0",
+    "t": "<p>I en pyramid med kvadratisk basyta är summan av pyramidens höjd och basytans sida 24 cm.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"350\" height=\"250\" viewBox=\"0 0 350 250\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Pyramid med kvadratisk basyta\"><rect x=\"1\" y=\"1\" width=\"348\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><polygon points=\"90,178 210,178 260,210 140,210\" fill=\"#F4EBDD\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"175\" y1=\"42\" x2=\"90\" y2=\"178\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"175\" y1=\"42\" x2=\"210\" y2=\"178\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"175\" y1=\"42\" x2=\"260\" y2=\"210\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"175\" y1=\"42\" x2=\"140\" y2=\"210\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"175\" y1=\"42\" x2=\"175\" y2=\"194\" stroke=\"#2D70B3\" stroke-dasharray=\"5 4\"/><text x=\"184\" y=\"120\" font-size=\"14\" fill=\"#2D70B3\">24 − x</text><text x=\"150\" y=\"229\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"230\" y=\"197\" font-size=\"14\" fill=\"#2B2527\">x</text></svg></span><p>a) Ställ upp en funktion för volymen om basytans sida är \\(x\\) cm.<br>b) Bestäm pyramidens maximala volym.</p>",
+    "s": "<p>Höjden är \\(24-x\\). Volymen blir</p><p>\\[V(x)=\\frac{x^2(24-x)}{3}=8x^2-\\frac{x^3}{3},\\qquad0&lt;x&lt;24.\\]</p><p>\\(V^{\\prime}(x)=16x-x^2=x(16-x)\\). Maximum fås för \\(x=16\\), vilket ger \\(V=2048/3\\approx682,7\\text{ cm}^3\\).</p>",
+    "familj": "deriv_app_pyramid",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.443",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>Ett rektangulärt hyllplan ska ha arean 24 dm² och tre kanter av glas, två korta och en lång. Glasets höjd är 0,7 dm och tjockleken kan försummas i modellen.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rektangulärt hyllplan med tre glaskanter\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><polygon points=\"76,74 275,74 315,111 115,111\" fill=\"#EFEFEF\" stroke=\"#5B5560\" stroke-width=\"2\"/><polygon points=\"76,74 115,111 115,157 76,119\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><polygon points=\"115,111 315,111 315,157 115,157\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><polygon points=\"275,74 315,111 315,157 275,120\" fill=\"#D8EEF7\" fill-opacity=\"0.7\" stroke=\"#2D70B3\" stroke-width=\"2\"/><text x=\"178\" y=\"181\" font-size=\"14\" fill=\"#2B2527\">y</text><text x=\"288\" y=\"93\" font-size=\"14\" fill=\"#2B2527\">x</text><text x=\"205\" y=\"207\" font-size=\"13\" fill=\"#6B6670\">Hyllplanets area: 24 dm²</text></svg></span><p>Bestäm måtten \\(x\\) och \\(y\\) så att den sammanlagda glasarean blir så liten som möjligt.</p>",
+    "s": "<p>Villkoret är \\(xy=24\\), alltså \\(y=24/x\\).</p><p>Glaslängden är \\(2x+y\\), så glasarean är proportionell mot \\(L(x)=2x+24/x\\).</p><p>\\(L^{\\prime}(x)=2-24/x^2\\). Nollstället ger \\(x^2=12\\), alltså \\(x=2\\sqrt3\\) dm. Då är \\(y=24/x=4\\sqrt3\\) dm. Andraderivatan är positiv, så värdet är ett minimum.</p>",
+    "familj": "deriv_app_shelf",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.444",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En konferens kostar 2400 kr och brukar ha 320 deltagare. För varje höjning med 100 kr minskar antalet deltagare med 20. För varje sänkning med 100 kr ökar antalet med 20.</p><p>Vilket pris ger störst intäkt enligt modellen?</p>",
+    "s": "<p>Låt \\(x\\) vara antalet hundrakronorshöjningar. Då är priset \\(2400+100x\\) och antalet deltagare \\(320-20x\\).</p><p>\\[I(x)=(2400+100x)(320-20x)=-2000x^2-16000x+768000.\\]</p><p>\\(I^{\\prime}(x)=-4000x-16000\\), så maximum fås för \\(x=-4\\). Priset ska alltså sänkas med 400 kr till \\(2000\\) kr.</p>",
+    "familj": "deriv_app_conference",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.445",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>Summan av två positiva tal är 10. Bestäm talen så att produkten av talen och deras positiva differens blir så stor som möjligt.</p>",
+    "s": "<p>Låt det större talet vara \\(x\\), så att det andra är \\(10-x\\) och \\(5&lt;x&lt;10\\).</p><p>Uttrycket blir \\(T(x)=x(10-x)(2x-10)=-2x^3+30x^2-100x\\).</p><p>\\(T^{\\prime}(x)=-6x^2+60x-100\\). Det relevanta nollstället är \\(x=5+5/\\sqrt3\\approx7,887\\). Det andra talet är då \\(2,113\\).</p>",
+    "familj": "deriv_app_tartaglia",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.446",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>I en rak cirkulär kon är sidan från spetsen till baskanten 18 cm.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"330\" height=\"260\" viewBox=\"0 0 330 260\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Rak cirkulär kon med sida från spetsen till baskanten 18 cm\"><rect x=\"1\" y=\"1\" width=\"328\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><ellipse cx=\"165\" cy=\"203\" rx=\"74\" ry=\"20\" fill=\"#F4EBDD\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"165\" y1=\"42\" x2=\"91\" y2=\"203\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"165\" y1=\"42\" x2=\"239\" y2=\"203\" stroke=\"#8C6A43\" stroke-width=\"2\"/><line x1=\"165\" y1=\"42\" x2=\"165\" y2=\"203\" stroke=\"#2D70B3\" stroke-dasharray=\"5 4\"/><line x1=\"165\" y1=\"203\" x2=\"239\" y2=\"203\" stroke=\"#2D70B3\"/><text x=\"176\" y=\"124\" font-size=\"14\" fill=\"#2D70B3\">h</text><text x=\"200\" y=\"197\" font-size=\"14\" fill=\"#2D70B3\">r</text><text x=\"216\" y=\"117\" font-size=\"14\" fill=\"#2B2527\">18 cm</text></svg></span><p>Bestäm konens största möjliga volym.</p>",
+    "s": "<p>Med höjden \\(h\\) och radien \\(r\\) gäller \\(r^2+h^2=18^2=324\\), alltså \\(r^2=324-h^2\\).</p><p>Volymen kan därför skrivas</p><p>\\[V(h)=\\frac{\\pi}{3}(324-h^2)h=108\\pi h-\\frac{\\pi h^3}{3}.\\]</p><p>\\(V^{\\prime}(h)=108\\pi-\\pi h^2\\), så maximum fås för \\(h=6\\sqrt3\\). Då är \\(r=6\\sqrt6\\) och \\(V_{max}=432\\pi\\sqrt3\\approx2351\\text{ cm}^3\\).</p>",
+    "familj": "deriv_app_cone",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.447",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Höjden för en boll som kastas uppåt modelleras av \\(h(t)=1,6+14t-4,9t^2\\), där \\(t\\) mäts i sekunder.</p><p>a) När når bollen sin största höjd?<br>b) Hur hög är bollen då?</p>",
+    "s": "<p>\\(h^{\\prime}(t)=14-9,8t\\). Sätt lika med noll: \\(t=14/9,8\\approx1,43\\) s.</p><p>Andraderivatan är \\(-9,8&lt;0\\), så det är ett maximum. Höjden blir ungefär \\(11,6\\) m.</p>",
+    "familj": "deriv_app_projectile",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.448",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En öppen låda görs av en kartong som är 36 cm × 24 cm genom att kvadrater med sidan \\(x\\) klipps bort i hörnen.</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Kartong 36 cm gånger 24 cm med kvadrater i hörnen\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"64\" y=\"46\" width=\"260\" height=\"150\" fill=\"#F8F3E7\" stroke=\"#8C6A43\" stroke-width=\"2\"/><rect x=\"64\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"46\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"64\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"294\" y=\"166\" width=\"30\" height=\"30\" fill=\"#fff\" stroke=\"#C74440\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><text x=\"194.0\" y=\"32\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\">36 cm</text><text x=\"45\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"#2B2527\" transform=\"rotate(-90 45 121.0)\">24 cm</text><text x=\"79\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text><text x=\"305\" y=\"66\" font-size=\"13\" fill=\"#C74440\">x</text></svg></span><p>Ställ upp volymfunktionen och bestäm med GeoGebra lådans största möjliga volym.</p>",
+    "s": "<p>Volymen är \\[V(x)=x(36-2x)(24-2x),\\qquad0&lt;x&lt;12.\\]</p><p>Rita funktionen i GeoGebra och använd extrempunktverktyget. Maximum fås vid \\(x\\approx4,708\\) cm och volymen blir ungefär \\(\\boxed{1825,3\\text{ cm}^3}\\).</p>",
+    "familj": "deriv_app_open_box",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.449",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har omkretsen 56 cm. Bestäm största möjliga area.</p>",
+    "s": "<p>Låt ena sidan vara x. Den andra blir 28-x. A(x)=x(28-x). A'(x)=28-2x, så x=14 och maxarean är 196 cm².</p>",
+    "familj": "deriv_app_rect_perimeter",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.450",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En rektangel ska ha arean 72 cm². Bestäm den minsta möjliga omkretsen.</p>",
+    "s": "<p>Låt sidorna vara x och 72/x. O(x)=2x+144/x. O'(x)=2-144/x²=0 ger x=6√2, vilket även ger den andra sidan 6√2. Minsta omkrets är 24√2 cm.</p>",
+    "familj": "deriv_app_rect_area",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.451",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En hage byggs mot en sjö. Det finns 150 m stängsel till de tre övriga sidorna. Bestäm största möjliga area.</p>",
+    "s": "<p>A(x)=x(150-2x). A'(x)=150-4x=0 ger x=37,5. Den tredje sidan blir 75 m och maxarean 2812,5 m².</p>",
+    "familj": "deriv_app_fence_lake",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.452",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett företag har kostnaden K(x)=0,02x^3-1,2x^2+40x+800 för 0≤x≤50. Bestäm minsta kostnad i intervallet med GeoGebra.</p>",
+    "s": "<p>Rita K på intervallet och jämför extrempunkter med ändpunkter. GeoGebra ger minsta värdet K(0)=800.</p>",
+    "familj": "deriv_app_cost_cubic",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.453",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Vinsten från en produkt modelleras av V(x)=-0,5x²+60x-500. Bestäm största möjliga vinst och det x-värde där den fås.</p>",
+    "s": "<p>V'(x)=-x+60. Maximum fås vid x=60. V(60)=1300.</p>",
+    "familj": "deriv_app_profit_quad",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.454",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>En läkemedelskoncentration modelleras av C(t)=5t·e^{-0,4t} för t≥0. Använd GeoGebra för att bestämma när koncentrationen är som störst och det största värdet.</p>",
+    "s": "<p>Rita C(t) för t≥0 och använd extrempunktverktyget. Maximum fås vid t=2,5 och C≈4,598.</p>",
+    "familj": "deriv_app_drug_geo",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.455",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En rektangel skrivs in under parabeln y=9-x² med basen på x-axeln och symmetri kring y-axeln. Bestäm största möjliga area.</p>",
+    "s": "<p>Låt högra hörnets x-koordinat vara x. Bredden är 2x och höjden 9-x². A(x)=2x(9-x²)=18x-2x³. A'(x)=18-6x²=0 ger x=√3. Maxarean är 12√3.</p>",
+    "familj": "deriv_app_sym_rect_parabola",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.456",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Ett slutet cylindriskt kärl ska rymma 1000 cm³. Bestäm med GeoGebra den radie och höjd som ger minsta totala yta.</p>",
+    "s": "<p>Volymvillkoret ger h=1000/(πr²). Ytan blir A(r)=2πr²+2000/r. GeoGebra ger minimum vid r≈5,42 cm och h≈10,84 cm.</p>",
+    "familj": "deriv_app_closed_cylinder",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.457",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En affisch ska ha 400 cm² tryckyta. Sidmarginalerna är 2 cm och marginalerna upptill och nedtill 3 cm. Bestäm minsta möjliga pappersarea.</p>",
+    "s": "<p>Låt tryckbredden vara \\(x\\) cm. Då är tryckhöjden \\(400/x\\) cm.</p><p>Pappersarean blir \\[A(x)=(x+4)\\left(\\frac{400}{x}+6\\right)=424+6x+\\frac{1600}{x}.\\]</p><p>\\(A^{\\prime}(x)=6-1600/x^2\\). Nollstället ger \\(x=20\\sqrt{2/3}\\approx16,33\\) cm. Den minsta pappersarean blir ungefär \\(\\boxed{619,96\\text{ cm}^2}\\).</p>",
+    "familj": "deriv_app_poster",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.458",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En rektangulär inhägnad delas i fyra lika delar med tre stängsel parallella med ena sidan. Totalt finns 180 m stängsel. Bestäm största möjliga area.</p>",
+    "s": "<p>Låt de fem parallella stängseldelarna ha längden \\(x\\) meter. Då återstår \\(180-5x\\) meter till de två andra sidorna, så \\(y=(180-5x)/2\\).</p><p>Arean blir \\[A(x)=xy=90x-2,5x^2.\\]</p><p>\\(A^{\\prime}(x)=90-5x\\), så maximum fås för \\(x=18\\) m. Då är \\(y=45\\) m och den största arean \\(\\boxed{810\\text{ m}^2}\\).</p>",
+    "familj": "deriv_app_four_pens",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.459",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>En båtuthyrare tar 500 kr per dag och hyr då ut 40 båtar. För varje prishöjning med 20 kr minskar antalet uthyrda båtar med 1. Vilket pris maximerar intäkten enligt modellen?</p>",
+    "s": "<p>Låt x vara antalet tjugokronorshöjningar. I(x)=(500+20x)(40-x)=-20x²+300x+20000. I'= -40x+300=0 ger x=7,5. Modellen ger optimalt pris 650 kr.</p>",
+    "familj": "deriv_app_boat_rental",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.460",
+    "kap": 3,
+    "omr": "derivata_tillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Temperaturen i en ugn modelleras under 0≤t≤8 av T(t)=-0,5t³+4t²+20. Bestäm största och minsta temperatur under intervallet med GeoGebra.</p>",
+    "s": "<p>Rita funktionen på intervallet och bestäm derivatans nollställen. \\(T^{\\prime}(t)=-1,5t^2+8t=t(8-1,5t)\\), så det relevanta inre nollstället är \\(t=16/3\\approx5,33\\).</p><p>Jämför med ändpunkterna: \\(T(0)=20\\), \\(T(8)=20\\) och \\(T(16/3)\\approx57,93\\). <strong>Svar:</strong> minsta temperatur är \\(20\\) och största ungefär \\(57,93\\).</p>",
+    "familj": "deriv_app_oven_interval",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.461",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} e^{- x^{2}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}e^{- x^{2}}\\,dx\\approx 0,882\\).</p>",
+    "familj": "digital_integral_numeric_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.462",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\sqrt{x^{3} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}\\sqrt{x^{3} + 1}\\,dx\\approx 3,241\\).</p>",
+    "familj": "digital_integral_numeric_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.463",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\frac{1}{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{3}\\frac{1}{x^{2} + 1}\\,dx\\approx 1,249\\).</p>",
+    "familj": "digital_integral_numeric_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.464",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{-2}^{2} \\sqrt{4 - x^{2}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{-2}^{2}\\sqrt{4 - x^{2}}\\,dx\\approx 6,283\\).</p>",
+    "familj": "digital_integral_numeric_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.465",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{-2}^{4} \\left|{x - 1}\\right|\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{-2}^{4}\\left|{x - 1}\\right|\\,dx\\approx 9\\).</p>",
+    "familj": "digital_integral_numeric_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.466",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^5 1{,}2^x\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^5 1{,}2^x\\,dx\\approx8,163\\).</p>",
+    "familj": "digital_integral_numeric_6",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.467",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^2 e^{-x^3}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^2 e^{-x^3}\\,dx\\approx0,893\\).</p>",
+    "familj": "digital_integral_numeric_7",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.468",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_0^{1,5}\\frac{1}{2+x^3}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_0^{1,5}\\frac{1}{2+x^3}\\,dx\\approx0,578\\).</p>",
+    "familj": "digital_integral_numeric_8",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.469",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{2} \\frac{1}{\\sqrt{x^{4} + 1}}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{2}\\frac{1}{\\sqrt{x^{4} + 1}}\\,dx\\approx 1,357\\).</p>",
+    "familj": "digital_integral_numeric_9",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.470",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralen</p><p>\\[\\int_{0}^{3} \\sqrt{x^{2} + 1}\\,dx\\]</p><p>med tre decimaler. Visa vilket kommando eller verktyg du använder.</p>",
+    "s": "<p>GeoGebras integralverktyg ger \\(\\int_{0}^{3}\\sqrt{x^{2} + 1}\\,dx\\approx 5,653\\).</p>",
+    "familj": "digital_integral_numeric_10",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.471",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x + 3\\) och \\(g(x)=x^{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=\\frac{1}{2} - \\frac{\\sqrt{13}}{2}\\) och \\(x=\\frac{1}{2} + \\frac{\\sqrt{13}}{2}\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(\\frac{13 \\sqrt{13}}{6}\\), alltså ungefär \\(7,812\\).</p>",
+    "familj": "digital_integral_between_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.472",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=4 - x\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=-4\\) och \\(x=2\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(18\\), alltså ungefär \\(18,0\\).</p>",
+    "familj": "digital_integral_between_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.473",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=2 x + 1\\) och \\(g(x)=x^{2} - 2\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=-1\\) och \\(x=3\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(\\frac{32}{3}\\), alltså ungefär \\(10,667\\).</p>",
+    "familj": "digital_integral_between_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.474",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=3\\) och \\(g(x)=\\frac{x^{2}}{2}\\). Bestäm arean mellan graferna i det område som begränsas av deras skärningspunkter.</p>",
+    "s": "<p>Bestäm först grafernas skärningspunkter. De ligger vid \\(x=- \\sqrt{6}\\) och \\(x=\\sqrt{6}\\). Använd sedan GeoGebras integralverktyg mellan graferna. Arean blir \\(4 \\sqrt{6}\\), alltså ungefär \\(9,798\\).</p>",
+    "familj": "digital_integral_between_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.475",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a x^{2} + 1\\,dx=10.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a x^{2} + 1\\,dx\\) och lös \\(A(a)=10\\). GeoGebra ger \\(a\\approx 2,787\\).</p>",
+    "familj": "digital_integral_upper_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.476",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a 2 x + 3\\,dx=18.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a 2 x + 3\\,dx\\) och lös \\(A(a)=18\\). GeoGebra ger \\(a\\approx 3\\).</p>",
+    "familj": "digital_integral_upper_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.477",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm det positiva talet \\(a\\) som uppfyller</p><p>\\[\\int_0^a e^{\\frac{x}{2}}\\,dx=5.\\]</p><p>Svara med tre decimaler.</p>",
+    "s": "<p>Skapa en glidare \\(a\\) eller rita funktionen \\(A(a)=\\int_0^a e^{\\frac{x}{2}}\\,dx\\) och lös \\(A(a)=5\\). GeoGebra ger \\(a\\approx 2,506\\).</p>",
+    "familj": "digital_integral_upper_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.478",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x^3-4x\\) och bestäm både \\(\\int_{-2}^{2}f(x)\\,dx\\) och arean mellan grafen och x-axeln på samma intervall. Förklara varför svaren skiljer sig.</p>",
+    "s": "<p>Integralen blir 0 eftersom positiva och negativa bidrag tar ut varandra. Den geometriska arean fås genom att dela vid nollställena och summera beloppen av delintegralerna.</p>",
+    "familj": "digital_integral_signed_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.479",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=x^2-4\\). Bestäm integralens värde på \\([-3,3]\\) och den geometriska arean mellan grafen och x-axeln.</p>",
+    "s": "<p>Grafen skär x-axeln vid x=±2. Integralen tar hänsyn till tecken medan geometrisk area räknas positiv. Dela därför intervallet vid -2 och 2.</p>",
+    "familj": "digital_integral_signed_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.480",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Rita \\(f(x)=\\frac{x}{1+x^2}\\) på intervallet \\([-3,3]\\). Bestäm integralvärdet digitalt och förklara resultatet utifrån grafen.</p>",
+    "s": "<p>GeoGebra ger integralvärdet \\(0\\). Grafen har lika stora bidrag ovanför och under \\(x\\)-axeln på symmetriska intervall, så de tar ut varandra i integralen.</p>",
+    "familj": "digital_integral_signed_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.481",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En boll faller så att hastigheten kan beskrivas med \\(v(t)=9,82t\\) m/s. a) Teckna en integral för sträckan under de första 3 sekunderna. b) Beräkna sträckan.</p>",
+    "s": "<p>Sträckan är \\(\\int_0^3 9,82t\\,dt=[4,91t^2]_0^3=44,19\\) m.</p>",
+    "familj": "integral_app_falling_ball",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.482",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Vatten rinner in i en tank med hastigheten \\(q(t)=20-0,5t\\) liter/minut. Hur mycket vatten har runnit in efter 10 minuter?</p>",
+    "s": "<p>Volymen är \\(\\int_0^{10}(20-0,5t)\\,dt=[20t-0,25t^2]_0^{10}=175\\) liter.</p>",
+    "familj": "integral_app_tank_linear",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.483",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En hotad djurpopulation ökar med hastigheten \\(N^{\\prime}(t)=12+4t\\) individer/år under 15 år. Vid start finns 700 individer. Hur stor är populationen efter 15 år?</p>",
+    "s": "<p>Ökningen är \\(\\int_0^{15}(12+4t)dt=630\\). Populationen blir 700+630=1330 individer.</p>",
+    "familj": "integral_app_population_rate",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.484",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Vattenflödet i en ledning är \\(q(t)=12-3t\\) cm³/s. Hur mycket vatten passerar innan flödet blir noll?</p>",
+    "s": "<p>Flödet är noll vid t=4. Volymen är \\(\\int_0^4(12-3t)dt=24\\) cm³.</p>",
+    "familj": "integral_app_pipe_until_zero",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.485",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Det krävs 50 N för att dra ut en fjäder 0,20 m. Kraften är proportionell mot utdragningen. Beräkna arbetet för att dra fjädern från 0,20 m till 0,30 m.</p>",
+    "s": "<p>Eftersom \\(F=kx\\) och \\(50=k\\cdot0,20\\) fås \\(k=250\\).</p><p>Arbetet är \\[W=\\int_{0,20}^{0,30}250x\\,dx=\\left[125x^2\\right]_{0,20}^{0,30}=6,25.\\]</p><p><strong>Svar:</strong> \\(\\boxed{6,25\\text{ Nm}}\\).</p>",
+    "familj": "integral_app_spring_work",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.486",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Ett företag investerar 30 miljoner kronor per år vid start och investeringstakten ökar enligt \\(I(t)=30\\cdot1,03^t\\) miljoner kr/år. Uppskatta den totala investeringen under de första 8 åren med GeoGebra.</p>",
+    "s": "<p>Den totala investeringen ges av \\[\\int_0^8 30\\cdot1,03^t\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{270,75}\\) miljoner kronor.</p>",
+    "familj": "integral_app_investment",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.487",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Den elektriska fältstyrkan längs en sträcka modelleras av \\(E(r)=12/r^2\\) V/m. Bestäm spänningen mellan punkterna r=0,2 m och r=1,0 m om \\(U=\\int E(r)dr\\).</p>",
+    "s": "<p>\\(U=\\int_{0,2}^{1,0}12/r^2\\,dr=[-12/r]_{0,2}^{1}=48\\) V.</p>",
+    "familj": "integral_app_electric_field",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.488",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Ett föremål har accelerationen \\(a(t)=3t\\) m/s². Vid t=1 s är hastigheten 5 m/s. Bestäm sträckan mellan t=1 s och t=4 s.</p>",
+    "s": "<p>En primitiv funktion till accelerationen är \\(v(t)=1,5t^2+C\\). Villkoret \\(v(1)=5\\) ger \\(C=3,5\\).</p><p>Sträckan blir \\[\\int_1^4(1,5t^2+3,5)\\,dt=42.\\]</p><p><strong>Svar:</strong> \\(\\boxed{42\\text{ m}}\\).</p>",
+    "familj": "integral_app_acceleration_distance",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.489",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Visa att bromssträckan är proportionell mot starthastigheten i kvadrat om accelerationen är konstant \\(-k\\).</p>",
+    "s": "<p>Hastigheten är v(t)=v0-kt och bilen stannar vid t=v0/k. Sträckan är \\(\\int_0^{v0/k}(v0-kt)dt=v0²/(2k)\\), alltså proportionell mot v0².</p>",
+    "familj": "integral_app_braking_proof",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.490",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En pump fyller en bassäng med flödet \\(q(t)=8+2t\\) liter/minut. Hur mycket vatten pumpas in under de första 6 minuterna?</p>",
+    "s": "<p>\\(\\int_0^6(8+2t)dt=[8t+t²]_0^6=84\\) liter.</p>",
+    "familj": "integral_app_pool",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.491",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Effekten från en solpanel under sex timmar modelleras av \\(P(t)=0,6t(6-t)\\) kW. Hur mycket energi produceras?</p>",
+    "s": "<p>Energin är \\(\\int_0^6 0,6t(6-t)dt=21,6\\) kWh.</p>",
+    "familj": "integral_app_solar",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.492",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Trafikflödet förbi en mätpunkt modelleras av \\(f(t)=500+120\\cdot1{,}05^t\\) bilar/timme under \\(0\\le t\\le6\\). Bestäm hur många bilar som passerar under perioden.</p>",
+    "s": "<p>Antalet bilar ges av \\[\\int_0^6\\left(500+120\\cdot1{,}05^t\\right)\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{3836}\\) bilar.</p>",
+    "familj": "integral_app_traffic",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.493",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>Regnintensiteten under ett oväder modelleras av \\(r(t)=6te^{-0,5t}\\) mm/h för 0≤t≤8. Bestäm den totala nederbörden med GeoGebra.</p>",
+    "s": "<p>Den totala nederbörden är \\[\\int_0^8 6te^{-0,5t}\\,dt.\\]</p><p>GeoGebra ger ungefär \\(\\boxed{21,80\\text{ mm}}\\).</p>",
+    "familj": "integral_app_rain",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.494",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En bils hastighet är \\(v(t)=20-0,4t^2\\) m/s tills bilen stannar. Bestäm bromssträckan.</p>",
+    "s": "<p>Stopp sker när 20-0,4t²=0, alltså t=√50. Bromssträckan är \\(\\int_0^{\\sqrt{50}}(20-0,4t²)dt\\approx94,28\\) m.</p>",
+    "familj": "integral_app_braking_numeric",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.495",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En maskin producerar med hastigheten \\(p(t)=100+15t-2t^2\\) enheter/timme under 0≤t≤6. Hur många enheter produceras?</p>",
+    "s": "<p>Produktionen ges av \\[\\int_0^6(100+15t-2t^2)\\,dt=726.\\]</p><p><strong>Svar:</strong> \\(\\boxed{726}\\) enheter.</p>",
+    "familj": "integral_app_production",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.496",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En medicinpump ger läkemedel med hastigheten \\(q(t)=4e^{-0,2t}\\) ml/h. Hur stor volym ges under de första 10 timmarna?</p>",
+    "s": "<p>\\(\\int_0^{10}4e^{-0,2t}dt=20(1-e^{-2})\\approx17,29\\) ml.</p>",
+    "familj": "integral_app_medicine",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.497",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En partikel har hastigheten \\(v(t)=t^2-4t+3\\) m/s för 0≤t≤5. Bestäm den totala sträckan, inte bara förflyttningen.</p>",
+    "s": "<p>Nollställena är t=1 och t=3. Dela integralen vid dessa och summera absolutbeloppen av delintegralerna. Total sträcka blir 28/3≈9,33 m.</p>",
+    "familj": "integral_app_total_distance",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.498",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En cistern har från början 120 liter vatten. Nettotillförseln är \\(q(t)=5-0,2t\\) liter/minut. Hur mycket vatten finns efter 15 minuter?</p>",
+    "s": "<p>Förändringen är \\(\\int_0^{15}(5-0,2t)dt=52,5\\) liter. Cisternen innehåller 172,5 liter.</p>",
+    "familj": "integral_app_cistern",
+    "miniräknare": true,
+    "geogebra": false
+  },
+  {
+    "id": "3.499",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Ett föremåls acceleration visas i grafen. Vid \\(t=0\\) är hastigheten \\(2\\text{ m/s}\\). Bestäm hastigheten vid \\(t=5\\text{ s}\\).</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"255\" viewBox=\"0 0 400 255\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Acceleration som funktion av tiden\"><rect x=\"1\" y=\"1\" width=\"398\" height=\"253\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50.0\" y1=\"28\" x2=\"50.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"50.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"113.0\" y1=\"28\" x2=\"113.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"113.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"176.0\" y1=\"28\" x2=\"176.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"176.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"239.0\" y1=\"28\" x2=\"239.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"239.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"302.0\" y1=\"28\" x2=\"302.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"302.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"365.0\" y1=\"28\" x2=\"365.0\" y2=\"218\" stroke=\"#F0EFF2\"/><text x=\"365.0\" y=\"237\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"50\" y1=\"218.0\" x2=\"365\" y2=\"218.0\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"222.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"50\" y1=\"161.3\" x2=\"365\" y2=\"161.3\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"165.3\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"50\" y1=\"104.7\" x2=\"365\" y2=\"104.7\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"108.7\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"50\" y1=\"48.0\" x2=\"365\" y2=\"48.0\" stroke=\"#F0EFF2\"/><text x=\"41\" y=\"52.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"50\" y1=\"218\" x2=\"370\" y2=\"218\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"28\" x2=\"50\" y2=\"218\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 50.0 218.0 L 176.0 48.0 L 302.0 161.3 L 365.0 104.7\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.7\"/><circle cx=\"50.0\" cy=\"218.0\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"176.0\" cy=\"48.0\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"302.0\" cy=\"161.3\" r=\"4\" fill=\"#2D70B3\"/><circle cx=\"365.0\" cy=\"104.7\" r=\"4\" fill=\"#2D70B3\"/><text x=\"12\" y=\"20\" font-size=\"12\" fill=\"#2B2527\">a (m/s²)</text><text x=\"374\" y=\"221\" font-size=\"12\" fill=\"#2B2527\">t (s)</text></svg></span>",
+    "s": "<p>Hastighetsändringen är arean under accelerationsgrafen. Dela upp området i tre parallelltrapetser:</p><p>\\[\\Delta v=\\frac{0+3}{2}\\cdot2+\\frac{3+1}{2}\\cdot2+\\frac{1+2}{2}\\cdot1=3+4+1,5=8,5.\\]</p><p>Hastigheten blir därför \\(v(5)=2+8,5=\\boxed{10,5\\text{ m/s}}\\).</p>",
+    "familj": "integral_app_acc_graph",
+    "miniräknare": false,
+    "geogebra": false
+  },
+  {
+    "id": "3.500",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p><em>Använd GeoGebra eller motsvarande digitalt verktyg.</em></p><p>En fabrik har kostnadstakten \\(K(t)=12+0,5t^2\\) tusen kr/månad. Hur stor är den sammanlagda kostnaden under de första 4 månaderna?</p>",
+    "s": "<p>\\(\\int_0^4(12+0,5t²)dt=48+32/3\\approx58,67\\) tusen kr.</p>",
+    "familj": "integral_app_cost_rate",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.501",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^3(2x+1)\\,dx\\]</p>",
+    "s": "<p>GeoGebra ger \\(\\int_0^3(2x+1)\\,dx=12\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
+    "familj": "digital_integral_tool_E_1",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.502",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_1^4 x^2\\,dx\\]</p>",
+    "s": "<p>GeoGebra ger \\(\\int_1^4 x^2\\,dx=21\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
+    "familj": "digital_integral_tool_E_2",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.503",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^2 3^x\\,dx\\]</p>",
+    "s": "<p>GeoGebra ger \\(\\int_0^2 3^x\\,dx=\\frac{8}{\\ln3}\\approx7,282\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
+    "familj": "digital_integral_tool_E_3",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.504",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_0^4(4-x)\\,dx\\]</p>",
+    "s": "<p>GeoGebra ger \\(\\int_0^4(4-x)\\,dx=8\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
+    "familj": "digital_integral_tool_E_4",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.505",
+    "kap": 3,
+    "omr": "integraler_digitalt",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "1/0/0",
+    "t": "<p><em>Använd GeoGebra.</em></p><p>Bestäm integralens värde och låt GeoGebra markera området som hör till integralen:</p><p>\\[\\int_{-1}^{2}(x+2)\\,dx\\]</p>",
+    "s": "<p>GeoGebra ger \\(\\int_{-1}^{2}(x+2)\\,dx=7,5\\). Kontrollera att det markerade området stämmer med integrationsgränserna.</p>",
+    "familj": "digital_integral_tool_E_5",
+    "miniräknare": true,
+    "geogebra": true
+  },
+  {
+    "id": "3.506",
+    "kap": 3,
+    "omr": "integraltillampningar",
+    "kurs": [
+      "1b",
+      "1c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beskriv vilken storhet arean under grafen motsvarar och ange enhet.</p><p>a)</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"350\" height=\"220\" viewBox=\"0 0 350 220\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Kraft som funktion av sträcka\"><rect x=\"1\" y=\"1\" width=\"348\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"30\" x2=\"48.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"138.0\" y1=\"30\" x2=\"138.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"138.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"228.0\" y1=\"30\" x2=\"228.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"228.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"318.0\" y1=\"30\" x2=\"318.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"318.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"185.0\" x2=\"320\" y2=\"185.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"162.5\" x2=\"320\" y2=\"162.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"166.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"48\" y1=\"140.0\" x2=\"320\" y2=\"140.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"144.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"48\" y1=\"117.5\" x2=\"320\" y2=\"117.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"121.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"95.0\" x2=\"320\" y2=\"95.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"99.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"48\" y1=\"72.5\" x2=\"320\" y2=\"72.5\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"76.5\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"48\" y1=\"50.0\" x2=\"320\" y2=\"50.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"54.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">6</text><line x1=\"48\" y1=\"185\" x2=\"324\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"28\" x2=\"48\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 48.0 185.0 L 138.0 140.0 L 228.0 95.0 L 318.0 50.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><text x=\"10\" y=\"18\" font-size=\"12\" fill=\"#2B2527\">kraft (N)</text><text x=\"260\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2B2527\">sträcka (m)</text></svg></span><p>b)</p><span class=\"fig smal\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"350\" height=\"220\" viewBox=\"0 0 350 220\" style=\"max-width:100%;height:auto\" role=\"img\" aria-label=\"Hastighet som funktion av tid\"><rect x=\"1\" y=\"1\" width=\"348\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"30\" x2=\"48.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"48.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">0</text><line x1=\"138.0\" y1=\"30\" x2=\"138.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"138.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"228.0\" y1=\"30\" x2=\"228.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"228.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"318.0\" y1=\"30\" x2=\"318.0\" y2=\"185\" stroke=\"#F0EFF2\"/><text x=\"318.0\" y=\"202\" text-anchor=\"middle\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"185.0\" x2=\"320\" y2=\"185.0\" stroke=\"#F0EFF2\"/><line x1=\"48\" y1=\"158.0\" x2=\"320\" y2=\"158.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">1</text><line x1=\"48\" y1=\"131.0\" x2=\"320\" y2=\"131.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"135.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">2</text><line x1=\"48\" y1=\"104.0\" x2=\"320\" y2=\"104.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"108.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">3</text><line x1=\"48\" y1=\"77.0\" x2=\"320\" y2=\"77.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"81.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">4</text><line x1=\"48\" y1=\"50.0\" x2=\"320\" y2=\"50.0\" stroke=\"#F0EFF2\"/><text x=\"39\" y=\"54.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#6B6670\">5</text><line x1=\"48\" y1=\"185\" x2=\"324\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"28\" x2=\"48\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><path d=\"M 48.0 131.0 L 138.0 104.0 L 228.0 77.0 L 318.0 50.0\" fill=\"none\" stroke=\"#2D70B3\" stroke-width=\"2.6\"/><text x=\"10\" y=\"18\" font-size=\"12\" fill=\"#2B2527\">hastighet (m/s)</text><text x=\"260\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"#2B2527\">tid (s)</text></svg></span>",
+    "s": "<p>a) Area under en kraft–sträcka-graf motsvarar <strong>arbete</strong>. Enheten är \\(\\text{N}\\cdot\\text{m}=\\text{Nm}\\).</p><p>b) Area under en hastighet–tid-graf motsvarar <strong>sträcka</strong>. Enheten är \\(\\text{m/s}\\cdot\\text{s}=\\text{m}\\).</p>",
+    "familj": "integral_app_area_interpretation",
     "miniräknare": false,
     "geogebra": false
   }
