@@ -584,6 +584,13 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
 .märke{display:flex;align-items:center;gap:13px;min-width:0}
 .märke img{height:46px;width:auto;display:block}
+.hem-logo{
+  display:grid;place-items:center;flex:none;margin:0;padding:0;border:0;background:transparent;
+  border-radius:10px;cursor:pointer;transition:background .15s,transform .08s,box-shadow .15s
+}
+.hem-logo:hover{background:var(--sunken)}
+.hem-logo:active{transform:translateY(.5px)}
+.hem-logo:focus-visible{outline:2px solid var(--ed);outline-offset:3px}
 .titel{display:flex;flex-direction:column;min-width:0}
 .titel h1{margin:0;font-size:21px;font-weight:600;letter-spacing:-.015em;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis}
@@ -2264,7 +2271,9 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 
 <header class="top" hidden>
   <div class="märke">
-    <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+    <button class="hem-logo" id="logoHem" type="button" aria-label="Till startsidan" title="Till startsidan">
+      <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+    </button>
     <div class="titel">
       <h1>Erik Dahlbergsgymnasiets uppgiftsbank</h1>
       <span id="banktal"></span>
@@ -3155,6 +3164,7 @@ $('#sorteraKnapp').addEventListener('click',()=>{
 });
 $('#visaPoäng').addEventListener('change',e=>{state.visaPoäng=e.target.checked;rita();ritaBlad();});
 $('#bytKurs').addEventListener('click',visaKursval);
+$('#logoHem').addEventListener('click',visaKursval);
 
 /* ── urvalet ── */
 /* Sökrutan söker både i själva uppgiftstexten och i uppgiftens metadata.
