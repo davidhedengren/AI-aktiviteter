@@ -1062,6 +1062,41 @@ table.data th{background:var(--sunken);font-weight:600}
   color:var(--ink);transition:border-color .15s,box-shadow .15s,background .15s
 }
 .ru-text:focus{outline:none;background:#fff;border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
+/* Matematikredigerare: källtexten förblir enkel att ändra samtidigt som
+   samma innehåll visas med riktig KaTeX direkt under skrivfältet. */
+.ru-matverktyg{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 8px
+}
+.ru-matverktyg .ru-matetikett{
+  margin-right:2px;font-family:var(--mono);font-size:9.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted)
+}
+.ru-matknapp{
+  min-height:30px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;
+  background:#fff;color:var(--ink-2);font-family:var(--ui);font-size:11px;font-weight:650;
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:.15s
+}
+.ru-matknapp:hover{background:var(--ed-tint);border-color:rgba(180,49,35,.22);color:var(--ed-dark)}
+.ru-matknapp:focus-visible{outline:2px solid var(--ed);outline-offset:2px}
+.ru-matknapp code{font-family:var(--mono);font-size:10.5px;color:inherit}
+.ru-latexhjälp{margin-left:auto;font-size:10px;color:var(--muted);white-space:nowrap}
+.ru-preview-wrap{margin-top:10px}
+.ru-preview-topp{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;
+  font-size:10.5px;font-weight:650;color:var(--muted)
+}
+.ru-preview-topp span:last-child{font-weight:400}
+.ru-preview{
+  min-height:62px;max-height:190px;overflow:auto;padding:11px 13px;
+  border:1px solid var(--line);border-radius:10px;background:#fff;
+  font-family:var(--las);font-size:14px;line-height:1.55;color:var(--ink)
+}
+.ru-preview p{margin:0 0 7px}.ru-preview p:last-child{margin-bottom:0}
+.ru-preview ol{margin:7px 0 3px;padding-left:0;list-style:none;counter-reset:ru-d}
+.ru-preview li{margin-bottom:4px;padding-left:25px;position:relative}
+.ru-preview li::before{counter-increment:ru-d;content:counter(ru-d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono);font-size:11.5px;font-weight:650;color:var(--ed)}
+.ru-preview .ru-preview-tomt{font-size:12px;color:var(--muted)}
+.ru-preview .katex-display{margin:.45em 0;overflow-x:auto;overflow-y:hidden}
 .ru-kopiera-rad{display:flex;justify-content:flex-end;margin-top:8px}
 .ru-bildbox{
   min-height:220px;max-height:300px;padding:14px;border:1px solid var(--line);
@@ -1098,6 +1133,8 @@ table.data th{background:var(--sunken);font-weight:600}
   .ru-facit-topp{padding:13px;min-height:44px}
   .ru-text{min-height:180px}
   #ruFacit{min-height:130px!important}
+  .ru-latexhjälp{width:100%;margin-left:0;white-space:normal}
+  .ru-preview{max-height:155px}
 }
 
 
@@ -2468,7 +2505,21 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
           <span>Uppgiftstext</span>
           <span class="ru-hjälp">Ändringen gäller bara detta övningsblad</span>
         </label>
-        <textarea class="ru-text" id="ruText"></textarea>
+        <div class="ru-matverktyg" aria-label="Matematikverktyg för uppgiftstext">
+          <span class="ru-matetikett">LaTeX</span>
+          <button class="ru-matknapp" type="button" data-latex-target="ruText" data-latex-mode="inline" title="Markera ett uttryck och klicka, eller infoga en tom formel">
+            <code>ƒ(x)</code><span>Formel</span>
+          </button>
+          <button class="ru-matknapp" type="button" data-latex-target="ruText" data-latex-mode="display" title="Infoga en fristående formelrad">
+            <code>∑</code><span>Radformel</span>
+          </button>
+          <span class="ru-latexhjälp">t.ex. <code>\frac{a}{b}</code>, <code>x^2</code>, <code>\sqrt{x}</code></span>
+        </div>
+        <textarea class="ru-text" id="ruText" spellcheck="false"></textarea>
+        <div class="ru-preview-wrap">
+          <div class="ru-preview-topp"><span>Förhandsvisning</span><span>uppdateras automatiskt</span></div>
+          <div class="ru-preview" id="ruTextPreview" aria-live="polite"></div>
+        </div>
         <div class="ru-kopiera-rad">
           <button class="knapp tyst liten" id="ruKopieraText" type="button">
             Kopiera text
@@ -2485,7 +2536,20 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
         </summary>
         <div class="ru-facit-kropp">
           <p class="ru-hjälp" style="margin:0 0 8px">Markera svar med **dubbla asterisker**</p>
-          <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
+          <div class="ru-matverktyg" aria-label="Matematikverktyg för facit">
+            <span class="ru-matetikett">LaTeX</span>
+            <button class="ru-matknapp" type="button" data-latex-target="ruFacit" data-latex-mode="inline" title="Markera ett uttryck och klicka, eller infoga en tom formel">
+              <code>ƒ(x)</code><span>Formel</span>
+            </button>
+            <button class="ru-matknapp" type="button" data-latex-target="ruFacit" data-latex-mode="display" title="Infoga en fristående formelrad">
+              <code>∑</code><span>Radformel</span>
+            </button>
+          </div>
+          <textarea class="ru-text" id="ruFacit" style="min-height:150px" spellcheck="false"></textarea>
+          <div class="ru-preview-wrap">
+            <div class="ru-preview-topp"><span>Förhandsvisning</span><span>uppdateras automatiskt</span></div>
+            <div class="ru-preview" id="ruFacitPreview" aria-live="polite"></div>
+          </div>
           <div class="ru-kopiera-rad">
             <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
               Kopiera facit
@@ -3528,6 +3592,43 @@ function redigerbarTextTillHTML(text){
   return out;
 }
 
+/* ── LaTeX-redigering med liveförhandsvisning ── */
+function ritaRedigeringsPreview(id,facit=false){
+  const fält=$('#'+id), box=$('#'+id+'Preview');
+  if(!fält||!box) return;
+  const rå=fält.value.trim();
+  if(!rå){
+    box.innerHTML='<span class="ru-preview-tomt">Skriv text eller en formel för att se förhandsvisningen här.</span>';
+    return;
+  }
+  box.innerHTML=facit?textTillFacitHTML(rå):redigerbarTextTillHTML(rå);
+  renderKatex(box);
+}
+let ruPreviewTimer=null;
+function uppdateraRedigeringsPreview(){
+  clearTimeout(ruPreviewTimer);
+  ruPreviewTimer=setTimeout(()=>{
+    ritaRedigeringsPreview('ruText',false);
+    ritaRedigeringsPreview('ruFacit',true);
+  },90);
+}
+function infogaLatex(fält,läge){
+  if(!fält) return;
+  const display=läge==='display';
+  const vänster=display?'\\[':'\\(';
+  const höger=display?'\\]':'\\)';
+  const start=Number.isFinite(fält.selectionStart)?fält.selectionStart:fält.value.length;
+  const slut=Number.isFinite(fält.selectionEnd)?fält.selectionEnd:start;
+  const markerat=fält.value.slice(start,slut);
+  const infog=vänster+markerat+höger;
+  fält.setRangeText(infog,start,slut,'end');
+  const inreStart=start+vänster.length;
+  if(markerat) fält.setSelectionRange(inreStart,inreStart+markerat.length);
+  else fält.setSelectionRange(inreStart,inreStart);
+  fält.focus();
+  fält.dispatchEvent(new Event('input',{bubbles:true}));
+}
+
 function figurStorlekUrHTML(figHTML){
   const box=document.createElement('div');
   box.innerHTML=figHTML||'';
@@ -3628,6 +3729,8 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
   $('#ruFacit').value=facitTillText(x.s||'');
+  ritaRedigeringsPreview('ruText',false);
+  ritaRedigeringsPreview('ruFacit',true);
   /* Facit öppnas hopfällt för att minska oavsiktliga ändringar. */
   $('#ruFacitFäll').open=false;
   const facitRader=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
@@ -3648,6 +3751,8 @@ function stängUppgiftsredigering(){
   urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
   $('#ruFil').value='';
   $('#ruFacit').value='';
+  if($('#ruTextPreview')) $('#ruTextPreview').innerHTML='';
+  if($('#ruFacitPreview')) $('#ruFacitPreview').innerHTML='';
   $('#ruFacitFäll').open=false;
 }
 function sparaUppgiftsredigering(){
@@ -3762,10 +3867,19 @@ async function kopieraFacit(){
   setTimeout(()=>$('#ruKopieraFacit').textContent='Kopiera facit',1200);
 }
 $('#ruKopieraFacit').addEventListener('click',kopieraFacit);
-/* Uppdaterar radräknaren medan texten redigeras. */
+/* Formelknapparna fungerar likadant i uppgiften och facit. Markerad text
+   omsluts; utan markering placeras markören direkt inne i formeln. */
+$$('[data-latex-target]').forEach(knapp=>{
+  knapp.addEventListener('click',()=>{
+    infogaLatex($('#'+knapp.dataset.latexTarget),knapp.dataset.latexMode);
+  });
+});
+$('#ruText').addEventListener('input',uppdateraRedigeringsPreview);
+/* Uppdaterar radräknaren och matematikförhandsvisningen medan facit redigeras. */
 $('#ruFacit').addEventListener('input',()=>{
   const n=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
   $('#ruFacitStatus').textContent=n?n+(n===1?' rad':' rader'):'tomt';
+  uppdateraRedigeringsPreview();
 });
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
