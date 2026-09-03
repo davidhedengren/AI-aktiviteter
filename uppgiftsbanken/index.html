@@ -1953,9 +1953,9 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 .kk-top{align-items:center!important;gap:14px!important;min-height:24px}
 .kk-index{
   display:inline-flex!important;align-items:center!important;gap:8px!important;
-  font-family:var(--mono)!important;font-size:9.5px!important;font-weight:600!important;
-  letter-spacing:.16em!important;text-transform:uppercase!important;
-  color:var(--sida-tyst)!important;
+  font-family:var(--mono)!important;font-size:12px!important;font-weight:700!important;
+  letter-spacing:.11em!important;text-transform:uppercase!important;
+  color:var(--sida-ink-2)!important;
 }
 .kk-index::before{
   width:6px!important;height:6px!important;border-radius:50%!important;
@@ -2103,6 +2103,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .kv-kortgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(max-width:700px){
+  .kk-index{font-size:11.5px!important;letter-spacing:.10em!important}
   .kv-inner{padding:24px 20px 44px!important}
   .kv-nav{margin-bottom:34px!important;padding-bottom:15px}
   .kv-designhero{margin-bottom:32px!important}
@@ -2861,7 +2862,16 @@ $('#kvKort').addEventListener('click',e=>{
   const kurs=KURSER.find(x=>x.id===kort.dataset.kurs);
   if(kurs)väljKurs(kurs,kort);
 });
-const BANK_VERSION='2026-08-27-2125';
+/* Versionsdatum hämtas automatiskt från själva HTML-filens
+   Last-Modified-värde. På GitHub Pages uppdateras det när den publicerade
+   sidan uppdateras, så datumet i sidfoten behöver inte ändras manuellt.
+   Samma värde används för cache-busting av struktur- och uppgiftsfiler. */
+const BANK_VERSION=(()=>{
+  const d=new Date(document.lastModified);
+  if(Number.isNaN(d.getTime())) return 'auto';
+  const två=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${två(d.getMonth()+1)}-${två(d.getDate())}-${två(d.getHours())}${två(d.getMinutes())}`;
+})();
 function laddaSkript(src){
   return new Promise((ok,fel)=>{
     const s=document.createElement('script');
