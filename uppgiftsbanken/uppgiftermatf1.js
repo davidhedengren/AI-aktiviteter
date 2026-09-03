@@ -1,7 +1,9 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Denna version innehåller en ny designrunda för utvalda figurer i området
-   tillämpningar av derivata. Figurerna har gjorts mer visuellt tilltalande
-   med färg och renare layout, utan att ändra matematiken eller de givna måtten. */
+   Varje uppgift har metadatafälten:
+     "miniräknare": true/false
+     "geogebra": true/false
+   Klassificeringen är gjord utifrån uppgiftens avsedda metod och vad som
+   faktiskt prövas, inte utifrån E/C/A-nivå. */
 
 window.BANKMATF1 = [
   {
@@ -12,7 +14,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Skriv med mängdsymboler mängden av alla reella tal som är mindre än 100.</p>",
     "s": "<p><strong>Idé:</strong> Mängdbyggarnotation beskriver både vilket talområde elementen kommer från och vilket villkor de ska uppfylla.</p><p>Här ska elementen vara reella tal och villkoret är att talet ska vara mindre än 100. En möjlig skrivning är därför</p><p><strong>\\(A=\\{x\\in\\mathbb R\\mid x&lt;100\\}\\)</strong>.</p>",
-    "id": "1.01"
+    "id": "1.01",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -22,7 +26,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm elementen i mängden \\(A=\\{n\\in\\mathbb Z\\mid |n|&lt;4\\}\\).</p>",
     "s": "<p><strong>Idé:</strong> Villkoret \\(|n|&lt;4\\) betyder att heltalet \\(n\\) ligger mindre än 4 enheter från 0.</p><p>De heltal som uppfyller detta är</p><p><strong>\\(A=\\{-3,-2,-1,0,1,2,3\\}\\)</strong>.</p>",
-    "id": "1.02"
+    "id": "1.02",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -32,7 +38,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Skriv följande mängder på listform.</p><ol type=\"a\"><li>Veckans dagar.</li><li>Heltalen strikt mellan 1 och 2.</li><li>De naturliga talen från 1 till och med 3.</li></ol>",
     "s": "<ol type=\"a\"><li>På listform skriver vi ut alla element: <strong>\\(\\{\\text{måndag, tisdag, onsdag, torsdag, fredag, lördag, söndag}\\}\\)</strong>.</li><li>Det finns inget heltal som är större än 1 och samtidigt mindre än 2. Mängden är därför <strong>\\(\\varnothing\\)</strong>.</li><li>De naturliga talen från 1 till och med 3 är <strong>\\(\\{1,2,3\\}\\)</strong>.</li></ol>",
-    "id": "1.03"
+    "id": "1.03",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -42,7 +50,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Låt \\(A=\\{1,3,4,5,6,8\\}\\) och \\(B=\\{3,4,5,6,7,8,9\\}\\).</p><ol type=\"a\"><li>Bestäm \\(A\\cap B\\).</li><li>Bestäm \\(A\\cup B\\).</li></ol>",
     "s": "<p><strong>Metod:</strong> Översätt först operationen: union betyder ”i minst en”, snitt betyder ”i båda” och differens betyder ”i den första men inte i den andra”.</p><ol type=\"a\"><li>Gemensamma element är 3, 4, 5, 6 och 8, alltså <strong>\\(A\\cap B=\\{3,4,5,6,8\\}\\)</strong>.</li><li>Alla element som finns i minst en av mängderna ger <strong>\\(A\\cup B=\\{1,3,4,5,6,7,8,9\\}\\)</strong>.</li></ol>",
-    "id": "1.04"
+    "id": "1.04",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -52,7 +62,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder A, B och C och antal i varje område\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text><text x=\"302\" y=\"56\" font-size=\"17\">B</text><text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"122\" y=\"116\" font-size=\"15\">10</text><text x=\"291\" y=\"116\" font-size=\"15\">1</text><text x=\"210\" y=\"222\" font-size=\"15\">9</text>\n<text x=\"210\" y=\"91\" font-size=\"15\">10</text><text x=\"168\" y=\"171\" font-size=\"15\">6</text><text x=\"258\" y=\"171\" font-size=\"15\">2</text>\n<text x=\"211\" y=\"143\" font-size=\"15\" font-weight=\"700\">2</text>\n</svg></span><p>I diagrammet är \\(A\\), \\(B\\) och \\(C\\) tre elevgrupper.</p><ol type=\"a\"><li>Bestäm \\(|A\\cap B|\\).</li><li>Bestäm \\(|A\\cup C|\\).</li><li>Beskriv med ord mängden \\(A\\setminus B\\).</li></ol>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_05_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_05_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_05_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_05_s_1_Aclip)\"><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>a)</strong> I \\(A\\cap B\\) ingår både området som ligger i bara \\(A\\) och \\(B\\) och mittenområdet som ligger i alla tre mängder. Därför blir \\(|A\\cap B|=10+2=12\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A union C är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_05_s_2_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_05_s_2_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_05_s_2_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>b)</strong> Unionen \\(A\\cup C\\) består av alla områden som ligger i \\(A\\) eller i \\(C\\). Då blir \\(|A\\cup C|=10+10+6+2+2+9=39\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A utan B är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>c)</strong> Det markerade området är den del av \\(A\\) som ligger utanför \\(B\\). Med ord: <strong>de elever som tillhör \\(A\\) men inte \\(B\\)</strong>.</p>",
-    "id": "1.05"
+    "id": "1.05",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -62,7 +74,9 @@ window.BANKMATF1 = [
     "poang": "4/0/0",
     "t": "<p>Låt \\(A=\\{1,2,3,4,5,6,7\\}\\), \\(B=\\{1,3,5,7\\}\\) och \\(C=\\varnothing\\). Bestäm</p><ol type=\"a\"><li>\\(A\\cup B\\)</li><li>\\(B\\cap C\\)</li><li>\\(C\\cup A\\)</li><li>\\(B\\cap(A\\cup C)\\).</li></ol>",
     "s": "<p><strong>Metod:</strong> Översätt först operationen: union betyder ”i minst en”, snitt betyder ”i båda” och differens betyder ”i den första men inte i den andra”.</p><ol type=\"a\"><li><strong>\\(A\\)</strong>, eftersom \\(B\\subseteq A\\).</li><li><strong>\\(\\varnothing\\)</strong>.</li><li><strong>\\(A\\)</strong>.</li><li>\\(A\\cup C=A\\), och därför <strong>\\(B\\cap A=B\\)</strong>.</li></ol>",
-    "id": "1.06"
+    "id": "1.06",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -72,7 +86,9 @@ window.BANKMATF1 = [
     "poang": "4/0/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>I Venn-diagrammet ska följande områden markeras.</p><ol type=\"a\"><li>\\(A\\cup B\\)</li><li>\\(A\\cap(B\\cup C)\\)</li><li>\\(A^c\\cup B\\)</li><li>\\((B\\cup C)\\setminus A\\)</li></ol>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A union B är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_07_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>a)</strong> \\(A\\cup B\\) är allt som ligger i \\(A\\) eller \\(B\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt (B union C) är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_07_s_2_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_2_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_2_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_07_s_2_Aclip)\"><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_07_s_2_Aclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>b)</strong> \\(A\\cap(B\\cup C)\\) är de delar av \\(A\\) som samtidigt ligger i \\(B\\) eller \\(C\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A-komplement union B är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_07_s_3_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_3_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_3_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>c)</strong> \\(A^c\\cup B\\) är allt utanför \\(A\\), tillsammans med hela \\(B\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där (B union C) utan A är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_07_s_4_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_4_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_07_s_4_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>d)</strong> \\((B\\cup C)\\setminus A\\) är de delar av \\(B\\) eller \\(C\\) som ligger utanför \\(A\\).</p>",
-    "id": "1.07"
+    "id": "1.07",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -82,7 +98,9 @@ window.BANKMATF1 = [
     "poang": "5/0/0",
     "t": "<p>Låt grundmängden vara \\(G=\\{0,1,2,\\ldots,20\\}\\), \\(A=\\{0,1,5,8,13,20\\}\\) och \\(M=\\{0,3,7,11,14\\}\\). Bestäm</p><ol type=\"a\"><li>\\(A\\cap M\\)</li><li>\\(M^c\\)</li><li>\\(M\\cup A^c\\)</li><li>\\(M\\setminus A\\).</li></ol>",
     "s": "<ol type=\"a\"><li><strong>\\(\\{0\\}\\)</strong>.</li><li><strong>\\(\\{1,2,4,5,6,8,9,10,12,13,15,16,17,18,19,20\\}\\)</strong>.</li><li>Eftersom \\(A^c=G\\setminus A\\) fås <strong>\\(\\{0,2,3,4,6,7,9,10,11,12,14,15,16,17,18,19\\}\\)</strong>.</li><li><strong>\\(\\{3,7,11,14\\}\\)</strong>.</li></ol>",
-    "id": "1.08"
+    "id": "1.08",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -92,7 +110,9 @@ window.BANKMATF1 = [
     "poang": "2/1/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Ett område i ett Venn-diagram består av de element som ligger i både \\(A\\), \\(B\\) och \\(C\\). Beskriv området med mängdsymboler.</p>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B snitt C är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_09_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_09_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_09_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_09_s_1_Aclip)\"><g clip-path=\"url(#matf1_1_09_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Området ligger samtidigt i alla tre mängderna. Därför är området <strong>\\(A\\cap B\\cap C\\)</strong>.</p>",
-    "id": "1.09"
+    "id": "1.09",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -102,7 +122,9 @@ window.BANKMATF1 = [
     "poang": "2/1/0",
     "t": "<p>Låt \\(A=\\{2,3,4,5,6,7\\}\\) och \\(B=\\{2,4,6,8,10\\}\\). Bestäm</p><p>\\[C=(A\\cup B)\\setminus(A\\cap B).\\]</p>",
     "s": "<p><strong>Metod:</strong> Översätt först operationen: union betyder ”i minst en”, snitt betyder ”i båda” och differens betyder ”i den första men inte i den andra”.</p><p>\\(A\\cup B=\\{2,3,4,5,6,7,8,10\\}\\) och \\(A\\cap B=\\{2,4,6\\}\\). När snittet tas bort återstår <strong>\\(C=\\{3,5,7,8,10\\}\\)</strong>.</p>",
-    "id": "1.10"
+    "id": "1.10",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -112,7 +134,9 @@ window.BANKMATF1 = [
     "poang": "2/1/0",
     "t": "<p>Mängden \\(P=\\{2,4,6,8,10\\}\\) ska beskrivas på tre olika sätt: med ord, på listform och med mängdbyggarnotation.</p>",
     "s": "<p><strong>Metod:</strong> Läs villkoret som ett filter: vilka objekt får ingå och vilket talområde tillhör de?</p><p>Exempel:</p><p>Med ord: de positiva jämna heltalen mindre än 12.</p><p>Listform: \\(P=\\{2,4,6,8,10\\}\\).</p><p>Mängdbyggarnotation: <strong>\\(P=\\{2n\\mid n\\in\\mathbb Z,\\ 1\\le n\\le5\\}\\)</strong>.</p>",
-    "id": "1.11"
+    "id": "1.11",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -122,7 +146,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.111",
     "t": "<p>Skriv mängden av alla jämna heltal mellan 2 och 20 med mängdbyggare.</p>",
-    "s": "<p>Vi söker heltal som är jämna och ligger mellan 2 och 20. Ett tydligt sätt är att skriva</p><p><strong>\\(A=\\{x\\mid x\\in\\mathbb{Z},\\ 2\\le x\\le 20\\ \\text{och}\\ x\\ \\text{är jämnt}\\}\\)</strong>.</p><p>Man kan också skriva \\(A=\\{2n\\mid n\\in\\mathbb{Z},\\ 1\\le n\\le 10\\}\\).</p>"
+    "s": "<p>Vi söker heltal som är jämna och ligger mellan 2 och 20. Ett tydligt sätt är att skriva</p><p><strong>\\(A=\\{x\\mid x\\in\\mathbb{Z},\\ 2\\le x\\le 20\\ \\text{och}\\ x\\ \\text{är jämnt}\\}\\)</strong>.</p><p>Man kan också skriva \\(A=\\{2n\\mid n\\in\\mathbb{Z},\\ 1\\le n\\le 10\\}\\).</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -132,7 +158,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.112",
     "t": "<p>Vilka element ingår i mängden</p><p>\\[B=\\{n\\mid n\\in\\mathbb{Z},\\ -3\\le n\\lt 4\\}?\\]</p>",
-    "s": "<p>Mängden består av alla heltal från \\(-3\\) upp till men inte med 4.</p><p>Därför är</p><p><strong>\\(B=\\{-3,-2,-1,0,1,2,3\\}\\)</strong>.</p>"
+    "s": "<p>Mängden består av alla heltal från \\(-3\\) upp till men inte med 4.</p><p>Därför är</p><p><strong>\\(B=\\{-3,-2,-1,0,1,2,3\\}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -142,7 +170,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv mängden av alla heltal \\(x\\) som uppfyller \\(-2\\le x\\le5\\) med mängdbyggare.</p>",
     "s": "<p><strong>\\(\\{x\\mid x\\in\\mathbb Z,\\ -2\\le x\\le5\\}\\)</strong>.</p>",
-    "id": "1.145"
+    "id": "1.145",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -152,7 +182,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<span class=\"fig smal\"><svg height=\"223\" width=\"360\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med två mängder A och B\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>Beskriv följande två områden med mängdsymboler.</p><ol type=\"a\"><li>De element som ligger i \\(B\\) men inte i \\(A\\).</li><li>De element i grundmängden som ligger varken i \\(A\\) eller \\(B\\).</li></ol>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där B men inte A är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_12_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_12_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> Området är <strong>\\(B\\setminus A\\)</strong>.</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför både A och B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_12_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_12_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> Området är <strong>\\((A\\cup B)^c\\)</strong>.</p>",
-    "id": "1.12"
+    "id": "1.12",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -162,7 +194,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Beskriv med mängdsymboler de element som ligger i både \\(B\\) och \\(C\\), men inte i \\(A\\).</p>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området i B och C men inte A är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_13_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_13_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_13_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_13_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_13_s_1_Aclip)\"><g clip-path=\"url(#matf1_1_13_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/></g></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Området ligger i både \\(B\\) och \\(C\\), men den del som också ligger i \\(A\\) ska inte vara med. Därför är området <strong>\\((B\\cap C)\\setminus A\\)</strong>, vilket också kan skrivas <strong>\\(B\\cap C\\cap A^c\\)</strong>.</p>",
-    "id": "1.13"
+    "id": "1.13",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -172,7 +206,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<span class=\"fig smal\"><svg height=\"223\" width=\"360\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med två mängder A och B\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>Beskriv med mängdsymboler</p><ol type=\"a\"><li>den del av \\(A\\) som ligger utanför \\(B\\),</li><li>området utanför både \\(A\\) och \\(B\\).</li></ol>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A men inte B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_14_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_14_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> Området är <strong>\\(A\\setminus B\\)</strong>.</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför både A och B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_14_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_14_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> Området är <strong>\\((A\\cup B)^c\\)</strong>.</p>",
-    "id": "1.14"
+    "id": "1.14",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -182,7 +218,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där delen i B och C men inte A är markerad\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_46_t_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_46_t_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_46_t_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_46_t_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_46_t_1_Aclip)\"><g clip-path=\"url(#matf1_1_46_t_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/></g></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Det markerade området ska beskrivas med mängdsymboler.</p>",
     "s": "<p>Området ligger samtidigt i \\(B\\) och \\(C\\), men den del som också ligger i \\(A\\) är borttagen. Därför är området</p><p><strong>\\((B\\cap C)\\setminus A\\)</strong>, vilket också kan skrivas \\(B\\cap C\\cap A^c\\).</p>",
-    "id": "1.46"
+    "id": "1.46",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -192,7 +230,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.115",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med två mängder där antalen 14, 9, 11 och 6 är utsatta\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p>Diagrammet visar hur 40 elever fördelar sig i mängderna \\(A\\) och \\(B\\).</p><ol type=\"a\"><li>Hur många tillhör \\(A\\cap B\\)?</li><li>Hur många tillhör \\(A\\cup B\\)?</li><li>Hur många tillhör ingen av mängderna?</li></ol>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs><clipPath id=\"c115a\"><circle cx=\"170\" cy=\"138\" r=\"86\"/></clipPath></defs><g clip-path=\"url(#c115a)\"><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/></g>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>a)</strong> I snittet står talet 9, alltså \\(|A\\cap B|=9\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A union B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>b)</strong> Unionen innehåller \\(14+9+11=34\\) elever.</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför både A och B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"white\"/><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>c)</strong> Utanför båda mängderna ligger \\(40-34=6\\) elever.</p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs><clipPath id=\"c115a\"><circle cx=\"170\" cy=\"138\" r=\"86\"/></clipPath></defs><g clip-path=\"url(#c115a)\"><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/></g>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>a)</strong> I snittet står talet 9, alltså \\(|A\\cap B|=9\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A union B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"#E7B07A\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>b)</strong> Unionen innehåller \\(14+9+11=34\\) elever.</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför både A och B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"white\"/><circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"138\" r=\"86\" fill=\"none\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"70\" font-size=\"18\">A</text><text x=\"288\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"42\" font-size=\"16\">U</text>\n<text x=\"128\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">14</text><text x=\"210\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">9</text><text x=\"292\" y=\"145\" font-size=\"20\" text-anchor=\"middle\">11</text><text x=\"355\" y=\"228\" font-size=\"16\" text-anchor=\"middle\">6</text></svg></span><p><strong>c)</strong> Utanför båda mängderna ligger \\(40-34=6\\) elever.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -202,7 +242,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram för engelska, spanska och tyska\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">E</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">S</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">T</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>I en grupp på 80 personer talar 42 engelska, 31 spanska och 24 tyska. 15 talar engelska och spanska, 11 engelska och tyska, 8 spanska och tyska och 5 alla tre. Hur många talar minst ett av språken?</p>",
     "s": "<p>Att tala minst ett av språken betyder att man tillhör unionen \\(E\\cup S\\cup T\\).</p><p>Vi använder därför additionsprincipen för tre mängder:</p><p>\\[|E\\cup S\\cup T|=|E|+|S|+|T|-|E\\cap S|-|E\\cap T|-|S\\cap T|+|E\\cap S\\cap T|.\\]</p><p>Insättning ger</p><p>\\[42+31+24-15-11-8+5=68.\\]</p><p><strong>68 personer talar minst ett av språken.</strong></p>",
-    "id": "1.147"
+    "id": "1.147",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -212,7 +254,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.161",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"249\" viewBox=\"0 0 420 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med två mängder där talen 1, 3, 5, 7, 9 och 11 är utplacerade\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"255\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"140\" r=\"88\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"258\" cy=\"140\" r=\"88\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"120\" y=\"72\" font-size=\"18\">A</text>\n<text x=\"296\" y=\"72\" font-size=\"18\">B</text>\n<text x=\"32\" y=\"40\" font-size=\"16\">U</text>\n<text x=\"112\" y=\"134\" font-size=\"17\" text-anchor=\"middle\">1</text>\n<text x=\"126\" y=\"180\" font-size=\"17\" text-anchor=\"middle\">3</text>\n<text x=\"214\" y=\"126\" font-size=\"17\" text-anchor=\"middle\">5</text>\n<text x=\"214\" y=\"172\" font-size=\"17\" text-anchor=\"middle\">7</text>\n<text x=\"312\" y=\"134\" font-size=\"17\" text-anchor=\"middle\">9</text>\n<text x=\"366\" y=\"248\" font-size=\"17\" text-anchor=\"middle\">11</text>\n</svg></span><p>I diagrammet är elementen i grundmängden utplacerade i mängderna \\(A\\) och \\(B\\).</p><ol type=\"a\"><li>Skriv mängden \\(A\\cap B\\).</li><li>Skriv mängden \\(A\\setminus B\\).</li><li>Skriv mängden \\((A\\cup B)^c\\).</li></ol>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_161_s_1_A2clip)\"><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/></g>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> \\(A\\cap B=\\{5,7\\}\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A minus B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> \\(A\\setminus B=\\{1,3\\}\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför A union B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_3_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_3_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>c)</strong> \\((A\\cup B)^c=\\{11\\}\\).</p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A snitt B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_161_s_1_A2clip)\"><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/></g>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> \\(A\\cap B=\\{5,7\\}\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A minus B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> \\(A\\setminus B=\\{1,3\\}\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför A union B är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_161_s_3_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_161_s_3_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>c)</strong> \\((A\\cup B)^c=\\{11\\}\\).</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -222,7 +266,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.162",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området i B men inte i A är markerat\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_162_t_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_162_t_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"white\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>Beskriv det markerade området med mängdsymboler.</p>",
-    "s": "<p>Det markerade området ligger i \\(B\\), men inte i \\(A\\). Därför skrivs området som <strong>\\(B\\setminus A\\)</strong>.</p>"
+    "s": "<p>Det markerade området ligger i \\(B\\), men inte i \\(A\\). Därför skrivs området som <strong>\\(B\\setminus A\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -232,7 +278,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "id": "1.163",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där den del av A och C som ligger utanför B är markerad\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_163_t_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_163_t_Aclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Beskriv det markerade området med mängdsymboler på två likvärdiga sätt.</p>",
-    "s": "<p>Området ligger i både \\(A\\) och \\(C\\), men inte i \\(B\\). Därför kan det skrivas som <strong>\\((A\\cap C)\\setminus B\\)</strong>.</p><p>En likvärdig skrivning är <strong>\\(A\\cap C\\cap B^c\\)</strong>.</p>"
+    "s": "<p>Området ligger i både \\(A\\) och \\(C\\), men inte i \\(B\\). Därför kan det skrivas som <strong>\\((A\\cap C)\\setminus B\\)</strong>.</p><p>En likvärdig skrivning är <strong>\\(A\\cap C\\cap B^c\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -242,7 +290,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "id": "1.165",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Beskriv med mängdsymboler den del av \\(C\\) som ligger utanför både \\(A\\) och \\(B\\).</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där delen av C utanför A och B är markerad\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_165_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_165_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_165_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Vi söker de element som ligger i \\(C\\), men inte i \\(A\\) och inte i \\(B\\). Området kan skrivas <strong>\\(C\\setminus(A\\cup B)\\)</strong> eller <strong>\\(C\\cap A^c\\cap B^c\\)</strong>.</p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där delen av C utanför A och B är markerad\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_165_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_165_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_165_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Vi söker de element som ligger i \\(C\\), men inte i \\(A\\) och inte i \\(B\\). Området kan skrivas <strong>\\(C\\setminus(A\\cup B)\\)</strong> eller <strong>\\(C\\cap A^c\\cap B^c\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -252,7 +302,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Låt \\(A=\\{1,\\{2\\},3\\}\\). Avgör om påståendena är sanna eller falska.</p><ol type=\"a\"><li>\\(2\\in A\\)</li><li>\\(\\{2\\}\\in A\\)</li></ol>",
     "s": "<p><strong>Metod:</strong> Översätt först operationen: union betyder ”i minst en”, snitt betyder ”i båda” och differens betyder ”i den första men inte i den andra”.</p><ol type=\"a\"><li><strong>Falskt.</strong> Talet 2 är inte ett element i \\(A\\).</li><li><strong>Sant.</strong> Mängden \\(\\{2\\}\\) är ett element i \\(A\\).</li></ol>",
-    "id": "1.15"
+    "id": "1.15",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -262,7 +314,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg height=\"223\" width=\"360\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram för mängderna A och B i grundmängden G\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>Låt grundmängden vara \\(G=\\{1,2,\\ldots,12\\}\\), \\(A\\) mängden jämna tal och \\(B\\) mängden tal delbara med 3. Bestäm \\((A\\cup B)^c\\) på två sätt och kontrollera De Morgans lag.</p>",
     "s": "<p>Först bestämmer vi mängderna i grundmängden \\(G=\\{1,2,\\ldots,12\\}\\).</p><p>\\(A\\) är de jämna talen:</p><p>\\[A=\\{2,4,6,8,10,12\\}.\\]</p><p>\\(B\\) är talen som är delbara med 3:</p><p>\\[B=\\{3,6,9,12\\}.\\]</p><p>Då blir</p><p>\\[A\\cup B=\\{2,3,4,6,8,9,10,12\\}.\\]</p><p>Komplementet till unionen är alltså</p><p><strong>\\[(A\\cup B)^c=\\{1,5,7,11\\}.\\]</strong></p><p>Vidare får vi</p><p>\\[A^c=\\{1,3,5,7,9,11\\},\\qquad B^c=\\{1,2,4,5,7,8,10,11\\}.\\]</p><p>Snittet av dessa komplement blir</p><p><strong>\\[A^c\\cap B^c=\\{1,5,7,11\\}.\\]</strong></p><p>Alltså verifieras De Morgans lag:</p><p><strong>\\[(A\\cup B)^c=A^c\\cap B^c.\\]</strong></p>",
-    "id": "1.16"
+    "id": "1.16",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -272,7 +326,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.113",
     "t": "<p>Låt \\(A=\\{1,3,5,7,9\\}\\) och \\(B=\\{3,4,5,6\\}\\). Bestäm</p><ol type=\"a\"><li>\\(A\\cup B\\)</li><li>\\(A\\cap B\\)</li></ol>",
-    "s": "<p><strong>a)</strong> Unionen innehåller alla element som finns i minst en av mängderna:</p><p>\\[A\\cup B=\\{1,3,4,5,6,7,9\\}.\\]</p><p><strong>b)</strong> Snittet innehåller de element som finns i båda mängderna:</p><p>\\[A\\cap B=\\{3,5\\}.\\]</p>"
+    "s": "<p><strong>a)</strong> Unionen innehåller alla element som finns i minst en av mängderna:</p><p>\\[A\\cup B=\\{1,3,4,5,6,7,9\\}.\\]</p><p><strong>b)</strong> Snittet innehåller de element som finns i båda mängderna:</p><p>\\[A\\cap B=\\{3,5\\}.\\]</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -282,7 +338,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.114",
     "t": "<p>Grundmängden är \\(U=\\{1,2,3,4,5,6,7,8\\}\\) och \\(A=\\{2,4,6,8\\}\\).</p><ol type=\"a\"><li>Bestäm \\(U\\setminus A\\).</li><li>Bestäm komplementet \\(A^c\\).</li></ol>",
-    "s": "<p>Eftersom komplementet tas i förhållande till grundmängden \\(U\\), är \\(A^c\\) samma mängd som \\(U\\setminus A\\).</p><p>Vi tar alltså bort \\(2,4,6,8\\) ur \\(U\\):</p><p>\\[U\\setminus A=A^c=\\{1,3,5,7\\}.\\]</p>"
+    "s": "<p>Eftersom komplementet tas i förhållande till grundmängden \\(U\\), är \\(A^c\\) samma mängd som \\(U\\setminus A\\).</p><p>Vi tar alltså bort \\(2,4,6,8\\) ur \\(U\\):</p><p>\\[U\\setminus A=A^c=\\{1,3,5,7\\}.\\]</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -292,7 +350,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Låt \\(A=\\{1,2,3,4\\}\\) och \\(B=\\{3,4,5,6\\}\\). Bestäm \\((A\\cup B)\\setminus(A\\cap B)\\).</p>",
     "s": "<p>\\(A\\cup B=\\{1,2,3,4,5,6\\}\\) och \\(A\\cap B=\\{3,4\\}\\). Tar vi bort snittet återstår</p><p><strong>\\(\\{1,2,5,6\\}\\)</strong>.</p>",
-    "id": "1.146"
+    "id": "1.146",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -302,7 +362,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg height=\"223\" width=\"360\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram för två kursmängder\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>På en skola läser 82 elever fysik, 67 elever programmering och 31 elever båda kurserna. Hur många elever läser minst en av kurserna?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där unionen av de två mängderna är markerad\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_17_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_17_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p>Vi söker hur många som läser <em>minst en</em> av kurserna, alltså \\(|A\\cup B|\\).</p><p>Om vi bara adderar 82 och 67 räknas de 31 elever som läser båda kurserna två gånger. Därför blir</p><p>\\[|A\\cup B|=|A|+|B|-|A\\cap B|=82+67-31=118.\\]</p><p><strong>118 elever läser minst en av kurserna.</strong></p>",
-    "id": "1.17"
+    "id": "1.17",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -312,7 +374,9 @@ window.BANKMATF1 = [
     "poang": "0/0/3",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>I en grupp deltar \\(x\\) personer i alla tre aktiviteterna \\(A,B,C\\). Man vet att \\(|A|=38\\), \\(|B|=34\\), \\(|C|=29\\), \\(|A\\cap B|=16\\), \\(|A\\cap C|=12\\), \\(|B\\cap C|=11\\) och att 7 personer inte deltar i någon aktivitet. Totalt finns \\(y\\) personer i gruppen.</p><p>Bestäm ett samband mellan \\(x\\) och \\(y\\), och ange vilka heltalsvärden på \\(x\\) som är möjliga.</p>",
     "s": "<p>Låt mittenområdet, alltså \\(A\\cap B\\cap C\\), vara \\(x\\).</p><p>Antalet som tillhör minst en av mängderna blir då enligt additionsprincipen för tre mängder</p><p>\\[|A\\cup B\\cup C|=38+34+29-16-12-11+x=62+x.\\]</p><p>Om 7 personer ligger utanför alla mängder blir därför det totala antalet</p><p>\\[y=(62+x)+7=69+x.\\]</p><p>För att alla delområden i diagrammet ska vara möjliga måste varje område ha ett icke-negativt antal personer.</p><p>Ett av områdena är de som ligger i \\(B\\cap C\\) men inte i \\(A\\). Det området har storleken \\(11-x\\), så</p><p>\\[11-x\\ge 0\\Rightarrow x\\le 11.\\]</p><p>Samtidigt måste förstås \\(x\\ge 0\\).</p><p>Alltså kan \\(x\\) anta heltalsvärdena</p><p><strong>\\[x\\in\\{0,1,2,\\ldots,11\\}.\\]</strong></p>",
-    "id": "1.18"
+    "id": "1.18",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -322,7 +386,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>På en skola deltar 74 elever i programmering, 61 i fysik och 48 i kemi. Av dessa deltar 28 i både programmering och fysik, 19 i både programmering och kemi och 17 i både fysik och kemi. 9 elever deltar i alla tre.</p><p>Hur många elever deltar i minst en av aktiviteterna?</p>",
     "s": "<p>För tre mängder används inklusion–exklusion:</p><p>\\[|P\\cup F\\cup K|=74+61+48-28-19-17+9.\\]</p><p>De parvisa snitten dras bort eftersom de annars räknats två gånger, men de 9 som ligger i alla tre har då dragits bort en gång för mycket och läggs därför tillbaka.</p><p><strong>\\(|P\\cup F\\cup K|=128\\)</strong>.</p>",
-    "id": "1.47"
+    "id": "1.47",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -332,7 +398,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>På en teknikdag deltar 68 elever i programmering, 54 i robotik och 29 i båda aktiviteterna.</p><p>Hur många elever deltar i <em>exakt en</em> av de två aktiviteterna?</p>",
     "s": "<p><strong>Idé:</strong> De 29 som deltar i båda ska inte räknas med alls. Ta därför bort dem från båda grupperna.</p><p>Endast programmering: \\(68-29=39\\).<br>Endast robotik: \\(54-29=25\\).</p><p>\\[39+25=\\mathbf{64}.\\]</p>",
-    "id": "1.56"
+    "id": "1.56",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -342,7 +410,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>I en undersökning gäller \\(|A\\cap B|=24\\), \\(|A\\cap C|=19\\), \\(|B\\cap C|=17\\) och \\(|A\\cap B\\cap C|=8\\).</p><p>Hur många personer tillhör <em>exakt två</em> av mängderna?</p>",
     "s": "<p><strong>Idé:</strong> Varje parsnitt innehåller även de 8 personer som ligger i alla tre mängderna. De måste tas bort från varje parsnitt.</p><p>Exakt \\(A\\) och \\(B\\): \\(24-8=16\\).<br>Exakt \\(A\\) och \\(C\\): \\(19-8=11\\).<br>Exakt \\(B\\) och \\(C\\): \\(17-8=9\\).</p><p>\\[16+11+9=\\mathbf{36}.\\]</p>",
-    "id": "1.57"
+    "id": "1.57",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -352,7 +422,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.116",
     "t": "<p>På en skola spelar 18 elever fotboll, 15 spelar basket och 7 spelar både fotboll och basket.</p><p>Hur många elever spelar minst en av sporterna?</p>",
-    "s": "<p>Om vi bara adderar 18 och 15 räknas de 7 elever som spelar båda sporterna två gånger. Därför använder vi additionsprincipen:</p><p>\\[|F\\cup B|=|F|+|B|-|F\\cap B|=18+15-7=26.\\]</p><p><strong>26 elever</strong> spelar minst en av sporterna.</p>"
+    "s": "<p>Om vi bara adderar 18 och 15 räknas de 7 elever som spelar båda sporterna två gånger. Därför använder vi additionsprincipen:</p><p>\\[|F\\cup B|=|F|+|B|-|F\\cap B|=18+15-7=26.\\]</p><p><strong>26 elever</strong> spelar minst en av sporterna.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -362,7 +434,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.164",
     "t": "<span class=\"fig smal\"><svg height=\"223\" width=\"360\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med två mängder och antal i varje område\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text><text x=\"284\" y=\"70\" font-size=\"18\">B</text><text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n<text x=\"123\" y=\"136\" font-size=\"18\">18</text><text x=\"206\" y=\"136\" font-size=\"18\">7</text><text x=\"292\" y=\"136\" font-size=\"18\">11</text><text x=\"340\" y=\"214\" font-size=\"18\">4</text>\n</svg></span><p>Diagrammet visar hur elever fördelar sig i mängderna \\(A\\) och \\(B\\).</p><ol type=\"a\"><li>Hur många tillhör \\(A\\cup B\\)?</li><li>Hur många tillhör exakt en av mängderna?</li></ol>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där unionen av A och B är markerad\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_164_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_164_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> \\(|A\\cup B|=18+7+11=36\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där exakt en av mängderna är markerad\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_164_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_164_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><g clip-path=\"url(#matf1_1_164_s_2_A2clip)\"><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/></g>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> Exakt en mängd ger \\(18+11=29\\) personer.</p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där unionen av A och B är markerad\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_164_s_1_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_164_s_1_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>a)</strong> \\(|A\\cup B|=18+7+11=36\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"223\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där exakt en av mängderna är markerad\">\n<rect x=\"18\" y=\"18\" width=\"384\" height=\"224\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_164_s_2_A2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"170\" cy=\"130\" r=\"75\"/></clipPath>\n<clipPath id=\"matf1_1_164_s_2_B2clip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"250\" cy=\"130\" r=\"75\"/></clipPath>\n</defs>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"#E7B07A\"/><g clip-path=\"url(#matf1_1_164_s_2_A2clip)\"><circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"white\"/></g>\n<circle cx=\"170\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"250\" cy=\"130\" r=\"75\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"126\" y=\"70\" font-size=\"18\">A</text>\n<text x=\"284\" y=\"70\" font-size=\"18\">B</text>\n<text x=\"34\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> Exakt en mängd ger \\(18+11=29\\) personer.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -372,7 +446,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "id": "1.166",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder och angivna antal i varje del\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text><text x=\"302\" y=\"56\" font-size=\"17\">B</text><text x=\"210\" y=\"260\" font-size=\"17\">C</text><text x=\"28\" y=\"35\" font-size=\"15\">U = 60</text>\n<text x=\"122\" y=\"116\" font-size=\"16\">12</text><text x=\"286\" y=\"116\" font-size=\"16\">8</text><text x=\"214\" y=\"222\" font-size=\"16\">10</text>\n<text x=\"209\" y=\"92\" font-size=\"16\">5</text><text x=\"168\" y=\"170\" font-size=\"16\">6</text><text x=\"255\" y=\"170\" font-size=\"16\">4</text>\n<text x=\"210\" y=\"142\" font-size=\"16\" font-weight=\"700\">3</text>\n</svg></span><p>Diagrammet visar hur 60 personer fördelar sig i mängderna \\(A\\), \\(B\\) och \\(C\\).</p><ol type=\"a\"><li>Hur många tillhör exakt två av mängderna?</li><li>Hur många tillhör ingen av mängderna?</li></ol>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där de områden som tillhör exakt två mängder är markerade\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_166_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><g clip-path=\"url(#matf1_1_166_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/></g></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>a)</strong> Exakt två mängder motsvarar de tre parvisa överlappen utan mittenområdet. Antalet är \\(5+6+4=15\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför alla tre mängder är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_166_s_2_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_2_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_2_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>b)</strong> Inne i minst en mängd finns \\(12+8+10+5+6+4+3=48\\) personer. Utanför alla tre finns därför \\(60-48=12\\) personer.</p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där de områden som tillhör exakt två mängder är markerade\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_166_s_1_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_1_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_1_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E7B07A\"/></g><g clip-path=\"url(#matf1_1_166_s_1_Aclip)\"><g clip-path=\"url(#matf1_1_166_s_1_Bclip)\"><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/></g></g>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>a)</strong> Exakt två mängder motsvarar de tre parvisa överlappen utan mittenområdet. Antalet är \\(5+6+4=15\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där området utanför alla tre mängder är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"matf1_1_166_s_2_Aclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_2_Bclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"matf1_1_166_s_2_Cclip\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p><strong>b)</strong> Inne i minst en mängd finns \\(12+8+10+5+6+4+3=48\\) personer. Utanför alla tre finns därför \\(60-48=12\\) personer.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -382,7 +458,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Till en nordisk skolkonferens kommer 31 elever från fem länder. Förklara varför minst ett land måste representeras av minst 7 elever.</p>",
     "s": "<p><strong>Lådprincipen:</strong> Tänk de fem länderna som fem lådor och de 31 eleverna som föremål som placeras i lådorna.</p><p>Om varje land hade högst 6 elever skulle det totalt kunna finnas högst</p><p>\\[5\\cdot6=30\\]</p><p>elever. Men det finns 31 elever. Antagandet är alltså omöjligt. Därför måste minst ett land representeras av <strong>minst 7 elever</strong>.</p>",
-    "id": "1.19"
+    "id": "1.19",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -392,7 +470,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Ett fotbollslag har 16 spelare. Fem ska utses till straffläggare och ordningen ska bestämmas. Vilket uttryck ger antalet möjliga straffläggarlistor?</p><p>A) \\(P(16,5)\\) &nbsp; B) \\(\\binom{16}{5}\\) &nbsp; C) \\(16!\\) &nbsp; D) \\(11!\\)</p>",
     "s": "<p><strong>Idé:</strong> Här väljer vi både <em>vilka</em> fem spelare som ska slå och <em>i vilken ordning</em> de ska slå. När ordningen spelar roll använder vi permutationer.</p><p>För första straffen finns 16 val, därefter 15, 14, 13 och 12:</p><p>\\[P(16,5)=16\\cdot15\\cdot14\\cdot13\\cdot12.\\]</p><p>Rätt alternativ är alltså <strong>A</strong>.</p>",
-    "id": "1.20"
+    "id": "1.20",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -402,7 +482,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Ur en trupp med 23 spelare ska fem väljas till en grupp. Ordningen saknar betydelse. Hur många olika grupper kan väljas?</p>",
     "s": "<p><strong>Idé:</strong> Vi ska bara välja vilka fem spelare som ingår. Det spelar ingen roll i vilken ordning de väljs, så vi använder en kombination.</p><p>\\[\\binom{23}{5}=\\frac{23!}{5!18!}=\\mathbf{33\\,649}.\\]</p><p>Det finns alltså <strong>33 649 olika grupper</strong>.</p>",
-    "id": "1.21"
+    "id": "1.21",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -412,7 +494,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm koefficienten framför \\(a^4\\) i utvecklingen av \\((a+1)^5\\).</p>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><p>Termen med \\(a^4\\) fås när en av de fem faktorerna bidrar med 1. Koefficienten är <strong>\\(\\binom51=5\\)</strong>.</p>",
-    "id": "1.22"
+    "id": "1.22",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -422,7 +506,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>På hur många sätt kan man välja ett hjärterkort och ett ruterkort ur en vanlig kortlek? Det finns 13 kort av varje färg.</p>",
     "s": "<p><strong>Idé:</strong> Valet görs i två steg: först ett hjärterkort och sedan ett ruterkort. Varje val i det första steget kan kombineras med varje val i det andra.</p><p>\\[13\\cdot13=\\mathbf{169}.\\]</p><p>Det finns alltså <strong>169 olika par</strong>.</p>",
-    "id": "1.23"
+    "id": "1.23",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -432,7 +518,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Hur många olika fyrsiffriga pinkoder finns om varje position kan vara någon av siffrorna 0–9 och siffror får upprepas?</p>",
     "s": "<p><strong>Idé:</strong> En pinkod har fyra positioner och varje position har 10 möjliga siffror. Eftersom siffror får upprepas påverkar ett val inte nästa.</p><p>Multiplikationsprincipen ger</p><p>\\[10\\cdot10\\cdot10\\cdot10=10^4=\\mathbf{10\\,000}.\\]</p>",
-    "id": "1.24"
+    "id": "1.24",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -442,7 +530,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En person har 5 par byxor, 10 par strumpor, 6 skjortor och 7 par skor. På hur många sätt kan en outfit med ett val ur varje kategori sättas ihop?</p>",
     "s": "<p><strong>Idé:</strong> En outfit byggs genom ett val ur varje kategori. Varje val i en kategori kan kombineras med alla val i de andra.</p><p>\\[5\\cdot10\\cdot6\\cdot7=\\mathbf{2100}.\\]</p><p>Det finns alltså <strong>2100 olika outfits</strong>.</p>",
-    "id": "1.25"
+    "id": "1.25",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -450,9 +540,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "ordna grupper i block",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg width=\"470\" height=\"215\" viewBox=\"0 0 480 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre block med geografiböcker, religionsböcker och romaner som ska stå tillsammans\">\n<rect width=\"480\" height=\"220\" fill=\"white\"/>\n<rect x=\"30\" y=\"60\" width=\"170\" height=\"86\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/><text x=\"115\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">6 geografiböcker</text><text x=\"115\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<rect x=\"212\" y=\"60\" width=\"128\" height=\"86\" rx=\"7\" fill=\"#2E7D52\" fill-opacity=\".12\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/><text x=\"276\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">4 religionsböcker</text><text x=\"276\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<rect x=\"352\" y=\"60\" width=\"100\" height=\"86\" rx=\"7\" fill=\"#B48A18\" fill-opacity=\".12\" stroke=\"#B48A18\" stroke-width=\"2.2\"/><text x=\"402\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">3 romaner</text><text x=\"402\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<line x1=\"20\" y1=\"152\" x2=\"462\" y2=\"152\" stroke=\"#333\" stroke-width=\"4\"/>\n\n</svg></span><p>I en bokhylla ska 6 geografiböcker, 4 religionsböcker och 3 romaner ställas så att böcker av samma kategori står tillsammans. Alla böcker är olika. Hur många ordningar finns?</p>",
+    "t": "<span class=\"fig\"><svg width=\"470\" height=\"215\" viewBox=\"0 0 480 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre block med geografiböcker, religionsböcker och romaner som ska stå tillsammans\">\n<rect width=\"480\" height=\"220\" fill=\"white\"/>\n<rect x=\"30\" y=\"60\" width=\"170\" height=\"86\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/><text x=\"115\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">6 geografiböcker</text><text x=\"115\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<rect x=\"212\" y=\"60\" width=\"128\" height=\"86\" rx=\"7\" fill=\"#2E7D52\" fill-opacity=\".12\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/><text x=\"276\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">4 religionsböcker</text><text x=\"276\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<rect x=\"352\" y=\"60\" width=\"100\" height=\"86\" rx=\"7\" fill=\"#B48A18\" fill-opacity=\".12\" stroke=\"#B48A18\" stroke-width=\"2.2\"/><text x=\"402\" y=\"98\" font-size=\"15\" text-anchor=\"middle\">3 romaner</text><text x=\"402\" y=\"121\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">ett block</text>\n<line x1=\"20\" y1=\"152\" x2=\"462\" y2=\"152\" stroke=\"#333\" stroke-width=\"4\"/>\n<text x=\"240\" y=\"188\" font-size=\"14\" text-anchor=\"middle\">Blocken kan byta plats, och böckerna kan flyttas om inom sitt block.</text>\n</svg></span><p>I en bokhylla ska 6 geografiböcker, 4 religionsböcker och 3 romaner ställas så att böcker av samma kategori står tillsammans. Alla böcker är olika. Hur många ordningar finns?</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. Här gör den det, vilket är signalen för permutationer.</p><p>De tre kategoriblocken kan ordnas på \\(3!\\) sätt. Inom blocken finns \\(6!\\), \\(4!\\) respektive \\(3!\\) ordningar. Totalt</p><p>\\[3!\\cdot6!\\cdot4!\\cdot3!=\\mathbf{622\\,080}.\\]</p>",
-    "id": "1.26"
+    "id": "1.26",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -462,7 +554,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En pokerhand består av 5 kort ur en kortlek med 52 kort. Hur många olika händer finns?</p>",
     "s": "<p><strong>Idé:</strong> En pokerhand bestäms av vilka fem kort som ingår; kortens ordning spelar ingen roll. Därför använder vi kombinationer.</p><p>\\[\\binom{52}{5}=\\frac{52!}{5!47!}=\\mathbf{2\\,598\\,960}.\\]</p>",
-    "id": "1.27"
+    "id": "1.27",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -472,7 +566,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Förklara med ord vad \\(\\binom nk\\) betyder och skriv formeln med fakulteter.</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. När bara vilka objekt som väljs är viktigt används kombinationer.</p><p>\\(\\binom nk\\) är antalet sätt att välja \\(k\\) objekt bland \\(n\\) när ordningen inte spelar roll. Formeln är</p><p><strong>\\[\\binom nk=\\frac{n!}{k!(n-k)!}.\\]</strong></p>",
-    "id": "1.28"
+    "id": "1.28",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -482,7 +578,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Beräkna \\(\\binom{11}{4}\\), \\(\\binom{20}{5}\\) och \\(\\binom{17}{13}\\).</p>",
     "s": "<p><strong>Idé:</strong> Använd \\(\\binom nk=\\frac{n!}{k!(n-k)!}\\). I den sista beräkningen är symmetrin \\(\\binom nk=\\binom n{n-k}\\) särskilt praktisk.</p><p>\\[\\binom{11}{4}=330,\\qquad \\binom{20}{5}=15\\,504.\\]</p><p>\\[\\binom{17}{13}=\\binom{17}{4}=2380.\\]</p>",
-    "id": "1.29"
+    "id": "1.29",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -492,7 +590,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Utveckla \\(\\left(2x+\\frac{1}{2}y\\right)^4\\).</p>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><p>Med binomialsatsen:</p><p><strong>\\[16x^4+16x^3y+6x^2y^2+xy^3+\\frac{1}{16}y^4.\\]</strong></p>",
-    "id": "1.30"
+    "id": "1.30",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -502,7 +602,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Utveckla \\((3x+2)^4\\).</p>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><p>\\[\\binom40(3x)^4+\\binom41(3x)^3(2)+\\binom42(3x)^2(2^2)+\\binom43(3x)(2^3)+2^4\\]</p><p><strong>\\(=81x^4+216x^3+216x^2+96x+16\\)</strong>.</p>",
-    "id": "1.31"
+    "id": "1.31",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -512,7 +614,9 @@ window.BANKMATF1 = [
     "poang": "4/0/0",
     "t": "<p>Av 33 elever ska 9 delta i en aktivitet.</p><ol type=\"a\"><li>Hur många olika köordningar kan 9 av eleverna bilda?</li><li>Hur många olika grupper om 9 elever kan väljas om ordningen inte spelar roll?</li></ol>",
     "s": "<ol type=\"a\"><li>Här spelar ordningen roll, så vi använder permutationer: \\[P(33,9)=\\frac{33!}{24!}=\\mathbf{13\\,995\\,229\\,248\\,000}.\\]</li><li>Här spelar ordningen inte roll, så vi använder kombinationer: \\[\\binom{33}{9}=\\mathbf{38\\,567\\,100}.\\]</li></ol>",
-    "id": "1.32"
+    "id": "1.32",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -522,7 +626,9 @@ window.BANKMATF1 = [
     "poang": "6/0/0",
     "t": "<p>Beräkna \\(\\binom98\\), \\(\\binom{20}{18}\\) och \\(\\binom{105}{102}\\).</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. När bara vilka objekt som väljs är viktigt används kombinationer.</p><p>Använd gärna symmetrin \\(\\binom nk=\\binom n{n-k}\\):</p><p><strong>\\(\\binom98=9\\)</strong>, <strong>\\(\\binom{20}{18}=\\binom{20}{2}=190\\)</strong>, <strong>\\(\\binom{105}{102}=\\binom{105}{3}=187\\,460\\)</strong>.</p>",
-    "id": "1.33"
+    "id": "1.33",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -532,7 +638,9 @@ window.BANKMATF1 = [
     "poang": "2/2/0",
     "t": "<p>Utveckla.</p><ol type=\"a\"><li>\\((2x+x^2)^5\\)</li><li>\\((2x-y)^5\\)</li></ol>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><ol type=\"a\"><li>Faktorisera gärna \\(x\\): \\((x(2+x))^5=x^5(2+x)^5\\). Det ger <strong>\\(32x^5+80x^6+80x^7+40x^8+10x^9+x^{10}\\)</strong>.</li><li><strong>\\(32x^5-80x^4y+80x^3y^2-40x^2y^3+10xy^4-y^5\\)</strong>.</li></ol>",
-    "id": "1.34"
+    "id": "1.34",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -542,7 +650,9 @@ window.BANKMATF1 = [
     "poang": "2/2/0",
     "t": "<p>I ett lotteri väljer man 5 olika nummer av 25. Därefter dras 5 vinnarnummer.</p><ol type=\"a\"><li>Bestäm sannolikheten att få alla 5 rätt.</li><li>Bestäm sannolikheten att få minst 3 rätt.</li></ol>",
     "s": "<p>Antalet möjliga femmängder är \\(\\binom{25}{5}=53\\,130\\).</p><ol type=\"a\"><li>Endast en rad ger fem rätt: <strong>\\(1/53\\,130\\approx0,00188\\%\\)</strong>.</li><li>För exakt \\(r\\) rätt väljs \\(r\\) av de 5 egna numren och \\(5-r\\) av de 20 andra. Därför</li></ol><p>\\[\\frac{\\binom53\\binom{20}2+\\binom54\\binom{20}1+\\binom55}{\\binom{25}5}=\\frac{2001}{53130}\\approx\\mathbf{3,77\\%}.\\]</p>",
-    "id": "1.35"
+    "id": "1.35",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -552,7 +662,9 @@ window.BANKMATF1 = [
     "poang": "2/2/0",
     "t": "<p>Bestäm koefficienten framför</p><ol type=\"a\"><li>\\(x^7y^4\\) i \\((x+y)^{11}\\),</li><li>\\(x^5y^8\\) i \\((2x+y^2)^9\\).</li></ol>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><ol type=\"a\"><li>Koefficienten är <strong>\\(\\binom{11}{4}=330\\)</strong>.</li><li>För \\(y^8\\) behövs fyra faktorer \\(y^2\\), alltså fem faktorer \\(2x\\). Koefficienten blir <strong>\\(\\binom94 2^5=4032\\)</strong>.</li></ol>",
-    "id": "1.36"
+    "id": "1.36",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -562,7 +674,9 @@ window.BANKMATF1 = [
     "poang": "1/2/0",
     "t": "<p>Ett registreringssystem använder tre bokstäver följda av tre symboler. I den äldre versionen var de tre sista symbolerna siffror. I en utökad version får den sista symbolen även vara en av 23 bokstäver. De tre första bokstäverna väljs också bland 23 bokstäver.</p><p>Hur många <em>ytterligare</em> registreringsnummer blir möjliga genom att den sista symbolen får vara en bokstav?</p>",
     "s": "<p><strong>Metod:</strong> När valet sker i flera steg och varje val kan kombineras med valen i nästa steg multipliceras antalet möjligheter.</p><p>De nya kombinationerna är precis de där sista symbolen är en bokstav. Då finns</p><p>\\[23^3\\cdot10^2\\cdot23=\\mathbf{27\\,984\\,100}\\]</p><p>ytterligare registreringsnummer.</p>",
-    "id": "1.37"
+    "id": "1.37",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -572,7 +686,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Hur många personer behövs minst i ett rum för att man med säkerhet ska kunna säga att minst tre fyller år i samma månad?</p>",
     "s": "<p><strong>Lådprincipen:</strong> De 12 månaderna är lådorna.</p><p>För att undvika att tre personer fyller år i samma månad kan vi ha högst två personer i varje månad. Då ryms högst</p><p>\\[12\\cdot2=24\\]</p><p>personer. När person nummer 25 kommer in måste någon månad innehålla minst tre personer. Minsta antal är därför <strong>25</strong>.</p>",
-    "id": "1.38"
+    "id": "1.38",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -582,7 +698,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Man väljer 73 olika heltal ur mängden \\(\\{1,2,3,\\ldots,144\\}\\).</p><p>Visa att det bland de valda talen alltid finns två på varandra följande heltal.</p>",
     "s": "<p>Dela in talen i 72 par:</p><p>\\[(1,2),(3,4),\\ldots,(143,144).\\]</p><p>Om man väljer 73 tal men bara har 72 par måste minst ett par innehålla två valda tal, enligt lådprincipen. Talen i detta par är på varandra följande. Alltså finns det alltid <strong>två valda heltal som skiljer 1</strong>.</p>",
-    "id": "1.51"
+    "id": "1.51",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -592,7 +710,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>En lista innehåller 27 svenska ord. Visa att minst två av orden måste börja på samma bokstav.</p>",
     "s": "<p><strong>Lådprincipen:</strong> De 26 bokstäverna är lådorna och de 27 orden placeras efter sin första bokstav.</p><p>Om varje bokstav fick högst ett ord skulle listan kunna innehålla högst 26 ord. Eftersom listan innehåller 27 ord måste någon bokstav få minst två ord.</p>",
-    "id": "1.58"
+    "id": "1.58",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -600,9 +720,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "strumpor och färger",
     "poang": "1/0/0",
-    "t": "<span class=\"fig\"><svg width=\"460\" height=\"230\" viewBox=\"0 0 470 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Åtta färger av strumpor där högst två av varje färg kan tas utan att få tre lika\">\n<rect width=\"470\" height=\"235\" fill=\"white\"/>\n<text x=\"235\" y=\"38\" font-size=\"15\" text-anchor=\"middle\">8 färger i lådan</text>\n<rect x=\"34\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".18\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"54\" cy=\"152\" r=\"7\" fill=\"#2C62A8\" fill-opacity=\".45\"/><circle cx=\"54\" cy=\"172\" r=\"7\" fill=\"#2C62A8\" fill-opacity=\".45\"/><rect x=\"86\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#2E7D52\" fill-opacity=\".18\" stroke=\"#2E7D52\" stroke-width=\"2\"/><circle cx=\"106\" cy=\"152\" r=\"7\" fill=\"#2E7D52\" fill-opacity=\".45\"/><circle cx=\"106\" cy=\"172\" r=\"7\" fill=\"#2E7D52\" fill-opacity=\".45\"/><rect x=\"138\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#B48A18\" fill-opacity=\".18\" stroke=\"#B48A18\" stroke-width=\"2\"/><circle cx=\"158\" cy=\"152\" r=\"7\" fill=\"#B48A18\" fill-opacity=\".45\"/><circle cx=\"158\" cy=\"172\" r=\"7\" fill=\"#B48A18\" fill-opacity=\".45\"/><rect x=\"190\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#B23A2E\" fill-opacity=\".18\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"210\" cy=\"152\" r=\"7\" fill=\"#B23A2E\" fill-opacity=\".45\"/><circle cx=\"210\" cy=\"172\" r=\"7\" fill=\"#B23A2E\" fill-opacity=\".45\"/><rect x=\"242\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#6A4E9C\" fill-opacity=\".18\" stroke=\"#6A4E9C\" stroke-width=\"2\"/><circle cx=\"262\" cy=\"152\" r=\"7\" fill=\"#6A4E9C\" fill-opacity=\".45\"/><circle cx=\"262\" cy=\"172\" r=\"7\" fill=\"#6A4E9C\" fill-opacity=\".45\"/><rect x=\"294\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#1F8A8A\" fill-opacity=\".18\" stroke=\"#1F8A8A\" stroke-width=\"2\"/><circle cx=\"314\" cy=\"152\" r=\"7\" fill=\"#1F8A8A\" fill-opacity=\".45\"/><circle cx=\"314\" cy=\"172\" r=\"7\" fill=\"#1F8A8A\" fill-opacity=\".45\"/><rect x=\"346\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#8A5A2B\" fill-opacity=\".18\" stroke=\"#8A5A2B\" stroke-width=\"2\"/><circle cx=\"366\" cy=\"152\" r=\"7\" fill=\"#8A5A2B\" fill-opacity=\".45\"/><circle cx=\"366\" cy=\"172\" r=\"7\" fill=\"#8A5A2B\" fill-opacity=\".45\"/><rect x=\"398\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#555\" fill-opacity=\".18\" stroke=\"#555\" stroke-width=\"2\"/><circle cx=\"418\" cy=\"152\" r=\"7\" fill=\"#555\" fill-opacity=\".45\"/><circle cx=\"418\" cy=\"172\" r=\"7\" fill=\"#555\" fill-opacity=\".45\"/>\n\n</svg></span><p>En låda innehåller strumpor i 8 olika färger. Hur många strumpor måste man minst ta upp för att vara säker på att få minst 3 strumpor av samma färg?</p>",
+    "t": "<span class=\"fig\"><svg width=\"460\" height=\"230\" viewBox=\"0 0 470 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Åtta färger av strumpor där högst två av varje färg kan tas utan att få tre lika\">\n<rect width=\"470\" height=\"235\" fill=\"white\"/>\n<text x=\"235\" y=\"38\" font-size=\"15\" text-anchor=\"middle\">8 färger i lådan</text>\n<rect x=\"34\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".18\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"54\" cy=\"152\" r=\"7\" fill=\"#2C62A8\" fill-opacity=\".45\"/><circle cx=\"54\" cy=\"172\" r=\"7\" fill=\"#2C62A8\" fill-opacity=\".45\"/><rect x=\"86\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#2E7D52\" fill-opacity=\".18\" stroke=\"#2E7D52\" stroke-width=\"2\"/><circle cx=\"106\" cy=\"152\" r=\"7\" fill=\"#2E7D52\" fill-opacity=\".45\"/><circle cx=\"106\" cy=\"172\" r=\"7\" fill=\"#2E7D52\" fill-opacity=\".45\"/><rect x=\"138\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#B48A18\" fill-opacity=\".18\" stroke=\"#B48A18\" stroke-width=\"2\"/><circle cx=\"158\" cy=\"152\" r=\"7\" fill=\"#B48A18\" fill-opacity=\".45\"/><circle cx=\"158\" cy=\"172\" r=\"7\" fill=\"#B48A18\" fill-opacity=\".45\"/><rect x=\"190\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#B23A2E\" fill-opacity=\".18\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"210\" cy=\"152\" r=\"7\" fill=\"#B23A2E\" fill-opacity=\".45\"/><circle cx=\"210\" cy=\"172\" r=\"7\" fill=\"#B23A2E\" fill-opacity=\".45\"/><rect x=\"242\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#6A4E9C\" fill-opacity=\".18\" stroke=\"#6A4E9C\" stroke-width=\"2\"/><circle cx=\"262\" cy=\"152\" r=\"7\" fill=\"#6A4E9C\" fill-opacity=\".45\"/><circle cx=\"262\" cy=\"172\" r=\"7\" fill=\"#6A4E9C\" fill-opacity=\".45\"/><rect x=\"294\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#1F8A8A\" fill-opacity=\".18\" stroke=\"#1F8A8A\" stroke-width=\"2\"/><circle cx=\"314\" cy=\"152\" r=\"7\" fill=\"#1F8A8A\" fill-opacity=\".45\"/><circle cx=\"314\" cy=\"172\" r=\"7\" fill=\"#1F8A8A\" fill-opacity=\".45\"/><rect x=\"346\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#8A5A2B\" fill-opacity=\".18\" stroke=\"#8A5A2B\" stroke-width=\"2\"/><circle cx=\"366\" cy=\"152\" r=\"7\" fill=\"#8A5A2B\" fill-opacity=\".45\"/><circle cx=\"366\" cy=\"172\" r=\"7\" fill=\"#8A5A2B\" fill-opacity=\".45\"/><rect x=\"398\" y=\"62\" width=\"40\" height=\"66\" rx=\"7\" fill=\"#555\" fill-opacity=\".18\" stroke=\"#555\" stroke-width=\"2\"/><circle cx=\"418\" cy=\"152\" r=\"7\" fill=\"#555\" fill-opacity=\".45\"/><circle cx=\"418\" cy=\"172\" r=\"7\" fill=\"#555\" fill-opacity=\".45\"/>\n<text x=\"235\" y=\"205\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">Värsta fallet: två av varje färg utan att få tre lika.</text>\n</svg></span><p>En låda innehåller strumpor i 8 olika färger. Hur många strumpor måste man minst ta upp för att vara säker på att få minst 3 strumpor av samma färg?</p>",
     "s": "<p><strong>Lådprincipen:</strong> Färgerna är de 8 lådorna.</p><p>För att undvika tre av samma färg kan man ta högst 2 av varje färg, alltså \\(8\\cdot2=16\\) strumpor. Nästa strumpa tvingar fram en tredje av någon färg.</p><p>Minsta antal är <strong>17</strong>.</p>",
-    "id": "1.59"
+    "id": "1.59",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -612,7 +734,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>I en grupp finns 37 personer. Visa att minst fyra av dem fyller år i samma månad.</p>",
     "s": "<p><strong>Lådprincipen:</strong> De 12 månaderna är lådorna.</p><p>Om varje månad hade högst 3 personer skulle gruppen kunna innehålla högst \\(12\\cdot3=36\\) personer. Eftersom det finns 37 måste någon månad innehålla minst <strong>4 personer</strong>.</p>",
-    "id": "1.60"
+    "id": "1.60",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -622,7 +746,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa att bland vilka 10 heltal som helst finns två som ger samma rest vid division med 9.</p>",
     "s": "<p><strong>Lådprincipen:</strong> Vid division med 9 kan resten bara vara \\(0,1,2,\\ldots,8\\), alltså 9 olika rester. Restklasserna är lådorna.</p><p>Om 10 heltal fördelas på 9 restklasser måste minst två hamna i samma klass. De två talen har därför <strong>samma rest modulo 9</strong>.</p>",
-    "id": "1.61"
+    "id": "1.61",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -632,7 +758,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>51 mätvärden avrundas till heltal och samtliga avrundade värden ligger mellan 150 och 159, inklusive ändpunkterna.</p><p>Visa att minst 6 mätvärden får samma avrundade värde.</p>",
     "s": "<p>Det finns 10 möjliga avrundade heltal: 150, 151, ..., 159. De är lådorna.</p><p>Om varje värde förekom högst 5 gånger skulle det finnas högst \\(10\\cdot5=50\\) mätvärden. Men det finns 51.</p><p>Alltså måste något heltal förekomma <strong>minst 6 gånger</strong>.</p>",
-    "id": "1.62"
+    "id": "1.62",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -642,7 +770,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Man väljer 7 olika heltal ur mängden \\(\\{1,2,\\ldots,12\\}\\). Visa att det alltid finns två valda tal vars summa är 13.</p>",
     "s": "<p><strong>Nyckelidé:</strong> Para ihop talen efter vilka som summerar till 13:</p><p>\\[(1,12),(2,11),(3,10),(4,9),(5,8),(6,7).\\]</p></p><span class=\"fig\"><svg width=\"460\" height=\"200\" viewBox=\"0 0 470 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Talen 1 till 12 parade så att varje par summerar till 13\">\n<rect width=\"470\" height=\"205\" fill=\"white\"/>\n<text x=\"235\" y=\"36\" font-size=\"15\" text-anchor=\"middle\">6 par – lådorna</text>\n<rect x=\"30\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"61\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">1</text><text x=\"61\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">12</text><text x=\"61\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text><rect x=\"102\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"133\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">2</text><text x=\"133\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">11</text><text x=\"133\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text><rect x=\"174\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"205\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">3</text><text x=\"205\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">10</text><text x=\"205\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text><rect x=\"246\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"277\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">4</text><text x=\"277\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">9</text><text x=\"277\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text><rect x=\"318\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"349\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">5</text><text x=\"349\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">8</text><text x=\"349\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text><rect x=\"390\" y=\"58\" width=\"62\" height=\"76\" rx=\"8\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"421\" y=\"88\" font-size=\"18\" text-anchor=\"middle\">6</text><text x=\"421\" y=\"123\" font-size=\"18\" text-anchor=\"middle\">7</text><text x=\"421\" y=\"152\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">= 13</text>\n<text x=\"235\" y=\"188\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">7 valda tal i 6 par ger minst ett par med båda talen valda.</text>\n</svg></span><p>Det finns 6 par. Om 7 olika tal väljs måste två av dem komma från samma par. De två talen i det paret har summan <strong>13</strong>.</p>",
-    "id": "1.63"
+    "id": "1.63",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -652,7 +782,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Man väljer 6 olika heltal ur mängden \\(\\{1,2,\\ldots,10\\}\\). Visa att två av de valda talen måste vara på varandra följande.</p>",
     "s": "<p>Dela mängden i fem par: \\[(1,2),(3,4),(5,6),(7,8),(9,10).\\]</p><p>Paren är lådorna. Om 6 olika tal väljs och bara 5 par finns måste två valda tal hamna i samma par. Talen i varje par är på varandra följande.</p>",
-    "id": "1.64"
+    "id": "1.64",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -662,7 +794,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>13 elever väljer var sin av fyra workshops. Visa att minst fyra elever måste ha valt samma workshop.</p>",
     "s": "<p>De fyra workshopparna är lådorna. Om varje workshop hade högst 3 elever skulle totalt högst \\(4\\cdot3=12\\) elever kunna fördelas.</p><p>Eftersom 13 elever ska placeras måste någon workshop få minst <strong>4 elever</strong>.</p>",
-    "id": "1.65"
+    "id": "1.65",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -672,7 +806,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<span class=\"fig\"><svg width=\"330\" height=\"290\" viewBox=\"0 0 340 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat med sidan 1 och fem utplacerade punkter\">\n<rect width=\"340\" height=\"300\" fill=\"white\"/>\n<rect x=\"70\" y=\"45\" width=\"200\" height=\"200\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<circle cx=\"120\" cy=\"90\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"230\" cy=\"72\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"168\" cy=\"160\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"258\" cy=\"205\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"105\" cy=\"215\" r=\"5.5\" fill=\"#2C62A8\"/>\n<line x1=\"70\" y1=\"268\" x2=\"270\" y2=\"268\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<line x1=\"70\" y1=\"263\" x2=\"70\" y2=\"273\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"270\" y1=\"263\" x2=\"270\" y2=\"273\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<text x=\"165\" y=\"288\" font-size=\"15\">1</text>\n<line x1=\"47\" y1=\"45\" x2=\"47\" y2=\"245\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<line x1=\"42\" y1=\"45\" x2=\"52\" y2=\"45\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"42\" y1=\"245\" x2=\"52\" y2=\"245\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<text x=\"30\" y=\"150\" font-size=\"15\">1</text>\n</svg></span><p>Fem punkter placeras godtyckligt i eller på en kvadrat med sidan 1.</p><p>Visa att det alltid finns två av punkterna vars avstånd är högst \\(\\frac{\\sqrt2}{2}\\).</p>",
     "s": "<p><strong>Idé:</strong> Dela den stora kvadraten i fyra lika stora kvadrater med sidan \\(1/2\\). De fyra delarna är lådorna. Punkter som ligger på en delningslinje kan tilldelas någon av de angränsande delarna; varje punkt tillhör då exakt en låda.</p><span class=\"fig\"><svg width=\"360\" height=\"320\" viewBox=\"0 0 370 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadraten indelad i fyra delkvadrater med sidan en halv, där två av punkterna hamnar i samma delkvadrat\">\n<rect width=\"370\" height=\"330\" fill=\"white\"/>\n<rect x=\"85\" y=\"145\" width=\"100\" height=\"100\" fill=\"#E3B52B\" fill-opacity=\".16\"/>\n<rect x=\"85\" y=\"45\" width=\"200\" height=\"200\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<line x1=\"185\" y1=\"45\" x2=\"185\" y2=\"245\" stroke=\"#777\" stroke-width=\"1.8\" stroke-dasharray=\"5 5\"/>\n<line x1=\"85\" y1=\"145\" x2=\"285\" y2=\"145\" stroke=\"#777\" stroke-width=\"1.8\" stroke-dasharray=\"5 5\"/>\n<line x1=\"85\" y1=\"245\" x2=\"185\" y2=\"145\" stroke=\"#B23A2E\" stroke-width=\"1.6\" stroke-dasharray=\"4 3\"/>\n<line x1=\"183\" y1=\"160\" x2=\"120\" y2=\"215\" stroke=\"#B23A2E\" stroke-width=\"2.4\"/>\n<circle cx=\"135\" cy=\"90\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"245\" cy=\"72\" r=\"5.5\" fill=\"#2C62A8\"/>\n<circle cx=\"183\" cy=\"160\" r=\"5.5\" fill=\"#2C62A8\"/><circle cx=\"273\" cy=\"205\" r=\"5.5\" fill=\"#2C62A8\"/>\n<circle cx=\"120\" cy=\"215\" r=\"5.5\" fill=\"#2C62A8\"/>\n<text x=\"127\" y=\"266\" font-size=\"14\" text-anchor=\"middle\">1/2</text><text x=\"227\" y=\"266\" font-size=\"14\" text-anchor=\"middle\">1/2</text>\n<line x1=\"85\" y1=\"255\" x2=\"285\" y2=\"255\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<line x1=\"85\" y1=\"250\" x2=\"85\" y2=\"260\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"185\" y1=\"250\" x2=\"185\" y2=\"260\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"285\" y1=\"250\" x2=\"285\" y2=\"260\" stroke=\"#777\" stroke-width=\"1.2\"/>\n<text x=\"30\" y=\"292\" font-size=\"14\">Två punkter hamnar i samma delkvadrat. Deras</text>\n<text x=\"30\" y=\"311\" font-size=\"14\">avstånd är högst delkvadratens diagonal.</text>\n</svg></span><p>Fem punkter placeras i fyra lådor, så enligt lådprincipen ligger minst två punkter i samma lilla kvadrat.</p><p>Det största möjliga avståndet mellan två punkter i en sådan kvadrat är dess diagonal:</p><p>\\[\\sqrt{(1/2)^2+(1/2)^2}=\\frac{\\sqrt2}{2}.\\]</p><p>Alltså finns alltid två punkter vars avstånd är högst <strong>\\(\\frac{\\sqrt2}{2}\\)</strong>.</p>",
-    "id": "1.66"
+    "id": "1.66",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -682,7 +818,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa att bland vilka \\(n+1\\) heltal som helst finns två tal vars differens är delbar med \\(n\\), där \\(n\\ge1\\).</p>",
     "s": "<p><strong>Idé:</strong> Använd restklasser modulo \\(n\\) som lådor.</p><p>Varje heltal ger exakt en av resterna \\(0,1,\\ldots,n-1\\), så det finns \\(n\\) lådor. Vi har \\(n+1\\) heltal, alltså måste två av dem, säg \\(a\\) och \\(b\\), ge samma rest.</p><p>Då gäller \\(a\\equiv b\\pmod n\\), vilket betyder \\(n\\mid(a-b)\\). Alltså är differensen delbar med \\(n\\).</p>",
-    "id": "1.67"
+    "id": "1.67",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -692,7 +830,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En dator sorterar 73 filer i 12 mappar efter filtyp. Visa att minst en mapp innehåller minst 7 filer.</p>",
     "s": "<p>Mapparna är de 12 lådorna. Om varje mapp innehöll högst 6 filer skulle totalt högst \\(12\\cdot6=72\\) filer få plats.</p><p>Eftersom 73 filer ska sorteras måste någon mapp innehålla <strong>minst 7 filer</strong>.</p>",
-    "id": "1.68"
+    "id": "1.68",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -702,7 +842,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.119",
     "t": "<p>I en grupp finns 13 personer.</p><p>Visa med lådprincipen att minst två av dem måste vara födda samma månad.</p>",
-    "s": "<p>Här är månaderna lådorna, alltså 12 lådor. Personerna är objekten som placeras i lådorna.</p><p>Om 13 personer fördelas på 12 månader måste någon månad innehålla minst två personer enligt <strong>lådprincipen</strong>.</p><p>Alltså måste minst två personer vara födda samma månad.</p>"
+    "s": "<p>Här är månaderna lådorna, alltså 12 lådor. Personerna är objekten som placeras i lådorna.</p><p>Om 13 personer fördelas på 12 månader måste någon månad innehålla minst två personer enligt <strong>lådprincipen</strong>.</p><p>Alltså måste minst två personer vara födda samma månad.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -712,7 +854,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.120",
     "t": "<p>I en låda ligger svarta, vita och blå strumpor. Hur många strumpor måste man ta upp i mörker för att vara säker på att få två strumpor av samma färg?</p>",
-    "s": "<p>Färgerna är lådorna: svart, vit och blå, alltså 3 lådor.</p><p>I värsta fall kan man först få en svart, en vit och en blå strumpa, alltså tre strumpor utan att ha ett par i samma färg. Nästa strumpa måste då ge samma färg som någon av de tidigare.</p><p><strong>Man måste ta upp 4 strumpor.</strong></p>"
+    "s": "<p>Färgerna är lådorna: svart, vit och blå, alltså 3 lådor.</p><p>I värsta fall kan man först få en svart, en vit och en blå strumpa, alltså tre strumpor utan att ha ett par i samma färg. Nästa strumpa måste då ge samma färg som någon av de tidigare.</p><p><strong>Man måste ta upp 4 strumpor.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -722,7 +866,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Hur många personer behövs minst för att man säkert ska ha två personer som är födda på samma veckodag?</p>",
     "s": "<p>Veckodagarna är 7 lådor. Med 7 personer kan en person ligga i varje låda. Person nummer 8 måste hamna i en redan använd låda.</p><p><strong>8 personer</strong>.</p>",
-    "id": "1.133"
+    "id": "1.133",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -732,7 +878,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"410\" height=\"205\" viewBox=\"0 0 420 210\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sex heltal ska fördelas på de fem restklasserna modulo 5\">\n<rect width=\"420\" height=\"210\" fill=\"white\"/>\n<circle cx=\"70\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><circle cx=\"122\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><circle cx=\"174\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><circle cx=\"226\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><circle cx=\"278\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><circle cx=\"330\" cy=\"52\" r=\"14\" fill=\"#2C62A8\" fill-opacity=\".12\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/>\n<text x=\"382\" y=\"57\" font-size=\"14\">6 tal</text>\n<rect x=\"35\" y=\"95\" width=\"64\" height=\"72\" fill=\"none\" stroke=\"#444\" stroke-width=\"2\"/><text x=\"67\" y=\"137\" font-size=\"14\" text-anchor=\"middle\">rest 0</text><rect x=\"109\" y=\"95\" width=\"64\" height=\"72\" fill=\"none\" stroke=\"#444\" stroke-width=\"2\"/><text x=\"141\" y=\"137\" font-size=\"14\" text-anchor=\"middle\">rest 1</text><rect x=\"183\" y=\"95\" width=\"64\" height=\"72\" fill=\"none\" stroke=\"#444\" stroke-width=\"2\"/><text x=\"215\" y=\"137\" font-size=\"14\" text-anchor=\"middle\">rest 2</text><rect x=\"257\" y=\"95\" width=\"64\" height=\"72\" fill=\"none\" stroke=\"#444\" stroke-width=\"2\"/><text x=\"289\" y=\"137\" font-size=\"14\" text-anchor=\"middle\">rest 3</text><rect x=\"331\" y=\"95\" width=\"64\" height=\"72\" fill=\"none\" stroke=\"#444\" stroke-width=\"2\"/><text x=\"363\" y=\"137\" font-size=\"14\" text-anchor=\"middle\">rest 4</text>\n<text x=\"35\" y=\"190\" font-size=\"14\">5 möjliga rester vid division med 5</text>\n</svg></span><p>Sex heltal väljs. Visa att minst två av dem ger samma rest vid division med 5.</p>",
     "s": "<p>De möjliga resterna är 0, 1, 2, 3 och 4, alltså fem lådor. Sex heltal fördelas på fem restklasser. Enligt lådprincipen måste minst två heltal hamna i samma restklass.</p>",
-    "id": "1.134"
+    "id": "1.134",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -742,7 +890,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En skola har 10 klasser. Hur många elever måste skolan ha för att man med säkerhet ska veta att någon klass har minst 31 elever?</p>",
     "s": "<p>För att undvika 31 elever i någon klass kan varje klass ha högst 30 elever. Då ryms</p><p>\\[10\\cdot30=300\\]</p><p>elever. Nästa elev tvingar fram minst 31 i någon klass.</p><p><strong>301 elever</strong>.</p>",
-    "id": "1.135"
+    "id": "1.135",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -752,7 +902,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En påse innehåller pennor i fyra färger. Hur många pennor måste man ta för att säkert få minst tre av samma färg?</p>",
     "s": "<p>Med högst två av varje färg kan man ta \\(4\\cdot2=8\\) pennor utan att få tre lika. Nästa penna tvingar fram en tredje av någon färg.</p><p><strong>9 pennor</strong>.</p>",
-    "id": "1.150"
+    "id": "1.150",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -762,7 +914,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Elva heltal väljs ur mängden \\(\\{1,2,\\ldots,20\\}\\). Visa att minst två av de valda talen skiljer högst 1.</p>",
     "s": "<p>Dela talen i 10 lådor:</p><p>\\[(1,2),(3,4),\\ldots,(19,20).\\]</p><p>Elva valda tal fördelas på tio par. Lådprincipen ger att något par innehåller två valda tal. Talen i det paret skiljer 1.</p>",
-    "id": "1.151"
+    "id": "1.151",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -772,7 +926,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En kod består av två bokstäver följda av tre siffror. Bokstäverna väljs bland 26 bokstäver och får upprepas, men den första siffran får inte vara 0. Hur många koder finns?</p>",
     "s": "<p><strong>Idé:</strong> Räkna antalet val position för position.</p><p>De två bokstäverna har 26 val vardera. Den första siffran har 9 val eftersom 0 inte är tillåtet där. De två sista siffrorna har 10 val vardera.</p><p>\\[26\\cdot26\\cdot9\\cdot10\\cdot10=\\mathbf{608\\,400}.\\]</p>",
-    "id": "1.39"
+    "id": "1.39",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -782,7 +938,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett konferensmärke får en kod med två <em>olika</em> bokstäver följda av två siffror. Bokstäverna väljs bland 24 möjliga bokstäver. Siffrorna 0–9 får upprepas.</p><p>Hur många olika koder kan bildas?</p>",
     "s": "<p><strong>Idé:</strong> Räkna antalet val position för position. Eftersom bokstäverna måste vara olika minskar antalet bokstavsval efter första positionen.</p><p>Första bokstaven: 24 val.<br>Andra bokstaven: 23 val.<br>Första siffran: 10 val.<br>Andra siffran: 10 val.</p><p>\\[24\\cdot23\\cdot10\\cdot10=\\mathbf{55\\,200}.\\]</p>",
-    "id": "1.52"
+    "id": "1.52",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -792,7 +950,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I ett spel väljer en spelare 6 frisyrer, 4 jackor, 5 par skor och 3 bakgrunder till sin avatar. Ett val görs ur varje kategori.</p><p>Hur många olika avatarer kan skapas?</p>",
     "s": "<p><strong>Idé:</strong> Varje frisyr kan kombineras med varje jacka, varje par skor och varje bakgrund.</p><p>\\[6\\cdot4\\cdot5\\cdot3=\\mathbf{360}.\\]</p><p>Det finns alltså <strong>360 olika avatarer</strong>.</p>",
-    "id": "1.53"
+    "id": "1.53",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -802,7 +962,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En dessert byggs av en botten, en topping och en sås. Det finns 4 bottnar, 6 toppings och 3 såser. En av bottnarna är choklad. Chokladbotten får inte kombineras med två av frukttoppingarna.</p><p>Hur många tillåtna desserter finns?</p>",
     "s": "<p><strong>Idé:</strong> Räkna först alla kombinationer och ta sedan bort de förbjudna.</p><p>Utan begränsningen finns \\(4\\cdot6\\cdot3=72\\) desserter.</p><p>De förbjudna har chokladbotten, en av 2 frukttoppings och valfri sås: \\(1\\cdot2\\cdot3=6\\).</p><p>Alltså finns <strong>\\(72-6=66\\)</strong> tillåtna desserter.</p>",
-    "id": "1.54"
+    "id": "1.54",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -812,7 +974,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg height=\"250\" width=\"420\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Flagga med fyra lodräta fält\"><rect width=\"420\" height=\"250\" fill=\"white\"/><rect x=\"80\" y=\"45\" width=\"260\" height=\"160\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/><line x1=\"145\" y1=\"45\" x2=\"145\" y2=\"205\" stroke=\"#555\" stroke-width=\"2\"/><line x1=\"210\" y1=\"45\" x2=\"210\" y2=\"205\" stroke=\"#555\" stroke-width=\"2\"/><line x1=\"275\" y1=\"45\" x2=\"275\" y2=\"205\" stroke=\"#555\" stroke-width=\"2\"/><text x=\"105\" y=\"130\" font-size=\"24\">1</text><text x=\"170\" y=\"130\" font-size=\"24\">2</text><text x=\"235\" y=\"130\" font-size=\"24\">3</text><text x=\"300\" y=\"130\" font-size=\"24\">4</text></svg></span><p>En flagga består av fyra lodräta fält. Varje fält ska färgas med en av 5 färger. Två fält som ligger bredvid varandra får inte ha samma färg.</p><p>Hur många olika flaggor kan skapas?</p>",
     "s": "<p><strong>Idé:</strong> Första fältet är fritt, men varje följande fält får inte använda färgen direkt till vänster.</p><p>Fält 1: 5 val.<br>Fält 2: 4 val.<br>Fält 3: 4 val.<br>Fält 4: 4 val.</p><p>\\[5\\cdot4^3=\\mathbf{320}.\\]</p>",
-    "id": "1.55"
+    "id": "1.55",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -822,7 +986,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.117",
     "t": "<p>I en glasskiosk väljer man 1 bägare bland 3 sorter, 1 glassmak bland 6 sorter och 1 topping bland 4 sorter.</p><p>På hur många olika sätt kan man välja sin glass?</p>",
-    "s": "<p>Först görs ett val av bägare, sedan ett oberoende val av smak och till sist ett oberoende val av topping. Då används multiplikationsprincipen:</p><p>\\[3\\cdot 6\\cdot 4=72.\\]</p><p><strong>Det finns 72 olika val.</strong></p>"
+    "s": "<p>Först görs ett val av bägare, sedan ett oberoende val av smak och till sist ett oberoende val av topping. Då används multiplikationsprincipen:</p><p>\\[3\\cdot 6\\cdot 4=72.\\]</p><p><strong>Det finns 72 olika val.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -832,7 +998,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.118",
     "t": "<p>En kod består av två bokstäver följda av tre siffror. Bokstäverna får väljas bland de 26 vanliga versalerna och siffrorna bland 0–9.</p><p>Hur många olika koder finns det?</p>",
-    "s": "<p>För första bokstaven finns 26 val och för andra bokstaven också 26 val. För varje sifferplats finns 10 val.</p><p>\\[26\\cdot 26\\cdot 10\\cdot 10\\cdot 10=676\\,000.\\]</p><p><strong>Antalet koder är 676 000.</strong></p>"
+    "s": "<p>För första bokstaven finns 26 val och för andra bokstaven också 26 val. För varje sifferplats finns 10 val.</p><p>\\[26\\cdot 26\\cdot 10\\cdot 10\\cdot 10=676\\,000.\\]</p><p><strong>Antalet koder är 676 000.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -842,7 +1010,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En lunch består av en av 4 huvudrätter och en av 3 drycker. Hur många olika luncher kan väljas?</p>",
     "s": "<p>Valet av huvudrätt och dryck görs oberoende. Multiplikationsprincipen ger</p><p>\\[4\\cdot3=12.\\]</p><p><strong>12 luncher</strong>.</p>",
-    "id": "1.130"
+    "id": "1.130",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -852,7 +1022,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En kod består av en bokstav följd av fyra siffror. Bokstaven väljs bland 20 bokstäver. Den första siffran får inte vara 0, övriga siffror får vara 0–9. Hur många koder finns?</p>",
     "s": "<p>Det finns 20 val för bokstaven, 9 val för första siffran och 10 val för var och en av de tre sista siffrorna:</p><p>\\[20\\cdot9\\cdot10^3=180\\,000.\\]</p><p><strong>180 000 koder</strong>.</p>",
-    "id": "1.131"
+    "id": "1.131",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -862,7 +1034,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En biograf säljer paket med antingen <em>popcorn + dryck</em> eller <em>godis + dryck</em>. Det finns 5 sorters popcorn, 7 sorters godis och 4 sorters dryck. Hur många olika paket finns?</p>",
     "s": "<p>Popcornpaket: \\(5\\cdot4=20\\) val. Godispaket: \\(7\\cdot4=28\\) val. Pakettyperna är olika fall, så additionsprincipen ger</p><p>\\[20+28=48.\\]</p><p><strong>48 paket</strong>.</p>",
-    "id": "1.132"
+    "id": "1.132",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -872,7 +1046,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg height=\"230\" width=\"420\" viewBox=\"0 0 420 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Flagga med tre lodräta fält\">\n<rect width=\"420\" height=\"230\" fill=\"white\"/>\n<rect x=\"65\" y=\"45\" width=\"290\" height=\"140\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<line x1=\"161.7\" y1=\"45\" x2=\"161.7\" y2=\"185\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"258.3\" y1=\"45\" x2=\"258.3\" y2=\"185\" stroke=\"#555\" stroke-width=\"2\"/>\n<text x=\"102\" y=\"122\" font-size=\"20\">fält 1</text><text x=\"194\" y=\"122\" font-size=\"20\">fält 2</text><text x=\"291\" y=\"122\" font-size=\"20\">fält 3</text>\n</svg></span><p>En flagga har tre lodräta fält. Varje fält ska färgas med en av 5 färger och samma färg får användas flera gånger. Hur många flaggor finns?</p>",
     "s": "<p>Varje fält har 5 oberoende val:</p><p>\\[5^3=125.\\]</p><p><strong>125 flaggor</strong>.</p>",
-    "id": "1.148"
+    "id": "1.148",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -882,7 +1058,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En säkerhetskod består av 3 olika bokstäver följda av 2 olika siffror. Bokstäver väljs bland 8 bokstäver och siffror bland 0–9. Hur många koder finns?</p>",
     "s": "<p>Bokstäver: \\(8\\cdot7\\cdot6\\). Siffror: \\(10\\cdot9\\). Multiplikationsprincipen ger</p><p>\\[8\\cdot7\\cdot6\\cdot10\\cdot9=30\\,240.\\]</p>",
-    "id": "1.149"
+    "id": "1.149",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -892,7 +1070,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"556\" height=\"180\" viewBox=\"0 0 556 185\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bokstavsbrickor för ordet MATEMATIK där M, A och T förekommer två gånger vardera\">\n<rect width=\"556\" height=\"185\" fill=\"white\"/>\n<rect x=\"35.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"58.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">M</text><rect x=\"90.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"113.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"145.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"168.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">T</text><rect x=\"200.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"223.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">E</text><rect x=\"255.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"278.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">M</text><rect x=\"310.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"333.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"365.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"388.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">T</text><rect x=\"420.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"443.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">I</text><rect x=\"475.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"498.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">K</text><text x=\"139\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#B48A18\">M: 2 gånger</text><text x=\"278\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#2C62A8\">A: 2 gånger</text><text x=\"417\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#2E7D52\">T: 2 gånger</text>\n<text x=\"278\" y=\"173\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">9 brickor; tre bokstäver förekommer dubbelt</text>\n</svg></span><p>Hur många olika bokstavsordningar kan bildas av bokstäverna i ordet MATEMATIK?</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. Här gör den det, vilket är signalen för permutationer.</p><p>Ordet har 9 bokstäver. A, M och T förekommer vardera två gånger. Därför blir antalet</p><p>\\[\\frac{9!}{2!2!2!}=\\mathbf{45\\,360}.\\]</p>",
-    "id": "1.40"
+    "id": "1.40",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -902,7 +1082,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Åtta finalister tävlar i ett lopp. På hur många sätt kan guld, silver och brons fördelas?</p>",
     "s": "<p><strong>Idé:</strong> Vi väljer tre personer men platserna guld, silver och brons är olika. Därför spelar ordningen roll och vi använder permutationer.</p><p>För guldet finns 8 val, för silvret 7 återstående val och för bronset 6:</p><p>\\[P(8,3)=8\\cdot7\\cdot6=\\mathbf{336}.\\]</p>",
-    "id": "1.69"
+    "id": "1.69",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -912,7 +1094,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Sju olika låtar ska placeras i en spellista. På hur många olika sätt kan hela spellistan ordnas?</p>",
     "s": "<p><strong>Idé:</strong> Alla sju låtar används och varje ny ordning ger en ny spellista. Det är därför en permutation av 7 olika objekt.</p><p>\\[7!=7\\cdot6\\cdot5\\cdot4\\cdot3\\cdot2\\cdot1=\\mathbf{5040}.\\]</p>",
-    "id": "1.70"
+    "id": "1.70",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -922,7 +1106,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Åtta olika presentationer ska hållas under en dag. Presentation A måste ligga före presentation B, men i övrigt finns inga begränsningar.</p><p>Hur många ordningar är möjliga?</p>",
     "s": "<p><strong>Idé:</strong> Utan villkor finns \\(8!\\) ordningar. För varje ordning där A ligger före B finns en motsvarande ordning där A och B byter plats.</p><p>Exakt hälften uppfyller därför villkoret:</p><p>\\[\\frac{8!}{2}=\\mathbf{20\\,160}.\\]</p>",
-    "id": "1.71"
+    "id": "1.71",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -932,7 +1118,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Nio olika böcker ska ställas på en hylla. Två bestämda böcker ska stå bredvid varandra.</p><p>På hur många sätt kan böckerna ordnas?</p>",
     "s": "<p><strong>Idé:</strong> Betrakta de två bestämda böckerna som ett block. Då har vi blocket plus sju andra böcker, alltså 8 objekt att ordna.</p><p>De 8 objekten kan ordnas på \\(8!\\) sätt. Inuti blocket kan böckerna ligga i 2 ordningar.</p><p>\\[2\\cdot8!=\\mathbf{80\\,640}.\\]</p>",
-    "id": "1.72"
+    "id": "1.72",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -942,7 +1130,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"556\" height=\"180\" viewBox=\"0 0 556 185\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bokstavsbrickor för ordet STATISTIK där T förekommer tre gånger samt S och I två gånger\">\n<rect width=\"556\" height=\"185\" fill=\"white\"/>\n<rect x=\"35.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"58.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">S</text><rect x=\"90.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"113.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">T</text><rect x=\"145.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"168.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"200.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"223.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">T</text><rect x=\"255.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"278.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">I</text><rect x=\"310.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"333.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">S</text><rect x=\"365.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2E7D52\" fill-opacity=\".16\" stroke=\"#2E7D52\" stroke-width=\"2\"/><text x=\"388.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">T</text><rect x=\"420.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"443.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">I</text><rect x=\"475.0\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"498.0\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">K</text><text x=\"139\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#2E7D52\">T: 3 gånger</text><text x=\"278\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#2E7D52\">S: 2 gånger</text><text x=\"417\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#B48A18\">I: 2 gånger</text>\n<text x=\"278\" y=\"173\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">9 brickor med upprepade bokstäver</text>\n</svg></span><p>Hur många olika bokstavsordningar kan bildas av bokstäverna i ordet <strong>STATISTIK</strong>?</p>",
     "s": "<p>Ordet har 9 bokstäver. T förekommer 3 gånger, S 2 gånger och I 2 gånger. Om alla bokstäver vore olika skulle vi ha \\(9!\\) ordningar, men byten mellan identiska bokstäver ger inga nya ord.</p><p>\\[\\frac{9!}{3!2!2!}=\\mathbf{15\\,120}.\\]</p>",
-    "id": "1.73"
+    "id": "1.73",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -952,7 +1142,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Tio personer ska ställa sig på led. Två bestämda personer, A och B, vill inte stå bredvid varandra.</p><p>Hur många ordningar är möjliga?</p>",
     "s": "<p><strong>Idé:</strong> Räkna alla ordningar och ta bort dem där A och B står bredvid varandra.</p><p>Alla ordningar: \\(10!\\). Om A och B står ihop behandlas de som ett block. Då ordnas 9 objekt på \\(9!\\) sätt och blocket kan vara AB eller BA.</p><p>\\[10!-2\\cdot9!=3\\,628\\,800-725\\,760=\\mathbf{2\\,903\\,040}.\\]</p>",
-    "id": "1.74"
+    "id": "1.74",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -962,7 +1154,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Sju personer ska stå på led. Två bestämda lärare ska stå på de två yttersta platserna.</p><p>På hur många sätt kan ledet ordnas?</p>",
     "s": "<p>Lärarna kan byta plats med varandra på \\(2!\\) sätt. De fem övriga personerna kan ordnas på mittplatserna på \\(5!\\) sätt.</p><p>\\[2!\\cdot5!=\\mathbf{240}.\\]</p>",
-    "id": "1.75"
+    "id": "1.75",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -972,7 +1166,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"215\" viewBox=\"0 0 450 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Åtta böcker på en hylla där tre är matematikböcker\">\n<rect width=\"450\" height=\"220\" fill=\"white\"/>\n<rect x=\"52\" y=\"74\" width=\"34\" height=\"96\" fill=\"#ddd\" fill-opacity=\"1\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"98\" y=\"60\" width=\"34\" height=\"110\" fill=\"#ddd\" fill-opacity=\"1\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"144\" y=\"82\" width=\"34\" height=\"88\" fill=\"#2C62A8\" fill-opacity=\".22\" stroke=\"#333\" stroke-width=\"1.5\"/><text x=\"161\" y=\"132\" font-size=\"15\" text-anchor=\"middle\" fill=\"#2C62A8\" font-weight=\"700\">M</text><rect x=\"190\" y=\"66\" width=\"34\" height=\"104\" fill=\"#ddd\" fill-opacity=\"1\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"236\" y=\"78\" width=\"34\" height=\"92\" fill=\"#2C62A8\" fill-opacity=\".22\" stroke=\"#333\" stroke-width=\"1.5\"/><text x=\"253\" y=\"130\" font-size=\"15\" text-anchor=\"middle\" fill=\"#2C62A8\" font-weight=\"700\">M</text><rect x=\"282\" y=\"58\" width=\"34\" height=\"112\" fill=\"#ddd\" fill-opacity=\"1\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"328\" y=\"70\" width=\"34\" height=\"100\" fill=\"#ddd\" fill-opacity=\"1\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"374\" y=\"80\" width=\"34\" height=\"90\" fill=\"#2C62A8\" fill-opacity=\".22\" stroke=\"#333\" stroke-width=\"1.5\"/><text x=\"391\" y=\"131\" font-size=\"15\" text-anchor=\"middle\" fill=\"#2C62A8\" font-weight=\"700\">M</text>\n<line x1=\"34\" y1=\"170\" x2=\"426\" y2=\"170\" stroke=\"#333\" stroke-width=\"5\"/>\n<text x=\"225\" y=\"200\" font-size=\"15\" text-anchor=\"middle\">8 olika böcker, varav 3 matematikböcker (M)</text>\n</svg></span><p>Åtta olika böcker ska ställas på en hylla. Tre av böckerna är matematikböcker. Ingen av matematikböckerna får stå bredvid en annan matematikbok.</p><p>På hur många sätt kan böckerna ordnas?</p>",
     "s": "<p><strong>Nyckelidé:</strong> Placera först de fem övriga böckerna. De kan ordnas på \\(5!\\) sätt.</p><span class=\"fig\"><svg width=\"440\" height=\"235\" viewBox=\"0 0 450 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"De fem övriga böckerna skapar sex luckor där matematikböckerna kan placeras\">\n<rect width=\"450\" height=\"240\" fill=\"white\"/>\n<rect x=\"105\" y=\"70\" width=\"36\" height=\"100\" fill=\"#ddd\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"161\" y=\"58\" width=\"36\" height=\"112\" fill=\"#ddd\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"217\" y=\"78\" width=\"36\" height=\"92\" fill=\"#ddd\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"273\" y=\"64\" width=\"36\" height=\"106\" fill=\"#ddd\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"329\" y=\"74\" width=\"36\" height=\"96\" fill=\"#ddd\" stroke=\"#333\" stroke-width=\"1.5\"/>\n<line x1=\"60\" y1=\"170\" x2=\"400\" y2=\"170\" stroke=\"#333\" stroke-width=\"5\"/>\n<path d=\"M87 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"87\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"87\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">1</text><path d=\"M143 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"143\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"143\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">2</text><path d=\"M199 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"199\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"199\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">3</text><path d=\"M255 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"255\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"255\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">4</text><path d=\"M311 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"311\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"311\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">5</text><path d=\"M367 178 v14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><circle cx=\"367\" cy=\"199\" r=\"9\" fill=\"#fff\" stroke=\"#B23A2E\" stroke-width=\"1.8\"/><text x=\"367\" y=\"204\" font-size=\"12\" text-anchor=\"middle\" fill=\"#B23A2E\">6</text>\n<text x=\"225\" y=\"230\" font-size=\"15\" text-anchor=\"middle\">5 övriga böcker ger 6 luckor</text>\n</svg></span><p>När de står på hyllan finns 6 luckor där matematikböcker kan placeras utan att hamna bredvid varandra. Välj 3 av de 6 luckorna och ordna sedan de tre olika matematikböckerna:</p><p>\\[5!\\binom63 3!=120\\cdot20\\cdot6=\\mathbf{14\\,400}.\\]</p>",
-    "id": "1.76"
+    "id": "1.76",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -982,7 +1178,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Sex olika föredrag ska ordnas under en konferens. Föredrag A ska hållas direkt före föredrag B.</p><p>Hur många scheman är möjliga?</p>",
     "s": "<p>Eftersom A måste ligga direkt före B behandlas ”AB” som ett enda block. Tillsammans med de fyra andra föredragen har vi då 5 objekt att ordna.</p><p>\\[5!=\\mathbf{120}.\\]</p><p>Vi multiplicerar inte med 2 eftersom ordningen inom blocket är bestämd.</p>",
-    "id": "1.77"
+    "id": "1.77",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -992,7 +1190,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En kod består av fem olika siffror. Första siffran får inte vara 0.</p><p>Hur många sådana koder finns?</p>",
     "s": "<p><strong>Idé:</strong> Koden kan inte börja med 0 och ingen siffra får återanvändas. Därför måste antalet val uppdateras efter varje vald siffra.</p><p>Första positionen: 9 val (1–9). Därefter återstår 9 möjliga siffror, inklusive 0, sedan 8, 7 och 6.</p><p>\\[9\\cdot9\\cdot8\\cdot7\\cdot6=\\mathbf{27\\,216}.\\]</p><p>Det finns alltså <strong>27 216 koder</strong>.</p>",
-    "id": "1.78"
+    "id": "1.78",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1002,7 +1202,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.121",
     "t": "<p>Hur många olika ord kan bildas av bokstäverna i ordet <em>SOLAR</em> om alla bokstäver används?</p>",
-    "s": "<p>Ordet har 5 olika bokstäver. Antalet ord fås därför som antalet permutationer av 5 objekt:</p><p>\\[5!=120.\\]</p><p><strong>Det går att bilda 120 olika ord.</strong></p>"
+    "s": "<p>Ordet har 5 olika bokstäver. Antalet ord fås därför som antalet permutationer av 5 objekt:</p><p>\\[5!=120.\\]</p><p><strong>Det går att bilda 120 olika ord.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1012,7 +1214,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "id": "1.122",
     "t": "<p>Bokstäverna i ordet <em>AFKNOT</em> ska ordnas på alla möjliga sätt.</p><ol type=\"a\"><li>Hur många olika ord kan bildas?</li><li>Om alla orden ordnas i bokstavsordning, vilket nummer får ordet <em>KNOTAF</em>?</li></ol>",
-    "s": "<p><strong>a)</strong> Alla 6 bokstäver är olika, så antalet ord är</p><p>\\[6!=720.\\]</p><p><strong>b)</strong> Vi räknar hur många ord som kommer före <em>KNOTAF</em> i lexikografisk ordning.</p><p>Första bokstaven är K. Före K finns A och F.</p><p>Med A först finns \\(5!=120\\) ord och med F först finns också \\(5!=120\\) ord. Alltså 240 ord före.</p><p>Bland ord som börjar på K är andra bokstaven N. När K är valt återstår A, F, N, O, T, och före N kommer A och F. Det ger \\(2\\cdot 4!=48\\) ord.</p><p>Nu är vi på 288.</p><p>Tredje bokstaven är O. Efter K och N återstår A, F, O, T. Före O kommer A och F, alltså \\(2\\cdot 3!=12\\) ord. Nu 300.</p><p>Fjärde bokstaven är T. Efter K, N, O återstår A, F, T. Före T kommer A och F, alltså \\(2\\cdot 2!=4\\) ord. Nu 304.</p><p>Femte bokstaven är A. Efter K, N, O, T återstår A och F. Ingen bokstav kommer före A, alltså 0 nya ord.</p><p>Alltså finns 304 ord före <em>KNOTAF</em>. Därför får ordet nummer <strong>305</strong>.</p>"
+    "s": "<p><strong>a)</strong> Alla 6 bokstäver är olika, så antalet ord är</p><p>\\[6!=720.\\]</p><p><strong>b)</strong> Vi räknar hur många ord som kommer före <em>KNOTAF</em> i lexikografisk ordning.</p><p>Första bokstaven är K. Före K finns A och F.</p><p>Med A först finns \\(5!=120\\) ord och med F först finns också \\(5!=120\\) ord. Alltså 240 ord före.</p><p>Bland ord som börjar på K är andra bokstaven N. När K är valt återstår A, F, N, O, T, och före N kommer A och F. Det ger \\(2\\cdot 4!=48\\) ord.</p><p>Nu är vi på 288.</p><p>Tredje bokstaven är O. Efter K och N återstår A, F, O, T. Före O kommer A och F, alltså \\(2\\cdot 3!=12\\) ord. Nu 300.</p><p>Fjärde bokstaven är T. Efter K, N, O återstår A, F, T. Före T kommer A och F, alltså \\(2\\cdot 2!=4\\) ord. Nu 304.</p><p>Femte bokstaven är A. Efter K, N, O, T återstår A och F. Ingen bokstav kommer före A, alltså 0 nya ord.</p><p>Alltså finns 304 ord före <em>KNOTAF</em>. Därför får ordet nummer <strong>305</strong>.</p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1021,8 +1225,10 @@ window.BANKMATF1 = [
     "typ": "permutationer med grannvillkor",
     "poang": "0/1/2",
     "id": "1.123",
-    "t": "<span class=\"fig\"><svg width=\"430\" height=\"175\" viewBox=\"0 0 440 180\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Hylla med tolv platser i rad\">\n<rect width=\"440\" height=\"180\" fill=\"white\"/>\n<rect x=\"30\" y=\"42\" width=\"378\" height=\"80\" fill=\"none\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"61.5\" y1=\"42\" x2=\"61.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"93.0\" y1=\"42\" x2=\"93.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"124.5\" y1=\"42\" x2=\"124.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"156.0\" y1=\"42\" x2=\"156.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"187.5\" y1=\"42\" x2=\"187.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"219.0\" y1=\"42\" x2=\"219.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"250.5\" y1=\"42\" x2=\"250.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"282.0\" y1=\"42\" x2=\"282.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"313.5\" y1=\"42\" x2=\"313.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"345.0\" y1=\"42\" x2=\"345.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"376.5\" y1=\"42\" x2=\"376.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"408.0\" y1=\"42\" x2=\"408.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/>\n\n<rect x=\"30\" y=\"42\" width=\"31.5\" height=\"80\" fill=\"#2C62A8\" fill-opacity=\".13\"/>\n<text x=\"46\" y=\"90\" font-size=\"16\" text-anchor=\"middle\">A</text>\n<rect x=\"187.5\" y=\"42\" width=\"31.5\" height=\"80\" fill=\"#2E7D52\" fill-opacity=\".13\"/>\n<text x=\"203\" y=\"90\" font-size=\"16\" text-anchor=\"middle\">B</text>\n</svg></span><p>Tolv olika kemiska ämnen ska placeras på en hylla. Ämne A och ämne B får inte stå bredvid varandra eftersom de kan reagera med varandra.</p><p>På hur många sätt kan ämnena placeras?</p>",
-    "s": "<p>Vi räknar först alla möjliga ordningar och drar sedan bort de förbjudna.</p><p>Totalt antal ordningar av 12 olika ämnen är</p><p>\\[12!.\\]</p><p>Om A och B står bredvid varandra kan de ses som ett block. Då har vi blocket \\(AB\\) eller \\(BA\\) samt de övriga 10 ämnena, alltså totalt 11 objekt att ordna.</p><p>Det ger</p><p>\\[2\\cdot 11!\\]</p><p>förbjudna ordningar.</p><p>Alltså blir antalet tillåtna ordningar</p><p>\\[12!-2\\cdot 11!=11!(12-2)=10\\cdot 11!.\\]</p><p><strong>Svaret är \\(399\\,168\\,000\\).</strong></p>"
+    "t": "<span class=\"fig\"><svg width=\"430\" height=\"175\" viewBox=\"0 0 440 180\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Hylla med tolv platser i rad\">\n<rect width=\"440\" height=\"180\" fill=\"white\"/>\n<rect x=\"30\" y=\"42\" width=\"378\" height=\"80\" fill=\"none\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"61.5\" y1=\"42\" x2=\"61.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"93.0\" y1=\"42\" x2=\"93.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"124.5\" y1=\"42\" x2=\"124.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"156.0\" y1=\"42\" x2=\"156.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"187.5\" y1=\"42\" x2=\"187.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"219.0\" y1=\"42\" x2=\"219.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"250.5\" y1=\"42\" x2=\"250.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"282.0\" y1=\"42\" x2=\"282.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"313.5\" y1=\"42\" x2=\"313.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"345.0\" y1=\"42\" x2=\"345.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"376.5\" y1=\"42\" x2=\"376.5\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/><line x1=\"408.0\" y1=\"42\" x2=\"408.0\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.2\"/>\n<text x=\"219\" y=\"150\" font-size=\"15\" text-anchor=\"middle\">12 platser i rad – A och B får inte bli grannar</text>\n<rect x=\"30\" y=\"42\" width=\"31.5\" height=\"80\" fill=\"#2C62A8\" fill-opacity=\".13\"/>\n<text x=\"46\" y=\"90\" font-size=\"16\" text-anchor=\"middle\">A</text>\n<rect x=\"187.5\" y=\"42\" width=\"31.5\" height=\"80\" fill=\"#2E7D52\" fill-opacity=\".13\"/>\n<text x=\"203\" y=\"90\" font-size=\"16\" text-anchor=\"middle\">B</text>\n</svg></span><p>Tolv olika kemiska ämnen ska placeras på en hylla. Ämne A och ämne B får inte stå bredvid varandra eftersom de kan reagera med varandra.</p><p>På hur många sätt kan ämnena placeras?</p>",
+    "s": "<p>Vi räknar först alla möjliga ordningar och drar sedan bort de förbjudna.</p><p>Totalt antal ordningar av 12 olika ämnen är</p><p>\\[12!.\\]</p><p>Om A och B står bredvid varandra kan de ses som ett block. Då har vi blocket \\(AB\\) eller \\(BA\\) samt de övriga 10 ämnena, alltså totalt 11 objekt att ordna.</p><p>Det ger</p><p>\\[2\\cdot 11!\\]</p><p>förbjudna ordningar.</p><p>Alltså blir antalet tillåtna ordningar</p><p>\\[12!-2\\cdot 11!=11!(12-2)=10\\cdot 11!.\\]</p><p><strong>Svaret är \\(399\\,168\\,000\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1032,7 +1238,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Sex olika personer ställer sig i en kö. På hur många sätt kan de stå?</p>",
     "s": "<p>Alla sex personer är olika och alla platser används. Antalet permutationer är</p><p>\\[6!=720.\\]</p><p><strong>720 sätt</strong>.</p>",
-    "id": "1.136"
+    "id": "1.136",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1042,7 +1250,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"480\" height=\"180\" viewBox=\"0 0 480 185\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Bokstavsbrickor för ordet ANANAS där A förekommer tre gånger och N två gånger\">\n<rect width=\"480\" height=\"185\" fill=\"white\"/>\n<rect x=\"79.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"102.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"134.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"157.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">N</text><rect x=\"189.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"212.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"244.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#B48A18\" fill-opacity=\".16\" stroke=\"#B48A18\" stroke-width=\"2\"/><text x=\"267.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">N</text><rect x=\"299.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/><text x=\"322.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">A</text><rect x=\"354.5\" y=\"52\" width=\"46\" height=\"46\" rx=\"6\" fill=\"#999\" fill-opacity=\".04\" stroke=\"#999\" stroke-width=\"2\"/><text x=\"377.5\" y=\"83\" font-size=\"22\" text-anchor=\"middle\" fill=\"#222\">S</text><text x=\"160\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#2C62A8\">A: 3 gånger</text><text x=\"320\" y=\"145\" font-size=\"14.5\" text-anchor=\"middle\" fill=\"#B48A18\">N: 2 gånger</text>\n<text x=\"240\" y=\"173\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">6 brickor med upprepade bokstäver</text>\n</svg></span><p>Hur många olika bokstavsordningar kan bildas av bokstäverna i ordet ANANAS?</p>",
     "s": "<p>Det finns 6 bokstäver: A förekommer 3 gånger, N 2 gånger och S 1 gång. Därför är antalet olika ordningar</p><p>\\[\\frac{6!}{3!2!}=60.\\]</p><p><strong>60 ordningar</strong>.</p>",
-    "id": "1.137"
+    "id": "1.137",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1052,7 +1262,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Åtta elever ska stå på rad. Alva och Bo vill stå bredvid varandra. På hur många sätt kan raden ordnas?</p>",
     "s": "<p>Betrakta Alva och Bo som ett block. Då ska 7 objekt ordnas: blocket plus 6 andra elever. Det kan göras på \\(7!\\) sätt. Inne i blocket kan Alva och Bo byta plats på 2 sätt.</p><p>\\[2\\cdot7!=10\\,080.\\]</p><p><strong>10 080 sätt</strong>.</p>",
-    "id": "1.138"
+    "id": "1.138",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1060,9 +1272,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "cirkulär placering introduktion",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg width=\"450\" height=\"275\" viewBox=\"0 0 460 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Runt bord med sex platser där en plats är markerad som fixerad\">\n<rect width=\"460\" height=\"280\" fill=\"white\"/>\n<circle cx=\"225\" cy=\"140\" r=\"58\" fill=\"#999\" fill-opacity=\".10\" stroke=\"#666\" stroke-width=\"2\"/>\n<circle cx=\"225.0\" cy=\"48.0\" r=\"17\" fill=\"#B23A2E\" fill-opacity=\".14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><text x=\"225.0\" y=\"54.0\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\">1</text><circle cx=\"304.7\" cy=\"94.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"304.7\" cy=\"186.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"225.0\" cy=\"232.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"145.3\" cy=\"186.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"145.3\" cy=\"94.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n\n<text x=\"225\" y=\"262\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">Placeringar som bara är vridna räknas som samma.</text>\n</svg></span><p>Sex personer sitter runt ett runt bord. Rotationer av samma placering räknas som samma. På hur många sätt kan de placeras?</p>",
+    "t": "<span class=\"fig\"><svg width=\"450\" height=\"275\" viewBox=\"0 0 460 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Runt bord med sex platser där en plats är markerad som fixerad\">\n<rect width=\"460\" height=\"280\" fill=\"white\"/>\n<circle cx=\"225\" cy=\"140\" r=\"58\" fill=\"#999\" fill-opacity=\".10\" stroke=\"#666\" stroke-width=\"2\"/>\n<circle cx=\"225.0\" cy=\"48.0\" r=\"17\" fill=\"#B23A2E\" fill-opacity=\".14\" stroke=\"#B23A2E\" stroke-width=\"2\"/><text x=\"225.0\" y=\"54.0\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\">1</text><circle cx=\"304.7\" cy=\"94.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"304.7\" cy=\"186.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"225.0\" cy=\"232.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"145.3\" cy=\"186.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/><circle cx=\"145.3\" cy=\"94.0\" r=\"17\" fill=\"#2C62A8\" fill-opacity=\".14\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<line x1=\"243\" y1=\"46\" x2=\"300\" y2=\"36\" stroke=\"#B23A2E\" stroke-width=\"1.2\"/>\n<text x=\"306\" y=\"40\" font-size=\"14\" fill=\"#B23A2E\">en person fixeras</text>\n<text x=\"225\" y=\"262\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">Placeringar som bara är vridna räknas som samma.</text>\n</svg></span><p>Sex personer sitter runt ett runt bord. Rotationer av samma placering räknas som samma. På hur många sätt kan de placeras?</p>",
     "s": "<p>Fixera en person för att ta bort rotationerna. De övriga 5 kan ordnas på</p><p>\\[5!=120\\]</p><p>sätt.</p>",
-    "id": "1.152"
+    "id": "1.152",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1072,7 +1286,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Nio böcker står på en hylla. Tre fysikböcker ska stå tillsammans och två historieböcker ska också stå tillsammans. Alla böcker är olika. På hur många sätt kan böckerna ordnas?</p>",
     "s": "<p>Betrakta fysikböckerna som ett block och historieböckerna som ett block. Tillsammans med de 4 övriga böckerna blir det 6 objekt att ordna: \\(6!\\) sätt. Inom fysikblocket finns \\(3!\\) ordningar och inom historieblocket \\(2!\\).</p><p>\\[6!3!2!=8640.\\]</p>",
-    "id": "1.153"
+    "id": "1.153",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1082,7 +1298,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En arbetsgrupp på 5 personer ska väljas bland 7 kvinnor och 4 män. Gruppen ska innehålla minst 3 kvinnor. Hur många grupper är möjliga?</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. När bara vilka objekt som väljs är viktigt används kombinationer.</p><p>Räkna fallen 3, 4 respektive 5 kvinnor:</p><p>\\[\\binom73\\binom42+\\binom74\\binom41+\\binom75\\binom40=210+140+21=\\mathbf{371}.\\]</p>",
-    "id": "1.41"
+    "id": "1.41",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1090,9 +1308,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "fördela personer i olika grupper",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg width=\"450\" height=\"230\" viewBox=\"0 0 460 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre namngivna bilar med plats för tre, fyra respektive fem personer\">\n<rect width=\"460\" height=\"235\" fill=\"white\"/>\n<rect x=\"28\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#2C62A8\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"87\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 1</text>\n<text x=\"87\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#2C62A8\">3</text>\n<text x=\"87\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<rect x=\"166\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#2E7D52\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"225\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 2</text>\n<text x=\"225\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#2E7D52\">4</text>\n<text x=\"225\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<rect x=\"304\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#B48A18\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"363\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 3</text>\n<text x=\"363\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#B48A18\">5</text>\n<text x=\"363\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<text x=\"225\" y=\"30\" font-size=\"15\" text-anchor=\"middle\">12 personer ska fördelas</text>\n\n</svg></span><p>12 personer ska fördelas i tre namngivna bilar som tar 3, 4 respektive 5 personer. Platserna inne i bilarna spelar ingen roll. På hur många sätt kan fördelningen göras?</p>",
+    "t": "<span class=\"fig\"><svg width=\"450\" height=\"230\" viewBox=\"0 0 460 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre namngivna bilar med plats för tre, fyra respektive fem personer\">\n<rect width=\"460\" height=\"235\" fill=\"white\"/>\n<rect x=\"28\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#2C62A8\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"87\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 1</text>\n<text x=\"87\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#2C62A8\">3</text>\n<text x=\"87\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<rect x=\"166\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#2E7D52\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"225\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 2</text>\n<text x=\"225\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#2E7D52\">4</text>\n<text x=\"225\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<rect x=\"304\" y=\"52\" width=\"118\" height=\"132\" rx=\"10\" fill=\"#B48A18\" fill-opacity=\".06\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"363\" y=\"76\" font-size=\"15\" text-anchor=\"middle\">Bil 3</text>\n<text x=\"363\" y=\"130\" font-size=\"26\" text-anchor=\"middle\" fill=\"#B48A18\">5</text>\n<text x=\"363\" y=\"156\" font-size=\"14\" text-anchor=\"middle\" fill=\"#555\">platser</text>\n<text x=\"225\" y=\"30\" font-size=\"15\" text-anchor=\"middle\">12 personer ska fördelas</text>\n<text x=\"225\" y=\"212\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">Bilarna är namngivna, så det spelar roll i vilken bil man hamnar.</text>\n</svg></span><p>12 personer ska fördelas i tre namngivna bilar som tar 3, 4 respektive 5 personer. Platserna inne i bilarna spelar ingen roll. På hur många sätt kan fördelningen göras?</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. När bara vilka objekt som väljs är viktigt används kombinationer.</p><p>Välj först 3 till första bilen och sedan 4 av de återstående 9 till den andra. Resten går i tredje:</p><p>\\[\\binom{12}{3}\\binom94=\\mathbf{27\\,720}.\\]</p>",
-    "id": "1.42"
+    "id": "1.42",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1102,7 +1322,9 @@ window.BANKMATF1 = [
     "poang": "0/0/3",
     "t": "<p>Visa kombinatoriskt att</p><p>\\[\\binom n2+\\binom n1=\\binom{n+1}{2}.\\]</p>",
     "s": "<p>Tänk en grupp med \\(n+1\\) personer där en särskild person heter P. Antalet par är \\(\\binom{n+1}{2}\\). Dela paren i två typer: par utan P, \\(\\binom n2\\), och par med P, där den andra personen kan väljas på \\(\\binom n1=n\\) sätt. Därför måste <strong>\\(\\binom n2+\\binom n1=\\binom{n+1}{2}\\)</strong>.</p>",
-    "id": "1.43"
+    "id": "1.43",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1112,7 +1334,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En arbetsgrupp med 5 personer ska väljas bland 7 elever från NA och 6 elever från TE. Gruppen ska innehålla minst 2 elever från varje program.</p><p>På hur många sätt kan gruppen väljas?</p>",
     "s": "<p><strong>Metod:</strong> Kontrollera först om ordningen spelar roll. När bara vilka objekt som väljs är viktigt används kombinationer.</p><p>Eftersom gruppen har 5 personer är de möjliga fördelningarna \\(2+3\\) eller \\(3+2\\).</p><p>\\[\\binom72\\binom63+\\binom73\\binom62=21\\cdot20+35\\cdot15=945.\\]</p><p><strong>945 grupper</strong>.</p>",
-    "id": "1.48"
+    "id": "1.48",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1122,7 +1346,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Fyra sensorer ska väljas ur en uppsättning med 12 olika sensorer. Ordningen spelar ingen roll.</p><p>Hur många urval finns?</p>",
     "s": "<p><strong>Idé:</strong> Vi väljer vilka 4 sensorer som ska ingå. Sensorernas inbördes ordning spelar ingen roll, så vi använder en kombination.</p><p>\\[\\binom{12}{4}=\\frac{12!}{4!8!}=\\mathbf{495}.\\]</p>",
-    "id": "1.79"
+    "id": "1.79",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1132,7 +1358,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>En pizza ska få exakt 3 olika toppings från en lista med 9 toppings.</p><p>Hur många olika pizzor kan skapas om ordningen på toppingarna inte spelar roll?</p>",
     "s": "<p><strong>Idé:</strong> En pizza bestäms av vilka tre toppings som väljs, inte av i vilken ordning vi nämner dem. Därför använder vi kombinationer.</p><p>\\[\\binom93=\\frac{9!}{3!6!}=\\mathbf{84}.\\]</p>",
-    "id": "1.80"
+    "id": "1.80",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1142,7 +1370,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>En kommitté med 6 personer ska väljas bland 8 elever från grupp A och 7 elever från grupp B. Kommittén ska innehålla minst 2 personer från varje grupp.</p><p>Hur många kommittéer är möjliga?</p>",
     "s": "<p><strong>Idé:</strong> Eftersom kommittén har 6 personer och minst 2 ska komma från varje grupp finns tre möjliga fördelningar: \\((2,4),(3,3),(4,2)\\).</p><p>\\[\\binom{8}{2}\\binom74+\\binom83\\binom73+\\binom84\\binom72\\]</p><p>\\[=28\\cdot35+56\\cdot35+70\\cdot21=\\mathbf{4410}.\\]</p>",
-    "id": "1.81"
+    "id": "1.81",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1152,7 +1382,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En tränare ska välja 5 spelare till en övning. Det finns 3 målvakter och 12 utespelare. Exakt en av de fem ska vara målvakt.</p><p>Hur många lag kan väljas?</p>",
     "s": "<p><strong>Idé:</strong> Kravet ”exakt en målvakt” delar urvalet i två oberoende val: en målvakt och fyra utespelare.</p><p>Välj målvakten på \\(\\binom{3}{1}=3\\) sätt och utespelarna på \\(\\binom{12}{4}=495\\) sätt.</p><p>\\[\\binom{3}{1}\\binom{12}{4}=3\\cdot495=\\mathbf{1485}.\\]</p>",
-    "id": "1.82"
+    "id": "1.82",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1162,7 +1394,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett övningsprov ska innehålla 5 uppgifter. Läraren har 8 algebrauppgifter och 6 kombinatorikuppgifter. Provet ska innehålla minst en uppgift från varje område.</p><p>Hur många olika prov kan skapas om uppgifternas ordning inte spelar roll?</p>",
     "s": "<p><strong>Komplementmetod:</strong> Börja med alla sätt att välja 5 av 14 och ta bort proven som bara innehåller ett område.</p><p>\\[\\binom{14}{5}-\\binom85-\\binom65=2002-56-6=\\mathbf{1940}.\\]</p>",
-    "id": "1.83"
+    "id": "1.83",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1172,7 +1406,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett projektteam med 5 personer ska väljas bland 12 personer. Två av personerna är specialister A och B. Teamet måste innehålla minst en av specialisterna.</p><p>Hur många team är möjliga?</p>",
     "s": "<p><strong>Komplementmetod:</strong> Räkna alla team och ta bort dem som inte innehåller någon av specialisterna.</p><p>\\[\\binom{12}{5}-\\binom{10}{5}=792-252=\\mathbf{540}.\\]</p>",
-    "id": "1.84"
+    "id": "1.84",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1182,7 +1418,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fyra forskningsidéer ska väljas bland 10 olika idéer. Två bestämda idéer, A och B, får inte båda väljas.</p><p>Hur många urval är möjliga?</p>",
     "s": "<p>Räkna alla fyrgrupper och ta bort dem som innehåller både A och B.</p><p>\\[\\binom{10}{4}-\\binom{8}{2}=210-28=\\mathbf{182}.\\]</p><p>I den andra termen är A och B redan valda, så endast två platser återstår.</p>",
-    "id": "1.85"
+    "id": "1.85",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1192,7 +1430,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Sex uppgifter ska väljas från en bank med 4 analysuppgifter, 5 kombinatorikuppgifter och 3 talteoriuppgifter. Minst en uppgift från varje område måste ingå.</p><p>Hur många olika sexuppgiftsprov kan skapas?</p>",
     "s": "<p><strong>Idé:</strong> Använd komplement och inklusion–exklusion.</p><p>Totalt finns \\(\\binom{12}{6}=924\\) urval.</p><p>Utan analys: \\(\\binom86=28\\). Utan kombinatorik: \\(\\binom76=7\\). Utan talteori: \\(\\binom96=84\\).</p><p>Det går inte att välja 6 uppgifter från bara ett av de tre områdena, så inga dubbelborttagna fall behöver läggas tillbaka.</p><p>\\[924-28-7-84=\\mathbf{805}.\\]</p>",
-    "id": "1.86"
+    "id": "1.86",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1202,7 +1442,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Två representanter ska väljas bland 9 elever. Roller eller ordning spelar ingen roll.</p><p>Hur många par kan väljas?</p>",
     "s": "<p><strong>Idé:</strong> Roller saknas, så paret \\(\\{A,B\\}\\) är samma urval som \\(\\{B,A\\}\\). Ordningen spelar alltså inte roll.</p><p>\\[\\binom92=\\frac{9\\cdot8}{2}=\\mathbf{36}.\\]</p>",
-    "id": "1.87"
+    "id": "1.87",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1212,7 +1454,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En grupp på 5 personer ska väljas bland 4 erfarna och 8 nya deltagare. Gruppen ska innehålla exakt 2 erfarna.</p><p>Hur många grupper är möjliga?</p>",
     "s": "<p><strong>Idé:</strong> Kravet ”exakt 2 erfarna” betyder att de övriga 3 personerna måste vara nya. Valen görs oberoende inom de två kategorierna.</p><p>\\[\\binom42\\binom83=6\\cdot56=\\mathbf{336}.\\]</p>",
-    "id": "1.88"
+    "id": "1.88",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1222,7 +1466,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fem laboratorieprover ska väljas bland 7 jordprover och 5 vattenprover. Högst ett vattenprov får väljas.</p><p>Hur många urval finns?</p>",
     "s": "<p><strong>Idé:</strong> ”Högst ett” betyder två fall: 0 eller 1 vattenprov.</p><p>0 vattenprov: \\(\\binom75=21\\).</p><p>1 vattenprov: \\(\\binom51\\binom74=5\\cdot35=175\\).</p><p>Totalt \\(21+175=\\mathbf{196}\\).</p>",
-    "id": "1.89"
+    "id": "1.89",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1232,7 +1478,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Sex fotografier ska väljas till en utställning bland 10 landskapsbilder och 8 porträtt. Exakt lika många bilder av varje typ ska väljas.</p><p>Hur många urval finns?</p>",
     "s": "<p><strong>Idé:</strong> Eftersom totalt 6 bilder ska väljas och antalet av de två typerna ska vara lika, måste urvalet bestå av 3 landskapsbilder och 3 porträtt.</p><p>Landskapsbilderna kan väljas på \\(\\binom{10}{3}\\) sätt och porträtten på \\(\\binom83\\) sätt. Valen kan kombineras fritt:</p><p>\\[\\binom{10}{3}\\binom83=120\\cdot56=\\mathbf{6720}.\\]</p>",
-    "id": "1.90"
+    "id": "1.90",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1242,7 +1490,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Ett sexmannalag ska väljas bland 5 försvarare, 5 mittfältare och 4 anfallare. Laget ska innehålla minst en spelare från varje positionstyp och minst 2 försvarare.</p><p>Hur många lag kan väljas?</p>",
     "s": "<p><strong>Idé:</strong> Dela upp efter antalet försvarare.</p><p><strong>2 försvarare:</strong> fördelningarna för mittfältare/anfallare är \\((1,3),(2,2),(3,1)\\):</p><p>\\[\\binom{5}{2}\\left(\\binom51\\binom43+\\binom{5}{2}\\binom42+\\binom53\\binom41\\right)=1200.\\]</p><p><strong>3 försvarare:</strong> \\((1,2),(2,1)\\):</p><p>\\[\\binom53\\left(\\binom51\\binom42+\\binom{5}{2}\\binom41\\right)=700.\\]</p><p><strong>4 försvarare:</strong> en mittfältare och en anfallare:</p><p>\\[\\binom54\\binom51\\binom41=100.\\]</p><p>Totalt <strong>\\(1200+700+100=2000\\)</strong> lag.</p>",
-    "id": "1.91"
+    "id": "1.91",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1252,7 +1502,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En kommitté med 5 personer ska väljas bland 12 personer. Exakt en av två bestämda personer, A och B, ska ingå.</p><p>Hur många kommittéer är möjliga?</p>",
     "s": "<p><strong>Idé:</strong> Kravet ”exakt en av A och B” innebär två symmetriska fall: A är med och B är inte med, eller B är med och A är inte med.</p><p>Välj först vilken av A och B som ska ingå: 2 möjligheter. När den personen är vald återstår 4 platser, och de väljs bland de 10 personer som varken är A eller B:</p><p>\\[2\\binom{10}{4}=2\\cdot210=\\mathbf{420}.\\]</p>",
-    "id": "1.92"
+    "id": "1.92",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1262,7 +1514,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg height=\"340\" width=\"470\" viewBox=\"0 0 470 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rutnät från A till B med fem steg åt höger och tre steg upp\"><rect width=\"470\" height=\"340\" fill=\"white\"/><g stroke=\"#bbb\" stroke-width=\"1.2\"><line x1=\"70\" y1=\"55\" x2=\"70\" y2=\"235\"/><line x1=\"130\" y1=\"55\" x2=\"130\" y2=\"235\"/><line x1=\"190\" y1=\"55\" x2=\"190\" y2=\"235\"/><line x1=\"250\" y1=\"55\" x2=\"250\" y2=\"235\"/><line x1=\"310\" y1=\"55\" x2=\"310\" y2=\"235\"/><line x1=\"370\" y1=\"55\" x2=\"370\" y2=\"235\"/><line x1=\"70\" y1=\"55\" x2=\"370\" y2=\"55\"/><line x1=\"70\" y1=\"115\" x2=\"370\" y2=\"115\"/><line x1=\"70\" y1=\"175\" x2=\"370\" y2=\"175\"/><line x1=\"70\" y1=\"235\" x2=\"370\" y2=\"235\"/></g><circle cx=\"70\" cy=\"235\" r=\"5\" fill=\"#222\"/><circle cx=\"370\" cy=\"55\" r=\"5\" fill=\"#222\"/><text x=\"48\" y=\"258\" font-size=\"18\">A</text><text x=\"382\" y=\"52\" font-size=\"18\">B</text><text x=\"125\" y=\"280\" font-size=\"15\">endast höger eller upp</text></svg></span><p>En robot ska gå från A till B längs rutnätets linjer. Den får bara gå åt höger eller upp och ska ta en kortaste väg.</p><p>Hur många olika kortaste vägar finns?</p>",
     "s": "<p>Varje kortaste väg består av exakt 5 steg åt höger och 3 steg upp, totalt 8 steg.</p><p>En väg bestäms av vilka 3 av de 8 stegen som är uppsteg. Därför är antalet</p><p>\\[\\binom83=\\mathbf{56}.\\]</p>",
-    "id": "1.93"
+    "id": "1.93",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1272,7 +1526,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett prov ska bestå av 5 uppgifter valda bland 8. Två bestämda uppgifter måste vara med.</p><p>Hur många olika prov kan skapas om ordningen inte spelar roll?</p>",
     "s": "<p><strong>Idé:</strong> De två obligatoriska uppgifterna är redan bestämda och behöver inte väljas igen. Av provets fem platser återstår därför tre.</p><p>Dessa tre uppgifter väljs bland de 6 uppgifter som inte är obligatoriska:</p><p>\\[\\binom63=\\mathbf{20}.\\]</p>",
-    "id": "1.94"
+    "id": "1.94",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1282,7 +1538,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.124",
     "t": "<p>En klass har 11 elever. Tre av dem ska väljas till elevrådet.</p><p>På hur många sätt kan valet göras?</p>",
-    "s": "<p>Här spelar ordningen ingen roll. Vi ska alltså välja 3 elever av 11, vilket är en kombination:</p><p>\\[\\binom{11}{3}=\\frac{11!}{3!\\,8!}=165.\\]</p><p><strong>Det finns 165 möjliga elevråd.</strong></p>"
+    "s": "<p>Här spelar ordningen ingen roll. Vi ska alltså välja 3 elever av 11, vilket är en kombination:</p><p>\\[\\binom{11}{3}=\\frac{11!}{3!\\,8!}=165.\\]</p><p><strong>Det finns 165 möjliga elevråd.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1292,7 +1550,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "id": "1.125",
     "t": "<p>David ska köpa 12 burkar energidryck. Det finns 4 olika smaker att välja mellan.</p><ol type=\"a\"><li>På hur många sätt kan han välja 12 burkar om bara antalet av varje smak spelar roll?</li><li>På hur många sätt kan han välja burkarna om han vill ha minst en av varje smak?</li></ol>",
-    "s": "<p><strong>a)</strong> Låt \\(x_1,x_2,x_3,x_4\\) vara antalet burkar av de fyra smakerna. Då söker vi antalet heltalslösningar till</p><p>\\[x_1+x_2+x_3+x_4=12\\]</p><p>där varje \\(x_i\\) är 0 eller positivt.</p><p>Ett sätt att räkna är att tänka de 12 burkarna som 12 markeringar och skilja de fyra smakerna åt med tre streck. Vi ordnar alltså 12 markeringar och 3 streck i en rad. Det räcker att välja vilka 3 av de 15 platserna som ska innehålla streck:</p><p>\\[\\binom{15}{3}=455.\\]</p><p><strong>b)</strong> Om minst en burk av varje smak ska väljas lägger vi först undan en burk av varje smak. Då återstår 8 burkar att fördela fritt mellan de fyra smakerna.</p><p>Det motsvarar 8 markeringar och 3 streck, alltså</p><p>\\[\\binom{11}{3}=165.\\]</p><p><strong>Svar:</strong> a) 455 sätt, b) 165 sätt.</p>"
+    "s": "<p><strong>a)</strong> Låt \\(x_1,x_2,x_3,x_4\\) vara antalet burkar av de fyra smakerna. Då söker vi antalet heltalslösningar till</p><p>\\[x_1+x_2+x_3+x_4=12\\]</p><p>där varje \\(x_i\\) är 0 eller positivt.</p><p>Ett sätt att räkna är att tänka de 12 burkarna som 12 markeringar och skilja de fyra smakerna åt med tre streck. Vi ordnar alltså 12 markeringar och 3 streck i en rad. Det räcker att välja vilka 3 av de 15 platserna som ska innehålla streck:</p><p>\\[\\binom{15}{3}=455.\\]</p><p><strong>b)</strong> Om minst en burk av varje smak ska väljas lägger vi först undan en burk av varje smak. Då återstår 8 burkar att fördela fritt mellan de fyra smakerna.</p><p>Det motsvarar 8 markeringar och 3 streck, alltså</p><p>\\[\\binom{11}{3}=165.\\]</p><p><strong>Svar:</strong> a) 455 sätt, b) 165 sätt.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1302,7 +1562,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Fyra elever ska väljas ur en grupp med 13 elever. På hur många sätt kan gruppen väljas?</p>",
     "s": "<p>Ordningen spelar ingen roll, alltså används kombinationer:</p><p>\\[\\binom{13}{4}=715.\\]</p><p><strong>715 grupper</strong>.</p>",
-    "id": "1.139"
+    "id": "1.139",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1312,7 +1574,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En glassbar har 9 smaker. Du väljer 3 olika smaker till en bägare. På hur många sätt kan valet göras?</p>",
     "s": "<p>Vi väljer 3 av 9 smaker utan hänsyn till ordning:</p><p>\\[\\binom93=84.\\]</p><p><strong>84 val</strong>.</p>",
-    "id": "1.140"
+    "id": "1.140",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1322,7 +1586,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En projektgrupp på 6 personer ska väljas bland 8 elever från klass A och 7 från klass B. Gruppen ska innehålla exakt 4 från klass A. Hur många grupper finns?</p>",
     "s": "<p>Välj 4 av de 8 från A och 2 av de 7 från B:</p><p>\\[\\binom84\\binom72=70\\cdot21=1470.\\]</p><p><strong>1470 grupper</strong>.</p>",
-    "id": "1.141"
+    "id": "1.141",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1332,7 +1598,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En kommitté på 5 personer väljs bland 6 tekniker och 5 ekonomer. Minst 2 ekonomer ska vara med. Hur många kommittéer är möjliga?</p>",
     "s": "<p>Räkna fallen med 2, 3, 4 eller 5 ekonomer:</p><p>\\[\\binom52\\binom63+\\binom53\\binom62+\\binom54\\binom61+\\binom55\\binom60\\]</p><p>\\[=10\\cdot20+10\\cdot15+5\\cdot6+1=381.\\]</p><p><strong>381 kommittéer</strong>.</p>",
-    "id": "1.142"
+    "id": "1.142",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1342,7 +1610,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Hur många femkortshänder kan väljas ur en kortlek med 52 olika kort?</p>",
     "s": "<p>Ordningen spelar ingen roll:</p><p>\\[\\binom{52}{5}=2\\,598\\,960.\\]</p>",
-    "id": "1.154"
+    "id": "1.154",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1352,7 +1622,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Två representanter ska väljas bland 14 elever. Hur många par är möjliga?</p>",
     "s": "<p>\\[\\binom{14}{2}=91.\\]</p>",
-    "id": "1.155"
+    "id": "1.155",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1362,7 +1634,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fem personer ska väljas bland 12. Två särskilda personer, A och B, får inte båda ingå samtidigt. Hur många grupper är möjliga?</p>",
     "s": "<p>Totalt finns \\(\\binom{12}{5}\\) grupper. Förbjudna grupper innehåller både A och B; då väljs de övriga 3 bland 10 personer:</p><p>\\[\\binom{12}{5}-\\binom{10}{3}=792-120=672.\\]</p>",
-    "id": "1.156"
+    "id": "1.156",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1372,7 +1646,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ur 12 personer ska en kommitté med 4 personer väljas. Hur många olika kommittéer finns?</p>",
     "s": "<p>Ordningen spelar ingen roll, så vi använder kombinationer:</p><p>\\[\\binom{12}{4}=495.\\]</p><p><strong>Svar: 495 kommittéer.</strong></p>",
-    "id": "1.187"
+    "id": "1.187",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1382,7 +1658,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Sex olika fotografier ska hängas på rad. På hur många sätt kan de ordnas?</p>",
     "s": "<p>Alla sex används och ordningen spelar roll:</p><p>\\[6!=720.\\]</p><p><strong>Svar: 720 ordningar.</strong></p>",
-    "id": "1.188"
+    "id": "1.188",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1392,7 +1670,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en förening med 14 medlemmar ska en ordförande och en vice ordförande väljas. Samma person kan inte ha båda rollerna.</p><p>Hur många val är möjliga?</p>",
     "s": "<p>Rollerna är olika, så ordningen spelar roll. Det finns 14 val till ordförande och sedan 13 val till vice ordförande:</p><p>\\[14\\cdot13=182.\\]</p><p><strong>Svar: 182.</strong></p>",
-    "id": "1.189"
+    "id": "1.189",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1402,7 +1682,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En pizza ska få exakt 3 olika toppings av 8 möjliga. Ordningen spelar ingen roll.</p><p>Hur många val finns?</p>",
     "s": "<p>Vi väljer 3 av 8 utan ordning:</p><p>\\[\\binom83=56.\\]</p><p><strong>Svar: 56.</strong></p>",
-    "id": "1.190"
+    "id": "1.190",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1412,7 +1694,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Av 9 löpare ska fyra väljas ut och placeras på fyra olika stafettsträckor. Hur många laguppställningar finns?</p>",
     "s": "<p>Vi väljer fyra personer och sträckorna är olika, så ordningen spelar roll:</p><p>\\[P(9,4)=9\\cdot8\\cdot7\\cdot6=3024.\\]</p><p><strong>Svar: 3024.</strong></p>",
-    "id": "1.191"
+    "id": "1.191",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1422,7 +1706,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Tio personer sätter sig runt ett runt bord. Två placeringar som bara skiljer sig genom att alla har roterat lika mycket räknas som samma.</p><p>Hur många olika placeringar finns?</p>",
     "s": "<p>Fixera en person på en plats för att ta bort rotationerna. De övriga 9 personerna kan sedan ordnas på</p><p>\\[9!=362\\,880\\]</p><p>sätt. <strong>Svar: 362 880 placeringar.</strong></p>",
-    "id": "1.192"
+    "id": "1.192",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1432,7 +1718,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En grupp består av 8 kvinnor och 7 män. En kommitté med 5 personer ska väljas med exakt 3 kvinnor.</p><p>Hur många kommittéer finns?</p>",
     "s": "<p>Välj först 3 av de 8 kvinnorna och sedan 2 av de 7 männen:</p><p>\\[\\binom83\\binom72=56\\cdot21=1176.\\]</p><p><strong>Svar: 1176.</strong></p>",
-    "id": "1.193"
+    "id": "1.193",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1442,7 +1730,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Sju olika böcker ska ställas på en hylla. Fyra av dem är matematikböcker och ska stå tillsammans.</p><p>Hur många ordningar är möjliga?</p>",
     "s": "<p>Betrakta de fyra matematikböckerna som ett block. Då finns blocket och tre andra böcker, alltså 4 objekt, som kan ordnas på \\(4!\\) sätt.</p><p>Inuti blocket kan de fyra matematikböckerna ordnas på \\(4!\\) sätt.</p><p>\\[4!\\cdot4!=24\\cdot24=576.\\]</p><p><strong>Svar: 576.</strong></p>",
-    "id": "1.194"
+    "id": "1.194",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1452,7 +1742,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Sju personer ska stå på rad. Två bestämda personer får inte stå bredvid varandra.</p><p>Hur många ordningar är möjliga?</p>",
     "s": "<p>Alla ordningar: \\(7!=5040\\).</p><p>Ordningar där de två står tillsammans: behandla dem som ett block. Då finns 6 objekt att ordna och två interna ordningar:</p><p>\\[2\\cdot6!=1440.\\]</p><p>Tillåtna ordningar:</p><p>\\[5040-1440=3600.\\]</p><p><strong>Svar: 3600.</strong></p>",
-    "id": "1.195"
+    "id": "1.195",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1462,7 +1754,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Fem elever och tre lärare ska stå på rad. Ingen lärare får stå bredvid en annan lärare.</p><p>Hur många ordningar är möjliga?</p>",
     "s": "<p>Ordna först de fem eleverna: \\(5!\\) sätt.</p><p>De skapar 6 möjliga luckor för lärare:</p><p>\\[_E_E_E_E_E_\\]</p><p>Välj 3 av dessa 6 luckor och placera sedan de tre olika lärarna i de valda luckorna:</p><p>\\[5!\\binom63 3!=120\\cdot20\\cdot6=14\\,400.\\]</p><p><strong>Svar: 14 400.</strong></p>",
-    "id": "1.196"
+    "id": "1.196",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1472,7 +1766,9 @@ window.BANKMATF1 = [
     "poang": "0/0/3",
     "t": "<p>I utvecklingen av \\((1+ax)^8\\) är koefficienten framför \\(x^3\\) fyra gånger så stor som koefficienten framför \\(x^2\\). Bestäm det värde på \\(a\\) som inte är noll.</p>",
     "s": "<p><strong>Metod:</strong> Identifiera vilken term i binomialutvecklingen som kan ge den efterfrågade potensen och bestäm sedan koefficienten.</p><p>Koefficienterna är \\(\\binom83a^3=56a^3\\) och \\(\\binom{8}{2}a^2=28a^2\\). Villkoret ger \\(56a^3=4\\cdot28a^2\\). För \\(a\\ne0\\): \\(56a=112\\), alltså <strong>\\(a=2\\)</strong>.</p>",
-    "id": "1.44"
+    "id": "1.44",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1482,7 +1778,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm koefficienten framför \\(x^5\\) i utvecklingen av \\((2x-3)^8\\).</p>",
     "s": "<p>En allmän term är \\(\\binom8k(2x)^{8-k}(-3)^k\\). För att få \\(x^5\\) måste \\(8-k=5\\), alltså \\(k=3\\).</p><p>Koefficienten blir</p><p>\\[\\binom83 2^5(-3)^3=56\\cdot32\\cdot(-27)=\\mathbf{-48\\,384}.\\]</p>",
-    "id": "1.49"
+    "id": "1.49",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1492,7 +1790,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm koefficienten framför \\(x^3\\) i utvecklingen av \\((1+2x)^5\\).</p>",
     "s": "<p>För att få \\(x^3\\) väljs termen \\(2x\\) från exakt 3 av de 5 faktorerna. Det kan göras på \\(\\binom53\\) sätt.</p><p>\\[\\binom53 2^3=10\\cdot8=\\mathbf{80}.\\]</p>",
-    "id": "1.95"
+    "id": "1.95",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1502,7 +1802,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm den konstanta termen i utvecklingen av \\[\\left(x^2+\\frac3x\\right)^6.\\]</p>",
     "s": "<p>Om \\(\\frac3x\\) väljs från \\(k\\) faktorer blir termen \\[\\binom{6}{k}(x^2)^{6-k}\\left(\\frac3x\\right)^k.\\]</p><p>Exponent på \\(x\\) är \\(2(6-k)-k=12-3k\\). För en konstant term ska exponenten vara 0, alltså \\(k=4\\).</p><p>\\[\\binom{6}{4} 3^4=15\\cdot81=\\mathbf{1215}.\\]</p>",
-    "id": "1.96"
+    "id": "1.96",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1512,7 +1814,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm koefficienten framför \\(x^4\\) i utvecklingen av \\((2-x)^7\\).</p>",
     "s": "<p><strong>Idé:</strong> För att få \\(x^4\\) måste termen \\(-x\\) väljas från exakt 4 av de 7 faktorerna. De övriga 3 faktorerna bidrar med talet 2.</p><p>Termen blir</p><p>\\[\\binom74 2^3(-x)^4.\\]</p><p>Eftersom \\((-1)^4=1\\) är koefficienten</p><p>\\[\\binom74 2^3=35\\cdot8=\\mathbf{280}.\\]</p>",
-    "id": "1.97"
+    "id": "1.97",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1522,7 +1826,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I utvecklingen av \\((1+ax)^6\\) är koefficienten framför \\(x^2\\) lika med 60.</p><p>Bestäm alla reella värden på \\(a\\).</p>",
     "s": "<p><strong>Idé:</strong> I binomialutvecklingen fås \\(x^2\\)-termen genom att välja \\(ax\\) från exakt två av de sex faktorerna.</p><p>Koefficienten är därför</p><p>\\[\\binom62 a^2=15a^2.\\]</p><p>Villkoret säger att denna koefficient är 60:</p><p>\\[15a^2=60\\Rightarrow a^2=4.\\]</p><p>Eftersom frågan gäller alla reella värden får vi <strong>\\(a=2\\) eller \\(a=-2\\)</strong>.</p>",
-    "id": "1.98"
+    "id": "1.98",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1532,7 +1838,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Bestäm den konstanta termen i utvecklingen av \\[\\left(x+\\frac{2}{x^2}\\right)^9.\\]</p>",
     "s": "<p>Om \\(\\frac{2}{x^2}\\) väljs från \\(k\\) faktorer blir exponenten på \\(x\\)</p><p>\\[(9-k)-2k=9-3k.\\]</p><p>För en konstant term krävs \\(9-3k=0\\), alltså \\(k=3\\).</p><p>Den konstanta termen är \\[\\binom93 2^3=84\\cdot8=\\mathbf{672}.\\]</p>",
-    "id": "1.99"
+    "id": "1.99",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1542,7 +1850,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med binomialsatsen att \\[\\binom n0+\\binom n1+\\cdots+\\binom nn=2^n.\\]</p>",
     "s": "<p>Utgå från binomialsatsen \\[(a+b)^n=\\sum_{k=0}^n\\binom nk a^{n-k}b^k.\\]</p><p>Sätt \\(a=1\\) och \\(b=1\\). Då blir vänsterledet \\(2^n\\) och alla potenser av 1 i högerledet blir 1:</p><p>\\[2^n=\\sum_{k=0}^n\\binom nk.\\]</p>",
-    "id": "1.100"
+    "id": "1.100",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1552,7 +1862,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Koefficienten framför \\(x^2\\) i utvecklingen av \\((1+x)^n\\) är 45. Bestäm det positiva heltalet \\(n\\).</p>",
     "s": "<p>Koefficienten framför \\(x^2\\) är \\(\\binom n2\\). Därför</p><p>\\[\\frac{n(n-1)}2=45\\Rightarrow n(n-1)=90.\\]</p><p>Två på varandra följande positiva heltal med produkten 90 är 9 och 10, alltså <strong>\\(n=10\\)</strong>.</p>",
-    "id": "1.101"
+    "id": "1.101",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1562,7 +1874,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.126",
     "t": "<p>Bestäm koefficienten framför \\(x^3\\) i utvecklingen av \\((x+2)^5\\).</p>",
-    "s": "<p>En allmän term i utvecklingen av \\((x+2)^5\\) är \\(\\binom{5}{k}x^{5-k}2^k\\).</p><p>För att få \\(x^3\\) måste \\(5-k=3\\), alltså \\(k=2\\).</p><p>Koefficienten blir därför</p><p>\\[\\binom{5}{2}\\cdot 2^2=10\\cdot4=40.\\]</p><p><strong>Koefficienten är 40.</strong></p>"
+    "s": "<p>En allmän term i utvecklingen av \\((x+2)^5\\) är \\(\\binom{5}{k}x^{5-k}2^k\\).</p><p>För att få \\(x^3\\) måste \\(5-k=3\\), alltså \\(k=2\\).</p><p>Koefficienten blir därför</p><p>\\[\\binom{5}{2}\\cdot 2^2=10\\cdot4=40.\\]</p><p><strong>Koefficienten är 40.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1572,7 +1886,9 @@ window.BANKMATF1 = [
     "poang": "0/2/1",
     "id": "1.127",
     "t": "<p>Bestäm den konstanta termen i utvecklingen av</p><p>\\[\\left(2x^2+\\frac{1}{x}\\rightight)^6.\\]</p>",
-    "s": "<p>En allmän term är</p><p>\\[\\binom{6}{k}(2x^2)^{6-k}\\left(\\frac{1}{x}\\rightight)^k=\\binom{6}{k} 2^{6-k}x^{12-3k}.\\]</p><p>Den konstanta termen fås när exponenten på \\(x\\) är 0:</p><p>\\[12-3k=0\\quad\\Rightarrow\\quad k=4.\\]</p><p>Då blir termen</p><p>\\[\\binom{6}{4} 2^{2}=15\\cdot 4=60.\\]</p><p><strong>Den konstanta termen är 60.</strong></p>"
+    "s": "<p>En allmän term är</p><p>\\[\\binom{6}{k}(2x^2)^{6-k}\\left(\\frac{1}{x}\\rightight)^k=\\binom{6}{k} 2^{6-k}x^{12-3k}.\\]</p><p>Den konstanta termen fås när exponenten på \\(x\\) är 0:</p><p>\\[12-3k=0\\quad\\Rightarrow\\quad k=4.\\]</p><p>Då blir termen</p><p>\\[\\binom{6}{4} 2^{2}=15\\cdot 4=60.\\]</p><p><strong>Den konstanta termen är 60.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1582,7 +1898,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Utveckla \\((x+3)^4\\).</p>",
     "s": "<p>Binomialkoefficienterna är 1, 4, 6, 4, 1:</p><p>\\[(x+3)^4=x^4+12x^3+54x^2+108x+81.\\]</p>",
-    "id": "1.143"
+    "id": "1.143",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1590,9 +1908,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "bestämma viss term",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg width=\"490\" height=\"300\" viewBox=\"0 0 500 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pascals triangel till och med rad sju, där rad sju är markerad\">\n<rect width=\"500\" height=\"305\" fill=\"white\"/>\n<text x=\"268.0\" y=\"44\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"44\" font-size=\"13\" fill=\"#888\">n = 0</text><text x=\"245.0\" y=\"77\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"291.0\" y=\"77\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"77\" font-size=\"13\" fill=\"#888\">n = 1</text><text x=\"222.0\" y=\"110\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"268.0\" y=\"110\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">2</text><text x=\"314.0\" y=\"110\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"110\" font-size=\"13\" fill=\"#888\">n = 2</text><text x=\"199.0\" y=\"143\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"245.0\" y=\"143\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">3</text><text x=\"291.0\" y=\"143\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">3</text><text x=\"337.0\" y=\"143\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"143\" font-size=\"13\" fill=\"#888\">n = 3</text><text x=\"176.0\" y=\"176\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"222.0\" y=\"176\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">4</text><text x=\"268.0\" y=\"176\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"314.0\" y=\"176\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">4</text><text x=\"360.0\" y=\"176\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"176\" font-size=\"13\" fill=\"#888\">n = 4</text><text x=\"153.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"199.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">5</text><text x=\"245.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">10</text><text x=\"291.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">10</text><text x=\"337.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">5</text><text x=\"383.0\" y=\"209\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"209\" font-size=\"13\" fill=\"#888\">n = 5</text><text x=\"130.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"176.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"222.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">15</text><text x=\"268.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">20</text><text x=\"314.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">15</text><text x=\"360.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"406.0\" y=\"242\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"26\" y=\"242\" font-size=\"13\" fill=\"#888\">n = 6</text><text x=\"107.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">1</text><text x=\"153.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">7</text><text x=\"199.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">21</text><text x=\"245.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">35</text><text x=\"291.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">35</text><text x=\"337.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">21</text><text x=\"383.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">7</text><text x=\"429.0\" y=\"275\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">1</text><text x=\"26\" y=\"275\" font-size=\"13\" fill=\"#888\">n = 7</text>\n<text x=\"26\" y=\"298\" font-size=\"13\" fill=\"#888\">Rad n ger binomialkoefficienterna i (a + b)&#8319;</text>\n</svg></span><p>Bestäm termen som innehåller \\(x^4\\) i utvecklingen av \\((2x-1)^7\\).</p>",
+    "t": "<span class=\"fig\"><svg width=\"440\" height=\"300\" viewBox=\"0 0 460 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pascals triangel till och med rad sju, där rad sju är markerad\">\n<rect width=\"460\" height=\"305\" fill=\"white\"/>\n<text x=\"230.0\" y=\"42\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"42\" font-size=\"13\" fill=\"#777\">n = 0</text><text x=\"207.0\" y=\"75\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"253.0\" y=\"75\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"75\" font-size=\"13\" fill=\"#777\">n = 1</text><text x=\"184.0\" y=\"108\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"230.0\" y=\"108\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">2</text><text x=\"276.0\" y=\"108\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"108\" font-size=\"13\" fill=\"#777\">n = 2</text><text x=\"161.0\" y=\"141\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"207.0\" y=\"141\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">3</text><text x=\"253.0\" y=\"141\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">3</text><text x=\"299.0\" y=\"141\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"141\" font-size=\"13\" fill=\"#777\">n = 3</text><text x=\"138.0\" y=\"174\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"184.0\" y=\"174\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">4</text><text x=\"230.0\" y=\"174\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"276.0\" y=\"174\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">4</text><text x=\"322.0\" y=\"174\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"174\" font-size=\"13\" fill=\"#777\">n = 4</text><text x=\"115.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"161.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">5</text><text x=\"207.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">10</text><text x=\"253.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">10</text><text x=\"299.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">5</text><text x=\"345.0\" y=\"207\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"207\" font-size=\"13\" fill=\"#777\">n = 5</text><text x=\"92.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"138.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"184.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">15</text><text x=\"230.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">20</text><text x=\"276.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">15</text><text x=\"322.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">6</text><text x=\"368.0\" y=\"240\" font-size=\"15\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"400\">1</text><text x=\"34\" y=\"240\" font-size=\"13\" fill=\"#777\">n = 6</text><text x=\"69.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">1</text><text x=\"115.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">7</text><text x=\"161.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">21</text><text x=\"207.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">35</text><text x=\"253.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">35</text><text x=\"299.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">21</text><text x=\"345.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">7</text><text x=\"391.0\" y=\"273\" font-size=\"15\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">1</text><text x=\"34\" y=\"273\" font-size=\"13\" fill=\"#777\">n = 7</text>\n<text x=\"34\" y=\"298\" font-size=\"13\" fill=\"#777\">Rad n ger binomialkoefficienterna i (a+b)^n</text>\n</svg></span><p>Bestäm termen som innehåller \\(x^4\\) i utvecklingen av \\((2x-1)^7\\).</p>",
     "s": "<p>En allmän term är</p><p>\\[\\binom7k(2x)^{7-k}(-1)^k.\\]</p><p>För \\(x^4\\) krävs \\(7-k=4\\), alltså \\(k=3\\). Termen blir</p><p>\\[\\binom73(2x)^4(-1)^3=-35\\cdot16x^4=-560x^4.\\]</p><p><strong>Termen är \\(-560x^4\\)</strong>.</p>",
-    "id": "1.144"
+    "id": "1.144",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1602,7 +1922,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm koefficienten framför \\(x^2\\) i \\((1+2x)^6\\).</p>",
     "s": "<p>Termen med \\(x^2\\) fås när två av de sex faktorerna bidrar med \\(2x\\):</p><p>\\[\\binom62 2^2=15\\cdot4=60.\\]</p>",
-    "id": "1.157"
+    "id": "1.157",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1612,7 +1934,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I utvecklingen av \\((1+ax)^5\\) är koefficienten framför \\(x^2\\) lika med 90. Bestäm positiva \\(a\\).</p>",
     "s": "<p>Koefficienten framför \\(x^2\\) är</p><p>\\[\\binom52a^2=10a^2.\\]</p><p>\\[10a^2=90\\Rightarrow a^2=9.\\]</p><p>Eftersom \\(a\\) är positivt är <strong>\\(a=3\\)</strong>.</p>",
-    "id": "1.158"
+    "id": "1.158",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1622,7 +1946,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Utveckla \\((2x+3)^4\\).</p>",
     "s": "<p>Med binomialsatsen:</p><p>\\[(2x+3)^4=(2x)^4+4(2x)^3(3)+6(2x)^2(3^2)+4(2x)(3^3)+3^4.\\]</p><p><strong>\\[16x^4+96x^3+216x^2+216x+81.\\]</strong></p>",
-    "id": "1.179"
+    "id": "1.179",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1632,7 +1958,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm koefficienten framför \\(x^3\\) i \\((2x-1)^6\\).</p>",
     "s": "<p>En allmän term är</p><p>\\[\\binom6k(2x)^{6-k}(-1)^k.\\]</p><p>För \\(x^3\\) krävs \\(6-k=3\\), alltså \\(k=3\\).</p><p>Koefficienten blir</p><p>\\[\\binom63 2^3(-1)^3=20\\cdot8\\cdot(-1)=-160.\\]</p><p><strong>Svar: \\(-160\\).</strong></p>",
-    "id": "1.180"
+    "id": "1.180",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1642,7 +1970,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm koefficienten framför \\(x^4\\) i \\((1-3x)^6\\).</p>",
     "s": "<p>Termen med \\(x^4\\) fås när fyra faktorer bidrar med \\(-3x\\):</p><p>\\[\\binom64(-3)^4x^4.\\]</p><p>Koefficienten är</p><p>\\[15\\cdot81=1215.\\]</p><p><strong>Svar: 1215.</strong></p>",
-    "id": "1.181"
+    "id": "1.181",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1652,7 +1982,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Skriv de fyra första termerna i utvecklingen av \\((1+x)^8\\), ordnade efter stigande potens av \\(x\\).</p>",
     "s": "<p>Binomialkoefficienterna i början av rad 8 är \\(1,8,28,56\\).</p><p>Därför börjar utvecklingen</p><p><strong>\\[1+8x+28x^2+56x^3+\\cdots\\]</strong></p>",
-    "id": "1.182"
+    "id": "1.182",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1662,7 +1994,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm mittentermen i utvecklingen av \\((a+b)^8\\).</p>",
     "s": "<p>Det finns 9 termer, så mittentermen är den femte. Den motsvarar \\(k=4\\):</p><p>\\[\\binom84a^{8-4}b^4=70a^4b^4.\\]</p><p><strong>Mittentermen är \\(70a^4b^4\\).</strong></p>",
-    "id": "1.183"
+    "id": "1.183",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1672,7 +2006,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm koefficienten framför \\(x^4\\) i utvecklingen av</p><p>\\[\\left(x^2+\\frac{2}{x}\\right)^5.\\]</p>",
     "s": "<p>En allmän term är</p><p>\\[\\binom5k(x^2)^{5-k}\\left(\\frac2x\\right)^k.\\]</p><p>Potensen av \\(x\\) blir</p><p>\\[2(5-k)-k=10-3k.\\]</p><p>Vi vill ha \\(10-3k=4\\), alltså \\(k=2\\).</p><p>Koefficienten blir</p><p>\\[\\binom52 2^2=10\\cdot4=40.\\]</p><p><strong>Svar: 40.</strong></p>",
-    "id": "1.184"
+    "id": "1.184",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1682,7 +2018,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm konstanttermen i</p><p>\\[\\left(2x^2-\\frac1x\\right)^6.\\]</p>",
     "s": "<p>En allmän term är</p><p>\\[\\binom6k(2x^2)^{6-k}\\left(-\\frac1x\\right)^k.\\]</p><p>Potensen av \\(x\\) blir \\(2(6-k)-k=12-3k\\). För en konstant term krävs</p><p>\\[12-3k=0\\Rightarrow k=4.\\]</p><p>Koefficienten blir</p><p>\\[\\binom64 2^{2}(-1)^4=15\\cdot4=60.\\]</p><p><strong>Konstanttermen är 60.</strong></p>",
-    "id": "1.185"
+    "id": "1.185",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1692,7 +2030,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I utvecklingen av \\((1+ax)^4\\) är koefficienten framför \\(x^2\\) lika med 54.</p><p>Bestäm alla reella värden på \\(a\\).</p>",
     "s": "<p>Termen med \\(x^2\\) är</p><p>\\[\\binom42 (ax)^2=6a^2x^2.\\]</p><p>Alltså</p><p>\\[6a^2=54\\Rightarrow a^2=9.\\]</p><p><strong>\\(a=3\\) eller \\(a=-3\\).</strong></p>",
-    "id": "1.186"
+    "id": "1.186",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1702,7 +2042,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Ur en grupp med 8 kvinnor och 6 män väljs slumpmässigt 5 personer. Givet att gruppen innehåller minst 3 kvinnor, bestäm sannolikheten att den innehåller exakt 4 kvinnor.</p>",
     "s": "<p>Villkoret begränsar utfallsrummet till grupper med 3, 4 eller 5 kvinnor.</p><p>\\[P=\\frac{\\binom84\\binom61}{\\binom83\\binom62+\\binom84\\binom61+\\binom85\\binom60}=\\frac{420}{840+420+56}=\\frac{105}{329}\\approx\\mathbf{0,319}.\\]</p>",
-    "id": "1.45"
+    "id": "1.45",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1712,7 +2054,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>En låda innehåller 8 röda, 6 blå och 4 gröna kulor. Fem kulor dras samtidigt utan återläggning.</p><p>Bestäm sannolikheten att exakt två av kulorna är röda och att minst en av de övriga tre är grön.</p>",
     "s": "<p>Totalt finns \\(\\binom{18}{5}\\) möjliga femgrupper.</p><p>Välj först exakt två röda: \\(\\binom{8}{2}\\). Bland de tre återstående ska minst en vara grön. Från de 10 icke-röda kulorna finns totalt \\(\\binom{10}{3}\\) val, men \\(\\binom63\\) av dem innehåller bara blå kulor.</p><p>\\[P=\\frac{\\binom{8}{2}\\left(\\binom{10}{3}-\\binom63\\right)}{\\binom{18}{5}}=\\frac{28(120-20)}{8568}=\\frac{350}{1071}\\approx\\mathbf{0,327}.\\]</p>",
-    "id": "1.50"
+    "id": "1.50",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1722,7 +2066,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Fyra personer väljs slumpmässigt ur en grupp med 10 personer. Hur stor är sannolikheten att två bestämda personer, A och B, båda blir valda?</p>",
     "s": "<p>Alla fyrgrupper är lika sannolika. Totalt finns \\(\\binom{10}{4}=210\\) grupper.</p><p>Om A och B måste vara med återstår två platser bland de övriga 8: \\(\\binom{8}{2}=28\\).</p><p>\\[P=\\frac{28}{210}=\\mathbf{\\frac{2}{15}}\\approx0,133.\\]</p>",
-    "id": "1.102"
+    "id": "1.102",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1732,7 +2078,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg height=\"235\" width=\"430\" viewBox=\"0 0 430 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Låda med tolv komponenter varav tre markerade som defekta\">\n<rect width=\"430\" height=\"235\" fill=\"white\"/>\n<rect x=\"55\" y=\"30\" width=\"320\" height=\"165\" rx=\"8\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<g stroke=\"#333\" stroke-width=\"1.8\">\n<circle cx=\"100\" cy=\"70\" r=\"15\" fill=\"#aaa\"/><circle cx=\"175\" cy=\"70\" r=\"15\" fill=\"#aaa\"/><circle cx=\"250\" cy=\"70\" r=\"15\" fill=\"#aaa\"/><circle cx=\"325\" cy=\"70\" r=\"15\" fill=\"white\"/>\n<circle cx=\"100\" cy=\"120\" r=\"15\" fill=\"white\"/><circle cx=\"175\" cy=\"120\" r=\"15\" fill=\"white\"/><circle cx=\"250\" cy=\"120\" r=\"15\" fill=\"white\"/><circle cx=\"325\" cy=\"120\" r=\"15\" fill=\"white\"/>\n<circle cx=\"100\" cy=\"170\" r=\"15\" fill=\"white\"/><circle cx=\"175\" cy=\"170\" r=\"15\" fill=\"white\"/><circle cx=\"250\" cy=\"170\" r=\"15\" fill=\"white\"/><circle cx=\"325\" cy=\"170\" r=\"15\" fill=\"white\"/>\n</g>\n<text x=\"80\" y=\"220\" font-size=\"14\">3 markerade komponenter är defekta</text>\n</svg></span><p>En låda innehåller 12 komponenter, varav 3 är defekta. Fyra komponenter väljs slumpmässigt utan återläggning.</p><p>Bestäm sannolikheten att exakt en av de valda komponenterna är defekt.</p>",
     "s": "<p>Totalt finns \\(\\binom{12}{4}\\) lika sannolika fyrgrupper.</p><p>För ett gynnsamt urval väljs 1 av de 3 defekta och 3 av de 9 fungerande:</p><p>\\[P=\\frac{\\binom{3}{1}\\binom93}{\\binom{12}{4}}=\\frac{3\\cdot84}{495}=\\mathbf{\\frac{28}{55}}\\approx0,509.\\]</p>",
-    "id": "1.103"
+    "id": "1.103",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1742,7 +2090,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En jury med 7 personer väljs slumpmässigt bland 9 vuxna och 5 ungdomar. Bestäm sannolikheten att juryn innehåller exakt 2 ungdomar.</p>",
     "s": "<p>Totalt finns \\(\\binom{14}{7}\\) juryer. För exakt 2 ungdomar väljs 2 av de 5 ungdomarna och 5 av de 9 vuxna:</p><p>\\[P=\\frac{\\binom{5}{2}\\binom95}{\\binom{14}{7}}=\\frac{1260}{3432}=\\mathbf{\\frac{105}{286}}\\approx0,367.\\]</p>",
-    "id": "1.104"
+    "id": "1.104",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1752,7 +2102,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fem kort dras slumpmässigt ur en vanlig kortlek med 52 kort. Bestäm sannolikheten att exakt två av korten är hjärter.</p>",
     "s": "<p>Totalt finns \\(\\binom{52}{5}\\) femkortshänder.</p><p>För exakt två hjärter väljs 2 av de 13 hjärterkorten och 3 av de 39 övriga:</p><p>\\[P=\\frac{\\binom{13}{2}\\binom{39}{3}}{\\binom{52}{5}}\\approx\\mathbf{0,274}.\\]</p><p>Det är ungefär <strong>27,4 %</strong>.</p>",
-    "id": "1.105"
+    "id": "1.105",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1762,7 +2114,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Fem personer väljs slumpmässigt bland 7 personer från grupp A och 6 från grupp B. Givet att den valda gruppen innehåller minst 2 personer från grupp B, bestäm sannolikheten att den innehåller exakt 3 personer från grupp B.</p>",
     "s": "<p><strong>Viktigt:</strong> Eftersom sannolikheten är villkorad ska nämnaren bara innehålla grupper som uppfyller villkoret ”minst 2 från B”.</p><p>Exakt 3 från B: \\[\\binom63\\binom72=420.\\]</p><p>Villkoret tillåter 2, 3, 4 eller 5 från B:</p><p>\\[N=\\binom62\\binom73+\\binom63\\binom72+\\binom{6}{4}\\binom71+\\binom65\\binom70=1056.\\]</p><p>\\[P=\\frac{420}{1056}=\\mathbf{\\frac{35}{88}}\\approx0,398.\\]</p>",
-    "id": "1.106"
+    "id": "1.106",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1772,7 +2126,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fem uppgifter väljs slumpmässigt ur 8 algebrauppgifter och 6 kombinatorikuppgifter. Bestäm sannolikheten att minst en kombinatorikuppgift väljs.</p>",
     "s": "<p><strong>Komplementmetod:</strong> Räkna sannolikheten för motsatsen: att alla fem är algebrauppgifter.</p><p>\\[P=1-\\frac{\\binom85}{\\binom{14}{5}}=1-\\frac{56}{2002}=\\mathbf{\\frac{973}{1001}}\\approx0,972.\\]</p>",
-    "id": "1.107"
+    "id": "1.107",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1782,7 +2138,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Åtta personer ställer sig slumpmässigt på led. Bestäm sannolikheten att två bestämda personer, A och B, hamnar bredvid varandra.</p>",
     "s": "<p>Totalt finns \\(8!\\) ordningar.</p><p>Om A och B står bredvid varandra behandlas de som ett block: \\(7!\\) ordningar av blocket och de sex andra, och 2 ordningar inom blocket.</p><p>\\[P=\\frac{2\\cdot7!}{8!}=\\mathbf{\\frac14}.\\]</p>",
-    "id": "1.108"
+    "id": "1.108",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1792,7 +2150,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I ett lotteri väljer en spelare 6 olika nummer av 30. Sex vinnarnummer dras slumpmässigt. Bestäm sannolikheten att spelaren får exakt 4 rätt.</p>",
     "s": "<p>Totalt finns \\(\\binom{30}{6}\\) möjliga vinnarrader.</p><p>För exakt 4 rätt väljs 4 av spelarens 6 nummer och 2 av de 24 nummer spelaren inte valde:</p><p>\\[P=\\frac{\\binom{6}{4}\\binom{24}{2}}{\\binom{30}{6}}\\approx\\mathbf{0,00697}.\\]</p><p>Det motsvarar ungefär <strong>0,697 %</strong>.</p>",
-    "id": "1.109"
+    "id": "1.109",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1802,7 +2162,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fem produkter väljs slumpmässigt ur ett parti med 15 produkter, varav 4 är premiumprodukter. Bestäm sannolikheten att minst 2 premiumprodukter väljs.</p>",
     "s": "<p>Totalt finns \\(\\binom{15}{5}\\) femgrupper.</p><p>”Minst 2” innebär 2, 3 eller 4 premiumprodukter:</p><p>\\[N=\\binom42\\binom{11}{3}+\\binom43\\binom{11}{2}+\\binom44\\binom{11}{1}=1221.\\]</p><p>\\[P=\\frac{1221}{\\binom{15}{5}}=\\frac{1221}{3003}\\approx\\mathbf{0,407}.\\]</p>",
-    "id": "1.110"
+    "id": "1.110",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1812,7 +2174,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "1.128",
     "t": "<p>I en låda finns 5 röda och 3 blå kulor. Två kulor dras samtidigt.</p><p>Bestäm sannolikheten att båda är röda.</p>",
-    "s": "<p>Totalt antal sätt att välja 2 kulor av 8 är</p><p>\\[\\binom{8}{2}=28.\\]</p><p>Gynnsamma val är att välja 2 av de 5 röda:</p><p>\\[\\binom{5}{2}=10.\\]</p><p>Sannolikheten blir</p><p>\\[P=\\frac{10}{28}=\\frac{5}{14}.\\]</p><p><strong>Sannolikheten är \\(5/14\\).</strong></p>"
+    "s": "<p>Totalt antal sätt att välja 2 kulor av 8 är</p><p>\\[\\binom{8}{2}=28.\\]</p><p>Gynnsamma val är att välja 2 av de 5 röda:</p><p>\\[\\binom{5}{2}=10.\\]</p><p>Sannolikheten blir</p><p>\\[P=\\frac{10}{28}=\\frac{5}{14}.\\]</p><p><strong>Sannolikheten är \\(5/14\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1822,7 +2186,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "id": "1.129",
     "t": "<span class=\"fig\"><svg width=\"340\" height=\"235\" viewBox=\"0 0 350 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rutnät med tre steg åt höger och två steg uppåt från A till B\">\n<rect width=\"350\" height=\"240\" fill=\"white\"/>\n<g stroke=\"#666\" stroke-width=\"1.5\"><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"185\"/><line x1=\"130\" y1=\"45\" x2=\"130\" y2=\"185\"/><line x1=\"200\" y1=\"45\" x2=\"200\" y2=\"185\"/><line x1=\"270\" y1=\"45\" x2=\"270\" y2=\"185\"/><line x1=\"60\" y1=\"45\" x2=\"270\" y2=\"45\"/><line x1=\"60\" y1=\"115\" x2=\"270\" y2=\"115\"/><line x1=\"60\" y1=\"185\" x2=\"270\" y2=\"185\"/></g>\n<circle cx=\"60\" cy=\"185\" r=\"5\" fill=\"#222\"/><circle cx=\"270\" cy=\"45\" r=\"5\" fill=\"#222\"/>\n<circle cx=\"200\" cy=\"115\" r=\"4.5\" fill=\"#B23A2E\"/>\n<text x=\"40\" y=\"204\" font-size=\"16\">A</text><text x=\"278\" y=\"41\" font-size=\"16\">B</text>\n<text x=\"208\" y=\"110\" font-size=\"13\" fill=\"#B23A2E\">M</text>\n<text x=\"60\" y=\"225\" font-size=\"14\">endast steg åt höger eller uppåt</text>\n</svg></span><p>Man går från punkt A till punkt B i rutnätet genom att bara gå åt höger eller uppåt.</p><ol type=\"a\"><li>Hur många kortaste vägar finns det?</li><li>Hur många av dessa vägar passerar genom punkten mitt i rutnätet, alltså punkten som ligger 2 steg åt höger och 1 steg upp från A?</li></ol>",
-    "s": "<p>Från A till B krävs totalt 3 steg åt höger och 2 steg upp, alltså 5 steg.</p><p><strong>a)</strong> Antalet kortaste vägar är antalet sätt att välja vilka 2 av de 5 stegen som ska vara uppsteg:</p><p>\\[\\binom{5}{2}=10.\\]</p><p><strong>b)</strong> Till mittpunkten krävs 2 höger och 1 upp, alltså \\(\\binom{3}{1}=3\\) vägar. Från mittpunkten till B krävs 1 höger och 1 upp, alltså \\(\\binom{2}{1}=2\\) vägar.</p><p>Multiplikationsprincipen ger</p><p>\\[3\\cdot 2=6.\\]</p><p><strong>Det finns 6 sådana vägar.</strong></p>"
+    "s": "<p>Från A till B krävs totalt 3 steg åt höger och 2 steg upp, alltså 5 steg.</p><p><strong>a)</strong> Antalet kortaste vägar är antalet sätt att välja vilka 2 av de 5 stegen som ska vara uppsteg:</p><p>\\[\\binom{5}{2}=10.\\]</p><p><strong>b)</strong> Till mittpunkten krävs 2 höger och 1 upp, alltså \\(\\binom{3}{1}=3\\) vägar. Från mittpunkten till B krävs 1 höger och 1 upp, alltså \\(\\binom{2}{1}=2\\) vägar.</p><p>Multiplikationsprincipen ger</p><p>\\[3\\cdot 2=6.\\]</p><p><strong>Det finns 6 sådana vägar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1832,7 +2198,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En låda innehåller 6 vita och 4 svarta kulor. Tre kulor dras samtidigt. Bestäm sannolikheten att exakt en är svart.</p>",
     "s": "<p>Gynnsamma val: välj 1 svart av 4 och 2 vita av 6. Totalt väljs 3 av 10:</p><p>\\[P=\\frac{\\binom41\\binom62}{\\binom{10}{3}}=\\frac{60}{120}=\\frac12.\\]</p>",
-    "id": "1.159"
+    "id": "1.159",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1842,7 +2210,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Fyra kort dras ur en vanlig kortlek. Bestäm sannolikheten att minst ett kort är ett ess.</p>",
     "s": "<p>Det är enklare att använda komplementet: inga ess. Det finns 48 icke-ess.</p><p>\\[P(\\text{minst ett ess})=1-\\frac{\\binom{48}{4}}{\\binom{52}{4}}\\approx0,281.\\]</p>",
-    "id": "1.160"
+    "id": "1.160",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1852,7 +2222,9 @@ window.BANKMATF1 = [
     "poang": "0/2/2",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram med tre mängder där mittenområdet är okänt och betecknas x\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"m167_A\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m167_B\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m167_C\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<text x=\"112\" y=\"105\" font-size=\"16\" text-anchor=\"middle\">19</text><text x=\"215\" y=\"98\" font-size=\"16\" text-anchor=\"middle\">12</text><text x=\"318\" y=\"105\" font-size=\"16\" text-anchor=\"middle\">14</text><text x=\"163\" y=\"168\" font-size=\"16\" text-anchor=\"middle\">8</text><text x=\"215\" y=\"132\" font-size=\"17\" text-anchor=\"middle\" fill=\"#B23A2E\" font-weight=\"700\">x</text><text x=\"268\" y=\"168\" font-size=\"16\" text-anchor=\"middle\">6</text><text x=\"215\" y=\"222\" font-size=\"16\" text-anchor=\"middle\">11</text>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>I diagrammet är antalet i mittenområdet okänt och betecknas \\(x\\). Det är känt att \\(|A|=45\\).</p><ol type=\"a\"><li>Bestäm \\(x\\).</li><li>Hur många tillhör exakt en av mängderna?</li><li>Hur många tillhör minst två av mängderna?</li></ol>",
     "s": "<p><strong>Idé:</strong> Varje tal i diagrammet står för ett eget delområde. Summan av de delområden som ligger inuti \\(A\\) måste bli \\(|A|\\).</p><p><strong>a)</strong> Mängden \\(A\\) består av fyra delområden: 19, 12, 8 och \\(x\\). Alltså</p><p>\\[19+12+8+x=45\\Rightarrow x=\\mathbf{6}.\\]</p><p><strong>b)</strong> Exakt en mängd svarar mot de tre yttre områdena:</p><p>\\[19+14+11=\\mathbf{44}.\\]</p><p><strong>c)</strong> Minst två mängder är de tre parvisa överlappen tillsammans med mitten:</p><p>\\[12+8+6+6=\\mathbf{32}.\\]</p><p><strong>Kontroll:</strong> \\(44+32=76\\), och additionsprincipen ger samma sak: \\(45+38+31-18-14-12+6=76\\).</p>",
-    "id": "1.167"
+    "id": "1.167",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1862,7 +2234,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "t": "<p>Visa att</p><p>\\[(A\\cup B\\cup C)^c=A^c\\cap B^c\\cap C^c\\]</p><p>för alla mängder \\(A\\), \\(B\\) och \\(C\\) i en grundmängd \\(U\\). Motivera med ett elementresonemang och illustrera med Venn-diagram.</p>",
     "s": "<p><strong>Idé:</strong> Två mängder är lika om varje element i den ena också ligger i den andra, och tvärtom. Vi översätter därför båda sidorna till villkor på ett godtyckligt element \\(u\\in U\\).</p><p><strong>Vänsterledet.</strong> Att \\(u\\in(A\\cup B\\cup C)^c\\) betyder att \\(u\\) <em>inte</em> ligger i unionen. Men unionen består precis av de element som ligger i minst en av mängderna. Att inte ligga i minst en av dem betyder att ligga i ingen av dem:</p><p>\\[u\\notin A\\ \\text{och}\\ u\\notin B\\ \\text{och}\\ u\\notin C.\\]</p><p><strong>Högerledet.</strong> Att \\(u\\in A^c\\cap B^c\\cap C^c\\) betyder att \\(u\\) ligger i alla tre komplementen, alltså exakt samma sak:</p><p>\\[u\\notin A\\ \\text{och}\\ u\\notin B\\ \\text{och}\\ u\\notin C.\\]</p><p>Villkoren är identiska, så ett element ligger i vänsterledet precis när det ligger i högerledet. Därmed är mängderna lika.</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där komplementet till A union B union C är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"m168a_A\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m168a_B\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m168a_C\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Det markerade området är \\((A\\cup B\\cup C)^c\\), alltså allt utanför de tre cirklarna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där A-komplement snitt B-komplement snitt C-komplement är markerat\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs>\n<clipPath id=\"m168b_A\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"165\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m168b_B\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"265\" cy=\"118\" r=\"82\"/></clipPath>\n<clipPath id=\"m168b_C\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"215\" cy=\"184\" r=\"72\"/></clipPath>\n</defs>\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"#E7B07A\"/><circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"white\"/><circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"white\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"none\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"118\" y=\"56\" font-size=\"17\">A</text>\n<text x=\"302\" y=\"56\" font-size=\"17\">B</text>\n<text x=\"210\" y=\"260\" font-size=\"17\">C</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">U</text>\n</svg></span><p>Det markerade området är \\(A^c\\cap B^c\\cap C^c\\). Diagrammen är identiska, vilket illustrerar likheten.</p><p><strong>Anmärkning:</strong> ett Venn-diagram är en illustration, inte ett bevis. Det är elementresonemanget ovan som utgör beviset.</p>",
-    "id": "1.168"
+    "id": "1.168",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1872,7 +2246,9 @@ window.BANKMATF1 = [
     "poang": "0/2/2",
     "t": "<span class=\"fig\"><svg width=\"470\" height=\"300\" viewBox=\"0 0 480 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Delmängdsgitter för mängden med elementen a, b och c med alla åtta delmängder ordnade efter antal element\">\n<rect width=\"480\" height=\"305\" fill=\"white\"/>\n<line x1=\"265\" y1=\"235\" x2=\"150\" y2=\"205\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"265\" y1=\"235\" x2=\"265\" y2=\"205\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"265\" y1=\"235\" x2=\"380\" y2=\"205\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"150\" y1=\"175\" x2=\"150\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"150\" y1=\"175\" x2=\"265\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"265\" y1=\"175\" x2=\"150\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"265\" y1=\"175\" x2=\"380\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"380\" y1=\"175\" x2=\"265\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"380\" y1=\"175\" x2=\"380\" y2=\"140\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"150\" y1=\"110\" x2=\"265\" y2=\"75\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"265\" y1=\"110\" x2=\"265\" y2=\"75\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><line x1=\"380\" y1=\"110\" x2=\"265\" y2=\"75\" stroke=\"#c8c8c8\" stroke-width=\"1.4\"/><rect x=\"246\" y=\"235\" width=\"38\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"265\" y=\"256\" font-size=\"15\" text-anchor=\"middle\">∅</text><rect x=\"126\" y=\"175\" width=\"48\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"150\" y=\"196\" font-size=\"15\" text-anchor=\"middle\">{a}</text><rect x=\"241\" y=\"175\" width=\"48\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"265\" y=\"196\" font-size=\"15\" text-anchor=\"middle\">{b}</text><rect x=\"356\" y=\"175\" width=\"48\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"380\" y=\"196\" font-size=\"15\" text-anchor=\"middle\">{c}</text><rect x=\"116\" y=\"110\" width=\"68\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"150\" y=\"131\" font-size=\"15\" text-anchor=\"middle\">{a,b}</text><rect x=\"231\" y=\"110\" width=\"68\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"265\" y=\"131\" font-size=\"15\" text-anchor=\"middle\">{a,c}</text><rect x=\"346\" y=\"110\" width=\"68\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"380\" y=\"131\" font-size=\"15\" text-anchor=\"middle\">{b,c}</text><rect x=\"221\" y=\"45\" width=\"88\" height=\"30\" rx=\"7\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"1.6\"/><text x=\"265\" y=\"66\" font-size=\"15\" text-anchor=\"middle\">{a,b,c}</text><text x=\"22\" y=\"255\" font-size=\"13\" fill=\"#888\">0 element</text><text x=\"22\" y=\"195\" font-size=\"13\" fill=\"#888\">1 element</text><text x=\"22\" y=\"130\" font-size=\"13\" fill=\"#888\">2 element</text><text x=\"22\" y=\"65\" font-size=\"13\" fill=\"#888\">3 element</text>\n<text x=\"265\" y=\"294\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">Två val per element: med eller inte med.</text>\n</svg></span><p>Figuren visar samtliga delmängder till \\(\\{a,b,c\\}\\), ordnade efter antal element.</p><ol type=\"a\"><li>Förklara varför en mängd med \\(n\\) element har \\(2^n\\) delmängder.</li><li>Hur många delmängder har \\(\\{1,2,\\ldots,8\\}\\)?</li><li>Hur många av dessa har exakt tre element?</li><li>Visa att \\(\\binom n0+\\binom n1+\\cdots+\\binom nn=2^n\\).</li></ol>",
     "s": "<p><strong>a)</strong> En delmängd byggs genom att för varje element fatta ett oberoende beslut: ta med det eller inte. Det är 2 val per element och \\(n\\) element, så multiplikationsprincipen ger</p><p>\\[\\underbrace{2\\cdot2\\cdots2}_{n\\ \\text{faktorer}}=2^n\\]</p><p>delmängder. I figuren syns de \\(2^3=8\\) delmängderna till \\(\\{a,b,c\\}\\).</p><p><strong>b)</strong> Här är \\(n=8\\), alltså <strong>\\(2^8=256\\)</strong> delmängder.</p><p><strong>c)</strong> En delmängd med tre element bestäms av vilka tre av de åtta elementen som ingår:</p><p>\\[\\binom83=\\mathbf{56}.\\]</p><p><strong>d)</strong> Räkna delmängderna på två sätt. Å ena sidan finns totalt \\(2^n\\) delmängder enligt a). Å andra sidan kan vi sortera dem efter storlek: det finns \\(\\binom nk\\) delmängder med exakt \\(k\\) element, och varje delmängd har exakt en storlek. Summerar vi över alla möjliga storlekar \\(k=0,1,\\ldots,n\\) får vi alltså varje delmängd räknad precis en gång:</p><p>\\[\\sum_{k=0}^{n}\\binom nk=2^n.\\]</p><p>Eftersom de två uttrycken räknar samma sak är de lika.</p>",
-    "id": "1.169"
+    "id": "1.169",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1882,7 +2258,9 @@ window.BANKMATF1 = [
     "poang": "1/2/0",
     "t": "<p>Den symmetriska differensen mellan två mängder definieras som</p><p>\\[A\\,\\triangle\\,B=(A\\setminus B)\\cup(B\\setminus A).\\]</p><p>Låt \\(A=\\{1,2,3,4,5,6\\}\\) och \\(B=\\{4,5,6,7,8\\}\\).</p><ol type=\"a\"><li>Bestäm \\(A\\,\\triangle\\,B\\).</li><li>Markera \\(A\\,\\triangle\\,B\\) i ett Venn-diagram.</li><li>Visa att \\(A\\,\\triangle\\,B=(A\\cup B)\\setminus(A\\cap B)\\).</li></ol>",
     "s": "<p><strong>a)</strong> \\(A\\setminus B=\\{1,2,3\\}\\) och \\(B\\setminus A=\\{7,8\\}\\). Unionen av dessa är</p><p>\\[A\\,\\triangle\\,B=\\{1,2,3,7,8\\}.\\]</p><span class=\"fig smal\"><svg width=\"360\" height=\"234\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Venn-diagram där den symmetriska differensen mellan A och B är markerad\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<defs><clipPath id=\"m170_A\" clipPathUnits=\"userSpaceOnUse\"><circle cx=\"175\" cy=\"140\" r=\"88\"/></clipPath></defs>\n<circle cx=\"175\" cy=\"140\" r=\"88\" fill=\"#E7B07A\"/><circle cx=\"258\" cy=\"140\" r=\"88\" fill=\"#E7B07A\"/>\n<g clip-path=\"url(#m170_A)\"><circle cx=\"258\" cy=\"140\" r=\"88\" fill=\"white\"/></g>\n<circle cx=\"175\" cy=\"140\" r=\"88\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"258\" cy=\"140\" r=\"88\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"124\" y=\"72\" font-size=\"18\">A</text><text x=\"298\" y=\"72\" font-size=\"18\">B</text>\n<text x=\"32\" y=\"40\" font-size=\"16\">U</text>\n</svg></span><p><strong>b)</strong> Området består av de två \"månskärorna\", alltså allt som ligger i exakt en av mängderna. Snittet är inte med.</p><p><strong>c)</strong> Ett element ligger i \\(A\\,\\triangle\\,B\\) precis när det ligger i exakt en av mängderna. Att ligga i exakt en av dem är detsamma som att ligga i minst en av dem, men inte i båda. \"Minst en\" är \\(A\\cup B\\) och \"i båda\" är \\(A\\cap B\\), så villkoret kan skrivas</p><p>\\[(A\\cup B)\\setminus(A\\cap B).\\]</p><p><strong>Kontroll med talen:</strong> \\(A\\cup B=\\{1,\\ldots,8\\}\\) och \\(A\\cap B=\\{4,5,6\\}\\), vilket ger \\(\\{1,2,3,7,8\\}\\) precis som i a).</p>",
-    "id": "1.170"
+    "id": "1.170",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1890,9 +2268,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "inklusion-exklusion med delbarhet",
     "poang": "0/3/0",
-    "t": "<span class=\"fig smal\"><svg width=\"400\" height=\"250\" viewBox=\"0 0 430 275\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två överlappande mängder för tal delbara med 3 respektive 5 i intervallet 1 till 300\">\n<rect x=\"18\" y=\"18\" width=\"394\" height=\"216\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"172\" cy=\"140\" r=\"80\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"252\" cy=\"140\" r=\"80\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"112\" y=\"58\" font-size=\"14\" fill=\"#2C62A8\" text-anchor=\"middle\">delbara med 3</text>\n<text x=\"312\" y=\"58\" font-size=\"14\" fill=\"#2E7D52\" text-anchor=\"middle\">delbara med 5</text>\n<text x=\"130\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"212\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"294\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"34\" y=\"42\" font-size=\"15\">talen 1–300</text>\n\n</svg></span><p>Bland talen \\(1,2,\\ldots,300\\), hur många är delbara med 3 eller 5?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"400\" height=\"250\" viewBox=\"0 0 430 275\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två överlappande mängder för tal delbara med 3 respektive 5 i intervallet 1 till 300\">\n<rect x=\"18\" y=\"18\" width=\"394\" height=\"216\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"172\" cy=\"140\" r=\"80\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"252\" cy=\"140\" r=\"80\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2.2\"/>\n<text x=\"118\" y=\"82\" font-size=\"15\" fill=\"#2C62A8\" text-anchor=\"middle\">delbara</text>\n<text x=\"118\" y=\"99\" font-size=\"15\" fill=\"#2C62A8\" text-anchor=\"middle\">med 3</text>\n<text x=\"308\" y=\"82\" font-size=\"15\" fill=\"#2E7D52\" text-anchor=\"middle\">delbara</text>\n<text x=\"308\" y=\"99\" font-size=\"15\" fill=\"#2E7D52\" text-anchor=\"middle\">med 5</text>\n<text x=\"130\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"212\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"294\" y=\"152\" font-size=\"20\" text-anchor=\"middle\">?</text>\n<text x=\"34\" y=\"42\" font-size=\"15\">talen 1–300</text>\n<text x=\"215\" y=\"262\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">Snittet: delbara med både 3 och 5, alltså med 15.</text>\n</svg></span><p>Bland talen \\(1,2,\\ldots,300\\), hur många är delbara med 3 eller 5?</p>",
     "s": "<p><strong>Metod:</strong> Låt \\(T_3\\) vara de tal som är delbara med 3 och \\(T_5\\) de som är delbara med 5. Vi söker \\(|T_3\\cup T_5|\\).</p><p>Antalet multiplar av \\(d\\) upp till 300 är \\(\\lfloor 300/d\\rfloor\\):</p><p>\\[|T_3|=\\frac{300}{3}=100,\\qquad |T_5|=\\frac{300}{5}=60.\\]</p><p>Snittet består av talen som är delbara med både 3 och 5, alltså med 15:</p><p>\\[|T_3\\cap T_5|=\\frac{300}{15}=20.\\]</p><p>Om vi bara adderar 100 och 60 räknas de 20 gemensamma talen två gånger. Additionsprincipen ger därför</p><p>\\[|T_3\\cup T_5|=100+60-20=\\mathbf{140}.\\]</p>",
-    "id": "1.171"
+    "id": "1.171",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1900,9 +2280,11 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "inklusion-exklusion för tre mängder med delbarhet",
     "poang": "0/1/3",
-    "t": "<span class=\"fig smal\"><svg width=\"400\" height=\"285\" viewBox=\"0 0 430 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre mängder för tal delbara med 2, 3 respektive 5\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"96\" y=\"46\" font-size=\"16\" fill=\"#2C62A8\">T&#8322;</text>\n<text x=\"326\" y=\"46\" font-size=\"16\" fill=\"#2E7D52\">T&#8323;</text>\n<text x=\"212\" y=\"270\" font-size=\"16\" fill=\"#B48A18\">T&#8325;</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">1–1000</text>\n<text x=\"30\" y=\"288\" font-size=\"14\" fill=\"#777\">T&#8322;, T&#8323; och T&#8325; = talen delbara med 2, 3 respektive 5.</text>\n</svg></span><p>Låt \\(T_2\\), \\(T_3\\) och \\(T_5\\) vara mängderna av de tal bland \\(1,2,\\ldots,1000\\) som är delbara med 2, 3 respektive 5.</p><ol type=\"a\"><li>Hur många av talen är delbara med minst ett av talen 2, 3 och 5?</li><li>Hur många är inte delbara med något av dem?</li></ol>",
+    "t": "<span class=\"fig smal\"><svg width=\"400\" height=\"285\" viewBox=\"0 0 430 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tre mängder för tal delbara med 2, 3 respektive 5\">\n<rect x=\"15\" y=\"15\" width=\"400\" height=\"250\" fill=\"white\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<circle cx=\"165\" cy=\"118\" r=\"82\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<circle cx=\"265\" cy=\"118\" r=\"82\" fill=\"#2E7D52\" fill-opacity=\".08\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<circle cx=\"215\" cy=\"184\" r=\"72\" fill=\"#E3B52B\" fill-opacity=\".10\" stroke=\"#B48A18\" stroke-width=\"2\"/>\n<text x=\"112\" y=\"52\" font-size=\"16\" fill=\"#2C62A8\">T&#8322;</text>\n<text x=\"308\" y=\"52\" font-size=\"16\" fill=\"#2E7D52\">T&#8323;</text>\n<text x=\"208\" y=\"258\" font-size=\"16\" fill=\"#B48A18\">T&#8325;</text>\n<text x=\"28\" y=\"35\" font-size=\"15\">1–1000</text>\n<text x=\"30\" y=\"288\" font-size=\"14\" fill=\"#777\">T&#8322;, T&#8323; och T&#8325; = talen delbara med 2, 3 respektive 5.</text>\n</svg></span><p>Låt \\(T_2\\), \\(T_3\\) och \\(T_5\\) vara mängderna av de tal bland \\(1,2,\\ldots,1000\\) som är delbara med 2, 3 respektive 5.</p><ol type=\"a\"><li>Hur många av talen är delbara med minst ett av talen 2, 3 och 5?</li><li>Hur många är inte delbara med något av dem?</li></ol>",
     "s": "<p><strong>Metod:</strong> Antalet multiplar av \\(d\\) upp till 1000 är \\(\\lfloor 1000/d\\rfloor\\). För snitten gäller att ett tal är delbart med både \\(a\\) och \\(b\\) precis när det är delbart med deras minsta gemensamma multipel.</p><p>De enskilda mängderna:</p><p>\\[|T_2|=500,\\qquad |T_3|=333,\\qquad |T_5|=200.\\]</p><p>De parvisa snitten (delbarhet med 6, 10 respektive 15):</p><p>\\[|T_2\\cap T_3|=166,\\qquad |T_2\\cap T_5|=100,\\qquad |T_3\\cap T_5|=66.\\]</p><p>Trippelsnittet svarar mot delbarhet med 30:</p><p>\\[|T_2\\cap T_3\\cap T_5|=33.\\]</p><p><strong>a)</strong> Additionsprincipen för tre mängder ger</p><p>\\[500+333+200-166-100-66+33=\\mathbf{734}.\\]</p><p><strong>b)</strong> De övriga talen är komplementet:</p><p>\\[1000-734=\\mathbf{266}.\\]</p>",
-    "id": "1.172"
+    "id": "1.172",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1912,7 +2294,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en årskurs spelar 45 elever ett instrument, 38 elever utövar en lagsport och 16 elever gör båda delarna.</p><p>Hur många elever gör minst en av aktiviteterna?</p>",
     "s": "<p>De 16 eleverna i båda grupperna räknas två gånger om vi bara adderar. Därför</p><p>\\[45+38-16=67.\\]</p><p><strong>67 elever gör minst en av aktiviteterna.</strong></p>",
-    "id": "1.174"
+    "id": "1.174",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1922,7 +2306,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>På en mässa besöker 32 personer monter A, 27 personer monter B och 11 personer båda montrarna.</p><p>Hur många besöker exakt en av montrarna?</p>",
     "s": "<p>Endast A: \\(32-11=21\\).</p><p>Endast B: \\(27-11=16\\).</p><p>Exakt en monter:</p><p>\\[21+16=37.\\]</p><p><strong>Svar: 37 personer.</strong></p>",
-    "id": "1.175"
+    "id": "1.175",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1932,7 +2318,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en grupp på 80 personer läser 41 en morgontidning, 30 en kvällstidning och 12 läser båda.</p><p>Hur många läser ingen av tidningarna?</p>",
     "s": "<p>Först bestämmer vi hur många som läser minst en tidning:</p><p>\\[41+30-12=59.\\]</p><p>Resten läser ingen:</p><p>\\[80-59=21.\\]</p><p><strong>Svar: 21 personer.</strong></p>",
-    "id": "1.176"
+    "id": "1.176",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1942,7 +2330,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>På en skola följer 58 elever fotboll, 46 ishockey och 35 basket. 22 följer både fotboll och ishockey, 18 fotboll och basket, 14 ishockey och basket, och 7 följer alla tre.</p><p>Hur många följer minst en av sporterna?</p>",
     "s": "<p>Använd inklusion–exklusion:</p><p>\\[58+46+35-22-18-14+7=92.\\]</p><p>De parvisa snitten dras bort eftersom de annars räknas två gånger. De 7 som ligger i alla tre har då dragits bort en gång för mycket och läggs tillbaka.</p><p><strong>92 elever följer minst en sport.</strong></p>",
-    "id": "1.177"
+    "id": "1.177",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1952,7 +2342,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>På en arbetsplats använder 72 personer program A och 54 personer program B. Totalt 98 personer använder minst ett av programmen.</p><p>Hur många använder båda programmen?</p>",
     "s": "<p>Additionsprincipen ger</p><p>\\[|A\\cup B|=|A|+|B|-|A\\cap B|.\\]</p><p>Sätt in värdena:</p><p>\\[98=72+54-|A\\cap B|.\\]</p><p>\\[|A\\cap B|=126-98=28.\\]</p><p><strong>28 personer använder båda programmen.</strong></p>",
-    "id": "1.178"
+    "id": "1.178",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1962,7 +2354,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>På en skola läser 52 elever franska, 44 elever tyska och 18 elever båda språken.</p><p>Hur många läser minst ett av språken?</p>",
     "s": "<p>De 18 som läser båda räknas två gånger i summan \\(52+44\\). Därför</p><p>\\[52+44-18=78.\\]</p><p><strong>78 elever läser minst ett av språken.</strong></p>",
-    "id": "1.205"
+    "id": "1.205",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1972,7 +2366,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I en grupp på 150 personer använder 90 tjänst A och 70 tjänst B. 25 personer använder ingen av tjänsterna.</p><p>Hur många använder båda?</p>",
     "s": "<p>Antalet som använder minst en tjänst är</p><p>\\[150-25=125.\\]</p><p>Additionsprincipen ger</p><p>\\[125=90+70-|A\\cap B|.\\]</p><p>Alltså</p><p>\\[|A\\cap B|=160-125=35.\\]</p><p><strong>35 personer använder båda tjänsterna.</strong></p>",
-    "id": "1.206"
+    "id": "1.206",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1982,7 +2378,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>På ett evenemang provar 64 personer aktivitet A och 51 personer aktivitet B. 23 provar båda. Totalt deltar 110 personer.</p><ol type=\"a\"><li>Hur många provar exakt en av aktiviteterna?</li><li>Hur många provar ingen av aktiviteterna?</li></ol>",
     "s": "<p><strong>a)</strong> Endast A: \\(64-23=41\\). Endast B: \\(51-23=28\\).</p><p>Exakt en:</p><p>\\[41+28=69.\\]</p><p><strong>b)</strong> Minst en aktivitet:</p><p>\\[64+51-23=92.\\]</p><p>Ingen aktivitet:</p><p>\\[110-92=18.\\]</p><p><strong>Svar: 69 provar exakt en och 18 provar ingen.</strong></p>",
-    "id": "1.207"
+    "id": "1.207",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -1992,7 +2390,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Fem kort dras slumpmässigt ur en vanlig kortlek med 52 kort. Bestäm sannolikheten att handen innehåller minst ett ess.</p>",
     "s": "<p><strong>Idé:</strong> \"Minst ett\" är besvärligt att räkna direkt, eftersom man då måste behandla fallen ett, två, tre och fyra ess var för sig. Komplementhändelsen \"inget ess\" är däremot ett enda fall.</p><p>Antalet möjliga händer är</p><p>\\[\\binom{52}{5}=2\\,598\\,960.\\]</p><p>En hand utan ess består av 5 kort valda bland de 48 som inte är ess:</p><p>\\[\\binom{48}{5}=1\\,712\\,304.\\]</p><p>Därför är</p><p>\\[P(\\text{inget ess})=\\frac{1\\,712\\,304}{2\\,598\\,960}\\approx0,659.\\]</p><p>Den sökta sannolikheten blir</p><p>\\[P(\\text{minst ett ess})=1-\\frac{\\binom{48}{5}}{\\binom{52}{5}}\\approx\\mathbf{0,341}.\\]</p><p>Ungefär 34 % av alla femkortshänder innehåller minst ett ess.</p>",
-    "id": "1.173"
+    "id": "1.173",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2002,7 +2402,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Två olika tal väljs slumpmässigt ur \\(\\{1,2,\\ldots,10\\}\\). Vad är sannolikheten att båda talen är jämna?</p>",
     "s": "<p>Det finns \\(\\binom{10}{2}=45\\) möjliga par. Fem av talen är jämna, så gynnsamma par är \\(\\binom52=10\\).</p><p>\\[P=\\frac{10}{45}=\\frac29.\\]</p><p><strong>Svar: \\(\\frac29\\).</strong></p>",
-    "id": "1.197"
+    "id": "1.197",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2012,7 +2414,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en klass finns 8 flickor och 12 pojkar. Två elever väljs slumpmässigt.</p><p>Vad är sannolikheten att båda är flickor?</p>",
     "s": "<p>Alla par: \\(\\binom{20}{2}=190\\). Gynnsamma par: \\(\\binom82=28\\).</p><p>\\[P=\\frac{28}{190}=\\frac{14}{95}.\\]</p>",
-    "id": "1.198"
+    "id": "1.198",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2022,7 +2426,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En påse innehåller 6 röda och 4 blå kulor. Tre kulor väljs utan återläggning.</p><p>Vad är sannolikheten att alla tre är röda?</p>",
     "s": "<p>Alla möjliga tregrupper: \\(\\binom{10}{3}=120\\). Tre röda kan väljas på \\(\\binom63=20\\) sätt.</p><p>\\[P=\\frac{20}{120}=\\frac16.\\]</p><p><strong>Svar: \\(\\frac16\\).</strong></p>",
-    "id": "1.199"
+    "id": "1.199",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2032,7 +2438,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ur 10 personer väljs en grupp med 3 personer slumpmässigt. Vad är sannolikheten att en bestämd person, Alex, kommer med?</p>",
     "s": "<p>Alla grupper: \\(\\binom{10}{3}=120\\).</p><p>Om Alex ska vara med väljer vi de två andra bland de återstående 9:</p><p>\\[\\binom92=36.\\]</p><p>\\[P=\\frac{36}{120}=\\frac3{10}.\\]</p>",
-    "id": "1.200"
+    "id": "1.200",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2042,7 +2450,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En låda innehåller 5 röda och 7 blå komponenter. Fyra komponenter väljs slumpmässigt utan återläggning.</p><p>Vad är sannolikheten att exakt två är röda?</p>",
     "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>För exakt två röda väljer vi 2 av 5 röda och 2 av 7 blå:</p><p>\\[\\binom52\\binom72=10\\cdot21=210.\\]</p><p>\\[P=\\frac{210}{495}=\\frac{14}{33}.\\]</p><p><strong>Svar: \\(\\frac{14}{33}\\approx42,4\\%\\).</strong></p>",
-    "id": "1.201"
+    "id": "1.201",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2052,7 +2462,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I ett parti med 20 produkter är 2 defekta. Tre produkter väljs slumpmässigt utan återläggning.</p><p>Bestäm sannolikheten att minst en av de valda produkterna är defekt.</p>",
     "s": "<p>Det är enklast att använda komplementhändelsen ”ingen defekt”.</p><p>\\[P(\\text{ingen defekt})=\\frac{\\binom{18}{3}}{\\binom{20}{3}}=\\frac{816}{1140}.\\]</p><p>Därför</p><p>\\[P(\\text{minst en defekt})=1-\\frac{816}{1140}=\\frac{324}{1140}=\\frac{27}{95}.\\]</p><p><strong>\\(\\frac{27}{95}\\approx28,4\\%\\).</strong></p>",
-    "id": "1.202"
+    "id": "1.202",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2062,7 +2474,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En grupp består av 7 kvinnor och 5 män. Fyra personer väljs slumpmässigt.</p><p>Vad är sannolikheten att exakt en kvinna väljs?</p>",
     "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>Gynnsamt: välj 1 av 7 kvinnor och 3 av 5 män:</p><p>\\[\\binom71\\binom53=7\\cdot10=70.\\]</p><p>\\[P=\\frac{70}{495}=\\frac{14}{99}.\\]</p><p><strong>\\(P\\approx14,1\\%\\).</strong></p>",
-    "id": "1.203"
+    "id": "1.203",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 1,
@@ -2072,7 +2486,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Av 12 böcker är 4 signerade. Fyra böcker väljs slumpmässigt.</p><p>Vad är sannolikheten att minst två signerade böcker väljs?</p>",
     "s": "<p>Alla fyrgrupper: \\(\\binom{12}{4}=495\\).</p><p>”Minst två” betyder exakt 2, exakt 3 eller exakt 4 signerade:</p><p>\\[\\binom42\\binom82+\\binom43\\binom81+\\binom44\\binom80\\]</p><p>\\[=6\\cdot28+4\\cdot8+1=201.\\]</p><p>\\[P=\\frac{201}{495}=\\frac{67}{165}.\\]</p><p><strong>\\(P\\approx40,6\\%\\).</strong></p>",
-    "id": "1.204"
+    "id": "1.204",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2082,7 +2498,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beskriv vad som kännetecknar en geometrisk talföljd. Vilka av följande är geometriska?</p><p>A) \\(2,4,6,8,\\ldots\\)<br>B) \\(1,4,9,16,\\ldots\\)<br>C) \\(1,2,4,8,\\ldots\\)<br>D) \\(3,-9,27,-81,\\ldots\\)</p>",
     "s": "<p><strong>Metod:</strong> Undersök om differensen eller kvoten mellan följande termer är konstant.</p><p>I en geometrisk talföljd fås varje ny term genom multiplikation med samma kvot \\(q\\). <strong>C</strong> har \\(q=2\\) och <strong>D</strong> har \\(q=-3\\). A och B är inte geometriska.</p>",
-    "id": "2.01"
+    "id": "2.01",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2092,7 +2510,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv ut termerna och beräkna \\(\\displaystyle\\sum_{k=1}^{4}2k^2\\).</p>",
     "s": "<p><strong>Metod:</strong> Sätt in indexvärdena ett i taget och kontrollera vilka termer som faktiskt ingår.</p><p>\\[2\\cdot1^2+2\\cdot2^2+2\\cdot3^2+2\\cdot4^2=2+8+18+32=\\mathbf{60}.\\]</p>",
-    "id": "2.02"
+    "id": "2.02",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2102,7 +2522,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Vilka av följande talföljder är geometriska?</p><p>1) \\(1,4,16,64,\\ldots\\)<br>2) \\(-1,1,-1,1,\\ldots\\)<br>3) \\(\\frac{1}{2},\\frac13,\\frac29,\\frac4{27},\\ldots\\)<br>4) \\(1,\\frac{1}{2},\\frac14,\\frac{1}{16},\\ldots\\)</p>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><p><strong>1, 2 och 3</strong> är geometriska med kvoterna \\(4\\), \\(-1\\) respektive \\(2/3\\). Följd 4 byter kvot från \\(1/2\\) till \\(1/4\\) mellan de två sista visade termerna.</p>",
-    "id": "2.03"
+    "id": "2.03",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2112,7 +2534,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Vilka termer ingår i \\(\\displaystyle\\sum_{k=1}^{4}3\\cdot0,6^k\\)? Beräkna summan.</p>",
     "s": "<p><strong>Metod:</strong> Sätt in indexvärdena ett i taget och kontrollera vilka termer som faktiskt ingår.</p><p>Termerna är \\(1,8\\), \\(1,08\\), \\(0,648\\) och \\(0,3888\\). Summan är <strong>\\(3,9168\\)</strong>.</p>",
-    "id": "2.04"
+    "id": "2.04",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2122,7 +2546,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Talföljden \\(1,3,9,\\ldots,19683\\) innehåller 10 termer.</p><ol type=\"a\"><li>Ange en formel för den \\(n\\):te termen.</li><li>Beräkna summan av de 10 termerna.</li></ol>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><ol type=\"a\"><li><strong>\\(a_n=3^{n-1}\\)</strong>.</li><li>\\(S_{10}=\\frac{3^{10}-1}{3-1}=\\mathbf{29\\,524}\\).</li></ol>",
-    "id": "2.05"
+    "id": "2.05",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2132,7 +2558,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Varje födelsedag från 1-årsdagen till och med 20-årsdagen sätts 1000 kr in på ett konto. Årsräntan är 5,2 %. Hur mycket finns på kontot direkt efter insättningen på 20-årsdagen? Anta att räntan läggs till en gång per år.</p>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><p>Den första insättningen har vuxit i 19 år och den sista i 0 år:</p><p>\\[1000(1+1,052+\\cdots+1,052^{19})=1000\\frac{1,052^{20}-1}{0,052}\\approx\\mathbf{33\\,774\\text{ kr}}.\\]</p>",
-    "id": "2.06"
+    "id": "2.06",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2142,7 +2570,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En aritmetisk talföljd har 10 termer. De två första är 4 och 11.</p><ol type=\"a\"><li>Bestäm de två sista termerna.</li><li>Bestäm summan av alla termer.</li></ol>",
     "s": "<p><strong>Metod:</strong> För en aritmetisk talföljd är differensen mellan två följande termer konstant.</p><p>Differensen är \\(d=7\\). Då är \\(a_9=4+8\\cdot7=60\\) och \\(a_{10}=67\\). Summan blir</p><p>\\[S_{10}=\\frac{10(4+67)}2=\\mathbf{355}.\\]</p>",
-    "id": "2.07"
+    "id": "2.07",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2152,7 +2582,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Skriv en rekursiv formel för talföljden \\(2,4,8,16,32,\\ldots\\).</p>",
     "s": "<p><strong>Metod:</strong> En rekursiv formel behöver både startvärde och en regel för hur nästa term fås.</p><p>Varje term är dubbelt så stor som föregående: <strong>\\(a_1=2,\\ a_{n+1}=2a_n\\)</strong>.</p>",
-    "id": "2.08"
+    "id": "2.08",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2162,7 +2594,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Studera följderna.</p><p>A) \\(2,4,6,8,\\ldots\\)<br>B) \\(1,4,9,16,\\ldots\\)<br>C) \\(1,2,4,8,\\ldots\\)<br>D) \\(3,-9,27,-81,\\ldots\\)</p><ol type=\"a\"><li>Vilka är aritmetiska?</li><li>Vilka är geometriska?</li></ol>",
     "s": "<p><strong>Metod:</strong> Undersök om differensen eller kvoten mellan följande termer är konstant.</p><ol type=\"a\"><li><strong>A</strong>, med differensen 2.</li><li><strong>C och D</strong>, med kvoterna 2 respektive −3.</li></ol>",
-    "id": "2.09"
+    "id": "2.09",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2172,7 +2606,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Talföljden börjar</p><p>\\[2,\\ 5,\\ 10,\\ 17,\\ 26,\\ldots\\]</p><ol type=\"a\"><li>Bestäm en explicit formel för \\(a_n\\).</li><li>Bestäm \\(a_{20}\\).</li></ol>",
     "s": "<p>Differenserna är \\(3,5,7,9,\\ldots\\), alltså de udda talen från 3 och framåt. Det stämmer med följden \\(n^2+1\\):</p><p>\\[1^2+1=2,\\quad 2^2+1=5,\\quad 3^2+1=10.\\]</p><p>Alltså <strong>\\(a_n=n^2+1\\)</strong> och <strong>\\(a_{20}=401\\)</strong>.</p>",
-    "id": "2.55"
+    "id": "2.55",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2182,7 +2618,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.67",
     "t": "<p>Talföljden börjar \\(7,11,15,19,\\ldots\\).</p><ol type=\"a\"><li>Skriv de tre nästa termerna.</li><li>Vilken typ av talföljd är detta?</li></ol>",
-    "s": "<p>Varje gång ökar talföljden med 4.</p><p><strong>a)</strong> De tre nästa termerna är \\(23,27,31\\).</p><p><strong>b)</strong> Eftersom differensen är konstant är det en <strong>aritmetisk talföljd</strong>.</p>"
+    "s": "<p>Varje gång ökar talföljden med 4.</p><p><strong>a)</strong> De tre nästa termerna är \\(23,27,31\\).</p><p><strong>b)</strong> Eftersom differensen är konstant är det en <strong>aritmetisk talföljd</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2192,7 +2630,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om talföljden \\(5,15,45,135,\\ldots\\) är aritmetisk eller geometrisk. Ange i så fall differens eller kvot.</p>",
     "s": "<p>Kvoten mellan två på varandra följande termer är konstant:</p><p>\\[15/5=45/15=135/45=3.\\]</p><p>Följden är <strong>geometrisk med kvoten 3</strong>.</p>",
-    "id": "2.96"
+    "id": "2.96",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2202,7 +2642,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Talföljden är \\(1,4,9,16,25,\\ldots\\). Skriv de tre nästa termerna och beskriv mönstret.</p>",
     "s": "<p>Termerna är kvadraterna \\(1^2,2^2,3^2,\\ldots\\). Nästa termer är</p><p><strong>\\(36,49,64\\)</strong>.</p>",
-    "id": "2.97"
+    "id": "2.97",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2212,7 +2654,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Talföljden är \\(3,8,15,24,35,\\ldots\\). Bestäm en explicit formel för \\(a_n\\).</p>",
     "s": "<p>Differenserna är \\(5,7,9,11,\\ldots\\), alltså udda tal som ökar med 2. Det tyder på en kvadratisk formel. Testa \\(n^2+2n\\):</p><p>\\[1^2+2=3,\\quad2^2+4=8,\\quad3^2+6=15.\\]</p><p>Alltså <strong>\\(a_n=n^2+2n\\)</strong>.</p>",
-    "id": "2.98"
+    "id": "2.98",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2222,7 +2666,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm en explicit formel för talföljden \\(4,7,10,13,\\ldots\\).</p>",
     "s": "<p>Det är en aritmetisk följd med \\(a_1=4\\), \\(d=3\\):</p><p>\\[a_n=4+3(n-1)=3n+1.\\]</p>",
-    "id": "2.123"
+    "id": "2.123",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2232,7 +2678,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Talföljden är \\(11,18,25,32,39,\\ldots\\).</p><ol type=\"a\"><li>Skriv en rekursiv formel.</li><li>Skriv en explicit formel för \\(a_n\\).</li><li>Beräkna \\(\\sum_{i=1}^{100}a_i\\).</li></ol>",
     "s": "<p><strong>Metod:</strong> För en aritmetisk talföljd är differensen mellan två följande termer konstant.</p><ol type=\"a\"><li><strong>\\(a_1=11,\\ a_{n+1}=a_n+7\\)</strong>.</li><li><strong>\\(a_n=11+7(n-1)=7n+4\\)</strong>.</li><li>\\(a_{100}=704\\), alltså \\(S_{100}=\\frac{100(11+704)}2=\\mathbf{35\\,750}\\).</li></ol>",
-    "id": "2.10"
+    "id": "2.10",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2242,7 +2690,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<p>Beräkna summan av en geometrisk talföljd med fem termer, första termen 1 och kvoten \\(1/3\\).</p>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><p>\\[S_5=\\frac{1-(1/3)^5}{1-1/3}=\\frac{121}{81}\\approx\\mathbf{1,494}.\\]</p>",
-    "id": "2.11"
+    "id": "2.11",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2252,7 +2702,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<p>Beskriv huvudstegen i ett induktionsbevis och förklara varför de tillsammans räcker för att visa ett påstående för alla heltal \\(n\\ge n_0\\).</p>",
     "s": "<p>1. <strong>Bassteg:</strong> kontrollera påståendet för \\(n=n_0\\). 2. <strong>Induktionsantagande:</strong> anta att påståendet gäller för ett godtyckligt \\(n=k\\). 3. <strong>Induktionssteg:</strong> visa med hjälp av antagandet att det då också gäller för \\(n=k+1\\). 4. <strong>Slutsats:</strong> eftersom kedjan startar i \\(n_0\\) och varje sant fall tvingar fram nästa, gäller påståendet för alla \\(n\\ge n_0\\).</p>",
-    "id": "2.12"
+    "id": "2.12",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2262,7 +2714,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En läktare har 7 platser på första raden och 3 fler platser på varje följande rad. Sista raden har 124 platser. Hur många platser finns totalt?</p>",
     "s": "<p><strong>Metod:</strong> För en aritmetisk talföljd är differensen mellan två följande termer konstant.</p><p>\\(124=7+3(n-1)\\) ger \\(n=40\\). Summan är</p><p>\\[S_{40}=\\frac{40(7+124)}2=\\mathbf{2620}.\\]</p>",
-    "id": "2.13"
+    "id": "2.13",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2272,7 +2726,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.68",
     "t": "<p>En aritmetisk talföljd har första termen 5 och differensen 3.</p><p>Bestäm den 20:e termen.</p>",
-    "s": "<p>Formeln för en aritmetisk talföljd är \\(a_n=a_1+(n-1)d\\).</p><p>Här är \\(a_1=5\\), \\(d=3\\) och \\(n=20\\):</p><p>\\[a_{20}=5+19\\cdot 3=5+57=62.\\]</p><p><strong>Den 20:e termen är 62.</strong></p>"
+    "s": "<p>Formeln för en aritmetisk talföljd är \\(a_n=a_1+(n-1)d\\).</p><p>Här är \\(a_1=5\\), \\(d=3\\) och \\(n=20\\):</p><p>\\[a_{20}=5+19\\cdot 3=5+57=62.\\]</p><p><strong>Den 20:e termen är 62.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2282,7 +2738,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.69",
     "t": "<p>Beräkna summan</p><p>\\[4+7+10+\\ldots+46.\\]</p>",
-    "s": "<p>Detta är en aritmetisk talföljd med första termen 4, sista termen 46 och differensen 3.</p><p>Antal termer fås av</p><p>\\[4+(n-1)\\cdot 3=46\\Rightarrow (n-1)\\cdot 3=42\\Rightarrow n=15.\\]</p><p>Summan blir</p><p>\\[S_{15}=\\frac{15(4+46)}{2}=\\frac{15\\cdot 50}{2}=375.\\]</p><p><strong>Summan är 375.</strong></p>"
+    "s": "<p>Detta är en aritmetisk talföljd med första termen 4, sista termen 46 och differensen 3.</p><p>Antal termer fås av</p><p>\\[4+(n-1)\\cdot 3=46\\Rightarrow (n-1)\\cdot 3=42\\Rightarrow n=15.\\]</p><p>Summan blir</p><p>\\[S_{15}=\\frac{15(4+46)}{2}=\\frac{15\\cdot 50}{2}=375.\\]</p><p><strong>Summan är 375.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2292,7 +2750,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En aritmetisk talföljd börjar \\(12,17,22,\\ldots\\). Bestäm \\(a_{30}\\).</p>",
     "s": "<p>Här är \\(a_1=12\\) och \\(d=5\\). Då</p><p>\\[a_{30}=12+29\\cdot5=157.\\]</p>",
-    "id": "2.99"
+    "id": "2.99",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2300,9 +2760,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "summa n termer",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg width=\"470\" height=\"260\" viewBox=\"0 0 470 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Läktare där varje rad har två platser mer än raden under\">\n<rect width=\"470\" height=\"260\" fill=\"white\"/>\n<rect x=\"55\" y=\"180\" width=\"122\" height=\"44\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"116\" y=\"198\" font-size=\"13\" text-anchor=\"middle\">rad 1</text><text x=\"116\" y=\"215\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">18 platser</text><rect x=\"177\" y=\"130\" width=\"122\" height=\"44\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"238\" y=\"148\" font-size=\"13\" text-anchor=\"middle\">rad 2</text><text x=\"238\" y=\"165\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">20 platser</text><rect x=\"299\" y=\"80\" width=\"122\" height=\"44\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"360\" y=\"98\" font-size=\"13\" text-anchor=\"middle\">rad 3</text><text x=\"360\" y=\"115\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">22 platser</text>\n<rect x=\"421\" y=\"80\" width=\"42\" height=\"44\" fill=\"none\" stroke=\"#bbb\" stroke-width=\"1.4\" stroke-dasharray=\"4 4\"/>\n<text x=\"442\" y=\"108\" font-size=\"16\" text-anchor=\"middle\" fill=\"#777\">…</text>\n<line x1=\"40\" y1=\"226\" x2=\"464\" y2=\"226\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<text x=\"40\" y=\"250\" font-size=\"14\">Varje rad har 2 platser mer än raden under. Totalt 12 rader.</text>\n</svg></span><p>En läktare har 18 platser på första raden och 2 fler platser på varje ny rad. Hur många platser finns på de första 12 raderna?</p>",
+    "t": "<span class=\"fig\"><svg width=\"450\" height=\"240\" viewBox=\"0 0 460 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Läktare där varje rad har två platser mer än raden under\">\n<rect width=\"460\" height=\"245\" fill=\"white\"/>\n<rect x=\"55\" y=\"176\" width=\"118\" height=\"34\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"114\" y=\"190\" font-size=\"13\" text-anchor=\"middle\">rad 1</text><text x=\"114\" y=\"204\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">18 platser</text><rect x=\"173\" y=\"132\" width=\"118\" height=\"34\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"232\" y=\"146\" font-size=\"13\" text-anchor=\"middle\">rad 2</text><text x=\"232\" y=\"160\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">20 platser</text><rect x=\"291\" y=\"88\" width=\"118\" height=\"34\" fill=\"#2C62A8\" fill-opacity=\".08\" stroke=\"#444\" stroke-width=\"1.6\"/><text x=\"350\" y=\"102\" font-size=\"13\" text-anchor=\"middle\">rad 3</text><text x=\"350\" y=\"116\" font-size=\"13\" text-anchor=\"middle\" fill=\"#B23A2E\">22 platser</text>\n<rect x=\"409\" y=\"78\" width=\"42\" height=\"34\" fill=\"none\" stroke=\"#bbb\" stroke-width=\"1.4\" stroke-dasharray=\"4 4\"/>\n<text x=\"430\" y=\"100\" font-size=\"16\" text-anchor=\"middle\" fill=\"#777\">…</text>\n<line x1=\"40\" y1=\"212\" x2=\"452\" y2=\"212\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<text x=\"40\" y=\"235\" font-size=\"14\">+2 platser för varje ny rad, totalt 12 rader</text>\n</svg></span><p>En läktare har 18 platser på första raden och 2 fler platser på varje ny rad. Hur många platser finns på de första 12 raderna?</p>",
     "s": "<p>Det är en aritmetisk följd med \\(a_1=18\\), \\(d=2\\). Sista termen är</p><p>\\[a_{12}=18+11\\cdot2=40.\\]</p><p>Summan blir</p><p>\\[S_{12}=\\frac{12(18+40)}2=348.\\]</p><p><strong>348 platser</strong>.</p>",
-    "id": "2.100"
+    "id": "2.100",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2312,7 +2774,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En aritmetisk talföljd har första termen 7 och differensen 4. Summan av de första \\(n\\) termerna är 462. Bestäm \\(n\\).</p>",
     "s": "<p>Formeln för summan är</p><p>\\[S_n=\\frac n2\\bigl(2a_1+(n-1)d\\bigr).\\]</p><p>Med \\(a_1=7\\), \\(d=4\\) och \\(S_n=462\\) får vi</p><p>\\[462=\\frac n2(14+4n-4)=n(2n+5).\\]</p><p>Alltså</p><p>\\[2n^2+5n-462=0=(n-14)(2n+33).\\]</p><p>Antalet termer måste vara positivt, så <strong>\\(n=14\\)</strong>.</p>",
-    "id": "2.101"
+    "id": "2.101",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2322,7 +2786,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en aritmetisk talföljd är \\(a_{10}=47\\) och differensen är 5. Bestäm \\(a_1\\).</p>",
     "s": "<p>\\[47=a_1+9\\cdot5\\Rightarrow a_1=2.\\]</p>",
-    "id": "2.124"
+    "id": "2.124",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2332,7 +2798,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I en aritmetisk talföljd är \\(a_5=18\\) och \\(a_{12}=46\\). Bestäm första termen och differensen.</p>",
     "s": "<p>\\[a_1+4d=18,\\qquad a_1+11d=46.\\]</p><p>Subtraktion ger \\(7d=28\\Rightarrow d=4\\). Då \\(a_1=18-16=2\\).</p>",
-    "id": "2.125"
+    "id": "2.125",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2342,7 +2810,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en aritmetisk talföljd är \\(a_3=11\\) och \\(a_7=27\\). Bestäm \\(a_{15}\\).</p>",
     "s": "<p>Från \\(a_7-a_3=4d\\) fås \\(16=4d\\Rightarrow d=4\\). Då \\(a_1=11-2\\cdot4=3\\) och</p><p>\\[a_{15}=3+14\\cdot4=59.\\]</p>",
-    "id": "2.140"
+    "id": "2.140",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2352,7 +2822,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Talföljden \\(0,2,5,9,14,20,\\ldots\\) har successiva differenser \\(2,3,4,5,6,\\ldots\\). Skriv en rekursiv formel för följden.</p>",
     "s": "<p><strong>Metod:</strong> En rekursiv formel behöver både startvärde och en regel för hur nästa term fås.</p><p>Om \\(a_1=0\\), så ökar steget från 2 med 1 varje gång. Från \\(a_n\\) till \\(a_{n+1}\\) adderas \\(n+1\\). Alltså <strong>\\(a_1=0,\\ a_{n+1}=a_n+n+1\\)</strong>.</p>",
-    "id": "2.14"
+    "id": "2.14",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2362,7 +2834,9 @@ window.BANKMATF1 = [
     "poang": "0/0/2",
     "t": "<p>En population beskrivs rekursivt av \\(a_0=12000\\) och \\(a_{n+1}=0,78a_n+2400\\). Bestäm en explicit formel för \\(a_n\\) och populationens gränsvärde.</p>",
     "s": "<p>Jämviktsvärdet \\(L\\) uppfyller \\(L=0,78L+2400\\), så \\(L=2400/0,22=\\frac{120000}{11}\\). Sätt \\(b_n=a_n-L\\). Då \\(b_{n+1}=0,78b_n\\), så</p><p><strong>\\[a_n=L+(12000-L)0,78^n.\\]</strong></p><p>Alltså \\(a_n\\to L\\approx\\mathbf{10\\,909}\\).</p>",
-    "id": "2.15"
+    "id": "2.15",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2372,7 +2846,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En talföljd definieras av \\(a_1=3\\) och</p><p>\\[a_{n+1}=2a_n+1.\\]</p><p>Bestäm en explicit formel för \\(a_n\\).</p>",
     "s": "<p>Beräkna några termer: \\(3,7,15,31,\\ldots\\). Om vi adderar 1 får vi \\(4,8,16,32,\\ldots\\), alltså potenser av 2.</p><p>\\[a_n+1=2^{n+1}\\]</p><p>och därmed <strong>\\(a_n=2^{n+1}-1\\)</strong>.</p><p>Kontroll i rekursionen: \\(2(2^{n+1}-1)+1=2^{n+2}-1=a_{n+1}\\).</p>",
-    "id": "2.56"
+    "id": "2.56",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2382,7 +2858,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.74",
     "t": "<p>En talföljd definieras av \\(a_1=2\\) och \\(a_{n+1}=a_n+5\\).</p><p>Bestäm \\(a_2\\), \\(a_3\\) och \\(a_4\\).</p>",
-    "s": "<p>Vi använder rekursionsformeln steg för steg:</p><p>\\[a_2=a_1+5=2+5=7,\\]</p><p>\\[a_3=a_2+5=7+5=12,\\]</p><p>\\[a_4=a_3+5=12+5=17.\\]</p><p><strong>Alltså är \\(a_2=7\\), \\(a_3=12\\) och \\(a_4=17\\).</strong></p>"
+    "s": "<p>Vi använder rekursionsformeln steg för steg:</p><p>\\[a_2=a_1+5=2+5=7,\\]</p><p>\\[a_3=a_2+5=7+5=12,\\]</p><p>\\[a_4=a_3+5=12+5=17.\\]</p><p><strong>Alltså är \\(a_2=7\\), \\(a_3=12\\) och \\(a_4=17\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2392,7 +2870,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd ges av \\(a_1=5\\) och \\(a_{n+1}=2a_n-1\\). Bestäm \\(a_2,a_3,a_4\\).</p>",
     "s": "<p>\\[a_2=2\\cdot5-1=9,\\quad a_3=2\\cdot9-1=17,\\quad a_4=2\\cdot17-1=33.\\]</p>",
-    "id": "2.108"
+    "id": "2.108",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2402,7 +2882,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv en rekursionsformel för talföljden \\(11,15,19,23,\\ldots\\).</p>",
     "s": "<p>Första termen är 11 och varje ny term fås genom att addera 4:</p><p><strong>\\(a_1=11,\\quad a_{n+1}=a_n+4\\)</strong>.</p>",
-    "id": "2.109"
+    "id": "2.109",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2412,7 +2894,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett konto innehåller från början 10 000 kr. I slutet av varje år läggs först 3 % ränta till och därefter sätts 2 000 kr in. Skriv en rekursionsformel för saldot \\(a_n\\) efter \\(n\\) år och beräkna \\(a_3\\).</p>",
     "s": "<p>Sätt \\(a_0=10000\\). Varje år multipliceras saldot med 1,03 och sedan adderas 2000:</p><p>\\[a_{n+1}=1,03a_n+2000.\\]</p><p>\\[a_1=12300,\\quad a_2=14669,\\quad a_3=17109,07.\\]</p><p><strong>Efter tre år är saldot cirka 17 109 kr.</strong></p>",
-    "id": "2.110"
+    "id": "2.110",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2422,7 +2906,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd ges av \\(a_1=2\\), \\(a_2=3\\) och \\(a_{n+2}=a_{n+1}+a_n\\). Bestäm \\(a_3,a_4,a_5\\).</p>",
     "s": "<p>\\[a_3=3+2=5,\\quad a_4=5+3=8,\\quad a_5=8+5=13.\\]</p>",
-    "id": "2.130"
+    "id": "2.130",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2432,7 +2918,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En talföljd uppfyller \\(a_1=4\\) och \\(a_{n+1}=3a_n\\). Skriv en explicit formel och bestäm \\(a_7\\).</p>",
     "s": "<p>Varje term fås genom multiplikation med 3. Följden är geometrisk:</p><p>\\[a_n=4\\cdot3^{n-1}.\\]</p><p>\\[a_7=4\\cdot3^6=2916.\\]</p>",
-    "id": "2.131"
+    "id": "2.131",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2442,7 +2930,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm en sluten form för \\(\\displaystyle\\sum_{k=1}^{n}(5k-2)\\).</p>",
     "s": "<p><strong>Metod:</strong> Sätt in indexvärdena ett i taget och kontrollera vilka termer som faktiskt ingår.</p><p>\\[\\sum_{k=1}^{n}(5k-2)=5\\frac{n(n+1)}2-2n=\\frac{5n^2+n}{2}.\\]</p><p><strong>\\(\\frac{n(5n+1)}2\\)</strong>.</p>",
-    "id": "2.16"
+    "id": "2.16",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2452,7 +2942,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.72",
     "t": "<p>Skriv ut termerna i summan och beräkna värdet:</p><p>\\[\\sum_{k=1}^{5}(2k+1).\\]</p>",
-    "s": "<p>Vi sätter in \\(k=1,2,3,4,5\\):</p><p>\\[(2\\cdot1+1)+(2\\cdot2+1)+(2\\cdot3+1)+(2\\cdot4+1)+(2\\cdot5+1)\\]</p><p>\\[=3+5+7+9+11=35.\\]</p><p><strong>Summan är 35.</strong></p>"
+    "s": "<p>Vi sätter in \\(k=1,2,3,4,5\\):</p><p>\\[(2\\cdot1+1)+(2\\cdot2+1)+(2\\cdot3+1)+(2\\cdot4+1)+(2\\cdot5+1)\\]</p><p>\\[=3+5+7+9+11=35.\\]</p><p><strong>Summan är 35.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2462,7 +2954,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.73",
     "t": "<p>Skriv summan \\(4+8+12+16+20\\) med sigma-notation.</p>",
-    "s": "<p>Termerna är multiplar av 4: \\(4\\cdot1,4\\cdot2,\\ldots,4\\cdot5\\).</p><p>Därför kan summan skrivas</p><p><strong>\\(\\displaystyle \\sum_{k=1}^{5}4k\\)</strong>.</p>"
+    "s": "<p>Termerna är multiplar av 4: \\(4\\cdot1,4\\cdot2,\\ldots,4\\cdot5\\).</p><p>Därför kan summan skrivas</p><p><strong>\\(\\displaystyle \\sum_{k=1}^{5}4k\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2472,7 +2966,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv ut termerna och beräkna</p><p>\\[\\sum_{k=0}^{4}3\\cdot2^k.\\]</p>",
     "s": "<p>Termerna är \\(3,6,12,24,48\\). Summan blir</p><p>\\[3+6+12+24+48=93.\\]</p>",
-    "id": "2.105"
+    "id": "2.105",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2482,7 +2978,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv summan \\(2+5+8+11+14\\) med sigma-notation.</p>",
     "s": "<p>Term nummer \\(k\\) kan skrivas \\(3k-1\\) för \\(k=1,\\ldots,5\\). Alltså</p><p><strong>\\(\\displaystyle\\sum_{k=1}^{5}(3k-1)\\)</strong>.</p>",
-    "id": "2.106"
+    "id": "2.106",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2492,7 +2990,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna</p><p>\\[\\sum_{k=1}^{20}(4k-3).\\]</p>",
     "s": "<p>Dela upp summan:</p><p>\\[4\\sum_{k=1}^{20}k-3\\sum_{k=1}^{20}1=4\\cdot\\frac{20\\cdot21}{2}-3\\cdot20.\\]</p><p>\\[=840-60=780.\\]</p><p><strong>780</strong>.</p>",
-    "id": "2.107"
+    "id": "2.107",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2502,7 +3002,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\sum_{k=3}^{7}k\\).</p>",
     "s": "<p>\\[3+4+5+6+7=25.\\]</p>",
-    "id": "2.128"
+    "id": "2.128",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2512,7 +3014,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(\\sum_{k=0}^{8}5\\cdot0,8^k\\).</p>",
     "s": "<p>Det är en geometrisk summa med 9 termer:</p><p>\\[5\\frac{1-0,8^9}{1-0,8}\\approx21,64.\\]</p>",
-    "id": "2.129"
+    "id": "2.129",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2522,7 +3026,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En patient får 6 mg av en substans varje timme. Under varje timme bryts 18 % av den mängd som finns i kroppen ned. Hur mycket finns i kroppen direkt efter den åttonde dosen?</p>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><p>Efter varje timme återstår faktorn \\(0,82\\). Direkt efter åttonde dosen finns</p><p>\\[6(1+0,82+\\cdots+0,82^7)=6\\frac{1-0,82^8}{1-0,82}\\approx\\mathbf{26,5\\text{ mg}}.\\]</p>",
-    "id": "2.17"
+    "id": "2.17",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2532,7 +3038,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>En substans bryts ned med 22 % varje timme. Tolv lika stora doser ges med en timmes mellanrum. Hur stor ska varje dos vara för att mängden direkt efter den tolfte dosen ska vara 900 mg?</p>",
     "s": "<p><strong>Metod:</strong> För en geometrisk talföljd är kvoten mellan två följande termer konstant.</p><p>Om dosen är \\(d\\) mg får vi</p><p>\\[900=d(1+0,78+\\cdots+0,78^{11})=d\\frac{1-0,78^{12}}{1-0,78}.\\]</p><p>Därför <strong>\\(d=900\\frac{0,22}{1-0,78^{12}}\\approx208,6\\text{ mg}\\)</strong>.</p>",
-    "id": "2.18"
+    "id": "2.18",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2542,7 +3050,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.70",
     "t": "<p>En geometrisk talföljd har första termen 3 och kvoten 2.</p><p>Bestäm den 8:e termen.</p>",
-    "s": "<p>Formeln är \\(a_n=a_1\\cdot k^{n-1}\\).</p><p>\\[a_8=3\\cdot 2^{7}=3\\cdot 128=384.\\]</p><p><strong>Den 8:e termen är 384.</strong></p>"
+    "s": "<p>Formeln är \\(a_n=a_1\\cdot k^{n-1}\\).</p><p>\\[a_8=3\\cdot 2^{7}=3\\cdot 128=384.\\]</p><p><strong>Den 8:e termen är 384.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2552,7 +3062,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.71",
     "t": "<p>Beräkna summan av de sex första termerna i den geometriska talföljden</p><p>\\[2,6,18,\\ldots\\]</p>",
-    "s": "<p>Här är första termen \\(a_1=2\\) och kvoten \\(k=3\\).</p><p>Summan av de sex första termerna blir</p><p>\\[S_6=\\frac{a_1(k^6-1)}{k-1}=\\frac{2(3^6-1)}{3-1}=3^6-1=729-1=728.\\]</p><p><strong>Summan är 728.</strong></p>"
+    "s": "<p>Här är första termen \\(a_1=2\\) och kvoten \\(k=3\\).</p><p>Summan av de sex första termerna blir</p><p>\\[S_6=\\frac{a_1(k^6-1)}{k-1}=\\frac{2(3^6-1)}{3-1}=3^6-1=729-1=728.\\]</p><p><strong>Summan är 728.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2562,7 +3074,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En geometrisk talföljd börjar \\(160,80,40,\\ldots\\). Bestäm den åttonde termen.</p>",
     "s": "<p>Första termen är 160 och kvoten \\(k=0,5\\). Då</p><p>\\[a_8=160\\cdot0,5^7=1,25.\\]</p><p><strong>\\(a_8=1,25\\)</strong>.</p>",
-    "id": "2.102"
+    "id": "2.102",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2572,7 +3086,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(5+10+20+40+80\\).</p>",
     "s": "<p>Det är en geometrisk summa med \\(a_1=5\\), \\(k=2\\) och 5 termer:</p><p>\\[S_5=5\\frac{2^5-1}{2-1}=5\\cdot31=155.\\]</p>",
-    "id": "2.103"
+    "id": "2.103",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2582,7 +3098,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"285\" viewBox=\"0 0 450 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Maskinens värde år för år med en streckad linje vid 100 000 kronor\">\n<rect width=\"450\" height=\"290\" fill=\"white\"/>\n<text x=\"42\" y=\"34\" font-size=\"13\" fill=\"#777\">Värde (tusen kr)</text>\n<text x=\"425\" y=\"34\" font-size=\"12.5\" fill=\"#B23A2E\" text-anchor=\"end\">streckad linje: 100 000 kr</text>\n<rect x=\"72\" y=\"62.0\" width=\"40\" height=\"176.0\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"92\" y=\"54.0\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">240</text><text x=\"92\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">0</text><rect x=\"128\" y=\"93.7\" width=\"40\" height=\"144.3\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"148\" y=\"85.7\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">197</text><text x=\"148\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">1</text><rect x=\"184\" y=\"119.7\" width=\"40\" height=\"118.3\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"204\" y=\"111.7\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">161</text><text x=\"204\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">2</text><rect x=\"240\" y=\"141.0\" width=\"40\" height=\"97.0\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"260\" y=\"133.0\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">132</text><text x=\"260\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">3</text><rect x=\"296\" y=\"158.4\" width=\"40\" height=\"79.6\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"316\" y=\"150.4\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">109</text><text x=\"316\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">4</text><rect x=\"352\" y=\"172.7\" width=\"40\" height=\"65.3\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"1.5\"/><text x=\"372\" y=\"164.7\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">89</text><text x=\"372\" y=\"257\" font-size=\"13\" text-anchor=\"middle\">5</text>\n<line x1=\"55\" y1=\"238\" x2=\"425\" y2=\"238\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"164.7\" x2=\"425\" y2=\"164.7\" stroke=\"#B23A2E\" stroke-width=\"1.8\" stroke-dasharray=\"6 4\"/>\n<text x=\"55\" y=\"278\" font-size=\"13\" fill=\"#777\">Antal år</text>\n</svg></span><p>En maskin är värd 240 000 kr. Värdet minskar med 18 % per år. Efter hur många hela år är värdet för första gången under 100 000 kr?</p>",
     "s": "<p>Efter \\(n\\) år är värdet</p><p>\\[V_n=240000\\cdot0,82^n.\\]</p><p>Vi söker minsta heltal \\(n\\) som uppfyller</p><p>\\[240000\\cdot0,82^n\\lt100000.\\]</p><p>Logaritmer ger \\(n\\gt4,42\\). Minsta hela antal år är därför <strong>5 år</strong>.</p>",
-    "id": "2.104"
+    "id": "2.104",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 2,
@@ -2592,7 +3110,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en geometrisk talföljd är \\(a_1=5\\) och \\(a_4=135\\). Bestäm den positiva kvoten.</p>",
     "s": "<p>\\[135=5k^3\\Rightarrow k^3=27\\Rightarrow k=3.\\]</p>",
-    "id": "2.126"
+    "id": "2.126",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2602,7 +3122,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En geometrisk serie har första termen 12 och kvoten 0,25. Bestäm summan till oändlighet.</p>",
     "s": "<p>Eftersom \\(|k|\\lt1\\) konvergerar serien:</p><p>\\[S=\\frac{a_1}{1-k}=\\frac{12}{0,75}=16.\\]</p>",
-    "id": "2.127"
+    "id": "2.127",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2612,7 +3134,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I en geometrisk talföljd är \\(a_4=54\\) och kvoten är 3. Bestäm \\(a_1\\).</p>",
     "s": "<p>\\[54=a_1\\cdot3^3=27a_1\\Rightarrow a_1=2.\\]</p>",
-    "id": "2.139"
+    "id": "2.139",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2622,7 +3146,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En aritmetisk talföljd har \\(a_1=7\\) och differensen \\(d=4\\). Bestäm \\(a_{20}\\).</p>",
     "s": "<p>För en aritmetisk följd gäller \\(a_n=a_1+(n-1)d\\).</p><p>\\[a_{20}=7+19\\cdot4=83.\\]</p><p><strong>Svar: 83.</strong></p>",
-    "id": "2.181"
+    "id": "2.181",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2632,7 +3158,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna summan av de 30 första termerna i den aritmetiska följden</p><p>\\[5,8,11,14,\\ldots\\]</p>",
     "s": "<p>Här är \\(a_1=5\\), \\(d=3\\) och</p><p>\\[a_{30}=5+29\\cdot3=92.\\]</p><p>Summan blir</p><p>\\[S_{30}=\\frac{30(5+92)}2=15\\cdot97=1455.\\]</p><p><strong>Svar: 1455.</strong></p>",
-    "id": "2.182"
+    "id": "2.182",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2642,7 +3170,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En geometrisk talföljd har \\(a_1=3\\) och kvoten \\(q=2\\). Bestäm \\(a_8\\).</p>",
     "s": "<p>\\[a_n=a_1q^{n-1}.\\]</p><p>\\[a_8=3\\cdot2^7=384.\\]</p><p><strong>Svar: 384.</strong></p>",
-    "id": "2.183"
+    "id": "2.183",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2652,7 +3182,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[1+\\frac12+\\frac14+\\cdots+\\frac1{128}.\\]</p>",
     "s": "<p>Det är en geometrisk summa med \\(a_1=1\\), \\(q=\\frac12\\) och 8 termer.</p><p>\\[S_8=\\frac{1-(1/2)^8}{1-1/2}=2\\left(1-\\frac1{256}\\right)=\\frac{255}{128}.\\]</p><p><strong>Svar: \\(\\frac{255}{128}\\).</strong></p>",
-    "id": "2.184"
+    "id": "2.184",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2662,7 +3194,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om följden är aritmetisk eller geometrisk och ange differens eller kvot:</p><p>\\[160,\\ 80,\\ 40,\\ 20,\\ldots\\]</p>",
     "s": "<p>Kvoten mellan efterföljande termer är konstant:</p><p>\\[\\frac{80}{160}=\\frac{40}{80}=\\frac{20}{40}=\\frac12.\\]</p><p>Följden är därför <strong>geometrisk med kvoten \\(q=\\frac12\\)</strong>.</p>",
-    "id": "2.185"
+    "id": "2.185",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2672,7 +3206,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En läktare har 25 rader. Första raden har 18 platser och varje ny rad har 2 platser fler än föregående rad.</p><p>Hur många sittplatser finns totalt?</p>",
     "s": "<p>Antalet platser per rad bildar en aritmetisk följd med \\(a_1=18\\), \\(d=2\\).</p><p>Sista raden har</p><p>\\[a_{25}=18+24\\cdot2=66.\\]</p><p>Totalt:</p><p>\\[S_{25}=\\frac{25(18+66)}2=25\\cdot42=1050.\\]</p><p><strong>Svar: 1050 platser.</strong></p>",
-    "id": "2.186"
+    "id": "2.186",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2682,7 +3218,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>En boll släpps från 12 m höjd. Efter varje studs når den 70 % av föregående maxhöjd.</p><p>Hur lång sträcka färdas bollen totalt om modellen fortsätter obegränsat?</p>",
     "s": "<p>Först faller bollen 12 m. Därefter går den både upp och ner för varje studshöjd:</p><p>\\[12+2(12\\cdot0,7+12\\cdot0,7^2+\\cdots).\\]</p><p>Den geometriska serien i parentes har första term \\(8,4\\) och kvot \\(0,7\\):</p><p>\\[\\frac{8,4}{1-0,7}=28.\\]</p><p>Total sträcka:</p><p>\\[12+2\\cdot28=68.\\]</p><p><strong>Bollen färdas totalt 68 m.</strong></p>",
-    "id": "2.187"
+    "id": "2.187",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2692,7 +3230,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En geometrisk följd börjar med 5 och har kvoten 1,5. Bestäm det minsta \\(n\\) för vilket \\(a_n>100\\).</p>",
     "s": "<p>\\[a_n=5\\cdot1,5^{n-1}.\\]</p><p>Vi söker</p><p>\\[5\\cdot1,5^{n-1}>100\\Rightarrow1,5^{n-1}>20.\\]</p><p>Logaritmera:</p><p>\\[n-1>\\frac{\\ln20}{\\ln1,5}\\approx7,39.\\]</p><p>Alltså måste \\(n-1\\ge8\\), alltså <strong>\\(n=9\\)</strong>. Kontroll: \\(a_8\\approx85,4\\), \\(a_9\\approx128,1\\).</p>",
-    "id": "2.188"
+    "id": "2.188",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 2,
@@ -2702,7 +3242,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm \\(n\\) om \\(29\\equiv n\\pmod5\\) och \\(0\\le n&lt;5\\).</p>",
     "s": "<p><strong>Metod:</strong> Här arbetar vi modulo 5, alltså tittar vi på resten vid division med 5.</p><p>\\[29=5\\cdot5+4.\\]</p><p>Resten är 4. Därför gäller</p><p>\\[29\\equiv4\\pmod5.\\]</p><p>Alltså är <strong>\\(n=4\\)</strong>.</p>",
-    "id": "2.19"
+    "id": "2.19",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2712,7 +3254,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Förenkla \\(21\\cdot102\\pmod4\\).</p>",
     "s": "<p><strong>Metod:</strong> Ersätt först varje faktor med dess rest vid division med 4. Det gör talen mindre men ändrar inte vilken rest produkten får.</p><p>\\[21\\equiv1\\pmod4,\\qquad102\\equiv2\\pmod4.\\]</p><p>Därför</p><p>\\[21\\cdot102\\equiv1\\cdot2\\equiv\\mathbf2\\pmod4.\\]</p><p>Alltså är resten <strong>2</strong>.</p>",
-    "id": "2.20"
+    "id": "2.20",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2722,7 +3266,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Ge två olika heltal som är kongruenta med 7 modulo 9. Motivera.</p>",
     "s": "<p>Två tal är kongruenta modulo 9 om de ger samma rest vid division med 9.</p><p>Talet 7 ger förstås resten 7. Vi kan därför lägga till eller dra bort multiplar av 9 utan att ändra resten.</p><p>Exempel:</p><p>\\[7+9=16,\\qquad 7+18=25.\\]</p><p>Alltså är till exempel <strong>16 och 25</strong> kongruenta med 7 modulo 9.</p><p>Kontroll: \\(16-7=9\\) och \\(25-7=18\\), som båda är delbara med 9.</p>",
-    "id": "2.21"
+    "id": "2.21",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2732,7 +3278,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Beräkna \\(18\\cdot33\\pmod{16}\\).</p>",
     "s": "<p><strong>Metod:</strong> Eftersom vi arbetar modulo 16 kan vi först ersätta varje faktor med dess rest vid division med 16.</p><p>\\[18\\equiv2\\pmod{16},\\qquad33\\equiv1\\pmod{16}.\\]</p><p>Då blir</p><p>\\[18\\cdot33\\equiv2\\cdot1\\equiv\\mathbf2\\pmod{16}.\\]</p><p>Alltså är resten <strong>2</strong>.</p>",
-    "id": "2.22"
+    "id": "2.22",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2742,7 +3290,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Beräkna \\(21\\pmod2\\).</p>",
     "s": "<p>Här arbetar vi modulo 2, alltså tittar vi på resten vid division med 2.</p><p>Eftersom 21 är udda kan vi skriva</p><p>\\[21=2\\cdot10+1.\\]</p><p>Resten är därför 1, alltså</p><p><strong>\\(21\\equiv1\\pmod2\\)</strong>.</p>",
-    "id": "2.23"
+    "id": "2.23",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2752,7 +3302,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Idag är det tisdag. Vilken veckodag är det om 209 dagar?</p>",
     "s": "<p><strong>Metod:</strong> Situationen upprepas periodiskt och kan därför beskrivas med kongruensräkning.</p><p>Veckodagar upprepas med period 7, så vi räknar modulo 7:</p><p>\\[209=7\\cdot29+6\\quad\\Rightarrow\\quad209\\equiv6\\pmod7.\\]</p><p>Sex dagar efter tisdag är <strong>måndag</strong>.</p>",
-    "id": "2.24"
+    "id": "2.24",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2762,7 +3314,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Förklara med ord vad följande betyder.</p><ol type=\"a\"><li>\\(38\\equiv3\\pmod5\\)</li><li>\\(17\\equiv23\\pmod3\\)</li></ol>",
     "s": "<p><strong>a)</strong> \\(38\\equiv3\\pmod5\\) betyder att 38 och 3 ger samma rest vid division med 5. Det kan också kontrolleras genom att skillnaden</p><p>\\[38-3=35\\]</p><p>är delbar med 5.</p><p><strong>b)</strong> \\(17\\equiv23\\pmod3\\) betyder att 17 och 23 ger samma rest vid division med 3. Skillnaden</p><p>\\[17-23=-6\\]</p><p>är delbar med 3.</p>",
-    "id": "2.25"
+    "id": "2.25",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2772,7 +3326,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.64",
     "t": "<p>Bestäm resten då 58 divideras med 7 och skriv sedan en kongruens.</p>",
-    "s": "<p>\\(58=56+2=8\\cdot 7+2\\).</p><p>Resten är alltså 2. Med kongruensnotation skrivs detta</p><p><strong>\\(58\\equiv 2\\pmod 7\\)</strong>.</p>"
+    "s": "<p>\\(58=56+2=8\\cdot 7+2\\).</p><p>Resten är alltså 2. Med kongruensnotation skrivs detta</p><p><strong>\\(58\\equiv 2\\pmod 7\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2782,7 +3338,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(n\\) om \\(83\\equiv n\\pmod 6\\) och \\(0\\le n\\lt6\\).</p>",
     "s": "<p>\\(83=13\\cdot6+5\\), alltså <strong>\\(n=5\\)</strong>.</p>",
-    "id": "2.87"
+    "id": "2.87",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2792,7 +3350,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Är 41 och 17 kongruenta modulo 8? Motivera.</p>",
     "s": "<p>Skillnaden är \\(41-17=24\\), som är delbar med 8. Därför</p><p><strong>\\(41\\equiv17\\pmod8\\)</strong>.</p>",
-    "id": "2.88"
+    "id": "2.88",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2802,7 +3362,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ge ett negativt heltal som är kongruent med 4 modulo 7.</p>",
     "s": "<p>Vi kan subtrahera 7 från 4: \\(4-7=-3\\). Alltså är exempelvis <strong>\\(-3\\)</strong> kongruent med 4 modulo 7.</p>",
-    "id": "2.89"
+    "id": "2.89",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2812,7 +3374,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv tre heltal som är kongruenta med 2 modulo 6.</p>",
     "s": "<p>Vi kan addera eller subtrahera multiplar av 6. Exempel:</p><p><strong>\\(-4,2,8\\)</strong>.</p>",
-    "id": "2.118"
+    "id": "2.118",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2822,7 +3386,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Klockan är 9. Vad pekar timvisaren på om 110 timmar?</p>",
     "s": "<p>Klockans timvisare upprepar sig efter 12 timmar, så vi räknar modulo 12:</p><p>\\[110=12\\cdot9+2\\quad\\Rightarrow\\quad110\\equiv2\\pmod{12}.\\]</p><p>Två timmar efter 9 pekar timvisaren på <strong>11</strong>.</p>",
-    "id": "2.26"
+    "id": "2.26",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2832,7 +3398,9 @@ window.BANKMATF1 = [
     "poang": "2/1/0",
     "t": "<p>Förenkla \\(23+39\\cdot12\\pmod5\\) så långt som möjligt.</p>",
     "s": "<p><strong>Metod:</strong> Vi arbetar modulo 5. Ersätt därför 23, 39 och 12 med deras respektive rester vid division med 5:</p><p>\\[23\\equiv3,\\qquad39\\equiv4,\\qquad12\\equiv2\\pmod5.\\]</p><p>Uttrycket får då samma rest som</p><p>\\[3+4\\cdot2=11.\\]</p><p>Eftersom \\(11\\equiv1\\pmod5\\) blir svaret <strong>1</strong>.</p>",
-    "id": "2.27"
+    "id": "2.27",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2842,7 +3410,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<p>För vilka positiva heltal \\(n\\) gäller \\(37\\equiv2\\pmod n\\)?</p>",
     "s": "<p><strong>Metod:</strong> Översätt villkoret till en delbarhetsfråga innan du bestämmer möjliga heltal.</p><p>Villkoret betyder att \\(n\\mid(37-2)=35\\). De positiva delarna till 35 är <strong>\\(n=1,5,7,35\\)</strong>.</p>",
-    "id": "2.28"
+    "id": "2.28",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2852,7 +3422,9 @@ window.BANKMATF1 = [
     "poang": "2/2/0",
     "t": "<p>Förenkla.</p><ol type=\"a\"><li>\\(21+15+38\\pmod5\\)</li><li>\\(13\\cdot11\\pmod5\\)</li><li>\\(2^{30}\\pmod3\\)</li><li>\\(2^{30}\\pmod5\\)</li></ol>",
     "s": "<ol type=\"a\"><li>\\(1+0+3\\equiv\\mathbf4\\pmod5\\).</li><li>\\(3\\cdot1\\equiv\\mathbf3\\pmod5\\).</li><li>\\(2\\equiv-1\\pmod3\\), så \\((-1)^{30}=\\mathbf1\\).</li><li>\\(2^4\\equiv1\\pmod5\\), och \\(30=7\\cdot4+2\\), så \\(2^{30}\\equiv2^2=\\mathbf4\\pmod5\\).</li></ol>",
-    "id": "2.29"
+    "id": "2.29",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2862,7 +3434,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm slutsiffran i \\(7^{2026}\\).</p>",
     "s": "<p><strong>Metod:</strong> För att bestämma slutsiffran räcker det att undersöka potenserna av 7 modulo 10.</p><p>\\[7^1\\equiv7,\\qquad7^2\\equiv9,\\qquad7^3\\equiv3,\\qquad7^4\\equiv1\\pmod{10}.\\]</p><p>Därefter upprepas samma fyra slutsiffror. Eftersom</p><p>\\[2026=4\\cdot506+2,\\]</p><p>har \\(7^{2026}\\) samma slutsiffra som \\(7^2\\).</p><p>Alltså är slutsiffran <strong>9</strong>.</p>",
-    "id": "2.30"
+    "id": "2.30",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2872,7 +3446,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Idag är det fredag. Vilken veckodag är det om \\(3^{20}+5\\cdot10^4\\) dagar?</p>",
     "s": "<p>Modulo 7: \\(3^6\\equiv1\\), så \\(3^{20}=3^{18}3^2\\equiv9\\equiv2\\). Dessutom \\(10\\equiv3\\), så \\(10^4\\equiv3^4=81\\equiv4\\). Då är \\(5\\cdot10^4\\equiv20\\equiv6\\). Totalt \\(2+6=8\\equiv1\\pmod7\\). En dag efter fredag är <strong>lördag</strong>.</p>",
-    "id": "2.31"
+    "id": "2.31",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2882,7 +3458,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Anta att den 1 januari är en måndag. Vilken veckodag är det \\(10^{100}\\) dagar senare?</p>",
     "s": "<p>Vi behöver \\(10^{100}\\pmod7\\). Eftersom \\(10\\equiv3\\pmod7\\) och \\(3^6\\equiv1\\pmod7\\), medan \\(100\\equiv4\\pmod6\\), får vi</p><p>\\[10^{100}\\equiv3^4=81\\equiv4\\pmod7.\\]</p><p>Fyra dagar efter måndag är <strong>fredag</strong>.</p>",
-    "id": "2.58"
+    "id": "2.58",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2892,7 +3470,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "id": "2.66",
     "t": "<p>På ett företag ska de anställda delas in i grupper. Företaget har mellan 500 och 800 anställda, men 10 personer deltar inte i gruppindelningen.</p><p>Antalet deltagare ger resten 1 vid indelning i grupper om 4 eller 8, men saknar 1 person för att gå jämnt upp vid indelning i grupper om 3, 6 eller 9.</p><p>Om deltagarna delas in i grupper om 5 går det jämnt upp. Hur många anställda har företaget?</p>",
-    "s": "<p>Låt \\(N\\) vara antalet deltagare. Villkoren ger</p><p>\\[N\\equiv 1\\pmod 4,\\quad N\\equiv 1\\pmod 8,\\quad N\\equiv -1\\pmod 3,\\quad N\\equiv -1\\pmod 6,\\quad N\\equiv -1\\pmod 9,\\quad N\\equiv 0\\pmod 5.\\]</p><p>Villkoren modulo 4 och 8 sammanfattas av det starkaste, alltså \\(N\\equiv 1\\pmod 8\\). På samma sätt sammanfattas villkoren modulo 3, 6 och 9 av</p><p>\\[N\\equiv -1\\pmod{18},\\qquad\\text{det vill säga}\\qquad N\\equiv 17\\pmod{18}.\\]</p><p>Kvar är tre kongruenser:</p><p>\\[N\\equiv 1\\pmod 8,\\qquad N\\equiv 17\\pmod{18},\\qquad N\\equiv 0\\pmod 5.\\]</p><p>Från den sista är \\(N=5m\\). Insatt i den första ger \\(5m\\equiv 1\\pmod 8\\), och eftersom \\(5\\cdot 5=25\\equiv 1\\pmod 8\\) är 5 sin egen invers modulo 8. Multiplikation med 5 ger</p><p>\\[m\\equiv 5\\pmod 8,\\qquad\\text{alltså}\\qquad N\\equiv 25\\pmod{40}.\\]</p><p>Skriv \\(N=40k+25\\) och sätt in i den andra kongruensen:</p><p>\\[40k+25\\equiv 17\\pmod{18}\\Rightarrow 4k\\equiv 10\\pmod{18}\\Rightarrow 2k\\equiv 5\\pmod 9.\\]</p><p>Eftersom \\(2\\cdot 5=10\\equiv 1\\pmod 9\\) är 5 invers till 2 modulo 9, och</p><p>\\[k\\equiv 25\\equiv 7\\pmod 9.\\]</p><p>Med \\(k=9j+7\\) blir</p><p>\\[N=40(9j+7)+25=360j+305.\\]</p><p>Deltagarna är 10 färre än de anställda, så \\(N\\) ska ligga mellan 490 och 790. Det ger \\(j=1\\) och</p><p>\\[N=665.\\]</p><p>Kontroll: \\(665=83\\cdot 8+1\\), \\(665=36\\cdot 18+17\\) och \\(665=133\\cdot 5\\). Antalet anställda blir</p><p><strong>\\[665+10=675.\\]</strong></p>"
+    "s": "<p>Låt \\(N\\) vara antalet deltagare. Villkoren ger</p><p>\\[N\\equiv 1\\pmod 4,\\quad N\\equiv 1\\pmod 8,\\quad N\\equiv -1\\pmod 3,\\quad N\\equiv -1\\pmod 6,\\quad N\\equiv -1\\pmod 9,\\quad N\\equiv 0\\pmod 5.\\]</p><p>Villkoren modulo 4 och 8 sammanfattas av det starkaste, alltså \\(N\\equiv 1\\pmod 8\\). På samma sätt sammanfattas villkoren modulo 3, 6 och 9 av</p><p>\\[N\\equiv -1\\pmod{18},\\qquad\\text{det vill säga}\\qquad N\\equiv 17\\pmod{18}.\\]</p><p>Kvar är tre kongruenser:</p><p>\\[N\\equiv 1\\pmod 8,\\qquad N\\equiv 17\\pmod{18},\\qquad N\\equiv 0\\pmod 5.\\]</p><p>Från den sista är \\(N=5m\\). Insatt i den första ger \\(5m\\equiv 1\\pmod 8\\), och eftersom \\(5\\cdot 5=25\\equiv 1\\pmod 8\\) är 5 sin egen invers modulo 8. Multiplikation med 5 ger</p><p>\\[m\\equiv 5\\pmod 8,\\qquad\\text{alltså}\\qquad N\\equiv 25\\pmod{40}.\\]</p><p>Skriv \\(N=40k+25\\) och sätt in i den andra kongruensen:</p><p>\\[40k+25\\equiv 17\\pmod{18}\\Rightarrow 4k\\equiv 10\\pmod{18}\\Rightarrow 2k\\equiv 5\\pmod 9.\\]</p><p>Eftersom \\(2\\cdot 5=10\\equiv 1\\pmod 9\\) är 5 invers till 2 modulo 9, och</p><p>\\[k\\equiv 25\\equiv 7\\pmod 9.\\]</p><p>Med \\(k=9j+7\\) blir</p><p>\\[N=40(9j+7)+25=360j+305.\\]</p><p>Deltagarna är 10 färre än de anställda, så \\(N\\) ska ligga mellan 490 och 790. Det ger \\(j=1\\) och</p><p>\\[N=665.\\]</p><p>Kontroll: \\(665=83\\cdot 8+1\\), \\(665=36\\cdot 18+17\\) och \\(665=133\\cdot 5\\). Antalet anställda blir</p><p><strong>\\[665+10=675.\\]</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2902,7 +3482,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Klockan är 8. Vad visar timvisaren 53 timmar senare?</p>",
     "s": "<p>\\(53\\equiv5\\pmod{12}\\). Fem timmar efter 8 är <strong>1</strong>.</p>",
-    "id": "2.94"
+    "id": "2.94",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2912,7 +3494,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En måndag inträffar en händelse. Vilken veckodag är det \\(2^{20}\\) dagar senare?</p>",
     "s": "<p>Vi behöver \\(2^{20}\\pmod7\\). Potenser av 2 modulo 7 har period 3 eftersom \\(2^3=8\\equiv1\\pmod7\\). Eftersom \\(20\\equiv2\\pmod3\\):</p><p>\\[2^{20}\\equiv2^2=4\\pmod7.\\]</p><p>Fyra dagar efter måndag är <strong>fredag</strong>.</p>",
-    "id": "2.95"
+    "id": "2.95",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2922,7 +3506,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm slutsiffran i \\(6^{2026}\\).</p>",
     "s": "<p>Alla positiva potenser av 6 slutar på 6. Slutsiffran är <strong>6</strong>.</p>",
-    "id": "2.121"
+    "id": "2.121",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2932,7 +3518,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm det minsta positiva heltalet \\(n\\) som uppfyller \\(n\\equiv2\\pmod5\\) och \\(n\\equiv1\\pmod3\\).</p>",
     "s": "<p>Tal som är \\(2\\pmod5\\) är \\(2,7,12,17,\\ldots\\). Av dessa är 7 det första som ger resten 1 vid division med 3. Alltså <strong>\\(n=7\\)</strong>.</p>",
-    "id": "2.122"
+    "id": "2.122",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2942,7 +3530,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Bestäm det minsta positiva heltalet \\(x\\) som uppfyller</p><p>\\[x\\equiv2\\pmod5,\\qquad x\\equiv4\\pmod7.\\]</p>",
     "s": "<p>Villkoret \\(x\\equiv2\\pmod5\\) betyder att \\(x\\) kan skrivas</p><p>\\[x=5k+2\\]</p><p>för något heltal \\(k\\ge0\\).</p><p>Det andra villkoret kräver att</p><p>\\[5k+2\\equiv4\\pmod7,\\]</p><p>alltså</p><p>\\[5k\\equiv2\\pmod7.\\]</p><p>Eftersom \\(5\\cdot3=15\\equiv1\\pmod7\\) kan vi multiplicera båda leden med 3:</p><p>\\[k\\equiv6\\pmod7.\\]</p><p>Det minsta icke-negativa värdet är därför \\(k=6\\). Då får vi</p><p>\\[x=5\\cdot6+2=32.\\]</p><p>Kontroll: \\(32\\) ger resten 2 vid division med 5 och resten 4 vid division med 7.</p><p>Alltså är <strong>\\(x=32\\)</strong>.</p>",
-    "id": "2.32"
+    "id": "2.32",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2952,7 +3542,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm resten när \\(3^{2026}+5^{2026}\\) divideras med 7.</p>",
     "s": "<p>Vi behöver bara hålla reda på resterna vid division med 7.</p><p>För båda baserna gäller</p><p>\\[3^6\\equiv1\\pmod7,\\qquad5^6\\equiv1\\pmod7.\\]</p><p>Därför upprepas resterna efter sex exponentsteg i den här beräkningen. Eftersom</p><p>\\[2026=6\\cdot337+4\\]</p><p>räcker det att beräkna fjärde potensen:</p><p>\\[3^{2026}\\equiv3^4=81\\equiv4\\pmod7,\\]</p><p>\\[5^{2026}\\equiv5^4=625\\equiv2\\pmod7.\\]</p><p>Summan ger då</p><p>\\[4+2=6.\\]</p><p>Resten är alltså <strong>6</strong>.</p>",
-    "id": "2.57"
+    "id": "2.57",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2962,7 +3554,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.65",
     "t": "<p>Förenkla \\(17\\cdot 23\\pmod 5\\).</p>",
-    "s": "<p><strong>Metod:</strong> Vi arbetar modulo 5, så vi ersätter först faktorerna med deras rester vid division med 5:</p><p>\\[17\\equiv2\\pmod5,\\qquad23\\equiv3\\pmod5.\\]</p><p>Då får produkten samma rest som</p><p>\\[2\\cdot3=6\\equiv1\\pmod5.\\]</p><p>Alltså är resten <strong>1</strong>.</p>"
+    "s": "<p><strong>Metod:</strong> Vi arbetar modulo 5, så vi ersätter först faktorerna med deras rester vid division med 5:</p><p>\\[17\\equiv2\\pmod5,\\qquad23\\equiv3\\pmod5.\\]</p><p>Då får produkten samma rest som</p><p>\\[2\\cdot3=6\\equiv1\\pmod5.\\]</p><p>Alltså är resten <strong>1</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2972,7 +3566,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\((37+58)\\pmod 9\\).</p>",
     "s": "<p>\\(37\\equiv1\\pmod9\\) och \\(58\\equiv4\\pmod9\\). Alltså</p><p>\\[37+58\\equiv1+4=5\\pmod9.\\]</p><p><strong>Resten är 5.</strong></p>",
-    "id": "2.90"
+    "id": "2.90",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2982,7 +3578,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(2^{10}\\pmod3\\).</p>",
     "s": "<p>\\(2\\equiv-1\\pmod3\\). Då</p><p>\\[2^{10}\\equiv(-1)^{10}=1\\pmod3.\\]</p><p><strong>Resten är 1.</strong></p>",
-    "id": "2.91"
+    "id": "2.91",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -2992,7 +3590,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(46\\cdot29\\pmod7\\).</p>",
     "s": "<p>\\(46\\equiv4\\pmod7\\) och \\(29\\equiv1\\pmod7\\). Produkten är därför</p><p>\\[4\\cdot1=4\\pmod7.\\]</p>",
-    "id": "2.92"
+    "id": "2.92",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3002,7 +3602,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm resten när \\(7^{2027}\\) divideras med 10.</p>",
     "s": "<p>Sista siffrorna för potenser av 7 följer cykeln \\(7,9,3,1\\) med period 4. Eftersom</p><p>\\[2027\\equiv3\\pmod4\\]</p><p>får \\(7^{2027}\\) samma slutsiffra som \\(7^3\\), alltså <strong>3</strong>.</p>",
-    "id": "2.93"
+    "id": "2.93",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3012,7 +3614,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\((18-47)\\pmod5\\).</p>",
     "s": "<p>\\(18\\equiv3\\) och \\(47\\equiv2\\pmod5\\). Skillnaden är \\(3-2=1\\). <strong>Resten är 1.</strong></p>",
-    "id": "2.119"
+    "id": "2.119",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3022,7 +3626,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm resten när \\(3^{50}+4^{50}\\) divideras med 5.</p>",
     "s": "<p>\\(3^4\\equiv1\\pmod5\\) och \\(50\\equiv2\\pmod4\\), så \\(3^{50}\\equiv3^2=9\\equiv4\\). Vidare \\(4\\equiv-1\\), så \\(4^{50}\\equiv1\\). Summan är \\(4+1=5\\equiv0\\). <strong>Resten är 0.</strong></p>",
-    "id": "2.120"
+    "id": "2.120",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3032,7 +3638,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den minsta icke-negativa resten till \\(-23\\pmod7\\).</p>",
     "s": "<p>\\(-23+28=5\\). Alltså \\(-23\\equiv5\\pmod7\\). <strong>Resten är 5.</strong></p>",
-    "id": "2.137"
+    "id": "2.137",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3042,7 +3650,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm resten när 347 divideras med 12.</p>",
     "s": "<p>\\[347=12\\cdot28+11.\\]</p><p>Resten är därför <strong>11</strong>, vilket också kan skrivas \\(347\\equiv11\\pmod{12}\\).</p>",
-    "id": "2.195"
+    "id": "2.195",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3052,7 +3662,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm resten när \\(58+79\\) divideras med 9.</p>",
     "s": "<p>Arbeta med resterna vid division med 9:</p><p>\\[58\\equiv4\\pmod9,\\qquad79\\equiv7\\pmod9.\\]</p><p>Då</p><p>\\[58+79\\equiv4+7=11\\equiv2\\pmod9.\\]</p><p><strong>Resten är 2.</strong></p>",
-    "id": "2.196"
+    "id": "2.196",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3062,7 +3674,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm resten när \\(17^2\\) divideras med 5.</p>",
     "s": "<p>Eftersom \\(17\\equiv2\\pmod5\\) får vi</p><p>\\[17^2\\equiv2^2=4\\pmod5.\\]</p><p><strong>Resten är 4.</strong></p>",
-    "id": "2.197"
+    "id": "2.197",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3072,7 +3686,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Det är tisdag i dag. Vilken veckodag är det om 100 dagar?</p>",
     "s": "<p>Veckodagar upprepas med period 7. Dividera 100 med 7:</p><p>\\[100=14\\cdot7+2.\\]</p><p>Det räcker alltså att gå två dagar fram från tisdag: onsdag, torsdag.</p><p><strong>Svar: torsdag.</strong></p>",
-    "id": "2.198"
+    "id": "2.198",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3082,7 +3698,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös kongruensen</p><p>\\[4x\\equiv3\\pmod7.\\]</p>",
     "s": "<p>Vi behöver inversen till 4 modulo 7. Eftersom</p><p>\\[4\\cdot2=8\\equiv1\\pmod7\\]</p><p>kan vi multiplicera båda leden med 2:</p><p>\\[x\\equiv6\\pmod7.\\]</p><p><strong>Lösning: \\(x=6+7k\\), där \\(k\\in\\mathbb Z\\).</strong></p>",
-    "id": "2.199"
+    "id": "2.199",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3092,7 +3710,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm de två sista siffrorna i \\(3^{20}\\).</p>",
     "s": "<p>De två sista siffrorna bestäms av resten modulo 100. Vi kan kvadrera stegvis:</p><p>\\[3^4=81\\pmod{100}.\\]</p><p>\\[3^{10}=59049\\equiv49\\pmod{100}.\\]</p><p>Därför</p><p>\\[3^{20}\\equiv49^2=2401\\equiv1\\pmod{100}.\\]</p><p><strong>De två sista siffrorna är 01.</strong></p>",
-    "id": "2.200"
+    "id": "2.200",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3102,7 +3722,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa att \\(11^{2n}-1\\) är delbart med 120 för varje positivt heltal \\(n\\).</p>",
     "s": "<p><strong>Metod:</strong> Översätt villkoret till en delbarhetsfråga innan du bestämmer möjliga heltal.</p><p>Eftersom \\(11^2=121\\equiv1\\pmod{120}\\) gäller \\(11^{2n}=(11^2)^n\\equiv1^n\\equiv1\\pmod{120}\\). Alltså <strong>\\(11^{2n}-1\\equiv0\\pmod{120}\\)</strong>, vilket visar delbarheten.</p>",
-    "id": "2.33"
+    "id": "2.33",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3112,7 +3734,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv talet \\(91_{10}\\) i bas 4.</p>",
     "s": "<p><strong>Idé:</strong> Skriv 91 som en summa av potenser av 4.</p><p>\\[91=1\\cdot4^3+1\\cdot4^2+2\\cdot4+3.\\]</p><p>Koefficienterna framför \\(4^3,4^2,4^1,4^0\\) är alltså 1, 1, 2 och 3. Därför är <strong>\\(91_{10}=1123_4\\)</strong>.</p>",
-    "id": "2.34"
+    "id": "2.34",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3122,7 +3746,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(3241_5\\) till ett tal i bas tio.</p>",
     "s": "<p><strong>Metod:</strong> Använd platsvärdena i den aktuella basen och skriv talet som en summa av baspotenser.</p><p>Platsvärdena är \\(5^3,5^2,5^1,5^0\\):</p><p>\\[3241_5=3\\cdot125+2\\cdot25+4\\cdot5+1=\\mathbf{446}_{10}.\\]</p>",
-    "id": "2.53"
+    "id": "2.53",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3132,7 +3758,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Omvandla \\(242_{10}\\) till bas tre.</p>",
     "s": "<p>Den största trepotensen som behövs är \\(3^4=81\\). Eftersom</p><p>\\[242=2\\cdot81+2\\cdot27+2\\cdot9+2\\cdot3+2,\\]</p><p>blir svaret <strong>\\(22222_3\\)</strong>.</p><p>Kontroll: \\(2(81+27+9+3+1)=2\\cdot121=242\\).</p>",
-    "id": "2.54"
+    "id": "2.54",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3142,7 +3770,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.63",
     "t": "<p>Omvandla \\(101101_2\\) till bas tio.</p>",
-    "s": "<p>Vi använder platsvärdena i bas 2:</p><p>\\[101101_2=1\\cdot 2^5+0\\cdot 2^4+1\\cdot 2^3+1\\cdot 2^2+0\\cdot 2^1+1\\cdot 2^0.\\]</p><p>\\[=32+8+4+1=45.\\]</p><p><strong>Svaret är \\(45_{10}\\).</strong></p>"
+    "s": "<p>Vi använder platsvärdena i bas 2:</p><p>\\[101101_2=1\\cdot 2^5+0\\cdot 2^4+1\\cdot 2^3+1\\cdot 2^2+0\\cdot 2^1+1\\cdot 2^0.\\]</p><p>\\[=32+8+4+1=45.\\]</p><p><strong>Svaret är \\(45_{10}\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3152,7 +3782,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(2312_4\\) till bas tio.</p>",
     "s": "<p>\\[2312_4=2\\cdot4^3+3\\cdot4^2+1\\cdot4+2=128+48+4+2=182.\\]</p><p><strong>\\(182_{10}\\)</strong>.</p>",
-    "id": "2.83"
+    "id": "2.83",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3162,7 +3794,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(53_{10}\\) till bas två.</p>",
     "s": "<p>\\(53=32+16+4+1=2^5+2^4+2^2+2^0\\). Därför blir siffrorna på platserna \\(2^5,2^4,\\ldots,2^0\\):</p><p><strong>\\(110101_2\\)</strong>.</p>",
-    "id": "2.84"
+    "id": "2.84",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3172,7 +3806,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(745_8\\) till bas tio.</p>",
     "s": "<p>\\[745_8=7\\cdot8^2+4\\cdot8+5=448+32+5=485.\\]</p><p><strong>\\(485_{10}\\)</strong>.</p>",
-    "id": "2.85"
+    "id": "2.85",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3182,7 +3818,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(243_5+132_5\\) och skriv svaret i bas fem.</p>",
     "s": "<p>Vi kan räkna i bas tio och omvandla tillbaka:</p><p>\\[243_5=2\\cdot25+4\\cdot5+3=73,\\qquad132_5=42.\\]</p><p>Summan är 115. Eftersom \\(115=4\\cdot25+3\\cdot5+0\\) blir</p><p><strong>\\(430_5\\)</strong>.</p>",
-    "id": "2.86"
+    "id": "2.86",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3192,7 +3830,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(351_6\\) till bas tio.</p>",
     "s": "<p>\\[351_6=3\\cdot36+5\\cdot6+1=139.\\]</p>",
-    "id": "2.116"
+    "id": "2.116",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3202,7 +3842,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Talet \\(2a3_5\\) är lika med \\(68_{10}\\). Bestäm siffran \\(a\\).</p>",
     "s": "<p>\\[2a3_5=2\\cdot25+5a+3=53+5a.\\]</p><p>\\[53+5a=68\\Rightarrow a=3.\\]</p><p><strong>\\(a=3\\)</strong>.</p>",
-    "id": "2.117"
+    "id": "2.117",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3212,7 +3854,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(94_{10}\\) till bas fem.</p>",
     "s": "<p>\\(94=3\\cdot25+3\\cdot5+4\\). Därför <strong>\\(334_5\\)</strong>.</p>",
-    "id": "2.138"
+    "id": "2.138",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3222,7 +3866,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>462 enkronor, 105 tvåkronor och 182 femkronor ska fördelas lika mellan så många kassor som möjligt, utan att några mynt blir över. Hur många kassor kan användas?</p>",
     "s": "<p><strong>Metod:</strong> Översätt villkoret till en delbarhetsfråga innan du bestämmer möjliga heltal.</p><p>Antalet kassor måste dela alla tre talen. \\(\\gcd(462,105)=21\\) och \\(\\gcd(21,182)=7\\). Alltså kan man använda <strong>7 kassor</strong>.</p>",
-    "id": "2.35"
+    "id": "2.35",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3232,7 +3878,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.61",
     "t": "<p>Bestäm \\(\\mathrm{sgd}(84,126)\\).</p>",
-    "s": "<p>Primtalsfaktorisera båda talen:</p><p>\\[84=2^2\\cdot 3\\cdot 7,\\qquad 126=2\\cdot 3^2\\cdot 7.\\]</p><p>Gemensamma faktorer med minsta exponent är \\(2\\), \\(3\\) och \\(7\\).</p><p>\\[\\mathrm{sgd}(84,126)=2\\cdot 3\\cdot 7=42.\\]</p>"
+    "s": "<p>Primtalsfaktorisera båda talen:</p><p>\\[84=2^2\\cdot 3\\cdot 7,\\qquad 126=2\\cdot 3^2\\cdot 7.\\]</p><p>Gemensamma faktorer med minsta exponent är \\(2\\), \\(3\\) och \\(7\\).</p><p>\\[\\mathrm{sgd}(84,126)=2\\cdot 3\\cdot 7=42.\\]</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3242,7 +3890,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.62",
     "t": "<p>Avgör om 693 är delbart med 3, 9 och 11.</p>",
-    "s": "<p>Summan av siffrorna är \\(6+9+3=18\\).</p><p>Därför är 693 delbart med 3 och också med 9.</p><p>För 11 kan vi använda regeln med växlande summa:</p><p>\\[(6+3)-9=0.\\]</p><p>Eftersom resultatet är delbart med 11 är även 693 delbart med 11.</p><p><strong>Alltså är 693 delbart med 3, 9 och 11.</strong></p>"
+    "s": "<p>Summan av siffrorna är \\(6+9+3=18\\).</p><p>Därför är 693 delbart med 3 och också med 9.</p><p>För 11 kan vi använda regeln med växlande summa:</p><p>\\[(6+3)-9=0.\\]</p><p>Eftersom resultatet är delbart med 11 är även 693 delbart med 11.</p><p><strong>Alltså är 693 delbart med 3, 9 och 11.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3252,7 +3902,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Primtalsfaktorisera 360.</p>",
     "s": "<p>\\[360=36\\cdot10=(2^2\\cdot3^2)(2\\cdot5)=\\mathbf{2^3\\cdot3^2\\cdot5}.\\]</p>",
-    "id": "2.79"
+    "id": "2.79",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3262,7 +3914,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\mathrm{sgd}(168,252)\\).</p>",
     "s": "<p>\\(168=2^3\\cdot3\\cdot7\\) och \\(252=2^2\\cdot3^2\\cdot7\\). Gemensamma faktorer med lägsta exponent ger</p><p>\\[\\mathrm{sgd}=2^2\\cdot3\\cdot7=84.\\]</p>",
-    "id": "2.80"
+    "id": "2.80",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3272,7 +3926,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm minsta positiva tal som är delbart med både 18 och 24.</p>",
     "s": "<p>\\(18=2\\cdot3^2\\) och \\(24=2^3\\cdot3\\). För minsta gemensamma multipel tar vi högsta exponenten av varje primfaktor:</p><p>\\[2^3\\cdot3^2=72.\\]</p><p><strong>72</strong>.</p>",
-    "id": "2.81"
+    "id": "2.81",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3282,7 +3938,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En förening har 144 vattenflaskor och 216 energibars. Man vill göra så många identiska paket som möjligt utan att något blir över. Hur många paket kan göras och vad innehåller varje paket?</p>",
     "s": "<p>Antalet paket måste dela både 144 och 216. Det största möjliga antalet är</p><p>\\[\\mathrm{sgd}(144,216)=72.\\]</p><p>Varje paket får då \\(144/72=2\\) flaskor och \\(216/72=3\\) bars.</p><p><strong>72 paket med 2 flaskor och 3 bars i varje.</strong></p>",
-    "id": "2.82"
+    "id": "2.82",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3292,7 +3950,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd Euklides algoritm för att bestämma \\(\\mathrm{sgd}(391,299)\\).</p>",
     "s": "<p>\\[391=1\\cdot299+92\\]</p><p>\\[299=3\\cdot92+23\\]</p><p>\\[92=4\\cdot23+0.\\]</p><p>Alltså <strong>\\(\\mathrm{sgd}(391,299)=23\\)</strong>.</p>",
-    "id": "2.114"
+    "id": "2.114",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3302,7 +3962,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa att \\(\\mathrm{sgd}(84,30)=6\\) och skriv 6 som en heltalskombination av 84 och 30.</p>",
     "s": "<p>Euklides algoritm:</p><p>\\[84=2\\cdot30+24,\\qquad30=1\\cdot24+6.\\]</p><p>Alltså sgd = 6. Bakåtsubstitution:</p><p>\\[6=30-24=30-(84-2\\cdot30)=3\\cdot30-84.\\]</p>",
-    "id": "2.115"
+    "id": "2.115",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3312,7 +3974,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa att produkten av tre på varandra följande heltal alltid är delbar med 6.</p>",
     "s": "<p>Bland tre på varandra följande heltal finns alltid ett jämnt tal, alltså en faktor 2. Dessutom finns alltid ett tal delbart med 3, alltså en faktor 3. Produkten innehåller därför faktorn \\(2\\cdot3=6\\) och är delbar med 6.</p>",
-    "id": "2.136"
+    "id": "2.136",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3322,7 +3986,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Visa med induktion att</p><p>\\[a+ak+ak^2+\\cdots+ak^{n-1}=a\\frac{k^n-1}{k-1}\\]</p><p>för \\(n\\ge1\\) och \\(k\\ne1\\).</p>",
     "s": "<p><strong>Bas:</strong> \\(n=1\\): vänsterledet är \\(a\\), högerledet \\(a(k-1)/(k-1)=a\\).</p><p><strong>Antagande:</strong> formeln gäller för \\(n=p\\).</p><p><strong>Steg:</strong></p><p>\\[S_{p+1}=S_p+ak^p=a\\frac{k^p-1}{k-1}+ak^p=a\\frac{k^{p+1}-1}{k-1}.\\]</p><p>Alltså gäller formeln även för \\(p+1\\), och därmed för alla \\(n\\ge1\\).</p>",
-    "id": "2.36"
+    "id": "2.36",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3332,7 +3998,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Visa med induktion att \\(3\\mid(n^3+2n)\\) för alla positiva heltal \\(n\\).</p>",
     "s": "<p><strong>Bas:</strong> \\(n=1\\) ger 3.</p><p>Anta att \\(k^3+2k\\) är delbart med 3. Då</p><p>\\[(k+1)^3+2(k+1)=k^3+2k+3(k^2+k+1).\\]</p><p>Första delen är delbar med 3 enligt antagandet och den andra har faktor 3. Alltså gäller påståendet för \\(k+1\\), och därmed för alla positiva \\(n\\).</p>",
-    "id": "2.37"
+    "id": "2.37",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3342,7 +4010,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Bevisa med induktion att</p><p>\\[\\sum_{n=1}^{k}(6n-1)=k(3k+2).\\]</p>",
     "s": "<p><strong>Basfall:</strong> För \\(k=1\\) är vänsterledet \\(5\\) och högerledet \\(1(3\\cdot1+2)=5\\). Formeln stämmer alltså för \\(k=1\\).</p><p><strong>Induktionsantagande:</strong> Anta att formeln gäller för \\(k=p\\):</p><p>\\[\\sum_{n=1}^{p}(6n-1)=p(3p+2).\\]</p><p><strong>Induktionssteg:</strong> Lägg till nästa term \\(6(p+1)-1=6p+5\\):</p><p>\\[\\sum_{n=1}^{p+1}(6n-1)=p(3p+2)+6p+5=3p^2+8p+5.\\]</p><p>Högerledet för \\(p+1\\) är</p><p>\\[(p+1)(3(p+1)+2)=(p+1)(3p+5)=3p^2+8p+5.\\]</p><p>Uttrycken är lika. Därför gäller formeln för \\(p+1\\), och enligt induktionsprincipen för alla positiva heltal \\(k\\).</p>",
-    "id": "2.38"
+    "id": "2.38",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3352,7 +4022,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Bevisa med induktion att</p><p>\\[1+5+9+\\cdots+(4n-3)=n(2n-1)\\]</p><p>för alla \\(n\\ge1\\).</p>",
     "s": "<p><strong>Bas:</strong> \\(n=1\\): \\(1=1(2-1)\\).</p><p>Anta att summan till term \\(k\\) är \\(k(2k-1)\\). Nästa term är \\(4(k+1)-3=4k+1\\). Då</p><p>\\[k(2k-1)+(4k+1)=2k^2+3k+1=(k+1)(2k+1),\\]</p><p>vilket är formeln med \\(n=k+1\\).</p>",
-    "id": "2.39"
+    "id": "2.39",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3362,7 +4034,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Visa med induktion att \\(1+2+\\cdots+n=\\frac{n(n+1)}2\\) för alla positiva heltal \\(n\\).</p>",
     "s": "<p><strong>Basfall:</strong> För \\(n=1\\): \\(1=\\frac{1\\cdot2}{2}\\).</p><p><strong>Induktionsantagande:</strong> Anta att</p><p>\\[1+2+\\cdots+k=\\frac{k(k+1)}2.\\]</p><p><strong>Induktionssteg:</strong> För \\(k+1\\) får vi</p><p>\\[1+2+\\cdots+k+(k+1)=\\frac{k(k+1)}2+(k+1).\\]</p><p>Faktorisera \\(k+1\\):</p><p>\\[=(k+1)\\left(\\frac{k}{2}+1\\right)=\\frac{(k+1)(k+2)}2.\\]</p><p>Det är exakt formeln med \\(n=k+1\\). Alltså gäller formeln för alla positiva heltal \\(n\\).</p>",
-    "id": "2.40"
+    "id": "2.40",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3372,7 +4046,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Bevisa med induktion att</p><p>\\[\\sum_{n=1}^{k}(12n-9)=k(6k-3).\\]</p>",
     "s": "<p><strong>Bas:</strong> \\(k=1\\): \\(3=3\\).</p><p>Anta formeln för \\(k\\). Lägg till nästa term \\(12(k+1)-9=12k+3\\):</p><p>\\[k(6k-3)+12k+3=6k^2+9k+3=(k+1)(6k+3).\\]</p><p>Eftersom \\((k+1)(6(k+1)-3)=(k+1)(6k+3)\\) är steget visat.</p>",
-    "id": "2.41"
+    "id": "2.41",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3382,7 +4058,9 @@ window.BANKMATF1 = [
     "poang": "0/1/1",
     "t": "<p>En elev säger: ”I ett induktionsbevis räcker det att kontrollera \\(n=1\\) och sedan prova några fler värden.” Förklara varför detta inte räcker och vad som måste visas i stället.</p>",
     "s": "<p>Ändligt många kontroller visar inte ett påstående för alla heltal. Efter bassteget måste man anta att påståendet gäller för ett <em>godtyckligt</em> \\(n=k\\) och därefter visa att detta medför att det gäller för \\(k+1\\). Det är just denna generella övergång som gör beviset giltigt för alla efterföljande heltal.</p>",
-    "id": "2.42"
+    "id": "2.42",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3392,7 +4070,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Följden definieras av \\(a_0=0\\), \\(a_1=1\\) och \\(a_{n+1}=5a_n-6a_{n-1}\\) för \\(n\\ge1\\). Visa med induktion att \\(a_n=3^n-2^n\\).</p>",
     "s": "<p>Eftersom rekursionen använder två föregående termer kontrolleras två basfall: \\(a_0=0=1-1\\) och \\(a_1=1=3-2\\). Anta sedan att formlerna gäller för \\(a_k\\) och \\(a_{k-1}\\). Då</p><p>\\[a_{k+1}=5(3^k-2^k)-6(3^{k-1}-2^{k-1})=3^{k+1}-2^{k+1}.\\]</p><p>Alltså gäller formeln för alla \\(n\\ge0\\).</p>",
-    "id": "2.43"
+    "id": "2.43",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3402,7 +4082,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa med induktion att \\(8^n-5^n\\) är delbart med 3 för alla heltal \\(n\\ge0\\).</p>",
     "s": "<p><strong>Basfall:</strong> För \\(n=0\\) är \\(8^0-5^0=1-1=0\\), som är delbart med 3.</p><p><strong>Induktionsantagande:</strong> Anta att \\(8^k-5^k\\) är delbart med 3. Då finns ett heltal \\(m\\) sådant att</p><p>\\[8^k-5^k=3m.\\]</p><p><strong>Induktionssteg:</strong></p><p>\\[\\begin{aligned}8^{k+1}-5^{k+1}&=8\\cdot8^k-5\\cdot5^k\\\\&=8(8^k-5^k)+(8-5)5^k\\\\&=8\\cdot3m+3\\cdot5^k\\\\&=3(8m+5^k).\\end{aligned}\\]</p><p>Uttrycket har alltså faktor 3. Därmed gäller påståendet för \\(k+1\\), och enligt induktionsprincipen för alla \\(n\\ge0\\).</p>",
-    "id": "2.44"
+    "id": "2.44",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3412,7 +4094,9 @@ window.BANKMATF1 = [
     "poang": "1/1/3",
     "t": "<p>Visa med induktion att</p><p>\\[\\sum_{k=1}^{n}k^3=\\frac{n^2(n+1)^2}{4}\\]</p><p>för alla positiva heltal \\(n\\).</p>",
     "s": "<p><strong>Bas:</strong> \\(n=1\\) ger 1 i båda led.</p><p>Anta formeln för \\(n=p\\). Då</p><p>\\[S_{p+1}=\\frac{p^2(p+1)^2}{4}+(p+1)^3=(p+1)^2\\left(\\frac{p^2}{4}+p+1\\right)\\]</p><p>\\[=(p+1)^2\\frac{(p+2)^2}{4}=\\frac{(p+1)^2((p+1)+1)^2}{4}.\\]</p><p>Det är precis formeln för \\(p+1\\).</p>",
-    "id": "2.45"
+    "id": "2.45",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3422,7 +4106,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "t": "<p>Fibonacciföljden definieras av \\(F_1=F_2=1\\) och \\(F_{n+2}=F_{n+1}+F_n\\). Visa att</p><p>\\[\\sum_{n=1}^{k}F_n=F_{k+2}-1\\]</p><p>för alla \\(k\\ge1\\).</p>",
     "s": "<p><strong>Bas:</strong> \\(k=1\\): \\(F_1=1=F_3-1=2-1\\).</p><p>Anta \\(\\sum_{n=1}^{k}F_n=F_{k+2}-1\\). Då</p><p>\\[\\sum_{n=1}^{k+1}F_n=F_{k+2}-1+F_{k+1}=F_{k+3}-1\\]</p><p>genom Fibonaccis rekursion. Alltså gäller formeln för \\(k+1\\).</p>",
-    "id": "2.46"
+    "id": "2.46",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3432,7 +4118,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med induktion att \\(2+5+8+\\cdots+(3n-1)=\\frac{n(3n+1)}2\\).</p>",
     "s": "<p>Basfallet \\(n=1\\) ger 2 i båda led. Anta formeln för \\(n=k\\). Nästa term är \\(3(k+1)-1=3k+2\\):</p><p>\\[\\frac{k(3k+1)}2+3k+2=\\frac{3k^2+7k+4}{2}=\\frac{(k+1)(3k+4)}2,\\]</p><p>vilket är formeln med \\(n=k+1\\).</p>",
-    "id": "2.47"
+    "id": "2.47",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3442,7 +4130,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa med induktion att \\(2^n\\ge n+1\\) för alla heltal \\(n\\ge0\\).</p>",
     "s": "<p><strong>Basfall:</strong> För \\(n=0\\) är \\(2^0=1\\) och \\(0+1=1\\), så olikheten gäller.</p><p><strong>Induktionsantagande:</strong> Anta att \\(2^k\\ge k+1\\).</p><p><strong>Induktionssteg:</strong></p><p>\\[2^{k+1}=2\\cdot2^k\\ge2(k+1)=2k+2.\\]</p><p>För \\(k\\ge0\\) gäller \\(2k+2\\ge k+2\\). Alltså</p><p>\\[2^{k+1}\\ge k+2=(k+1)+1.\\]</p><p>Därmed gäller olikheten för \\(k+1\\), och alltså för alla heltal \\(n\\ge0\\).</p>",
-    "id": "2.48"
+    "id": "2.48",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3452,7 +4142,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa med induktion att \\(7^n-1\\) är delbart med 6 för alla positiva heltal \\(n\\).</p>",
     "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är \\(7^1-1=6\\), som är delbart med 6.</p><p><strong>Induktionsantagande:</strong> Anta att \\(7^k-1\\) är delbart med 6, alltså att \\(7^k-1=6m\\) för något heltal \\(m\\).</p><p><strong>Induktionssteg:</strong></p><p>\\[7^{k+1}-1=7(7^k-1)+6=7\\cdot6m+6=6(7m+1).\\]</p><p>Uttrycket är därför delbart med 6. Alltså gäller påståendet för \\(k+1\\) och därmed för alla positiva heltal \\(n\\).</p>",
-    "id": "2.49"
+    "id": "2.49",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3462,7 +4154,9 @@ window.BANKMATF1 = [
     "poang": "0/0/3",
     "t": "<p>En elev försöker bevisa att alla positiva heltal är lika genom induktion och säger: ”Anta att alla tal från 1 till \\(k\\) är lika. Då överlappar mängderna \\(\\{1,\\ldots,k\\}\\) och \\(\\{2,\\ldots,k+1\\}\\), så även \\(k+1\\) måste vara lika med de andra.” Var brister argumentet?</p>",
     "s": "<p>Överlappningsargumentet fungerar bara om de två mängderna faktiskt har ett gemensamt element. I steget från \\(k=1\\) till \\(k=2\\) är mängderna \\(\\{1\\}\\) och \\(\\{2\\}\\) disjunkta. Därför kan man inte koppla ihop de två påståendena. <strong>Induktionssteget gäller alltså inte för basövergången.</strong></p>",
-    "id": "2.50"
+    "id": "2.50",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3472,7 +4166,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med induktion att \\(5^{2n}-1\\) är delbart med 24 för alla heltal \\(n\\ge1\\).</p>",
     "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är \\(5^2-1=24\\), alltså delbart med 24.</p><p><strong>Induktionsantagande:</strong> Anta att \\(5^{2k}-1=24m\\) för något heltal \\(m\\).</p><p><strong>Induktionssteg:</strong></p><p>\\[5^{2(k+1)}-1=25\\cdot5^{2k}-1=25(5^{2k}-1)+24.\\]</p><p>Med antagandet blir detta \\(25\\cdot24m+24=24(25m+1)\\), som är delbart med 24. Därmed gäller påståendet för alla \\(n\\ge1\\).</p>",
-    "id": "2.60"
+    "id": "2.60",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3482,7 +4178,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.75",
     "t": "<p>Visa med induktion att</p><p>\\[1+3+5+\\ldots +(2n-1)=n^2\\]</p><p>för alla heltal \\(n\\ge 1\\).</p>",
-    "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är vänsterledet \\(1\\) och högerledet \\(1^2=1\\). Påståendet stämmer.</p><p><strong>Induktionsantagande:</strong> Anta att</p><p>\\[1+3+5+\\ldots +(2k-1)=k^2.\\]</p><p><strong>Induktionssteg:</strong> För \\(n=k+1\\) får vi</p><p>\\[1+3+\\ldots +(2k-1)+(2(k+1)-1).\\]</p><p>Med induktionsantagandet blir detta</p><p>\\[k^2+(2k+1)=(k+1)^2.\\]</p><p>Därmed gäller formeln också för \\(k+1\\). Alltså är påståendet sant för alla \\(n\\ge 1\\).</p>"
+    "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är vänsterledet \\(1\\) och högerledet \\(1^2=1\\). Påståendet stämmer.</p><p><strong>Induktionsantagande:</strong> Anta att</p><p>\\[1+3+5+\\ldots +(2k-1)=k^2.\\]</p><p><strong>Induktionssteg:</strong> För \\(n=k+1\\) får vi</p><p>\\[1+3+\\ldots +(2k-1)+(2(k+1)-1).\\]</p><p>Med induktionsantagandet blir detta</p><p>\\[k^2+(2k+1)=(k+1)^2.\\]</p><p>Därmed gäller formeln också för \\(k+1\\). Alltså är påståendet sant för alla \\(n\\ge 1\\).</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3492,7 +4190,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "id": "2.76",
     "t": "<p>Visa med induktion att</p><p>\\[7^{2n}-1\\]</p><p>är delbart med 48 för alla heltal \\(n\\ge 1\\).</p>",
-    "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är \\(7^2-1=49-1=48\\), alltså delbart med 48.</p><p><strong>Induktionsantagande:</strong> Anta att \\(7^{2k}-1\\) är delbart med 48, alltså att</p><p>\\[7^{2k}-1=48m\\]</p><p>för något heltal \\(m\\).</p><p><strong>Induktionssteg:</strong></p><p>\\[7^{2(k+1)}-1=49\\cdot 7^{2k}-1=48\\cdot 7^{2k}+(7^{2k}-1).\\]</p><p>Den första termen är uppenbart delbar med 48. Den andra termen, \\(7^{2k}-1\\), är delbar med 48 enligt induktionsantagandet. Summan är därför också delbar med 48.</p><p>Alltså gäller påståendet för alla \\(n\\ge 1\\).</p>"
+    "s": "<p><strong>Basfall:</strong> För \\(n=1\\) är \\(7^2-1=49-1=48\\), alltså delbart med 48.</p><p><strong>Induktionsantagande:</strong> Anta att \\(7^{2k}-1\\) är delbart med 48, alltså att</p><p>\\[7^{2k}-1=48m\\]</p><p>för något heltal \\(m\\).</p><p><strong>Induktionssteg:</strong></p><p>\\[7^{2(k+1)}-1=49\\cdot 7^{2k}-1=48\\cdot 7^{2k}+(7^{2k}-1).\\]</p><p>Den första termen är uppenbart delbar med 48. Den andra termen, \\(7^{2k}-1\\), är delbar med 48 enligt induktionsantagandet. Summan är därför också delbar med 48.</p><p>Alltså gäller påståendet för alla \\(n\\ge 1\\).</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3502,7 +4202,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa med induktion att</p><p>\\[2+4+6+\\cdots+2n=n(n+1)\\]</p><p>för alla \\(n\\ge1\\).</p>",
     "s": "<p><strong>Basfall:</strong> \\(n=1\\): \\(2=1\\cdot2\\).</p><p><strong>Antagande:</strong> anta \\(2+4+\\cdots+2k=k(k+1)\\).</p><p><strong>Steg:</strong></p><p>\\[2+4+\\cdots+2k+2(k+1)=k(k+1)+2(k+1)=(k+1)(k+2).\\]</p><p>Detta är formeln för \\(n=k+1\\). Alltså gäller påståendet för alla \\(n\\ge1\\).</p>",
-    "id": "2.111"
+    "id": "2.111",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3512,7 +4214,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med induktion att \\(4^n-1\\) är delbart med 3 för alla heltal \\(n\\ge1\\).</p>",
     "s": "<p><strong>Basfall:</strong> \\(4^1-1=3\\).</p><p><strong>Antagande:</strong> anta \\(4^k-1=3m\\).</p><p><strong>Steg:</strong></p><p>\\[4^{k+1}-1=4(4^k-1)+3.\\]</p><p>Med antagandet blir detta \\(4\\cdot3m+3=3(4m+1)\\), alltså delbart med 3.</p>",
-    "id": "2.112"
+    "id": "2.112",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3522,7 +4226,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa med induktion att \\(1+2+\\cdots+n=\\frac{n(n+1)}2\\).</p>",
     "s": "<p><strong>Basfall:</strong> \\(1=1\\cdot2/2\\).</p><p><strong>Antagande:</strong> anta summan till \\(k\\) är \\(k(k+1)/2\\).</p><p><strong>Steg:</strong></p><p>\\[\\frac{k(k+1)}2+(k+1)=\\frac{(k+1)(k+2)}2.\\]</p><p>Alltså gäller formeln för \\(k+1\\).</p>",
-    "id": "2.132"
+    "id": "2.132",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3532,7 +4238,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med induktion att \\(1+2+4+\\cdots+2^n=2^{n+1}-1\\) för \\(n\\ge0\\).</p>",
     "s": "<p><strong>Basfall \\(n=0\\):</strong> \\(1=2^1-1\\).</p><p><strong>Antagande:</strong> anta summan till \\(2^k\\) är \\(2^{k+1}-1\\).</p><p><strong>Steg:</strong></p><p>\\[(2^{k+1}-1)+2^{k+1}=2^{k+2}-1.\\]</p>",
-    "id": "2.133"
+    "id": "2.133",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3542,7 +4250,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att \\(\\sqrt2\\) är irrationellt.</p>",
     "s": "<p>Anta motsatsen: \\(\\sqrt2=p/q\\) i förkortad form. Då \\(p^2=2q^2\\), så \\(p^2\\) och därmed \\(p\\) är jämnt. Sätt \\(p=2r\\). Då \\(4r^2=2q^2\\), alltså \\(q^2=2r^2\\), så även \\(q\\) är jämnt. Då har \\(p\\) och \\(q\\) gemensam faktor 2, i strid med att bråket var förkortat. Alltså är <strong>\\(\\sqrt2\\) irrationellt</strong>.</p>",
-    "id": "2.51"
+    "id": "2.51",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3552,7 +4262,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa med ett motsägelsebevis att det finns oändligt många primtal.</p>",
     "s": "<p>Anta att det bara finns ändligt många primtal \\(p_1,\\ldots,p_n\\). Betrakta \\(N=p_1p_2\\cdots p_n+1\\). Talet \\(N\\gt 1\\) har en primtalsdelare \\(p\\). Men inget \\(p_i\\) delar \\(N\\), eftersom division med \\(p_i\\) ger resten 1. Därmed finns ett primtal som inte finns i listan, en motsägelse. Alltså finns <strong>oändligt många primtal</strong>.</p>",
-    "id": "2.52"
+    "id": "2.52",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3562,7 +4274,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "t": "<p>Visa med ett motsägelsebevis att det finns oändligt många primtal.</p>",
     "s": "<p>Anta motsatsen: att det bara finns ändligt många primtal \\(p_1,p_2,\\ldots,p_n\\).</p><p>Bilda talet</p><p>\\[N=p_1p_2\\cdots p_n+1.\\]</p><p>För varje primtal \\(p_i\\) ger division av \\(N\\) med \\(p_i\\) resten 1. Alltså är \\(N\\) inte delbart med något av de primtal som enligt antagandet skulle vara alla primtal.</p><p>Men varje heltal större än 1 är antingen ett primtal eller har en primtalsfaktor. Därför måste \\(N\\) ha en primtalsfaktor som inte finns i listan. Det motsäger antagandet. Alltså finns <strong>oändligt många primtal</strong>.</p>",
-    "id": "2.59"
+    "id": "2.59",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3572,7 +4286,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "id": "2.77",
     "t": "<p>Visa med ett motsägelsebevis att \\(\\sqrt{12}\\) är irrationellt.</p>",
-    "s": "<p>Anta motsatsen: att \\(\\sqrt{12}\\) är rationellt. Då kan det skrivas</p><p>\\[\\sqrt{12}=\\frac{a}{b}\\]</p><p>där \\(a\\) och \\(b\\) är heltal utan gemensamma faktorer och \\(b\\ne 0\\).</p><p>Kvadrera:</p><p>\\[12=\\frac{a^2}{b^2}\\Rightarrow a^2=12b^2.\\]</p><p>Då är \\(a^2\\) delbart med 3, alltså är \\(a\\) delbart med 3. Skriv \\(a=3k\\).</p><p>Insättning ger</p><p>\\[9k^2=12b^2\\Rightarrow 3k^2=4b^2.\\]</p><p>Då är \\(b^2\\) delbart med 3, alltså är \\(b\\) också delbart med 3.</p><p>Men då har \\(a\\) och \\(b\\) en gemensam faktor 3, i strid med antagandet att bråket är förkortat. Motsägelse. Alltså är <strong>\\(\\sqrt{12}\\) irrationellt</strong>.</p>"
+    "s": "<p>Anta motsatsen: att \\(\\sqrt{12}\\) är rationellt. Då kan det skrivas</p><p>\\[\\sqrt{12}=\\frac{a}{b}\\]</p><p>där \\(a\\) och \\(b\\) är heltal utan gemensamma faktorer och \\(b\\ne 0\\).</p><p>Kvadrera:</p><p>\\[12=\\frac{a^2}{b^2}\\Rightarrow a^2=12b^2.\\]</p><p>Då är \\(a^2\\) delbart med 3, alltså är \\(a\\) delbart med 3. Skriv \\(a=3k\\).</p><p>Insättning ger</p><p>\\[9k^2=12b^2\\Rightarrow 3k^2=4b^2.\\]</p><p>Då är \\(b^2\\) delbart med 3, alltså är \\(b\\) också delbart med 3.</p><p>Men då har \\(a\\) och \\(b\\) en gemensam faktor 3, i strid med antagandet att bråket är förkortat. Motsägelse. Alltså är <strong>\\(\\sqrt{12}\\) irrationellt</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3582,7 +4298,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.78",
     "t": "<p>Visa med ett motsägelsebevis att \\(\\sqrt{2}\\) är irrationellt.</p>",
-    "s": "<p>Anta motsatsen: att \\(\\sqrt{2}\\) är rationellt. Då kan det skrivas</p><p>\\[\\sqrt{2}=\\frac{a}{b}\\]</p><p>där \\(a\\) och \\(b\\) är heltal utan gemensamma faktorer och \\(b\\ne 0\\).</p><p>Kvadrera båda leden:</p><p>\\[2=\\frac{a^2}{b^2}\\Rightarrow a^2=2b^2.\\]</p><p>Alltså är \\(a^2\\) jämnt, och då måste även \\(a\\) vara jämnt. Skriv därför \\(a=2k\\).</p><p>Insättning ger</p><p>\\[4k^2=2b^2\\Rightarrow b^2=2k^2.\\]</p><p>Då är även \\(b^2\\) jämnt, alltså är också \\(b\\) jämnt.</p><p>Men då är både \\(a\\) och \\(b\\) jämna, så de har minst faktorn 2 gemensam. Det strider mot att bråket \\(a/b\\) skulle vara förkortat. Detta är en motsägelse.</p><p>Alltså är <strong>\\(\\sqrt{2}\\) irrationellt</strong>.</p>"
+    "s": "<p>Anta motsatsen: att \\(\\sqrt{2}\\) är rationellt. Då kan det skrivas</p><p>\\[\\sqrt{2}=\\frac{a}{b}\\]</p><p>där \\(a\\) och \\(b\\) är heltal utan gemensamma faktorer och \\(b\\ne 0\\).</p><p>Kvadrera båda leden:</p><p>\\[2=\\frac{a^2}{b^2}\\Rightarrow a^2=2b^2.\\]</p><p>Alltså är \\(a^2\\) jämnt, och då måste även \\(a\\) vara jämnt. Skriv därför \\(a=2k\\).</p><p>Insättning ger</p><p>\\[4k^2=2b^2\\Rightarrow b^2=2k^2.\\]</p><p>Då är även \\(b^2\\) jämnt, alltså är också \\(b\\) jämnt.</p><p>Men då är både \\(a\\) och \\(b\\) jämna, så de har minst faktorn 2 gemensam. Det strider mot att bråket \\(a/b\\) skulle vara förkortat. Detta är en motsägelse.</p><p>Alltså är <strong>\\(\\sqrt{2}\\) irrationellt</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3592,7 +4310,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att om \\(n^2\\) är udda så är \\(n\\) udda.</p>",
     "s": "<p>Anta motsatsen: \\(n^2\\) är udda men \\(n\\) är jämnt. Då finns ett heltal \\(k\\) så att \\(n=2k\\). Då</p><p>\\[n^2=4k^2=2(2k^2),\\]</p><p>vilket är jämnt. Det motsäger att \\(n^2\\) är udda. Alltså måste \\(n\\) vara udda.</p>",
-    "id": "2.113"
+    "id": "2.113",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3602,7 +4322,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa med motsägelse att det inte finns något minsta positivt rationellt tal.</p>",
     "s": "<p>Anta att \\(r\\gt0\\) är det minsta positiva rationella talet. Då är \\(r/2\\) också positivt och rationellt, men \\(r/2\\lt r\\). Det motsäger att \\(r\\) var minst. Alltså finns inget minsta positivt rationellt tal.</p>",
-    "id": "2.134"
+    "id": "2.134",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3612,7 +4334,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med motsägelsebevis att \\(\\sqrt5\\) är irrationellt.</p>",
     "s": "<p>Anta \\(\\sqrt5=a/b\\) i förkortad form. Då \\(a^2=5b^2\\), så \\(a\\) är delbart med 5. Sätt \\(a=5k\\). Då \\(25k^2=5b^2\\Rightarrow b^2=5k^2\\), så även \\(b\\) är delbart med 5. Det motsäger att \\(a/b\\) var förkortat.</p>",
-    "id": "2.135"
+    "id": "2.135",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.141",
@@ -3622,7 +4346,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – jämna tal",
     "poang": "2/0/0",
     "t": "<p>Visa med ett <strong>direkt bevis</strong> att summan av två jämna heltal alltid är jämn.</p>",
-    "s": "<p><strong>Idé:</strong> I ett direkt bevis utgår vi från det vi vet och arbetar steg för steg fram till det som ska visas.</p><p>Låt de två jämna heltalen vara \\(a\\) och \\(b\\). Eftersom de är jämna finns heltal \\(m\\) och \\(n\\) sådana att</p><p>\\[a=2m,\\qquad b=2n.\\]</p><p>Då är</p><p>\\[a+b=2m+2n=2(m+n).\\]</p><p>Eftersom \\(m+n\\) är ett heltal är \\(a+b\\) två gånger ett heltal. Därför är <strong>\\(a+b\\) jämnt</strong>.</p>"
+    "s": "<p><strong>Idé:</strong> I ett direkt bevis utgår vi från det vi vet och arbetar steg för steg fram till det som ska visas.</p><p>Låt de två jämna heltalen vara \\(a\\) och \\(b\\). Eftersom de är jämna finns heltal \\(m\\) och \\(n\\) sådana att</p><p>\\[a=2m,\\qquad b=2n.\\]</p><p>Då är</p><p>\\[a+b=2m+2n=2(m+n).\\]</p><p>Eftersom \\(m+n\\) är ett heltal är \\(a+b\\) två gånger ett heltal. Därför är <strong>\\(a+b\\) jämnt</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.142",
@@ -3632,7 +4358,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – udda tal",
     "poang": "2/0/0",
     "t": "<p>Visa med ett direkt bevis att summan av två udda heltal alltid är jämn.</p>",
-    "s": "<p>Låt de udda talen vara</p><p>\\[a=2m+1,\\qquad b=2n+1\\]</p><p>där \\(m\\) och \\(n\\) är heltal.</p><p>Då blir</p><p>\\[a+b=(2m+1)+(2n+1)=2m+2n+2=2(m+n+1).\\]</p><p>Uttrycket är alltså två gånger ett heltal. Därför är <strong>summan jämn</strong>.</p>"
+    "s": "<p>Låt de udda talen vara</p><p>\\[a=2m+1,\\qquad b=2n+1\\]</p><p>där \\(m\\) och \\(n\\) är heltal.</p><p>Då blir</p><p>\\[a+b=(2m+1)+(2n+1)=2m+2n+2=2(m+n+1).\\]</p><p>Uttrycket är alltså två gånger ett heltal. Därför är <strong>summan jämn</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.143",
@@ -3642,7 +4370,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – rationella tal",
     "poang": "2/0/0",
     "t": "<p>Visa med ett direkt bevis att summan av två rationella tal är rationell.</p>",
-    "s": "<p>Låt \\(x\\) och \\(y\\) vara rationella. Då kan de skrivas</p><p>\\[x=\\frac{a}{b},\\qquad y=\\frac{c}{d}\\]</p><p>där \\(a,b,c,d\\) är heltal och \\(b\\ne0\\), \\(d\\ne0\\).</p><p>Då är</p><p>\\[x+y=\\frac{a}{b}+\\frac{c}{d}=\\frac{ad+bc}{bd}.\\]</p><p>Täljaren \\(ad+bc\\) är ett heltal och nämnaren \\(bd\\ne0\\) är ett heltal. Alltså kan summan skrivas som en kvot av två heltal.</p><p>Därför är <strong>\\(x+y\\) rationellt</strong>.</p>"
+    "s": "<p>Låt \\(x\\) och \\(y\\) vara rationella. Då kan de skrivas</p><p>\\[x=\\frac{a}{b},\\qquad y=\\frac{c}{d}\\]</p><p>där \\(a,b,c,d\\) är heltal och \\(b\\ne0\\), \\(d\\ne0\\).</p><p>Då är</p><p>\\[x+y=\\frac{a}{b}+\\frac{c}{d}=\\frac{ad+bc}{bd}.\\]</p><p>Täljaren \\(ad+bc\\) är ett heltal och nämnaren \\(bd\\ne0\\) är ett heltal. Alltså kan summan skrivas som en kvot av två heltal.</p><p>Därför är <strong>\\(x+y\\) rationellt</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.144",
@@ -3652,7 +4382,9 @@ window.BANKMATF1 = [
     "typ": "indirekt bevis – kontraposition",
     "poang": "2/0/0",
     "t": "<p>Visa med ett <strong>indirekt bevis</strong> att om \\(n^2\\) är jämnt, så är \\(n\\) jämnt.</p><p>Använd kontraposition.</p>",
-    "s": "<p><strong>Kontraposition:</strong> I stället för att visa</p><p>\\[n^2\\text{ jämnt}\\Rightarrow n\\text{ jämnt}\\]</p><p>visar vi det logiskt likvärdiga påståendet</p><p>\\[n\\text{ udda}\\Rightarrow n^2\\text{ udda}.\\]</p><p>Anta därför att \\(n\\) är udda. Då finns ett heltal \\(k\\) sådant att</p><p>\\[n=2k+1.\\]</p><p>Då</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=2(2k^2+2k)+1.\\]</p><p>Detta är udda. Kontrapositionen är alltså bevisad, och därmed gäller det ursprungliga påståendet: <strong>om \\(n^2\\) är jämnt så är \\(n\\) jämnt</strong>.</p>"
+    "s": "<p><strong>Kontraposition:</strong> I stället för att visa</p><p>\\[n^2\\text{ jämnt}\\Rightarrow n\\text{ jämnt}\\]</p><p>visar vi det logiskt likvärdiga påståendet</p><p>\\[n\\text{ udda}\\Rightarrow n^2\\text{ udda}.\\]</p><p>Anta därför att \\(n\\) är udda. Då finns ett heltal \\(k\\) sådant att</p><p>\\[n=2k+1.\\]</p><p>Då</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=2(2k^2+2k)+1.\\]</p><p>Detta är udda. Kontrapositionen är alltså bevisad, och därmed gäller det ursprungliga påståendet: <strong>om \\(n^2\\) är jämnt så är \\(n\\) jämnt</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.145",
@@ -3662,7 +4394,9 @@ window.BANKMATF1 = [
     "typ": "välja bevismetod",
     "poang": "2/0/0",
     "t": "<p>Förklara kort skillnaden mellan ett <strong>direkt bevis</strong> och ett <strong>indirekt bevis</strong>.</p><p>Nämn också två vanliga sätt att genomföra ett indirekt bevis.</p>",
-    "s": "<p>I ett <strong>direkt bevis</strong> utgår man från antagandena och härleder steg för steg det som ska visas.</p><p>I ett <strong>indirekt bevis</strong> visar man påståendet via ett logiskt likvärdigt eller motsatt resonemang i stället för att gå direkt från antagande till slutsats.</p><p>Två vanliga indirekta metoder är:</p><p>1. <strong>Kontraposition:</strong> för att visa \\(P\\Rightarrow Q\\) visar man i stället \\(\\neg Q\\Rightarrow\\neg P\\).</p><p>2. <strong>Motsägelsebevis:</strong> man antar att det man vill visa är falskt och visar att antagandet leder till en motsägelse.</p>"
+    "s": "<p>I ett <strong>direkt bevis</strong> utgår man från antagandena och härleder steg för steg det som ska visas.</p><p>I ett <strong>indirekt bevis</strong> visar man påståendet via ett logiskt likvärdigt eller motsatt resonemang i stället för att gå direkt från antagande till slutsats.</p><p>Två vanliga indirekta metoder är:</p><p>1. <strong>Kontraposition:</strong> för att visa \\(P\\Rightarrow Q\\) visar man i stället \\(\\neg Q\\Rightarrow\\neg P\\).</p><p>2. <strong>Motsägelsebevis:</strong> man antar att det man vill visa är falskt och visar att antagandet leder till en motsägelse.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.146",
@@ -3672,7 +4406,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – delbarhet",
     "poang": "0/2/0",
     "t": "<p>Låt \\(a,b,c\\) vara heltal. Visa med ett direkt bevis att om \\(a\\mid b\\) och \\(b\\mid c\\), så gäller \\(a\\mid c\\).</p>",
-    "s": "<p>Antag att \\(a\\mid b\\). Då finns ett heltal \\(m\\) sådant att</p><p>\\[b=am.\\]</p><p>Antag också att \\(b\\mid c\\). Då finns ett heltal \\(n\\) sådant att</p><p>\\[c=bn.\\]</p><p>Sätt in \\(b=am\\):</p><p>\\[c=(am)n=a(mn).\\]</p><p>Produkten \\(mn\\) är ett heltal. Alltså kan \\(c\\) skrivas som \\(a\\) gånger ett heltal.</p><p>Därför gäller <strong>\\(a\\mid c\\)</strong>.</p>"
+    "s": "<p>Antag att \\(a\\mid b\\). Då finns ett heltal \\(m\\) sådant att</p><p>\\[b=am.\\]</p><p>Antag också att \\(b\\mid c\\). Då finns ett heltal \\(n\\) sådant att</p><p>\\[c=bn.\\]</p><p>Sätt in \\(b=am\\):</p><p>\\[c=(am)n=a(mn).\\]</p><p>Produkten \\(mn\\) är ett heltal. Alltså kan \\(c\\) skrivas som \\(a\\) gånger ett heltal.</p><p>Därför gäller <strong>\\(a\\mid c\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.147",
@@ -3682,7 +4418,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – udda kvadrat modulo 8",
     "poang": "0/2/0",
     "t": "<p>Visa med ett direkt bevis att kvadraten av varje udda heltal ger resten 1 vid division med 8.</p>",
-    "s": "<p>Låt \\(n\\) vara udda. Då kan vi skriva</p><p>\\[n=2k+1\\]</p><p>för något heltal \\(k\\).</p><p>Kvadrera:</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=4k(k+1)+1.\\]</p><p>Två heltal i följd, \\(k\\) och \\(k+1\\), innehåller alltid ett jämnt tal. Därför är \\(k(k+1)\\) jämnt. Skriv \\(k(k+1)=2m\\).</p><p>Då</p><p>\\[n^2=4\\cdot2m+1=8m+1.\\]</p><p>Alltså ger \\(n^2\\) resten <strong>1</strong> vid division med 8.</p>"
+    "s": "<p>Låt \\(n\\) vara udda. Då kan vi skriva</p><p>\\[n=2k+1\\]</p><p>för något heltal \\(k\\).</p><p>Kvadrera:</p><p>\\[n^2=(2k+1)^2=4k^2+4k+1=4k(k+1)+1.\\]</p><p>Två heltal i följd, \\(k\\) och \\(k+1\\), innehåller alltid ett jämnt tal. Därför är \\(k(k+1)\\) jämnt. Skriv \\(k(k+1)=2m\\).</p><p>Då</p><p>\\[n^2=4\\cdot2m+1=8m+1.\\]</p><p>Alltså ger \\(n^2\\) resten <strong>1</strong> vid division med 8.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.148",
@@ -3692,7 +4430,9 @@ window.BANKMATF1 = [
     "typ": "indirekt bevis – kontraposition och delbarhet",
     "poang": "0/2/0",
     "t": "<p>Visa med ett indirekt bevis att om \\(n^2\\) är delbart med 3, så är \\(n\\) delbart med 3.</p><p>Använd kontraposition.</p>",
-    "s": "<p>Vi visar kontrapositionen:</p><p><strong>Om \\(n\\) inte är delbart med 3, så är \\(n^2\\) inte delbart med 3.</strong></p><p>Om \\(n\\) inte är delbart med 3 ger det resten 1 eller 2 vid division med 3.</p><p>Fall 1:</p><p>\\[n\\equiv1\\pmod3\\Rightarrow n^2\\equiv1^2=1\\pmod3.\\]</p><p>Fall 2:</p><p>\\[n\\equiv2\\pmod3\\Rightarrow n^2\\equiv2^2=4\\equiv1\\pmod3.\\]</p><p>I båda fallen ger \\(n^2\\) resten 1 och är alltså inte delbart med 3.</p><p>Kontrapositionen är bevisad. Därför gäller det ursprungliga påståendet.</p>"
+    "s": "<p>Vi visar kontrapositionen:</p><p><strong>Om \\(n\\) inte är delbart med 3, så är \\(n^2\\) inte delbart med 3.</strong></p><p>Om \\(n\\) inte är delbart med 3 ger det resten 1 eller 2 vid division med 3.</p><p>Fall 1:</p><p>\\[n\\equiv1\\pmod3\\Rightarrow n^2\\equiv1^2=1\\pmod3.\\]</p><p>Fall 2:</p><p>\\[n\\equiv2\\pmod3\\Rightarrow n^2\\equiv2^2=4\\equiv1\\pmod3.\\]</p><p>I båda fallen ger \\(n^2\\) resten 1 och är alltså inte delbart med 3.</p><p>Kontrapositionen är bevisad. Därför gäller det ursprungliga påståendet.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.149",
@@ -3702,7 +4442,9 @@ window.BANKMATF1 = [
     "typ": "indirekt bevis – kontraposition av produkt",
     "poang": "0/2/0",
     "t": "<p>Visa indirekt att om produkten \\(ab\\) är udda, så är både \\(a\\) och \\(b\\) udda.</p>",
-    "s": "<p>Det är smidigare att visa kontrapositionen:</p><p><strong>Om minst ett av talen \\(a\\) och \\(b\\) är jämnt, så är produkten \\(ab\\) jämn.</strong></p><p>Anta till exempel att \\(a\\) är jämnt. Då finns ett heltal \\(k\\) sådant att</p><p>\\[a=2k.\\]</p><p>Då blir</p><p>\\[ab=(2k)b=2(kb).\\]</p><p>Eftersom \\(kb\\) är ett heltal är produkten jämn. Samma resonemang gäller om \\(b\\) är jämnt.</p><p>Alltså är kontrapositionen sann. Därför gäller det ursprungliga påståendet: om \\(ab\\) är udda måste <strong>både \\(a\\) och \\(b\\) vara udda</strong>.</p>"
+    "s": "<p>Det är smidigare att visa kontrapositionen:</p><p><strong>Om minst ett av talen \\(a\\) och \\(b\\) är jämnt, så är produkten \\(ab\\) jämn.</strong></p><p>Anta till exempel att \\(a\\) är jämnt. Då finns ett heltal \\(k\\) sådant att</p><p>\\[a=2k.\\]</p><p>Då blir</p><p>\\[ab=(2k)b=2(kb).\\]</p><p>Eftersom \\(kb\\) är ett heltal är produkten jämn. Samma resonemang gäller om \\(b\\) är jämnt.</p><p>Alltså är kontrapositionen sann. Därför gäller det ursprungliga påståendet: om \\(ab\\) är udda måste <strong>både \\(a\\) och \\(b\\) vara udda</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.150",
@@ -3712,7 +4454,9 @@ window.BANKMATF1 = [
     "typ": "direkt bevis – tre konsekutiva heltal",
     "poang": "0/3/0",
     "t": "<p>Visa med ett direkt bevis att produkten av tre på varandra följande heltal alltid är delbar med 6.</p>",
-    "s": "<p>Låt de tre heltalen vara</p><p>\\[n,\\qquad n+1,\\qquad n+2.\\]</p><p>För att produkten ska vara delbar med 6 måste den innehålla både en faktor 2 och en faktor 3.</p><p><strong>Faktor 2:</strong> Bland tre på varandra följande heltal finns alltid minst ett jämnt tal. Produkten är därför delbar med 2.</p><p><strong>Faktor 3:</strong> Tre på varandra följande heltal ger vid division med 3 resterna 0, 1 och 2 i någon ordning. Därför är exakt ett av dem delbart med 3. Produkten är alltså delbar med 3.</p><p>Eftersom 2 och 3 saknar gemensamma primfaktorer är produkten delbar med</p><p>\\[2\\cdot3=6.\\]</p><p>Alltså är <strong>\\(n(n+1)(n+2)\\) alltid delbart med 6</strong>.</p>"
+    "s": "<p>Låt de tre heltalen vara</p><p>\\[n,\\qquad n+1,\\qquad n+2.\\]</p><p>För att produkten ska vara delbar med 6 måste den innehålla både en faktor 2 och en faktor 3.</p><p><strong>Faktor 2:</strong> Bland tre på varandra följande heltal finns alltid minst ett jämnt tal. Produkten är därför delbar med 2.</p><p><strong>Faktor 3:</strong> Tre på varandra följande heltal ger vid division med 3 resterna 0, 1 och 2 i någon ordning. Därför är exakt ett av dem delbart med 3. Produkten är alltså delbar med 3.</p><p>Eftersom 2 och 3 saknar gemensamma primfaktorer är produkten delbar med</p><p>\\[2\\cdot3=6.\\]</p><p>Alltså är <strong>\\(n(n+1)(n+2)\\) alltid delbart med 6</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3722,7 +4466,9 @@ window.BANKMATF1 = [
     "poang": "0/2/1",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"235\" viewBox=\"0 0 450 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Additionsuppställning för 342 plus 143 i bas fem med minnessiffror\">\n<rect width=\"450\" height=\"240\" fill=\"white\"/>\n<text x=\"60\" y=\"40\" font-size=\"14\" fill=\"#777\">rad för minnessiffror</text>\n\n<text x=\"170\" y=\"96\" font-size=\"24\" text-anchor=\"middle\">3</text><text x=\"170\" y=\"140\" font-size=\"24\" text-anchor=\"middle\">1</text><text x=\"216\" y=\"96\" font-size=\"24\" text-anchor=\"middle\">4</text><text x=\"216\" y=\"140\" font-size=\"24\" text-anchor=\"middle\">4</text><text x=\"262\" y=\"96\" font-size=\"24\" text-anchor=\"middle\">2</text><text x=\"262\" y=\"140\" font-size=\"24\" text-anchor=\"middle\">3</text>\n<text x=\"94\" y=\"140\" font-size=\"24\" text-anchor=\"middle\">+</text>\n<text x=\"304\" y=\"96\" font-size=\"15\" fill=\"#777\">(bas 5)</text>\n<text x=\"304\" y=\"140\" font-size=\"15\" fill=\"#777\">(bas 5)</text>\n<line x1=\"101.0\" y1=\"156\" x2=\"285.0\" y2=\"156\" stroke=\"#333\" stroke-width=\"2.2\"/>\n<text x=\"216\" y=\"196\" font-size=\"24\" text-anchor=\"middle\" fill=\"#bbb\">?</text>\n<text x=\"60\" y=\"222\" font-size=\"14\" fill=\"#777\">I bas 5 sker växling när en kolumn når 5.</text>\n</svg></span><p>Beräkna \\(342_5+143_5\\) genom att räkna direkt i bas 5, alltså utan att gå via bas tio. Kontrollera sedan svaret genom att omvandla båda talen till bas tio.</p>",
     "s": "<p><strong>Idé:</strong> Uppställningen fungerar som i bas tio, men växlingen sker vid 5 i stället för vid 10.</p><p><strong>Entalskolumnen:</strong> \\(2+3=5\\). I bas 5 är \\(5=1\\cdot5+0\\), så vi skriver 0 och får 1 i minne.</p><p><strong>Femtalskolumnen:</strong> \\(4+4+1=9\\). Eftersom \\(9=1\\cdot5+4\\) skriver vi 4 och får 1 i minne.</p><p><strong>Tjugofemtalskolumnen:</strong> \\(3+1+1=5=1\\cdot5+0\\), så vi skriver 0 och får 1 i minne.</p><p>Minnessiffran 1 blir en ny siffra längst fram. Alltså</p><p>\\[342_5+143_5=\\mathbf{1040_5}.\\]</p><p><strong>Kontroll via bas tio:</strong></p><p>\\[342_5=3\\cdot25+4\\cdot5+2=97,\\qquad 143_5=1\\cdot25+4\\cdot5+3=48.\\]</p><p>Summan är \\(97+48=145\\), och</p><p>\\[145=1\\cdot125+0\\cdot25+4\\cdot5+0=1040_5.\\]</p><p>Svaren stämmer överens.</p>",
-    "id": "2.151"
+    "id": "2.151",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3732,7 +4478,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Talet \\(143_b\\) är lika med \\(120_{10}\\). Bestäm basen \\(b\\).</p>",
     "s": "<p><strong>Idé:</strong> Skriv talet med platsvärden i basen \\(b\\). Då blir basen den obekanta i en ekvation.</p><p>\\[143_b=1\\cdot b^2+4\\cdot b+3.\\]</p><p>Villkoret ger andragradsekvationen</p><p>\\[b^2+4b+3=120\\ \\Longleftrightarrow\\ b^2+4b-117=0.\\]</p><p>Lösningarna är</p><p>\\[b=\\frac{-4\\pm\\sqrt{16+468}}{2}=\\frac{-4\\pm22}{2},\\]</p><p>alltså \\(b=9\\) eller \\(b=-13\\).</p><p>En bas måste vara ett positivt heltal, så \\(b=-13\\) förkastas. Dessutom måste basen vara större än varje siffra som förekommer i talet; den största siffran här är 4, och \\(9\\gt4\\) fungerar.</p><p>Alltså är <strong>\\(b=9\\)</strong>.</p><p><strong>Kontroll:</strong> \\(143_9=81+36+3=120\\).</p>",
-    "id": "2.152"
+    "id": "2.152",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3742,7 +4490,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(243_{10}\\) till bas 5.</p>",
     "s": "<p>Största fempotensen som ryms är \\(5^3=125\\):</p><p>\\[243=1\\cdot125+4\\cdot25+3\\cdot5+3.\\]</p><p>Alltså är <strong>\\(243_{10}=1433_5\\)</strong>.</p>",
-    "id": "2.165"
+    "id": "2.165",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3752,7 +4502,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(1101011_2\\) till bas tio.</p>",
     "s": "<p>Utveckla med tvåpotenser:</p><p>\\[1101011_2=1\\cdot64+1\\cdot32+0\\cdot16+1\\cdot8+0\\cdot4+1\\cdot2+1.\\]</p><p>\\[64+32+8+2+1=107.\\]</p><p><strong>Svar: \\(1101011_2=107_{10}\\).</strong></p>",
-    "id": "2.166"
+    "id": "2.166",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3762,7 +4514,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(3241_5\\) till bas tio.</p>",
     "s": "<p>\\[3241_5=3\\cdot5^3+2\\cdot5^2+4\\cdot5+1\\]</p><p>\\[=375+50+20+1=446.\\]</p><p><strong>Svar: \\(446_{10}\\).</strong></p>",
-    "id": "2.167"
+    "id": "2.167",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3772,7 +4526,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(127_{10}\\) till bas två.</p>",
     "s": "<p>\\(127=64+32+16+8+4+2+1\\), alltså används alla tvåpotenser från \\(2^6\\) till \\(2^0\\).</p><p><strong>\\(127_{10}=1111111_2\\)</strong>.</p>",
-    "id": "2.168"
+    "id": "2.168",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3782,7 +4538,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(1567_8\\) till bas tio.</p>",
     "s": "<p>\\[1567_8=1\\cdot8^3+5\\cdot8^2+6\\cdot8+7\\]</p><p>\\[=512+320+48+7=887.\\]</p><p><strong>Svar: \\(887_{10}\\).</strong></p>",
-    "id": "2.169"
+    "id": "2.169",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3792,7 +4550,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(2431_5+1324_5\\) och skriv svaret i bas 5.</p>",
     "s": "<p>Räkna från höger och växla när en kolumn når 5:</p><p>Ental: \\(1+4=5=10_5\\): skriv 0 och minnessiffra 1.</p><p>Femtal: \\(3+2+1=6=11_5\\): skriv 1 och minnessiffra 1.</p><p>\\(25\\)-tal: \\(4+3+1=8=13_5\\): skriv 3 och minnessiffra 1.</p><p>\\(125\\)-tal: \\(2+1+1=4\\).</p><p>Alltså</p><p><strong>\\[2431_5+1324_5=4310_5.\\]</strong></p>",
-    "id": "2.170"
+    "id": "2.170",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3802,7 +4562,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>I talet \\(3a2_6\\) är \\(a\\) en siffra i bas 6. Man vet att \\(3a2_6=134_{10}\\).</p><p>Bestäm \\(a\\).</p>",
     "s": "<p>Värdet i bas tio är</p><p>\\[3\\cdot6^2+a\\cdot6+2=108+6a+2=110+6a.\\]</p><p>Sätt detta lika med 134:</p><p>\\[110+6a=134\\Rightarrow6a=24\\Rightarrow a=4.\\]</p><p><strong>Svar: \\(a=4\\).</strong></p>",
-    "id": "2.171"
+    "id": "2.171",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3812,7 +4574,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Talet \\(132_b\\) är lika med \\(56_{10}\\). Bestäm basen \\(b\\).</p>",
     "s": "<p>I bas \\(b\\) betyder talet</p><p>\\[132_b=b^2+3b+2.\\]</p><p>Alltså</p><p>\\[b^2+3b+2=56\\Rightarrow b^2+3b-54=0.\\]</p><p>Faktorisera:</p><p>\\[(b-6)(b+9)=0.\\]</p><p>En talbas måste vara positiv och större än den största siffran 3. Därför är <strong>\\(b=6\\)</strong>.</p>",
-    "id": "2.172"
+    "id": "2.172",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3822,7 +4586,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Omvandla \\(2024_5\\) till bas tio.</p>",
     "s": "<p>\\[2024_5=2\\cdot5^3+0\\cdot5^2+2\\cdot5+4=250+10+4=264.\\]</p><p><strong>Svar: \\(264_{10}\\).</strong></p>",
-    "id": "2.205"
+    "id": "2.205",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3832,7 +4598,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(4312_6-254_6\\) och skriv svaret i bas 6.</p>",
     "s": "<p>Ett säkert sätt är att kontrollera via bas tio:</p><p>\\[4312_6=4\\cdot216+3\\cdot36+1\\cdot6+2=980.\\]</p><p>\\[254_6=2\\cdot36+5\\cdot6+4=106.\\]</p><p>Skillnaden är \\(980-106=874\\).</p><p>Omvandla 874 tillbaka till bas 6:</p><p>\\[874=4\\cdot216+0\\cdot36+1\\cdot6+4.\\]</p><p><strong>\\[4312_6-254_6=4014_6.\\]</strong></p>",
-    "id": "2.206"
+    "id": "2.206",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3842,7 +4610,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa att</p><p>\\[\\sum_{k=1}^{n}\\frac{1}{k(k+1)}=\\frac{n}{n+1}\\]</p><p>genom att först skriva om varje term som en differens. Bestäm sedan summan för \\(n=99\\).</p>",
     "s": "<p><strong>Nyckelidé:</strong> Om varje term kan skrivas som en differens mellan två närliggande uttryck tar termerna ut varandra parvis. En sådan summa kallas teleskopsumma.</p><p>Vi söker en uppdelning av formen</p><p>\\[\\frac{1}{k(k+1)}=\\frac1k-\\frac1{k+1}.\\]</p><p>Kontrollera genom att sätta på gemensam nämnare:</p><p>\\[\\frac1k-\\frac1{k+1}=\\frac{(k+1)-k}{k(k+1)}=\\frac{1}{k(k+1)}.\\]</p><p>Uppdelningen stämmer. Summan blir därför</p><p>\\[\\sum_{k=1}^{n}\\left(\\frac1k-\\frac1{k+1}\\right)=\\left(\\frac11-\\frac12\\right)+\\left(\\frac12-\\frac13\\right)+\\cdots+\\left(\\frac1n-\\frac1{n+1}\\right).\\]</p><p>Varje negativ term möter en lika stor positiv term i nästa parentes. Kvar blir bara den första och den sista:</p><p>\\[1-\\frac{1}{n+1}=\\frac{n+1-1}{n+1}=\\frac{n}{n+1}.\\]</p><p>För \\(n=99\\) fås</p><p>\\[\\frac{99}{100}=\\mathbf{0,99}.\\]</p>",
-    "id": "2.153"
+    "id": "2.153",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3852,7 +4622,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna</p><p>\\[\\sum_{k=3}^{12}(2k-1).\\]</p>",
     "s": "<p><strong>Metod:</strong> Dela upp summan i två enklare delar och använd formeln \\(1+2+\\cdots+n=\\frac{n(n+1)}2\\). Tänk på att summationen startar vid \\(k=3\\), inte vid \\(k=1\\).</p><p>\\[\\sum_{k=3}^{12}(2k-1)=2\\sum_{k=3}^{12}k-\\sum_{k=3}^{12}1.\\]</p><p>Den andra summan består av 10 ettor, alltså 10.</p><p>Den första får vi genom att ta hela summan från 1 och dra bort de termer som inte ska vara med:</p><p>\\[\\sum_{k=3}^{12}k=\\frac{12\\cdot13}{2}-(1+2)=78-3=75.\\]</p><p>Alltså</p><p>\\[\\sum_{k=3}^{12}(2k-1)=2\\cdot75-10=\\mathbf{140}.\\]</p><p><strong>Kontroll:</strong> termerna är \\(5,7,9,\\ldots,23\\), alltså 10 termer i en aritmetisk följd. Summan blir \\(\\frac{10(5+23)}2=140\\).</p>",
-    "id": "2.154"
+    "id": "2.154",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3862,7 +4634,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\sum_{k=2}^{6}(3k-2).\\]</p>",
     "s": "<p>Sätt in \\(k=2,3,4,5,6\\):</p><p>\\[4+7+10+13+16=50.\\]</p><p><strong>Svar: 50.</strong></p>",
-    "id": "2.189"
+    "id": "2.189",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3872,7 +4646,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv summan</p><p>\\[4+7+10+\\cdots+31\\]</p><p>med sigma-notation.</p>",
     "s": "<p>Termen kan skrivas \\(3k+1\\). När \\(k=1\\) fås 4 och när \\(k=10\\) fås 31.</p><p><strong>\\[\\sum_{k=1}^{10}(3k+1).\\]</strong></p>",
-    "id": "2.190"
+    "id": "2.190",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3882,7 +4658,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd ges av \\(a_n=3n^2-1\\). Bestäm de fyra första termerna.</p>",
     "s": "<p>\\[a_1=2,\\quad a_2=11,\\quad a_3=26,\\quad a_4=47.\\]</p><p><strong>Följden börjar \\(2,11,26,47,\\ldots\\)</strong></p>",
-    "id": "2.191"
+    "id": "2.191",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3892,7 +4670,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(a\\) om</p><p>\\[\\sum_{k=1}^{10}(ak+1)=230.\\]</p>",
     "s": "<p>Dela upp summan:</p><p>\\[a\\sum_{k=1}^{10}k+\\sum_{k=1}^{10}1=230.\\]</p><p>\\[55a+10=230\\Rightarrow55a=220\\Rightarrow a=4.\\]</p><p><strong>Svar: \\(a=4\\).</strong></p>",
-    "id": "2.192"
+    "id": "2.192",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3902,7 +4682,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa med summaformler att</p><p>\\[\\sum_{k=1}^{n}(2k-1)=n^2.\\]</p>",
     "s": "<p>Separera summan:</p><p>\\[\\sum_{k=1}^{n}(2k-1)=2\\sum_{k=1}^{n}k-\\sum_{k=1}^{n}1.\\]</p><p>\\[=2\\cdot\\frac{n(n+1)}2-n=n(n+1)-n=n^2.\\]</p><p><strong>Alltså är summan av de \\(n\\) första udda talen \\(n^2\\).</strong></p>",
-    "id": "2.193"
+    "id": "2.193",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3912,7 +4694,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\sum_{k=1}^{20}k.\\]</p>",
     "s": "<p>Använd formeln</p><p>\\[1+2+\\cdots+n=\\frac{n(n+1)}2.\\]</p><p>\\[\\sum_{k=1}^{20}k=\\frac{20\\cdot21}{2}=210.\\]</p><p><strong>Svar: 210.</strong></p>",
-    "id": "2.194"
+    "id": "2.194",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3922,7 +4706,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Visa att \\(n^5-n\\) är delbart med 30 för varje heltal \\(n\\).</p>",
     "s": "<p><strong>Idé:</strong> Eftersom \\(30=2\\cdot3\\cdot5\\) och faktorerna är olika primtal räcker det att visa delbarhet med 2, 3 och 5 var för sig.</p><p>Faktorisera först:</p><p>\\[n^5-n=n(n^4-1)=n(n^2-1)(n^2+1)=(n-1)n(n+1)(n^2+1).\\]</p><p><strong>Delbarhet med 2 och 3.</strong> Faktorerna \\(n-1\\), \\(n\\) och \\(n+1\\) är tre på varandra följande heltal. Bland tre sådana finns alltid minst ett jämnt tal och alltid exakt ett som är delbart med 3. Produkten är därför delbar med både 2 och 3.</p><p><strong>Delbarhet med 5.</strong> Undersök resten av \\(n\\) vid division med 5. Om \\(n\\equiv0\\pmod5\\) är faktorn \\(n\\) delbar med 5. Om \\(n\\equiv1\\) är \\(n-1\\) delbar med 5, och om \\(n\\equiv4\\equiv-1\\) är \\(n+1\\) delbar med 5. Återstår \\(n\\equiv\\pm2\\pmod5\\), och då gäller</p><p>\\[n^2\\equiv4\\pmod 5\\Rightarrow n^2+1\\equiv5\\equiv0\\pmod5,\\]</p><p>så faktorn \\(n^2+1\\) är delbar med 5. I samtliga fall är produkten delbar med 5.</p><p><strong>Slutsats.</strong> Talet är delbart med 2, 3 och 5. Eftersom dessa är olika primtal är det delbart med deras produkt, alltså med <strong>30</strong>.</p>",
-    "id": "2.155"
+    "id": "2.155",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3932,7 +4718,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Primtalsfaktorisera talet \\(756\\).</p>",
     "s": "<p>Vi delar stegvis med primtal:</p><p>\\[756=2\\cdot378=2^2\\cdot189=2^2\\cdot3\\cdot63=2^2\\cdot3^3\\cdot7.\\]</p><p><strong>Svar:</strong> \\(\\boxed{756=2^2\\cdot3^3\\cdot7}\\).</p>",
-    "id": "2.157"
+    "id": "2.157",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3942,7 +4730,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\mathrm{sgd}(420,588)\\) med Euklides algoritm.</p>",
     "s": "<p>Vi dividerar successivt och använder resten:</p><p>\\[588=1\\cdot420+168\\]</p><p>\\[420=2\\cdot168+84\\]</p><p>\\[168=2\\cdot84.\\]</p><p>Den sista icke-nollresten är 84. Alltså är <strong>\\(\\mathrm{sgd}(420,588)=84\\)</strong>.</p>",
-    "id": "2.158"
+    "id": "2.158",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3952,7 +4742,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm minsta gemensamma multipel till 36 och 84.</p>",
     "s": "<p>Primtalsfaktorisera:</p><p>\\[36=2^2\\cdot3^2,\\qquad84=2^2\\cdot3\\cdot7.\\]</p><p>För MGM tar vi den högsta förekommande potensen av varje primtal:</p><p>\\[\\mathrm{mgm}(36,84)=2^2\\cdot3^2\\cdot7=252.\\]</p><p><strong>Svar: 252.</strong></p>",
-    "id": "2.159"
+    "id": "2.159",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3962,7 +4754,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Avgör om talet 2772 är delbart med</p><ol type=\"a\"><li>4</li><li>9</li><li>11.</li></ol>",
     "s": "<p><strong>a)</strong> De två sista siffrorna är 72 och \\(72\\) är delbart med 4. Alltså är 2772 delbart med 4.</p><p><strong>b)</strong> Siffersumman är \\(2+7+7+2=18\\), som är delbar med 9. Alltså är 2772 delbart med 9.</p><p><strong>c)</strong> Den alternerande summan är \\(2-7+7-2=0\\), som är delbar med 11. Alltså är 2772 också delbart med 11.</p>",
-    "id": "2.160"
+    "id": "2.160",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3972,7 +4766,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett lager har 180 röda och 252 blå reflexband. Man vill göra så många <em>identiska</em> paket som möjligt utan att något band blir över.</p><p>Hur många paket kan göras, och hur många band av varje färg ligger i varje paket?</p>",
     "s": "<p>Antalet paket måste dela både 180 och 252. Det största möjliga antalet är därför</p><p>\\[\\mathrm{sgd}(180,252)=36.\\]</p><p>I varje paket blir det</p><p>\\[180/36=5\\text{ röda},\\qquad252/36=7\\text{ blå}.\\]</p><p><strong>Svar: 36 paket med 5 röda och 7 blå reflexband i varje.</strong></p>",
-    "id": "2.161"
+    "id": "2.161",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3982,7 +4778,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm det minsta positiva heltalet \\(k\\) som gör produkten \\(18k\\) delbar med 84.</p>",
     "s": "<p>Primtalsfaktorisera:</p><p>\\[18=2\\cdot3^2,\\qquad84=2^2\\cdot3\\cdot7.\\]</p><p>Produkten \\(18k\\) har redan en faktor 2 och minst en faktor 3. För att bli delbar med 84 saknas därför minst en extra faktor 2 och en faktor 7.</p><p>Det minsta möjliga \\(k\\) är</p><p>\\[k=2\\cdot7=14.\\]</p><p>Kontroll: \\(18\\cdot14=252=3\\cdot84\\).</p><p><strong>Svar: \\(k=14\\).</strong></p>",
-    "id": "2.162"
+    "id": "2.162",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -3992,7 +4790,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett rektangulärt golv är 378 cm långt och 630 cm brett. Golvet ska täckas helt av lika stora kvadratiska plattor utan att plattor behöver kapas.</p><p>Vilken är den största möjliga sidlängden på plattorna?</p>",
     "s": "<p>Plattans sida måste dela både 378 och 630. Den största möjliga sidan är därför deras största gemensamma delare.</p><p>Med Euklides algoritm:</p><p>\\[630=1\\cdot378+252,\\quad378=1\\cdot252+126,\\quad252=2\\cdot126.\\]</p><p>Alltså är \\(\\mathrm{sgd}(378,630)=126\\).</p><p><strong>Plattorna kan som mest ha sidan 126 cm.</strong></p>",
-    "id": "2.163"
+    "id": "2.163",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4002,7 +4802,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Hur många positiva delare har talet 720?</p>",
     "s": "<p>Primtalsfaktorisera först:</p><p>\\[720=72\\cdot10=2^4\\cdot3^2\\cdot5.\\]</p><p>En positiv delare kan innehålla \\(2^a3^b5^c\\), där</p><p>\\[a=0,1,2,3,4,\\qquad b=0,1,2,\\qquad c=0,1.\\]</p><p>Det finns alltså</p><p>\\[(4+1)(2+1)(1+1)=5\\cdot3\\cdot2=30\\]</p><p>möjliga delare. <strong>Svar: 30.</strong></p>",
-    "id": "2.164"
+    "id": "2.164",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4012,7 +4814,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\mathrm{sgd}(945,630)\\).</p>",
     "s": "<p>Med Euklides algoritm:</p><p>\\[945=1\\cdot630+315\\]</p><p>\\[630=2\\cdot315.\\]</p><p>Alltså är <strong>\\(\\mathrm{sgd}(945,630)=315\\)</strong>.</p>",
-    "id": "2.207"
+    "id": "2.207",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4022,7 +4826,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Tre busslinjer avgår samtidigt klockan 06.00. De avgår sedan var 18:e, 24:e respektive 30:e minut.</p><p>När avgår alla tre samtidigt nästa gång?</p>",
     "s": "<p>Vi söker minsta gemensamma multipel av 18, 24 och 30.</p><p>\\[18=2\\cdot3^2,\\quad24=2^3\\cdot3,\\quad30=2\\cdot3\\cdot5.\\]</p><p>\\[\\mathrm{mgm}=2^3\\cdot3^2\\cdot5=360\\text{ minuter}.\\]</p><p>360 minuter är 6 timmar. Sex timmar efter 06.00 är <strong>12.00</strong>.</p>",
-    "id": "2.208"
+    "id": "2.208",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4032,7 +4838,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "t": "<p>En talföljd definieras av</p><p>\\[a_1=2,\\qquad a_{n+1}=3a_n+4\\quad\\text{för }n\\ge1.\\]</p><ol type=\"a\"><li>Beräkna \\(a_2\\), \\(a_3\\) och \\(a_4\\).</li><li>Visa med induktion att \\(a_n=4\\cdot3^{\\,n-1}-2\\) för alla \\(n\\ge1\\).</li></ol>",
     "s": "<p><strong>a)</strong> Rekursionen ger</p><p>\\[a_2=3\\cdot2+4=10,\\qquad a_3=3\\cdot10+4=34,\\qquad a_4=3\\cdot34+4=106.\\]</p><p><strong>b) Basfall.</strong> För \\(n=1\\) ger formeln \\(4\\cdot3^{0}-2=4-2=2\\), vilket stämmer med \\(a_1=2\\).</p><p><strong>Induktionsantagande.</strong> Anta att formeln gäller för något \\(n=k\\ge1\\), alltså att</p><p>\\[a_k=4\\cdot3^{\\,k-1}-2.\\]</p><p><strong>Induktionssteg.</strong> Använd rekursionen och sätt in antagandet:</p><p>\\[a_{k+1}=3a_k+4=3\\left(4\\cdot3^{\\,k-1}-2\\right)+4.\\]</p><p>Multiplicera in trean och förenkla:</p><p>\\[=4\\cdot3^{\\,k}-6+4=4\\cdot3^{\\,k}-2.\\]</p><p>Detta är precis formeln med \\(n=k+1\\), eftersom \\(4\\cdot3^{\\,(k+1)-1}-2=4\\cdot3^{\\,k}-2\\).</p><p>Basfallet gäller och steget för antagandet vidare från \\(k\\) till \\(k+1\\). Enligt induktionsprincipen gäller formeln därför för alla \\(n\\ge1\\).</p><p><strong>Kontroll:</strong> \\(a_4=4\\cdot27-2=106\\), som i a).</p>",
-    "id": "2.156"
+    "id": "2.156",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4042,7 +4850,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd definieras av \\(a_1=11\\) och \\(a_{n+1}=a_n-4\\).</p><p>Bestäm \\(a_6\\).</p>",
     "s": "<p>Beräkna termerna steg för steg:</p><p>\\[a_2=7,\\quad a_3=3,\\quad a_4=-1,\\quad a_5=-5,\\quad a_6=-9.\\]</p><p><strong>Svar: \\(a_6=-9\\).</strong></p>",
-    "id": "2.173"
+    "id": "2.173",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4052,7 +4862,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd ges av \\(a_1=4\\) och \\(a_{n+1}=4a_n\\).</p><p>Skriv de fem första termerna.</p>",
     "s": "<p>Varje term är fyra gånger den föregående:</p><p><strong>\\[4,\\ 16,\\ 64,\\ 256,\\ 1024.\\]</strong></p>",
-    "id": "2.174"
+    "id": "2.174",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4062,7 +4874,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv en rekursiv formel för talföljden</p><p>\\[12,\\ 9,\\ 6,\\ 3,\\ 0,\\ldots\\]</p>",
     "s": "<p>Skillnaden mellan två efterföljande termer är alltid \\(-3\\). En rekursiv beskrivning är därför</p><p><strong>\\[a_1=12,\\qquad a_{n+1}=a_n-3.\\]</strong></p>",
-    "id": "2.175"
+    "id": "2.175",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4072,7 +4886,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Skriv en rekursiv formel för talföljden</p><p>\\[2,\\ 6,\\ 18,\\ 54,\\ldots\\]</p>",
     "s": "<p>Varje term fås genom att multiplicera föregående term med 3. Alltså</p><p><strong>\\[a_1=2,\\qquad a_{n+1}=3a_n.\\]</strong></p>",
-    "id": "2.176"
+    "id": "2.176",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4082,7 +4898,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd ges av \\(a_1=1\\), \\(a_2=2\\) och \\(a_{n+2}=2a_{n+1}+a_n\\).</p><p>Bestäm \\(a_6\\).</p>",
     "s": "<p>\\[a_3=2\\cdot2+1=5\\]</p><p>\\[a_4=2\\cdot5+2=12\\]</p><p>\\[a_5=2\\cdot12+5=29\\]</p><p>\\[a_6=2\\cdot29+12=70.\\]</p><p><strong>Svar: \\(a_6=70\\).</strong></p>",
-    "id": "2.177"
+    "id": "2.177",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4092,7 +4910,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett sparkonto innehåller 5000 kr. I slutet av varje år får kontot 4 % ränta och därefter sätts 1200 kr in.</p><p>Låt \\(S_n\\) vara saldot efter \\(n\\) år.</p><ol type=\"a\"><li>Skriv en rekursionsformel.</li><li>Bestäm \\(S_3\\).</li></ol>",
     "s": "<p><strong>a)</strong> Först multipliceras saldot med \\(1,04\\), sedan läggs 1200 kr till:</p><p>\\[S_0=5000,\\qquad S_{n+1}=1,04S_n+1200.\\]</p><p><strong>b)</strong></p><p>\\[S_1=6400\\]</p><p>\\[S_2=1,04\\cdot6400+1200=7856\\]</p><p>\\[S_3=1,04\\cdot7856+1200=9370,24.\\]</p><p><strong>Efter tre år är saldot 9370,24 kr.</strong></p>",
-    "id": "2.178"
+    "id": "2.178",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4102,7 +4922,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En talföljd definieras av \\(T_0=80\\) och</p><p>\\[T_{n+1}=0,75T_n+5.\\]</p><p>Bestäm en explicit formel för \\(T_n\\).</p>",
     "s": "<p><strong>Nyckelidé:</strong> Leta först efter ett jämviktsvärde \\(L\\) som inte ändras av rekursionen:</p><p>\\[L=0,75L+5\\Rightarrow0,25L=5\\Rightarrow L=20.\\]</p><p>Studera avvikelsen från 20:</p><p>\\[T_{n+1}-20=0,75(T_n-20).\\]</p><p>Avvikelsen bildar alltså en geometrisk följd. Eftersom \\(T_0-20=60\\) får vi</p><p><strong>\\[T_n=20+60\\cdot0,75^n.\\]</strong></p>",
-    "id": "2.179"
+    "id": "2.179",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4112,7 +4934,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En talföljd definieras av \\(a_1=5\\) och \\(a_{n+1}=3a_n-4\\).</p><p>Bestäm en explicit formel för \\(a_n\\).</p>",
     "s": "<p>Jämviktsvärdet \\(L\\) uppfyller</p><p>\\[L=3L-4\\Rightarrow L=2.\\]</p><p>Då</p><p>\\[a_{n+1}-2=3(a_n-2).\\]</p><p>Alltså är \\(a_n-2\\) geometrisk med kvoten 3. Eftersom \\(a_1-2=3\\) får vi</p><p>\\[a_n-2=3\\cdot3^{n-1}=3^n.\\]</p><p><strong>\\[a_n=2+3^n.\\]</strong></p>",
-    "id": "2.180"
+    "id": "2.180",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4122,7 +4946,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En mängd beskrivs av \\(a_0=100\\) och \\(a_{n+1}=0,9a_n\\). Bestäm \\(a_3\\).</p>",
     "s": "<p>\\[a_1=90,\\qquad a_2=81,\\qquad a_3=72,9.\\]</p><p><strong>Svar: \\(a_3=72,9\\).</strong></p>",
-    "id": "2.201"
+    "id": "2.201",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4132,7 +4958,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En talföljd definieras av \\(a_1=2\\) och</p><p>\\[a_{n+1}=a_n+2n.\\]</p><p>Bestäm \\(a_5\\).</p>",
     "s": "<p>\\[a_2=2+2\\cdot1=4\\]</p><p>\\[a_3=4+2\\cdot2=8\\]</p><p>\\[a_4=8+2\\cdot3=14\\]</p><p>\\[a_5=14+2\\cdot4=22.\\]</p><p><strong>Svar: 22.</strong></p>",
-    "id": "2.202"
+    "id": "2.202",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4142,7 +4970,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En medicinmängd följer rekursionen</p><p>\\[M_0=0,\\qquad M_{n+1}=0,8M_n+10.\\]</p><p>Bestäm en explicit formel för \\(M_n\\).</p>",
     "s": "<p>Jämviktsvärdet \\(L\\) uppfyller</p><p>\\[L=0,8L+10\\Rightarrow0,2L=10\\Rightarrow L=50.\\]</p><p>Därför</p><p>\\[M_{n+1}-50=0,8(M_n-50).\\]</p><p>Eftersom \\(M_0-50=-50\\) får vi</p><p>\\[M_n-50=-50\\cdot0,8^n.\\]</p><p><strong>\\[M_n=50(1-0,8^n).\\]</strong></p>",
-    "id": "2.203"
+    "id": "2.203",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 2,
@@ -4152,7 +4982,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En talföljd definieras av \\(a_0=20\\) och</p><p>\\[a_{n+1}=0,5a_n+6.\\]</p><ol type=\"a\"><li>Bestäm följdens gränsvärde.</li><li>Bestäm en explicit formel.</li></ol>",
     "s": "<p><strong>a)</strong> Ett gränsvärde \\(L\\) måste uppfylla</p><p>\\[L=0,5L+6\\Rightarrow L=12.\\]</p><p><strong>b)</strong> Avvikelsen från 12 uppfyller</p><p>\\[a_{n+1}-12=0,5(a_n-12).\\]</p><p>Eftersom \\(a_0-12=8\\) får vi</p><p><strong>\\[a_n=12+8\\cdot0,5^n.\\]</strong></p>",
-    "id": "2.204"
+    "id": "2.204",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4162,7 +4994,9 @@ window.BANKMATF1 = [
     "poang": "0/2/1",
     "t": "<p>Beräkna \\(\\displaystyle\\int x^2e^{-2x}\\,dx\\).</p>",
     "s": "<p>Partiell integration två gånger ger</p><p>\\[\\int x^2e^{-2x}dx=-\\frac{1}{2}x^2e^{-2x}+\\int xe^{-2x}dx\\]</p><p>\\[=-\\frac{1}{2}x^2e^{-2x}-\\frac{1}{2}xe^{-2x}-\\frac14e^{-2x}+C.\\]</p><p>Alltså <strong>\\(-e^{-2x}(\\frac{1}{2}x^2+\\frac{1}{2}x+\\frac14)+C\\)</strong>.</p>",
-    "id": "3.01"
+    "id": "3.01",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4172,7 +5006,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\displaystyle\\int xe^x\\,dx\\).</p>",
     "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Välj \\(u=x\\), \\(dv=e^x dx\\). Då \\(du=dx\\), \\(v=e^x\\): <strong>\\(xe^x-e^x+C=e^x(x-1)+C\\)</strong>.</p>",
-    "id": "3.02"
+    "id": "3.02",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4182,7 +5018,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(\\displaystyle\\int \\ln x\\,dx\\), \\(x\\gt 0\\).</p>",
     "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Skriv \\(\\ln x=1\\cdot\\ln x\\). Med \\(u=\\ln x\\), \\(dv=dx\\) fås \\(du=dx/x\\), \\(v=x\\):</p><p><strong>\\(x\\ln x-x+C\\)</strong>.</p>",
-    "id": "3.03"
+    "id": "3.03",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4192,7 +5030,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm</p><p>\\[\\int x\\cos x\\,dx.\\]</p>",
     "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Välj \\(u=x\\) och \\(dv=\\cos x\\,dx\\). Då är \\(du=dx\\) och \\(v=\\sin x\\).</p><p>\\[\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx=x\\sin x+\\cos x+C.\\]</p>",
-    "id": "3.14"
+    "id": "3.14",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4202,7 +5042,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm</p><p>\\[\\int x^2\\ln x\\,dx,\\qquad x\\gt 0.\\]</p>",
     "s": "<p>Välj \\(u=\\ln x\\) och \\(dv=x^2dx\\). Då är \\(du=dx/x\\) och \\(v=x^3/3\\).</p><p>\\[\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\int x^2dx\\]</p><p>\\[=\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}+C.\\]</p>",
-    "id": "3.15"
+    "id": "3.15",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4212,7 +5054,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "3.24",
     "t": "<p>Bestäm</p><p>\\[\\int xe^x\\,dx.\\]</p>",
-    "s": "<p>Välj \\(u=x\\) och \\(dv=e^x\\,dx\\). Då är \\(du=dx\\) och \\(v=e^x\\).</p><p>Med partiell integration får vi</p><p>\\[\\int xe^x\\,dx=xe^x-\\int e^x\\,dx=xe^x-e^x+C.\\]</p><p><strong>Svaret är \\((x-1)e^x+C\\).</strong></p>"
+    "s": "<p>Välj \\(u=x\\) och \\(dv=e^x\\,dx\\). Då är \\(du=dx\\) och \\(v=e^x\\).</p><p>Med partiell integration får vi</p><p>\\[\\int xe^x\\,dx=xe^x-\\int e^x\\,dx=xe^x-e^x+C.\\]</p><p><strong>Svaret är \\((x-1)e^x+C\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4222,7 +5066,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int xe^{2x}\\,dx\\).</p>",
     "s": "<p>Välj \\(u=x\\), \\(dv=e^{2x}dx\\). Då \\(du=dx\\) och \\(v=\\frac12e^{2x}\\).</p><p>\\[\\int xe^{2x}dx=\\frac{x}{2}e^{2x}-\\frac12\\int e^{2x}dx=\\frac{x}{2}e^{2x}-\\frac14e^{2x}+C.\\]</p>",
-    "id": "3.30"
+    "id": "3.30",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4232,7 +5078,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int x\\sin x\\,dx\\).</p>",
     "s": "<p>Välj \\(u=x\\), \\(dv=\\sin x\\,dx\\). Då \\(v=-\\cos x\\):</p><p>\\[\\int x\\sin x\\,dx=-x\\cos x+\\int\\cos x\\,dx=-x\\cos x+\\sin x+C.\\]</p>",
-    "id": "3.31"
+    "id": "3.31",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4242,7 +5090,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int \\ln x\\,dx\\), \\(x\\gt0\\).</p>",
     "s": "<p>Skriv integranden som \\(1\\cdot\\ln x\\). Välj \\(u=\\ln x\\), \\(dv=dx\\). Då \\(du=dx/x\\), \\(v=x\\):</p><p>\\[\\int\\ln x\\,dx=x\\ln x-\\int1\\,dx=x\\ln x-x+C.\\]</p>",
-    "id": "3.32"
+    "id": "3.32",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4252,7 +5102,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_0^1 xe^x\\,dx\\).</p>",
     "s": "<p>En primitiv funktion är \\((x-1)e^x\\). Därför</p><p>\\[\\int_0^1xe^x\\,dx=[(x-1)e^x]_0^1=0-(-1)=1.\\]</p>",
-    "id": "3.33"
+    "id": "3.33",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4262,7 +5114,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(\\int x^2e^x\\,dx\\).</p>",
     "s": "<p>Första partiella integreringen med \\(u=x^2\\), \\(dv=e^xdx\\) ger</p><p>\\[x^2e^x-\\int2xe^xdx.\\]</p><p>Integrera den återstående integralen partiellt igen:</p><p>\\[\\int2xe^xdx=2(xe^x-e^x).\\]</p><p>Alltså</p><p>\\[\\int x^2e^xdx=e^x(x^2-2x+2)+C.\\]</p>",
-    "id": "3.34"
+    "id": "3.34",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4272,7 +5126,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int x\\cos(2x)\\,dx\\).</p>",
     "s": "<p>Välj \\(u=x\\), \\(dv=\\cos(2x)dx\\), så \\(v=\\frac12\\sin2x\\):</p><p>\\[\\int x\\cos2x dx=\\frac{x}{2}\\sin2x+\\frac14\\cos2x+C.\\]</p>",
-    "id": "3.55"
+    "id": "3.55",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4282,7 +5138,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int xe^{-x}\\,dx\\).</p>",
     "s": "<p>Välj \\(u=x\\), \\(dv=e^{-x}dx\\), \\(v=-e^{-x}\\):</p><p>\\[\\int xe^{-x}dx=-xe^{-x}-e^{-x}+C=-(x+1)e^{-x}+C.\\]</p>",
-    "id": "3.56"
+    "id": "3.56",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4292,7 +5150,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(\\int_1^e x\\ln x\\,dx\\).</p>",
     "s": "<p>Partiell integration ger</p><p>\\[\\int x\\ln x dx=\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}.\\]</p><p>Därför</p><p>\\[\\left[\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}\\right]_1^e=\\frac{e^2}{4}+\\frac14=\\frac{e^2+1}{4}.\\]</p>",
-    "id": "3.57"
+    "id": "3.57",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4302,7 +5162,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(\\int x^2\\sin x\\,dx\\).</p>",
     "s": "<p>Integrera partiellt två gånger:</p><p>\\[\\int x^2\\sin xdx=-x^2\\cos x+\\int2x\\cos xdx.\\]</p><p>\\[\\int2x\\cos xdx=2x\\sin x+2\\cos x.\\]</p><p>Alltså</p><p><strong>\\(-x^2\\cos x+2x\\sin x+2\\cos x+C\\)</strong>.</p>",
-    "id": "3.58"
+    "id": "3.58",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4312,7 +5174,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_0^{\\pi}x\\cos x\\,dx\\).</p>",
     "s": "<p>Primitiv funktion är \\(x\\sin x+\\cos x\\). Därför</p><p>\\[[x\\sin x+\\cos x]_0^{\\pi}=(-1)-(1)=-2.\\]</p>",
-    "id": "3.76"
+    "id": "3.76",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4322,7 +5186,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>För vilka värden på parametern \\(p\\) konvergerar den generaliserade integralen \\(\\displaystyle\\int_1^\\infty x^{-p}\\,dx\\)?</p>",
     "s": "<p>Skriv integralen med en övre gräns \\(R\\):</p><p>\\[\\int_1^R x^{-p}\\,dx=\\frac{R^{1-p}-1}{1-p}\\qquad(p\\ne1).\\]</p><p>När \\(R\\to\\infty\\) blir gränsvärdet ändligt exakt när exponenten \\(1-p&lt;0\\), det vill säga när <strong>\\(p&gt;1\\)</strong>.</p><p>För \\(p=1\\) får vi \\(\\int_1^R\\frac{1}{x}\\,dx=\\ln R\\), som går mot oändligheten. Alltså konvergerar integralen exakt för <strong>\\(p&gt;1\\)</strong>.</p>",
-    "id": "3.04"
+    "id": "3.04",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4332,7 +5198,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Beräkna \\(\\displaystyle\\int_0^\\infty e^{-3x}\\,dx\\).</p>",
     "s": "<p>Eftersom intervallet är obegränsat skriver vi integralen som ett gränsvärde:</p><p>\\[\\int_0^\\infty e^{-3x}\\,dx=\\lim_{R\\to\\infty}\\int_0^R e^{-3x}\\,dx.\\]</p><p>\\[=\\lim_{R\\to\\infty}\\left[-\\frac13e^{-3x}\\right]_0^R=\\lim_{R\\to\\infty}\\left(\\frac13-\\frac13e^{-3R}\\right)=\\mathbf{\\frac13}.\\]</p>",
-    "id": "3.05"
+    "id": "3.05",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4342,7 +5210,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>För vilka reella \\(a\\) konvergerar \\(\\displaystyle\\int_0^1 x^a\\,dx\\)?</p>",
     "s": "<p>För \\(a\\ne-1\\): \\(\\int_\\varepsilon^1x^a dx=\\frac{1-\\varepsilon^{a+1}}{a+1}\\). När \\(\\varepsilon\\to0^+\\) är gränsvärdet ändligt exakt om \\(a+1\\gt 0\\). För \\(a=-1\\) divergerar logaritmen. Alltså <strong>\\(a\\gt -1\\)</strong>.</p>",
-    "id": "3.06"
+    "id": "3.06",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4352,7 +5222,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg height=\"260\" width=\"390\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med 1 genom x kvadrat och det oändliga området från x lika med 1\">\n<rect width=\"390\" height=\"260\" fill=\"white\"/>\n<line x1=\"80\" y1=\"35\" x2=\"80\" y2=\"225\" stroke=\"#e2e2e2\"/><text x=\"76\" y=\"242\" font-size=\"13\">1</text><line x1=\"142\" y1=\"35\" x2=\"142\" y2=\"225\" stroke=\"#e2e2e2\"/><text x=\"138\" y=\"242\" font-size=\"13\">2</text><line x1=\"204\" y1=\"35\" x2=\"204\" y2=\"225\" stroke=\"#e2e2e2\"/><text x=\"200\" y=\"242\" font-size=\"13\">3</text><line x1=\"266\" y1=\"35\" x2=\"266\" y2=\"225\" stroke=\"#e2e2e2\"/><text x=\"262\" y=\"242\" font-size=\"13\">4</text><line x1=\"328\" y1=\"35\" x2=\"328\" y2=\"225\" stroke=\"#e2e2e2\"/><text x=\"324\" y=\"242\" font-size=\"13\">5</text><line x1=\"60\" y1=\"215.0\" x2=\"350\" y2=\"215.0\" stroke=\"#e2e2e2\"/><line x1=\"60\" y1=\"178.75\" x2=\"350\" y2=\"178.75\" stroke=\"#e2e2e2\"/><line x1=\"60\" y1=\"142.5\" x2=\"350\" y2=\"142.5\" stroke=\"#e2e2e2\"/><line x1=\"60\" y1=\"106.25\" x2=\"350\" y2=\"106.25\" stroke=\"#e2e2e2\"/><line x1=\"60\" y1=\"70.0\" x2=\"350\" y2=\"70.0\" stroke=\"#e2e2e2\"/>\n<line x1=\"55\" y1=\"215\" x2=\"355\" y2=\"215\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"80\" y1=\"230\" x2=\"80\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 80,215 L 80.0,70.0 L 83.1,83.5 L 86.2,95.2 L 89.3,105.4 L 92.4,114.3 L 95.5,122.2 L 98.6,129.2 L 101.7,135.4 L 104.8,141.0 L 107.9,146.0 L 111.0,150.6 L 114.1,154.6 L 117.2,158.4 L 120.3,161.7 L 123.4,164.8 L 126.5,167.7 L 129.6,170.2 L 132.7,172.6 L 135.8,174.8 L 138.9,176.9 L 142.0,178.8 L 145.1,180.5 L 148.2,182.1 L 151.3,183.6 L 154.4,185.0 L 157.5,186.4 L 160.6,187.6 L 163.7,188.7 L 166.8,189.8 L 169.9,190.8 L 173.0,191.8 L 176.1,192.7 L 179.2,193.6 L 182.3,194.4 L 185.4,195.1 L 188.5,195.8 L 191.6,196.5 L 194.7,197.1 L 197.8,197.8 L 200.9,198.3 L 204.0,198.9 L 207.1,199.4 L 210.2,199.9 L 213.3,200.4 L 216.4,200.8 L 219.5,201.3 L 222.6,201.7 L 225.7,202.1 L 228.8,202.5 L 231.9,202.8 L 235.0,203.2 L 238.1,203.5 L 241.2,203.8 L 244.3,204.1 L 247.4,204.4 L 250.5,204.7 L 253.6,205.0 L 256.7,205.2 L 259.8,205.5 L 262.9,205.7 L 266.0,205.9 L 269.1,206.2 L 272.2,206.4 L 275.3,206.6 L 278.4,206.8 L 281.5,207.0 L 284.6,207.2 L 287.7,207.3 L 290.8,207.5 L 293.9,207.7 L 297.0,207.8 L 300.1,208.0 L 303.2,208.1 L 306.3,208.3 L 309.4,208.4 L 312.5,208.6 L 315.6,208.7 L 318.7,208.8 L 321.8,209.0 L 324.9,209.1 L 328.0,209.2 L 328,215 Z\" fill=\"#999\" fill-opacity=\".25\"/>\n<path d=\"M 80.0,70.0 L 83.1,83.5 L 86.2,95.2 L 89.3,105.4 L 92.4,114.3 L 95.5,122.2 L 98.6,129.2 L 101.7,135.4 L 104.8,141.0 L 107.9,146.0 L 111.0,150.6 L 114.1,154.6 L 117.2,158.4 L 120.3,161.7 L 123.4,164.8 L 126.5,167.7 L 129.6,170.2 L 132.7,172.6 L 135.8,174.8 L 138.9,176.9 L 142.0,178.8 L 145.1,180.5 L 148.2,182.1 L 151.3,183.6 L 154.4,185.0 L 157.5,186.4 L 160.6,187.6 L 163.7,188.7 L 166.8,189.8 L 169.9,190.8 L 173.0,191.8 L 176.1,192.7 L 179.2,193.6 L 182.3,194.4 L 185.4,195.1 L 188.5,195.8 L 191.6,196.5 L 194.7,197.1 L 197.8,197.8 L 200.9,198.3 L 204.0,198.9 L 207.1,199.4 L 210.2,199.9 L 213.3,200.4 L 216.4,200.8 L 219.5,201.3 L 222.6,201.7 L 225.7,202.1 L 228.8,202.5 L 231.9,202.8 L 235.0,203.2 L 238.1,203.5 L 241.2,203.8 L 244.3,204.1 L 247.4,204.4 L 250.5,204.7 L 253.6,205.0 L 256.7,205.2 L 259.8,205.5 L 262.9,205.7 L 266.0,205.9 L 269.1,206.2 L 272.2,206.4 L 275.3,206.6 L 278.4,206.8 L 281.5,207.0 L 284.6,207.2 L 287.7,207.3 L 290.8,207.5 L 293.9,207.7 L 297.0,207.8 L 300.1,208.0 L 303.2,208.1 L 306.3,208.3 L 309.4,208.4 L 312.5,208.6 L 315.6,208.7 L 318.7,208.8 L 321.8,209.0 L 324.9,209.1 L 328.0,209.2\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<text x=\"250\" y=\"92\" font-size=\"16\">y = 1/x²</text>\n<text x=\"350\" y=\"207\" font-size=\"15\">x</text><text x=\"88\" y=\"32\" font-size=\"15\">y</text>\n</svg></span><p>Grafen visar \\(f(x)=1/x^2\\). Bestäm arean av det obegränsade området mellan grafen, \\(x\\)-axeln och linjen \\(x=1\\).</p>",
     "s": "<p>Arean skrivs som den generaliserade integralen</p><p>\\[\\int_1^\\infty \\frac{1}{x^2}\\,dx=\\lim_{b\\to\\infty}\\left[-\\frac{1}{x}\\right]_1^b.\\]</p><p>\\[\\lim_{b\\to\\infty}\\left(1-\\frac1b\\right)=\\mathbf{1}.\\]</p><p>Integralen konvergerar alltså trots att området sträcker sig oändligt långt åt höger.</p>",
-    "id": "3.16"
+    "id": "3.16",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4362,7 +5234,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>För vilka reella värden på \\(p\\gt 0\\) konvergerar integralen</p><p>\\[\\int_0^2 \\frac{1}{(2-x)^p}\\,dx?\\]</p>",
     "s": "<p>Problemet finns vid \\(x=2\\). Sätt \\(u=2-x\\). Då får vi samma konvergensfråga som för</p><p>\\[\\int_0^2 u^{-p}\\,du.\\]</p><p>För \\(p\\ne1\\) är en primitiv funktion \\(u^{1-p}/(1-p)\\). När \\(u\\to0^+\\) går \\(u^{1-p}\\to0\\) exakt när \\(1-p\\gt 0\\), alltså när \\(p&lt;1\\).</p><p>För \\(p=1\\) uppstår \\(\\ln u\\), som divergerar. Eftersom \\(p\\gt 0\\) är svaret <strong>\\(0\\lt p\\lt 1\\)</strong>.</p>",
-    "id": "3.17"
+    "id": "3.17",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4372,7 +5246,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "3.25",
     "t": "<p>Avgör om integralen konvergerar och bestäm i så fall dess värde:</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^3}\\,dx.\\]</p>",
-    "s": "<p>Vi skriver integralen som ett gränsvärde:</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^3}\\,dx=\\lim_{b\\to\\infty}\\int_1^b x^{-3}\\,dx.\\]</p><p>En primitiv funktion är \\(-\\frac{1}{2x^2}\\). Alltså</p><p>\\[\\lim_{b\\to\\infty}\\left[-\\frac{1}{2x^2}\\rightight]_1^b=\\lim_{b\\to\\infty}\\left(-\\frac{1}{2b^2}+\\frac{1}{2}\\rightight)=\\frac{1}{2}.\\]</p><p>Integralen <strong>konvergerar</strong> och värdet är <strong>\\(1/2\\)</strong>.</p>"
+    "s": "<p>Vi skriver integralen som ett gränsvärde:</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^3}\\,dx=\\lim_{b\\to\\infty}\\int_1^b x^{-3}\\,dx.\\]</p><p>En primitiv funktion är \\(-\\frac{1}{2x^2}\\). Alltså</p><p>\\[\\lim_{b\\to\\infty}\\left[-\\frac{1}{2x^2}\\rightight]_1^b=\\lim_{b\\to\\infty}\\left(-\\frac{1}{2b^2}+\\frac{1}{2}\\rightight)=\\frac{1}{2}.\\]</p><p>Integralen <strong>konvergerar</strong> och värdet är <strong>\\(1/2\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4382,7 +5258,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"270\" viewBox=\"0 0 450 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen till y lika med ett genom x i kvadrat med det obegränsade området från x lika med 2 markerat\">\n<rect width=\"450\" height=\"280\" fill=\"white\"/>\n<path d=\"M 151.3,212.0 L 151.3,192.2 L 152.6,192.6 L 153.9,193.0 L 155.2,193.4 L 156.5,193.8 L 157.8,194.2 L 159.1,194.5 L 160.4,194.8 L 161.7,195.2 L 163.0,195.5 L 164.2,195.8 L 165.5,196.1 L 166.8,196.4 L 168.1,196.7 L 169.4,197.0 L 170.7,197.2 L 172.0,197.5 L 173.3,197.8 L 174.6,198.0 L 175.9,198.3 L 177.2,198.5 L 178.5,198.7 L 179.8,199.0 L 181.1,199.2 L 182.4,199.4 L 183.6,199.6 L 184.9,199.8 L 186.2,200.0 L 187.5,200.2 L 188.8,200.4 L 190.1,200.6 L 191.4,200.7 L 192.7,200.9 L 194.0,201.1 L 195.3,201.3 L 196.6,201.4 L 197.9,201.6 L 199.2,201.7 L 200.5,201.9 L 201.8,202.0 L 203.0,202.2 L 204.3,202.3 L 205.6,202.5 L 206.9,202.6 L 208.2,202.7 L 209.5,202.9 L 210.8,203.0 L 212.1,203.1 L 213.4,203.3 L 214.7,203.4 L 216.0,203.5 L 217.3,203.6 L 218.6,203.7 L 219.9,203.8 L 221.2,203.9 L 222.4,204.1 L 223.7,204.2 L 225.0,204.3 L 226.3,204.4 L 227.6,204.5 L 228.9,204.6 L 230.2,204.7 L 231.5,204.7 L 232.8,204.8 L 234.1,204.9 L 235.4,205.0 L 236.7,205.1 L 238.0,205.2 L 239.3,205.3 L 240.6,205.4 L 241.9,205.4 L 243.1,205.5 L 244.4,205.6 L 245.7,205.7 L 247.0,205.7 L 248.3,205.8 L 249.6,205.9 L 250.9,206.0 L 252.2,206.0 L 253.5,206.1 L 254.8,206.2 L 256.1,206.2 L 257.4,206.3 L 258.7,206.4 L 260.0,206.4 L 261.3,206.5 L 262.5,206.5 L 263.8,206.6 L 265.1,206.7 L 266.4,206.7 L 267.7,206.8 L 269.0,206.8 L 270.3,206.9 L 271.6,206.9 L 272.9,207.0 L 274.2,207.0 L 275.5,207.1 L 276.8,207.1 L 278.1,207.2 L 279.4,207.2 L 280.7,207.3 L 281.9,207.3 L 283.2,207.4 L 284.5,207.4 L 285.8,207.5 L 287.1,207.5 L 288.4,207.6 L 289.7,207.6 L 291.0,207.7 L 292.3,207.7 L 293.6,207.7 L 294.9,207.8 L 296.2,207.8 L 297.5,207.9 L 298.8,207.9 L 300.1,207.9 L 301.4,208.0 L 302.6,208.0 L 303.9,208.1 L 305.2,208.1 L 306.5,208.1 L 307.8,208.2 L 309.1,208.2 L 310.4,208.2 L 311.7,208.3 L 313.0,208.3 L 314.3,208.3 L 315.6,208.4 L 316.9,208.4 L 318.2,208.4 L 319.5,208.5 L 320.8,208.5 L 322.0,208.5 L 323.3,208.6 L 324.6,208.6 L 325.9,208.6 L 327.2,208.6 L 328.5,208.7 L 329.8,208.7 L 331.1,208.7 L 332.4,208.8 L 333.7,208.8 L 335.0,208.8 L 336.3,208.8 L 337.6,208.9 L 338.9,208.9 L 340.2,208.9 L 341.4,208.9 L 342.7,209.0 L 344.0,209.0 L 345.3,209.0 L 346.6,209.0 L 347.9,209.1 L 349.2,209.1 L 350.5,209.1 L 351.8,209.1 L 353.1,209.2 L 354.4,209.2 L 355.7,209.2 L 357.0,209.2 L 358.3,209.2 L 359.6,209.3 L 360.8,209.3 L 362.1,209.3 L 363.4,209.3 L 364.7,209.4 L 366.0,209.4 L 367.3,209.4 L 368.6,209.4 L 369.9,209.4 L 371.2,209.5 L 372.5,209.5 L 373.8,209.5 L 375.1,209.5 L 376.4,209.5 L 377.7,209.5 L 379.0,209.6 L 380.3,209.6 L 381.5,209.6 L 382.8,209.6 L 384.1,209.6 L 385.4,209.6 L 386.7,209.7 L 388.0,209.7 L 389.3,209.7 L 390.6,209.7 L 391.9,209.7 L 393.2,209.7 L 394.5,209.8 L 395.8,209.8 L 397.1,209.8 L 398.4,209.8 L 399.7,209.8 L 400.9,209.8 L 402.2,209.9 L 403.5,209.9 L 404.8,209.9 L 406.1,209.9 L 407.4,209.9 L 408.7,209.9 L 410.0,209.9 L 410.0,212.0 Z\" fill=\"#2C62A8\" fill-opacity=\".22\"/>\n<line x1=\"151.3\" y1=\"212\" x2=\"151.3\" y2=\"192.2\" stroke=\"#2C62A8\" stroke-width=\"1.8\"/>\n<path d=\"M 62.0,38.0 L 63.3,38.0 L 64.7,38.0 L 66.0,38.0 L 67.4,38.0 L 68.7,38.0 L 70.0,41.1 L 71.4,51.6 L 72.7,61.0 L 74.0,69.7 L 75.4,77.7 L 76.7,85.0 L 78.1,91.7 L 79.4,97.9 L 80.7,103.6 L 82.1,108.9 L 83.4,113.9 L 84.8,118.4 L 86.1,122.7 L 87.4,126.7 L 88.8,130.4 L 90.1,133.9 L 91.4,137.2 L 92.8,140.2 L 94.1,143.1 L 95.5,145.8 L 96.8,148.4 L 98.1,150.8 L 99.5,153.1 L 100.8,155.2 L 102.2,157.3 L 103.5,159.2 L 104.8,161.0 L 106.2,162.7 L 107.5,164.4 L 108.8,166.0 L 110.2,167.4 L 111.5,168.9 L 112.9,170.2 L 114.2,171.5 L 115.5,172.7 L 116.9,173.9 L 118.2,175.0 L 119.6,176.1 L 120.9,177.1 L 122.2,178.1 L 123.6,179.1 L 124.9,180.0 L 126.2,180.8 L 127.6,181.7 L 128.9,182.5 L 130.3,183.2 L 131.6,184.0 L 132.9,184.7 L 134.3,185.4 L 135.6,186.0 L 137.0,186.7 L 138.3,187.3 L 139.6,187.9 L 141.0,188.4 L 142.3,189.0 L 143.6,189.5 L 145.0,190.0 L 146.3,190.5 L 147.7,191.0 L 149.0,191.5 L 150.3,191.9 L 151.7,192.3 L 153.0,192.8 L 154.4,193.2 L 155.7,193.6 L 157.0,193.9 L 158.4,194.3 L 159.7,194.7 L 161.0,195.0 L 162.4,195.4 L 163.7,195.7 L 165.1,196.0 L 166.4,196.3 L 167.7,196.6 L 169.1,196.9 L 170.4,197.2 L 171.8,197.5 L 173.1,197.7 L 174.4,198.0 L 175.8,198.2 L 177.1,198.5 L 178.4,198.7 L 179.8,199.0 L 181.1,199.2 L 182.5,199.4 L 183.8,199.6 L 185.1,199.8 L 186.5,200.0 L 187.8,200.2 L 189.2,200.4 L 190.5,200.6 L 191.8,200.8 L 193.2,201.0 L 194.5,201.2 L 195.8,201.3 L 197.2,201.5 L 198.5,201.7 L 199.9,201.8 L 201.2,202.0 L 202.5,202.1 L 203.9,202.3 L 205.2,202.4 L 206.6,202.6 L 207.9,202.7 L 209.2,202.9 L 210.6,203.0 L 211.9,203.1 L 213.2,203.2 L 214.6,203.4 L 215.9,203.5 L 217.3,203.6 L 218.6,203.7 L 219.9,203.8 L 221.3,204.0 L 222.6,204.1 L 224.0,204.2 L 225.3,204.3 L 226.6,204.4 L 228.0,204.5 L 229.3,204.6 L 230.6,204.7 L 232.0,204.8 L 233.3,204.9 L 234.7,205.0 L 236.0,205.1 L 237.3,205.1 L 238.7,205.2 L 240.0,205.3 L 241.4,205.4 L 242.7,205.5 L 244.0,205.6 L 245.4,205.6 L 246.7,205.7 L 248.0,205.8 L 249.4,205.9 L 250.7,205.9 L 252.1,206.0 L 253.4,206.1 L 254.7,206.2 L 256.1,206.2 L 257.4,206.3 L 258.8,206.4 L 260.1,206.4 L 261.4,206.5 L 262.8,206.6 L 264.1,206.6 L 265.4,206.7 L 266.8,206.7 L 268.1,206.8 L 269.5,206.8 L 270.8,206.9 L 272.1,207.0 L 273.5,207.0 L 274.8,207.1 L 276.2,207.1 L 277.5,207.2 L 278.8,207.2 L 280.2,207.3 L 281.5,207.3 L 282.8,207.4 L 284.2,207.4 L 285.5,207.5 L 286.9,207.5 L 288.2,207.6 L 289.5,207.6 L 290.9,207.7 L 292.2,207.7 L 293.6,207.7 L 294.9,207.8 L 296.2,207.8 L 297.6,207.9 L 298.9,207.9 L 300.2,207.9 L 301.6,208.0 L 302.9,208.0 L 304.3,208.1 L 305.6,208.1 L 306.9,208.1 L 308.3,208.2 L 309.6,208.2 L 311.0,208.2 L 312.3,208.3 L 313.6,208.3 L 315.0,208.4 L 316.3,208.4 L 317.6,208.4 L 319.0,208.5 L 320.3,208.5 L 321.7,208.5 L 323.0,208.5 L 324.3,208.6 L 325.7,208.6 L 327.0,208.6 L 328.4,208.7 L 329.7,208.7 L 331.0,208.7 L 332.4,208.8 L 333.7,208.8 L 335.0,208.8 L 336.4,208.8 L 337.7,208.9 L 339.1,208.9 L 340.4,208.9 L 341.7,208.9 L 343.1,209.0 L 344.4,209.0 L 345.8,209.0 L 347.1,209.1 L 348.4,209.1 L 349.8,209.1 L 351.1,209.1 L 352.4,209.1 L 353.8,209.2 L 355.1,209.2 L 356.5,209.2 L 357.8,209.2 L 359.1,209.3 L 360.5,209.3 L 361.8,209.3 L 363.2,209.3 L 364.5,209.3 L 365.8,209.4 L 367.2,209.4 L 368.5,209.4 L 369.8,209.4 L 371.2,209.5 L 372.5,209.5 L 373.9,209.5 L 375.2,209.5 L 376.5,209.5 L 377.9,209.5 L 379.2,209.6 L 380.6,209.6 L 381.9,209.6 L 383.2,209.6 L 384.6,209.6 L 385.9,209.7 L 387.2,209.7 L 388.6,209.7 L 389.9,209.7 L 391.3,209.7 L 392.6,209.7 L 393.9,209.8 L 395.3,209.8 L 396.6,209.8 L 398.0,209.8 L 399.3,209.8 L 400.6,209.8 L 402.0,209.9 L 403.3,209.9 L 404.6,209.9 L 406.0,209.9 L 407.3,209.9 L 408.7,209.9 L 410.0,209.9\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<line x1=\"48\" y1=\"212\" x2=\"426\" y2=\"212\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"62\" y1=\"24\" x2=\"62\" y2=\"228\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"89.7\" y1=\"212\" x2=\"89.7\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"89.7\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">1</text><line x1=\"151.3\" y1=\"212\" x2=\"151.3\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"151.3\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">2</text><line x1=\"212.9\" y1=\"212\" x2=\"212.9\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"212.9\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">3</text><line x1=\"274.5\" y1=\"212\" x2=\"274.5\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"274.5\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">4</text><line x1=\"336.1\" y1=\"212\" x2=\"336.1\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"336.1\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">5</text><line x1=\"397.7\" y1=\"212\" x2=\"397.7\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"397.7\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">6</text><line x1=\"57\" y1=\"172.5\" x2=\"62\" y2=\"172.5\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"177.5\" font-size=\"13\" text-anchor=\"end\">0,5</text><line x1=\"57\" y1=\"132.9\" x2=\"62\" y2=\"132.9\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"137.9\" font-size=\"13\" text-anchor=\"end\">1</text><line x1=\"57\" y1=\"93.4\" x2=\"62\" y2=\"93.4\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"98.4\" font-size=\"13\" text-anchor=\"end\">1,5</text><line x1=\"57\" y1=\"53.8\" x2=\"62\" y2=\"53.8\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"58.8\" font-size=\"13\" text-anchor=\"end\">2</text>\n<text x=\"432\" y=\"217\" font-size=\"14\">x</text><text x=\"56\" y=\"18\" font-size=\"14\">y</text>\n<text x=\"151.3\" y=\"250\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"middle\">start x = 2</text>\n<path d=\"M404 206 l12 6 -12 6\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"1.6\"/>\n<text x=\"414\" y=\"198\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">området fortsätter</text>\n<text x=\"80\" y=\"42\" font-size=\"16\">y = 1/x²</text>\n</svg></span><p>Beräkna \\(\\int_2^{\\infty}\\frac1{x^2}\\,dx\\).</p>",
     "s": "<p>\\[\\int_2^{\\infty}\\frac1{x^2}dx=\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_2^b=\\lim_{b\\to\\infty}\\left(\\frac12-\\frac1b\\right)=\\frac12.\\]</p>",
-    "id": "3.35"
+    "id": "3.35",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4392,7 +5270,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"270\" viewBox=\"0 0 450 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen till y lika med e upphöjt till minus två x med det obegränsade området från x lika med 0 markerat\">\n<rect width=\"450\" height=\"280\" fill=\"white\"/>\n<path d=\"M 62.0,212.0 L 62.0,56.6 L 63.7,61.5 L 65.5,66.3 L 67.2,70.9 L 69.0,75.3 L 70.7,79.6 L 72.4,83.8 L 74.2,87.8 L 75.9,91.7 L 77.7,95.5 L 79.4,99.2 L 81.1,102.7 L 82.9,106.2 L 84.6,109.5 L 86.4,112.7 L 88.1,115.9 L 89.8,118.9 L 91.6,121.8 L 93.3,124.7 L 95.1,127.4 L 96.8,130.1 L 98.5,132.7 L 100.3,135.2 L 102.0,137.6 L 103.8,139.9 L 105.5,142.2 L 107.2,144.4 L 109.0,146.5 L 110.7,148.6 L 112.5,150.6 L 114.2,152.5 L 115.9,154.4 L 117.7,156.2 L 119.4,158.0 L 121.2,159.7 L 122.9,161.3 L 124.6,162.9 L 126.4,164.5 L 128.1,166.0 L 129.9,167.4 L 131.6,168.8 L 133.3,170.2 L 135.1,171.5 L 136.8,172.8 L 138.6,174.0 L 140.3,175.2 L 142.0,176.4 L 143.8,177.5 L 145.5,178.6 L 147.3,179.6 L 149.0,180.6 L 150.7,181.6 L 152.5,182.6 L 154.2,183.5 L 156.0,184.4 L 157.7,185.3 L 159.4,186.1 L 161.2,186.9 L 162.9,187.7 L 164.7,188.5 L 166.4,189.2 L 168.1,189.9 L 169.9,190.6 L 171.6,191.3 L 173.4,192.0 L 175.1,192.6 L 176.8,193.2 L 178.6,193.8 L 180.3,194.4 L 182.1,194.9 L 183.8,195.5 L 185.5,196.0 L 187.3,196.5 L 189.0,197.0 L 190.8,197.4 L 192.5,197.9 L 194.2,198.4 L 196.0,198.8 L 197.7,199.2 L 199.5,199.6 L 201.2,200.0 L 202.9,200.4 L 204.7,200.7 L 206.4,201.1 L 208.2,201.4 L 209.9,201.8 L 211.6,202.1 L 213.4,202.4 L 215.1,202.7 L 216.9,203.0 L 218.6,203.3 L 220.3,203.6 L 222.1,203.8 L 223.8,204.1 L 225.6,204.3 L 227.3,204.6 L 229.0,204.8 L 230.8,205.0 L 232.5,205.2 L 234.3,205.5 L 236.0,205.7 L 237.7,205.9 L 239.5,206.1 L 241.2,206.2 L 243.0,206.4 L 244.7,206.6 L 246.4,206.8 L 248.2,206.9 L 249.9,207.1 L 251.7,207.3 L 253.4,207.4 L 255.1,207.5 L 256.9,207.7 L 258.6,207.8 L 260.4,208.0 L 262.1,208.1 L 263.8,208.2 L 265.6,208.3 L 267.3,208.4 L 269.1,208.6 L 270.8,208.7 L 272.5,208.8 L 274.3,208.9 L 276.0,209.0 L 277.8,209.1 L 279.5,209.2 L 281.2,209.2 L 283.0,209.3 L 284.7,209.4 L 286.5,209.5 L 288.2,209.6 L 289.9,209.7 L 291.7,209.7 L 293.4,209.8 L 295.2,209.9 L 296.9,209.9 L 298.6,210.0 L 300.4,210.1 L 302.1,210.1 L 303.9,210.2 L 305.6,210.2 L 307.3,210.3 L 309.1,210.3 L 310.8,210.4 L 312.6,210.5 L 314.3,210.5 L 316.0,210.5 L 317.8,210.6 L 319.5,210.6 L 321.3,210.7 L 323.0,210.7 L 324.7,210.8 L 326.5,210.8 L 328.2,210.8 L 330.0,210.9 L 331.7,210.9 L 333.4,210.9 L 335.2,211.0 L 336.9,211.0 L 338.7,211.0 L 340.4,211.1 L 342.1,211.1 L 343.9,211.1 L 345.6,211.2 L 347.4,211.2 L 349.1,211.2 L 350.8,211.2 L 352.6,211.3 L 354.3,211.3 L 356.1,211.3 L 357.8,211.3 L 359.5,211.3 L 361.3,211.4 L 363.0,211.4 L 364.8,211.4 L 366.5,211.4 L 368.2,211.4 L 370.0,211.5 L 371.7,211.5 L 373.5,211.5 L 375.2,211.5 L 376.9,211.5 L 378.7,211.5 L 380.4,211.6 L 382.2,211.6 L 383.9,211.6 L 385.6,211.6 L 387.4,211.6 L 389.1,211.6 L 390.9,211.6 L 392.6,211.6 L 394.3,211.7 L 396.1,211.7 L 397.8,211.7 L 399.6,211.7 L 401.3,211.7 L 403.0,211.7 L 404.8,211.7 L 406.5,211.7 L 408.3,211.7 L 410.0,211.7 L 410.0,212.0 Z\" fill=\"#2C62A8\" fill-opacity=\".22\"/>\n<line x1=\"62.0\" y1=\"212\" x2=\"62.0\" y2=\"56.6\" stroke=\"#2C62A8\" stroke-width=\"1.8\"/>\n<path d=\"M 62.0,56.6 L 63.3,60.4 L 64.7,64.1 L 66.0,67.7 L 67.4,71.2 L 68.7,74.6 L 70.0,78.0 L 71.4,81.2 L 72.7,84.4 L 74.0,87.5 L 75.4,90.5 L 76.7,93.5 L 78.1,96.4 L 79.4,99.2 L 80.7,101.9 L 82.1,104.6 L 83.4,107.2 L 84.8,109.8 L 86.1,112.3 L 87.4,114.7 L 88.8,117.0 L 90.1,119.4 L 91.4,121.6 L 92.8,123.8 L 94.1,125.9 L 95.5,128.0 L 96.8,130.1 L 98.1,132.1 L 99.5,134.0 L 100.8,135.9 L 102.2,137.8 L 103.5,139.6 L 104.8,141.3 L 106.2,143.0 L 107.5,144.7 L 108.8,146.4 L 110.2,148.0 L 111.5,149.5 L 112.9,151.0 L 114.2,152.5 L 115.5,154.0 L 116.9,155.4 L 118.2,156.7 L 119.6,158.1 L 120.9,159.4 L 122.2,160.7 L 123.6,161.9 L 124.9,163.1 L 126.2,164.3 L 127.6,165.5 L 128.9,166.6 L 130.3,167.7 L 131.6,168.8 L 132.9,169.9 L 134.3,170.9 L 135.6,171.9 L 137.0,172.9 L 138.3,173.8 L 139.6,174.7 L 141.0,175.6 L 142.3,176.5 L 143.6,177.4 L 145.0,178.2 L 146.3,179.1 L 147.7,179.9 L 149.0,180.6 L 150.3,181.4 L 151.7,182.1 L 153.0,182.9 L 154.4,183.6 L 155.7,184.3 L 157.0,184.9 L 158.4,185.6 L 159.7,186.2 L 161.0,186.9 L 162.4,187.5 L 163.7,188.1 L 165.1,188.7 L 166.4,189.2 L 167.7,189.8 L 169.1,190.3 L 170.4,190.8 L 171.8,191.4 L 173.1,191.9 L 174.4,192.4 L 175.8,192.8 L 177.1,193.3 L 178.4,193.7 L 179.8,194.2 L 181.1,194.6 L 182.5,195.0 L 183.8,195.5 L 185.1,195.9 L 186.5,196.3 L 187.8,196.6 L 189.2,197.0 L 190.5,197.4 L 191.8,197.7 L 193.2,198.1 L 194.5,198.4 L 195.8,198.7 L 197.2,199.1 L 198.5,199.4 L 199.9,199.7 L 201.2,200.0 L 202.5,200.3 L 203.9,200.6 L 205.2,200.8 L 206.6,201.1 L 207.9,201.4 L 209.2,201.6 L 210.6,201.9 L 211.9,202.1 L 213.2,202.4 L 214.6,202.6 L 215.9,202.8 L 217.3,203.1 L 218.6,203.3 L 219.9,203.5 L 221.3,203.7 L 222.6,203.9 L 224.0,204.1 L 225.3,204.3 L 226.6,204.5 L 228.0,204.7 L 229.3,204.8 L 230.6,205.0 L 232.0,205.2 L 233.3,205.3 L 234.7,205.5 L 236.0,205.7 L 237.3,205.8 L 238.7,206.0 L 240.0,206.1 L 241.4,206.3 L 242.7,206.4 L 244.0,206.5 L 245.4,206.7 L 246.7,206.8 L 248.0,206.9 L 249.4,207.0 L 250.7,207.2 L 252.1,207.3 L 253.4,207.4 L 254.7,207.5 L 256.1,207.6 L 257.4,207.7 L 258.8,207.8 L 260.1,207.9 L 261.4,208.0 L 262.8,208.1 L 264.1,208.2 L 265.4,208.3 L 266.8,208.4 L 268.1,208.5 L 269.5,208.6 L 270.8,208.7 L 272.1,208.7 L 273.5,208.8 L 274.8,208.9 L 276.2,209.0 L 277.5,209.0 L 278.8,209.1 L 280.2,209.2 L 281.5,209.3 L 282.8,209.3 L 284.2,209.4 L 285.5,209.5 L 286.9,209.5 L 288.2,209.6 L 289.5,209.6 L 290.9,209.7 L 292.2,209.7 L 293.6,209.8 L 294.9,209.9 L 296.2,209.9 L 297.6,210.0 L 298.9,210.0 L 300.2,210.1 L 301.6,210.1 L 302.9,210.2 L 304.3,210.2 L 305.6,210.2 L 306.9,210.3 L 308.3,210.3 L 309.6,210.4 L 311.0,210.4 L 312.3,210.4 L 313.6,210.5 L 315.0,210.5 L 316.3,210.6 L 317.6,210.6 L 319.0,210.6 L 320.3,210.7 L 321.7,210.7 L 323.0,210.7 L 324.3,210.8 L 325.7,210.8 L 327.0,210.8 L 328.4,210.8 L 329.7,210.9 L 331.0,210.9 L 332.4,210.9 L 333.7,210.9 L 335.0,211.0 L 336.4,211.0 L 337.7,211.0 L 339.1,211.0 L 340.4,211.1 L 341.7,211.1 L 343.1,211.1 L 344.4,211.1 L 345.8,211.2 L 347.1,211.2 L 348.4,211.2 L 349.8,211.2 L 351.1,211.2 L 352.4,211.3 L 353.8,211.3 L 355.1,211.3 L 356.5,211.3 L 357.8,211.3 L 359.1,211.3 L 360.5,211.4 L 361.8,211.4 L 363.2,211.4 L 364.5,211.4 L 365.8,211.4 L 367.2,211.4 L 368.5,211.4 L 369.8,211.5 L 371.2,211.5 L 372.5,211.5 L 373.9,211.5 L 375.2,211.5 L 376.5,211.5 L 377.9,211.5 L 379.2,211.5 L 380.6,211.6 L 381.9,211.6 L 383.2,211.6 L 384.6,211.6 L 385.9,211.6 L 387.2,211.6 L 388.6,211.6 L 389.9,211.6 L 391.3,211.6 L 392.6,211.6 L 393.9,211.7 L 395.3,211.7 L 396.6,211.7 L 398.0,211.7 L 399.3,211.7 L 400.6,211.7 L 402.0,211.7 L 403.3,211.7 L 404.6,211.7 L 406.0,211.7 L 407.3,211.7 L 408.7,211.7 L 410.0,211.7\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<line x1=\"48\" y1=\"212\" x2=\"426\" y2=\"212\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"62\" y1=\"24\" x2=\"62\" y2=\"228\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"62.0\" y1=\"212\" x2=\"62.0\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"62.0\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">0</text><line x1=\"170.8\" y1=\"212\" x2=\"170.8\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"170.8\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">1</text><line x1=\"279.5\" y1=\"212\" x2=\"279.5\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"279.5\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">2</text><line x1=\"388.2\" y1=\"212\" x2=\"388.2\" y2=\"217\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"388.2\" y=\"233\" font-size=\"13\" text-anchor=\"middle\">3</text><line x1=\"57\" y1=\"173.2\" x2=\"62\" y2=\"173.2\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"178.2\" font-size=\"13\" text-anchor=\"end\">0,25</text><line x1=\"57\" y1=\"134.3\" x2=\"62\" y2=\"134.3\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"139.3\" font-size=\"13\" text-anchor=\"end\">0,5</text><line x1=\"57\" y1=\"95.5\" x2=\"62\" y2=\"95.5\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"100.5\" font-size=\"13\" text-anchor=\"end\">0,75</text><line x1=\"57\" y1=\"56.6\" x2=\"62\" y2=\"56.6\" stroke=\"#222\" stroke-width=\"1.4\"/><text x=\"52\" y=\"61.6\" font-size=\"13\" text-anchor=\"end\">1</text>\n<text x=\"432\" y=\"217\" font-size=\"14\">x</text><text x=\"56\" y=\"18\" font-size=\"14\">y</text>\n<text x=\"62.0\" y=\"250\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"middle\">start x = 0</text>\n<path d=\"M404 206 l12 6 -12 6\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"1.6\"/>\n<text x=\"414\" y=\"198\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">området fortsätter</text>\n<text x=\"80\" y=\"42\" font-size=\"16\">y = e⁻²ˣ</text>\n</svg></span><p>Beräkna \\(\\int_0^{\\infty}e^{-2x}\\,dx\\).</p>",
     "s": "<p>\\[\\int_0^{\\infty}e^{-2x}dx=\\lim_{b\\to\\infty}\\left[-\\frac12e^{-2x}\\right]_0^b=\\frac12.\\]</p>",
-    "id": "3.36"
+    "id": "3.36",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4402,7 +5282,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om \\(\\int_1^{\\infty}\\frac1x\\,dx\\) konvergerar.</p>",
     "s": "<p>\\[\\int_1^b\\frac1x dx=\\ln b.\\]</p><p>När \\(b\\to\\infty\\) växer \\(\\ln b\\) utan gräns. Integralen <strong>divergerar</strong>.</p>",
-    "id": "3.37"
+    "id": "3.37",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4412,7 +5294,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Avgör om \\(\\int_0^1\\frac1{\\sqrt{x}}\\,dx\\) konvergerar och bestäm i så fall värdet.</p>",
     "s": "<p>Integranden är obegränsad vid \\(x=0\\), så</p><p>\\[\\int_0^1x^{-1/2}dx=\\lim_{a\\to0^+}[2\\sqrt{x}]_a^1=2.\\]</p><p>Integralen <strong>konvergerar till 2</strong>.</p>",
-    "id": "3.38"
+    "id": "3.38",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4422,7 +5306,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För vilka av \\(p=0,8\\), \\(p=1\\) och \\(p=1,4\\) konvergerar \\(\\int_1^{\\infty}x^{-p}\\,dx\\)?</p>",
     "s": "<p>Vi använder att en integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) konvergerar när \\(p\\gt1\\).</p><p>Därför divergerar fallen \\(p=0,8\\) och \\(p=1\\), medan <strong>\\(p=1,4\\)</strong> ger en konvergent integral.</p>",
-    "id": "3.39"
+    "id": "3.39",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4432,7 +5318,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_3^{\\infty}x^{-2}\\,dx\\).</p>",
     "s": "<p>\\[\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_3^b=\\frac13.\\]</p>",
-    "id": "3.59"
+    "id": "3.59",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4442,7 +5330,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om \\(\\int_0^{\\infty}e^x\\,dx\\) konvergerar.</p>",
     "s": "<p>\\[\\int_0^b e^x dx=e^b-1.\\]</p><p>När \\(b\\to\\infty\\) går detta mot oändligheten. Integralen <strong>divergerar</strong>.</p>",
-    "id": "3.60"
+    "id": "3.60",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4452,7 +5342,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Avgör om \\(\\int_{-1}^{1}\\frac1{x^2}\\,dx\\) konvergerar.</p>",
     "s": "<p>Integranden går mot oändligheten när \\(x\\to0\\), så integralen måste delas i två delar.</p><p>Redan</p><p>\\[\\int_0^1x^{-2}dx=\\lim_{a\\to0^+}\\left[-\\frac1x\\right]_a^1=\\infty.\\]</p><p>Alltså <strong>divergerar integralen</strong>.</p>",
-    "id": "3.61"
+    "id": "3.61",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4462,7 +5354,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För vilka \\(p\\gt0\\) konvergerar \\(\\int_0^1 x^{-p}\\,dx\\)?</p>",
     "s": "<p>För \\(p\\ne1\\):</p><p>\\[\\int_a^1x^{-p}dx=\\left[\\frac{x^{1-p}}{1-p}\\right]_a^1.\\]</p><p>Gränsvärdet vid \\(a\\to0^+\\) är ändligt exakt när \\(1-p\\gt0\\), alltså <strong>\\(0\\lt p\\lt1\\)</strong>.</p>",
-    "id": "3.62"
+    "id": "3.62",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4472,7 +5366,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_1^{\\infty}\\frac1{x^4}\\,dx\\).</p>",
     "s": "<p>\\[\\left[-\\frac1{3x^3}\\right]_1^{\\infty}=\\frac13.\\]</p>",
-    "id": "3.77"
+    "id": "3.77",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4482,7 +5378,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"280\" viewBox=\"0 0 440 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med ett genom x kvadrat med området från x lika med två mot oändligheten markerat\"><rect width=\"440\" height=\"280\" fill=\"white\"/><polygon points=\"136.9,235.0 136.9,203.0 139.7,204.2 142.4,205.4 145.1,206.5 147.8,207.5 150.6,208.5 153.3,209.5 156.0,210.4 158.8,211.2 161.5,212.0 164.2,212.8 167.0,213.5 169.7,214.2 172.4,214.8 175.2,215.4 177.9,216.0 180.6,216.6 183.3,217.2 186.1,217.7 188.8,218.2 191.5,218.7 194.3,219.1 197.0,219.6 199.7,220.0 202.5,220.4 205.2,220.8 207.9,221.1 210.7,221.5 213.4,221.8 216.1,222.2 218.8,222.5 221.6,222.8 224.3,223.1 227.0,223.4 229.8,223.7 232.5,223.9 235.2,224.2 238.0,224.4 240.7,224.7 243.4,224.9 246.2,225.1 248.9,225.3 251.6,225.5 254.3,225.7 257.1,225.9 259.8,226.1 262.5,226.3 265.3,226.5 268.0,226.7 270.7,226.8 273.5,227.0 276.2,227.1 278.9,227.3 281.7,227.5 284.4,227.6 287.1,227.7 289.8,227.9 292.6,228.0 295.3,228.1 298.0,228.3 300.8,228.4 303.5,228.5 306.2,228.6 309.0,228.7 311.7,228.8 314.4,228.9 317.2,229.0 319.9,229.2 322.6,229.2 325.3,229.3 328.1,229.4 330.8,229.5 333.5,229.6 336.3,229.7 339.0,229.8 341.7,229.9 344.5,230.0 347.2,230.0 349.9,230.1 352.7,230.2 355.4,230.3 358.1,230.3 360.8,230.4 363.6,230.5 366.3,230.5 369.0,230.6 371.8,230.7 374.5,230.7 377.2,230.8 380.0,230.9 382.7,230.9 385.4,231.0 388.2,231.0 390.9,231.1 393.6,231.1 396.3,231.2 399.1,231.2 401.8,231.3 404.5,231.3 407.3,231.4 410.0,231.4 410.0,235.0\" fill=\"#E3B52B\" fill-opacity=\".22\"/><line x1=\"55\" y1=\"235\" x2=\"410\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,34.8 58.0,54.8 60.9,72.0 63.9,86.9 66.8,99.8 69.8,111.0 72.8,121.0 75.7,129.8 78.7,137.6 81.6,144.5 84.6,150.8 87.5,156.4 90.5,161.5 93.5,166.1 96.4,170.2 99.4,174.1 102.3,177.5 105.3,180.7 108.2,183.7 111.2,186.4 114.2,188.9 117.1,191.2 120.1,193.3 123.0,195.3 126.0,197.2 129.0,198.9 131.9,200.5 134.9,202.0 137.8,203.4 140.8,204.7 143.8,205.9 146.7,207.1 149.7,208.2 152.6,209.2 155.6,210.2 158.5,211.1 161.5,212.0 164.5,212.8 167.4,213.6 170.4,214.3 173.3,215.0 176.3,215.7 179.2,216.3 182.2,216.9 185.2,217.5 188.1,218.1 191.1,218.6 194.0,219.1 197.0,219.6 200.0,220.0 202.9,220.4 205.9,220.9 208.8,221.3 211.8,221.6 214.7,222.0 217.7,222.4 220.7,222.7 223.6,223.0 226.6,223.3 229.5,223.6 232.5,223.9 235.5,224.2 238.4,224.5 241.4,224.7 244.3,225.0 247.3,225.2 250.3,225.4 253.2,225.7 256.2,225.9 259.1,226.1 262.1,226.3 265.0,226.5 268.0,226.7 271.0,226.8 273.9,227.0 276.9,227.2 279.8,227.4 282.8,227.5 285.8,227.7 288.7,227.8 291.7,228.0 294.6,228.1 297.6,228.2 300.5,228.4 303.5,228.5 306.5,228.6 309.4,228.7 312.4,228.9 315.3,229.0 318.3,229.1 321.2,229.2 324.2,229.3 327.2,229.4 330.1,229.5 333.1,229.6 336.0,229.7 339.0,229.8 342.0,229.9 344.9,230.0 347.9,230.1 350.8,230.1 353.8,230.2 356.8,230.3 359.7,230.4 362.7,230.5 365.6,230.5 368.6,230.6 371.5,230.7 374.5,230.7 377.5,230.8 380.4,230.9 383.4,230.9 386.3,231.0 389.3,231.1 392.2,231.1 395.2,231.2 398.2,231.2 401.1,231.3 404.1,231.3 407.0,231.4 410.0,231.4\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.4\"/><line x1=\"136.9\" y1=\"235\" x2=\"136.9\" y2=\"203.0\" stroke=\"#777\" stroke-dasharray=\"5 4\"/><text x=\"136.9\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"330\" y=\"78\" font-size=\"14\" fill=\"#2C62A8\">y = 1/x²</text><text x=\"400\" y=\"229\" font-size=\"14\">x</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Beräkna</p><p>\\[\\int_2^{\\infty}\\frac{1}{x^2}\\,dx.\\]</p>",
     "s": "<p>Skriv integralen som ett gränsvärde:</p><p>\\[\\int_2^{\\infty}\\frac1{x^2}\\,dx=\\lim_{b\\to\\infty}\\int_2^b x^{-2}\\,dx.\\]</p><p>\\[=\\lim_{b\\to\\infty}\\left[-\\frac1x\\right]_2^b=\\lim_{b\\to\\infty}\\left(-\\frac1b+\\frac12\\right)=\\frac12.\\]</p><p><strong>Integralen konvergerar och värdet är \\(\\frac12\\).</strong></p>",
-    "id": "3.85"
+    "id": "3.85",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4492,7 +5390,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\int_0^{\\infty}e^{-3x}\\,dx.\\]</p>",
     "s": "<p>\\[\\int_0^{\\infty}e^{-3x}\\,dx=\\lim_{b\\to\\infty}\\left[-\\frac13e^{-3x}\\right]_0^b.\\]</p><p>Eftersom \\(e^{-3b}\\to0\\) får vi</p><p>\\[0-\\left(-\\frac13\\right)=\\frac13.\\]</p><p><strong>Värdet är \\(\\frac13\\).</strong></p>",
-    "id": "3.86"
+    "id": "3.86",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4502,7 +5402,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om integralen</p><p>\\[\\int_1^{\\infty}\\frac{1}{\\sqrt{x}}\\,dx\\]</p><p>konvergerar eller divergerar.</p>",
     "s": "<p>Integranden är \\(x^{-1/2}\\). För en integral av typen \\(\\int_1^{\\infty}x^{-p}dx\\) krävs \\(p>1\\) för konvergens.</p><p>Här är \\(p=\\frac12\\), så integralen <strong>divergerar</strong>.</p><p>Man kan också se det direkt:</p><p>\\[\\int_1^b x^{-1/2}dx=2\\sqrt b-2\\to\\infty.\\]</p>",
-    "id": "3.87"
+    "id": "3.87",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4512,7 +5414,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\frac{1}{\\sqrt{x}}\\,dx.\\]</p>",
     "s": "<p>Integralen är generaliserad eftersom integranden går mot oändligheten när \\(x\\to0^+\\).</p><p>\\[\\int_0^1x^{-1/2}dx=\\lim_{a\\to0^+}\\left[2\\sqrt{x}\\right]_a^1\\]</p><p>\\[=\\lim_{a\\to0^+}(2-2\\sqrt a)=2.\\]</p><p><strong>Integralen konvergerar och värdet är 2.</strong></p>",
-    "id": "3.88"
+    "id": "3.88",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4522,7 +5426,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För vilka reella värden på \\(a\\) konvergerar</p><p>\\[\\int_1^{\\infty}\\frac{1}{x^{a+2}}\\,dx?\\]</p>",
     "s": "<p>Integralen har formen</p><p>\\[\\int_1^{\\infty}x^{-p}dx\\]</p><p>med</p><p>\\[p=a+2.\\]</p><p>En sådan integral konvergerar när \\(p>1\\).</p><p>Alltså</p><p>\\[a+2>1\\Rightarrow a>-1.\\]</p><p><strong>Integralen konvergerar för \\(a>-1\\).</strong></p>",
-    "id": "3.89"
+    "id": "3.89",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4532,7 +5438,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\int_3^{\\infty}\\frac1{x^3}\\,dx.\\]</p>",
     "s": "<p>\\[\\int_3^{\\infty}x^{-3}dx=\\lim_{b\\to\\infty}\\left[-\\frac1{2x^2}\\right]_3^b.\\]</p><p>\\[=0-\\left(-\\frac1{18}\\right)=\\frac1{18}.\\]</p><p><strong>Integralen konvergerar till \\(\\frac1{18}\\).</strong></p>",
-    "id": "3.106"
+    "id": "3.106",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4542,7 +5450,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna</p><p>\\[\\int_0^{\\infty}2e^{-2x}\\,dx.\\]</p>",
     "s": "<p>En primitiv funktion är \\(-e^{-2x}\\). Därför</p><p>\\[\\int_0^{\\infty}2e^{-2x}dx=\\lim_{b\\to\\infty}[-e^{-2x}]_0^b=0-(-1)=1.\\]</p><p><strong>Svar: 1.</strong></p>",
-    "id": "3.107"
+    "id": "3.107",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4552,7 +5462,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Avgör om integralen konvergerar och bestäm i så fall värdet:</p><p>\\[\\int_0^1\\ln x\\,dx.\\]</p>",
     "s": "<p>Integralen är generaliserad eftersom \\(\\ln x\\to-\\infty\\) när \\(x\\to0^+\\).</p><p>En primitiv funktion är \\(x\\ln x-x\\). Därför</p><p>\\[\\int_0^1\\ln xdx=\\lim_{a\\to0^+}[x\\ln x-x]_a^1.\\]</p><p>Vid \\(x=1\\) blir värdet \\(-1\\). Dessutom gäller \\(a\\ln a\\to0\\) och \\(a\\to0\\).</p><p>Alltså blir gränsvärdet <strong>\\(-1\\)</strong>. Integralen konvergerar.</p>",
-    "id": "3.108"
+    "id": "3.108",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4562,7 +5474,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För vilka reella \\(a\\) konvergerar</p><p>\\[\\int_0^1x^a\\,dx?\\]</p><p>Bestäm också integralens värde när den konvergerar.</p>",
     "s": "<p>För \\(a\\ne-1\\) är en primitiv funktion</p><p>\\[\\frac{x^{a+1}}{a+1}.\\]</p><p>Gränsvärdet vid 0 blir ändligt precis när \\(a+1>0\\), alltså när</p><p>\\[a>-1.\\]</p><p>Då är</p><p>\\[\\int_0^1x^adx=\\left[\\frac{x^{a+1}}{a+1}\\right]_0^1=\\frac1{a+1}.\\]</p><p><strong>Konvergens för \\(a>-1\\), med värdet \\(1/(a+1)\\).</strong></p>",
-    "id": "3.109"
+    "id": "3.109",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4572,7 +5486,9 @@ window.BANKMATF1 = [
     "poang": "1/1/0",
     "t": "<p>Bestäm en linjär approximation till \\(f(x)=\\sqrt{x}\\) kring \\(x=9\\), och använd den för att uppskatta \\(\\sqrt{9,2}\\).</p>",
     "s": "<p>\\(f(9)=3\\) och \\(f'(x)=1/(2\\sqrt{x})\\), så \\(f'(9)=1/6\\). Linjäriseringen är</p><p>\\[L(x)=3+\\frac16(x-9).\\]</p><p>Därför \\(\\sqrt{9,2}\\approx L(9,2)=3+0,2/6=\\mathbf{3,0333}.\\)</p>",
-    "id": "3.07"
+    "id": "3.07",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4582,7 +5498,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Funktionen \\(f(x)=\\ln x\\) approximeras linjärt kring \\(x=1\\). Använd approximationen för att uppskatta \\(\\ln(1,04)\\), och avgör utan räknare om approximationen är för stor eller för liten.</p>",
     "s": "<p>För \\(f(x)=\\ln x\\) är \\(f(1)=0\\) och \\(f'(1)=1\\). Tangentlinjen kring \\(x=1\\) blir därför</p><p>\\[L(x)=0+1(x-1)=x-1.\\]</p><p>Alltså</p><p>\\[\\ln(1,04)\\approx L(1,04)=\\mathbf{0,04}.\\]</p><p>Eftersom \\(f''(x)=-1/x^2&lt;0\\) för \\(x&gt;0\\) är grafen konkav. En tangent till en konkav funktion ligger lokalt ovanför grafen, så approximationen är <strong>för stor</strong>.</p>",
-    "id": "3.08"
+    "id": "3.08",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4592,7 +5510,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd en linjär approximation kring \\(x=16\\) för att uppskatta \\(\\sqrt{15,8}\\).</p>",
     "s": "<p>Låt \\(f(x)=\\sqrt{x}\\). Då är \\(f(16)=4\\) och \\(f'(16)=1/(2\\sqrt{16})=1/8\\).</p><p>Den linjära approximationen är</p><p>\\[L(x)=4+\\frac{1}{8}(x-16).\\]</p><p>För \\(x=15,8\\):</p><p>\\[L(15,8)=4+\\frac{1}{8}(-0,2)=\\mathbf{3,975}.\\]</p>",
-    "id": "3.18"
+    "id": "3.18",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4601,8 +5521,10 @@ window.BANKMATF1 = [
     "typ": "linjär approximation med figur",
     "poang": "2/0/0",
     "id": "3.26",
-    "t": "<span class=\"fig\"><svg width=\"420\" height=\"280\" viewBox=\"0 0 420 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen till y lika med roten ur x med tangentlinjen i punkten 16 komma 4\">\n<rect width=\"420\" height=\"280\" fill=\"white\"/>\n<line x1=\"300.9\" y1=\"85.3\" x2=\"300.9\" y2=\"232\" stroke=\"#bbb\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<path d=\"M 118.7,140.3 L 392.0,57.8\" fill=\"none\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<path d=\"M 58.0,232.0 L 59.4,220.9 L 60.8,216.3 L 62.2,212.8 L 63.6,209.8 L 65.0,207.2 L 66.3,204.8 L 67.7,202.6 L 69.1,200.6 L 70.5,198.7 L 71.9,196.9 L 73.3,195.2 L 74.7,193.5 L 76.1,192.0 L 77.5,190.5 L 78.9,189.0 L 80.3,187.6 L 81.7,186.2 L 83.0,184.9 L 84.4,183.6 L 85.8,182.4 L 87.2,181.1 L 88.6,179.9 L 90.0,178.8 L 91.4,177.6 L 92.8,176.5 L 94.2,175.4 L 95.6,174.3 L 97.0,173.3 L 98.4,172.2 L 99.8,171.2 L 101.1,170.2 L 102.5,169.2 L 103.9,168.2 L 105.3,167.3 L 106.7,166.3 L 108.1,165.4 L 109.5,164.5 L 110.9,163.6 L 112.3,162.7 L 113.7,161.8 L 115.1,160.9 L 116.5,160.1 L 117.8,159.2 L 119.2,158.4 L 120.6,157.5 L 122.0,156.7 L 123.4,155.9 L 124.8,155.1 L 126.2,154.3 L 127.6,153.5 L 129.0,152.7 L 130.4,151.9 L 131.8,151.2 L 133.2,150.4 L 134.5,149.7 L 135.9,148.9 L 137.3,148.2 L 138.7,147.5 L 140.1,146.7 L 141.5,146.0 L 142.9,145.3 L 144.3,144.6 L 145.7,143.9 L 147.1,143.2 L 148.5,142.5 L 149.8,141.8 L 151.2,141.1 L 152.6,140.5 L 154.0,139.8 L 155.4,139.1 L 156.8,138.5 L 158.2,137.8 L 159.6,137.1 L 161.0,136.5 L 162.4,135.9 L 163.8,135.2 L 165.2,134.6 L 166.6,134.0 L 167.9,133.3 L 169.3,132.7 L 170.7,132.1 L 172.1,131.5 L 173.5,130.9 L 174.9,130.3 L 176.3,129.7 L 177.7,129.0 L 179.1,128.5 L 180.5,127.9 L 181.9,127.3 L 183.2,126.7 L 184.6,126.1 L 186.0,125.5 L 187.4,124.9 L 188.8,124.4 L 190.2,123.8 L 191.6,123.2 L 193.0,122.7 L 194.4,122.1 L 195.8,121.5 L 197.2,121.0 L 198.6,120.4 L 199.9,119.9 L 201.3,119.3 L 202.7,118.8 L 204.1,118.2 L 205.5,117.7 L 206.9,117.2 L 208.3,116.6 L 209.7,116.1 L 211.1,115.6 L 212.5,115.0 L 213.9,114.5 L 215.3,114.0 L 216.7,113.5 L 218.0,113.0 L 219.4,112.4 L 220.8,111.9 L 222.2,111.4 L 223.6,110.9 L 225.0,110.4 L 226.4,109.9 L 227.8,109.4 L 229.2,108.9 L 230.6,108.4 L 232.0,107.9 L 233.3,107.4 L 234.7,106.9 L 236.1,106.4 L 237.5,105.9 L 238.9,105.4 L 240.3,104.9 L 241.7,104.5 L 243.1,104.0 L 244.5,103.5 L 245.9,103.0 L 247.3,102.5 L 248.7,102.1 L 250.1,101.6 L 251.4,101.1 L 252.8,100.6 L 254.2,100.2 L 255.6,99.7 L 257.0,99.2 L 258.4,98.8 L 259.8,98.3 L 261.2,97.9 L 262.6,97.4 L 264.0,96.9 L 265.4,96.5 L 266.8,96.0 L 268.1,95.6 L 269.5,95.1 L 270.9,94.7 L 272.3,94.2 L 273.7,93.8 L 275.1,93.3 L 276.5,92.9 L 277.9,92.5 L 279.3,92.0 L 280.7,91.6 L 282.1,91.1 L 283.4,90.7 L 284.8,90.3 L 286.2,89.8 L 287.6,89.4 L 289.0,89.0 L 290.4,88.5 L 291.8,88.1 L 293.2,87.7 L 294.6,87.3 L 296.0,86.8 L 297.4,86.4 L 298.8,86.0 L 300.1,85.6 L 301.5,85.1 L 302.9,84.7 L 304.3,84.3 L 305.7,83.9 L 307.1,83.5 L 308.5,83.1 L 309.9,82.6 L 311.3,82.2 L 312.7,81.8 L 314.1,81.4 L 315.5,81.0 L 316.9,80.6 L 318.2,80.2 L 319.6,79.8 L 321.0,79.4 L 322.4,79.0 L 323.8,78.6 L 325.2,78.2 L 326.6,77.8 L 328.0,77.4 L 329.4,77.0 L 330.8,76.6 L 332.2,76.2 L 333.6,75.8 L 334.9,75.4 L 336.3,75.0 L 337.7,74.6 L 339.1,74.2 L 340.5,73.8 L 341.9,73.4 L 343.3,73.1 L 344.7,72.7 L 346.1,72.3 L 347.5,71.9 L 348.9,71.5 L 350.2,71.1 L 351.6,70.7 L 353.0,70.4 L 354.4,70.0 L 355.8,69.6 L 357.2,69.2 L 358.6,68.8 L 360.0,68.5 L 361.4,68.1 L 362.8,67.7 L 364.2,67.3 L 365.6,67.0 L 366.9,66.6 L 368.3,66.2 L 369.7,65.8 L 371.1,65.5 L 372.5,65.1 L 373.9,64.7 L 375.3,64.4 L 376.7,64.0 L 378.1,63.6 L 379.5,63.3 L 380.9,62.9 L 382.3,62.5 L 383.6,62.2 L 385.0,61.8 L 386.4,61.5 L 387.8,61.1 L 389.2,60.7 L 390.6,60.4 L 392.0,60.0\" fill=\"none\" stroke=\"#0e5d9e\" stroke-width=\"2.6\"/>\n<line x1=\"46\" y1=\"232\" x2=\"406\" y2=\"232\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"58\" y1=\"22\" x2=\"58\" y2=\"246\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"118.7\" y1=\"232\" x2=\"118.7\" y2=\"237\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"118.7\" y=\"253\" font-size=\"12.5\" text-anchor=\"middle\">4</text><line x1=\"179.5\" y1=\"232\" x2=\"179.5\" y2=\"237\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"179.5\" y=\"253\" font-size=\"12.5\" text-anchor=\"middle\">8</text><line x1=\"240.2\" y1=\"232\" x2=\"240.2\" y2=\"237\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"240.2\" y=\"253\" font-size=\"12.5\" text-anchor=\"middle\">12</text><line x1=\"300.9\" y1=\"232\" x2=\"300.9\" y2=\"237\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"300.9\" y=\"253\" font-size=\"12.5\" text-anchor=\"middle\">16</text><line x1=\"361.6\" y1=\"232\" x2=\"361.6\" y2=\"237\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"361.6\" y=\"253\" font-size=\"12.5\" text-anchor=\"middle\">20</text><line x1=\"53\" y1=\"195.3\" x2=\"58\" y2=\"195.3\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"48\" y=\"199.8\" font-size=\"12.5\" text-anchor=\"end\">1</text><line x1=\"53\" y1=\"158.7\" x2=\"58\" y2=\"158.7\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"48\" y=\"163.2\" font-size=\"12.5\" text-anchor=\"end\">2</text><line x1=\"53\" y1=\"122.0\" x2=\"58\" y2=\"122.0\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"48\" y=\"126.5\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"53\" y1=\"85.3\" x2=\"58\" y2=\"85.3\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"48\" y=\"89.8\" font-size=\"12.5\" text-anchor=\"end\">4</text><line x1=\"53\" y1=\"48.7\" x2=\"58\" y2=\"48.7\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"48\" y=\"53.2\" font-size=\"12.5\" text-anchor=\"end\">5</text>\n<circle cx=\"300.9\" cy=\"85.3\" r=\"4.2\" fill=\"#222\"/>\n<text x=\"300.9\" y=\"112\" font-size=\"13\" text-anchor=\"middle\">(16, 4)</text>\n<text x=\"164.3\" y=\"107.3\" font-size=\"14\" fill=\"#0e5d9e\">y = &#8730;x</text>\n<text x=\"354.0\" y=\"52.3\" font-size=\"14\" fill=\"#b45f32\" text-anchor=\"end\">tangent i x = 16</text>\n<text x=\"410\" y=\"237\" font-size=\"13\">x</text><text x=\"66\" y=\"18\" font-size=\"13\">y</text>\n</svg></span><p>Använd tangentlinjen i \\(x=16\\) för att uppskatta \\(\\sqrt{16,3}\\).</p>",
-    "s": "<p>Låt \\(f(x)=\\sqrt{x}\\). Då är \\(f(16)=4\\) och</p><p>\\[f'(x)=\\frac{1}{2\\sqrt{x}}\\Rightarrow f'(16)=\\frac{1}{8}.\\]</p><p>Tangentlinjen i \\(x=16\\) blir därför</p><p>\\[L(x)=4+\\frac{1}{8}(x-16).\\]</p><p>För \\(x=16,3\\) får vi</p><p>\\[L(16,3)=4+\\frac{1}{8}\\cdot 0,3=4+0,0375=4,0375.\\]</p><p><strong>Uppskattningen blir \\(\\sqrt{16,3}\\approx 4,0375\\).</strong></p>"
+    "t": "<span class=\"fig\"><svg height=\"270\" width=\"390\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen till y lika med roten ur x och tangentlinjen vid x lika med 16\">\n<rect width=\"390\" height=\"270\" fill=\"white\"/>\n<line x1=\"40.0\" y1=\"30\" x2=\"40.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"34.0\" y=\"257\" font-size=\"12\">12</text><line x1=\"95.0\" y1=\"30\" x2=\"95.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"89.0\" y=\"257\" font-size=\"12\">13</text><line x1=\"150.0\" y1=\"30\" x2=\"150.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"144.0\" y=\"257\" font-size=\"12\">14</text><line x1=\"205.0\" y1=\"30\" x2=\"205.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"199.0\" y=\"257\" font-size=\"12\">15</text><line x1=\"260.0\" y1=\"30\" x2=\"260.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"254.0\" y=\"257\" font-size=\"12\">16</text><line x1=\"315.0\" y1=\"30\" x2=\"315.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"309.0\" y=\"257\" font-size=\"12\">17</text><line x1=\"370.0\" y1=\"30\" x2=\"370.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"364.0\" y=\"257\" font-size=\"12\">18</text><line x1=\"425.0\" y1=\"30\" x2=\"425.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"419.0\" y=\"257\" font-size=\"12\">19</text><line x1=\"480.0\" y1=\"30\" x2=\"480.0\" y2=\"240\" stroke=\"#e6e6e6\"/><text x=\"474.0\" y=\"257\" font-size=\"12\">20</text><line x1=\"35\" y1=\"226.0\" x2=\"370\" y2=\"226.0\" stroke=\"#e6e6e6\"/><line x1=\"35\" y1=\"181.0\" x2=\"370\" y2=\"181.0\" stroke=\"#e6e6e6\"/><line x1=\"35\" y1=\"136.0\" x2=\"370\" y2=\"136.0\" stroke=\"#e6e6e6\"/>\n<line x1=\"35\" y1=\"235\" x2=\"375\" y2=\"235\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"40\" y1=\"245\" x2=\"40\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 40.0,229.2 L 43.7,228.4 L 47.3,227.5 L 51.0,226.6 L 54.7,225.8 L 58.3,224.9 L 62.0,224.1 L 65.7,223.2 L 69.3,222.4 L 73.0,221.5 L 76.7,220.7 L 80.3,219.8 L 84.0,219.0 L 87.7,218.2 L 91.3,217.3 L 95.0,216.5 L 98.7,215.7 L 102.3,214.8 L 106.0,214.0 L 109.7,213.2 L 113.3,212.4 L 117.0,211.5 L 120.7,210.7 L 124.3,209.9 L 128.0,209.1 L 131.7,208.3 L 135.3,207.5 L 139.0,206.7 L 142.7,205.9 L 146.3,205.1 L 150.0,204.3 L 153.7,203.5 L 157.3,202.7 L 161.0,201.9 L 164.7,201.1 L 168.3,200.3 L 172.0,199.5 L 175.7,198.7 L 179.3,197.9 L 183.0,197.1 L 186.7,196.3 L 190.3,195.5 L 194.0,194.8 L 197.7,194.0 L 201.3,193.2 L 205.0,192.4 L 208.7,191.7 L 212.3,190.9 L 216.0,190.1 L 219.7,189.3 L 223.3,188.6 L 227.0,187.8 L 230.7,187.1 L 234.3,186.3 L 238.0,185.5 L 241.7,184.8 L 245.3,184.0 L 249.0,183.3 L 252.7,182.5 L 256.3,181.8 L 260.0,181.0 L 263.7,180.3 L 267.3,179.5 L 271.0,178.8 L 274.7,178.0 L 278.3,177.3 L 282.0,176.5 L 285.7,175.8 L 289.3,175.0 L 293.0,174.3 L 296.7,173.6 L 300.3,172.8 L 304.0,172.1 L 307.7,171.4 L 311.3,170.6 L 315.0,169.9 L 318.7,169.2 L 322.3,168.5 L 326.0,167.7 L 329.7,167.0 L 333.3,166.3 L 337.0,165.6 L 340.7,164.9 L 344.3,164.1 L 348.0,163.4 L 351.7,162.7 L 355.3,162.0 L 359.0,161.3 L 362.7,160.6 L 366.3,159.9 L 370.0,159.2 L 373.7,158.5 L 377.3,157.8 L 381.0,157.0 L 384.7,156.3 L 388.3,155.6 L 392.0,154.9 L 395.7,154.2 L 399.3,153.5 L 403.0,152.9 L 406.7,152.2 L 410.3,151.5 L 414.0,150.8 L 417.7,150.1 L 421.3,149.4 L 425.0,148.7 L 428.7,148.0 L 432.3,147.3 L 436.0,146.6 L 439.7,146.0 L 443.3,145.3 L 447.0,144.6 L 450.7,143.9 L 454.3,143.2 L 458.0,142.6 L 461.7,141.9 L 465.3,141.2 L 469.0,140.5 L 472.7,139.9 L 476.3,139.2 L 480.0,138.5\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.6\"/>\n<path d=\"M 40.0,226.0 L 43.7,225.2 L 47.3,224.5 L 51.0,223.8 L 54.7,223.0 L 58.3,222.2 L 62.0,221.5 L 65.7,220.7 L 69.3,220.0 L 73.0,219.2 L 76.7,218.5 L 80.3,217.7 L 84.0,217.0 L 87.7,216.2 L 91.3,215.5 L 95.0,214.8 L 98.7,214.0 L 102.3,213.2 L 106.0,212.5 L 109.7,211.8 L 113.3,211.0 L 117.0,210.2 L 120.7,209.5 L 124.3,208.8 L 128.0,208.0 L 131.7,207.3 L 135.3,206.5 L 139.0,205.8 L 142.7,205.0 L 146.3,204.2 L 150.0,203.5 L 153.7,202.8 L 157.3,202.0 L 161.0,201.2 L 164.7,200.5 L 168.3,199.7 L 172.0,199.0 L 175.7,198.2 L 179.3,197.5 L 183.0,196.7 L 186.7,196.0 L 190.3,195.2 L 194.0,194.5 L 197.7,193.8 L 201.3,193.0 L 205.0,192.2 L 208.7,191.5 L 212.3,190.8 L 216.0,190.0 L 219.7,189.2 L 223.3,188.5 L 227.0,187.8 L 230.7,187.0 L 234.3,186.2 L 238.0,185.5 L 241.7,184.8 L 245.3,184.0 L 249.0,183.2 L 252.7,182.5 L 256.3,181.8 L 260.0,181.0 L 263.7,180.3 L 267.3,179.5 L 271.0,178.7 L 274.7,178.0 L 278.3,177.3 L 282.0,176.5 L 285.7,175.7 L 289.3,175.0 L 293.0,174.2 L 296.7,173.5 L 300.3,172.7 L 304.0,172.0 L 307.7,171.2 L 311.3,170.5 L 315.0,169.8 L 318.7,169.0 L 322.3,168.2 L 326.0,167.5 L 329.7,166.8 L 333.3,166.0 L 337.0,165.2 L 340.7,164.5 L 344.3,163.8 L 348.0,163.0 L 351.7,162.2 L 355.3,161.5 L 359.0,160.8 L 362.7,160.0 L 366.3,159.2 L 370.0,158.5 L 373.7,157.8 L 377.3,157.0 L 381.0,156.2 L 384.7,155.5 L 388.3,154.8 L 392.0,154.0 L 395.7,153.2 L 399.3,152.5 L 403.0,151.7 L 406.7,151.0 L 410.3,150.2 L 414.0,149.5 L 417.7,148.8 L 421.3,148.0 L 425.0,147.2 L 428.7,146.5 L 432.3,145.8 L 436.0,145.0 L 439.7,144.2 L 443.3,143.5 L 447.0,142.8 L 450.7,142.0 L 454.3,141.2 L 458.0,140.5 L 461.7,139.7 L 465.3,139.0 L 469.0,138.3 L 472.7,137.5 L 476.3,136.7 L 480.0,136.0\" fill=\"none\" stroke=\"#777\" stroke-width=\"2.2\" stroke-dasharray=\"6 4\"/>\n<circle cx=\"260.0\" cy=\"181.0\" r=\"4\" fill=\"#222\"/>\n<text x=\"160\" y=\"55\" font-size=\"14\">y = √x</text>\n<text x=\"210\" y=\"148\" font-size=\"14\">tangent</text>\n</svg></span><p>Använd tangentlinjen i \\(x=16\\) för att uppskatta \\(\\sqrt{16,3}\\).</p>",
+    "s": "<p>Låt \\(f(x)=\\sqrt{x}\\). Då är \\(f(16)=4\\) och</p><p>\\[f'(x)=\\frac{1}{2\\sqrt{x}}\\Rightarrow f'(16)=\\frac{1}{8}.\\]</p><p>Tangentlinjen i \\(x=16\\) blir därför</p><p>\\[L(x)=4+\\frac{1}{8}(x-16).\\]</p><p>För \\(x=16,3\\) får vi</p><p>\\[L(16,3)=4+\\frac{1}{8}\\cdot 0,3=4+0,0375=4,0375.\\]</p><p><strong>Uppskattningen blir \\(\\sqrt{16,3}\\approx 4,0375\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4612,7 +5534,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg height=\"270\" width=\"440\" viewBox=\"0 0 440 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kurva och tangent för linjär approximation\">\n<rect width=\"440\" height=\"270\" fill=\"white\"/><line x1=\"40\" y1=\"230\" x2=\"420\" y2=\"230\" stroke=\"#222\" stroke-width=\"2\"/><line x1=\"50\" y1=\"245\" x2=\"50\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 77.5,180.5 L 80.2,178.1 L 83.0,175.8 L 85.8,173.6 L 88.5,171.4 L 91.2,169.4 L 94.0,167.4 L 96.8,165.5 L 99.5,163.6 L 102.2,161.8 L 105.0,160.0 L 107.8,158.3 L 110.5,156.6 L 113.2,154.9 L 116.0,153.3 L 118.8,151.7 L 121.5,150.2 L 124.2,148.7 L 127.0,147.2 L 129.8,145.7 L 132.5,144.3 L 135.2,142.9 L 138.0,141.5 L 140.8,140.1 L 143.5,138.7 L 146.2,137.4 L 149.0,136.1 L 151.8,134.8 L 154.5,133.5 L 157.2,132.3 L 160.0,131.0 L 162.8,129.8 L 165.5,128.6 L 168.2,127.4 L 171.0,126.2 L 173.8,125.0 L 176.5,123.8 L 179.2,122.7 L 182.0,121.6 L 184.8,120.4 L 187.5,119.3 L 190.2,118.2 L 193.0,117.1 L 195.8,116.0 L 198.5,115.0 L 201.2,113.9 L 204.0,112.9 L 206.8,111.8 L 209.5,110.8 L 212.2,109.8 L 215.0,108.8 L 217.8,107.8 L 220.5,106.8 L 223.2,105.8 L 226.0,104.8 L 228.8,103.8 L 231.5,102.8 L 234.2,101.9 L 237.0,100.9 L 239.8,100.0 L 242.5,99.0 L 245.2,98.1 L 248.0,97.2 L 250.8,96.3 L 253.5,95.4 L 256.2,94.4 L 259.0,93.5 L 261.8,92.7 L 264.5,91.8 L 267.2,90.9 L 270.0,90.0 L 272.8,89.1 L 275.5,88.3 L 278.2,87.4 L 281.0,86.5 L 283.8,85.7 L 286.5,84.8 L 289.2,84.0 L 292.0,83.2 L 294.8,82.3 L 297.5,81.5 L 300.2,80.7 L 303.0,79.9 L 305.8,79.1 L 308.5,78.2 L 311.2,77.4 L 314.0,76.6 L 316.8,75.8 L 319.5,75.0 L 322.2,74.3 L 325.0,73.5 L 327.8,72.7 L 330.5,71.9 L 333.2,71.1 L 336.0,70.4 L 338.8,69.6 L 341.5,68.8 L 344.2,68.1 L 347.0,67.3 L 349.8,66.6 L 352.5,65.8 L 355.2,65.1 L 358.0,64.3 L 360.8,63.6 L 363.5,62.9 L 366.2,62.1 L 369.0,61.4 L 371.8,60.7 L 374.5,60.0 L 377.2,59.3 L 380.0,58.5 L 382.8,57.8 L 385.5,57.1 L 388.2,56.4 L 391.0,55.7 L 393.8,55.0 L 396.5,54.3 L 399.2,53.6 L 402.0,52.9 L 404.8,52.2 L 407.5,51.5\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/><path d=\"M 77.5,151.2 L 80.2,150.4 L 83.0,149.5 L 85.8,148.6 L 88.5,147.8 L 91.2,146.9 L 94.0,146.0 L 96.8,145.1 L 99.5,144.2 L 102.2,143.4 L 105.0,142.5 L 107.8,141.6 L 110.5,140.8 L 113.2,139.9 L 116.0,139.0 L 118.8,138.1 L 121.5,137.2 L 124.2,136.4 L 127.0,135.5 L 129.8,134.6 L 132.5,133.8 L 135.2,132.9 L 138.0,132.0 L 140.8,131.1 L 143.5,130.2 L 146.2,129.4 L 149.0,128.5 L 151.8,127.6 L 154.5,126.8 L 157.2,125.9 L 160.0,125.0 L 162.8,124.1 L 165.5,123.2 L 168.2,122.4 L 171.0,121.5 L 173.8,120.6 L 176.5,119.8 L 179.2,118.9 L 182.0,118.0 L 184.8,117.1 L 187.5,116.2 L 190.2,115.4 L 193.0,114.5 L 195.8,113.6 L 198.5,112.8 L 201.2,111.9 L 204.0,111.0 L 206.8,110.1 L 209.5,109.2 L 212.2,108.4 L 215.0,107.5 L 217.8,106.6 L 220.5,105.8 L 223.2,104.9 L 226.0,104.0 L 228.8,103.1 L 231.5,102.2 L 234.2,101.4 L 237.0,100.5 L 239.8,99.6 L 242.5,98.8 L 245.2,97.9 L 248.0,97.0 L 250.8,96.1 L 253.5,95.2 L 256.2,94.4 L 259.0,93.5 L 261.8,92.6 L 264.5,91.8 L 267.2,90.9 L 270.0,90.0 L 272.8,89.1 L 275.5,88.2 L 278.2,87.4 L 281.0,86.5 L 283.8,85.6 L 286.5,84.8 L 289.2,83.9 L 292.0,83.0 L 294.8,82.1 L 297.5,81.2 L 300.2,80.4 L 303.0,79.5 L 305.8,78.6 L 308.5,77.8 L 311.2,76.9 L 314.0,76.0 L 316.8,75.1 L 319.5,74.2 L 322.2,73.4 L 325.0,72.5 L 327.8,71.6 L 330.5,70.8 L 333.2,69.9 L 336.0,69.0 L 338.8,68.1 L 341.5,67.2 L 344.2,66.4 L 347.0,65.5 L 349.8,64.6 L 352.5,63.8 L 355.2,62.9 L 358.0,62.0 L 360.8,61.1 L 363.5,60.2 L 366.2,59.4 L 369.0,58.5 L 371.8,57.6 L 374.5,56.8 L 377.2,55.9 L 380.0,55.0 L 382.8,54.1 L 385.5,53.2 L 388.2,52.4 L 391.0,51.5 L 393.8,50.6 L 396.5,49.8 L 399.2,48.9 L 402.0,48.0 L 404.8,47.1 L 407.5,46.2\" fill=\"none\" stroke=\"#777\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/>\n<circle cx=\"270.0\" cy=\"90.0\" r=\"4\" fill=\"#222\"/><text x=\"270\" y=\"60\" font-size=\"15\">y=√x</text><text x=\"250\" y=\"145\" font-size=\"15\">tangent</text>\n</svg></span><p>Använd linjär approximation kring \\(x=4\\) för att uppskatta \\(\\sqrt{4,1}\\).</p>",
     "s": "<p>För \\(f(x)=\\sqrt{x}\\) är \\(f(4)=2\\) och \\(f'(4)=1/4\\). Därför</p><p>\\[L(x)=2+\\frac14(x-4).\\]</p><p>\\[L(4,1)=2+0,025=\\mathbf{2,025}.\\]</p>",
-    "id": "3.40"
+    "id": "3.40",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4622,7 +5546,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd linjär approximation kring \\(x=2\\) för att uppskatta \\(1/2,04\\).</p>",
     "s": "<p>Låt \\(f(x)=1/x\\). Då \\(f(2)=0,5\\) och \\(f'(2)=-1/4\\). Alltså</p><p>\\[L(2,04)=0,5-\\frac14\\cdot0,04=0,49.\\]</p><p><strong>\\(1/2,04\\approx0,49\\)</strong>.</p>",
-    "id": "3.41"
+    "id": "3.41",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4632,7 +5558,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd linjär approximation kring \\(x=27\\) för att uppskatta \\(\\sqrt[3]{27,3}\\).</p>",
     "s": "<p>\\(f(x)=x^{1/3}\\), \\(f(27)=3\\) och \\(f'(27)=1/(3\\cdot27^{2/3})=1/27\\). Därför</p><p>\\[L(27,3)=3+\\frac{0,3}{27}\\approx3,0111.\\]</p>",
-    "id": "3.42"
+    "id": "3.42",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4642,7 +5570,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En elev använder tangentlinjen till \\(f(x)=\\sqrt{x}\\) vid \\(x=9\\) för att uppskatta \\(\\sqrt{9,4}\\). Kommer approximationen att bli något för stor eller något för liten? Motivera.</p>",
     "s": "<p>För \\(x\\gt0\\) är</p><p>\\[f''(x)=-\\frac{1}{4x^{3/2}}\\lt0.\\]</p><p>Grafen är alltså konkav nedåt. En tangent till en konkav nedåt-kurva ligger ovanför grafen nära tangentpunkten. Approximationen blir därför <strong>något för stor</strong>.</p>",
-    "id": "3.43"
+    "id": "3.43",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4652,7 +5582,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd linjär approximation kring \\(x=0\\) för att uppskatta \\(\\sin(0,06)\\), där vinkeln mäts i radianer.</p>",
     "s": "<p>För \\(f(x)=\\sin x\\): \\(f(0)=0\\), \\(f'(0)=1\\). Tangenten är \\(L(x)=x\\). Därför</p><p><strong>\\(\\sin0,06\\approx0,06\\)</strong>.</p>",
-    "id": "3.63"
+    "id": "3.63",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4662,7 +5594,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd linjär approximation kring \\(x=0\\) för att uppskatta \\(e^{0,03}\\).</p>",
     "s": "<p>För \\(f(x)=e^x\\) är \\(f(0)=1\\) och \\(f'(0)=1\\). Därför \\(L(x)=1+x\\) och</p><p><strong>\\(e^{0,03}\\approx1,03\\)</strong>.</p>",
-    "id": "3.64"
+    "id": "3.64",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4672,7 +5606,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm den linjära approximationen till \\(f(x)=\\ln x\\) kring \\(x=1\\) och använd den för att uppskatta \\(\\ln1,08\\).</p>",
     "s": "<p>\\(f(1)=0\\), \\(f'(1)=1\\). Alltså</p><p>\\[L(x)=x-1.\\]</p><p>\\[\\ln1,08\\approx L(1,08)=0,08.\\]</p>",
-    "id": "3.65"
+    "id": "3.65",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4682,7 +5618,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den linjära approximationen till \\(\\cos x\\) kring \\(x=0\\).</p>",
     "s": "<p>\\(f(0)=1\\) och \\(f'(0)=0\\). Därför är den linjära approximationen <strong>\\(L(x)=1\\)</strong>.</p>",
-    "id": "3.78"
+    "id": "3.78",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4690,9 +5628,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter två fordon",
     "poang": "0/3/0",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"250\" y=\"90\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"176\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två raka vägar korsar varandra vinkelrätt. Bil A är 300 m norr om korsningen och kör söderut med 90 km/h. Bil B är 400 m öster om korsningen och kör österut. I detta ögonblick ökar avståndet mellan bilarna med 18 km/h.</p><p>Bestäm bil B:s hastighet.</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"250\" y=\"90\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"176\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Låt <strong>x</strong> vara bil B:s avstånd från korsningen, <strong>y</strong> bil A:s avstånd från korsningen och <strong>s</strong> avståndet mellan bilarna.</p><p>Vi räknar i km. I detta ögonblick är</p><p>\\[x=0,4,\\qquad y=0,3,\\qquad s=0,5.\\]</p><p>Bil A närmar sig korsningen, alltså \\(y'=-90\\). Bil B kör bort från korsningen, så \\(x'=v\\). Dessutom är \\(s'=18\\).</p><p>Av figuren ser vi en rätvinklig triangel, så Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[2ss'=2xx'+2yy'\\quad\\Rightarrow\\quad ss'=xx'+yy'.\\]</p><p>Sätt in värdena:</p><p>\\[0,5\\cdot18=0,4v+0,3\\cdot(-90).\\]</p><p>Det ger</p><p>\\[9=0,4v-27\\Rightarrow 0,4v=36\\Rightarrow v=90.\\]</p><p><strong>Svar: bil B kör \\(90\\ \\text{km/h}\\).</strong></p>",
-    "id": "3.09"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två raka vägar korsar varandra vinkelrätt. Bil A är 300 m norr om korsningen och kör söderut med 90 km/h. Bil B är 400 m öster om korsningen och kör österut. I detta ögonblick ökar avståndet mellan bilarna med 18 km/h.</p><p>Bestäm bil B:s hastighet.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till bilar på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">90 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Låt <strong>x</strong> vara bil B:s avstånd från korsningen, <strong>y</strong> bil A:s avstånd från korsningen och <strong>s</strong> avståndet mellan bilarna.</p><p>Vi räknar i km. I detta ögonblick är</p><p>\\[x=0,4,\\qquad y=0,3,\\qquad s=0,5.\\]</p><p>Bil A närmar sig korsningen, alltså \\(y'=-90\\). Bil B kör bort från korsningen, så \\(x'=v\\). Dessutom är \\(s'=18\\).</p><p>Av figuren ser vi en rätvinklig triangel, så Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[2ss'=2xx'+2yy'\\quad\\Rightarrow\\quad ss'=xx'+yy'.\\]</p><p>Sätt in värdena:</p><p>\\[0,5\\cdot18=0,4v+0,3\\cdot(-90).\\]</p><p>Det ger</p><p>\\[9=0,4v-27\\Rightarrow 0,4v=36\\Rightarrow v=90.\\]</p><p><strong>Svar: bil B kör \\(90\\ \\text{km/h}\\).</strong></p>",
+    "id": "3.09",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4700,9 +5640,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter ballong",
     "poang": "0/2/1",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"331\" y=\"184\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"327\" y=\"157\" font-size=\"13\">cyklist</text>\n</svg></span><p>En ballong stiger lodrätt med 1,5 m/s. När den är 18 m över marken passerar en cyklist rakt under den och fortsätter horisontellt med 6,0 m/s.</p><p>Hur snabbt ökar avståndet mellan dem 4,0 s senare?</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"331\" y=\"184\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"327\" y=\"157\" font-size=\"13\">cyklist</text>\n</svg></span><p>Låt <strong>x</strong> vara cyklistens horisontella avstånd från punkten rakt under ballongen, <strong>y</strong> ballongens höjd över marken och <strong>s</strong> avståndet mellan ballongen och cyklisten.</p><p>Efter 4,0 s är</p><p>\\[x=6,0\\cdot4,0=24\\ \\text{m},\\qquad y=18+1,5\\cdot4,0=24\\ \\text{m}.\\]</p><p>Dessutom är \\(x'=6,0\\) m/s och \\(y'=1,5\\) m/s.</p><p>Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera:</p><p>\\[ss'=xx'+yy'.\\]</p><p>När \\(x=y=24\\) blir</p><p>\\[s=\\sqrt{24^2+24^2}=24\\sqrt2.\\]</p><p>Sätt in:</p><p>\\[(24\\sqrt2)s'=24\\cdot6,0+24\\cdot1,5=180.\\]</p><p>Alltså</p><p>\\[s'=\\frac{180}{24\\sqrt2}=\\frac{7,5}{\\sqrt2}\\approx5,3.\\]</p><p><strong>Svar: avståndet ökar med ungefär \\(5,3\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.10"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"300\" y=\"181\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"316\" y=\"166\" font-size=\"13\">cyklist</text>\n</svg></span><p>En ballong stiger lodrätt med 1,5 m/s. När den är 18 m över marken passerar en cyklist rakt under den och fortsätter horisontellt med 6,0 m/s.</p><p>Hur snabbt ökar avståndet mellan dem 4,0 s senare?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"215\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till ballong och cyklist\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"220\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"35\" y1=\"195\" x2=\"385\" y2=\"195\" stroke=\"#666\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"70\" rx=\"28\" ry=\"34\" fill=\"#f0c36d\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"104\" x2=\"230\" y2=\"130\" stroke=\"#916d1b\" stroke-width=\"2\"/>\n<rect x=\"220\" y=\"130\" width=\"20\" height=\"15\" fill=\"#d9a65e\" stroke=\"#916d1b\"/>\n<circle cx=\"302\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<circle cx=\"324\" cy=\"195\" r=\"4\" fill=\"#333\"/>\n<line x1=\"302\" y1=\"195\" x2=\"324\" y2=\"195\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"312\" y1=\"187\" x2=\"312\" y2=\"178\" stroke=\"#333\" stroke-width=\"2\"/>\n<circle cx=\"312\" cy=\"171\" r=\"6\" fill=\"#333\"/>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"122\" stroke=\"#999\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"195\" x2=\"312\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"230\" y2=\"195\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"145\" x2=\"312\" y2=\"195\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"265\" y=\"188\" font-size=\"15\">x</text>\n<text x=\"214\" y=\"168\" font-size=\"15\">y</text>\n<text x=\"270\" y=\"154\" font-size=\"15\">s</text>\n<line x1=\"230\" y1=\"40\" x2=\"230\" y2=\"25\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"230,21 225,31 235,31\" fill=\"#8b1e3f\"/>\n<text x=\"238\" y=\"33\" font-size=\"12\">1,5 m/s</text>\n<line x1=\"334\" y1=\"195\" x2=\"354\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"358,195 348,190 348,200\" fill=\"#0e5d9e\"/>\n<text x=\"300\" y=\"181\" font-size=\"12\">6,0 m/s</text>\n<text x=\"239\" y=\"122\" font-size=\"13\">ballong</text>\n<text x=\"316\" y=\"166\" font-size=\"13\">cyklist</text>\n</svg></span><p>Låt <strong>x</strong> vara cyklistens horisontella avstånd från punkten rakt under ballongen, <strong>y</strong> ballongens höjd över marken och <strong>s</strong> avståndet mellan ballongen och cyklisten.</p><p>Efter 4,0 s är</p><p>\\[x=6,0\\cdot4,0=24\\ \\text{m},\\qquad y=18+1,5\\cdot4,0=24\\ \\text{m}.\\]</p><p>Dessutom är \\(x'=6,0\\) m/s och \\(y'=1,5\\) m/s.</p><p>Pythagoras sats ger</p><p>\\[s^2=x^2+y^2.\\]</p><p>Derivera:</p><p>\\[ss'=xx'+yy'.\\]</p><p>När \\(x=y=24\\) blir</p><p>\\[s=\\sqrt{24^2+24^2}=24\\sqrt2.\\]</p><p>Sätt in:</p><p>\\[(24\\sqrt2)s'=24\\cdot6,0+24\\cdot1,5=180.\\]</p><p>Alltså</p><p>\\[s'=\\frac{180}{24\\sqrt2}=\\frac{7,5}{\\sqrt2}\\approx5,3.\\]</p><p><strong>Svar: avståndet ökar med ungefär \\(5,3\\ \\text{m/s}\\).</strong></p>",
+    "id": "3.10",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4712,7 +5654,9 @@ window.BANKMATF1 = [
     "poang": "0/2/1",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Upp-och-nedvänd konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r</text>\n\n\n<line x1=\"352\" y1=\"48\" x2=\"352\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"48\" x2=\"358\" y2=\"48\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"220\" x2=\"358\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"360\" y=\"138\" font-size=\"13\" fill=\"#56606b\">3,0 m</text>\n\n<line x1=\"205\" y1=\"34\" x2=\"315\" y2=\"34\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"29\" x2=\"205\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"315\" y1=\"29\" x2=\"315\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"235\" y=\"26\" font-size=\"13\" fill=\"#56606b\">1,5 m</text>\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">50 liter/min</text>\n</svg></span><p>En upp-och-nedvänd konisk tank har höjden 3,0 m och toppradien 1,5 m. Vatten pumpas in med 50 liter/min.</p><p>Hur snabbt stiger vattennivån när djupet är 2,0 m?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r</text>\n\n\n<line x1=\"352\" y1=\"48\" x2=\"352\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"48\" x2=\"358\" y2=\"48\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"220\" x2=\"358\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"360\" y=\"138\" font-size=\"13\" fill=\"#56606b\">3,0 m</text>\n\n<line x1=\"205\" y1=\"34\" x2=\"315\" y2=\"34\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"29\" x2=\"205\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"315\" y1=\"29\" x2=\"315\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"235\" y=\"26\" font-size=\"13\" fill=\"#56606b\">1,5 m</text>\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">50 liter/min</text>\n</svg></span><p>Volymen ökar med \\(50\\) liter/min = \\(0,050\\ \\text{m}^3/\\text{min}\\).</p><p>Av likformighet i figuren gäller</p><p>\\[\\frac{r}{h}=\\frac{1,5}{3,0}=\\frac12\\quad\\Rightarrow\\quad r=\\frac h2.\\]</p><p>Volymen av vattnet är</p><p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h2\\right)^2h=\\frac{\\pi}{12}h^3.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{4}h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=2,0\\) m får vi</p><p>\\[0,050=\\frac{\\pi}{4}\\cdot 2^2\\cdot\\frac{dh}{dt}=\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{0,050}{\\pi}\\approx0,0159.\\]</p><p><strong>Svar: vattennivån stiger med ungefär \\(0,0159\\ \\text{m/min}\\), alltså cirka \\(1,59\\ \\text{cm/min}\\).</strong></p>",
-    "id": "3.11"
+    "id": "3.11",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4722,7 +5666,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<span class=\"fig smal\"><svg width=\"340\" height=\"215\" viewBox=\"0 0 380 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg\">\n<rect x=\"10\" y=\"10\" width=\"360\" height=\"220\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"45\" y=\"195\" width=\"275\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"320\" y=\"35\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#9c5e2d\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n<line x1=\"127\" y1=\"188\" x2=\"307\" y2=\"92\" stroke=\"#d8b48a\" stroke-width=\"1.8\" opacity=\"0.55\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"195\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"320\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"300\" y2=\"185\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"310\" y2=\"175\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<circle cx=\"115\" cy=\"195\" r=\"4.2\" fill=\"#666\"/>\n<circle cx=\"320\" cy=\"85\" r=\"4.2\" fill=\"#666\"/>\n<text x=\"198\" y=\"133\" font-size=\"13\" fill=\"#6d421f\">5,0 m</text>\n<text x=\"205\" y=\"188\" font-size=\"13\" fill=\"#1f5687\">x = 3,0 m</text>\n<text x=\"328\" y=\"145\" font-size=\"13\" fill=\"#7f1f3d\">y</text>\n<line x1=\"118\" y1=\"208\" x2=\"142\" y2=\"208\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"146,208 136,203 136,213\" fill=\"#2e8b57\"/>\n<text x=\"77\" y=\"223\" font-size=\"12\" fill=\"#2e8b57\">0,80 m/s</text>\n</svg></span><p>En 5,0 m lång stege står mot en lodrät vägg. Stegens fot glider bort från väggen med hastigheten 0,80 m/s.</p><p>Hur snabbt rör sig stegens övre ände nedåt när foten är 3,0 m från väggen?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"340\" height=\"215\" viewBox=\"0 0 380 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till stege mot vägg\">\n<rect x=\"10\" y=\"10\" width=\"360\" height=\"220\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"45\" y=\"195\" width=\"275\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"320\" y=\"35\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#9c5e2d\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n<line x1=\"127\" y1=\"188\" x2=\"307\" y2=\"92\" stroke=\"#d8b48a\" stroke-width=\"1.8\" opacity=\"0.55\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"195\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"320\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"300\" y2=\"185\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"310\" y2=\"175\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<circle cx=\"115\" cy=\"195\" r=\"4.2\" fill=\"#666\"/>\n<circle cx=\"320\" cy=\"85\" r=\"4.2\" fill=\"#666\"/>\n<text x=\"198\" y=\"133\" font-size=\"13\" fill=\"#6d421f\">5,0 m</text>\n<text x=\"205\" y=\"188\" font-size=\"13\" fill=\"#1f5687\">x = 3,0 m</text>\n<text x=\"328\" y=\"145\" font-size=\"13\" fill=\"#7f1f3d\">y</text>\n<line x1=\"118\" y1=\"208\" x2=\"142\" y2=\"208\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"146,208 136,203 136,213\" fill=\"#2e8b57\"/>\n<text x=\"77\" y=\"223\" font-size=\"12\" fill=\"#2e8b57\">0,80 m/s</text>\n</svg></span><p>Låt \\(x\\) vara stegens fotavstånd från väggen och \\(y\\) höjden upp på väggen.</p><p>Eftersom stegen är 5,0 m lång gäller</p><p>\\[x^2+y^2=25.\\]</p><p>När \\(x=3,0\\) m fås</p><p>\\[y=\\sqrt{25-9}=4,0\\ \\text{m}.\\]</p><p>Derivera sambandet:</p><p>\\[2xx'+2yy'=0\\quad\\Rightarrow\\quad xx'+yy'=0.\\]</p><p>Här är \\(x'=0,80\\) m/s. Sätt in värdena:</p><p>\\[3,0\\cdot0,80+4,0y'=0.\\]</p><p>Alltså</p><p>\\[y'=-0,60\\ \\text{m/s}.\\]</p><p>Minustecknet visar att höjden minskar.</p><p><strong>Svar: stegens övre ände rör sig nedåt med \\(0,60\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.19"
+    "id": "3.19",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4730,9 +5676,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter växande cirkel",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Växande cirkelfläck\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<circle cx=\"140\" cy=\"102\" r=\"3.7\" fill=\"#2c62a8\"/>\n<line x1=\"140\" y1=\"102\" x2=\"194\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"198,102 188,97 188,107\" fill=\"#b45f32\"/>\n<text x=\"140\" y=\"86\" font-size=\"14\" fill=\"#7a3d19\" text-anchor=\"middle\">r = 6,0 cm</text>\n</svg></span><p>En cirkelformad fläck växer så att radien ökar med 0,40 cm/s. Hur snabbt ökar fläckens area när radien är 6,0 cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Växande cirkelfläck\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<circle cx=\"140\" cy=\"102\" r=\"3.7\" fill=\"#2c62a8\"/>\n<line x1=\"140\" y1=\"102\" x2=\"194\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"198,102 188,97 188,107\" fill=\"#b45f32\"/>\n<text x=\"162\" y=\"94\" font-size=\"14\" fill=\"#7a3d19\">r = 6,0 cm</text>\n</svg></span><p>En cirkelformad fläck växer så att radien ökar med 0,40 cm/s. Hur snabbt ökar fläckens area när radien är 6,0 cm?</p>",
     "s": "<p>Arean är \\(A=\\pi r^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=6,0\\) cm och \\(dr/dt=0,40\\) cm/s:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot6,0\\cdot0,40=4,8\\pi.\\]</p><p><strong>Svar: arean ökar med \\(4,8\\pi\\ \\text{cm}^2/\\text{s}\\approx15,1\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
-    "id": "3.20"
+    "id": "3.20",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4742,7 +5690,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Upp-och-nedvänd konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r</text>\n\n\n<line x1=\"352\" y1=\"48\" x2=\"352\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"48\" x2=\"358\" y2=\"48\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"220\" x2=\"358\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"360\" y=\"138\" font-size=\"13\" fill=\"#56606b\">6,0 m</text>\n\n<line x1=\"205\" y1=\"34\" x2=\"315\" y2=\"34\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"29\" x2=\"205\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"315\" y1=\"29\" x2=\"315\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"235\" y=\"26\" font-size=\"13\" fill=\"#56606b\">3,0 m</text>\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">0,050 m³/min</text>\n</svg></span><p>En upp-och-nedvänd konisk tank är 6,0 m hög och har toppradien 3,0 m. Vatten rinner in med \\(0,050\\,\\text{m}^3/\\text{min}\\).</p><p>Hur snabbt stiger vattennivån när djupet är 4,0 m?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till större konisk tank\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r</text>\n\n\n<line x1=\"352\" y1=\"48\" x2=\"352\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"48\" x2=\"358\" y2=\"48\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"346\" y1=\"220\" x2=\"358\" y2=\"220\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"360\" y=\"138\" font-size=\"13\" fill=\"#56606b\">6,0 m</text>\n\n<line x1=\"205\" y1=\"34\" x2=\"315\" y2=\"34\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"29\" x2=\"205\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<line x1=\"315\" y1=\"29\" x2=\"315\" y2=\"39\" stroke=\"#aab2bd\" stroke-width=\"1.5\"/>\n<text x=\"235\" y=\"26\" font-size=\"13\" fill=\"#56606b\">3,0 m</text>\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">0,050 m³/min</text>\n</svg></span><p>Av likformighet gäller</p><p>\\[\\frac{r}{h}=\\frac{3,0}{6,0}=\\frac12\\quad\\Rightarrow\\quad r=\\frac h2.\\]</p><p>Volymen blir då</p><p>\\[V=\\frac13\\pi r^2h=\\frac13\\pi\\left(\\frac h2\\right)^2h=\\frac{\\pi}{12}h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{4}h^2\\frac{dh}{dt}.\\]</p><p>Sätt in \\(dV/dt=0,050\\) och \\(h=4,0\\):</p><p>\\[0,050=\\frac{\\pi}{4}\\cdot16\\cdot\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Därför</p><p>\\[\\frac{dh}{dt}=\\frac{0,050}{4\\pi}\\approx0,0040.\\]</p><p><strong>Svar: vattennivån stiger med ungefär \\(0,0040\\ \\text{m/min}\\), alltså cirka \\(0,40\\ \\text{cm/min}\\).</strong></p>",
-    "id": "3.21"
+    "id": "3.21",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4751,8 +5701,10 @@ window.BANKMATF1 = [
     "typ": "relaterade förändringshastigheter för kvadrat",
     "poang": "2/0/0",
     "id": "3.27",
-    "t": "<span class=\"fig smal\"><svg width=\"240\" height=\"190\" viewBox=\"0 0 260 210\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat vars sida ökar\">\n<rect x=\"10\" y=\"10\" width=\"240\" height=\"190\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"70\" y=\"50\" width=\"110\" height=\"110\" fill=\"#eef6ff\" stroke=\"#2c62a8\" stroke-width=\"2.5\"/>\n<text x=\"95\" y=\"44\" font-size=\"14\" fill=\"#2c62a8\">s</text>\n<text x=\"57\" y=\"143\" font-size=\"14\" fill=\"#2c62a8\">s</text>\n<line x1=\"125\" y1=\"44\" x2=\"125\" y2=\"30\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"125,26 120,36 130,36\" fill=\"#2e8b57\"/>\n<line x1=\"186\" y1=\"105\" x2=\"200\" y2=\"105\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"204,105 194,100 194,110\" fill=\"#2e8b57\"/>\n<line x1=\"125\" y1=\"166\" x2=\"125\" y2=\"180\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"125,184 120,174 130,174\" fill=\"#2e8b57\"/>\n<line x1=\"64\" y1=\"105\" x2=\"50\" y2=\"105\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"46,105 56,100 56,110\" fill=\"#2e8b57\"/>\n<text x=\"186\" y=\"92\" font-size=\"12\" fill=\"#2e8b57\">0,6 cm/s</text>\n</svg></span><p>Sidan \\(s\\) i en kvadrat ökar med hastigheten \\(0,6\\ \\text{cm/s}\\).</p><p>Hur snabbt ökar kvadratens area när \\(s=5,0\\ \\text{cm}\\)?</p>",
-    "s": "<p>Arean är \\(A=s^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2s\\frac{ds}{dt}.\\]</p><p>Sätt in \\(s=5,0\\) och \\(ds/dt=0,6\\):</p><p>\\[\\frac{dA}{dt}=2\\cdot5,0\\cdot0,6=6,0.\\]</p><p><strong>Svar: arean ökar med \\(6,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"240\" height=\"190\" viewBox=\"0 0 260 210\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat vars sida ökar\">\n<rect x=\"10\" y=\"10\" width=\"240\" height=\"190\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"70\" y=\"50\" width=\"110\" height=\"110\" fill=\"#eef6ff\" stroke=\"#2c62a8\" stroke-width=\"2.5\"/>\n<text x=\"118\" y=\"42\" font-size=\"14\" fill=\"#2c62a8\">s</text>\n<text x=\"55\" y=\"110\" font-size=\"14\" fill=\"#2c62a8\">s</text>\n<line x1=\"125\" y1=\"44\" x2=\"125\" y2=\"30\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"125,26 120,36 130,36\" fill=\"#2e8b57\"/>\n<line x1=\"186\" y1=\"105\" x2=\"200\" y2=\"105\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"204,105 194,100 194,110\" fill=\"#2e8b57\"/>\n<line x1=\"125\" y1=\"166\" x2=\"125\" y2=\"180\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"125,184 120,174 130,174\" fill=\"#2e8b57\"/>\n<line x1=\"64\" y1=\"105\" x2=\"50\" y2=\"105\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"46,105 56,100 56,110\" fill=\"#2e8b57\"/>\n<text x=\"186\" y=\"92\" font-size=\"12\" fill=\"#2e8b57\">0,6 cm/s</text>\n</svg></span><p>Sidan \\(s\\) i en kvadrat ökar med hastigheten \\(0,6\\ \\text{cm/s}\\).</p><p>Hur snabbt ökar kvadratens area när \\(s=5,0\\ \\text{cm}\\)?</p>",
+    "s": "<p>Arean är \\(A=s^2\\). Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=2s\\frac{ds}{dt}.\\]</p><p>Sätt in \\(s=5,0\\) och \\(ds/dt=0,6\\):</p><p>\\[\\frac{dA}{dt}=2\\cdot5,0\\cdot0,6=6,0.\\]</p><p><strong>Svar: arean ökar med \\(6,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4760,9 +5712,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "cirkelns area via diameter",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med diameter\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<line x1=\"82\" y1=\"102\" x2=\"198\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"78,102 88,97 88,107\" fill=\"#b45f32\"/>\n<polygon points=\"202,102 192,97 192,107\" fill=\"#b45f32\"/>\n<text x=\"140\" y=\"90\" font-size=\"14\" fill=\"#7a3d19\" text-anchor=\"middle\">d = 16,0 cm</text>\n</svg></span><p>Diametern i en cirkel ökar med 0,60 cm/s. Hur snabbt ökar arean när diametern är 16,0 cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med diameter\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<line x1=\"82\" y1=\"102\" x2=\"198\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"78,102 88,97 88,107\" fill=\"#b45f32\"/>\n<polygon points=\"202,102 192,97 192,107\" fill=\"#b45f32\"/>\n<text x=\"128\" y=\"94\" font-size=\"14\" fill=\"#7a3d19\">d = 16,0 cm</text>\n</svg></span><p>Diametern i en cirkel ökar med 0,60 cm/s. Hur snabbt ökar arean när diametern är 16,0 cm?</p>",
     "s": "<p>Låt \\(d\\) vara diametern. Då är radien \\(r=d/2\\), och arean blir</p><p>\\[A=\\pi r^2=\\pi\\left(\\frac d2\\right)^2=\\frac{\\pi}{4}d^2.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\frac{dA}{dt}=\\frac{\\pi}{2}d\\frac{dd}{dt}.\\]</p><p>Sätt in \\(d=16,0\\) cm och \\(dd/dt=0,60\\) cm/s:</p><p>\\[\\frac{dA}{dt}=\\frac{\\pi}{2}\\cdot16,0\\cdot0,60=4,8\\pi.\\]</p><p><strong>Svar: arean ökar med \\(4,8\\pi\\ \\text{cm}^2/\\text{s}\\approx15,1\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
-    "id": "3.44"
+    "id": "3.44",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4770,9 +5724,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "sfärens volym",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8fbff\" stroke=\"#6b6b6b\" stroke-width=\"2.3\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#b3bcc8\" stroke-width=\"1.2\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.3\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"145\" y=\"86\" font-size=\"14\" fill=\"#7a3d19\" text-anchor=\"middle\">r = 5,0 cm</text>\n</svg></span><p>Radien i en sfär ökar med 0,20 cm/s. Hur snabbt ökar volymen när radien är 5,0 cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8fbff\" stroke=\"#6b6b6b\" stroke-width=\"2.3\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#b3bcc8\" stroke-width=\"1.2\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.3\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\" fill=\"#7a3d19\">r = 5,0 cm</text>\n</svg></span><p>Radien i en sfär ökar med 0,20 cm/s. Hur snabbt ökar volymen när radien är 5,0 cm?</p>",
     "s": "<p>Volymen är \\(V=\\frac43\\pi r^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(r=5,0\\) cm och \\(dr/dt=0,20\\) cm/s:</p><p>\\[\\frac{dV}{dt}=4\\pi\\cdot25\\cdot0,20=20\\pi.\\]</p><p><strong>Svar: volymen ökar med \\(20\\pi\\ \\text{cm}^3/\\text{s}\\approx62,8\\ \\text{cm}^3/\\text{s}\\).</strong></p>",
-    "id": "3.45"
+    "id": "3.45",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4782,7 +5738,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"200\" viewBox=\"0 0 290 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kub\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"200\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<polygon points=\"90,145 160,145 160,75 90,75\" fill=\"#eef6ff\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<polygon points=\"160,145 215,110 215,40 160,75\" fill=\"#d9ebff\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<polygon points=\"90,75 160,75 215,40 145,40\" fill=\"#f7fbff\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<line x1=\"90\" y1=\"145\" x2=\"145\" y2=\"110\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<line x1=\"145\" y1=\"110\" x2=\"215\" y2=\"110\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<line x1=\"145\" y1=\"110\" x2=\"145\" y2=\"40\" stroke=\"#666\" stroke-width=\"2.3\"/>\n<text x=\"121\" y=\"68\" font-size=\"14\" fill=\"#2c62a8\">a</text>\n</svg></span><p>Kantlängden \\(a\\) i en kub ökar med 0,10 cm/s. Hur snabbt ökar kubens volym när \\(a=6,0\\) cm?</p>",
     "s": "<p>Volymen är \\(V=a^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=3a^2\\frac{da}{dt}.\\]</p><p>Sätt in \\(a=6,0\\) cm och \\(da/dt=0,10\\) cm/s:</p><p>\\[\\frac{dV}{dt}=3\\cdot6,0^2\\cdot0,10=10,8.\\]</p><p><strong>Svar: volymen ökar med \\(10,8\\ \\text{cm}^3/\\text{s}\\).</strong></p>",
-    "id": "3.46"
+    "id": "3.46",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4792,7 +5750,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"340\" height=\"215\" viewBox=\"0 0 380 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stege mot vägg\">\n<rect x=\"10\" y=\"10\" width=\"360\" height=\"220\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"45\" y=\"195\" width=\"275\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"320\" y=\"35\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#9c5e2d\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n<line x1=\"127\" y1=\"188\" x2=\"307\" y2=\"92\" stroke=\"#d8b48a\" stroke-width=\"1.8\" opacity=\"0.55\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"195\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"320\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"300\" y2=\"185\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"310\" y2=\"175\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<circle cx=\"115\" cy=\"195\" r=\"4.2\" fill=\"#666\"/>\n<circle cx=\"320\" cy=\"85\" r=\"4.2\" fill=\"#666\"/>\n<text x=\"198\" y=\"133\" font-size=\"13\" fill=\"#6d421f\">10 m</text>\n<text x=\"205\" y=\"188\" font-size=\"13\" fill=\"#1f5687\">x = 6,0 m</text>\n<text x=\"328\" y=\"145\" font-size=\"13\" fill=\"#7f1f3d\">y</text>\n<line x1=\"118\" y1=\"208\" x2=\"142\" y2=\"208\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"146,208 136,203 136,213\" fill=\"#2e8b57\"/>\n<text x=\"77\" y=\"223\" font-size=\"12\" fill=\"#2e8b57\">0,50 m/s</text>\n</svg></span><p>En 10 m lång stege står mot en vägg. Foten glider bort från väggen med 0,50 m/s. Hur snabbt rör sig stegens överände nedåt när foten är 6,0 m från väggen?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"340\" height=\"215\" viewBox=\"0 0 380 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till stege 10 m\">\n<rect x=\"10\" y=\"10\" width=\"360\" height=\"220\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"45\" y=\"195\" width=\"275\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"320\" y=\"35\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#9c5e2d\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n<line x1=\"127\" y1=\"188\" x2=\"307\" y2=\"92\" stroke=\"#d8b48a\" stroke-width=\"1.8\" opacity=\"0.55\"/>\n<line x1=\"115\" y1=\"195\" x2=\"320\" y2=\"195\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"320\" y1=\"195\" x2=\"320\" y2=\"85\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"300\" y2=\"185\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<line x1=\"310\" y1=\"185\" x2=\"310\" y2=\"175\" stroke=\"#333\" stroke-width=\"1.4\"/>\n<circle cx=\"115\" cy=\"195\" r=\"4.2\" fill=\"#666\"/>\n<circle cx=\"320\" cy=\"85\" r=\"4.2\" fill=\"#666\"/>\n<text x=\"198\" y=\"133\" font-size=\"13\" fill=\"#6d421f\">10 m</text>\n<text x=\"205\" y=\"188\" font-size=\"13\" fill=\"#1f5687\">x = 6,0 m</text>\n<text x=\"328\" y=\"145\" font-size=\"13\" fill=\"#7f1f3d\">y</text>\n<line x1=\"118\" y1=\"208\" x2=\"142\" y2=\"208\" stroke=\"#2e8b57\" stroke-width=\"2.3\"/>\n<polygon points=\"146,208 136,203 136,213\" fill=\"#2e8b57\"/>\n<text x=\"77\" y=\"223\" font-size=\"12\" fill=\"#2e8b57\">0,50 m/s</text>\n</svg></span><p>Med beteckningarna i figuren gäller</p><p>\\[x^2+y^2=10^2=100.\\]</p><p>När \\(x=6,0\\) m är</p><p>\\[y=\\sqrt{100-36}=8,0\\ \\text{m}.\\]</p><p>Derivera:</p><p>\\[xx'+yy'=0.\\]</p><p>Sätt in \\(x=6,0\\), \\(x'=0,50\\) och \\(y=8,0\\):</p><p>\\[6,0\\cdot0,50+8,0y'=0.\\]</p><p>Då fås</p><p>\\[y'=-0,375\\ \\text{m/s}.\\]</p><p><strong>Svar: överänden rör sig nedåt med \\(0,375\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.47"
+    "id": "3.47",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4800,9 +5760,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "kon med likformighet",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"219\" y=\"151\" font-size=\"14\" fill=\"#1f5687\" text-anchor=\"middle\">r = h/3</text>\n\n\n\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"326\" y=\"36\" font-size=\"13\" fill=\"#2d76c2\" text-anchor=\"end\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Vatten fylls i en konisk behållare. För vattenytan gäller hela tiden \\(r=h/3\\). Vattenvolymen ökar med 2,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=6\\) dm.</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till konisk behållare\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"219\" y=\"151\" font-size=\"14\" fill=\"#1f5687\" text-anchor=\"middle\">r = h/3</text>\n\n\n\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"326\" y=\"36\" font-size=\"13\" fill=\"#2d76c2\" text-anchor=\"end\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Volymen i konen är</p><p>\\[V=\\frac13\\pi r^2h.\\]</p><p>Eftersom \\(r=h/3\\) får vi</p><p>\\[V=\\frac13\\pi\\left(\\frac h3\\right)^2h=\\frac{\\pi}{27}h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{9}h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=6\\) dm gäller</p><p>\\[2,0=\\frac{\\pi}{9}\\cdot36\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{1}{2\\pi}\\approx0,159.\\]</p><p><strong>Svar: \\(dh/dt\\approx0,159\\ \\text{dm/s}\\).</strong></p>",
-    "id": "3.48"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r = h/3</text>\n\n\n\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Vatten fylls i en konisk behållare. För vattenytan gäller hela tiden \\(r=h/3\\). Vattenvolymen ökar med 2,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=6\\) dm.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"235\" viewBox=\"0 0 410 265\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till konisk behållare\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"245\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<line x1=\"95\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"315\" y1=\"48\" x2=\"205\" y2=\"220\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n<line x1=\"95\" y1=\"48\" x2=\"315\" y2=\"48\" stroke=\"#626262\" stroke-width=\"3.4\" stroke-linecap=\"round\"/>\n\n<polygon points=\"167,160 243,160 205,220\" fill=\"#a8d8ff\" opacity=\"0.9\" stroke=\"#4a90d9\" stroke-width=\"2\"/>\n<line x1=\"167\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2d76c2\" stroke-width=\"3\"/>\n\n<line x1=\"205\" y1=\"220\" x2=\"205\" y2=\"160\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"194\" font-size=\"14\" fill=\"#7f1f3d\">h</text>\n<line x1=\"205\" y1=\"160\" x2=\"243\" y2=\"160\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<text x=\"221\" y=\"152\" font-size=\"14\" fill=\"#1f5687\">r = h/3</text>\n\n\n\n\n<line x1=\"338\" y1=\"24\" x2=\"338\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"338\" y1=\"75\" x2=\"300\" y2=\"75\" stroke=\"#3b97ff\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<polygon points=\"296,75 307,69 307,81\" fill=\"#3b97ff\"/>\n<text x=\"286\" y=\"18\" font-size=\"13\" fill=\"#2d76c2\">dV/dt = 2,0 dm³/s</text>\n</svg></span><p>Volymen i konen är</p><p>\\[V=\\frac13\\pi r^2h.\\]</p><p>Eftersom \\(r=h/3\\) får vi</p><p>\\[V=\\frac13\\pi\\left(\\frac h3\\right)^2h=\\frac{\\pi}{27}h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=\\frac{\\pi}{9}h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=6\\) dm gäller</p><p>\\[2,0=\\frac{\\pi}{9}\\cdot36\\frac{dh}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{1}{2\\pi}\\approx0,159.\\]</p><p><strong>Svar: \\(dh/dt\\approx0,159\\ \\text{dm/s}\\).</strong></p>",
+    "id": "3.48",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4812,7 +5774,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En rektangels längd ökar med 2 cm/s och bredden ökar med 1 cm/s. Hur snabbt ökar arean när längden är 8 cm och bredden 5 cm?</p>",
     "s": "<p>\\(A=lb\\). Produktregeln ger</p><p>\\[A'=l'b+lb'=2\\cdot5+8\\cdot1=18.\\]</p><p><strong>18 cm²/s</strong>.</p>",
-    "id": "3.66"
+    "id": "3.66",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4822,7 +5786,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En cylindrisk behållare har konstant radie 3 dm. Vattenhöjden ökar med 0,4 dm/min. Hur snabbt ökar volymen?</p>",
     "s": "<p>\\(V=\\pi r^2h=9\\pi h\\). Därför</p><p>\\[V'=9\\pi h'=9\\pi\\cdot0,4=3,6\\pi\\text{ dm}^3/\\text{min}.\\]</p>",
-    "id": "3.67"
+    "id": "3.67",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4832,7 +5798,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"370\" height=\"210\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Person som går bort från en gatlykta\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"35\" y=\"185\" width=\"355\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<line x1=\"90\" y1=\"55\" x2=\"90\" y2=\"185\" stroke=\"#555\" stroke-width=\"5\"/>\n<circle cx=\"105\" cy=\"47\" r=\"7\" fill=\"#f3ca62\" stroke=\"#a77b13\"/>\n<line x1=\"240\" y1=\"185\" x2=\"240\" y2=\"128\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"240\" cy=\"118\" r=\"10\" fill=\"#333\"/>\n<line x1=\"105\" y1=\"47\" x2=\"305\" y2=\"185\" stroke=\"#d8a62a\" stroke-width=\"2.4\"/>\n<line x1=\"90\" y1=\"185\" x2=\"240\" y2=\"185\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"240\" y1=\"185\" x2=\"305\" y2=\"185\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"156\" y=\"177\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"266\" y=\"177\" font-size=\"14\" fill=\"#7f1f3d\">s</text>\n<text x=\"98\" y=\"117\" font-size=\"13\" fill=\"#555\">6,0 m</text>\n<text x=\"250\" y=\"150\" font-size=\"13\" fill=\"#555\">1,8 m</text>\n<line x1=\"240\" y1=\"205\" x2=\"260\" y2=\"205\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/><polygon points=\"264,205 254,200 254,210\" fill=\"#2e8b57\"/>\n</svg></span><p>En 1,8 m lång person går bort från en 6,0 m hög gatlykta med 1,5 m/s. Hur snabbt växer personens skugga?</p>",
     "s": "<span class=\"fig smal\"><svg width=\"370\" height=\"210\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till gatlykta och skugga\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"35\" y=\"185\" width=\"355\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<line x1=\"90\" y1=\"55\" x2=\"90\" y2=\"185\" stroke=\"#555\" stroke-width=\"5\"/>\n<circle cx=\"105\" cy=\"47\" r=\"7\" fill=\"#f3ca62\" stroke=\"#a77b13\"/>\n<line x1=\"240\" y1=\"185\" x2=\"240\" y2=\"128\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"240\" cy=\"118\" r=\"10\" fill=\"#333\"/>\n<line x1=\"105\" y1=\"47\" x2=\"305\" y2=\"185\" stroke=\"#d8a62a\" stroke-width=\"2.4\"/>\n<line x1=\"90\" y1=\"185\" x2=\"240\" y2=\"185\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"240\" y1=\"185\" x2=\"305\" y2=\"185\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"156\" y=\"177\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"266\" y=\"177\" font-size=\"14\" fill=\"#7f1f3d\">s</text>\n<text x=\"98\" y=\"117\" font-size=\"13\" fill=\"#555\">6,0 m</text>\n<text x=\"250\" y=\"150\" font-size=\"13\" fill=\"#555\">1,8 m</text>\n<line x1=\"240\" y1=\"205\" x2=\"260\" y2=\"205\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/><polygon points=\"264,205 254,200 254,210\" fill=\"#2e8b57\"/>\n</svg></span><p>Låt \\(x\\) vara personens avstånd till lyktan och \\(s\\) skuggans längd.</p><p>Av likformiga trianglar i figuren får vi</p><p>\\[\\frac{6,0}{x+s}=\\frac{1,8}{s}.\\]</p><p>Korsmultiplicera:</p><p>\\[6,0s=1,8(x+s)=1,8x+1,8s.\\]</p><p>Alltså</p><p>\\[4,2s=1,8x\\quad\\Rightarrow\\quad s=\\frac{1,8}{4,2}x=\\frac37x.\\]</p><p>Derivera:</p><p>\\[s'=\\frac37x'.\\]</p><p>Eftersom \\(x'=1,5\\) m/s blir</p><p>\\[s'=\\frac37\\cdot1,5=\\frac{9}{14}\\approx0,643.\\]</p><p><strong>Svar: skuggan växer med ungefär \\(0,64\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.68"
+    "id": "3.68",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4840,9 +5808,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "sfär area mot volym",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"145\" y=\"86\" font-size=\"14\" text-anchor=\"middle\">r = 3 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med 12 cm³/s. Hur snabbt ökar radien när \\(r=3\\) cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\">r = 3 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med 12 cm³/s. Hur snabbt ökar radien när \\(r=3\\) cm?</p>",
     "s": "<p>Volymen är \\(V=\\frac43\\pi r^3\\). Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=12\\) cm³/s och \\(r=3\\) cm:</p><p>\\[12=4\\pi\\cdot3^2\\frac{dr}{dt}=36\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{12}{36\\pi}=\\frac{1}{3\\pi}.\\]</p><p><strong>Svar: \\(dr/dt=\\frac{1}{3\\pi}\\ \\text{cm/s}\\approx0,106\\ \\text{cm/s}\\).</strong></p>",
-    "id": "3.69"
+    "id": "3.69",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4850,9 +5820,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "omkrets cirkel",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med minskande radie\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r</text>\n<text x=\"145\" y=\"182\" font-size=\"13\" text-anchor=\"middle\">dr/dt = −0,12 m/s</text>\n</svg></span><p>Radien i en cirkel minskar med 0,12 m/s. Hur snabbt förändras omkretsen?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med minskande radie\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r</text>\n<text x=\"237\" y=\"100\" font-size=\"12\">dr/dt = -0,12 m/s</text>\n</svg></span><p>Radien i en cirkel minskar med 0,12 m/s. Hur snabbt förändras omkretsen?</p>",
     "s": "<p>Omkretsen är \\(O=2\\pi r\\). Derivera:</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dr/dt=-0,12\\) m/s:</p><p>\\[\\frac{dO}{dt}=2\\pi\\cdot(-0,12)=-0,24\\pi.\\]</p><p><strong>Svar: omkretsen minskar med \\(0,24\\pi\\ \\text{m/s}\\approx0,754\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.79"
+    "id": "3.79",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4860,9 +5832,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "relaterad förändringshastighet cirkel via omkrets",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande omkrets\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<circle cx=\"140\" cy=\"102\" r=\"3.7\" fill=\"#2c62a8\"/>\n<line x1=\"140\" y1=\"102\" x2=\"194\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"198,102 188,97 188,107\" fill=\"#b45f32\"/>\n<text x=\"140\" y=\"86\" font-size=\"14\" fill=\"#7a3d19\" text-anchor=\"middle\">r = 5,0 cm</text>\n</svg></span><p>En cirkels omkrets ökar med \\(0,80\\pi\\) cm/s. Hur snabbt ökar cirkelns area när radien är 5,0 cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"255\" height=\"180\" viewBox=\"0 0 285 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande omkrets\">\n<rect x=\"10\" y=\"10\" width=\"265\" height=\"185\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<circle cx=\"140\" cy=\"102\" r=\"58\" fill=\"#eef7ff\" stroke=\"#2c62a8\" stroke-width=\"2.4\"/>\n<circle cx=\"140\" cy=\"102\" r=\"3.7\" fill=\"#2c62a8\"/>\n<line x1=\"140\" y1=\"102\" x2=\"194\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<polygon points=\"198,102 188,97 188,107\" fill=\"#b45f32\"/>\n<text x=\"162\" y=\"94\" font-size=\"14\" fill=\"#7a3d19\">r = 5,0 cm</text>\n</svg></span><p>En cirkels omkrets ökar med \\(0,80\\pi\\) cm/s. Hur snabbt ökar cirkelns area när radien är 5,0 cm?</p>",
     "s": "<p>Omkretsen är \\(O=2\\pi r\\). Derivera:</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dO/dt=0,80\\pi\\):</p><p>\\[0,80\\pi=2\\pi\\frac{dr}{dt}\\Rightarrow \\frac{dr}{dt}=0,40\\ \\text{cm/s}.\\]</p><p>Arean är \\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>När \\(r=5,0\\) cm blir</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot5,0\\cdot0,40=4\\pi.\\]</p><p><strong>Svar: \\(4\\pi\\ \\text{cm}^2/\\text{s}\\approx12,6\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
-    "id": "3.98"
+    "id": "3.98",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4872,7 +5846,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd linjär approximation kring \\(x=25\\) för att uppskatta \\(\\sqrt{25,4}\\).</p>",
     "s": "<p>Låt \\(f(x)=\\sqrt x\\). Då är</p><p>\\[f(25)=5,\\qquad f'(25)=\\frac1{2\\sqrt{25}}=\\frac1{10}.\\]</p><p>Den linjära approximationen ger</p><p>\\[f(25,4)\\approx5+\\frac1{10}(0,4)=5,04.\\]</p><p><strong>\\(\\sqrt{25,4}\\approx5,04\\).</strong></p>",
-    "id": "3.99"
+    "id": "3.99",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4880,9 +5856,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterad förändringshastighet båt och rep",
     "poang": "0/3/0",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Båt som dras mot en kaj\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"300\" y=\"35\" width=\"34\" height=\"180\" rx=\"3\" fill=\"#d8dde6\" stroke=\"#8f98a3\"/>\n<rect x=\"35\" y=\"183\" width=\"265\" height=\"8\" rx=\"4\" fill=\"#82bfe9\"/>\n<polygon points=\"110,185 155,185 145,170 120,170\" fill=\"#9c5e2d\" stroke=\"#6b3b1a\"/>\n<line x1=\"300\" y1=\"70\" x2=\"145\" y2=\"170\" stroke=\"#b45f32\" stroke-width=\"2.6\"/>\n<line x1=\"145\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"300\" y1=\"170\" x2=\"300\" y2=\"70\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"163\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"311\" y=\"123\" font-size=\"14\" fill=\"#7f1f3d\">3 m</text>\n<text x=\"224\" y=\"113\" font-size=\"14\" fill=\"#7a3d19\">s</text>\n<line x1=\"169\" y1=\"177\" x2=\"150\" y2=\"177\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/>\n<polygon points=\"146,177 156,172 156,182\" fill=\"#2e8b57\"/>\n<text x=\"168\" y=\"211\" font-size=\"12\" fill=\"#2e8b57\">båten rör sig mot kajen</text>\n</svg></span><p>Ett rep går från toppen av en kaj ned till en båt. Fästpunkten på kajen ligger 3,0 m över vattenytan. Repet dras in med hastigheten 0,60 m/s.</p><p>Hur snabbt närmar sig båten kajen när den är 4,0 m från kajen?</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till båt och rep\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"300\" y=\"35\" width=\"34\" height=\"180\" rx=\"3\" fill=\"#d8dde6\" stroke=\"#8f98a3\"/>\n<rect x=\"35\" y=\"183\" width=\"265\" height=\"8\" rx=\"4\" fill=\"#82bfe9\"/>\n<polygon points=\"110,185 155,185 145,170 120,170\" fill=\"#9c5e2d\" stroke=\"#6b3b1a\"/>\n<line x1=\"300\" y1=\"70\" x2=\"145\" y2=\"170\" stroke=\"#b45f32\" stroke-width=\"2.6\"/>\n<line x1=\"145\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"300\" y1=\"170\" x2=\"300\" y2=\"70\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"163\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"311\" y=\"123\" font-size=\"14\" fill=\"#7f1f3d\">3 m</text>\n<text x=\"224\" y=\"113\" font-size=\"14\" fill=\"#7a3d19\">s</text>\n<line x1=\"169\" y1=\"177\" x2=\"150\" y2=\"177\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/>\n<polygon points=\"146,177 156,172 156,182\" fill=\"#2e8b57\"/>\n<text x=\"168\" y=\"211\" font-size=\"12\" fill=\"#2e8b57\">båten rör sig mot kajen</text>\n</svg></span><p>Låt \\(x\\) vara båtens horisontella avstånd till kajen och \\(s\\) repets längd.</p><p>Av figuren gäller Pythagoras sats:</p><p>\\[s^2=x^2+3^2=x^2+9.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[2ss'=2xx'\\quad\\Rightarrow\\quad ss'=xx'.\\]</p><p>När \\(x=4,0\\) m är</p><p>\\[s=\\sqrt{4^2+3^2}=5,0\\ \\text{m}.\\]</p><p>Repet blir kortare, alltså är \\(s'=-0,60\\) m/s.</p><p>Sätt in:</p><p>\\[5,0\\cdot(-0,60)=4,0x'.\\]</p><p>Det ger</p><p>\\[x'=-0,75\\ \\text{m/s}.\\]</p><p>Minustecknet visar att avståndet minskar.</p><p><strong>Svar: båten närmar sig kajen med \\(0,75\\ \\text{m/s}\\).</strong></p>",
-    "id": "3.100"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Båt som dras mot en kaj\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"300\" y=\"35\" width=\"34\" height=\"180\" rx=\"3\" fill=\"#d8dde6\" stroke=\"#8f98a3\"/>\n<rect x=\"35\" y=\"183\" width=\"265\" height=\"8\" rx=\"4\" fill=\"#82bfe9\"/>\n<polygon points=\"110,185 155,185 145,170 120,170\" fill=\"#9c5e2d\" stroke=\"#6b3b1a\"/>\n<line x1=\"300\" y1=\"70\" x2=\"145\" y2=\"170\" stroke=\"#b45f32\" stroke-width=\"2.6\"/>\n<line x1=\"145\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"300\" y1=\"170\" x2=\"300\" y2=\"70\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"163\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"311\" y=\"123\" font-size=\"14\" fill=\"#7f1f3d\">3 m</text>\n<text x=\"224\" y=\"113\" font-size=\"14\" fill=\"#7a3d19\">s</text>\n<line x1=\"169\" y1=\"177\" x2=\"150\" y2=\"177\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/>\n<polygon points=\"146,177 156,172 156,182\" fill=\"#2e8b57\"/>\n<text x=\"154\" y=\"195\" font-size=\"12\" fill=\"#2e8b57\">båten rör sig mot kajen</text>\n</svg></span><p>Ett rep går från toppen av en kaj ned till en båt. Fästpunkten på kajen ligger 3,0 m över vattenytan. Repet dras in med hastigheten 0,60 m/s.</p><p>Hur snabbt närmar sig båten kajen när den är 4,0 m från kajen?</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till båt och rep\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"300\" y=\"35\" width=\"34\" height=\"180\" rx=\"3\" fill=\"#d8dde6\" stroke=\"#8f98a3\"/>\n<rect x=\"35\" y=\"183\" width=\"265\" height=\"8\" rx=\"4\" fill=\"#82bfe9\"/>\n<polygon points=\"110,185 155,185 145,170 120,170\" fill=\"#9c5e2d\" stroke=\"#6b3b1a\"/>\n<line x1=\"300\" y1=\"70\" x2=\"145\" y2=\"170\" stroke=\"#b45f32\" stroke-width=\"2.6\"/>\n<line x1=\"145\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"300\" y1=\"170\" x2=\"300\" y2=\"70\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"214\" y=\"163\" font-size=\"14\" fill=\"#1f5687\">x</text>\n<text x=\"311\" y=\"123\" font-size=\"14\" fill=\"#7f1f3d\">3 m</text>\n<text x=\"224\" y=\"113\" font-size=\"14\" fill=\"#7a3d19\">s</text>\n<line x1=\"169\" y1=\"177\" x2=\"150\" y2=\"177\" stroke=\"#2e8b57\" stroke-width=\"2.2\"/>\n<polygon points=\"146,177 156,172 156,182\" fill=\"#2e8b57\"/>\n<text x=\"154\" y=\"195\" font-size=\"12\" fill=\"#2e8b57\">båten rör sig mot kajen</text>\n</svg></span><p>Låt \\(x\\) vara båtens horisontella avstånd till kajen och \\(s\\) repets längd.</p><p>Av figuren gäller Pythagoras sats:</p><p>\\[s^2=x^2+3^2=x^2+9.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[2ss'=2xx'\\quad\\Rightarrow\\quad ss'=xx'.\\]</p><p>När \\(x=4,0\\) m är</p><p>\\[s=\\sqrt{4^2+3^2}=5,0\\ \\text{m}.\\]</p><p>Repet blir kortare, alltså är \\(s'=-0,60\\) m/s.</p><p>Sätt in:</p><p>\\[5,0\\cdot(-0,60)=4,0x'.\\]</p><p>Det ger</p><p>\\[x'=-0,75\\ \\text{m/s}.\\]</p><p>Minustecknet visar att avståndet minskar.</p><p><strong>Svar: båten närmar sig kajen med \\(0,75\\ \\text{m/s}\\).</strong></p>",
+    "id": "3.100",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4890,9 +5868,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterad förändringshastighet sfär",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"145\" y=\"86\" font-size=\"14\" text-anchor=\"middle\">r = 2,0 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med \\(30\\text{ cm}^3/\\text{s}\\). Hur snabbt ökar radien när \\(r=2,0\\) cm?</p>",
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"180\" viewBox=\"0 0 300 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sfär med växande volym\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"145\" cy=\"102\" r=\"60\" fill=\"#f8f8ff\" stroke=\"#555\" stroke-width=\"2.2\"/>\n<ellipse cx=\"145\" cy=\"102\" rx=\"60\" ry=\"18\" fill=\"none\" stroke=\"#aaa\" stroke-width=\"1.3\"/>\n<line x1=\"145\" y1=\"102\" x2=\"200\" y2=\"102\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"204,102 194,97 194,107\" fill=\"#b45f32\"/>\n<text x=\"168\" y=\"94\" font-size=\"14\">r = 2,0 cm</text>\n\n</svg></span><p>Volymen av en sfär ökar med \\(30\\text{ cm}^3/\\text{s}\\). Hur snabbt ökar radien när \\(r=2,0\\) cm?</p>",
     "s": "<p>Volymen av en sfär är \\(V=\\frac43\\pi r^3\\). Då</p><p>\\[\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dV/dt=30\\) cm³/s och \\(r=2,0\\) cm:</p><p>\\[30=4\\pi\\cdot2^2\\frac{dr}{dt}=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{30}{16\\pi}=\\frac{15}{8\\pi}.\\]</p><p><strong>Svar: \\(dr/dt=\\frac{15}{8\\pi}\\ \\text{cm/s}\\approx0,597\\ \\text{cm/s}\\).</strong></p>",
-    "id": "3.101"
+    "id": "3.101",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4902,7 +5882,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För \\(a\\gt 0\\) ges \\(f(x)=ax-x^2\\). Bestäm \\(a\\) så att arean mellan grafen och \\(x\\)-axeln mellan funktionens nollställen är \\(9/2\\).</p>",
     "s": "<p>Nollställena är 0 och \\(a\\). Arean är</p><p>\\[\\int_0^a(ax-x^2)dx=\\left[\\frac a2x^2-\\frac13x^3\\right]_0^a=\\frac{a^3}{6}.\\]</p><p>Kravet \\(a^3/6=9/2\\) ger \\(a^3=27\\), alltså <strong>\\(a=3\\)</strong>.</p>",
-    "id": "3.12"
+    "id": "3.12",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4910,9 +5892,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "area mellan kurva och x-axel med graf",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg height=\"270\" width=\"390\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med x kvadrat minus 4x plus 3 med området mellan x lika med 1 och 3 markerat\">\n<rect width=\"390\" height=\"270\" fill=\"white\"/>\n<line x1=\"55\" y1=\"35\" x2=\"55\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"44\" y=\"207\" font-size=\"12\" text-anchor=\"middle\">0</text><line x1=\"127\" y1=\"35\" x2=\"127\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"123\" y=\"210\" font-size=\"12\">1</text><line x1=\"199\" y1=\"35\" x2=\"199\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"195\" y=\"210\" font-size=\"12\">2</text><line x1=\"271\" y1=\"35\" x2=\"271\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"267\" y=\"210\" font-size=\"12\">3</text><line x1=\"343\" y1=\"35\" x2=\"343\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"339\" y=\"210\" font-size=\"12\">4</text><line x1=\"45\" y1=\"235\" x2=\"355\" y2=\"235\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"190\" x2=\"355\" y2=\"190\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"145\" x2=\"355\" y2=\"145\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"100\" x2=\"355\" y2=\"100\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"55\" x2=\"355\" y2=\"55\" stroke=\"#e4e4e4\"/>\n<line x1=\"45\" y1=\"190\" x2=\"360\" y2=\"190\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"245\" x2=\"55\" y2=\"30\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 127,190 L 127.0,190.0 L 129.4,193.0 L 131.8,195.8 L 134.2,198.6 L 136.6,201.2 L 139.0,203.8 L 141.4,206.2 L 143.8,208.6 L 146.2,210.8 L 148.6,212.9 L 151.0,215.0 L 153.4,216.9 L 155.8,218.8 L 158.2,220.6 L 160.6,222.2 L 163.0,223.8 L 165.4,225.2 L 167.8,226.6 L 170.2,227.8 L 172.6,228.9 L 175.0,230.0 L 177.4,230.9 L 179.8,231.8 L 182.2,232.6 L 184.6,233.2 L 187.0,233.8 L 189.4,234.2 L 191.8,234.6 L 194.2,234.8 L 196.6,234.9 L 199.0,235.0 L 201.4,234.9 L 203.8,234.8 L 206.2,234.6 L 208.6,234.2 L 211.0,233.8 L 213.4,233.2 L 215.8,232.6 L 218.2,231.8 L 220.6,230.9 L 223.0,230.0 L 225.4,228.9 L 227.8,227.8 L 230.2,226.5 L 232.6,225.2 L 235.0,223.8 L 237.4,222.2 L 239.8,220.6 L 242.2,218.8 L 244.6,216.9 L 247.0,215.0 L 249.4,212.9 L 251.8,210.8 L 254.2,208.6 L 256.6,206.2 L 259.0,203.8 L 261.4,201.2 L 263.8,198.6 L 266.2,195.8 L 268.6,192.9 L 271.0,190.0 L 271,190 Z\" fill=\"#888\" fill-opacity=\".28\"/>\n<path d=\"M 55.0,55.0 L 57.4,60.9 L 59.8,66.8 L 62.2,72.6 L 64.6,78.2 L 67.0,83.8 L 69.4,89.2 L 71.8,94.6 L 74.2,99.8 L 76.6,105.0 L 79.0,110.0 L 81.4,115.0 L 83.8,119.8 L 86.2,124.6 L 88.6,129.2 L 91.0,133.8 L 93.4,138.2 L 95.8,142.6 L 98.2,146.8 L 100.6,150.9 L 103.0,155.0 L 105.4,158.9 L 107.8,162.8 L 110.2,166.6 L 112.6,170.2 L 115.0,173.8 L 117.4,177.2 L 119.8,180.6 L 122.2,183.8 L 124.6,186.9 L 127.0,190.0 L 129.4,193.0 L 131.8,195.8 L 134.2,198.6 L 136.6,201.2 L 139.0,203.8 L 141.4,206.2 L 143.8,208.6 L 146.2,210.8 L 148.6,212.9 L 151.0,215.0 L 153.4,216.9 L 155.8,218.8 L 158.2,220.6 L 160.6,222.2 L 163.0,223.8 L 165.4,225.2 L 167.8,226.6 L 170.2,227.8 L 172.6,228.9 L 175.0,230.0 L 177.4,230.9 L 179.8,231.8 L 182.2,232.6 L 184.6,233.2 L 187.0,233.8 L 189.4,234.2 L 191.8,234.6 L 194.2,234.8 L 196.6,234.9 L 199.0,235.0 L 201.4,234.9 L 203.8,234.8 L 206.2,234.6 L 208.6,234.2 L 211.0,233.8 L 213.4,233.2 L 215.8,232.6 L 218.2,231.8 L 220.6,230.9 L 223.0,230.0 L 225.4,228.9 L 227.8,227.8 L 230.2,226.6 L 232.6,225.2 L 235.0,223.8 L 237.4,222.2 L 239.8,220.5 L 242.2,218.8 L 244.6,216.9 L 247.0,215.0 L 249.4,212.9 L 251.8,210.8 L 254.2,208.6 L 256.6,206.2 L 259.0,203.8 L 261.4,201.2 L 263.8,198.6 L 266.2,195.8 L 268.6,192.9 L 271.0,190.0 L 273.4,187.0 L 275.8,183.8 L 278.2,180.5 L 280.6,177.2 L 283.0,173.8 L 285.4,170.2 L 287.8,166.5 L 290.2,162.8 L 292.6,159.0 L 295.0,155.0 L 297.4,150.9 L 299.8,146.8 L 302.2,142.6 L 304.6,138.2 L 307.0,133.8 L 309.4,129.2 L 311.8,124.5 L 314.2,119.8 L 316.6,115.0 L 319.0,110.0 L 321.4,104.9 L 323.8,99.8 L 326.2,94.6 L 328.6,89.2 L 331.0,83.7 L 333.4,78.2 L 335.8,72.6 L 338.2,66.8 L 340.6,60.9 L 343.0,55.0\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<text x=\"225\" y=\"57\" font-size=\"15\">y = x² - 4x + 3</text>\n</svg></span><p>Bestäm exakt arean av det markerade området mellan grafen \\(y=x^2-4x+3\\) och \\(x\\)-axeln.</p>",
+    "t": "<span class=\"fig\"><svg height=\"270\" width=\"390\" viewBox=\"0 0 390 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med x kvadrat minus 4x plus 3 med området mellan x lika med 1 och 3 markerat\">\n<rect width=\"390\" height=\"270\" fill=\"white\"/>\n<line x1=\"55\" y1=\"35\" x2=\"55\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"51\" y=\"210\" font-size=\"12\">0</text><line x1=\"127\" y1=\"35\" x2=\"127\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"123\" y=\"210\" font-size=\"12\">1</text><line x1=\"199\" y1=\"35\" x2=\"199\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"195\" y=\"210\" font-size=\"12\">2</text><line x1=\"271\" y1=\"35\" x2=\"271\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"267\" y=\"210\" font-size=\"12\">3</text><line x1=\"343\" y1=\"35\" x2=\"343\" y2=\"245\" stroke=\"#e4e4e4\"/><text x=\"339\" y=\"210\" font-size=\"12\">4</text><line x1=\"45\" y1=\"235\" x2=\"355\" y2=\"235\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"190\" x2=\"355\" y2=\"190\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"145\" x2=\"355\" y2=\"145\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"100\" x2=\"355\" y2=\"100\" stroke=\"#e4e4e4\"/><line x1=\"45\" y1=\"55\" x2=\"355\" y2=\"55\" stroke=\"#e4e4e4\"/>\n<line x1=\"45\" y1=\"190\" x2=\"360\" y2=\"190\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"245\" x2=\"55\" y2=\"30\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 127,190 L 127.0,190.0 L 129.4,193.0 L 131.8,195.8 L 134.2,198.6 L 136.6,201.2 L 139.0,203.8 L 141.4,206.2 L 143.8,208.6 L 146.2,210.8 L 148.6,212.9 L 151.0,215.0 L 153.4,216.9 L 155.8,218.8 L 158.2,220.6 L 160.6,222.2 L 163.0,223.8 L 165.4,225.2 L 167.8,226.6 L 170.2,227.8 L 172.6,228.9 L 175.0,230.0 L 177.4,230.9 L 179.8,231.8 L 182.2,232.6 L 184.6,233.2 L 187.0,233.8 L 189.4,234.2 L 191.8,234.6 L 194.2,234.8 L 196.6,234.9 L 199.0,235.0 L 201.4,234.9 L 203.8,234.8 L 206.2,234.6 L 208.6,234.2 L 211.0,233.8 L 213.4,233.2 L 215.8,232.6 L 218.2,231.8 L 220.6,230.9 L 223.0,230.0 L 225.4,228.9 L 227.8,227.8 L 230.2,226.5 L 232.6,225.2 L 235.0,223.8 L 237.4,222.2 L 239.8,220.6 L 242.2,218.8 L 244.6,216.9 L 247.0,215.0 L 249.4,212.9 L 251.8,210.8 L 254.2,208.6 L 256.6,206.2 L 259.0,203.8 L 261.4,201.2 L 263.8,198.6 L 266.2,195.8 L 268.6,192.9 L 271.0,190.0 L 271,190 Z\" fill=\"#888\" fill-opacity=\".28\"/>\n<path d=\"M 55.0,55.0 L 57.4,60.9 L 59.8,66.8 L 62.2,72.6 L 64.6,78.2 L 67.0,83.8 L 69.4,89.2 L 71.8,94.6 L 74.2,99.8 L 76.6,105.0 L 79.0,110.0 L 81.4,115.0 L 83.8,119.8 L 86.2,124.6 L 88.6,129.2 L 91.0,133.8 L 93.4,138.2 L 95.8,142.6 L 98.2,146.8 L 100.6,150.9 L 103.0,155.0 L 105.4,158.9 L 107.8,162.8 L 110.2,166.6 L 112.6,170.2 L 115.0,173.8 L 117.4,177.2 L 119.8,180.6 L 122.2,183.8 L 124.6,186.9 L 127.0,190.0 L 129.4,193.0 L 131.8,195.8 L 134.2,198.6 L 136.6,201.2 L 139.0,203.8 L 141.4,206.2 L 143.8,208.6 L 146.2,210.8 L 148.6,212.9 L 151.0,215.0 L 153.4,216.9 L 155.8,218.8 L 158.2,220.6 L 160.6,222.2 L 163.0,223.8 L 165.4,225.2 L 167.8,226.6 L 170.2,227.8 L 172.6,228.9 L 175.0,230.0 L 177.4,230.9 L 179.8,231.8 L 182.2,232.6 L 184.6,233.2 L 187.0,233.8 L 189.4,234.2 L 191.8,234.6 L 194.2,234.8 L 196.6,234.9 L 199.0,235.0 L 201.4,234.9 L 203.8,234.8 L 206.2,234.6 L 208.6,234.2 L 211.0,233.8 L 213.4,233.2 L 215.8,232.6 L 218.2,231.8 L 220.6,230.9 L 223.0,230.0 L 225.4,228.9 L 227.8,227.8 L 230.2,226.6 L 232.6,225.2 L 235.0,223.8 L 237.4,222.2 L 239.8,220.5 L 242.2,218.8 L 244.6,216.9 L 247.0,215.0 L 249.4,212.9 L 251.8,210.8 L 254.2,208.6 L 256.6,206.2 L 259.0,203.8 L 261.4,201.2 L 263.8,198.6 L 266.2,195.8 L 268.6,192.9 L 271.0,190.0 L 273.4,187.0 L 275.8,183.8 L 278.2,180.5 L 280.6,177.2 L 283.0,173.8 L 285.4,170.2 L 287.8,166.5 L 290.2,162.8 L 292.6,159.0 L 295.0,155.0 L 297.4,150.9 L 299.8,146.8 L 302.2,142.6 L 304.6,138.2 L 307.0,133.8 L 309.4,129.2 L 311.8,124.5 L 314.2,119.8 L 316.6,115.0 L 319.0,110.0 L 321.4,104.9 L 323.8,99.8 L 326.2,94.6 L 328.6,89.2 L 331.0,83.7 L 333.4,78.2 L 335.8,72.6 L 338.2,66.8 L 340.6,60.9 L 343.0,55.0\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<text x=\"225\" y=\"57\" font-size=\"15\">y = x² - 4x + 3</text>\n</svg></span><p>Bestäm exakt arean av det markerade området mellan grafen \\(y=x^2-4x+3\\) och \\(x\\)-axeln.</p>",
     "s": "<p>Nollställena är \\(x=1\\) och \\(x=3\\). Mellan dem ligger grafen under \\(x\\)-axeln, så arean är</p><p>\\[A=-\\int_1^3(x^2-4x+3)\\,dx.\\]</p><p>\\[A=-\\left[\\frac{x^3}{3}-2x^2+3x\\right]_1^3=\\mathbf{\\frac43}.\\]</p>",
-    "id": "3.22"
+    "id": "3.22",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4921,8 +5905,10 @@ window.BANKMATF1 = [
     "typ": "area mellan graf och x-axel",
     "poang": "2/0/0",
     "id": "3.28",
-    "t": "<span class=\"fig\"><svg height=\"260\" width=\"400\" viewBox=\"0 0 400 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med 4 minus x och ett markerat område mellan x lika med 1 och 3\">\n<rect width=\"400\" height=\"260\" fill=\"white\"/>\n<g stroke=\"#e6e6e6\">\n<line x1=\"60\" y1=\"40\" x2=\"60\" y2=\"220\"/><line x1=\"120\" y1=\"40\" x2=\"120\" y2=\"220\"/><line x1=\"180\" y1=\"40\" x2=\"180\" y2=\"220\"/><line x1=\"240\" y1=\"40\" x2=\"240\" y2=\"220\"/><line x1=\"300\" y1=\"40\" x2=\"300\" y2=\"220\"/>\n<line x1=\"45\" y1=\"220\" x2=\"340\" y2=\"220\"/><line x1=\"45\" y1=\"175\" x2=\"340\" y2=\"175\"/><line x1=\"45\" y1=\"130\" x2=\"340\" y2=\"130\"/><line x1=\"45\" y1=\"85\" x2=\"340\" y2=\"85\"/><line x1=\"45\" y1=\"40\" x2=\"340\" y2=\"40\"/>\n</g>\n<line x1=\"45\" y1=\"220\" x2=\"350\" y2=\"220\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"60\" y1=\"235\" x2=\"60\" y2=\"30\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M60 40 L300 220\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.6\"/>\n<path d=\"M120 85 L240 175 L240 220 L120 220 Z\" fill=\"#888\" fill-opacity=\"0.28\"/>\n<text x=\"252\" y=\"110\" font-size=\"14\">y = 4 - x</text>\n<text x=\"116\" y=\"238\" font-size=\"12\">1</text><text x=\"236\" y=\"238\" font-size=\"12\">3</text>\n</svg></span><p>Bestäm arean av det markerade området mellan grafen \\(y=4-x\\), \\(x\\)-axeln och linjerna \\(x=1\\) och \\(x=3\\).</p>",
-    "s": "<p>Arean ges av integralen</p><p>\\[A=\\int_1^3 (4-x)\\,dx.\\]</p><p>En primitiv funktion är \\(4x-\\frac{x^2}{2}\\). Då får vi</p><p>\\[A=\\left[4x-\\frac{x^2}{2}\\rightight]_1^3=(12-4,5)-(4-0,5)=7,5-3,5=4.\\]</p><p><strong>Arean är 4 areaenheter.</strong></p>"
+    "t": "<span class=\"fig\"><svg height=\"260\" width=\"400\" viewBox=\"0 0 400 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Grafen y lika med 4 minus x och ett markerat område mellan x lika med 1 och 3\">\n<rect width=\"400\" height=\"260\" fill=\"white\"/>\n<g stroke=\"#e6e6e6\">\n<line x1=\"60\" y1=\"40\" x2=\"60\" y2=\"220\"/><line x1=\"120\" y1=\"40\" x2=\"120\" y2=\"220\"/><line x1=\"180\" y1=\"40\" x2=\"180\" y2=\"220\"/><line x1=\"240\" y1=\"40\" x2=\"240\" y2=\"220\"/><line x1=\"300\" y1=\"40\" x2=\"300\" y2=\"220\"/>\n<line x1=\"45\" y1=\"220\" x2=\"340\" y2=\"220\"/><line x1=\"45\" y1=\"175\" x2=\"340\" y2=\"175\"/><line x1=\"45\" y1=\"130\" x2=\"340\" y2=\"130\"/><line x1=\"45\" y1=\"85\" x2=\"340\" y2=\"85\"/><line x1=\"45\" y1=\"40\" x2=\"340\" y2=\"40\"/>\n</g>\n<line x1=\"45\" y1=\"220\" x2=\"350\" y2=\"220\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"60\" y1=\"235\" x2=\"60\" y2=\"30\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M60 40 L300 175\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.6\"/>\n<path d=\"M120 85 L240 130 L240 220 L120 220 Z\" fill=\"#888\" fill-opacity=\"0.28\"/>\n<text x=\"252\" y=\"110\" font-size=\"14\">y = 4 - x</text>\n<text x=\"116\" y=\"238\" font-size=\"12\">1</text><text x=\"236\" y=\"238\" font-size=\"12\">3</text>\n</svg></span><p>Bestäm arean av det markerade området mellan grafen \\(y=4-x\\), \\(x\\)-axeln och linjerna \\(x=1\\) och \\(x=3\\).</p>",
+    "s": "<p>Arean ges av integralen</p><p>\\[A=\\int_1^3 (4-x)\\,dx.\\]</p><p>En primitiv funktion är \\(4x-\\frac{x^2}{2}\\). Då får vi</p><p>\\[A=\\left[4x-\\frac{x^2}{2}\\rightight]_1^3=(12-4,5)-(4-0,5)=7,5-3,5=4.\\]</p><p><strong>Arean är 4 areaenheter.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4930,9 +5916,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "area under parabel",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg height=\"270\" width=\"410\" viewBox=\"0 0 410 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med 4 minus x kvadrat med området mellan x lika med minus 2 och 2 markerat\">\n<rect width=\"410\" height=\"270\" fill=\"white\"/>\n<line x1=\"35\" y1=\"195.5\" x2=\"390\" y2=\"195.5\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"208.0\" y1=\"245\" x2=\"208.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 80.0,195.5 L 80.0,195.5 L 82.1,190.9 L 84.3,186.4 L 86.4,182.0 L 88.5,177.6 L 90.7,173.4 L 92.8,169.2 L 94.9,165.1 L 97.1,161.1 L 99.2,157.1 L 101.3,153.2 L 103.5,149.4 L 105.6,145.7 L 107.7,142.1 L 109.9,138.5 L 112.0,135.0 L 114.1,131.6 L 116.3,128.2 L 118.4,125.0 L 120.5,121.8 L 122.7,118.7 L 124.8,115.7 L 126.9,112.7 L 129.1,109.8 L 131.2,107.0 L 133.3,104.3 L 135.5,101.6 L 137.6,99.1 L 139.7,96.6 L 141.9,94.2 L 144.0,91.8 L 146.1,89.6 L 148.3,87.4 L 150.4,85.3 L 152.5,83.2 L 154.7,81.3 L 156.8,79.4 L 158.9,77.6 L 161.1,75.9 L 163.2,74.2 L 165.3,72.6 L 167.5,71.1 L 169.6,69.7 L 171.7,68.4 L 173.9,67.1 L 176.0,65.9 L 178.1,64.8 L 180.3,63.8 L 182.4,62.8 L 184.5,61.9 L 186.7,61.1 L 188.8,60.4 L 190.9,59.7 L 193.1,59.2 L 195.2,58.7 L 197.3,58.2 L 199.5,57.9 L 201.6,57.6 L 203.7,57.4 L 205.9,57.3 L 208.0,57.3 L 210.1,57.3 L 212.3,57.4 L 214.4,57.6 L 216.5,57.9 L 218.7,58.2 L 220.8,58.7 L 222.9,59.2 L 225.1,59.7 L 227.2,60.4 L 229.3,61.1 L 231.5,61.9 L 233.6,62.8 L 235.7,63.8 L 237.9,64.8 L 240.0,65.9 L 242.1,67.1 L 244.3,68.4 L 246.4,69.7 L 248.5,71.1 L 250.7,72.6 L 252.8,74.2 L 254.9,75.9 L 257.1,77.6 L 259.2,79.4 L 261.3,81.3 L 263.5,83.2 L 265.6,85.3 L 267.7,87.4 L 269.9,89.6 L 272.0,91.8 L 274.1,94.2 L 276.3,96.6 L 278.4,99.1 L 280.5,101.6 L 282.7,104.3 L 284.8,107.0 L 286.9,109.8 L 289.1,112.7 L 291.2,115.7 L 293.3,118.7 L 295.5,121.8 L 297.6,125.0 L 299.7,128.2 L 301.9,131.6 L 304.0,135.0 L 306.1,138.5 L 308.3,142.1 L 310.4,145.7 L 312.5,149.4 L 314.7,153.2 L 316.8,157.1 L 318.9,161.1 L 321.1,165.1 L 323.2,169.2 L 325.3,173.4 L 327.5,177.6 L 329.6,182.0 L 331.7,186.4 L 333.9,190.9 L 336.0,195.5 L 336.0,195.5 Z\" fill=\"#888\" fill-opacity=\".22\"/>\n<path d=\"M 80.0,195.5 L 82.0,191.2 L 84.0,187.0 L 86.0,182.8 L 88.0,178.7 L 90.0,174.7 L 92.0,170.8 L 94.0,166.9 L 96.0,163.1 L 98.0,159.3 L 100.0,155.6 L 102.0,152.0 L 104.0,148.5 L 106.0,145.0 L 108.0,141.6 L 110.0,138.3 L 112.0,135.0 L 114.0,131.8 L 116.0,128.7 L 118.0,125.6 L 120.0,122.6 L 122.0,119.7 L 124.0,116.8 L 126.0,114.0 L 128.0,111.2 L 130.0,108.6 L 132.0,106.0 L 134.0,103.5 L 136.0,101.0 L 138.0,98.6 L 140.0,96.3 L 142.0,94.0 L 144.0,91.8 L 146.0,89.7 L 148.0,87.6 L 150.0,85.6 L 152.0,83.7 L 154.0,81.9 L 156.0,80.1 L 158.0,78.4 L 160.0,76.7 L 162.0,75.1 L 164.0,73.6 L 166.0,72.2 L 168.0,70.8 L 170.0,69.5 L 172.0,68.2 L 174.0,67.0 L 176.0,65.9 L 178.0,64.9 L 180.0,63.9 L 182.0,63.0 L 184.0,62.1 L 186.0,61.4 L 188.0,60.6 L 190.0,60.0 L 192.0,59.4 L 194.0,58.9 L 196.0,58.5 L 198.0,58.1 L 200.0,57.8 L 202.0,57.6 L 204.0,57.4 L 206.0,57.3 L 208.0,57.3 L 210.0,57.3 L 212.0,57.4 L 214.0,57.6 L 216.0,57.8 L 218.0,58.1 L 220.0,58.5 L 222.0,58.9 L 224.0,59.4 L 226.0,60.0 L 228.0,60.6 L 230.0,61.4 L 232.0,62.1 L 234.0,63.0 L 236.0,63.9 L 238.0,64.9 L 240.0,65.9 L 242.0,67.0 L 244.0,68.2 L 246.0,69.5 L 248.0,70.8 L 250.0,72.2 L 252.0,73.6 L 254.0,75.1 L 256.0,76.7 L 258.0,78.4 L 260.0,80.1 L 262.0,81.9 L 264.0,83.7 L 266.0,85.6 L 268.0,87.6 L 270.0,89.7 L 272.0,91.8 L 274.0,94.0 L 276.0,96.3 L 278.0,98.6 L 280.0,101.0 L 282.0,103.5 L 284.0,106.0 L 286.0,108.6 L 288.0,111.2 L 290.0,114.0 L 292.0,116.8 L 294.0,119.7 L 296.0,122.6 L 298.0,125.6 L 300.0,128.7 L 302.0,131.8 L 304.0,135.0 L 306.0,138.3 L 308.0,141.6 L 310.0,145.0 L 312.0,148.5 L 314.0,152.0 L 316.0,155.6 L 318.0,159.3 L 320.0,163.1 L 322.0,166.9 L 324.0,170.8 L 326.0,174.7 L 328.0,178.7 L 330.0,182.8 L 332.0,187.0 L 334.0,191.2 L 336.0,195.5\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<text x=\"270\" y=\"58\" font-size=\"15\">y = 4 - x²</text>\n<text x=\"80.0\" y=\"217\" font-size=\"13\" text-anchor=\"middle\">−2</text>\n<text x=\"336.0\" y=\"217\" font-size=\"13\" text-anchor=\"middle\">2</text>\n</svg></span><p>Bestäm arean mellan grafen \\(y=4-x^2\\) och \\(x\\)-axeln.</p>",
+    "t": "<span class=\"fig\"><svg height=\"270\" width=\"410\" viewBox=\"0 0 410 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med 4 minus x kvadrat med området mellan x lika med minus 2 och 2 markerat\">\n<rect width=\"410\" height=\"270\" fill=\"white\"/>\n<line x1=\"35\" y1=\"195.5\" x2=\"390\" y2=\"195.5\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"208.0\" y1=\"245\" x2=\"208.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<path d=\"M 80.0,195.5 L 80.0,195.5 L 82.1,190.9 L 84.3,186.4 L 86.4,182.0 L 88.5,177.6 L 90.7,173.4 L 92.8,169.2 L 94.9,165.1 L 97.1,161.1 L 99.2,157.1 L 101.3,153.2 L 103.5,149.4 L 105.6,145.7 L 107.7,142.1 L 109.9,138.5 L 112.0,135.0 L 114.1,131.6 L 116.3,128.2 L 118.4,125.0 L 120.5,121.8 L 122.7,118.7 L 124.8,115.7 L 126.9,112.7 L 129.1,109.8 L 131.2,107.0 L 133.3,104.3 L 135.5,101.6 L 137.6,99.1 L 139.7,96.6 L 141.9,94.2 L 144.0,91.8 L 146.1,89.6 L 148.3,87.4 L 150.4,85.3 L 152.5,83.2 L 154.7,81.3 L 156.8,79.4 L 158.9,77.6 L 161.1,75.9 L 163.2,74.2 L 165.3,72.6 L 167.5,71.1 L 169.6,69.7 L 171.7,68.4 L 173.9,67.1 L 176.0,65.9 L 178.1,64.8 L 180.3,63.8 L 182.4,62.8 L 184.5,61.9 L 186.7,61.1 L 188.8,60.4 L 190.9,59.7 L 193.1,59.2 L 195.2,58.7 L 197.3,58.2 L 199.5,57.9 L 201.6,57.6 L 203.7,57.4 L 205.9,57.3 L 208.0,57.3 L 210.1,57.3 L 212.3,57.4 L 214.4,57.6 L 216.5,57.9 L 218.7,58.2 L 220.8,58.7 L 222.9,59.2 L 225.1,59.7 L 227.2,60.4 L 229.3,61.1 L 231.5,61.9 L 233.6,62.8 L 235.7,63.8 L 237.9,64.8 L 240.0,65.9 L 242.1,67.1 L 244.3,68.4 L 246.4,69.7 L 248.5,71.1 L 250.7,72.6 L 252.8,74.2 L 254.9,75.9 L 257.1,77.6 L 259.2,79.4 L 261.3,81.3 L 263.5,83.2 L 265.6,85.3 L 267.7,87.4 L 269.9,89.6 L 272.0,91.8 L 274.1,94.2 L 276.3,96.6 L 278.4,99.1 L 280.5,101.6 L 282.7,104.3 L 284.8,107.0 L 286.9,109.8 L 289.1,112.7 L 291.2,115.7 L 293.3,118.7 L 295.5,121.8 L 297.6,125.0 L 299.7,128.2 L 301.9,131.6 L 304.0,135.0 L 306.1,138.5 L 308.3,142.1 L 310.4,145.7 L 312.5,149.4 L 314.7,153.2 L 316.8,157.1 L 318.9,161.1 L 321.1,165.1 L 323.2,169.2 L 325.3,173.4 L 327.5,177.6 L 329.6,182.0 L 331.7,186.4 L 333.9,190.9 L 336.0,195.5 L 336.0,195.5 Z\" fill=\"#888\" fill-opacity=\".22\"/>\n<path d=\"M 48.0,273.2 L 50.0,267.8 L 52.0,262.5 L 54.0,257.3 L 56.0,252.1 L 58.0,247.0 L 60.0,242.0 L 62.0,237.1 L 64.0,232.2 L 66.0,227.3 L 68.0,222.6 L 70.0,217.9 L 72.0,213.3 L 74.0,208.7 L 76.0,204.2 L 78.0,199.8 L 80.0,195.5 L 82.0,191.2 L 84.0,187.0 L 86.0,182.8 L 88.0,178.7 L 90.0,174.7 L 92.0,170.8 L 94.0,166.9 L 96.0,163.1 L 98.0,159.3 L 100.0,155.6 L 102.0,152.0 L 104.0,148.5 L 106.0,145.0 L 108.0,141.6 L 110.0,138.3 L 112.0,135.0 L 114.0,131.8 L 116.0,128.7 L 118.0,125.6 L 120.0,122.6 L 122.0,119.7 L 124.0,116.8 L 126.0,114.0 L 128.0,111.2 L 130.0,108.6 L 132.0,106.0 L 134.0,103.5 L 136.0,101.0 L 138.0,98.6 L 140.0,96.3 L 142.0,94.0 L 144.0,91.8 L 146.0,89.7 L 148.0,87.6 L 150.0,85.6 L 152.0,83.7 L 154.0,81.9 L 156.0,80.1 L 158.0,78.4 L 160.0,76.7 L 162.0,75.1 L 164.0,73.6 L 166.0,72.2 L 168.0,70.8 L 170.0,69.5 L 172.0,68.2 L 174.0,67.0 L 176.0,65.9 L 178.0,64.9 L 180.0,63.9 L 182.0,63.0 L 184.0,62.1 L 186.0,61.4 L 188.0,60.6 L 190.0,60.0 L 192.0,59.4 L 194.0,58.9 L 196.0,58.5 L 198.0,58.1 L 200.0,57.8 L 202.0,57.6 L 204.0,57.4 L 206.0,57.3 L 208.0,57.3 L 210.0,57.3 L 212.0,57.4 L 214.0,57.6 L 216.0,57.8 L 218.0,58.1 L 220.0,58.5 L 222.0,58.9 L 224.0,59.4 L 226.0,60.0 L 228.0,60.6 L 230.0,61.4 L 232.0,62.1 L 234.0,63.0 L 236.0,63.9 L 238.0,64.9 L 240.0,65.9 L 242.0,67.0 L 244.0,68.2 L 246.0,69.5 L 248.0,70.8 L 250.0,72.2 L 252.0,73.6 L 254.0,75.1 L 256.0,76.7 L 258.0,78.4 L 260.0,80.1 L 262.0,81.9 L 264.0,83.7 L 266.0,85.6 L 268.0,87.6 L 270.0,89.7 L 272.0,91.8 L 274.0,94.0 L 276.0,96.3 L 278.0,98.6 L 280.0,101.0 L 282.0,103.5 L 284.0,106.0 L 286.0,108.6 L 288.0,111.2 L 290.0,114.0 L 292.0,116.8 L 294.0,119.7 L 296.0,122.6 L 298.0,125.6 L 300.0,128.7 L 302.0,131.8 L 304.0,135.0 L 306.0,138.3 L 308.0,141.6 L 310.0,145.0 L 312.0,148.5 L 314.0,152.0 L 316.0,155.6 L 318.0,159.3 L 320.0,163.1 L 322.0,166.9 L 324.0,170.8 L 326.0,174.7 L 328.0,178.7 L 330.0,182.8 L 332.0,187.0 L 334.0,191.2 L 336.0,195.5 L 338.0,199.8 L 340.0,204.2 L 342.0,208.7 L 344.0,213.3 L 346.0,217.9 L 348.0,222.6 L 350.0,227.3 L 352.0,232.2 L 354.0,237.1 L 356.0,242.0 L 358.0,247.0 L 360.0,252.1 L 362.0,257.3 L 364.0,262.5 L 366.0,267.8 L 368.0,273.2\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<text x=\"270\" y=\"58\" font-size=\"15\">y = 4 - x²</text>\n<text x=\"73.0\" y=\"213.5\" font-size=\"13\">-2</text>\n<text x=\"332.0\" y=\"213.5\" font-size=\"13\">2</text>\n</svg></span><p>Bestäm arean mellan grafen \\(y=4-x^2\\) och \\(x\\)-axeln.</p>",
     "s": "<p>Nollställena är \\(x=-2\\) och \\(x=2\\). Mellan nollställena ligger grafen ovanför \\(x\\)-axeln, så arean är</p><p>\\[A=\\int_{-2}^{2}(4-x^2)\\,dx.\\]</p><p>\\[A=\\left[4x-\\frac{x^3}{3}\\right]_{-2}^{2}=\\mathbf{\\frac{32}{3}}.\\]</p>",
-    "id": "3.49"
+    "id": "3.49",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4942,7 +5930,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm medelvärdet av \\(f(x)=x^2\\) på intervallet \\([0,3]\\).</p>",
     "s": "<p>Medelvärdet är</p><p>\\[\\frac{1}{3-0}\\int_0^3x^2dx=\\frac13\\left[\\frac{x^3}{3}\\right]_0^3=\\frac13\\cdot9=3.\\]</p>",
-    "id": "3.50"
+    "id": "3.50",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4952,7 +5942,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm arean mellan graferna \\(y=x+2\\) och \\(y=x^2\\) mellan deras skärningspunkter.</p>",
     "s": "<p>Skärningar: \\(x^2=x+2\\Rightarrow(x-2)(x+1)=0\\), alltså \\(x=-1,2\\). Linjen ligger över parabeln mellan skärningarna:</p><p>\\[A=\\int_{-1}^{2}(x+2-x^2)dx=\\frac92.\\]</p>",
-    "id": "3.51"
+    "id": "3.51",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4962,7 +5954,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En rektangel har hörn på \\(x\\)-axeln och de övre hörnen på parabeln \\(y=9-x^2\\), symmetriskt kring \\(y\\)-axeln. Bestäm största möjliga area.</p>",
     "s": "<p>Låt högra hörnets x-koordinat vara \\(x\\). Bredden är \\(2x\\) och höjden \\(9-x^2\\), så</p><p>\\[A(x)=2x(9-x^2)=18x-2x^3.\\]</p><p>\\[A'(x)=18-6x^2=0\\Rightarrow x=\\sqrt3.\\]</p><p>\\[A_{\\max}=2\\sqrt3(9-3)=12\\sqrt3.\\]</p>",
-    "id": "3.52"
+    "id": "3.52",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4972,7 +5966,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm arean mellan \\(y=6-2x\\), \\(x\\)-axeln och \\(y\\)-axeln.</p>",
     "s": "<p>Nollstället är \\(x=3\\). Arean kan beräknas med integral:</p><p>\\[\\int_0^3(6-2x)dx=[6x-x^2]_0^3=9.\\]</p>",
-    "id": "3.70"
+    "id": "3.70",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4982,7 +5978,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\int_{-2}^{2}(x^3+4)dx\\).</p>",
     "s": "<p>\\(x^3\\) är udda och integralen över ett symmetriskt intervall är 0. Den konstanta delen ger \\(4\\cdot4=16\\). Alltså <strong>16</strong>.</p>",
-    "id": "3.71"
+    "id": "3.71",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -4992,7 +5990,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För \\(m\\gt0\\) begränsar grafen \\(y=mx-x^2\\) tillsammans med \\(x\\)-axeln ett område mellan \\(x=0\\) och \\(x=m\\). Bestäm \\(m\\) om områdets area är \\(9/2\\).</p>",
     "s": "<p>Eftersom \\(y=x(m-x)\\) är funktionen positiv mellan nollställena \\(0\\) och \\(m\\). Arean är därför</p><p>\\[A=\\int_0^m(mx-x^2)\\,dx=\\left[\\frac{mx^2}{2}-\\frac{x^3}{3}\\right]_0^m.\\]</p><p>\\[A=\\frac{m^3}{2}-\\frac{m^3}{3}=\\frac{m^3}{6}.\\]</p><p>Villkoret \\(A=9/2\\) ger</p><p>\\[\\frac{m^3}{6}=\\frac92\\Rightarrow m^3=27.\\]</p><p>Eftersom \\(m\\gt0\\) får vi <strong>\\(m=3\\)</strong>.</p>",
-    "id": "3.72"
+    "id": "3.72",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5002,7 +6002,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(a\\gt0\\) så att \\(\\int_0^a 2x\\,dx=25\\).</p>",
     "s": "<p>\\[\\int_0^a2x dx=[x^2]_0^a=a^2.\\]</p><p>\\[a^2=25\\Rightarrow a=5\\] eftersom \\(a\\gt0\\).</p>",
-    "id": "3.73"
+    "id": "3.73",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5012,7 +6014,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm arean mellan grafen \\(y=x^2-1\\) och \\(x\\)-axeln på intervallet \\([-2,2]\\).</p>",
     "s": "<p>Nollställena är \\(x=\\pm1\\). Funktionen är positiv på \\([-2,-1]\\) och \\([1,2]\\), men negativ på \\([-1,1]\\). För area måste den negativa delen därför byta tecken:</p><p>\\[A=2\\int_1^2(x^2-1)\\,dx-\\int_{-1}^{1}(x^2-1)\\,dx.\\]</p><p>De yttre delarna ger tillsammans \\(8/3\\) och mittdelen ger \\(4/3\\). Alltså</p><p>\\[A=\\frac83+\\frac43=\\mathbf{4}.\\]</p>",
-    "id": "3.80"
+    "id": "3.80",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5022,7 +6026,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett CAS ger värdet \\(-1\\) för en primitiv funktion när du undersöker \\(\\int_1^\\infty \\frac{1}{x^{1/2}}\\,dx\\). Förklara varför man inte kan acceptera detta som integralens värde och avgör om integralen konvergerar.</p>",
     "s": "<p>En generaliserad integral måste behandlas som ett gränsvärde:</p><p>\\[\\int_1^R x^{-1/2}dx=2\\sqrt R-2.\\]</p><p>När \\(R\\to\\infty\\) går uttrycket mot \\(\\infty\\). Integralen <strong>divergerar</strong>. Ett CAS-uttryck för en primitiv funktion ersätter inte konvergensprövningen.</p>",
-    "id": "3.13"
+    "id": "3.13",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5032,7 +6038,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett CAS ger resultatet</p><p>\\[\\int_0^2\\frac{1}{(x-1)^2}\\,dx=-2.\\]</p><p>Förklara varför resultatet inte kan användas som värde på den generaliserade integralen och avgör om integralen konvergerar.</p>",
     "s": "<p>Integranden går mot oändligheten när \\(x\\to1\\). Integralen måste därför delas upp:</p><p>\\[\\int_0^1\\frac{dx}{(x-1)^2}+\\int_1^2\\frac{dx}{(x-1)^2}.\\]</p><p>Redan den första delen divergerar eftersom en primitiv funktion är \\(-1/(x-1)\\), som går mot \\(+\\infty\\) när \\(x\\to1^-\\). Även den andra delen divergerar.</p><p>Integralen är alltså <strong>divergent</strong>. CAS-resultatet kommer av att man formellt satt in ändpunkterna utan att ta hänsyn till att integranden går mot oändligheten vid \\(x=1\\).</p>",
-    "id": "3.23"
+    "id": "3.23",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5042,7 +6050,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "3.29",
     "t": "<p>Ett CAS ger att derivatan av \\(f(x)=x^3-6x\\) är \\(f'(x)=3x^2-6\\).</p><ol type=\"a\"><li>Bestäm de kritiska punkterna.</li><li>Ange i vilka intervall funktionen är växande.</li></ol>",
-    "s": "<p><strong>a)</strong> Kritiska punkter fås när derivatan är 0:</p><p>\\[3x^2-6=0\\Rightarrow x^2=2\\Rightarrow x=\\pm \\sqrt2.\\]</p><p><strong>b)</strong> Funktionen är växande när \\(f'(x)\\gt 0\\):</p><p>\\[3x^2-6\\gt 0\\Rightarrow x^2\\gt 2\\Rightarrow x\\lt -\\sqrt2\\ \\text{eller}\\ x\\gt \\sqrt2.\\]</p><p><strong>Funktionen är alltså växande för \\(( -\\infty,-\\sqrt2)\\) och \\((\\sqrt2,\\infty)\\).</strong></p>"
+    "s": "<p><strong>a)</strong> Kritiska punkter fås när derivatan är 0:</p><p>\\[3x^2-6=0\\Rightarrow x^2=2\\Rightarrow x=\\pm \\sqrt2.\\]</p><p><strong>b)</strong> Funktionen är växande när \\(f'(x)\\gt 0\\):</p><p>\\[3x^2-6\\gt 0\\Rightarrow x^2\\gt 2\\Rightarrow x\\lt -\\sqrt2\\ \\text{eller}\\ x\\gt \\sqrt2.\\]</p><p><strong>Funktionen är alltså växande för \\(( -\\infty,-\\sqrt2)\\) och \\((\\sqrt2,\\infty)\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5052,7 +6062,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett digitalt verktyg ger \\(\\int_0^2 e^{-x^2}dx\\approx0,8821\\). Vad betyder talet geometriskt?</p>",
     "s": "<p>Eftersom \\(e^{-x^2}\\gt0\\) på intervallet är integralvärdet arean mellan grafen \\(y=e^{-x^2}\\), \\(x\\)-axeln och linjerna \\(x=0\\) och \\(x=2\\). Arean är ungefär <strong>0,8821 areaenheter</strong>.</p>",
-    "id": "3.53"
+    "id": "3.53",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5062,7 +6074,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett CAS ger lösningarna \\(x=\\pm2\\) till ekvationen \\(\\sqrt{x^2}=2\\). En elev påstår därför att \\(\\sqrt{x^2}=x\\) för alla reella \\(x\\). Förklara felet.</p>",
     "s": "<p>För reella \\(x\\) gäller \\(\\sqrt{x^2}=|x|\\), inte alltid \\(x\\). Om \\(x\\lt0\\) är \\(|x|=-x\\). CAS-svaret \\(x=\\pm2\\) visar just att båda tecknen är möjliga. Elevens generalisering är därför fel.</p>",
-    "id": "3.54"
+    "id": "3.54",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5072,7 +6086,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett digitalt verktyg ger nollpunkten \\(x\\approx1,521\\) till \\(x^3-x-2=0\\). Förklara hur du kan kontrollera att värdet är rimligt utan att lösa ekvationen exakt.</p>",
     "s": "<p>Sätt in värdet ungefärligt: \\(1,521^3-1,521-2\\approx0\\). Man kan också kontrollera teckenbyte: \\(f(1)=-2\\) och \\(f(2)=4\\), så en nollpunkt mellan 1 och 2 är rimlig.</p>",
-    "id": "3.74"
+    "id": "3.74",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 3,
@@ -5082,7 +6098,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett verktyg ger \\(f'(2)\\approx-3,7\\) för en mätdataanpassad funktion \\(f(t)\\), där \\(f\\) mäts i °C och \\(t\\) i minuter. Tolka värdet.</p>",
     "s": "<p>Vid \\(t=2\\) minuter minskar temperaturen momentant med ungefär <strong>3,7 °C per minut</strong>. Minustecknet anger minskning.</p>",
-    "id": "3.75"
+    "id": "3.75",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5092,7 +6110,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Bestäm</p><p>\\[\\int e^{x}\\sin x\\,dx.\\]</p>",
     "s": "<p><strong>Nyckelidé:</strong> Här blir ingen av faktorerna enklare när man deriverar. Efter två partiella integrationer dyker den ursprungliga integralen upp igen, och då kan man lösa ut den som en obekant.</p><p>Kalla integralen \\(I\\). Välj \\(u=\\sin x\\) och \\(dv=e^{x}dx\\), så att \\(du=\\cos x\\,dx\\) och \\(v=e^{x}\\):</p><p>\\[I=e^{x}\\sin x-\\int e^{x}\\cos x\\,dx.\\]</p><p>Integrera partiellt en gång till, nu med \\(u=\\cos x\\) och \\(dv=e^{x}dx\\):</p><p>\\[\\int e^{x}\\cos x\\,dx=e^{x}\\cos x+\\int e^{x}\\sin x\\,dx=e^{x}\\cos x+I.\\]</p><p>Sätt in detta i den första likheten:</p><p>\\[I=e^{x}\\sin x-\\left(e^{x}\\cos x+I\\right)=e^{x}\\sin x-e^{x}\\cos x-I.\\]</p><p>Nu står \\(I\\) i båda leden. Addera \\(I\\) till båda sidor:</p><p>\\[2I=e^{x}(\\sin x-\\cos x).\\]</p><p>Alltså</p><p>\\[\\int e^{x}\\sin x\\,dx=\\mathbf{\\frac{e^{x}(\\sin x-\\cos x)}{2}+C}.\\]</p><p><strong>Kontroll genom derivering:</strong> derivatan av \\(\\tfrac12 e^{x}(\\sin x-\\cos x)\\) blir \\(\\tfrac12 e^{x}(\\sin x-\\cos x)+\\tfrac12 e^{x}(\\cos x+\\sin x)=e^{x}\\sin x\\).</p>",
-    "id": "3.81"
+    "id": "3.81",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5102,7 +6122,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Bestäm</p><p>\\[\\int(\\ln x)^2\\,dx,\\qquad x\\gt 0.\\]</p>",
     "s": "<p><strong>Idé:</strong> Precis som för \\(\\int\\ln x\\,dx\\) finns ingen synlig andra faktor. Skriv därför integranden som \\(1\\cdot(\\ln x)^2\\) och låt \\(dv=dx\\).</p><p>Med \\(u=(\\ln x)^2\\) och \\(dv=dx\\) blir \\(du=\\dfrac{2\\ln x}{x}dx\\) och \\(v=x\\):</p><p>\\[\\int(\\ln x)^2dx=x(\\ln x)^2-\\int x\\cdot\\frac{2\\ln x}{x}\\,dx=x(\\ln x)^2-2\\int\\ln x\\,dx.\\]</p><p>Den återstående integralen är känd sedan tidigare:</p><p>\\[\\int\\ln x\\,dx=x\\ln x-x.\\]</p><p>Insättning ger</p><p>\\[x(\\ln x)^2-2(x\\ln x-x)=\\mathbf{x(\\ln x)^2-2x\\ln x+2x+C}.\\]</p><p><strong>Kontroll:</strong> derivering ger \\((\\ln x)^2+2\\ln x-2\\ln x-2+2=(\\ln x)^2\\).</p>",
-    "id": "3.82"
+    "id": "3.82",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5112,7 +6134,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm</p><p>\\[\\int xe^{3x}\\,dx.\\]</p>",
     "s": "<p>Välj \\(u=x\\) och \\(dv=e^{3x}dx\\). Då är \\(du=dx\\) och \\(v=\\frac13e^{3x}\\).</p><p>\\[\\int xe^{3x}dx=\\frac{x}{3}e^{3x}-\\frac13\\int e^{3x}dx\\]</p><p>\\[=\\frac{x}{3}e^{3x}-\\frac19e^{3x}+C.\\]</p><p><strong>\\[e^{3x}\\left(\\frac{x}{3}-\\frac19\\right)+C.\\]</strong></p>",
-    "id": "3.90"
+    "id": "3.90",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5122,7 +6146,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm</p><p>\\[\\int x\\sin(3x)\\,dx.\\]</p>",
     "s": "<p>Välj \\(u=x\\), \\(dv=\\sin(3x)dx\\). Då är \\(v=-\\frac13\\cos(3x)\\).</p><p>\\[\\int x\\sin(3x)dx=-\\frac{x}{3}\\cos(3x)+\\frac13\\int\\cos(3x)dx\\]</p><p>\\[=\\boxed{-\\frac{x}{3}\\cos(3x)+\\frac19\\sin(3x)+C}.\\]</p>",
-    "id": "3.91"
+    "id": "3.91",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5132,7 +6158,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\int\\ln(3x)\\,dx\\) för \\(x>0\\).</p>",
     "s": "<p>Skriv integranden som \\(1\\cdot\\ln(3x)\\). Välj \\(u=\\ln(3x)\\) och \\(dv=dx\\). Då är \\(du=\\frac1x dx\\) och \\(v=x\\).</p><p>\\[\\int\\ln(3x)dx=x\\ln(3x)-\\int1\\,dx.\\]</p><p><strong>\\[x\\ln(3x)-x+C.\\]</strong></p>",
-    "id": "3.92"
+    "id": "3.92",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5142,7 +6170,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Beräkna</p><p>\\[\\int_0^2xe^x\\,dx.\\]</p>",
     "s": "<p>En primitiv funktion är \\((x-1)e^x\\). Därför</p><p>\\[\\int_0^2xe^x dx=[(x-1)e^x]_0^2=e^2-(-1)=e^2+1.\\]</p><p><strong>Svar: \\(e^2+1\\).</strong></p>",
-    "id": "3.93"
+    "id": "3.93",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5152,7 +6182,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Bestäm</p><p>\\[\\int x^2e^{-x}\\,dx.\\]</p>",
     "s": "<p>Första partiella integreringen: välj \\(u=x^2\\), \\(dv=e^{-x}dx\\). Då är \\(v=-e^{-x}\\).</p><p>\\[\\int x^2e^{-x}dx=-x^2e^{-x}+2\\int xe^{-x}dx.\\]</p><p>Vidare</p><p>\\[\\int xe^{-x}dx=-(x+1)e^{-x}.\\]</p><p>Alltså</p><p><strong>\\[\\int x^2e^{-x}dx=-(x^2+2x+2)e^{-x}+C.\\]</strong></p>",
-    "id": "3.94"
+    "id": "3.94",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5162,7 +6194,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Bestäm</p><p>\\[\\int x^2\\cos x\\,dx.\\]</p>",
     "s": "<p>Välj först \\(u=x^2\\), \\(dv=\\cos xdx\\):</p><p>\\[\\int x^2\\cos xdx=x^2\\sin x-2\\int x\\sin xdx.\\]</p><p>Den återstående integralen är</p><p>\\[\\int x\\sin xdx=-x\\cos x+\\sin x.\\]</p><p>Därför</p><p><strong>\\[x^2\\sin x+2x\\cos x-2\\sin x+C.\\]</strong></p>",
-    "id": "3.95"
+    "id": "3.95",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5172,7 +6206,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(\\int x\\ln(2x)\\,dx\\) för \\(x>0\\).</p>",
     "s": "<p>Välj \\(u=\\ln(2x)\\) och \\(dv=x\\,dx\\). Då är \\(du=\\frac1x dx\\) och \\(v=\\frac{x^2}{2}\\).</p><p>\\[\\int x\\ln(2x)dx=\\frac{x^2}{2}\\ln(2x)-\\frac12\\int xdx\\]</p><p><strong>\\[=\\frac{x^2}{2}\\ln(2x)-\\frac{x^2}{4}+C.\\]</strong></p>",
-    "id": "3.96"
+    "id": "3.96",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5182,7 +6218,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Beräkna</p><p>\\[\\int_1^e(\\ln x)^2\\,dx.\\]</p>",
     "s": "<p>Välj \\(u=(\\ln x)^2\\), \\(dv=dx\\). Då är \\(du=\\frac{2\\ln x}{x}dx\\) och \\(v=x\\):</p><p>\\[\\int(\\ln x)^2dx=x(\\ln x)^2-2\\int\\ln xdx.\\]</p><p>Eftersom \\(\\int\\ln xdx=x\\ln x-x\\) får vi</p><p>\\[F(x)=x(\\ln x)^2-2x\\ln x+2x.\\]</p><p>\\[F(e)=e-2e+2e=e,\\qquad F(1)=2.\\]</p><p><strong>Integralen är \\(e-2\\).</strong></p>",
-    "id": "3.97"
+    "id": "3.97",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5190,9 +6228,11 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "optimering av inskriven rektangel",
     "poang": "0/1/3",
-    "t": "<span class=\"fig\"><svg width=\"460\" height=\"300\" viewBox=\"0 0 460 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med 12 minus x kvadrat med en inskriven rektangel som har basen på x-axeln\">\n<rect width=\"460\" height=\"300\" fill=\"white\"/>\n<rect x=\"126.0\" y=\"116.0\" width=\"208.0\" height=\"124.0\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<path d=\"M 48.0,243.9 L 50.6,238.5 L 53.2,233.2 L 55.8,227.9 L 58.4,222.8 L 61.0,217.7 L 63.6,212.7 L 66.2,207.8 L 68.8,203.0 L 71.4,198.2 L 74.0,193.5 L 76.6,188.9 L 79.2,184.4 L 81.8,179.9 L 84.4,175.5 L 87.0,171.2 L 89.6,167.0 L 92.2,162.8 L 94.8,158.8 L 97.4,154.8 L 100.0,150.9 L 102.6,147.0 L 105.2,143.3 L 107.8,139.6 L 110.4,136.0 L 113.0,132.5 L 115.6,129.0 L 118.2,125.6 L 120.8,122.4 L 123.4,119.1 L 126.0,116.0 L 128.6,112.9 L 131.2,110.0 L 133.8,107.0 L 136.4,104.2 L 139.0,101.5 L 141.6,98.8 L 144.2,96.2 L 146.8,93.7 L 149.4,91.2 L 152.0,88.9 L 154.6,86.6 L 157.2,84.4 L 159.8,82.2 L 162.4,80.2 L 165.0,78.2 L 167.6,76.3 L 170.2,74.5 L 172.8,72.8 L 175.4,71.1 L 178.0,69.5 L 180.6,68.0 L 183.2,66.6 L 185.8,65.2 L 188.4,63.9 L 191.0,62.7 L 193.6,61.6 L 196.2,60.5 L 198.8,59.6 L 201.4,58.7 L 204.0,57.9 L 206.6,57.1 L 209.2,56.5 L 211.8,55.9 L 214.4,55.4 L 217.0,55.0 L 219.6,54.6 L 222.2,54.3 L 224.8,54.2 L 227.4,54.0 L 230.0,54.0 L 232.6,54.0 L 235.2,54.2 L 237.8,54.3 L 240.4,54.6 L 243.0,55.0 L 245.6,55.4 L 248.2,55.9 L 250.8,56.5 L 253.4,57.1 L 256.0,57.9 L 258.6,58.7 L 261.2,59.6 L 263.8,60.5 L 266.4,61.6 L 269.0,62.7 L 271.6,63.9 L 274.2,65.2 L 276.8,66.6 L 279.4,68.0 L 282.0,69.5 L 284.6,71.1 L 287.2,72.8 L 289.8,74.5 L 292.4,76.3 L 295.0,78.2 L 297.6,80.2 L 300.2,82.2 L 302.8,84.4 L 305.4,86.6 L 308.0,88.9 L 310.6,91.2 L 313.2,93.7 L 315.8,96.2 L 318.4,98.8 L 321.0,101.5 L 323.6,104.2 L 326.2,107.0 L 328.8,110.0 L 331.4,112.9 L 334.0,116.0 L 336.6,119.1 L 339.2,122.4 L 341.8,125.6 L 344.4,129.0 L 347.0,132.5 L 349.6,136.0 L 352.2,139.6 L 354.8,143.3 L 357.4,147.0 L 360.0,150.9 L 362.6,154.8 L 365.2,158.8 L 367.8,162.8 L 370.4,167.0 L 373.0,171.2 L 375.6,175.5 L 378.2,179.9 L 380.8,184.4 L 383.4,188.9 L 386.0,193.5 L 388.6,198.2 L 391.2,203.0 L 393.8,207.8 L 396.4,212.7 L 399.0,217.7 L 401.6,222.8 L 404.2,227.9 L 406.8,233.2 L 409.4,238.5 L 412.0,243.9\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<line x1=\"45\" y1=\"240\" x2=\"425\" y2=\"240\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"30\" x2=\"230\" y2=\"256\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"74\" y1=\"240\" x2=\"74\" y2=\"245\" stroke=\"#222\"/><text x=\"74\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-3</text><line x1=\"126\" y1=\"240\" x2=\"126\" y2=\"245\" stroke=\"#222\"/><text x=\"126\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-2</text><line x1=\"178\" y1=\"240\" x2=\"178\" y2=\"245\" stroke=\"#222\"/><text x=\"178\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-1</text><line x1=\"282\" y1=\"240\" x2=\"282\" y2=\"245\" stroke=\"#222\"/><text x=\"282\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"334\" y1=\"240\" x2=\"334\" y2=\"245\" stroke=\"#222\"/><text x=\"334\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"386\" y1=\"240\" x2=\"386\" y2=\"245\" stroke=\"#222\"/><text x=\"386\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">3</text><line x1=\"225\" y1=\"178\" x2=\"235\" y2=\"178\" stroke=\"#222\"/><text x=\"214\" y=\"183\" font-size=\"12.5\" text-anchor=\"end\">4</text><line x1=\"225\" y1=\"116\" x2=\"235\" y2=\"116\" stroke=\"#222\"/><text x=\"214\" y=\"135\" font-size=\"12.5\" text-anchor=\"end\">8</text><line x1=\"225\" y1=\"54\" x2=\"235\" y2=\"54\" stroke=\"#222\"/><text x=\"214\" y=\"48\" font-size=\"12.5\" text-anchor=\"end\">12</text>\n<circle cx=\"334.0\" cy=\"116.0\" r=\"5\" fill=\"#B23A2E\"/>\n<circle cx=\"126.0\" cy=\"116.0\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"420\" y=\"96\" font-size=\"14\" fill=\"#B23A2E\" text-anchor=\"end\">(x, 12 − x²)</text>\n<text x=\"230\" y=\"278\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">bredd 2x, höjd 12 − x²</text>\n<text x=\"300\" y=\"60\" font-size=\"15\">y = 12 − x²</text>\n<text x=\"428\" y=\"245\" font-size=\"14\">x</text><text x=\"238\" y=\"40\" font-size=\"14\">y</text>\n</svg></span><p>En rektangel har sin bas på \\(x\\)-axeln och sina två övre hörn på parabeln \\(y=12-x^2\\), symmetriskt kring \\(y\\)-axeln.</p><ol type=\"a\"><li>Uttryck rektangelns area som en funktion av \\(x\\), där \\(x\\gt0\\) är det högra hörnets \\(x\\)-koordinat.</li><li>Bestäm den största möjliga arean.</li><li>Motivera att det verkligen är ett maximum.</li></ol>",
+    "t": "<span class=\"fig\"><svg width=\"460\" height=\"300\" viewBox=\"0 0 460 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Parabeln y lika med 12 minus x kvadrat med en inskriven rektangel som har basen på x-axeln\">\n<rect width=\"460\" height=\"300\" fill=\"white\"/>\n<rect x=\"126.0\" y=\"116.0\" width=\"208.0\" height=\"124.0\" fill=\"#2C62A8\" fill-opacity=\".16\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n<path d=\"M 48.0,243.9 L 50.6,238.5 L 53.2,233.2 L 55.8,227.9 L 58.4,222.8 L 61.0,217.7 L 63.6,212.7 L 66.2,207.8 L 68.8,203.0 L 71.4,198.2 L 74.0,193.5 L 76.6,188.9 L 79.2,184.4 L 81.8,179.9 L 84.4,175.5 L 87.0,171.2 L 89.6,167.0 L 92.2,162.8 L 94.8,158.8 L 97.4,154.8 L 100.0,150.9 L 102.6,147.0 L 105.2,143.3 L 107.8,139.6 L 110.4,136.0 L 113.0,132.5 L 115.6,129.0 L 118.2,125.6 L 120.8,122.4 L 123.4,119.1 L 126.0,116.0 L 128.6,112.9 L 131.2,110.0 L 133.8,107.0 L 136.4,104.2 L 139.0,101.5 L 141.6,98.8 L 144.2,96.2 L 146.8,93.7 L 149.4,91.2 L 152.0,88.9 L 154.6,86.6 L 157.2,84.4 L 159.8,82.2 L 162.4,80.2 L 165.0,78.2 L 167.6,76.3 L 170.2,74.5 L 172.8,72.8 L 175.4,71.1 L 178.0,69.5 L 180.6,68.0 L 183.2,66.6 L 185.8,65.2 L 188.4,63.9 L 191.0,62.7 L 193.6,61.6 L 196.2,60.5 L 198.8,59.6 L 201.4,58.7 L 204.0,57.9 L 206.6,57.1 L 209.2,56.5 L 211.8,55.9 L 214.4,55.4 L 217.0,55.0 L 219.6,54.6 L 222.2,54.3 L 224.8,54.2 L 227.4,54.0 L 230.0,54.0 L 232.6,54.0 L 235.2,54.2 L 237.8,54.3 L 240.4,54.6 L 243.0,55.0 L 245.6,55.4 L 248.2,55.9 L 250.8,56.5 L 253.4,57.1 L 256.0,57.9 L 258.6,58.7 L 261.2,59.6 L 263.8,60.5 L 266.4,61.6 L 269.0,62.7 L 271.6,63.9 L 274.2,65.2 L 276.8,66.6 L 279.4,68.0 L 282.0,69.5 L 284.6,71.1 L 287.2,72.8 L 289.8,74.5 L 292.4,76.3 L 295.0,78.2 L 297.6,80.2 L 300.2,82.2 L 302.8,84.4 L 305.4,86.6 L 308.0,88.9 L 310.6,91.2 L 313.2,93.7 L 315.8,96.2 L 318.4,98.8 L 321.0,101.5 L 323.6,104.2 L 326.2,107.0 L 328.8,110.0 L 331.4,112.9 L 334.0,116.0 L 336.6,119.1 L 339.2,122.4 L 341.8,125.6 L 344.4,129.0 L 347.0,132.5 L 349.6,136.0 L 352.2,139.6 L 354.8,143.3 L 357.4,147.0 L 360.0,150.9 L 362.6,154.8 L 365.2,158.8 L 367.8,162.8 L 370.4,167.0 L 373.0,171.2 L 375.6,175.5 L 378.2,179.9 L 380.8,184.4 L 383.4,188.9 L 386.0,193.5 L 388.6,198.2 L 391.2,203.0 L 393.8,207.8 L 396.4,212.7 L 399.0,217.7 L 401.6,222.8 L 404.2,227.9 L 406.8,233.2 L 409.4,238.5 L 412.0,243.9\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<line x1=\"45\" y1=\"240\" x2=\"425\" y2=\"240\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"30\" x2=\"230\" y2=\"256\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"74\" y1=\"240\" x2=\"74\" y2=\"245\" stroke=\"#222\"/><text x=\"74\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-3</text><line x1=\"126\" y1=\"240\" x2=\"126\" y2=\"245\" stroke=\"#222\"/><text x=\"126\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-2</text><line x1=\"178\" y1=\"240\" x2=\"178\" y2=\"245\" stroke=\"#222\"/><text x=\"178\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">-1</text><line x1=\"282\" y1=\"240\" x2=\"282\" y2=\"245\" stroke=\"#222\"/><text x=\"282\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"334\" y1=\"240\" x2=\"334\" y2=\"245\" stroke=\"#222\"/><text x=\"334\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"386\" y1=\"240\" x2=\"386\" y2=\"245\" stroke=\"#222\"/><text x=\"386\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">3</text><line x1=\"225\" y1=\"178\" x2=\"235\" y2=\"178\" stroke=\"#222\"/><text x=\"220\" y=\"183\" font-size=\"12.5\" text-anchor=\"end\">4</text><line x1=\"225\" y1=\"116\" x2=\"235\" y2=\"116\" stroke=\"#222\"/><text x=\"220\" y=\"121\" font-size=\"12.5\" text-anchor=\"end\">8</text><line x1=\"225\" y1=\"54\" x2=\"235\" y2=\"54\" stroke=\"#222\"/><text x=\"220\" y=\"59\" font-size=\"12.5\" text-anchor=\"end\">12</text>\n<circle cx=\"334.0\" cy=\"116.0\" r=\"5\" fill=\"#B23A2E\"/>\n<circle cx=\"126.0\" cy=\"116.0\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"420\" y=\"96\" font-size=\"14\" fill=\"#B23A2E\" text-anchor=\"end\">(x, 12 − x²)</text>\n<text x=\"230\" y=\"278\" font-size=\"14\" text-anchor=\"middle\" fill=\"#777\">bredd 2x, höjd 12 − x²</text>\n<text x=\"300\" y=\"60\" font-size=\"15\">y = 12 − x²</text>\n<text x=\"428\" y=\"245\" font-size=\"14\">x</text><text x=\"238\" y=\"40\" font-size=\"14\">y</text>\n</svg></span><p>En rektangel har sin bas på \\(x\\)-axeln och sina två övre hörn på parabeln \\(y=12-x^2\\), symmetriskt kring \\(y\\)-axeln.</p><ol type=\"a\"><li>Uttryck rektangelns area som en funktion av \\(x\\), där \\(x\\gt0\\) är det högra hörnets \\(x\\)-koordinat.</li><li>Bestäm den största möjliga arean.</li><li>Motivera att det verkligen är ett maximum.</li></ol>",
     "s": "<p><strong>a)</strong> Det högra hörnet ligger i \\((x,\\,12-x^2)\\). Eftersom rektangeln är symmetrisk kring \\(y\\)-axeln är bredden \\(2x\\) och höjden \\(12-x^2\\). Alltså</p><p>\\[A(x)=2x\\left(12-x^2\\right)=24x-2x^3.\\]</p><p>Definitionsmängden är \\(0\\lt x\\lt\\sqrt{12}\\), eftersom höjden måste vara positiv.</p><p><strong>b)</strong> Derivera och sätt derivatan till noll:</p><p>\\[A'(x)=24-6x^2=0\\Rightarrow x^2=4\\Rightarrow x=2\\]</p><p>(den negativa roten ligger utanför definitionsmängden). Arean blir</p><p>\\[A(2)=24\\cdot2-2\\cdot8=48-16=\\mathbf{32}.\\]</p><p>Rektangeln är då 4 bred och 8 hög.</p><p><strong>c)</strong> Andraderivatan är</p><p>\\[A''(x)=-12x,\\]</p><p>och \\(A''(2)=-24\\lt0\\). Grafen är alltså konkav i punkten, vilket ger ett lokalt maximum. Eftersom \\(A\\) är kontinuerlig på intervallet, går mot 0 i båda ändarna och bara har denna enda kritiska punkt, är det också det globala maximet.</p>",
-    "id": "3.83"
+    "id": "3.83",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5202,7 +6242,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"300\" viewBox=\"0 0 440 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Området mellan linjen y lika med 2x och parabeln y lika med x kvadrat mellan skärningspunkterna\">\n<rect width=\"440\" height=\"300\" fill=\"white\"/>\n<path d=\"M 90.0,240.0 L 92.0,238.5 L 93.9,236.9 L 95.9,235.4 L 97.9,233.9 L 99.8,232.3 L 101.8,230.8 L 103.8,229.3 L 105.7,227.7 L 107.7,226.2 L 109.7,224.7 L 111.6,223.1 L 113.6,221.6 L 115.6,220.1 L 117.5,218.5 L 119.5,217.0 L 121.5,215.5 L 123.4,213.9 L 125.4,212.4 L 127.4,210.9 L 129.3,209.3 L 131.3,207.8 L 133.3,206.3 L 135.2,204.7 L 137.2,203.2 L 139.2,201.7 L 141.1,200.1 L 143.1,198.6 L 145.1,197.1 L 147.0,195.5 L 149.0,194.0 L 151.0,192.5 L 152.9,190.9 L 154.9,189.4 L 156.9,187.9 L 158.8,186.3 L 160.8,184.8 L 162.8,183.3 L 164.7,181.7 L 166.7,180.2 L 168.7,178.7 L 170.6,177.1 L 172.6,175.6 L 174.6,174.1 L 176.5,172.5 L 178.5,171.0 L 180.5,169.5 L 182.4,167.9 L 184.4,166.4 L 186.4,164.9 L 188.3,163.3 L 190.3,161.8 L 192.3,160.3 L 194.2,158.7 L 196.2,157.2 L 198.2,155.7 L 200.1,154.1 L 202.1,152.6 L 204.1,151.1 L 206.0,149.5 L 208.0,148.0 L 210.0,146.5 L 211.9,144.9 L 213.9,143.4 L 215.9,141.9 L 217.8,140.3 L 219.8,138.8 L 221.8,137.3 L 223.7,135.7 L 225.7,134.2 L 227.7,132.7 L 229.6,131.1 L 231.6,129.6 L 233.6,128.1 L 235.5,126.5 L 237.5,125.0 L 239.5,123.5 L 241.4,121.9 L 243.4,120.4 L 245.4,118.9 L 247.3,117.3 L 249.3,115.8 L 251.3,114.3 L 253.2,112.7 L 255.2,111.2 L 257.2,109.7 L 259.1,108.1 L 261.1,106.6 L 263.1,105.1 L 265.0,103.5 L 267.0,102.0 L 269.0,100.5 L 270.9,98.9 L 272.9,97.4 L 274.9,95.9 L 276.8,94.3 L 278.8,92.8 L 280.8,91.3 L 282.7,89.7 L 284.7,88.2 L 286.7,86.7 L 288.6,85.1 L 290.6,83.6 L 292.6,82.1 L 294.5,80.5 L 296.5,79.0 L 298.5,77.5 L 300.4,75.9 L 302.4,74.4 L 304.4,72.9 L 306.3,71.3 L 308.3,69.8 L 310.3,68.3 L 312.2,66.7 L 314.2,65.2 L 316.2,63.7 L 318.1,62.1 L 320.1,60.6 L 322.1,59.1 L 324.0,57.5 L 326.0,56.0 L 326.0,56.0 L 324.0,59.1 L 322.1,62.1 L 320.1,65.1 L 318.1,68.1 L 316.2,71.0 L 314.2,73.9 L 312.2,76.8 L 310.3,79.7 L 308.3,82.6 L 306.3,85.4 L 304.4,88.2 L 302.4,91.0 L 300.4,93.7 L 298.5,96.4 L 296.5,99.1 L 294.5,101.8 L 292.6,104.4 L 290.6,107.1 L 288.6,109.7 L 286.7,112.2 L 284.7,114.8 L 282.7,117.3 L 280.8,119.8 L 278.8,122.2 L 276.8,124.7 L 274.9,127.1 L 272.9,129.5 L 270.9,131.8 L 269.0,134.2 L 267.0,136.5 L 265.0,138.8 L 263.1,141.0 L 261.1,143.3 L 259.1,145.5 L 257.2,147.7 L 255.2,149.8 L 253.2,152.0 L 251.3,154.1 L 249.3,156.2 L 247.3,158.2 L 245.4,160.3 L 243.4,162.3 L 241.4,164.2 L 239.5,166.2 L 237.5,168.1 L 235.5,170.0 L 233.6,171.9 L 231.6,173.8 L 229.6,175.6 L 227.7,177.4 L 225.7,179.2 L 223.7,180.9 L 221.8,182.6 L 219.8,184.3 L 217.8,186.0 L 215.9,187.7 L 213.9,189.3 L 211.9,190.9 L 210.0,192.5 L 208.0,194.0 L 206.0,195.5 L 204.1,197.0 L 202.1,198.5 L 200.1,199.9 L 198.2,201.3 L 196.2,202.7 L 194.2,204.1 L 192.3,205.4 L 190.3,206.8 L 188.3,208.1 L 186.4,209.3 L 184.4,210.6 L 182.4,211.8 L 180.5,213.0 L 178.5,214.1 L 176.5,215.3 L 174.6,216.4 L 172.6,217.5 L 170.6,218.5 L 168.7,219.6 L 166.7,220.6 L 164.7,221.5 L 162.8,222.5 L 160.8,223.4 L 158.8,224.3 L 156.9,225.2 L 154.9,226.1 L 152.9,226.9 L 151.0,227.7 L 149.0,228.5 L 147.0,229.3 L 145.1,230.0 L 143.1,230.7 L 141.1,231.4 L 139.2,232.0 L 137.2,232.6 L 135.2,233.2 L 133.3,233.8 L 131.3,234.4 L 129.3,234.9 L 127.4,235.4 L 125.4,235.9 L 123.4,236.3 L 121.5,236.7 L 119.5,237.1 L 117.5,237.5 L 115.6,237.8 L 113.6,238.2 L 111.6,238.5 L 109.7,238.7 L 107.7,239.0 L 105.7,239.2 L 103.8,239.4 L 101.8,239.5 L 99.8,239.7 L 97.9,239.8 L 95.9,239.9 L 93.9,239.9 L 92.0,240.0 L 90.0,240.0 Z\" fill=\"#2C62A8\" fill-opacity=\".18\"/>\n<path d=\"M 42.8,232.6 L 45.8,233.5 L 48.7,234.4 L 51.6,235.1 L 54.6,235.9 L 57.5,236.5 L 60.5,237.1 L 63.5,237.7 L 66.4,238.2 L 69.3,238.6 L 72.3,239.0 L 75.2,239.3 L 78.2,239.5 L 81.2,239.7 L 84.1,239.9 L 87.0,240.0 L 90.0,240.0 L 93.0,240.0 L 95.9,239.9 L 98.8,239.7 L 101.8,239.5 L 104.8,239.3 L 107.7,239.0 L 110.7,238.6 L 113.6,238.2 L 116.5,237.7 L 119.5,237.1 L 122.5,236.5 L 125.4,235.9 L 128.3,235.1 L 131.3,234.4 L 134.2,233.5 L 137.2,232.6 L 140.2,231.7 L 143.1,230.7 L 146.1,229.6 L 149.0,228.5 L 151.9,227.3 L 154.9,226.1 L 157.8,224.8 L 160.8,223.4 L 163.8,222.0 L 166.7,220.6 L 169.7,219.0 L 172.6,217.5 L 175.6,215.8 L 178.5,214.1 L 181.4,212.4 L 184.4,210.6 L 187.3,208.7 L 190.3,206.8 L 193.2,204.8 L 196.2,202.7 L 199.2,200.6 L 202.1,198.5 L 205.1,196.3 L 208.0,194.0 L 210.9,191.7 L 213.9,189.3 L 216.8,186.8 L 219.8,184.3 L 222.8,181.8 L 225.7,179.2 L 228.7,176.5 L 231.6,173.8 L 234.6,171.0 L 237.5,168.1 L 240.4,165.2 L 243.4,162.3 L 246.3,159.2 L 249.3,156.2 L 252.2,153.0 L 255.2,149.8 L 258.1,146.6 L 261.1,143.3 L 264.1,139.9 L 267.0,136.5 L 269.9,133.0 L 272.9,129.5 L 275.9,125.9 L 278.8,122.2 L 281.8,118.5 L 284.7,114.8 L 287.6,110.9 L 290.6,107.1 L 293.6,103.1 L 296.5,99.1 L 299.4,95.1 L 302.4,91.0 L 305.4,86.8 L 308.3,82.6 L 311.2,78.3 L 314.2,73.9 L 317.1,69.5 L 320.1,65.1 L 323.1,60.6 L 326.0,56.0 L 328.9,51.4 L 331.9,46.7 L 334.9,41.9 L 337.8,37.1 L 340.8,32.3 L 343.7,27.4 L 346.6,22.4 L 349.6,17.4 L 352.6,12.3 L 355.5,7.1 L 358.4,1.9 L 361.4,-3.3 L 364.4,-8.7 L 367.3,-14.0 L 370.2,-19.5 L 373.2,-25.0 L 376.1,-30.5 L 379.1,-36.1 L 382.1,-41.8 L 385.0,-47.5 L 387.9,-53.3 L 390.9,-59.1 L 393.9,-65.0 L 396.8,-71.0 L 399.8,-77.0 L 402.7,-83.0 L 405.6,-89.2 L 408.6,-95.3 L 411.6,-101.6 L 414.5,-107.9 L 417.4,-114.2 L 420.4,-120.6\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.4\"/>\n<path d=\"M 42.8,276.8 L 408.6,-8.4\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.4\"/>\n<line x1=\"55\" y1=\"240\" x2=\"410\" y2=\"240\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"256\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"208\" y1=\"240\" x2=\"208\" y2=\"245\" stroke=\"#222\"/><text x=\"208\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"326\" y1=\"240\" x2=\"326\" y2=\"245\" stroke=\"#222\"/><text x=\"326\" y=\"260\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"85\" y1=\"194\" x2=\"95\" y2=\"194\" stroke=\"#222\"/><text x=\"80\" y=\"199\" font-size=\"12.5\" text-anchor=\"end\">1</text><line x1=\"85\" y1=\"148\" x2=\"95\" y2=\"148\" stroke=\"#222\"/><text x=\"80\" y=\"153\" font-size=\"12.5\" text-anchor=\"end\">2</text><line x1=\"85\" y1=\"102\" x2=\"95\" y2=\"102\" stroke=\"#222\"/><text x=\"80\" y=\"107\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"85\" y1=\"56\" x2=\"95\" y2=\"56\" stroke=\"#222\"/><text x=\"80\" y=\"61\" font-size=\"12.5\" text-anchor=\"end\">4</text>\n<circle cx=\"90.0\" cy=\"240.0\" r=\"5\" fill=\"#B23A2E\"/>\n<circle cx=\"326.0\" cy=\"56.0\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"338\" y=\"58\" font-size=\"14\" fill=\"#B23A2E\">(2, 4)</text>\n<text x=\"330\" y=\"200\" font-size=\"15\" fill=\"#222\">y = x²</text>\n<text x=\"226\" y=\"51\" font-size=\"15\" fill=\"#2E7D52\">y = 2x</text>\n<text x=\"408\" y=\"245\" font-size=\"14\">x</text>\n</svg></span><p>Området begränsas av linjen \\(y=2x\\) och parabeln \\(y=x^2\\).</p><ol type=\"a\"><li>Bestäm skärningspunkterna.</li><li>Beräkna områdets area.</li></ol>",
     "s": "<p><strong>a)</strong> Kurvorna skär varandra där funktionsvärdena är lika:</p><p>\\[x^2=2x\\Rightarrow x^2-2x=0\\Rightarrow x(x-2)=0.\\]</p><p>Alltså \\(x=0\\) och \\(x=2\\), vilket ger punkterna \\((0,0)\\) och \\((2,4)\\).</p><p><strong>b)</strong> Mellan \\(x=0\\) och \\(x=2\\) ligger linjen ovanför parabeln, vilket syns i figuren och kan kontrolleras med en testpunkt: vid \\(x=1\\) är \\(2x=2\\) medan \\(x^2=1\\).</p><p>Arean är integralen av skillnaden mellan den övre och den undre kurvan:</p><p>\\[A=\\int_0^2\\left(2x-x^2\\right)dx=\\left[x^2-\\frac{x^3}{3}\\right]_0^2.\\]</p><p>Insättning ger</p><p>\\[A=\\left(4-\\frac83\\right)-0=\\frac{12-8}{3}=\\mathbf{\\frac43}\\approx1,33.\\]</p>",
-    "id": "3.84"
+    "id": "3.84",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5212,7 +6254,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm medelvärdet av \\(f(x)=2x+1\\) på intervallet \\([0,3]\\).</p>",
     "s": "<p>Medelvärdet är</p><p>\\[\\frac1{3-0}\\int_0^3(2x+1)dx=\\frac13[x^2+x]_0^3.\\]</p><p>\\[=\\frac13(9+3)=4.\\]</p><p><strong>Medelvärdet är 4.</strong></p>",
-    "id": "3.102"
+    "id": "3.102",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5222,7 +6266,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm arean mellan graferna \\(y=x\\) och \\(y=x^2\\) på intervallet \\([0,1]\\).</p>",
     "s": "<p>På \\([0,1]\\) ligger \\(x\\) över \\(x^2\\). Arean är</p><p>\\[\\int_0^1(x-x^2)dx=\\left[\\frac{x^2}{2}-\\frac{x^3}{3}\\right]_0^1=\\frac12-\\frac13=\\frac16.\\]</p><p><strong>Arean är \\(\\frac16\\) areaenheter.</strong></p>",
-    "id": "3.103"
+    "id": "3.103",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5232,7 +6278,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>För \\(k>0\\) begränsar kurvorna \\(y=kx\\) och \\(y=x^2\\) ett område mellan sina skärningspunkter. Bestäm \\(k\\) om områdets area är \\(\\frac43\\).</p>",
     "s": "<p>Skärningspunkterna fås av \\(kx=x^2\\), alltså \\(x=0\\) och \\(x=k\\).</p><p>På intervallet \\([0,k]\\) ligger linjen över parabeln. Arean är</p><p>\\[A=\\int_0^k(kx-x^2)dx=\\left[\\frac{kx^2}{2}-\\frac{x^3}{3}\\right]_0^k=\\frac{k^3}{6}.\\]</p><p>Sätt \\(A=\\frac43\\):</p><p>\\[\\frac{k^3}{6}=\\frac43\\Rightarrow k^3=8.\\]</p><p><strong>\\(k=2\\).</strong></p>",
-    "id": "3.104"
+    "id": "3.104",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 3,
@@ -5242,7 +6290,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>En rektangel är symmetrisk kring \\(y\\)-axeln. Dess bas ligger på \\(x\\)-axeln och de övre hörnen ligger på parabeln \\(y=9-x^2\\).</p><p>Bestäm rektangelns största möjliga area.</p>",
     "s": "<p>Låt det högra övre hörnet ha \\(x\\)-koordinaten \\(x>0\\). Då är bredden \\(2x\\) och höjden \\(9-x^2\\).</p><p>\\[A(x)=2x(9-x^2)=18x-2x^3.\\]</p><p>\\[A'(x)=18-6x^2.\\]</p><p>\\[A'(x)=0\\Rightarrow x^2=3\\Rightarrow x=\\sqrt3.\\]</p><p>\\[A_{\\max}=2\\sqrt3(9-3)=12\\sqrt3.\\]</p><p><strong>Största arean är \\(12\\sqrt3\\) areaenheter.</strong></p>",
-    "id": "3.105"
+    "id": "3.105",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5252,7 +6302,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm den lösning till \\(y''+4y'-5y=0\\) som uppfyller \\(y(0)=0\\) och \\(y'(0)=6\\).</p>",
     "s": "<p>Karakteristiska ekvationen \\(r^2+4r-5=0\\) har rötterna \\(r=1\\) och \\(r=-5\\). Alltså \\(y=Ae^x+Be^{-5x}\\). Villkoren ger \\(A+B=0\\) och \\(A-5B=6\\), alltså \\(A=1\\), \\(B=-1\\). <strong>\\(y=e^x-e^{-5x}\\)</strong>.</p>",
-    "id": "4.01"
+    "id": "4.01",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5262,7 +6314,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Funktionen \\(y=f(x)\\) löser \\(y''+7y'+10y=0\\) och uppfyller \\(y(0)=0\\), \\(y'(0)=3\\). Bestäm \\(y\\).</p>",
     "s": "<p><strong>Metod:</strong> Sätt upp den karakteristiska ekvationen och låt dess rötter bestämma lösningsformen.</p><p>Rötterna är \\(-2\\) och \\(-5\\), så \\(y=Ae^{-2x}+Be^{-5x}\\). Villkoren ger \\(A+B=0\\), \\(-2A-5B=3\\), alltså \\(A=1\\), \\(B=-1\\). <strong>\\(y=e^{-2x}-e^{-5x}\\)</strong>.</p>",
-    "id": "4.02"
+    "id": "4.02",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5272,7 +6326,9 @@ window.BANKMATF1 = [
     "poang": "1/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y'=3y\\).</p>",
     "s": "<p>För ekvationen \\(y'=3y\\) söker vi en exponentialfunktion, eftersom derivatan av \\(e^{kx}\\) är proportionell mot funktionen själv.</p><p>Den allmänna lösningen är <strong>\\(y=Ce^{3x}\\)</strong>, där \\(C\\) är en godtycklig konstant.</p>",
-    "id": "4.03"
+    "id": "4.03",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5282,7 +6338,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.49",
     "t": "<p>Lös differentialekvationen</p><p>\\[y'=3y.\\]</p>",
-    "s": "<p>För en differentialekvation av typen \\(y'=ky\\) är den allmänna lösningen \\(y=Ce^{kx}\\).</p><p>Här är \\(k=3\\), alltså</p><p><strong>\\(y=Ce^{3x}\\)</strong>.</p>"
+    "s": "<p>För en differentialekvation av typen \\(y'=ky\\) är den allmänna lösningen \\(y=Ce^{kx}\\).</p><p>Här är \\(k=3\\), alltså</p><p><strong>\\(y=Ce^{3x}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5292,7 +6350,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.50",
     "t": "<p>Lös begynnelsevärdesproblemet</p><p>\\[y'=-0,5y,\\qquad y(0)=12.\\]</p>",
-    "s": "<p>Den allmänna lösningen är \\(y=Ce^{-0,5x}\\).</p><p>Begynnelsevillkoret ger</p><p>\\[12=y(0)=Ce^0=C.\\]</p><p>Alltså är <strong>\\(y=12e^{-0,5x}\\)</strong>.</p>"
+    "s": "<p>Den allmänna lösningen är \\(y=Ce^{-0,5x}\\).</p><p>Begynnelsevillkoret ger</p><p>\\[12=y(0)=Ce^0=C.\\]</p><p>Alltså är <strong>\\(y=12e^{-0,5x}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5302,7 +6362,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'=-4y\\).</p>",
     "s": "<p>För \\(y'=ky\\) är lösningen \\(y=Ce^{kx}\\). Här är \\(k=-4\\):</p><p><strong>\\(y=Ce^{-4x}\\)</strong>.</p>",
-    "id": "4.67"
+    "id": "4.67",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5312,7 +6374,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'=0,3y\\), \\(y(0)=7\\).</p>",
     "s": "<p>\\(y=Ce^{0,3x}\\). Begynnelsevillkoret ger \\(C=7\\). Alltså</p><p><strong>\\(y=7e^{0,3x}\\)</strong>.</p>",
-    "id": "4.68"
+    "id": "4.68",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5322,7 +6386,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En lösning till \\(y'=ky\\) uppfyller \\(y(0)=12\\) och \\(y(5)=18\\). Bestäm \\(k\\).</p>",
     "s": "<p>\\(y=12e^{kx}\\). Sätt \\(x=5\\):</p><p>\\[18=12e^{5k}\\Rightarrow e^{5k}=1,5\\Rightarrow k=\\frac{\\ln1,5}{5}\\approx0,0811.\\]</p>",
-    "id": "4.69"
+    "id": "4.69",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5332,7 +6398,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En mängd följer \\(y'=-0,2y\\). Hur stor andel återstår efter 5 tidsenheter?</p>",
     "s": "<p>\\(y=y_0e^{-0,2t}\\). Efter 5 enheter är andelen</p><p>\\[e^{-1}\\approx0,368.\\]</p><p><strong>Cirka 36,8 % återstår.</strong></p>",
-    "id": "4.92"
+    "id": "4.92",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5342,7 +6410,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En radioaktiv mängd följer \\(N'=-0,035N\\). Bestäm halveringstiden.</p>",
     "s": "<p>\\(N=N_0e^{-0,035t}\\). Vid halvering:</p><p>\\[\\frac12=e^{-0,035t}\\Rightarrow t=\\frac{\\ln2}{0,035}\\approx19,8.\\]</p>",
-    "id": "4.93"
+    "id": "4.93",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5352,7 +6422,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En lösning till \\(y'=2y\\) är \\(y=Ce^{2x}\\). Bestäm \\(C\\) om \\(y(1)=10\\).</p>",
     "s": "<p>\\[10=Ce^2\\Rightarrow C=10e^{-2}.\\]</p>",
-    "id": "4.120"
+    "id": "4.120",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5362,7 +6434,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös differentialekvationen \\(y''-12y'+32y=0\\).</p>",
     "s": "<p><strong>Metod:</strong> För en homogen linjär differentialekvation med konstanta koefficienter använder vi den karakteristiska ekvationen.</p><p>\\[r^2-12r+32=0=(r-4)(r-8).\\]</p><p>Rötterna är \\(r=4\\) och \\(r=8\\). Två olika reella rötter ger <strong>\\(y=Ae^{4x}+Be^{8x}\\)</strong>.</p>",
-    "id": "4.04"
+    "id": "4.04",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5372,7 +6446,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Differentialekvationen \\(y''+8y'-9y=0\\) har många lösningar. Bestäm en lösning som inte är identiskt noll.</p>",
     "s": "<p>Den karakteristiska ekvationen är \\[r^2+8r-9=0=(r-1)(r+9).\\]</p><p>Rötterna är \\(r=1\\) och \\(r=-9\\). Därför är både \\(e^x\\) och \\(e^{-9x}\\) lösningar. En sådan lösning är exempelvis <strong>\\(y=e^x\\)</strong>.</p>",
-    "id": "4.05"
+    "id": "4.05",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5382,7 +6458,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.53",
     "t": "<p>Lös differentialekvationen</p><p>\\[y''-5y'+6y=0.\\]</p>",
-    "s": "<p>Karakteristiska ekvationen är</p><p>\\[r^2-5r+6=0=(r-2)(r-3).\\]</p><p>Rötterna är \\(r=2\\) och \\(r=3\\). Därför blir den allmänna lösningen</p><p><strong>\\(y=C_1e^{2x}+C_2e^{3x}\\)</strong>.</p>"
+    "s": "<p>Karakteristiska ekvationen är</p><p>\\[r^2-5r+6=0=(r-2)(r-3).\\]</p><p>Rötterna är \\(r=2\\) och \\(r=3\\). Därför blir den allmänna lösningen</p><p><strong>\\(y=C_1e^{2x}+C_2e^{3x}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5392,7 +6470,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+y'-6y=0\\).</p>",
     "s": "<p>Karakteristiska ekvationen är \\(r^2+r-6=0=(r-2)(r+3)\\). Rötterna är 2 och -3:</p><p><strong>\\(y=C_1e^{2x}+C_2e^{-3x}\\)</strong>.</p>",
-    "id": "4.73"
+    "id": "4.73",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5402,7 +6482,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+5y'+6y=0\\).</p>",
     "s": "<p>\\[r^2+5r+6=(r+2)(r+3)=0.\\]</p><p>Alltså <strong>\\(y=C_1e^{-2x}+C_2e^{-3x}\\)</strong>.</p>",
-    "id": "4.74"
+    "id": "4.74",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5412,7 +6494,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+3y'-4y=0\\).</p>",
     "s": "<p>\\[r^2+3r-4=(r-1)(r+4)=0.\\]</p><p><strong>\\(y=C_1e^x+C_2e^{-4x}\\)</strong>.</p>",
-    "id": "4.97"
+    "id": "4.97",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5422,7 +6506,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös \\(y''-3y'+2y=0\\), \\(y(0)=4\\), \\(y'(0)=5\\).</p>",
     "s": "<p>Allmän lösning \\(y=C_1e^x+C_2e^{2x}\\). Villkoren ger</p><p>\\[C_1+C_2=4,\\qquad C_1+2C_2=5.\\]</p><p>Därför \\(C_2=1\\), \\(C_1=3\\):</p><p><strong>\\(y=3e^x+e^{2x}\\)</strong>.</p>",
-    "id": "4.98"
+    "id": "4.98",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5432,7 +6518,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+6y'+8y=0\\) med \\(y(0)=1\\) och \\(y'(0)=0\\).</p>",
     "s": "<p><strong>Metod:</strong> Bestäm först den allmänna lösningen och använd sedan villkoren för att bestämma konstanterna.</p><p>Rötterna är −2 och −4: \\(y=Ae^{-2x}+Be^{-4x}\\). Villkoren ger \\(A+B=1\\) och \\(-2A-4B=0\\). Därav \\(A=2\\), \\(B=-1\\). <strong>\\(y=2e^{-2x}-e^{-4x}\\)</strong>.</p>",
-    "id": "4.06"
+    "id": "4.06",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5442,7 +6530,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''-8y'+12y=0\\) med \\(y(0)=1\\) och \\(y'(0)=0\\).</p>",
     "s": "<p><strong>Metod:</strong> Bestäm först den allmänna lösningen och använd sedan villkoren för att bestämma konstanterna.</p><p>Rötterna är 2 och 6: \\(y=Ae^{2x}+Be^{6x}\\). \\(A+B=1\\) och \\(2A+6B=0\\), vilket ger \\(A=3/2\\), \\(B=-1/2\\). <strong>\\(y=\\frac32e^{2x}-\\frac{1}{2}e^{6x}\\)</strong>.</p>",
-    "id": "4.07"
+    "id": "4.07",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5452,7 +6542,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.56",
     "t": "<p>Bestäm lösningen till differentialekvationen \\(y''-y=0\\) som uppfyller \\(y(0)=2\\) och \\(y'(0)=0\\).</p>",
-    "s": "<p>Den allmänna lösningen till \\(y''-y=0\\) är</p><p>\\[y=C_1e^x+C_2e^{-x}.\\]</p><p>Då är</p><p>\\[y(0)=C_1+C_2=2\\]</p><p>och</p><p>\\[y'=C_1e^x-C_2e^{-x}\\Rightarrow y'(0)=C_1-C_2=0.\\]</p><p>Systemet ger \\(C_1=C_2=1\\).</p><p><strong>Alltså är \\(y=e^x+e^{-x}\\).</strong></p>"
+    "s": "<p>Den allmänna lösningen till \\(y''-y=0\\) är</p><p>\\[y=C_1e^x+C_2e^{-x}.\\]</p><p>Då är</p><p>\\[y(0)=C_1+C_2=2\\]</p><p>och</p><p>\\[y'=C_1e^x-C_2e^{-x}\\Rightarrow y'(0)=C_1-C_2=0.\\]</p><p>Systemet ger \\(C_1=C_2=1\\).</p><p><strong>Alltså är \\(y=e^x+e^{-x}\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5462,7 +6554,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm lösningen till \\(y''-4y=0\\) med \\(y(0)=3\\) och \\(y'(0)=0\\).</p>",
     "s": "<p>\\(y=C_1e^{2x}+C_2e^{-2x}\\). Villkoren ger</p><p>\\[C_1+C_2=3,\\qquad2C_1-2C_2=0.\\]</p><p>Därför \\(C_1=C_2=1,5\\) och</p><p><strong>\\(y=1,5e^{2x}+1,5e^{-2x}\\)</strong>.</p>",
-    "id": "4.82"
+    "id": "4.82",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5472,7 +6566,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös \\(y''+4y=0\\), \\(y(0)=2\\), \\(y'(0)=-4\\).</p>",
     "s": "<p>\\(y=C_1\\cos2x+C_2\\sin2x\\). Från \\(y(0)=2\\) fås \\(C_1=2\\). Derivatan är \\(y'=-2C_1\\sin2x+2C_2\\cos2x\\). Då \\(y'(0)=2C_2=-4\\), så \\(C_2=-2\\).</p><p><strong>\\(y=2\\cos2x-2\\sin2x\\)</strong>.</p>",
-    "id": "4.83"
+    "id": "4.83",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5482,7 +6578,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den lösning till \\(y'+y=4\\) som uppfyller \\(y(0)=10\\).</p>",
     "s": "<p>Allmän lösning \\(y=4+Ce^{-x}\\). Villkoret ger \\(10=4+C\\Rightarrow C=6\\). Alltså</p><p><strong>\\(y=4+6e^{-x}\\)</strong>.</p>",
-    "id": "4.107"
+    "id": "4.107",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5492,7 +6590,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös \\(y''+y=2\\), \\(y(0)=0\\), \\(y'(0)=1\\).</p>",
     "s": "<p>Homogent \\(y_h=C_1\\cos x+C_2\\sin x\\). Partikulärt \\(y_p=2\\). Alltså \\(y=C_1\\cos x+C_2\\sin x+2\\).</p><p>\\(y(0)=0\\Rightarrow C_1=-2\\). \\(y'(0)=C_2=1\\).</p><p><strong>\\(y=-2\\cos x+\\sin x+2\\)</strong>.</p>",
-    "id": "4.108"
+    "id": "4.108",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5502,7 +6602,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y'=2y+6x\\).</p>",
     "s": "<p>Skriv \\(y'-2y=6x\\). Den homogena lösningen är \\(Ce^{2x}\\). Sök en partikulär lösning \\(y_p=ax+b\\). Då \\(a-2(ax+b)=6x\\), vilket ger \\(a=-3\\), \\(b=-3/2\\). Alltså <strong>\\(y=Ce^{2x}-3x-\\frac32\\)</strong>.</p>",
-    "id": "4.08"
+    "id": "4.08",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5512,7 +6614,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y'=3y-x\\).</p>",
     "s": "<p><strong>Metod:</strong> Bygg lösningen som homogen lösning plus en partikulärlösning.</p><p>\\(y'-3y=-x\\). Homogen lösning: \\(Ce^{3x}\\). Sök \\(y_p=ax+b\\): \\(a-3(ax+b)=-x\\), så \\(a=1/3\\), \\(b=1/9\\). <strong>\\(y=Ce^{3x}+\\frac{x}{3}+\\frac19\\)</strong>.</p>",
-    "id": "4.09"
+    "id": "4.09",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5522,7 +6626,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''+4y'+4y=0\\).</p>",
     "s": "<p>Den karakteristiska ekvationen är \\[r^2+4r+4=(r+2)^2=0.\\]</p><p>Vi får dubbelroten \\(r=-2\\). Vid en dubbelrot behövs två linjärt oberoende lösningar, \\(e^{-2x}\\) och \\(xe^{-2x}\\). Därför är <strong>\\(y=(A+Bx)e^{-2x}\\)</strong>.</p>",
-    "id": "4.10"
+    "id": "4.10",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5532,7 +6638,9 @@ window.BANKMATF1 = [
     "poang": "4/0/0",
     "t": "<p>I ett arkeologiskt prov sönderfaller kol-14 med en hastighet som är 0,012 % av den mängd som finns kvar per år. I provet återstår 52 % av mängden i levande material.</p><ol type=\"a\"><li>Ställ upp en differentialekvation för mängden \\(C(t)\\).</li><li>Beräkna ungefär hur gammalt provet är.</li></ol>",
     "s": "<ol type=\"a\"><li><strong>\\(C'=-0,00012C\\)</strong>.</li><li>\\(C(t)=C_0e^{-0,00012t}\\). Villkoret \\(C/C_0=0,52\\) ger \\(e^{-0,00012t}=0,52\\). Därför \\(t=-\\ln(0,52)/0,00012\\approx\\mathbf{5450\\text{ år}}\\).</li></ol>",
-    "id": "4.11"
+    "id": "4.11",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5542,7 +6650,9 @@ window.BANKMATF1 = [
     "poang": "2/2/0",
     "t": "<p>Lös differentialekvationerna.</p><ol type=\"a\"><li>\\(y'-8y=0\\) med \\(y(0)=10\\).</li><li>\\(y''+4y'+13y=0\\).</li></ol>",
     "s": "<p><strong>Metod:</strong> Komplexa rötter \\(a\\pm bi\\) ger lösningar av formen \\(e^{ax}(C\\cos bx+D\\sin bx)\\).</p><ol type=\"a\"><li><strong>\\(y=10e^{8x}\\)</strong>.</li><li>Karakteristiska ekvationen ger \\(r=-2\\pm3i\\). Därför <strong>\\(y=e^{-2x}(A\\cos3x+B\\sin3x)\\)</strong>.</li></ol>",
-    "id": "4.12"
+    "id": "4.12",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5552,7 +6662,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''+4y'+13y=0\\) och kontrollera genom insättning vilken differentialekvation lösningen uppfyller.</p>",
     "s": "<p>Rötterna till \\(r^2+4r+13=0\\) är \\(-2\\pm3i\\). Därför</p><p><strong>\\[y=e^{-2x}(A\\cos3x+B\\sin3x).\\]</strong></p><p>Deriverar man två gånger och bildar \\(y''+4y'+13y\\) tar både cosinus- och sinustermerna ut varandra, vilket ger 0.</p>",
-    "id": "4.13"
+    "id": "4.13",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5562,7 +6674,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=4e^{-2x}\\) är en lösning till \\(y'+2y=0\\).</p>",
     "s": "<p>För att verifiera en föreslagen lösning deriverar vi och sätter in i differentialekvationen.</p><p>För \\(y=4e^{-2x}\\) är \\(y'=-8e^{-2x}\\). Då blir</p><p>\\[y'+2y=-8e^{-2x}+8e^{-2x}=0.\\]</p><p>Vänsterledet blir alltså exakt högerledet, så funktionen <strong>är en lösning</strong>.</p>",
-    "id": "4.14"
+    "id": "4.14",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5572,7 +6686,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=2e^x+3\\) är en lösning till</p><p>\\[y''-y=-3.\\]</p>",
     "s": "<p><strong>Metod:</strong> Derivera den föreslagna funktionen och kontrollera att insättning ger rätt högerled.</p><p>Derivera: \\(y'=2e^x\\) och \\(y''=2e^x\\). Då</p><p>\\[y''-y=2e^x-(2e^x+3)=-3.\\]</p><p>Alltså uppfyller funktionen differentialekvationen.</p>",
-    "id": "4.36"
+    "id": "4.36",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5582,7 +6698,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.47",
     "t": "<p>Visa att \\(y=4e^{-2x}\\) är en lösning till differentialekvationen \\(y'+2y=0\\).</p>",
-    "s": "<p>Derivera först funktionen:</p><p>\\[y'=-8e^{-2x}.\\]</p><p>Sätt in i vänsterledet:</p><p>\\[y'+2y=-8e^{-2x}+2\\cdot 4e^{-2x}=-8e^{-2x}+8e^{-2x}=0.\\]</p><p>Eftersom vänsterledet blir 0 uppfyller funktionen differentialekvationen.</p>"
+    "s": "<p>Derivera först funktionen:</p><p>\\[y'=-8e^{-2x}.\\]</p><p>Sätt in i vänsterledet:</p><p>\\[y'+2y=-8e^{-2x}+2\\cdot 4e^{-2x}=-8e^{-2x}+8e^{-2x}=0.\\]</p><p>Eftersom vänsterledet blir 0 uppfyller funktionen differentialekvationen.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5592,7 +6710,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=3e^{2x}\\) löser \\(y'-2y=0\\).</p>",
     "s": "<p>\\(y'=6e^{2x}\\). Då</p><p>\\[y'-2y=6e^{2x}-6e^{2x}=0.\\]</p><p>Alltså är funktionen en lösning.</p>",
-    "id": "4.63"
+    "id": "4.63",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5602,7 +6722,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=\\sin3x\\) löser \\(y''+9y=0\\).</p>",
     "s": "<p>\\(y'=3\\cos3x\\), \\(y''=-9\\sin3x\\). Då</p><p>\\[y''+9y=-9\\sin3x+9\\sin3x=0.\\]</p>",
-    "id": "4.64"
+    "id": "4.64",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5612,7 +6734,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=4+2e^{-3x}\\) löser \\(y'+3y=12\\).</p>",
     "s": "<p>\\(y'=-6e^{-3x}\\). Då</p><p>\\[y'+3y=-6e^{-3x}+12+6e^{-3x}=12.\\]</p>",
-    "id": "4.89"
+    "id": "4.89",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5622,7 +6746,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm differentialekvationens ordning och avgör om den är homogen eller inhomogen:</p><p>\\[y''-5y'+6y=4e^x.\\]</p>",
     "s": "<p><strong>Ordning:</strong> Den högsta derivatan som förekommer är \\(y''\\). Differentialekvationen är därför av <strong>andra ordningen</strong>.</p><p><strong>Homogen eller inhomogen:</strong> En linjär differentialekvation är homogen när högerledet är 0. Här är högerledet \\(4e^x\\neq0\\), så ekvationen är <strong>inhomogen</strong>.</p>",
-    "id": "4.15"
+    "id": "4.15",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5632,7 +6758,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.46",
     "t": "<p>Vilka av följande är differentialekvationer?</p><p>a) \\(y'=3y\\) &nbsp;&nbsp; b) \\(2x+5=11\\) &nbsp;&nbsp; c) \\(y''+y=0\\) &nbsp;&nbsp; d) \\(f(x)=x^2\\)</p>",
-    "s": "<p>En differentialekvation innehåller en okänd funktion och någon av dess derivator.</p><p>a) \\(y'=3y\\) är en differentialekvation.</p><p>b) \\(2x+5=11\\) är bara en vanlig ekvation.</p><p>c) \\(y''+y=0\\) är en differentialekvation.</p><p>d) \\(f(x)=x^2\\) beskriver en funktion men är ingen differentialekvation.</p><p><strong>Rätt svar är a) och c).</strong></p>"
+    "s": "<p>En differentialekvation innehåller en okänd funktion och någon av dess derivator.</p><p>a) \\(y'=3y\\) är en differentialekvation.</p><p>b) \\(2x+5=11\\) är bara en vanlig ekvation.</p><p>c) \\(y''+y=0\\) är en differentialekvation.</p><p>d) \\(f(x)=x^2\\) beskriver en funktion men är ingen differentialekvation.</p><p><strong>Rätt svar är a) och c).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5642,7 +6770,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ange ordningen på differentialekvationen \\(y''+3y'-2y=x\\).</p>",
     "s": "<p>Den högsta derivatan som förekommer är \\(y''\\), alltså är det en differentialekvation av <strong>andra ordningen</strong>.</p>",
-    "id": "4.61"
+    "id": "4.61",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5652,7 +6782,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Avgör om \\(y''-4y'+4y=7e^x\\) är homogen eller inhomogen.</p>",
     "s": "<p>Högerledet är inte noll. Ekvationen är därför <strong>inhomogen</strong>.</p>",
-    "id": "4.62"
+    "id": "4.62",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5662,7 +6794,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>I differentialekvationen \\(T'=-0,2(T-20)\\), vilken storhet är den beroende variabeln?</p>",
     "s": "<p>Den beroende variabeln är <strong>\\(T\\)</strong>, eftersom dess förändring beskrivs som funktion av den oberoende variabeln (ofta tiden).</p>",
-    "id": "4.88"
+    "id": "4.88",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5672,7 +6806,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En temperaturmodell skrivs \\(T'=k(T-180)\\). Ett föremål som från början är 20 °C värms i en ugn på 180 °C. Vilket tecken måste \\(k\\) ha? Motivera.</p>",
     "s": "<p>När föremålet är kallare än ugnen gäller \\(T&lt;180\\), alltså är \\(T-180&lt;0\\). Samtidigt värms föremålet, så temperaturen ökar och därför är \\(T'&gt;0\\).</p><p>I modellen \\[T'=k(T-180)\\] måste produkten på höger sida alltså vara positiv trots att \\(T-180\\) är negativ. Därför måste <strong>\\(k&lt;0\\)</strong>.</p>",
-    "id": "4.16"
+    "id": "4.16",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5682,7 +6818,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Förklara skillnaden mellan lösningarna till</p><p>\\[y''+4y=0\\]</p><p>och</p><p>\\[y''+4y=8\\cos x.\\]</p><p>Fokusera på vad högerledet gör och hur den allmänna lösningen byggs upp.</p>",
     "s": "<p>I den homogena ekvationen är högerledet noll och alla lösningar består bara av den homogena delen:</p><p>\\[y_h=C_1\\cos2x+C_2\\sin2x.\\]</p><p>I den inhomogena ekvationen finns dessutom en yttre term \\(8\\cos x\\). Den allmänna lösningen byggs därför som</p><p>\\[y=y_h+y_p,\\]</p><p>där \\(y_p\\) är <em>en</em> partikulärlösning som återskapar högerledet. Här kan \\(y_p=\\frac83\\cos x\\). Skillnaden är alltså att högerledet tillför en bestämd påtvingad del till hela familjen av homogena lösningar.</p>",
-    "id": "4.44"
+    "id": "4.44",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5692,7 +6830,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.48",
     "t": "<p>Till differentialekvationen \\(y'=2y\\) hör lösningsfamiljen \\(y=Ce^{2x}\\).</p><p>Vilken lösning fås om \\(y(0)=5\\)?</p>",
-    "s": "<p>Vi använder begynnelsevillkoret i lösningsfamiljen:</p><p>\\[y(0)=Ce^{0}=C.\\]</p><p>Eftersom \\(y(0)=5\\) blir \\(C=5\\).</p><p><strong>Lösningen är \\(y=5e^{2x}\\).</strong></p>"
+    "s": "<p>Vi använder begynnelsevillkoret i lösningsfamiljen:</p><p>\\[y(0)=Ce^{0}=C.\\]</p><p>Eftersom \\(y(0)=5\\) blir \\(C=5\\).</p><p><strong>Lösningen är \\(y=5e^{2x}\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5702,7 +6842,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>För \\(y'=4-y\\), bestäm den konstanta jämviktslösningen.</p>",
     "s": "<p>Vid en konstant lösning är \\(y'=0\\). Därför</p><p>\\[0=4-y\\Rightarrow y=4.\\]</p><p><strong>Jämviktslösningen är \\(y=4\\).</strong></p>",
-    "id": "4.65"
+    "id": "4.65",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5712,7 +6854,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En population modelleras av \\(P'=0,02P(500-P)\\). För vilka positiva populationsstorlekar växer respektive minskar populationen?</p>",
     "s": "<p>För \\(0\\lt P\\lt500\\) är både \\(P\\) och \\(500-P\\) positiva, så \\(P'\\gt0\\): populationen växer. För \\(P\\gt500\\) är \\(500-P\\lt0\\), så \\(P'\\lt0\\): populationen minskar. \\(P=500\\) är en jämvikt.</p>",
-    "id": "4.66"
+    "id": "4.66",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5722,7 +6866,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>För \\(y'=y(10-y)\\), avgör tecknet på \\(y'\\) när \\(y=4\\) respektive \\(y=12\\).</p>",
     "s": "<p>Vid \\(y=4\\): \\(y'=4\\cdot6\\gt0\\), alltså växer lösningen. Vid \\(y=12\\): \\(y'=12\\cdot(-2)\\lt0\\), alltså minskar den.</p>",
-    "id": "4.90"
+    "id": "4.90",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5732,7 +6878,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm jämviktspunkterna för \\(y'=0,01y(200-y)\\) och klassificera dem som stabila eller instabila.</p>",
     "s": "<p>Jämvikt när \\(y'=0\\): \\(y=0\\) eller \\(y=200\\). För små positiva \\(y\\) är \\(y'\\gt0\\), så lösningar rör sig bort från 0: <strong>0 är instabil</strong>. Kring 200 är derivatan positiv under och negativ över: <strong>200 är stabil</strong>.</p>",
-    "id": "4.91"
+    "id": "4.91",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5742,7 +6890,9 @@ window.BANKMATF1 = [
     "poang": "0/2/1",
     "t": "<p>Kaffe har temperaturen 82 °C när det ställs i ett rum som håller 21 °C. Efter 6 minuter är temperaturen 67 °C. Anta Newtons avsvalningslag.</p><p>Bestäm kaffets temperatur efter 20 minuter.</p>",
     "s": "<p>Modellen är \\(T=21+61e^{-kt}\\). Villkoret \\(T(6)=67\\) ger \\(46=61e^{-6k}\\), alltså \\(k=-\\ln(46/61)/6\\approx0,0470\\). Då</p><p>\\[T(20)=21+61e^{-0,0470\\cdot20}\\approx\\mathbf{44,8\\,^{\\circ}C}.\\]</p>",
-    "id": "4.17"
+    "id": "4.17",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5752,7 +6902,9 @@ window.BANKMATF1 = [
     "poang": "1/1/1",
     "t": "<p>En tank innehåller 200 liter saltlösning med 1000 g salt. Lösning med salthalten 2,0 g/liter rinner in med 6,0 l/min, och väl blandad lösning rinner ut med samma flöde.</p><ol type=\"a\"><li>Ställ upp en differentialekvation för saltmängden \\(y(t)\\) i gram.</li><li>Bestäm saltmängden efter 15 minuter.</li></ol>",
     "s": "<ol type=\"a\"><li>Inflödet salt är \\(2,0\\cdot6,0=12\\) g/min. Utflödet är \\((y/200)\\cdot6=0,03y\\). Alltså <strong>\\(y'=12-0,03y,\\ y(0)=1000\\)</strong>.</li><li>Jämviktsvärdet är 400 g, så \\(y=400+600e^{-0,03t}\\). Därför \\(y(15)=400+600e^{-0,45}\\approx\\mathbf{783\\text{ g}}\\).</li></ol>",
-    "id": "4.18"
+    "id": "4.18",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5762,7 +6914,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd Eulers stegmetod med steglängden \\(h=0,5\\) för att approximera \\(y(1)\\) om \\(y'=x+y\\) och \\(y(0)=1\\).</p>",
     "s": "<p><strong>Metod:</strong> Eulers metod följer riktningsfältet stegvis med \\(y_{n+1}=y_n+h f(x_n,y_n)\\).</p><p>Start \\((0,1)\\). Första steg: \\(y_1=1+0,5(0+1)=1,5\\) vid \\(x=0,5\\). Andra steg: \\(y_2=1,5+0,5(0,5+1,5)=2,5\\). <strong>\\(y(1)\\approx2,5\\)</strong>.</p>",
-    "id": "4.19"
+    "id": "4.19",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5772,7 +6926,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För differentialekvationen \\(y'=x-y\\) gäller \\(y(0)=1\\). Använd Eulers stegmetod med steglängden \\(h=0,25\\) för att uppskatta \\(y(0,50)\\).</p>",
     "s": "<p>Eulerformeln är \\(y_{n+1}=y_n+h(x_n-y_n)\\).</p><p>Första steget:</p><p>\\[y_1=1+0,25(0-1)=0,75.\\]</p><p>Nu är \\((x_1,y_1)=(0,25,0,75)\\). Andra steget:</p><p>\\[y_2=0,75+0,25(0,25-0,75)=0,625.\\]</p><p>Alltså <strong>\\(y(0,50)\\approx0,625\\)</strong>.</p>",
-    "id": "4.39"
+    "id": "4.39",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5782,7 +6938,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.58",
     "t": "<span class=\"fig\"><svg height=\"285\" width=\"420\" viewBox=\"0 0 420 285\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf med punkten noll komma ett och Eulersteg mot noll komma fem\">\n<rect width=\"420\" height=\"285\" fill=\"white\"/>\n<g stroke=\"#e6e6e6\">\n<line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"245\"/><line x1=\"130\" y1=\"30\" x2=\"130\" y2=\"245\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"245\"/><line x1=\"290\" y1=\"30\" x2=\"290\" y2=\"245\"/><line x1=\"370\" y1=\"30\" x2=\"370\" y2=\"245\"/>\n<line x1=\"40\" y1=\"245\" x2=\"390\" y2=\"245\"/><line x1=\"40\" y1=\"190\" x2=\"390\" y2=\"190\"/><line x1=\"40\" y1=\"135\" x2=\"390\" y2=\"135\"/><line x1=\"40\" y1=\"80\" x2=\"390\" y2=\"80\"/>\n</g>\n<line x1=\"40\" y1=\"245\" x2=\"395\" y2=\"245\" stroke=\"#222\" stroke-width=\"2\"/><line x1=\"50\" y1=\"255\" x2=\"50\" y2=\"25\" stroke=\"#222\" stroke-width=\"2\"/>\n<circle cx=\"50\" cy=\"135\" r=\"4\" fill=\"#222\"/><text x=\"58\" y=\"128\" font-size=\"13\">(0, 1)</text>\n<line x1=\"50\" y1=\"135\" x2=\"130\" y2=\"190\" stroke=\"#777\" stroke-width=\"2.2\"/>\n<circle cx=\"130\" cy=\"190\" r=\"4\" fill=\"#777\"/>\n<text x=\"138\" y=\"184\" font-size=\"13\">första steg</text>\n</svg></span><p>Använd ett Eulersteg med steglängden \\(h=0,5\\) för att approximera \\(y(0,5)\\) om \\(y'=x-y\\) och \\(y(0)=1\\).</p>",
-    "s": "<p>Vid startpunkten \\((0,1)\\) är lutningen</p><p>\\[y'=x-y=0-1=-1.\\]</p><p>Eulerformeln är \\(y_{1}=y_0+h\\,f(x_0,y_0)\\).</p><p>Alltså</p><p>\\[y(0,5)\\approx 1+0,5\\cdot(-1)=0,5.\\]</p><p><strong>Approximationen blir \\(y(0,5)\\approx 0,5\\).</strong></p>"
+    "s": "<p>Vid startpunkten \\((0,1)\\) är lutningen</p><p>\\[y'=x-y=0-1=-1.\\]</p><p>Eulerformeln är \\(y_{1}=y_0+h\\,f(x_0,y_0)\\).</p><p>Alltså</p><p>\\[y(0,5)\\approx 1+0,5\\cdot(-1)=0,5.\\]</p><p><strong>Approximationen blir \\(y(0,5)\\approx 0,5\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5792,7 +6950,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<span class=\"fig\"><svg height=\"275\" width=\"430\" viewBox=\"0 0 430 275\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två Eulersteg som linjesegment\">\n<rect width=\"430\" height=\"275\" fill=\"white\"/><g stroke=\"#e3e3e3\"><line x1=\"60\" y1=\"35\" x2=\"60\" y2=\"235\"/><line x1=\"150\" y1=\"35\" x2=\"150\" y2=\"235\"/><line x1=\"240\" y1=\"35\" x2=\"240\" y2=\"235\"/><line x1=\"330\" y1=\"35\" x2=\"330\" y2=\"235\"/><line x1=\"45\" y1=\"215\" x2=\"390\" y2=\"215\"/><line x1=\"45\" y1=\"160\" x2=\"390\" y2=\"160\"/><line x1=\"45\" y1=\"105\" x2=\"390\" y2=\"105\"/></g>\n<line x1=\"45\" y1=\"215\" x2=\"395\" y2=\"215\" stroke=\"#222\"/><line x1=\"60\" y1=\"240\" x2=\"60\" y2=\"25\" stroke=\"#222\"/>\n<circle cx=\"60\" cy=\"105\" r=\"4\"/><line x1=\"60\" y1=\"105\" x2=\"150\" y2=\"132\" stroke=\"#555\" stroke-width=\"2.5\"/><circle cx=\"150\" cy=\"132\" r=\"4\"/><line x1=\"150\" y1=\"132\" x2=\"240\" y2=\"151\" stroke=\"#555\" stroke-width=\"2.5\"/><circle cx=\"240\" cy=\"151\" r=\"4\"/>\n<text x=\"68\" y=\"95\" font-size=\"14\">start</text><text x=\"250\" y=\"150\" font-size=\"14\">Euler</text>\n</svg></span><p>Använd Eulers metod med \\(h=0,5\\) för \\(y'=2-y\\), \\(y(0)=1\\). Bestäm en approximation av \\(y(1)\\).</p>",
     "s": "<p>Start: \\(x_0=0,y_0=1\\).</p><p>Steg 1: \\(y_1=1+0,5(2-1)=1,5\\).</p><p>Steg 2: \\(y_2=1,5+0,5(2-1,5)=1,75\\).</p><p><strong>\\(y(1)\\approx1,75\\)</strong>.</p>",
-    "id": "4.85"
+    "id": "4.85",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5802,7 +6962,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Använd Eulers metod med \\(h=0,2\\) för \\(y'=y\\), \\(y(0)=1\\). Bestäm \\(y(0,6)\\) approximativt.</p>",
     "s": "<p>Euler: \\(y_{n+1}=y_n+0,2y_n=1,2y_n\\).</p><p>\\[y_1=1,2,\\quad y_2=1,44,\\quad y_3=1,728.\\]</p><p><strong>\\(y(0,6)\\approx1,728\\)</strong>.</p>",
-    "id": "4.111"
+    "id": "4.111",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5812,7 +6974,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För \\(y'=y\\), \\(y(0)=1\\), ger Euler med \\(h=1\\) approximationen \\(y(1)\\approx2\\). Med \\(h=0,5\\) fås \\(y(1)\\approx2,25\\). Det exakta värdet är \\(e\\approx2,718\\). Vad visar jämförelsen?</p>",
     "s": "<p>Den mindre steglängden ger här ett värde närmare det exakta. Euler bygger på lokala linjära steg; mindre steg följer den krökta lösningskurvan bättre. Jämförelsen visar därför att <strong>mindre steglängd normalt ger bättre noggrannhet</strong>, på bekostnad av fler steg.</p>",
-    "id": "4.112"
+    "id": "4.112",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5822,7 +6986,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För differentialekvationen \\(y'=x-y\\), bestäm riktningsfältets lutning i punkterna \\((0,0)\\), \\((2,1)\\) och \\((1,3)\\). Förklara också på vilken linje fältet har horisontella riktningsstreck.</p>",
     "s": "<p><strong>Metod:</strong> Lutningen i en punkt fås genom att sätta punktens koordinater i differentialekvationens högerled.</p><p>Lutningen är \\(x-y\\). Den blir <strong>0, 1 och −2</strong> i de tre punkterna. Horisontella streck fås när \\(x-y=0\\), alltså längs <strong>linjen \\(y=x\\)</strong>.</p>",
-    "id": "4.20"
+    "id": "4.20",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5830,9 +6996,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "identifiera differentialekvation från riktningsfält",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg height=\"300\" width=\"430\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för differentialekvationen y prim lika med x minus y\">\n<rect width=\"430\" height=\"300\" fill=\"white\"/>\n<line x1=\"79.0\" y1=\"35\" x2=\"79.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"233.0\" x2=\"395\" y2=\"233.0\" stroke=\"#e1e1e1\"/><text x=\"79\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">-2</text><text x=\"200.0\" y=\"237.0\" font-size=\"11\" text-anchor=\"end\">-2</text><line x1=\"147.0\" y1=\"35\" x2=\"147.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"189.0\" x2=\"395\" y2=\"189.0\" stroke=\"#e1e1e1\"/><text x=\"147\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">-1</text><text x=\"200.0\" y=\"193.0\" font-size=\"11\" text-anchor=\"end\">-1</text><line x1=\"215.0\" y1=\"35\" x2=\"215.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"145.0\" x2=\"395\" y2=\"145.0\" stroke=\"#e1e1e1\"/><line x1=\"283.0\" y1=\"35\" x2=\"283.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"101.0\" x2=\"395\" y2=\"101.0\" stroke=\"#e1e1e1\"/><text x=\"283\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">1</text><text x=\"200.0\" y=\"105.0\" font-size=\"11\" text-anchor=\"end\">1</text><line x1=\"351.0\" y1=\"35\" x2=\"351.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"57.0\" x2=\"395\" y2=\"57.0\" stroke=\"#e1e1e1\"/><text x=\"351\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">2</text><text x=\"200.0\" y=\"61.0\" font-size=\"11\" text-anchor=\"end\">2</text>\n<line x1=\"35\" y1=\"145.0\" x2=\"400\" y2=\"145.0\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"215.0\" y1=\"270\" x2=\"215.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"67.0\" y1=\"233.0\" x2=\"91.0\" y2=\"233.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"70.5\" y1=\"180.5\" x2=\"87.5\" y2=\"197.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"73.6\" y1=\"134.3\" x2=\"84.4\" y2=\"155.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"75.2\" y1=\"89.6\" x2=\"82.8\" y2=\"112.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"76.1\" y1=\"45.4\" x2=\"81.9\" y2=\"68.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"241.5\" x2=\"155.5\" y2=\"224.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"135.0\" y1=\"189.0\" x2=\"159.0\" y2=\"189.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"136.5\" x2=\"155.5\" y2=\"153.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"141.6\" y1=\"90.3\" x2=\"152.4\" y2=\"111.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"143.2\" y1=\"45.6\" x2=\"150.8\" y2=\"68.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"243.7\" x2=\"220.4\" y2=\"222.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"197.5\" x2=\"223.5\" y2=\"180.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"203.0\" y1=\"145.0\" x2=\"227.0\" y2=\"145.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"92.5\" x2=\"223.5\" y2=\"109.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"46.3\" x2=\"220.4\" y2=\"67.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"279.2\" y1=\"244.4\" x2=\"286.8\" y2=\"221.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"277.6\" y1=\"199.7\" x2=\"288.4\" y2=\"178.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"153.5\" x2=\"291.5\" y2=\"136.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"271.0\" y1=\"101.0\" x2=\"295.0\" y2=\"101.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"48.5\" x2=\"291.5\" y2=\"65.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"348.1\" y1=\"244.6\" x2=\"353.9\" y2=\"221.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"347.2\" y1=\"200.4\" x2=\"354.8\" y2=\"177.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"345.6\" y1=\"155.7\" x2=\"356.4\" y2=\"134.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"342.5\" y1=\"109.5\" x2=\"359.5\" y2=\"92.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"339.0\" y1=\"57.0\" x2=\"363.0\" y2=\"57.0\" stroke=\"#666\" stroke-width=\"1.7\"/>\n\n<text x=\"400\" y=\"139.0\" font-size=\"13\">x</text><text x=\"222.0\" y=\"28\" font-size=\"13\">y</text>\n</svg></span><p>Riktningsfältet hör till en av differentialekvationerna nedan. Vilken?</p><p>A) \\(y'=x-y\\) &nbsp;&nbsp; B) \\(y'=x+y\\) &nbsp;&nbsp; C) \\(y'=xy\\) &nbsp;&nbsp; D) \\(y'=y-x\\)</p>",
+    "t": "<span class=\"fig\"><svg height=\"300\" width=\"430\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för differentialekvationen y prim lika med x minus y\">\n<rect width=\"430\" height=\"300\" fill=\"white\"/>\n<line x1=\"79.0\" y1=\"35\" x2=\"79.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"233.0\" x2=\"395\" y2=\"233.0\" stroke=\"#e1e1e1\"/><text x=\"74.0\" y=\"162.0\" font-size=\"11\">-2</text><text x=\"222.0\" y=\"237.0\" font-size=\"11\">-2</text><line x1=\"147.0\" y1=\"35\" x2=\"147.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"189.0\" x2=\"395\" y2=\"189.0\" stroke=\"#e1e1e1\"/><text x=\"142.0\" y=\"162.0\" font-size=\"11\">-1</text><text x=\"222.0\" y=\"193.0\" font-size=\"11\">-1</text><line x1=\"215.0\" y1=\"35\" x2=\"215.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"145.0\" x2=\"395\" y2=\"145.0\" stroke=\"#e1e1e1\"/><line x1=\"283.0\" y1=\"35\" x2=\"283.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"101.0\" x2=\"395\" y2=\"101.0\" stroke=\"#e1e1e1\"/><text x=\"278.0\" y=\"162.0\" font-size=\"11\">1</text><text x=\"222.0\" y=\"105.0\" font-size=\"11\">1</text><line x1=\"351.0\" y1=\"35\" x2=\"351.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"57.0\" x2=\"395\" y2=\"57.0\" stroke=\"#e1e1e1\"/><text x=\"346.0\" y=\"162.0\" font-size=\"11\">2</text><text x=\"222.0\" y=\"61.0\" font-size=\"11\">2</text>\n<line x1=\"35\" y1=\"145.0\" x2=\"400\" y2=\"145.0\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"215.0\" y1=\"270\" x2=\"215.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"67.0\" y1=\"233.0\" x2=\"91.0\" y2=\"233.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"70.5\" y1=\"180.5\" x2=\"87.5\" y2=\"197.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"73.6\" y1=\"134.3\" x2=\"84.4\" y2=\"155.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"75.2\" y1=\"89.6\" x2=\"82.8\" y2=\"112.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"76.1\" y1=\"45.4\" x2=\"81.9\" y2=\"68.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"241.5\" x2=\"155.5\" y2=\"224.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"135.0\" y1=\"189.0\" x2=\"159.0\" y2=\"189.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"136.5\" x2=\"155.5\" y2=\"153.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"141.6\" y1=\"90.3\" x2=\"152.4\" y2=\"111.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"143.2\" y1=\"45.6\" x2=\"150.8\" y2=\"68.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"243.7\" x2=\"220.4\" y2=\"222.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"197.5\" x2=\"223.5\" y2=\"180.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"203.0\" y1=\"145.0\" x2=\"227.0\" y2=\"145.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"92.5\" x2=\"223.5\" y2=\"109.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"46.3\" x2=\"220.4\" y2=\"67.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"279.2\" y1=\"244.4\" x2=\"286.8\" y2=\"221.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"277.6\" y1=\"199.7\" x2=\"288.4\" y2=\"178.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"153.5\" x2=\"291.5\" y2=\"136.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"271.0\" y1=\"101.0\" x2=\"295.0\" y2=\"101.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"48.5\" x2=\"291.5\" y2=\"65.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"348.1\" y1=\"244.6\" x2=\"353.9\" y2=\"221.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"347.2\" y1=\"200.4\" x2=\"354.8\" y2=\"177.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"345.6\" y1=\"155.7\" x2=\"356.4\" y2=\"134.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"342.5\" y1=\"109.5\" x2=\"359.5\" y2=\"92.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"339.0\" y1=\"57.0\" x2=\"363.0\" y2=\"57.0\" stroke=\"#666\" stroke-width=\"1.7\"/>\n\n<text x=\"400\" y=\"139.0\" font-size=\"13\">x</text><text x=\"222.0\" y=\"28\" font-size=\"13\">y</text>\n</svg></span><p>Riktningsfältet hör till en av differentialekvationerna nedan. Vilken?</p><p>A) \\(y'=x-y\\) &nbsp;&nbsp; B) \\(y'=x+y\\) &nbsp;&nbsp; C) \\(y'=xy\\) &nbsp;&nbsp; D) \\(y'=y-x\\)</p>",
     "s": "<p>På linjen \\(y=x\\) är de små linjestyckena horisontella, vilket betyder \\(y'=0\\). Det stämmer med \\(x-y=0\\).</p><p>Dessutom är lutningen positiv under linjen \\(y=x\\) och negativ ovanför den. Rätt svar är därför <strong>A: \\(y'=x-y\\)</strong>.</p>",
-    "id": "4.37"
+    "id": "4.37",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5840,9 +7008,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "bestämma lösningskurva ur riktningsfält och allmän lösning",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg height=\"300\" width=\"430\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för differentialekvationen y prim lika med x minus y med en lösningskurva\">\n<rect width=\"430\" height=\"300\" fill=\"white\"/>\n<line x1=\"79.0\" y1=\"35\" x2=\"79.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"233.0\" x2=\"395\" y2=\"233.0\" stroke=\"#e1e1e1\"/><text x=\"79\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">-2</text><text x=\"200.0\" y=\"237.0\" font-size=\"11\" text-anchor=\"end\">-2</text><line x1=\"147.0\" y1=\"35\" x2=\"147.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"189.0\" x2=\"395\" y2=\"189.0\" stroke=\"#e1e1e1\"/><text x=\"147\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">-1</text><text x=\"200.0\" y=\"193.0\" font-size=\"11\" text-anchor=\"end\">-1</text><line x1=\"215.0\" y1=\"35\" x2=\"215.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"145.0\" x2=\"395\" y2=\"145.0\" stroke=\"#e1e1e1\"/><line x1=\"283.0\" y1=\"35\" x2=\"283.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"101.0\" x2=\"395\" y2=\"101.0\" stroke=\"#e1e1e1\"/><text x=\"283\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">1</text><text x=\"200.0\" y=\"105.0\" font-size=\"11\" text-anchor=\"end\">1</text><line x1=\"351.0\" y1=\"35\" x2=\"351.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"57.0\" x2=\"395\" y2=\"57.0\" stroke=\"#e1e1e1\"/><text x=\"351\" y=\"170.0\" font-size=\"11\" text-anchor=\"middle\">2</text><text x=\"200.0\" y=\"61.0\" font-size=\"11\" text-anchor=\"end\">2</text>\n<line x1=\"35\" y1=\"145.0\" x2=\"400\" y2=\"145.0\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"215.0\" y1=\"270\" x2=\"215.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"67.0\" y1=\"233.0\" x2=\"91.0\" y2=\"233.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"70.5\" y1=\"180.5\" x2=\"87.5\" y2=\"197.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"73.6\" y1=\"134.3\" x2=\"84.4\" y2=\"155.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"75.2\" y1=\"89.6\" x2=\"82.8\" y2=\"112.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"76.1\" y1=\"45.4\" x2=\"81.9\" y2=\"68.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"241.5\" x2=\"155.5\" y2=\"224.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"135.0\" y1=\"189.0\" x2=\"159.0\" y2=\"189.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"136.5\" x2=\"155.5\" y2=\"153.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"141.6\" y1=\"90.3\" x2=\"152.4\" y2=\"111.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"143.2\" y1=\"45.6\" x2=\"150.8\" y2=\"68.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"243.7\" x2=\"220.4\" y2=\"222.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"197.5\" x2=\"223.5\" y2=\"180.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"203.0\" y1=\"145.0\" x2=\"227.0\" y2=\"145.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"92.5\" x2=\"223.5\" y2=\"109.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"46.3\" x2=\"220.4\" y2=\"67.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"279.2\" y1=\"244.4\" x2=\"286.8\" y2=\"221.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"277.6\" y1=\"199.7\" x2=\"288.4\" y2=\"178.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"153.5\" x2=\"291.5\" y2=\"136.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"271.0\" y1=\"101.0\" x2=\"295.0\" y2=\"101.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"48.5\" x2=\"291.5\" y2=\"65.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"348.1\" y1=\"244.6\" x2=\"353.9\" y2=\"221.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"347.2\" y1=\"200.4\" x2=\"354.8\" y2=\"177.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"345.6\" y1=\"155.7\" x2=\"356.4\" y2=\"134.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"342.5\" y1=\"109.5\" x2=\"359.5\" y2=\"92.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"339.0\" y1=\"57.0\" x2=\"363.0\" y2=\"57.0\" stroke=\"#666\" stroke-width=\"1.7\"/>\n<path d=\"M 163.8,35.2 L 165.6,39.0 L 167.4,42.6 L 169.2,46.1 L 171.0,49.4 L 172.8,52.7 L 174.7,55.8 L 176.5,58.8 L 178.3,61.8 L 180.1,64.6 L 181.9,67.2 L 183.7,69.8 L 185.5,72.3 L 187.3,74.7 L 189.2,77.0 L 191.0,79.3 L 192.8,81.4 L 194.6,83.4 L 196.4,85.4 L 198.2,87.2 L 200.0,89.0 L 201.9,90.7 L 203.7,92.4 L 205.5,93.9 L 207.3,95.4 L 209.1,96.8 L 210.9,98.2 L 212.7,99.5 L 214.5,100.7 L 216.4,101.9 L 218.2,103.0 L 220.0,104.0 L 221.8,105.0 L 223.6,105.9 L 225.4,106.8 L 227.2,107.6 L 229.1,108.3 L 230.9,109.0 L 232.7,109.7 L 234.5,110.3 L 236.3,110.9 L 238.1,111.4 L 239.9,111.9 L 241.7,112.3 L 243.6,112.7 L 245.4,113.0 L 247.2,113.4 L 249.0,113.6 L 250.8,113.9 L 252.6,114.1 L 254.4,114.2 L 256.3,114.3 L 258.1,114.4 L 259.9,114.5 L 261.7,114.5 L 263.5,114.5 L 265.3,114.5 L 267.1,114.4 L 268.9,114.3 L 270.8,114.2 L 272.6,114.0 L 274.4,113.8 L 276.2,113.6 L 278.0,113.4 L 279.8,113.1 L 281.6,112.9 L 283.5,112.5 L 285.3,112.2 L 287.1,111.9 L 288.9,111.5 L 290.7,111.1 L 292.5,110.7 L 294.3,110.3 L 296.1,109.8 L 298.0,109.3 L 299.8,108.9 L 301.6,108.3 L 303.4,107.8 L 305.2,107.3 L 307.0,106.7 L 308.8,106.1 L 310.7,105.6 L 312.5,104.9 L 314.3,104.3 L 316.1,103.7 L 317.9,103.0 L 319.7,102.4 L 321.5,101.7 L 323.3,101.0 L 325.2,100.3 L 327.0,99.6 L 328.8,98.9 L 330.6,98.1 L 332.4,97.4 L 334.2,96.6 L 336.0,95.8 L 337.9,95.1 L 339.7,94.3 L 341.5,93.5 L 343.3,92.6 L 345.1,91.8 L 346.9,91.0 L 348.7,90.2 L 350.5,89.3 L 352.4,88.4 L 354.2,87.6 L 356.0,86.7 L 357.8,85.8 L 359.6,84.9 L 361.4,84.0 L 363.2,83.1 L 365.1,82.2 L 366.9,81.3 L 368.7,80.4 L 370.5,79.4 L 372.3,78.5 L 374.1,77.6 L 375.9,76.6 L 377.7,75.7 L 379.6,74.7 L 381.4,73.7 L 383.2,72.8 L 385.0,71.8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.8\"/><circle cx=\"215.0\" cy=\"101.0\" r=\"4\" fill=\"#222\"/><text x=\"229.0\" y=\"85.0\" font-size=\"13\">(0, 1)</text>\n<text x=\"400\" y=\"139.0\" font-size=\"13\">x</text><text x=\"222.0\" y=\"28\" font-size=\"13\">y</text>\n</svg></span><p>Riktningsfältet till \\(y'=x-y\\) visas tillsammans med en lösningskurva som går genom punkten \\((0,1)\\).</p><p>Den allmänna lösningen är \\(y=x-1+Ce^{-x}\\). Bestäm den ritade lösningskurvans ekvation.</p>",
+    "t": "<span class=\"fig\"><svg height=\"300\" width=\"430\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för differentialekvationen y prim lika med x minus y med en lösningskurva\">\n<rect width=\"430\" height=\"300\" fill=\"white\"/>\n<line x1=\"79.0\" y1=\"35\" x2=\"79.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"233.0\" x2=\"395\" y2=\"233.0\" stroke=\"#e1e1e1\"/><text x=\"74.0\" y=\"162.0\" font-size=\"11\">-2</text><text x=\"222.0\" y=\"237.0\" font-size=\"11\">-2</text><line x1=\"147.0\" y1=\"35\" x2=\"147.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"189.0\" x2=\"395\" y2=\"189.0\" stroke=\"#e1e1e1\"/><text x=\"142.0\" y=\"162.0\" font-size=\"11\">-1</text><text x=\"222.0\" y=\"193.0\" font-size=\"11\">-1</text><line x1=\"215.0\" y1=\"35\" x2=\"215.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"145.0\" x2=\"395\" y2=\"145.0\" stroke=\"#e1e1e1\"/><line x1=\"283.0\" y1=\"35\" x2=\"283.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"101.0\" x2=\"395\" y2=\"101.0\" stroke=\"#e1e1e1\"/><text x=\"278.0\" y=\"162.0\" font-size=\"11\">1</text><text x=\"222.0\" y=\"105.0\" font-size=\"11\">1</text><line x1=\"351.0\" y1=\"35\" x2=\"351.0\" y2=\"265\" stroke=\"#e1e1e1\"/><line x1=\"35\" y1=\"57.0\" x2=\"395\" y2=\"57.0\" stroke=\"#e1e1e1\"/><text x=\"346.0\" y=\"162.0\" font-size=\"11\">2</text><text x=\"222.0\" y=\"61.0\" font-size=\"11\">2</text>\n<line x1=\"35\" y1=\"145.0\" x2=\"400\" y2=\"145.0\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"215.0\" y1=\"270\" x2=\"215.0\" y2=\"25\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"67.0\" y1=\"233.0\" x2=\"91.0\" y2=\"233.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"70.5\" y1=\"180.5\" x2=\"87.5\" y2=\"197.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"73.6\" y1=\"134.3\" x2=\"84.4\" y2=\"155.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"75.2\" y1=\"89.6\" x2=\"82.8\" y2=\"112.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"76.1\" y1=\"45.4\" x2=\"81.9\" y2=\"68.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"241.5\" x2=\"155.5\" y2=\"224.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"135.0\" y1=\"189.0\" x2=\"159.0\" y2=\"189.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"138.5\" y1=\"136.5\" x2=\"155.5\" y2=\"153.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"141.6\" y1=\"90.3\" x2=\"152.4\" y2=\"111.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"143.2\" y1=\"45.6\" x2=\"150.8\" y2=\"68.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"243.7\" x2=\"220.4\" y2=\"222.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"197.5\" x2=\"223.5\" y2=\"180.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"203.0\" y1=\"145.0\" x2=\"227.0\" y2=\"145.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"206.5\" y1=\"92.5\" x2=\"223.5\" y2=\"109.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"209.6\" y1=\"46.3\" x2=\"220.4\" y2=\"67.7\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"279.2\" y1=\"244.4\" x2=\"286.8\" y2=\"221.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"277.6\" y1=\"199.7\" x2=\"288.4\" y2=\"178.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"153.5\" x2=\"291.5\" y2=\"136.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"271.0\" y1=\"101.0\" x2=\"295.0\" y2=\"101.0\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"274.5\" y1=\"48.5\" x2=\"291.5\" y2=\"65.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"348.1\" y1=\"244.6\" x2=\"353.9\" y2=\"221.4\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"347.2\" y1=\"200.4\" x2=\"354.8\" y2=\"177.6\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"345.6\" y1=\"155.7\" x2=\"356.4\" y2=\"134.3\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"342.5\" y1=\"109.5\" x2=\"359.5\" y2=\"92.5\" stroke=\"#666\" stroke-width=\"1.7\"/><line x1=\"339.0\" y1=\"57.0\" x2=\"363.0\" y2=\"57.0\" stroke=\"#666\" stroke-width=\"1.7\"/>\n<path d=\"M 163.8,35.2 L 165.6,39.0 L 167.4,42.6 L 169.2,46.1 L 171.0,49.4 L 172.8,52.7 L 174.7,55.8 L 176.5,58.8 L 178.3,61.8 L 180.1,64.6 L 181.9,67.2 L 183.7,69.8 L 185.5,72.3 L 187.3,74.7 L 189.2,77.0 L 191.0,79.3 L 192.8,81.4 L 194.6,83.4 L 196.4,85.4 L 198.2,87.2 L 200.0,89.0 L 201.9,90.7 L 203.7,92.4 L 205.5,93.9 L 207.3,95.4 L 209.1,96.8 L 210.9,98.2 L 212.7,99.5 L 214.5,100.7 L 216.4,101.9 L 218.2,103.0 L 220.0,104.0 L 221.8,105.0 L 223.6,105.9 L 225.4,106.8 L 227.2,107.6 L 229.1,108.3 L 230.9,109.0 L 232.7,109.7 L 234.5,110.3 L 236.3,110.9 L 238.1,111.4 L 239.9,111.9 L 241.7,112.3 L 243.6,112.7 L 245.4,113.0 L 247.2,113.4 L 249.0,113.6 L 250.8,113.9 L 252.6,114.1 L 254.4,114.2 L 256.3,114.3 L 258.1,114.4 L 259.9,114.5 L 261.7,114.5 L 263.5,114.5 L 265.3,114.5 L 267.1,114.4 L 268.9,114.3 L 270.8,114.2 L 272.6,114.0 L 274.4,113.8 L 276.2,113.6 L 278.0,113.4 L 279.8,113.1 L 281.6,112.9 L 283.5,112.5 L 285.3,112.2 L 287.1,111.9 L 288.9,111.5 L 290.7,111.1 L 292.5,110.7 L 294.3,110.3 L 296.1,109.8 L 298.0,109.3 L 299.8,108.9 L 301.6,108.3 L 303.4,107.8 L 305.2,107.3 L 307.0,106.7 L 308.8,106.1 L 310.7,105.6 L 312.5,104.9 L 314.3,104.3 L 316.1,103.7 L 317.9,103.0 L 319.7,102.4 L 321.5,101.7 L 323.3,101.0 L 325.2,100.3 L 327.0,99.6 L 328.8,98.9 L 330.6,98.1 L 332.4,97.4 L 334.2,96.6 L 336.0,95.8 L 337.9,95.1 L 339.7,94.3 L 341.5,93.5 L 343.3,92.6 L 345.1,91.8 L 346.9,91.0 L 348.7,90.2 L 350.5,89.3 L 352.4,88.4 L 354.2,87.6 L 356.0,86.7 L 357.8,85.8 L 359.6,84.9 L 361.4,84.0 L 363.2,83.1 L 365.1,82.2 L 366.9,81.3 L 368.7,80.4 L 370.5,79.4 L 372.3,78.5 L 374.1,77.6 L 375.9,76.6 L 377.7,75.7 L 379.6,74.7 L 381.4,73.7 L 383.2,72.8 L 385.0,71.8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.8\"/><circle cx=\"215.0\" cy=\"101.0\" r=\"4\" fill=\"#222\"/><text x=\"223.0\" y=\"94.0\" font-size=\"13\">(0, 1)</text>\n<text x=\"400\" y=\"139.0\" font-size=\"13\">x</text><text x=\"222.0\" y=\"28\" font-size=\"13\">y</text>\n</svg></span><p>Riktningsfältet till \\(y'=x-y\\) visas tillsammans med en lösningskurva som går genom punkten \\((0,1)\\).</p><p>Den allmänna lösningen är \\(y=x-1+Ce^{-x}\\). Bestäm den ritade lösningskurvans ekvation.</p>",
     "s": "<p><strong>Metod:</strong> Lutningen i en punkt fås genom att sätta punktens koordinater i differentialekvationens högerled.</p><p>Punkten \\((0,1)\\) ger</p><p>\\[1=0-1+C e^0=-1+C,\\]</p><p>så \\(C=2\\). Lösningskurvan är därför</p><p><strong>\\(y=x-1+2e^{-x}\\)</strong>.</p>",
-    "id": "4.38"
+    "id": "4.38",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5852,7 +7022,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.57",
     "t": "<p>För differentialekvationen \\(y'=x+y\\), vilken lutning har lösningskurvan i punkten \\((1,2)\\)?</p>",
-    "s": "<p>Lutningen i en punkt fås genom att sätta in punktens koordinater i högerledet:</p><p>\\[y'=x+y=1+2=3.\\]</p><p><strong>Lösningskurvans lutning är 3.</strong></p>"
+    "s": "<p>Lutningen i en punkt fås genom att sätta in punktens koordinater i högerledet:</p><p>\\[y'=x+y=1+2=3.\\]</p><p><strong>Lösningskurvans lutning är 3.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5860,9 +7032,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "tolka stabil jämvikt ur riktningsfält",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg width=\"460\" height=\"390\" viewBox=\"0 0 460 390\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med 2 minus y\">\n<rect width=\"460\" height=\"390\" fill=\"white\"/>\n<line x1=\"72.8\" y1=\"329.5\" x2=\"79.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"276.9\" x2=\"80.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"68.9\" y1=\"223.1\" x2=\"83.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"164.0\" x2=\"86.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"68.9\" y1=\"104.9\" x2=\"83.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"51.1\" x2=\"80.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"124.8\" y1=\"329.5\" x2=\"131.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"276.9\" x2=\"132.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"223.1\" x2=\"135.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"164.0\" x2=\"138.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"104.9\" x2=\"135.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"51.1\" x2=\"132.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"176.8\" y1=\"329.5\" x2=\"183.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"276.9\" x2=\"184.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"223.1\" x2=\"187.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"164.0\" x2=\"190.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"104.9\" x2=\"187.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"51.1\" x2=\"184.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"228.8\" y1=\"329.5\" x2=\"235.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"276.9\" x2=\"236.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"223.1\" x2=\"239.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"164.0\" x2=\"242.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"104.9\" x2=\"239.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"51.1\" x2=\"236.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"280.8\" y1=\"329.5\" x2=\"287.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"276.9\" x2=\"288.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"223.1\" x2=\"291.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"164.0\" x2=\"294.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"104.9\" x2=\"291.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"51.1\" x2=\"288.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"332.8\" y1=\"329.5\" x2=\"339.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"276.9\" x2=\"340.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"223.1\" x2=\"343.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"164.0\" x2=\"346.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"104.9\" x2=\"343.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"51.1\" x2=\"340.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"384.8\" y1=\"329.5\" x2=\"391.2\" y2=\"310.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"276.9\" x2=\"392.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"223.1\" x2=\"395.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"164.0\" x2=\"398.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"104.9\" x2=\"395.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"51.1\" x2=\"392.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"268\" x2=\"419.20000000000005\" y2=\"268\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"31\" x2=\"232\" y2=\"349\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"264\" x2=\"76\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"264\" x2=\"128\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"264\" x2=\"180\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"264\" x2=\"284\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"264\" x2=\"336\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"264\" x2=\"388\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"320\" x2=\"236\" y2=\"320\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"325\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"216\" x2=\"236\" y2=\"216\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"221\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"164\" x2=\"236\" y2=\"164\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"169\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text><line x1=\"228\" y1=\"112\" x2=\"236\" y2=\"112\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"117\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">3</text><line x1=\"228\" y1=\"60\" x2=\"236\" y2=\"60\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"65\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">4</text>\n<text x=\"428.20000000000005\" y=\"273\" font-size=\"14\">x</text><text x=\"241\" y=\"44\" font-size=\"14\">y</text>\n<line x1=\"60\" y1=\"164\" x2=\"392\" y2=\"164\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/><text x=\"60\" y=\"156\" font-size=\"13\" fill=\"#B23A2E\">y = 2</text></svg></span><p>Riktningsfältet motsvarar \\(y'=2-y\\). Beskriv vad som händer med lösningar som startar med \\(y(0)\\gt2\\) respektive \\(y(0)\\lt2\\).</p>",
+    "t": "<span class=\"fig\"><svg width=\"460\" height=\"310\" viewBox=\"0 0 460 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med 2 minus y med jämviktslinjen y lika med 2\">\n<rect width=\"460\" height=\"310\" fill=\"white\"/>\n<line x1=\"72.8\" y1=\"351.5\" x2=\"79.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"298.9\" x2=\"80.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"68.9\" y1=\"245.1\" x2=\"83.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"186.0\" x2=\"86.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"68.9\" y1=\"126.9\" x2=\"83.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"73.1\" x2=\"80.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"124.8\" y1=\"351.5\" x2=\"131.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"298.9\" x2=\"132.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"245.1\" x2=\"135.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"186.0\" x2=\"138.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"126.9\" x2=\"135.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"73.1\" x2=\"132.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"176.8\" y1=\"351.5\" x2=\"183.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"298.9\" x2=\"184.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"245.1\" x2=\"187.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"186.0\" x2=\"190.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"126.9\" x2=\"187.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"73.1\" x2=\"184.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"228.8\" y1=\"351.5\" x2=\"235.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"298.9\" x2=\"236.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"245.1\" x2=\"239.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"186.0\" x2=\"242.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"126.9\" x2=\"239.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"73.1\" x2=\"236.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"280.8\" y1=\"351.5\" x2=\"287.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"298.9\" x2=\"288.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"245.1\" x2=\"291.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"186.0\" x2=\"294.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"126.9\" x2=\"291.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"73.1\" x2=\"288.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"332.8\" y1=\"351.5\" x2=\"339.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"298.9\" x2=\"340.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"245.1\" x2=\"343.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"186.0\" x2=\"346.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"126.9\" x2=\"343.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"73.1\" x2=\"340.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"384.8\" y1=\"351.5\" x2=\"391.2\" y2=\"332.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"298.9\" x2=\"392.5\" y2=\"281.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"245.1\" x2=\"395.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"186.0\" x2=\"398.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"126.9\" x2=\"395.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"73.1\" x2=\"392.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"290\" x2=\"419.20000000000005\" y2=\"290\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"51\" x2=\"232\" y2=\"373\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"286\" x2=\"76\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"286\" x2=\"128\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"286\" x2=\"180\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"286\" x2=\"284\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"286\" x2=\"336\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"286\" x2=\"388\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"342\" x2=\"236\" y2=\"342\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"347\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"238\" x2=\"236\" y2=\"238\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"243\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"186\" x2=\"236\" y2=\"186\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"191\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text><line x1=\"228\" y1=\"134\" x2=\"236\" y2=\"134\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"139\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">3</text><line x1=\"228\" y1=\"82\" x2=\"236\" y2=\"82\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"87\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">4</text>\n<text x=\"427.20000000000005\" y=\"295\" font-size=\"14\">x</text><text x=\"241\" y=\"63\" font-size=\"14\">y</text>\n<line x1=\"60\" y1=\"186\" x2=\"392\" y2=\"186\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/><text x=\"60\" y=\"178\" font-size=\"13\" fill=\"#B23A2E\">jämvikt y = 2</text></svg></span><p>Riktningsfältet motsvarar \\(y'=2-y\\). Beskriv vad som händer med lösningar som startar med \\(y(0)\\gt2\\) respektive \\(y(0)\\lt2\\).</p>",
     "s": "<p>Om \\(y\\gt2\\) är \\(2-y\\lt0\\), så lösningen minskar. Om \\(y\\lt2\\) är \\(2-y\\gt0\\), så lösningen ökar. Båda typerna rör sig mot <strong>jämvikten \\(y=2\\)</strong>, som därför är stabil.</p>",
-    "id": "4.84"
+    "id": "4.84",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5870,9 +7044,11 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "identifiera jämviktslinje",
     "poang": "2/0/0",
-    "t": "<span class=\"fig\"><svg width=\"460\" height=\"390\" viewBox=\"0 0 460 390\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med y gånger tre minus y\">\n<rect width=\"460\" height=\"390\" fill=\"white\"/>\n<line x1=\"73.6\" y1=\"310.3\" x2=\"78.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"268.0\" x2=\"86.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"224.9\" x2=\"80.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"172.9\" x2=\"80.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"112.0\" x2=\"86.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"73.6\" y1=\"50.3\" x2=\"78.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"310.3\" x2=\"130.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"268.0\" x2=\"138.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"224.9\" x2=\"132.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"172.9\" x2=\"132.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"112.0\" x2=\"138.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"50.3\" x2=\"130.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"177.6\" y1=\"310.3\" x2=\"182.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"268.0\" x2=\"190.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"224.9\" x2=\"184.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"172.9\" x2=\"184.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"112.0\" x2=\"190.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"177.6\" y1=\"50.3\" x2=\"182.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"229.6\" y1=\"310.3\" x2=\"234.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"268.0\" x2=\"242.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"224.9\" x2=\"236.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"172.9\" x2=\"236.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"112.0\" x2=\"242.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"229.6\" y1=\"50.3\" x2=\"234.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"281.6\" y1=\"310.3\" x2=\"286.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"268.0\" x2=\"294.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"224.9\" x2=\"288.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"172.9\" x2=\"288.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"112.0\" x2=\"294.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"281.6\" y1=\"50.3\" x2=\"286.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"310.3\" x2=\"338.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"268.0\" x2=\"346.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"224.9\" x2=\"340.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"172.9\" x2=\"340.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"112.0\" x2=\"346.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"50.3\" x2=\"338.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"310.3\" x2=\"390.4\" y2=\"329.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"268.0\" x2=\"398.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"224.9\" x2=\"392.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"172.9\" x2=\"392.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"112.0\" x2=\"398.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"50.3\" x2=\"390.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"268\" x2=\"419.20000000000005\" y2=\"268\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"31\" x2=\"232\" y2=\"349\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"264\" x2=\"76\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"264\" x2=\"128\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"264\" x2=\"180\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"264\" x2=\"284\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"264\" x2=\"336\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"264\" x2=\"388\" y2=\"272\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"289\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"320\" x2=\"236\" y2=\"320\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"325\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"216\" x2=\"236\" y2=\"216\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"221\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"164\" x2=\"236\" y2=\"164\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"169\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text><line x1=\"228\" y1=\"112\" x2=\"236\" y2=\"112\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"117\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">3</text><line x1=\"228\" y1=\"60\" x2=\"236\" y2=\"60\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"65\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">4</text>\n<text x=\"428.20000000000005\" y=\"273\" font-size=\"14\">x</text><text x=\"241\" y=\"44\" font-size=\"14\">y</text>\n</svg></span><p>Riktningsfältet kommer från \\(y'=y(3-y)\\). Vilka horisontella jämviktslösningar finns?</p>",
+    "t": "<span class=\"fig\"><svg width=\"460\" height=\"310\" viewBox=\"0 0 460 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med y gånger tre minus y\">\n<rect width=\"460\" height=\"310\" fill=\"white\"/>\n<line x1=\"73.6\" y1=\"332.3\" x2=\"78.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"290.0\" x2=\"86.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"246.9\" x2=\"80.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"194.9\" x2=\"80.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"66.0\" y1=\"134.0\" x2=\"86.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"73.6\" y1=\"72.3\" x2=\"78.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"332.3\" x2=\"130.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"290.0\" x2=\"138.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"246.9\" x2=\"132.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"194.9\" x2=\"132.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"134.0\" x2=\"138.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"72.3\" x2=\"130.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"177.6\" y1=\"332.3\" x2=\"182.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"290.0\" x2=\"190.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"246.9\" x2=\"184.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"194.9\" x2=\"184.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"134.0\" x2=\"190.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"177.6\" y1=\"72.3\" x2=\"182.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"229.6\" y1=\"332.3\" x2=\"234.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"290.0\" x2=\"242.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"246.9\" x2=\"236.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"194.9\" x2=\"236.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"134.0\" x2=\"242.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"229.6\" y1=\"72.3\" x2=\"234.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"281.6\" y1=\"332.3\" x2=\"286.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"290.0\" x2=\"294.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"246.9\" x2=\"288.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"194.9\" x2=\"288.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"134.0\" x2=\"294.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"281.6\" y1=\"72.3\" x2=\"286.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"332.3\" x2=\"338.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"290.0\" x2=\"346.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"246.9\" x2=\"340.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"194.9\" x2=\"340.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"134.0\" x2=\"346.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"72.3\" x2=\"338.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"332.3\" x2=\"390.4\" y2=\"351.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"290.0\" x2=\"398.0\" y2=\"290.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"246.9\" x2=\"392.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"194.9\" x2=\"392.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"378.0\" y1=\"134.0\" x2=\"398.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"72.3\" x2=\"390.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"290\" x2=\"419.20000000000005\" y2=\"290\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"51\" x2=\"232\" y2=\"373\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"286\" x2=\"76\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"286\" x2=\"128\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"286\" x2=\"180\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"286\" x2=\"284\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"286\" x2=\"336\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"286\" x2=\"388\" y2=\"294\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"311\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"342\" x2=\"236\" y2=\"342\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"347\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"238\" x2=\"236\" y2=\"238\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"243\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"186\" x2=\"236\" y2=\"186\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"191\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text><line x1=\"228\" y1=\"134\" x2=\"236\" y2=\"134\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"139\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">3</text><line x1=\"228\" y1=\"82\" x2=\"236\" y2=\"82\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"87\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">4</text>\n<text x=\"427.20000000000005\" y=\"295\" font-size=\"14\">x</text><text x=\"241\" y=\"63\" font-size=\"14\">y</text>\n</svg></span><p>Riktningsfältet kommer från \\(y'=y(3-y)\\). Vilka horisontella jämviktslösningar finns?</p>",
     "s": "<p>Jämvikt fås när högerledet är 0:</p><p>\\[y(3-y)=0\\Rightarrow y=0\\text{ eller }y=3.\\]</p><p><strong>Jämviktslösningarna är \\(y=0\\) och \\(y=3\\).</strong></p>",
-    "id": "4.109"
+    "id": "4.109",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5880,9 +7056,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "skissa kvalitativ lösning",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg width=\"460\" height=\"338\" viewBox=\"0 0 460 338\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med x minus y med linjen y lika med x markerad\">\n<rect width=\"460\" height=\"338\" fill=\"white\"/>\n<line x1=\"68.9\" y1=\"260.9\" x2=\"83.1\" y2=\"275.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"207.1\" x2=\"80.5\" y2=\"224.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"72.8\" y1=\"154.5\" x2=\"79.2\" y2=\"173.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"73.6\" y1=\"102.3\" x2=\"78.4\" y2=\"121.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"74.0\" y1=\"50.2\" x2=\"78.0\" y2=\"69.8\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"268.0\" x2=\"138.0\" y2=\"268.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"208.9\" x2=\"135.1\" y2=\"223.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"155.1\" x2=\"132.5\" y2=\"172.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"124.8\" y1=\"102.5\" x2=\"131.2\" y2=\"121.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"50.3\" x2=\"130.4\" y2=\"69.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"275.1\" x2=\"187.1\" y2=\"260.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"216.0\" x2=\"190.0\" y2=\"216.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"156.9\" x2=\"187.1\" y2=\"171.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"103.1\" x2=\"184.5\" y2=\"120.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"176.8\" y1=\"50.5\" x2=\"183.2\" y2=\"69.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"276.9\" x2=\"236.5\" y2=\"259.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"223.1\" x2=\"239.1\" y2=\"208.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"164.0\" x2=\"242.0\" y2=\"164.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"104.9\" x2=\"239.1\" y2=\"119.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"51.1\" x2=\"236.5\" y2=\"68.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"280.8\" y1=\"277.5\" x2=\"287.2\" y2=\"258.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"224.9\" x2=\"288.5\" y2=\"207.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"171.1\" x2=\"291.1\" y2=\"156.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"112.0\" x2=\"294.0\" y2=\"112.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"52.9\" x2=\"291.1\" y2=\"67.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"277.7\" x2=\"338.4\" y2=\"258.3\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"332.8\" y1=\"225.5\" x2=\"339.2\" y2=\"206.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"172.9\" x2=\"340.5\" y2=\"155.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"119.1\" x2=\"343.1\" y2=\"104.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"60.0\" x2=\"346.0\" y2=\"60.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"386.0\" y1=\"277.8\" x2=\"390.0\" y2=\"258.2\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"225.7\" x2=\"390.4\" y2=\"206.3\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"384.8\" y1=\"173.5\" x2=\"391.2\" y2=\"154.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"120.9\" x2=\"392.5\" y2=\"103.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"67.1\" x2=\"395.1\" y2=\"52.9\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"164\" x2=\"419.20000000000005\" y2=\"164\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"31\" x2=\"232\" y2=\"297\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"160\" x2=\"76\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"160\" x2=\"128\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"160\" x2=\"180\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"160\" x2=\"284\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"160\" x2=\"336\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"160\" x2=\"388\" y2=\"168\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"185\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"268\" x2=\"236\" y2=\"268\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"273\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-2</text><line x1=\"228\" y1=\"216\" x2=\"236\" y2=\"216\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"221\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"112\" x2=\"236\" y2=\"112\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"117\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"60\" x2=\"236\" y2=\"60\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"65\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text>\n<text x=\"428.20000000000005\" y=\"169\" font-size=\"14\">x</text><text x=\"241\" y=\"44\" font-size=\"14\">y</text>\n<line x1=\"80\" y1=\"320\" x2=\"384\" y2=\"16\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 4\"/><text x=\"352\" y=\"82\" font-size=\"13\" fill=\"#B23A2E\">y = x</text></svg></span><p>Riktningsfältet hör till \\(y'=x-y\\). En lösning startar i \\((0,3)\\). Beskriv först om den stiger eller sjunker och vad som händer när den närmar sig linjen \\(y=x\\).</p>",
+    "t": "<span class=\"fig\"><svg width=\"460\" height=\"310\" viewBox=\"0 0 460 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält till y-prim lika med x minus y med linjen y lika med x markerad\">\n<rect width=\"460\" height=\"310\" fill=\"white\"/>\n<line x1=\"68.9\" y1=\"230.9\" x2=\"83.1\" y2=\"245.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"71.5\" y1=\"177.1\" x2=\"80.5\" y2=\"194.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"72.8\" y1=\"124.5\" x2=\"79.2\" y2=\"143.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"73.6\" y1=\"72.3\" x2=\"78.4\" y2=\"91.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"74.0\" y1=\"20.2\" x2=\"78.0\" y2=\"39.8\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"118.0\" y1=\"238.0\" x2=\"138.0\" y2=\"238.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"120.9\" y1=\"178.9\" x2=\"135.1\" y2=\"193.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"123.5\" y1=\"125.1\" x2=\"132.5\" y2=\"142.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"124.8\" y1=\"72.5\" x2=\"131.2\" y2=\"91.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"125.6\" y1=\"20.3\" x2=\"130.4\" y2=\"39.7\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"245.1\" x2=\"187.1\" y2=\"230.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"170.0\" y1=\"186.0\" x2=\"190.0\" y2=\"186.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"172.9\" y1=\"126.9\" x2=\"187.1\" y2=\"141.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"175.5\" y1=\"73.1\" x2=\"184.5\" y2=\"90.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"176.8\" y1=\"20.5\" x2=\"183.2\" y2=\"39.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"246.9\" x2=\"236.5\" y2=\"229.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"193.1\" x2=\"239.1\" y2=\"178.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"222.0\" y1=\"134.0\" x2=\"242.0\" y2=\"134.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"224.9\" y1=\"74.9\" x2=\"239.1\" y2=\"89.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"227.5\" y1=\"21.1\" x2=\"236.5\" y2=\"38.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"280.8\" y1=\"247.5\" x2=\"287.2\" y2=\"228.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"279.5\" y1=\"194.9\" x2=\"288.5\" y2=\"177.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"141.1\" x2=\"291.1\" y2=\"126.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"274.0\" y1=\"82.0\" x2=\"294.0\" y2=\"82.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"276.9\" y1=\"22.9\" x2=\"291.1\" y2=\"37.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"333.6\" y1=\"247.7\" x2=\"338.4\" y2=\"228.3\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"332.8\" y1=\"195.5\" x2=\"339.2\" y2=\"176.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"331.5\" y1=\"142.9\" x2=\"340.5\" y2=\"125.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"328.9\" y1=\"89.1\" x2=\"343.1\" y2=\"74.9\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"326.0\" y1=\"30.0\" x2=\"346.0\" y2=\"30.0\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"386.0\" y1=\"247.8\" x2=\"390.0\" y2=\"228.2\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"385.6\" y1=\"195.7\" x2=\"390.4\" y2=\"176.3\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"384.8\" y1=\"143.5\" x2=\"391.2\" y2=\"124.5\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"383.5\" y1=\"90.9\" x2=\"392.5\" y2=\"73.1\" stroke=\"#555\" stroke-width=\"1.8\"/><line x1=\"380.9\" y1=\"37.1\" x2=\"395.1\" y2=\"22.9\" stroke=\"#555\" stroke-width=\"1.8\"/>\n<line x1=\"44.79999999999998\" y1=\"134\" x2=\"419.20000000000005\" y2=\"134\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"232\" y1=\"-1\" x2=\"232\" y2=\"269\" stroke=\"#222\" stroke-width=\"1.8\"/>\n<line x1=\"76\" y1=\"130\" x2=\"76\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"76\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-3</text><line x1=\"128\" y1=\"130\" x2=\"128\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"128\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-2</text><line x1=\"180\" y1=\"130\" x2=\"180\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"180\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">-1</text><line x1=\"284\" y1=\"130\" x2=\"284\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"284\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">1</text><line x1=\"336\" y1=\"130\" x2=\"336\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"336\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">2</text><line x1=\"388\" y1=\"130\" x2=\"388\" y2=\"138\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"388\" y=\"155\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#444\">3</text><line x1=\"228\" y1=\"238\" x2=\"236\" y2=\"238\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"243\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-2</text><line x1=\"228\" y1=\"186\" x2=\"236\" y2=\"186\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"191\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">-1</text><line x1=\"228\" y1=\"82\" x2=\"236\" y2=\"82\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"87\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">1</text><line x1=\"228\" y1=\"30\" x2=\"236\" y2=\"30\" stroke=\"#222\" stroke-width=\"1.3\"/><text x=\"222\" y=\"35\" font-size=\"12.5\" text-anchor=\"end\" fill=\"#444\">2</text>\n<text x=\"427.20000000000005\" y=\"139\" font-size=\"14\">x</text><text x=\"241\" y=\"11\" font-size=\"14\">y</text>\n<line x1=\"76\" y1=\"312\" x2=\"388\" y2=\"0\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 4\"/><text x=\"300\" y=\"52\" font-size=\"13\" fill=\"#B23A2E\">y = x</text></svg></span><p>Riktningsfältet hör till \\(y'=x-y\\). En lösning startar i \\((0,3)\\). Beskriv först om den stiger eller sjunker och vad som händer när den närmar sig linjen \\(y=x\\).</p>",
     "s": "<p>I startpunkten är \\(y'=0-3=-3\\), så lösningen sjunker. På linjen \\(y=x\\) är lutningen 0. Ovanför linjen gäller \\(x-y\\lt0\\), under den \\(x-y\\gt0\\). Lösningen böjer därför av när den närmar sig noll-lutningslinjen och följer sedan fältets riktning.</p>",
-    "id": "4.110"
+    "id": "4.110",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5892,7 +7070,9 @@ window.BANKMATF1 = [
     "poang": "1/2/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y'-2y=e^{3x}\\).</p>",
     "s": "<p><strong>Metod:</strong> Bygg lösningen som homogen lösning plus en partikulärlösning.</p><p>Homogen lösning: \\(y_h=Ce^{2x}\\). Sök en partikulär lösning \\(y_p=Ae^{3x}\\). Då \\(3Ae^{3x}-2Ae^{3x}=e^{3x}\\), så \\(A=1\\). <strong>\\(y=Ce^{2x}+e^{3x}\\)</strong>.</p>",
-    "id": "4.21"
+    "id": "4.21",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5902,7 +7082,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "id": "4.51",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y'+2y=6.\\]</p>",
-    "s": "<p>Vi löser först den homogena ekvationen \\(y'+2y=0\\), som ger</p><p>\\[y_h=Ce^{-2x}.\\]</p><p>Därefter söker vi en konstant partikulärlösning \\(y_p=A\\). Insättning ger</p><p>\\[0+2A=6\\Rightarrow A=3.\\]</p><p>Den allmänna lösningen blir då</p><p><strong>\\(y=Ce^{-2x}+3\\)</strong>.</p>"
+    "s": "<p>Vi löser först den homogena ekvationen \\(y'+2y=0\\), som ger</p><p>\\[y_h=Ce^{-2x}.\\]</p><p>Därefter söker vi en konstant partikulärlösning \\(y_p=A\\). Insättning ger</p><p>\\[0+2A=6\\Rightarrow A=3.\\]</p><p>Den allmänna lösningen blir då</p><p><strong>\\(y=Ce^{-2x}+3\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5912,7 +7094,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "id": "4.52",
     "t": "<span class=\"fig\"><svg height=\"260\" width=\"470\" viewBox=\"0 0 470 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kopp kaffe som svalnar i ett rum\">\n<rect width=\"470\" height=\"260\" fill=\"white\"/>\n<ellipse cx=\"190\" cy=\"95\" rx=\"75\" ry=\"18\" fill=\"#ddd\" stroke=\"#444\" stroke-width=\"2\"/>\n<path d=\"M115 95 L125 190 Q130 220 190 220 Q250 220 255 190 L265 95\" fill=\"#f8f8f8\" stroke=\"#444\" stroke-width=\"2\"/>\n<path d=\"M265 110 Q320 105 320 145 Q320 185 270 175\" fill=\"none\" stroke=\"#444\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<path d=\"M160 60 Q152 40 165 25 M190 55 Q182 35 196 20 M220 60 Q214 43 228 27\" fill=\"none\" stroke=\"#888\" stroke-width=\"3\"/>\n<text x=\"332\" y=\"95\" font-size=\"16\">Rum: 20 °C</text>\n<text x=\"330\" y=\"125\" font-size=\"16\">Kaffe: T(t)</text>\n<text x=\"330\" y=\"155\" font-size=\"16\">T(0) = 80 °C</text>\n</svg></span><p>En kopp kaffe har temperaturen 80 °C när den ställs i ett rum som håller 20 °C. Temperaturen \\(T(t)\\) i kaffet följer modellen</p><p>\\[T'(t)=k(20-T(t)),\\qquad k=0,10.\\]</p><ol type=\"a\"><li>Bestäm \\(T(t)\\).</li><li>När har kaffet svalnat till 50 °C?</li></ol>",
-    "s": "<p>Differentialekvationen kan skrivas</p><p>\\[T'+0,10T=2.\\]</p><p>Den homogena lösningen är \\(T_h=Ce^{-0,10t}\\). En konstant partikulärlösning fås av \\(T_p=A\\):</p><p>\\[0,10A=2\\Rightarrow A=20.\\]</p><p>Alltså</p><p>\\[T(t)=Ce^{-0,10t}+20.\\]</p><p>Begynnelsevillkoret \\(T(0)=80\\) ger \\(C=60\\), så</p><p>\\[T(t)=60e^{-0,10t}+20.\\]</p><p>För \\(T=50\\) får vi</p><p>\\[60e^{-0,10t}+20=50\\Rightarrow 60e^{-0,10t}=30\\Rightarrow e^{-0,10t}=\\frac{1}{2}.\\]</p><p>\\[-0,10t=\\ln\\left(\\frac{1}{2}\\rightight)=-\\ln 2\\Rightarrow t=10\\ln 2\\approx 6,93.\\]</p><p><strong>Kaffet når 50 °C efter ungefär 6,9 minuter.</strong></p>"
+    "s": "<p>Differentialekvationen kan skrivas</p><p>\\[T'+0,10T=2.\\]</p><p>Den homogena lösningen är \\(T_h=Ce^{-0,10t}\\). En konstant partikulärlösning fås av \\(T_p=A\\):</p><p>\\[0,10A=2\\Rightarrow A=20.\\]</p><p>Alltså</p><p>\\[T(t)=Ce^{-0,10t}+20.\\]</p><p>Begynnelsevillkoret \\(T(0)=80\\) ger \\(C=60\\), så</p><p>\\[T(t)=60e^{-0,10t}+20.\\]</p><p>För \\(T=50\\) får vi</p><p>\\[60e^{-0,10t}+20=50\\Rightarrow 60e^{-0,10t}=30\\Rightarrow e^{-0,10t}=\\frac{1}{2}.\\]</p><p>\\[-0,10t=\\ln\\left(\\frac{1}{2}\\rightight)=-\\ln 2\\Rightarrow t=10\\ln 2\\approx 6,93.\\]</p><p><strong>Kaffet når 50 °C efter ungefär 6,9 minuter.</strong></p>",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 4,
@@ -5922,7 +7106,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'+3y=12\\).</p>",
     "s": "<p>Homogent: \\(y_h=Ce^{-3x}\\). Konstant partikulärlösning \\(y_p=A\\) ger \\(3A=12\\Rightarrow A=4\\). Alltså</p><p><strong>\\(y=Ce^{-3x}+4\\)</strong>.</p>",
-    "id": "4.70"
+    "id": "4.70",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5932,7 +7118,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'+2y=10\\), \\(y(0)=1\\).</p>",
     "s": "<p>Allmän lösning: \\(y=Ce^{-2x}+5\\). Begynnelsevillkoret ger \\(1=C+5\\Rightarrow C=-4\\). Därför</p><p><strong>\\(y=5-4e^{-2x}\\)</strong>.</p>",
-    "id": "4.71"
+    "id": "4.71",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5942,7 +7130,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En differentialekvation har allmän lösning \\(y=Ce^{-5x}+3\\). Ställ upp en differentialekvation av formen \\(y'=ay+b\\) som har denna lösningsfamilj.</p>",
     "s": "<p>Derivera:</p><p>\\[y'=-5Ce^{-5x}.\\]</p><p>Eftersom \\(Ce^{-5x}=y-3\\) får vi</p><p>\\[y'=-5(y-3)=-5y+15.\\]</p><p><strong>\\(y'=-5y+15\\)</strong>.</p>",
-    "id": "4.72"
+    "id": "4.72",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5952,7 +7142,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'=8-2y\\).</p>",
     "s": "<p>Skriv \\(y'+2y=8\\). Homogen lösning \\(Ce^{-2x}\\), jämviktsvärde \\(y=4\\). Alltså</p><p><strong>\\(y=4+Ce^{-2x}\\)</strong>.</p>",
-    "id": "4.94"
+    "id": "4.94",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5962,7 +7154,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y'=6-3y\\), \\(y(0)=5\\).</p>",
     "s": "<p>Allmän lösning \\(y=2+Ce^{-3x}\\). Villkoret \\(5=2+C\\) ger \\(C=3\\). Alltså</p><p><strong>\\(y=2+3e^{-3x}\\)</strong>.</p>",
-    "id": "4.95"
+    "id": "4.95",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5972,7 +7166,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En temperaturmodell är \\(T(t)=20+60e^{-0,15t}\\). När är temperaturen 35 °C?</p>",
     "s": "<p>\\[35=20+60e^{-0,15t}\\Rightarrow e^{-0,15t}=\\frac14.\\]</p><p>\\[t=\\frac{\\ln4}{0,15}\\approx9,24.\\]</p><p><strong>Efter cirka 9,2 tidsenheter.</strong></p>",
-    "id": "4.96"
+    "id": "4.96",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 4,
@@ -5982,7 +7178,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös den allmänna differentialekvationen</p><p>\\[y'=4y.\\]</p>",
     "s": "<p>En första ordningens homogen ekvation \\(y'=ky\\) har lösningen \\(y=Ce^{kx}\\).</p><p><strong>\\[y=Ce^{4x}.\\]</strong></p>",
-    "id": "4.140"
+    "id": "4.140",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -5992,7 +7190,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'+3y=6.\\]</p>",
     "s": "<p>Den homogena lösningen är \\(y_h=Ce^{-3x}\\).</p><p>Pröva en konstant partikulär lösning \\(y_p=A\\):</p><p>\\[3A=6\\Rightarrow A=2.\\]</p><p><strong>\\[y=Ce^{-3x}+2.\\]</strong></p>",
-    "id": "4.141"
+    "id": "4.141",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6002,7 +7202,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'-2y=8.\\]</p>",
     "s": "<p>Homogen del: \\(y_h=Ce^{2x}\\).</p><p>Pröva \\(y_p=A\\):</p><p>\\[-2A=8\\Rightarrow A=-4.\\]</p><p><strong>\\[y=Ce^{2x}-4.\\]</strong></p>",
-    "id": "4.142"
+    "id": "4.142",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6012,7 +7214,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'=0,5y-3.\\]</p>",
     "s": "<p>Homogena lösningen är \\(Ce^{0,5x}\\). En konstant partikulär lösning uppfyller</p><p>\\[0=0,5A-3\\Rightarrow A=6.\\]</p><p><strong>\\[y=Ce^{0,5x}+6.\\]</strong></p>",
-    "id": "4.143"
+    "id": "4.143",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6022,7 +7226,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa genom insättning att</p><p>\\[y=Ce^{-2x}+5\\]</p><p>är en lösningsfamilj till \\(y'=-2y+10\\).</p>",
     "s": "<p>Derivera:</p><p>\\[y'=-2Ce^{-2x}.\\]</p><p>Högerledet blir</p><p>\\[-2y+10=-2(Ce^{-2x}+5)+10=-2Ce^{-2x}.\\]</p><p>Vänster- och högerled är lika. Alltså är familjen en lösningsfamilj.</p>",
-    "id": "4.144"
+    "id": "4.144",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6032,7 +7238,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y'=2y+4x-1.\\]</p>",
     "s": "<p>Homogena lösningen är \\(y_h=Ce^{2x}\\).</p><p>Eftersom högerledet är linjärt prövar vi \\(y_p=ax+b\\). Då är \\(y_p'=a\\).</p><p>Insättning:</p><p>\\[a=2(ax+b)+4x-1.\\]</p><p>Jämför koefficienter:</p><p>\\[2a+4=0\\Rightarrow a=-2,\\]</p><p>\\[a=2b-1\\Rightarrow-2=2b-1\\Rightarrow b=-\\frac12.\\]</p><p><strong>\\[y=Ce^{2x}-2x-\\frac12.\\]</strong></p>",
-    "id": "4.145"
+    "id": "4.145",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6042,7 +7250,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y'+2y=6x+1.\\]</p>",
     "s": "<p>Homogena lösningen är \\(y_h=Ce^{-2x}\\).</p><p>Pröva \\(y_p=ax+b\\). Då ger insättning</p><p>\\[a+2(ax+b)=6x+1.\\]</p><p>Jämför koefficienter:</p><p>\\[2a=6\\Rightarrow a=3,\\]</p><p>\\[a+2b=1\\Rightarrow3+2b=1\\Rightarrow b=-1.\\]</p><p><strong>\\[y=Ce^{-2x}+3x-1.\\]</strong></p>",
-    "id": "4.146"
+    "id": "4.146",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6052,7 +7262,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En temperatur \\(T(t)\\) uppfyller</p><p>\\[T'=-0,3(T-20).\\]</p><p>Bestäm den allmänna lösningen och tolka talet 20.</p>",
     "s": "<p>Sätt \\(u=T-20\\). Då är \\(u'=T'\\) och</p><p>\\[u'=-0,3u.\\]</p><p>Alltså \\(u=Ce^{-0,3t}\\), så</p><p><strong>\\[T(t)=20+Ce^{-0,3t}.\\]</strong></p><p>Talet 20 är modellens <strong>jämviktstemperatur</strong>: när \\(T=20\\) är förändringshastigheten noll, och lösningarna närmar sig 20 över tid.</p>",
-    "id": "4.147"
+    "id": "4.147",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6062,7 +7274,9 @@ window.BANKMATF1 = [
     "poang": "1/2/0",
     "t": "<p>Lös \\(y''-6y'+9y=0\\) med \\(y(0)=2\\) och \\(y'(0)=1\\).</p>",
     "s": "<p><strong>Metod:</strong> Vid dubbelrot behövs både \\(e^{rx}\\) och \\(xe^{rx}\\) för två oberoende lösningar.</p><p>Dubbelroten är \\(r=3\\), så \\(y=(A+Bx)e^{3x}\\). \\(y(0)=A=2\\). Vidare \\(y'=e^{3x}[B+3(A+Bx)]\\), så \\(y'(0)=B+3A=1\\), vilket ger \\(B=-5\\). <strong>\\(y=(2-5x)e^{3x}\\)</strong>.</p>",
-    "id": "4.22"
+    "id": "4.22",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6072,7 +7286,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En homogen differentialekvation av andra ordningen har den allmänna lösningen</p><p>\\[y=(C_1+C_2x)e^{-3x}.\\]</p><ol type=\"a\"><li>Bestäm den karakteristiska ekvationen.</li><li>Skriv en differentialekvation som har denna allmänna lösning.</li></ol>",
     "s": "<p>Faktorn \\(e^{-3x}\\) tillsammans med \\(x e^{-3x}\\) visar att \\(r=-3\\) är en dubbelrot.</p><p>Karakteristiska ekvationen är</p><p>\\[(r+3)^2=r^2+6r+9=0.\\]</p><p>En motsvarande differentialekvation är därför <strong>\\(y''+6y'+9y=0\\)</strong>.</p>",
-    "id": "4.43"
+    "id": "4.43",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6082,7 +7298,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.54",
     "t": "<p>Lös differentialekvationen</p><p>\\[y''-4y'+4y=0.\\]</p>",
-    "s": "<p>Karakteristiska ekvationen är</p><p>\\[r^2-4r+4=0=(r-2)^2.\\]</p><p>Roten \\(r=2\\) är en dubbelrot. Då får lösningen formen</p><p><strong>\\(y=(C_1+C_2x)e^{2x}\\)</strong>.</p>"
+    "s": "<p>Karakteristiska ekvationen är</p><p>\\[r^2-4r+4=0=(r-2)^2.\\]</p><p>Roten \\(r=2\\) är en dubbelrot. Då får lösningen formen</p><p><strong>\\(y=(C_1+C_2x)e^{2x}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6092,7 +7310,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+6y'+9y=0\\).</p>",
     "s": "<p>\\[(r+3)^2=0\\] ger dubbelroten \\(r=-3\\). Därför</p><p><strong>\\(y=(C_1+C_2x)e^{-3x}\\)</strong>.</p>",
-    "id": "4.75"
+    "id": "4.75",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6102,7 +7322,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ställ upp en homogen differentialekvation med konstantkoefficienter som har lösningsfamiljen \\(y=(C_1+C_2x)e^{4x}\\).</p>",
     "s": "<p>Faktorn \\(x e^{4x}\\) visar att \\(r=4\\) är dubbelrot. Karakteristiska polynomet är</p><p>\\[(r-4)^2=r^2-8r+16.\\]</p><p>Alltså exempelvis <strong>\\(y''-8y'+16y=0\\)</strong>.</p>",
-    "id": "4.76"
+    "id": "4.76",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6112,7 +7334,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+8y'+16y=0\\).</p>",
     "s": "<p>\\[(r+4)^2=0\\]. Därför</p><p><strong>\\(y=(C_1+C_2x)e^{-4x}\\)</strong>.</p>",
-    "id": "4.99"
+    "id": "4.99",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6122,7 +7346,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös \\(y''-2y'+y=0\\), \\(y(0)=1\\), \\(y'(0)=0\\).</p>",
     "s": "<p>Dubbelroten är \\(r=1\\), så \\(y=(C_1+C_2x)e^x\\). \\(y(0)=1\\Rightarrow C_1=1\\). Derivatan är \\((C_1+C_2+C_2x)e^x\\), så \\(y'(0)=C_1+C_2=0\\Rightarrow C_2=-1\\).</p><p><strong>\\(y=(1-x)e^x\\)</strong>.</p>",
-    "id": "4.100"
+    "id": "4.100",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6132,7 +7358,9 @@ window.BANKMATF1 = [
     "poang": "0/2/2",
     "t": "<p>Lös \\(y''+2y'+10y=0\\) med \\(y(0)=3\\) och \\(y'(0)=0\\).</p>",
     "s": "<p><strong>Metod:</strong> Komplexa rötter \\(a\\pm bi\\) ger lösningar av formen \\(e^{ax}(C\\cos bx+D\\sin bx)\\).</p><p>Rötterna är \\(-1\\pm3i\\), så \\(y=e^{-x}(A\\cos3x+B\\sin3x)\\). Av \\(y(0)=3\\) fås \\(A=3\\). Derivatan vid 0 är \\(-A+3B=0\\), så \\(B=1\\). <strong>\\(y=e^{-x}(3\\cos3x+\\sin3x)\\)</strong>.</p>",
-    "id": "4.23"
+    "id": "4.23",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6142,7 +7370,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.55",
     "t": "<p>Lös differentialekvationen</p><p>\\[y''+9y=0.\\]</p>",
-    "s": "<p>Karakteristiska ekvationen är \\(r^2+9=0\\), vilket ger rötterna \\(r=\\pm 3i\\).</p><p>Vid rötter av typen \\(\\alpha\\pm \\beta i\\) blir lösningen</p><p>\\[y=e^{\\alpha x}(C_1\\cos \\beta x + C_2\\sin \\beta x).\\]</p><p>Här är \\(\\alpha=0\\) och \\(\\beta=3\\), alltså</p><p><strong>\\(y=C_1\\cos 3x+C_2\\sin 3x\\)</strong>.</p>"
+    "s": "<p>Karakteristiska ekvationen är \\(r^2+9=0\\), vilket ger rötterna \\(r=\\pm 3i\\).</p><p>Vid rötter av typen \\(\\alpha\\pm \\beta i\\) blir lösningen</p><p>\\[y=e^{\\alpha x}(C_1\\cos \\beta x + C_2\\sin \\beta x).\\]</p><p>Här är \\(\\alpha=0\\) och \\(\\beta=3\\), alltså</p><p><strong>\\(y=C_1\\cos 3x+C_2\\sin 3x\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6152,7 +7382,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+2y'+5y=0\\).</p>",
     "s": "<p>\\[r^2+2r+5=0\\Rightarrow r=-1\\pm2i.\\]</p><p>Därför</p><p><strong>\\(y=e^{-x}(C_1\\cos2x+C_2\\sin2x)\\)</strong>.</p>",
-    "id": "4.77"
+    "id": "4.77",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6162,7 +7394,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ställ upp en homogen differentialekvation med konstantkoefficienter vars allmänna lösning är \\(y=e^{2x}(C_1\\cos3x+C_2\\sin3x)\\).</p>",
     "s": "<p>Rötterna är \\(2\\pm3i\\). Det karakteristiska polynomet är</p><p>\\[(r-(2+3i))(r-(2-3i))=(r-2)^2+9=r^2-4r+13.\\]</p><p>Alltså <strong>\\(y''-4y'+13y=0\\)</strong>.</p>",
-    "id": "4.78"
+    "id": "4.78",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6172,7 +7406,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös \\(y''+16y=0\\).</p>",
     "s": "<p>Rötterna är \\(r=\\pm4i\\). Därför</p><p><strong>\\(y=C_1\\cos4x+C_2\\sin4x\\)</strong>.</p>",
-    "id": "4.101"
+    "id": "4.101",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6182,7 +7418,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös \\(y''+4y'+13y=0\\), \\(y(0)=2\\), \\(y'(0)=0\\).</p>",
     "s": "<p>Rötterna är \\(-2\\pm3i\\). Alltså</p><p>\\[y=e^{-2x}(C_1\\cos3x+C_2\\sin3x).\\]</p><p>\\(C_1=2\\). Derivering vid 0 ger \\(-2C_1+3C_2=0\\Rightarrow C_2=4/3\\).</p>",
-    "id": "4.102"
+    "id": "4.102",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6192,7 +7430,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''-3y'+2y=6.\\]</p>",
     "s": "<p>Den homogena ekvationen har karakteristiska ekvationen</p><p>\\[r^2-3r+2=0\\quad\\Rightarrow\\quad r=1,2.\\]</p><p>Alltså \\(y_h=C_1e^x+C_2e^{2x}\\).</p><p>Eftersom högerledet är konstant söker vi en partikulär lösning \\(y_p=A\\). Insättning ger \\(2A=6\\), alltså \\(A=3\\).</p><p><strong>\\(y=C_1e^x+C_2e^{2x}+3\\)</strong>.</p>",
-    "id": "4.27"
+    "id": "4.27",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6202,7 +7442,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''+y'-2y=4x.\\]</p>",
     "s": "<p>Homogena delen: \\(r^2+r-2=(r-1)(r+2)=0\\), så</p><p>\\[y_h=C_1e^x+C_2e^{-2x}.\\]</p><p>Sök \\(y_p=ax+b\\). Då \\(y_p'=a\\) och \\(y_p''=0\\). Insättning ger</p><p>\\[a-2(ax+b)=4x.\\]</p><p>Jämför koefficienter: \\(-2a=4\\Rightarrow a=-2\\) och \\(a-2b=0\\Rightarrow b=-1\\).</p><p><strong>\\(y=C_1e^x+C_2e^{-2x}-2x-1\\)</strong>.</p>",
-    "id": "4.28"
+    "id": "4.28",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6212,7 +7454,9 @@ window.BANKMATF1 = [
     "poang": "1/2/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''-5y'+6y=3e^x.\\]</p>",
     "s": "<p>Karakteristiska ekvationen \\(r^2-5r+6=0\\) har rötterna 2 och 3:</p><p>\\[y_h=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Eftersom \\(e^x\\) inte ingår i den homogena lösningen söker vi \\(y_p=Ae^x\\). Då</p><p>\\[Ae^x-5Ae^x+6Ae^x=2Ae^x=3e^x,\\]</p><p>så \\(A=3/2\\).</p><p><strong>\\(y=C_1e^{2x}+C_2e^{3x}+\\frac32e^x\\)</strong>.</p>",
-    "id": "4.29"
+    "id": "4.29",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6222,7 +7466,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''-3y'+2y=e^x.\\]</p>",
     "s": "<p>Den homogena ekvationen har rötterna 1 och 2, så \\(y_h=C_1e^x+C_2e^{2x}\\).</p><p>En vanlig ansats \\(Ae^x\\) fungerar inte eftersom \\(e^x\\) redan är en homogen lösning. Vi multiplicerar därför med \\(x\\) och söker</p><p>\\[y_p=Axe^x.\\]</p><p>Då \\(y_p'=A(1+x)e^x\\) och \\(y_p''=A(x+2)e^x\\). Insättning ger</p><p>\\[A[(x+2)-3(x+1)+2x]e^x=-Ae^x=e^x,\\]</p><p>så \\(A=-1\\).</p><p><strong>\\(y=C_1e^x+C_2e^{2x}-xe^x\\)</strong>.</p>",
-    "id": "4.30"
+    "id": "4.30",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6232,7 +7478,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm den allmänna lösningen till</p><p>\\[y''+4y=8\\cos x.\\]</p>",
     "s": "<p>Homogena lösningen är</p><p>\\[y_h=C_1\\cos2x+C_2\\sin2x.\\]</p><p>Sök \\(y_p=A\\cos x+B\\sin x\\). Då är \\(y_p''=-A\\cos x-B\\sin x\\), så</p><p>\\[y_p''+4y_p=3A\\cos x+3B\\sin x.\\]</p><p>Jämförelse med \\(8\\cos x\\) ger \\(A=8/3\\), \\(B=0\\).</p><p><strong>\\(y=C_1\\cos2x+C_2\\sin2x+\\frac83\\cos x\\)</strong>.</p>",
-    "id": "4.31"
+    "id": "4.31",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6242,7 +7490,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För differentialekvationen</p><p>\\[y''-4y'+4y=e^{2x}\\]</p><p>förklarar en elev att ansatsen \\(y_p=Ae^{2x}\\) inte fungerar.</p><ol type=\"a\"><li>Förklara varför.</li><li>Ange en lämplig ansats för en partikulärlösning.</li></ol>",
     "s": "<p>Den homogena karakteristiska ekvationen är \\((r-2)^2=0\\). Därför innehåller den homogena lösningen både \\(e^{2x}\\) och \\(xe^{2x}\\).</p><p>Ansatsen \\(Ae^{2x}\\) ligger alltså redan i den homogena lösningsrymden. Eftersom roten 2 är en <strong>dubbelrot</strong> måste ansatsen multipliceras med \\(x^2\\).</p><p>En lämplig ansats är <strong>\\(y_p=Ax^2e^{2x}\\)</strong>.</p>",
-    "id": "4.32"
+    "id": "4.32",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6252,7 +7502,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>Lös begynnelsevärdesproblemet</p><p>\\[y''-y=2x+1,\\qquad y(0)=0,\\qquad y'(0)=0.\\]</p>",
     "s": "<p>Homogena lösningen är \\(y_h=C_1e^{-x}+C_2e^x\\).</p><p>Sök \\(y_p=ax+b\\). Då \\(0-(ax+b)=2x+1\\), vilket ger \\(a=-2\\), \\(b=-1\\).</p><p>Alltså</p><p>\\[y=C_1e^{-x}+C_2e^x-2x-1.\\]</p><p>Villkoret \\(y(0)=0\\) ger \\(C_1+C_2=1\\). Derivatan är</p><p>\\[y'=-C_1e^{-x}+C_2e^x-2,\\]</p><p>och \\(y'(0)=0\\) ger \\(-C_1+C_2=2\\). Lösning av systemet ger \\(C_1=-1/2\\), \\(C_2=3/2\\).</p><p><strong>\\(y=-\\frac{1}{2}e^{-x}+\\frac32e^x-2x-1\\)</strong>.</p>",
-    "id": "4.33"
+    "id": "4.33",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6262,7 +7514,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "t": "<p>Lös</p><p>\\[y''+4y=6\\cos(2x),\\qquad y(0)=0,\\qquad y'(0)=0.\\]</p><p>Beskriv också vad som är speciellt med lösningens amplitud.</p>",
     "s": "<p>Den homogena lösningen är \\(y_h=C_1\\cos2x+C_2\\sin2x\\). Högerledets \\(\\cos2x\\) har alltså samma form som en term som redan finns i den homogena lösningen.</p><p>Därför fungerar inte en vanlig ansats med bara sinus och cosinus. Vi prövar i stället</p><p>\\[y_p=Ax\\sin2x.\\]</p><p>Insättning ger \\(4A\\cos2x=6\\cos2x\\), alltså \\(A=3/2\\).</p><p>Den allmänna lösningen är</p><p>\\[y=C_1\\cos2x+C_2\\sin2x+\\frac32x\\sin2x.\\]</p><p>Begynnelsevillkoren ger \\(C_1=0\\) och \\(C_2=0\\). Alltså</p><p><strong>\\(y=\\frac32x\\sin2x\\)</strong>.</p><p>Faktorn \\(x\\) gör att svängningarnas amplitud växer med tiden. Lösningen är därför inte begränsad.</p>",
-    "id": "4.34"
+    "id": "4.34",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6272,7 +7526,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En partikulärlösning till differentialekvationen</p><p>\\[y''-2y'+y=g(x)\\]</p><p>är \\(y_p=x^2\\). Bestäm \\(g(x)\\).</p>",
     "s": "<p><strong>Idé:</strong> Eftersom \\(y_p=x^2\\) ska vara en partikulärlösning måste vänsterledet, efter insättning av \\(y_p\\), bli exakt \\(g(x)\\).</p><p>\\[y_p'=2x,\\qquad y_p''=2.\\]</p><p>Sätt in:</p><p>\\[g(x)=y_p''-2y_p'+y_p=2-4x+x^2.\\]</p><p>Alltså <strong>\\(g(x)=x^2-4x+2\\)</strong>.</p>",
-    "id": "4.35"
+    "id": "4.35",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6282,7 +7538,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''+y'-2y=8\\).</p>",
     "s": "<p>Homogent: \\(r^2+r-2=(r-1)(r+2)\\), så \\(y_h=C_1e^x+C_2e^{-2x}\\). Sök \\(y_p=A\\): \\(-2A=8\\Rightarrow A=-4\\).</p><p><strong>\\(y=C_1e^x+C_2e^{-2x}-4\\)</strong>.</p>",
-    "id": "4.79"
+    "id": "4.79",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6292,7 +7550,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm en partikulärlösning till \\(y''-y=6x\\).</p>",
     "s": "<p>Sök \\(y_p=ax+b\\). Då \\(y_p''=0\\), så</p><p>\\[-(ax+b)=6x.\\]</p><p>Jämförelse ger \\(a=-6\\), \\(b=0\\). En partikulärlösning är <strong>\\(y_p=-6x\\)</strong>.</p>",
-    "id": "4.80"
+    "id": "4.80",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6302,7 +7562,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm lämplig ansats för en partikulärlösning till \\(y''+4y=\\sin2x\\). Motivera.</p>",
     "s": "<p>Den homogena lösningen innehåller \\(\\cos2x\\) och \\(\\sin2x\\). Ansatsen \\(A\\cos2x+B\\sin2x\\) skulle därför bara ge termer som redan ingår i den homogena lösningen.</p><p>För att få en ny form multiplicerar vi därför ansatsen med \\(x\\):</p><p><strong>\\(y_p=x(A\\cos2x+B\\sin2x)\\)</strong>.</p>",
-    "id": "4.81"
+    "id": "4.81",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6312,7 +7574,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''-y=4e^{2x}\\).</p>",
     "s": "<p>Homogent: \\(y_h=C_1e^x+C_2e^{-x}\\). Sök \\(y_p=Ae^{2x}\\):</p><p>\\[4Ae^{2x}-Ae^{2x}=3Ae^{2x}=4e^{2x}\\Rightarrow A=4/3.\\]</p><p><strong>\\(y=C_1e^x+C_2e^{-x}+\\frac43e^{2x}\\)</strong>.</p>",
-    "id": "4.103"
+    "id": "4.103",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6322,7 +7586,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm en partikulärlösning till \\(y''+9y=8\\cos2x\\).</p>",
     "s": "<p>Sök \\(y_p=A\\cos2x+B\\sin2x\\). Då \\(y_p''=-4A\\cos2x-4B\\sin2x\\). Vänsterled blir \\(5A\\cos2x+5B\\sin2x\\). Därför \\(A=8/5\\), \\(B=0\\).</p><p><strong>\\(y_p=\\frac85\\cos2x\\)</strong>.</p>",
-    "id": "4.104"
+    "id": "4.104",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6332,7 +7598,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''+y=3x-2\\).</p>",
     "s": "<p>Homogent: \\(y_h=C_1\\cos x+C_2\\sin x\\). Sök \\(y_p=ax+b\\). Då \\(y_p''=0\\), så \\(ax+b=3x-2\\). Därför \\(a=3,b=-2\\).</p><p><strong>\\(y=C_1\\cos x+C_2\\sin x+3x-2\\)</strong>.</p>",
-    "id": "4.105"
+    "id": "4.105",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6342,7 +7610,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Bestäm en partikulärlösning till \\(y''-4y'+4y=e^{2x}\\).</p>",
     "s": "<p>Den homogena ekvationen har dubbelroten \\(r=2\\), så både \\(e^{2x}\\) och \\(xe^{2x}\\) ingår i den homogena lösningen. Därför behövs ansatsen \\(y_p=Ax^2e^{2x}\\). Insättning ger \\(2Ae^{2x}=e^{2x}\\), så \\(A=1/2\\).</p><p><strong>\\(y_p=\\frac12x^2e^{2x}\\)</strong>.</p>",
-    "id": "4.106"
+    "id": "4.106",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6352,7 +7622,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm den allmänna lösningen till \\(y''-2y'+y=5\\).</p>",
     "s": "<p>Homogent: dubbelrot \\(r=1\\), så \\(y_h=(C_1+C_2x)e^x\\). Sök konstant \\(y_p=A\\): \\(A=5\\). Alltså</p><p><strong>\\(y=(C_1+C_2x)e^x+5\\)</strong>.</p>",
-    "id": "4.119"
+    "id": "4.119",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6362,7 +7634,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y''-7y'+12y=0.\\]</p>",
     "s": "<p>Karakteristiska ekvationen</p><p>\\[r^2-7r+12=0=(r-3)(r-4)\\]</p><p>ger rötterna 3 och 4. Därför</p><p><strong>\\[y=C_1e^{3x}+C_2e^{4x}.\\]</strong></p>",
-    "id": "4.148"
+    "id": "4.148",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6372,7 +7646,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y''+6y'+9y=0.\\]</p>",
     "s": "<p>Karakteristiska ekvationen är</p><p>\\[(r+3)^2=0.\\]</p><p>Dubbelroten är \\(r=-3\\). Därför</p><p><strong>\\[y=(C_1+C_2x)e^{-3x}.\\]</strong></p>",
-    "id": "4.149"
+    "id": "4.149",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6382,7 +7658,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y''+2y'+10y=0.\\]</p>",
     "s": "<p>Karakteristiska ekvationen ger</p><p>\\[r=\\frac{-2\\pm\\sqrt{4-40}}2=-1\\pm3i.\\]</p><p>Alltså</p><p><strong>\\[y=e^{-x}(C_1\\cos3x+C_2\\sin3x).\\]</strong></p>",
-    "id": "4.150"
+    "id": "4.150",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6392,7 +7670,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y''-y=6.\\]</p>",
     "s": "<p>Homogena ekvationen har rötterna \\(\\pm1\\):</p><p>\\[y_h=C_1e^x+C_2e^{-x}.\\]</p><p>Pröva en konstant partikulär lösning \\(y_p=A\\). Då</p><p>\\[-A=6\\Rightarrow A=-6.\\]</p><p><strong>\\[y=C_1e^x+C_2e^{-x}-6.\\]</strong></p>",
-    "id": "4.151"
+    "id": "4.151",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6402,7 +7682,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y''-3y'+2y=e^{4x}.\\]</p>",
     "s": "<p>Homogena rötter är 1 och 2:</p><p>\\[y_h=C_1e^x+C_2e^{2x}.\\]</p><p>Eftersom 4 inte är en homogen rot prövar vi \\(y_p=Ae^{4x}\\). Insättning ger</p><p>\\[(16-12+2)Ae^{4x}=e^{4x}\\Rightarrow6A=1.\\]</p><p>\\[A=\\frac16.\\]</p><p><strong>\\[y=C_1e^x+C_2e^{2x}+\\frac16e^{4x}.\\]</strong></p>",
-    "id": "4.152"
+    "id": "4.152",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6412,7 +7694,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''-5y'+6y=e^{2x}.\\]</p>",
     "s": "<p>Den homogena ekvationen har rötterna 2 och 3:</p><p>\\[y_h=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Högerledet \\(e^{2x}\\) har samma form som termen \\(e^{2x}\\) som redan finns i den homogena lösningen. Därför fungerar inte ansatsen \\(Ae^{2x}\\).</p><p>Vi prövar i stället</p><p>\\[y_p=Axe^{2x}.\\]</p><p>Insättning i vänsterledet ger \\(-Ae^{2x}\\). För att få högerledet \\(e^{2x}\\) krävs \\(A=-1\\).</p><p>Alltså</p><p><strong>\\[y=C_1e^{2x}+C_2e^{3x}-xe^{2x}.\\]</strong></p>",
-    "id": "4.153"
+    "id": "4.153",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6422,7 +7706,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös</p><p>\\[y''+y=2x.\\]</p>",
     "s": "<p>Homogena lösningen är</p><p>\\[y_h=C_1\\cos x+C_2\\sin x.\\]</p><p>Pröva \\(y_p=ax+b\\). Då är \\(y_p''=0\\), så</p><p>\\[ax+b=2x.\\]</p><p>Det ger \\(a=2\\), \\(b=0\\), alltså \\(y_p=2x\\).</p><p><strong>\\[y=C_1\\cos x+C_2\\sin x+2x.\\]</strong></p>",
-    "id": "4.154"
+    "id": "4.154",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6432,7 +7718,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Lös</p><p>\\[y''+4y=\\cos x.\\]</p>",
     "s": "<p>Homogena lösningen är</p><p>\\[y_h=C_1\\cos2x+C_2\\sin2x.\\]</p><p>Pröva \\(y_p=A\\cos x+B\\sin x\\). Eftersom högerledet bara innehåller cosinus kommer \\(B=0\\) efter koefficientjämförelse. Med \\(y_p=A\\cos x\\) får vi</p><p>\\[y_p''+4y_p=-A\\cos x+4A\\cos x=3A\\cos x.\\]</p><p>Alltså \\(3A=1\\Rightarrow A=\\frac13\\).</p><p><strong>\\[y=C_1\\cos2x+C_2\\sin2x+\\frac13\\cos x.\\]</strong></p>",
-    "id": "4.155"
+    "id": "4.155",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6442,7 +7730,9 @@ window.BANKMATF1 = [
     "poang": "0/2/2",
     "t": "<p>Ett fallande föremål modelleras av \\(v'=9,82-0,40v\\), där \\(v\\) mäts i m/s och \\(t\\) i s. Föremålet släpps från vila.</p><ol type=\"a\"><li>Bestäm \\(v(t)\\).</li><li>Bestäm sträckan föremålet fallit efter 2,0 s.</li></ol>",
     "s": "<p>Jämviktsfarten är \\(9,82/0,40=24,55\\). Med \\(v(0)=0\\): <strong>\\(v(t)=24,55(1-e^{-0,40t})\\)</strong>.</p><p>Sträckan är integralen av hastigheten:</p><p>\\[s(t)=24,55t-\\frac{24,55}{0,40}(1-e^{-0,40t}).\\]</p><p>Vid \\(t=2\\): <strong>\\(s(2)\\approx15,3\\text{ m}\\)</strong>.</p>",
-    "id": "4.24"
+    "id": "4.24",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6452,7 +7742,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<span class=\"fig\"><svg width=\"460\" height=\"300\" viewBox=\"0 0 470 305\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Blandningstank med inflöde och utflöde av saltlösning\">\n<rect width=\"470\" height=\"305\" fill=\"white\"/>\n<path d=\"M130 140 L345 140 L345 245 Q345 260 330 260 L145 260 Q130 260 130 245 Z\" fill=\"#2C62A8\" fill-opacity=\".14\"/>\n<path d=\"M130 80 L130 245 Q130 262 147 262 L328 262 Q345 262 345 245 L345 80\" fill=\"none\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"45\" y1=\"76\" x2=\"122\" y2=\"76\" stroke=\"#222\" stroke-width=\"4\"/>\n<path d=\"M112 68 l13 8 -13 8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<path d=\"M126 80 v24\" stroke=\"#222\" stroke-width=\"2.5\" stroke-dasharray=\"4 3\"/>\n<text x=\"45\" y=\"36\" font-size=\"14\">in: 3,0 L/min</text>\n<text x=\"45\" y=\"56\" font-size=\"14\">med 0,40 g/L</text>\n<line x1=\"349\" y1=\"262\" x2=\"432\" y2=\"262\" stroke=\"#222\" stroke-width=\"4\"/>\n<path d=\"M422 254 l13 8 -13 8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<text x=\"352\" y=\"248\" font-size=\"14\">ut: 3,0 L/min</text>\n<text x=\"237\" y=\"192\" font-size=\"17\" text-anchor=\"middle\">120 L</text>\n<text x=\"237\" y=\"217\" font-size=\"14\" text-anchor=\"middle\">väl blandad lösning</text>\n<text x=\"237\" y=\"294\" font-size=\"13\" fill=\"#777\" text-anchor=\"middle\">Lika stort in- och utflöde ger konstant volym.</text>\n</svg></span><p>En tank innehåller 120 L lösning och från början 20 g av ett löst ämne. Lösning med koncentrationen 0,40 g/L rinner in med 3,0 L/min. Samma mängd väl blandad lösning rinner ut per minut.</p><ol type=\"a\"><li>Ställ upp en differentialekvation för mängden \\(S(t)\\) gram.</li><li>Bestäm mängden efter 30 minuter.</li></ol>",
     "s": "<p>Inflödet av ämnet är \\(3,0\\cdot0,40=1,20\\) g/min. Eftersom volymen är konstant 120 L är koncentrationen i tanken \\(S/120\\) g/L, så utflödet av ämnet är \\(3S/120=0,025S\\) g/min.</p><p>Alltså</p><p>\\[\\boxed{S'=1,20-0,025S},\\qquad S(0)=20.\\]</p><p>Jämviktsvärdet är \\(1,20/0,025=48\\), så</p><p>\\[S(t)=48+Ce^{-0,025t}.\\]</p><p>Av \\(S(0)=20\\) fås \\(C=-28\\). Därför</p><p>\\[S(30)=48-28e^{-0,75}\\approx\\mathbf{34,8\\text{ g}}.\\]</p>",
-    "id": "4.40"
+    "id": "4.40",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6462,7 +7754,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<span class=\"fig\"><svg height=\"270\" width=\"500\" viewBox=\"0 0 500 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Massa på fjäder med yttre periodisk kraft\">\n<rect width=\"500\" height=\"270\" fill=\"white\"/>\n<rect x=\"25\" y=\"35\" width=\"25\" height=\"200\" fill=\"#777\"/>\n<path d=\"M50 125 L75 125 L90 100 L115 150 L140 100 L165 150 L190 100 L215 150 L235 125 L255 125\" fill=\"none\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"255\" y=\"85\" width=\"105\" height=\"80\" rx=\"5\" fill=\"#999\" fill-opacity=\".22\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<text x=\"296\" y=\"132\" font-size=\"18\">m</text>\n<line x1=\"360\" y1=\"125\" x2=\"450\" y2=\"125\" stroke=\"#222\" stroke-width=\"3\"/>\n<path d=\"M435 117 l15 8 -15 8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<text x=\"370\" y=\"102\" font-size=\"16\">F(t)</text>\n<line x1=\"307\" y1=\"185\" x2=\"307\" y2=\"225\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<line x1=\"250\" y1=\"215\" x2=\"365\" y2=\"215\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<path d=\"M352 207 l13 8 -13 8\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.5\"/>\n<text x=\"372\" y=\"220\" font-size=\"15\">y</text>\n<text x=\"105\" y=\"75\" font-size=\"15\">fjäder</text>\n</svg></span><p>En massa på 1,0 kg sitter i en ideal fjäder med fjäderkonstanten 9,0 N/m. Förskjutningen \\(y(t)\\) mäts från jämviktsläget. En yttre kraft \\(F(t)=6\\cos(2t)\\) N verkar på massan. Friktion försummas.</p><p>Massan släpps från jämviktsläget utan begynnelsehastighet.</p><ol type=\"a\"><li>Ställ upp differentialekvationen med begynnelsevillkor.</li><li>Bestäm \\(y(t)\\).</li></ol>",
     "s": "<p>Newtons andra lag ger \\(my''=F(t)-ky\\). Med \\(m=1\\) och \\(k=9\\):</p><p>\\[y''+9y=6\\cos2t,\\qquad y(0)=0,\\quad y'(0)=0.\\]</p><p>Homogena lösningen är \\(C_1\\cos3t+C_2\\sin3t\\). Sök \\(y_p=A\\cos2t\\). Då</p><p>\\[(-4A+9A)\\cos2t=6\\cos2t\\Rightarrow A=\\frac65.\\]</p><p>Alltså \\(y=C_1\\cos3t+C_2\\sin3t+\\frac65\\cos2t\\).</p><p>Villkoren ger \\(C_1=-6/5\\) och \\(C_2=0\\). Därmed</p><p><strong>\\(y(t)=\\frac65(\\cos2t-\\cos3t)\\)</strong>.</p>",
-    "id": "4.41"
+    "id": "4.41",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6472,7 +7766,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>En modell för ett dämpat mekaniskt system är</p><p>\\[y''+2y'+5y=10,\\qquad y(0)=0,\\qquad y'(0)=0.\\]</p><ol type=\"a\"><li>Bestäm \\(y(t)\\).</li><li>Bestäm det värde som \\(y(t)\\) närmar sig när \\(t\\to\\infty\\) och förklara varför detta är rimligt utifrån differentialekvationen.</li></ol>",
     "s": "<p>Den homogena ekvationen har rötterna \\(-1\\pm2i\\):</p><p>\\[y_h=e^{-t}(C_1\\cos2t+C_2\\sin2t).\\]</p><p>En konstant partikulärlösning \\(y_p=A\\) ger \\(5A=10\\), alltså \\(A=2\\).</p><p>\\[y=2+e^{-t}(C_1\\cos2t+C_2\\sin2t).\\]</p><p>Av \\(y(0)=0\\) fås \\(C_1=-2\\). Derivering och \\(y'(0)=0\\) ger \\(C_2=-1\\). Alltså</p><p><strong>\\(y=2-e^{-t}(2\\cos2t+\\sin2t)\\)</strong>.</p><p>När \\(t\\to\\infty\\) går exponentialfaktorn mot 0, så \\(y\\to2\\). Det är också systemets jämviktsläge: om rörelsen har stannat är \\(y'=y''=0\\), och ekvationen ger \\(5y=10\\Rightarrow y=2\\).</p>",
-    "id": "4.42"
+    "id": "4.42",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6482,7 +7778,9 @@ window.BANKMATF1 = [
     "poang": "0/1/3",
     "id": "4.59",
     "t": "<p>I en tank finns från början 47,5 liter vatten och 2,5 kg salt väl blandat. En saltlösning tillförs med hastigheten 2,5 liter/minut. Den inkommande lösningen har koncentrationen 0,20 kg/L. Samtidigt rinner 5,0 liter/minut ut ur tanken.</p><p>Bestäm hur mycket salt tanken innehåller som mest och när detta sker.</p>",
-    "s": "<p>Låt \\(S(t)\\) vara mängden salt i kg och \\(V(t)\\) volymen i liter.</p><p>Eftersom 2,5 L/min rinner in och 5,0 L/min rinner ut får vi</p><p>\\[V(t)=47,5-2,5t,\\qquad 0\\le t\\lt 19.\\]</p><p>Inflödet av salt är \\(2,5\\cdot 0,20=0,5\\) kg/min. Utflödet av salt är koncentrationen i tanken gånger utflödet:</p><p>\\[5,0\\cdot\\frac{S}{47,5-2,5t}.\\]</p><p>Därför gäller</p><p>\\[S'=0,5-\\frac{5S}{47,5-2,5t}=0,5-\\frac{2S}{19-t}.\\]</p><p>För att hitta när mängden är som störst sätter vi \\(S'=0\\):</p><p>\\[0,5=\\frac{2S}{19-t}\\Rightarrow S=\\frac{19-t}{4}.\\]</p><p>Vi bestämmer nu \\(S(t)\\). Ekvationen är linjär:</p><p>\\[S'+\\frac{2}{19-t}S=0,5.\\]</p><p>En integrerande faktor är \\((19-t)^{-2}\\). Lösning ger</p><p>\\[S(t)=\\frac{19-t}{2}+C(19-t)^2.\\]</p><p>Begynnelsevillkoret \\(S(0)=2,5\\) ger</p><p>\\[2,5=9,5+361C\\Rightarrow C=-\\frac{7}{361}.\\]</p><p>Alltså</p><p>\\[S(t)=\\frac{19-t}{2}-\\frac{7}{361}(19-t)^2.\\]</p><p>Sätt detta lika med \\((19-t)/4\\):</p><p>\\[\\frac{19-t}{2}-\\frac{7}{361}(19-t)^2=\\frac{19-t}{4}.\\]</p><p>För \\(19-t\\gt 0\\) fås</p><p>\\[\\frac14=\\frac{7}{361}(19-t)\\Rightarrow 19-t=\\frac{361}{28}.\\]</p><p>Alltså</p><p>\\[t=19-\\frac{361}{28}=\\frac{171}{28}\\approx 6,11\\ \\text{min}.\\]</p><p>Då blir</p><p>\\[S_{\\max}=\\frac{19-t}{4}=\\frac{361}{112}\\approx 3,22\\ \\text{kg}.\\]</p><p><strong>Tankens maximala saltmängd är ungefär 3,22 kg och detta sker efter cirka 6,1 minuter.</strong></p>"
+    "s": "<p>Låt \\(S(t)\\) vara mängden salt i kg och \\(V(t)\\) volymen i liter.</p><p>Eftersom 2,5 L/min rinner in och 5,0 L/min rinner ut får vi</p><p>\\[V(t)=47,5-2,5t,\\qquad 0\\le t\\lt 19.\\]</p><p>Inflödet av salt är \\(2,5\\cdot 0,20=0,5\\) kg/min. Utflödet av salt är koncentrationen i tanken gånger utflödet:</p><p>\\[5,0\\cdot\\frac{S}{47,5-2,5t}.\\]</p><p>Därför gäller</p><p>\\[S'=0,5-\\frac{5S}{47,5-2,5t}=0,5-\\frac{2S}{19-t}.\\]</p><p>För att hitta när mängden är som störst sätter vi \\(S'=0\\):</p><p>\\[0,5=\\frac{2S}{19-t}\\Rightarrow S=\\frac{19-t}{4}.\\]</p><p>Vi bestämmer nu \\(S(t)\\). Ekvationen är linjär:</p><p>\\[S'+\\frac{2}{19-t}S=0,5.\\]</p><p>En integrerande faktor är \\((19-t)^{-2}\\). Lösning ger</p><p>\\[S(t)=\\frac{19-t}{2}+C(19-t)^2.\\]</p><p>Begynnelsevillkoret \\(S(0)=2,5\\) ger</p><p>\\[2,5=9,5+361C\\Rightarrow C=-\\frac{7}{361}.\\]</p><p>Alltså</p><p>\\[S(t)=\\frac{19-t}{2}-\\frac{7}{361}(19-t)^2.\\]</p><p>Sätt detta lika med \\((19-t)/4\\):</p><p>\\[\\frac{19-t}{2}-\\frac{7}{361}(19-t)^2=\\frac{19-t}{4}.\\]</p><p>För \\(19-t\\gt 0\\) fås</p><p>\\[\\frac14=\\frac{7}{361}(19-t)\\Rightarrow 19-t=\\frac{361}{28}.\\]</p><p>Alltså</p><p>\\[t=19-\\frac{361}{28}=\\frac{171}{28}\\approx 6,11\\ \\text{min}.\\]</p><p>Då blir</p><p>\\[S_{\\max}=\\frac{19-t}{4}=\\frac{361}{112}\\approx 3,22\\ \\text{kg}.\\]</p><p><strong>Tankens maximala saltmängd är ungefär 3,22 kg och detta sker efter cirka 6,1 minuter.</strong></p>",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 4,
@@ -6492,7 +7790,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett föremål med temperaturen 90 °C placeras i ett rum med 20 °C. Avsvalningshastigheten antas vara proportionell mot temperaturskillnaden. Ställ upp en differentialekvation med begynnelsevillkor för temperaturen \\(T(t)\\).</p>",
     "s": "<p>Temperaturskillnaden mot omgivningen är \\(T-20\\). När föremålet är varmare ska temperaturen minska, därför sätts ett minustecken:</p><p><strong>\\(T'=-k(T-20),\\quad T(0)=90,\\quad k\\gt0\\)</strong>.</p>",
-    "id": "4.86"
+    "id": "4.86",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6502,7 +7802,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En bakteriepopulation växer med en hastighet som är proportionell mot populationens storlek. Skriv en differentialekvation för populationen \\(P(t)\\).</p>",
     "s": "<p>\"Proportionell mot populationens storlek\" betyder</p><p><strong>\\(P'=kP\\)</strong>, där \\(k\\gt0\\) är proportionalitetskonstanten.</p>",
-    "id": "4.113"
+    "id": "4.113",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6512,7 +7814,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En medicinmängd \\(M(t)\\) bryts ned med en hastighet som är proportionell mot mängden. Samtidigt tillförs 20 mg per timme kontinuerligt. Skriv en differentialekvation och bestäm jämviktsmängden om nedbrytningskonstanten är 0,08 h\\(^{-1}\\).</p>",
     "s": "<p>Nedbrytningen är \\(-0,08M\\) och tillförseln +20:</p><p>\\[M'=20-0,08M.\\]</p><p>Jämvikt när \\(M'=0\\):</p><p>\\[20-0,08M=0\\Rightarrow M=250.\\]</p><p><strong>Jämviktsmängden är 250 mg.</strong></p>",
-    "id": "4.114"
+    "id": "4.114",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6522,7 +7826,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"440\" height=\"270\" viewBox=\"0 0 450 275\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tank med inflöde och utflöde där volymen betecknas V\">\n<rect width=\"450\" height=\"275\" fill=\"white\"/>\n<path d=\"M125 130 L330 130 L330 225 Q330 240 315 240 L140 240 Q125 240 125 225 Z\" fill=\"#2C62A8\" fill-opacity=\".14\"/>\n<path d=\"M125 70 L125 225 Q125 242 142 242 L313 242 Q330 242 330 225 L330 70\" fill=\"none\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"42\" y1=\"66\" x2=\"117\" y2=\"66\" stroke=\"#222\" stroke-width=\"4\"/>\n<path d=\"M107 58 l13 8 -13 8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<path d=\"M121 70 v22\" stroke=\"#222\" stroke-width=\"2.5\" stroke-dasharray=\"4 3\"/>\n<text x=\"42\" y=\"44\" font-size=\"15\">inflöde</text>\n<line x1=\"334\" y1=\"242\" x2=\"412\" y2=\"242\" stroke=\"#222\" stroke-width=\"4\"/>\n<path d=\"M402 234 l13 8 -13 8\" fill=\"none\" stroke=\"#222\" stroke-width=\"2.5\"/>\n<text x=\"337\" y=\"228\" font-size=\"15\">utflöde</text>\n<text x=\"227\" y=\"190\" font-size=\"17\" text-anchor=\"middle\">V liter</text>\n</svg></span><p>En tank innehåller 100 L lösning med 5 kg salt. Saltlösning med koncentration 0,08 kg/L rinner in med 4 L/min och lika mycket blandning rinner ut. Ställ upp differentialekvationen för saltmängden \\(S(t)\\).</p>",
     "s": "<p>Inflöde av salt:</p><p>\\[4\\cdot0,08=0,32\\text{ kg/min}.\\]</p><p>Koncentrationen i tanken är \\(S/100\\) kg/L, så utflödet av salt är</p><p>\\[4\\cdot\\frac{S}{100}=0,04S.\\]</p><p>Alltså</p><p><strong>\\(S'=0,32-0,04S,\\quad S(0)=5\\)</strong>.</p>",
-    "id": "4.115"
+    "id": "4.115",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6532,7 +7838,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett föremål svalnar enligt \\(T(t)=20+Ce^{-kt}\\). Vid \\(t=0\\) är temperaturen 80 °C och efter 10 min är den 50 °C. Bestäm \\(C\\) och \\(k\\).</p>",
     "s": "<p>Från \\(T(0)=80\\): \\(80=20+C\\Rightarrow C=60\\).</p><p>Vid 10 min:</p><p>\\[50=20+60e^{-10k}\\Rightarrow e^{-10k}=\\frac12.\\]</p><p>\\[k=\\frac{\\ln2}{10}\\approx0,0693.\\]</p>",
-    "id": "4.116"
+    "id": "4.116",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6542,7 +7850,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett digitalt verktyg påstår att lösningen till \\(y'=2y-x\\), \\(y(0)=1\\), är \\(y=\\frac{x}{2}+\\frac14+\\frac34e^{2x}\\). Kontrollera resultatet utan att lösa differentialekvationen från början.</p>",
     "s": "<p>Derivera: \\(y'=\\frac{1}{2}+\\frac32e^{2x}\\). Högerledet blir</p><p>\\[2y-x=x+\\frac{1}{2}+\\frac32e^{2x}-x=\\frac{1}{2}+\\frac32e^{2x}=y'.\\]</p><p>Dessutom \\(y(0)=1/4+3/4=1\\). Resultatet är alltså <strong>korrekt</strong>.</p>",
-    "id": "4.25"
+    "id": "4.25",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6552,7 +7862,9 @@ window.BANKMATF1 = [
     "poang": "0/1/2",
     "t": "<p>För begynnelsevärdesproblemet \\(y'=y\\), \\(y(0)=1\\), används Eulers metod på intervallet \\([0,1]\\).</p><ol type=\"a\"><li>Bestäm approximationen av \\(y(1)\\) med \\(h=0,5\\).</li><li>Bestäm approximationen med \\(h=0,25\\).</li><li>Jämför med exakt värde och kommentera hur steglängden påverkar felet.</li></ol>",
     "s": "<ol type=\"a\"><li>Två steg: \\(1\\to1,5\\to2,25\\), alltså <strong>2,25</strong>.</li><li>Fyra steg multiplicerar varje gång med \\(1,25\\): \\(1,25^4\\approx\\mathbf{2,4414}\\).</li><li>Exakt är \\(e\\approx2,7183\\). Felen är cirka 0,4683 respektive 0,2769. <strong>Mindre steglängd ger här bättre approximation</strong>, men kräver fler steg.</li></ol>",
-    "id": "4.26"
+    "id": "4.26",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6562,7 +7874,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett digitalt verktyg ger lösningen</p><p>\\[y=C_1e^x+C_2e^{2x}-xe^x\\]</p><p>till differentialekvationen \\(y''-3y'+2y=e^x\\).</p><p>Kontrollera lösningen genom insättning och förklara varför de två första termerna försvinner i vänsterledet.</p>",
     "s": "<p>Operatorn är \\(L[y]=y''-3y'+2y\\). Termerna \\(e^x\\) och \\(e^{2x}\\) motsvarar rötterna 1 och 2 till den karakteristiska ekvationen, så</p><p>\\[L[C_1e^x+C_2e^{2x}]=0.\\]</p><p>Det räcker därför att kontrollera \\(y_p=-xe^x\\). Vi får</p><p>\\[y_p'=-(x+1)e^x,\\qquad y_p''=-(x+2)e^x.\\]</p><p>Då</p><p>\\[L[y_p]=[-(x+2)+3(x+1)-2x]e^x=e^x.\\]</p><p>Verktygets lösning är alltså korrekt.</p>",
-    "id": "4.45"
+    "id": "4.45",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6572,7 +7886,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "4.60",
     "t": "<p>Ett CAS ger lösningen \\(y=Ce^{4x}\\) till differentialekvationen \\(y'=4y\\).</p><p>Bestäm den lösning som uppfyller \\(y(1)=6\\).</p>",
-    "s": "<p>Sätt in \\(x=1\\) i lösningsfamiljen:</p><p>\\[6=Ce^4.\\]</p><p>Därför är</p><p>\\[C=6e^{-4}.\\]</p><p>Lösningen blir då</p><p><strong>\\(y=6e^{-4}e^{4x}=6e^{4x-4}\\)</strong>.</p>"
+    "s": "<p>Sätt in \\(x=1\\) i lösningsfamiljen:</p><p>\\[6=Ce^4.\\]</p><p>Därför är</p><p>\\[C=6e^{-4}.\\]</p><p>Lösningen blir då</p><p><strong>\\(y=6e^{-4}e^{4x}=6e^{4x-4}\\)</strong>.</p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6582,7 +7898,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett digitalt verktyg ger \\(y=5-3e^{-2x}\\) som lösning till \\(y'+2y=10\\). Kontrollera snabbt genom insättning.</p>",
     "s": "<p>\\(y'=6e^{-2x}\\). Då</p><p>\\[y'+2y=6e^{-2x}+10-6e^{-2x}=10.\\]</p><p>Verktygets lösning är korrekt.</p>",
-    "id": "4.87"
+    "id": "4.87",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6592,7 +7910,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett verktyg ger \\(y(5)\\approx3,84\\) för ett begynnelsevärdesproblem. Vad betyder detta om \\(y(t)\\) är mängden vätska i liter och \\(t\\) mäts i minuter?</p>",
     "s": "<p>Modellen förutsäger att det finns ungefär <strong>3,84 liter efter 5 minuter</strong>.</p>",
-    "id": "4.117"
+    "id": "4.117",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6602,7 +7922,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För \\(y'=-y\\), \\(y(0)=1\\), ger Euler med \\(h=0,5\\) värdet \\(y(1)\\approx0,25\\). Den analytiska lösningen ger \\(e^{-1}\\approx0,368\\). Beräkna det absoluta felet och kommentera.</p>",
     "s": "<p>Det absoluta felet är</p><p>\\[|0,25-0,368|=0,118.\\]</p><p>Felet är relativt stort eftersom steglängden 0,5 är grov. Mindre \\(h\\) skulle normalt förbättra approximationen.</p>",
-    "id": "4.118"
+    "id": "4.118",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6612,7 +7934,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En tank innehåller 200 L vätska. Saltlösning med koncentrationen 0,05 kg/L rinner in med 4 L/min och lika mycket väl blandad vätska rinner ut.</p><p>Låt \\(M(t)\\) vara mängden salt i kg. Skriv differentialekvationen för \\(M\\).</p>",
     "s": "<p>Inflödet av salt är</p><p>\\[0,05\\cdot4=0,20\\text{ kg/min}.\\]</p><p>Koncentrationen i tanken är \\(M/200\\) kg/L. Utflödet av salt blir därför</p><p>\\[4\\cdot\\frac{M}{200}=0,02M.\\]</p><p>Alltså</p><p><strong>\\[M'=0,20-0,02M.\\]</strong></p>",
-    "id": "4.162"
+    "id": "4.162",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6622,7 +7946,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Ett CAS ger den allmänna lösningen</p><p>\\[T(t)=18+Ce^{-0,12t}\\]</p><p>till en temperaturmodell. Vad representerar talet 18 i modellen?</p>",
     "s": "<p>När \\(t\\to\\infty\\) går exponentialtermen mot 0. Då närmar sig temperaturen</p><p>\\[T(t)\\to18.\\]</p><p><strong>Talet 18 är modellens omgivnings- eller jämviktstemperatur.</strong></p>",
-    "id": "4.163"
+    "id": "4.163",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6632,7 +7958,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En medicinmängd modelleras av</p><p>\\[M'=12-0,15M.\\]</p><p>Bestäm den jämviktsmängden medicin.</p>",
     "s": "<p>Vid jämvikt förändras inte mängden, så \\(M'=0\\):</p><p>\\[0=12-0,15M\\Rightarrow M=\\frac{12}{0,15}=80.\\]</p><p><strong>Jämviktsmängden är 80 mg.</strong></p>",
-    "id": "4.164"
+    "id": "4.164",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6642,7 +7970,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En population följer modellen \\(P'=kP\\). Populationen fördubblas på 10 år.</p><p>Bestäm \\(k\\).</p>",
     "s": "<p>Lösningen är \\(P(t)=P_0e^{kt}\\). Fördubbling efter 10 år betyder</p><p>\\[2P_0=P_0e^{10k}.\\]</p><p>\\[2=e^{10k}\\Rightarrow\\ln2=10k.\\]</p><p><strong>\\[k=\\frac{\\ln2}{10}\\approx0,0693\\text{ per år}.\\]</strong></p>",
-    "id": "4.165"
+    "id": "4.165",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6652,7 +7982,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Ett föremål håller 70 °C när det placeras i ett rum som håller 20 °C. Efter 5 minuter är temperaturen 50 °C. Modellen är</p><p>\\[T(t)=20+50e^{-kt}.\\]</p><p>Bestäm \\(k\\).</p>",
     "s": "<p>Sätt in mätvärdet \\(T(5)=50\\):</p><p>\\[50=20+50e^{-5k}.\\]</p><p>\\[30=50e^{-5k}\\Rightarrow e^{-5k}=0,6.\\]</p><p>Logaritmera:</p><p>\\[-5k=\\ln0,6\\Rightarrow k=-\\frac{\\ln0,6}{5}.\\]</p><p><strong>\\[k\\approx0,1022\\text{ min}^{-1}.\\]</strong></p>",
-    "id": "4.166"
+    "id": "4.166",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6662,7 +7994,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Ett numeriskt verktyg ger \\(y(4)\\approx7,82\\), medan en analytisk lösning ger \\(y(4)=8,00\\).</p><ol type=\"a\"><li>Bestäm det absoluta felet.</li><li>Bestäm det relativa felet i procent.</li></ol>",
     "s": "<p><strong>a)</strong> Absolut fel:</p><p>\\[|7,82-8,00|=0,18.\\]</p><p><strong>b)</strong> Relativt fel:</p><p>\\[\\frac{0,18}{8,00}\\cdot100\\%=2,25\\%.\\]</p><p><strong>Svar: absolut fel 0,18 och relativt fel 2,25 %.</strong></p>",
-    "id": "4.167"
+    "id": "4.167",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6672,7 +8006,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En bakteriepopulation modelleras av \\(P'=0,06P\\) med \\(P(0)=800\\). Bestäm populationen efter 8 timmar enligt modellen.</p>",
     "s": "<p>Lösningen till \\(P'=0,06P\\) är \\(P(t)=Ce^{0,06t}\\). Begynnelsevillkoret ger \\(C=800\\).</p><p>\\[P(8)=800e^{0,48}\\approx1292,9.\\]</p><p><strong>Modellen ger ungefär 1293 bakterier efter 8 timmar.</strong></p>",
-    "id": "4.175"
+    "id": "4.175",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6682,7 +8018,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>En medicinmängd \\(M(t)\\) i mg modelleras av</p><p>\\[M'=18-0,3M,\\qquad M(0)=0.\\]</p><ol type=\"a\"><li>Bestäm \\(M(t)\\).</li><li>När når mängden 45 mg?</li></ol>",
     "s": "<p><strong>a)</strong> Jämviktsvärdet är \\(18/0,3=60\\). Lösningen kan därför skrivas \\(M=60+Ce^{-0,3t}\\). Av \\(M(0)=0\\) följer \\(C=-60\\):</p><p><strong>\\[M(t)=60(1-e^{-0,3t}).\\]</strong></p><p><strong>b)</strong> Sätt \\(M=45\\):</p><p>\\[45=60(1-e^{-0,3t})\\Rightarrow e^{-0,3t}=0,25.\\]</p><p>\\[-0,3t=\\ln0,25=-\\ln4\\]</p><p>\\[t=\\frac{\\ln4}{0,3}\\approx4,62.\\]</p><p><strong>Mängden når 45 mg efter cirka 4,62 timmar.</strong></p>",
-    "id": "4.176"
+    "id": "4.176",
+    "miniräknare": true,
+    "geogebra": true
   },
   {
     "kap": 4,
@@ -6690,9 +8028,11 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "harmonisk svängning med amplitud och fasförskjutning",
     "poang": "0/1/3",
-    "t": "<p>En odämpad svängning beskrivs av</p><p>\\[y''+9y=0,\\qquad y(0)=3,\\qquad y'(0)=-12.\\]</p><ol type=\"a\"><li>Bestäm \\(y(x)\\).</li><li>Skriv lösningen på formen \\(y=A\\cos(3x+\\varphi)\\) och bestäm amplituden \\(A\\).</li></ol>",
-    "s": "<p><span class=\"fig\"><svg width=\"470\" height=\"300\" viewBox=\"0 0 470 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Svängningskurvan med amplituden 5 och streckade linjer vid y lika med plus och minus 5\">\n<rect width=\"470\" height=\"300\" fill=\"white\"/>\n<line x1=\"62\" y1=\"45\" x2=\"428\" y2=\"45\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<line x1=\"62\" y1=\"255\" x2=\"428\" y2=\"255\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<path d=\"M 62.0,87.0 L 62.6,88.3 L 63.1,89.5 L 63.7,90.8 L 64.3,92.2 L 64.9,93.5 L 65.5,94.8 L 66.0,96.2 L 66.6,97.5 L 67.2,98.9 L 67.8,100.3 L 68.3,101.7 L 68.9,103.1 L 69.5,104.5 L 70.0,105.9 L 70.6,107.3 L 71.2,108.8 L 71.8,110.2 L 72.3,111.7 L 72.9,113.2 L 73.5,114.6 L 74.1,116.1 L 74.7,117.6 L 75.2,119.1 L 75.8,120.6 L 76.4,122.1 L 77.0,123.7 L 77.5,125.2 L 78.1,126.7 L 78.7,128.3 L 79.2,129.8 L 79.8,131.4 L 80.4,132.9 L 81.0,134.5 L 81.5,136.0 L 82.1,137.6 L 82.7,139.2 L 83.3,140.7 L 83.8,142.3 L 84.4,143.9 L 85.0,145.4 L 85.6,147.0 L 86.2,148.6 L 86.7,150.2 L 87.3,151.7 L 87.9,153.3 L 88.5,154.9 L 89.0,156.5 L 89.6,158.0 L 90.2,159.6 L 90.8,161.2 L 91.3,162.7 L 91.9,164.3 L 92.5,165.8 L 93.0,167.4 L 93.6,169.0 L 94.2,170.5 L 94.8,172.0 L 95.3,173.6 L 95.9,175.1 L 96.5,176.6 L 97.1,178.2 L 97.7,179.7 L 98.2,181.2 L 98.8,182.7 L 99.4,184.2 L 100.0,185.7 L 100.5,187.1 L 101.1,188.6 L 101.7,190.1 L 102.2,191.5 L 102.8,193.0 L 103.4,194.4 L 104.0,195.8 L 104.5,197.2 L 105.1,198.6 L 105.7,200.0 L 106.3,201.4 L 106.8,202.8 L 107.4,204.1 L 108.0,205.5 L 108.6,206.8 L 109.2,208.1 L 109.7,209.4 L 110.3,210.7 L 110.9,212.0 L 111.4,213.3 L 112.0,214.5 L 112.6,215.7 L 113.2,217.0 L 113.8,218.2 L 114.3,219.4 L 114.9,220.5 L 115.5,221.7 L 116.0,222.8 L 116.6,224.0 L 117.2,225.1 L 117.8,226.2 L 118.3,227.2 L 118.9,228.3 L 119.5,229.3 L 120.1,230.4 L 120.7,231.4 L 121.2,232.3 L 121.8,233.3 L 122.4,234.3 L 123.0,235.2 L 123.5,236.1 L 124.1,237.0 L 124.7,237.9 L 125.2,238.7 L 125.8,239.6 L 126.4,240.4 L 127.0,241.2 L 127.5,241.9 L 128.1,242.7 L 128.7,243.4 L 129.3,244.1 L 129.8,244.8 L 130.4,245.5 L 131.0,246.1 L 131.6,246.7 L 132.1,247.3 L 132.7,247.9 L 133.3,248.5 L 133.9,249.0 L 134.4,249.5 L 135.0,250.0 L 135.6,250.5 L 136.2,250.9 L 136.8,251.4 L 137.3,251.8 L 137.9,252.1 L 138.5,252.5 L 139.1,252.8 L 139.6,253.1 L 140.2,253.4 L 140.8,253.7 L 141.3,253.9 L 141.9,254.1 L 142.5,254.3 L 143.1,254.5 L 143.6,254.6 L 144.2,254.7 L 144.8,254.8 L 145.4,254.9 L 145.9,255.0 L 146.5,255.0 L 147.1,255.0 L 147.7,255.0 L 148.2,254.9 L 148.8,254.9 L 149.4,254.8 L 150.0,254.7 L 150.6,254.5 L 151.1,254.4 L 151.7,254.2 L 152.3,254.0 L 152.9,253.7 L 153.4,253.5 L 154.0,253.2 L 154.6,252.9 L 155.2,252.6 L 155.7,252.2 L 156.3,251.8 L 156.9,251.5 L 157.4,251.0 L 158.0,250.6 L 158.6,250.1 L 159.2,249.6 L 159.8,249.1 L 160.3,248.6 L 160.9,248.1 L 161.5,247.5 L 162.1,246.9 L 162.6,246.3 L 163.2,245.6 L 163.8,245.0 L 164.4,244.3 L 164.9,243.6 L 165.5,242.9 L 166.1,242.1 L 166.7,241.3 L 167.2,240.6 L 167.8,239.8 L 168.4,238.9 L 168.9,238.1 L 169.5,237.2 L 170.1,236.3 L 170.7,235.4 L 171.2,234.5 L 171.8,233.5 L 172.4,232.6 L 173.0,231.6 L 173.6,230.6 L 174.1,229.6 L 174.7,228.5 L 175.3,227.5 L 175.8,226.4 L 176.4,225.3 L 177.0,224.2 L 177.6,223.1 L 178.2,222.0 L 178.7,220.8 L 179.3,219.6 L 179.9,218.5 L 180.4,217.2 L 181.0,216.0 L 181.6,214.8 L 182.2,213.6 L 182.8,212.3 L 183.3,211.0 L 183.9,209.7 L 184.5,208.4 L 185.1,207.1 L 185.6,205.8 L 186.2,204.4 L 186.8,203.1 L 187.4,201.7 L 187.9,200.3 L 188.5,199.0 L 189.1,197.6 L 189.7,196.2 L 190.2,194.7 L 190.8,193.3 L 191.4,191.9 L 191.9,190.4 L 192.5,189.0 L 193.1,187.5 L 193.7,186.0 L 194.2,184.5 L 194.8,183.0 L 195.4,181.5 L 196.0,180.0 L 196.5,178.5 L 197.1,177.0 L 197.7,175.5 L 198.3,173.9 L 198.8,172.4 L 199.4,170.9 L 200.0,169.3 L 200.6,167.8 L 201.2,166.2 L 201.7,164.7 L 202.3,163.1 L 202.9,161.5 L 203.4,160.0 L 204.0,158.4 L 204.6,156.8 L 205.2,155.3 L 205.8,153.7 L 206.3,152.1 L 206.9,150.5 L 207.5,149.0 L 208.1,147.4 L 208.6,145.8 L 209.2,144.2 L 209.8,142.7 L 210.3,141.1 L 210.9,139.5 L 211.5,138.0 L 212.1,136.4 L 212.7,134.8 L 213.2,133.3 L 213.8,131.7 L 214.4,130.2 L 215.0,128.6 L 215.5,127.1 L 216.1,125.6 L 216.7,124.0 L 217.2,122.5 L 217.8,121.0 L 218.4,119.5 L 219.0,118.0 L 219.6,116.5 L 220.1,115.0 L 220.7,113.5 L 221.3,112.0 L 221.8,110.6 L 222.4,109.1 L 223.0,107.7 L 223.6,106.2 L 224.1,104.8 L 224.7,103.4 L 225.3,102.0 L 225.9,100.6 L 226.4,99.2 L 227.0,97.8 L 227.6,96.5 L 228.2,95.1 L 228.8,93.8 L 229.3,92.5 L 229.9,91.2 L 230.5,89.9 L 231.0,88.6 L 231.6,87.3 L 232.2,86.0 L 232.8,84.8 L 233.3,83.6 L 233.9,82.4 L 234.5,81.2 L 235.1,80.0 L 235.7,78.8 L 236.2,77.7 L 236.8,76.5 L 237.4,75.4 L 238.0,74.3 L 238.5,73.2 L 239.1,72.2 L 239.7,71.1 L 240.2,70.1 L 240.8,69.1 L 241.4,68.1 L 242.0,67.1 L 242.6,66.2 L 243.1,65.2 L 243.7,64.3 L 244.3,63.4 L 244.9,62.5 L 245.4,61.7 L 246.0,60.8 L 246.6,60.0 L 247.2,59.2 L 247.7,58.4 L 248.3,57.6 L 248.9,56.9 L 249.4,56.2 L 250.0,55.5 L 250.6,54.8 L 251.2,54.2 L 251.8,53.5 L 252.3,52.9 L 252.9,52.3 L 253.5,51.8 L 254.0,51.2 L 254.6,50.7 L 255.2,50.2 L 255.8,49.7 L 256.4,49.3 L 256.9,48.8 L 257.5,48.4 L 258.1,48.0 L 258.6,47.7 L 259.2,47.3 L 259.8,47.0 L 260.4,46.7 L 260.9,46.4 L 261.5,46.2 L 262.1,46.0 L 262.7,45.8 L 263.2,45.6 L 263.8,45.4 L 264.4,45.3 L 265.0,45.2 L 265.6,45.1 L 266.1,45.1 L 266.7,45.0 L 267.3,45.0 L 267.9,45.0 L 268.4,45.0 L 269.0,45.1 L 269.6,45.2 L 270.1,45.3 L 270.7,45.4 L 271.3,45.6 L 271.9,45.7 L 272.5,45.9 L 273.0,46.2 L 273.6,46.4 L 274.2,46.7 L 274.8,47.0 L 275.3,47.3 L 275.9,47.6 L 276.5,48.0 L 277.1,48.4 L 277.6,48.8 L 278.2,49.2 L 278.8,49.7 L 279.4,50.1 L 279.9,50.6 L 280.5,51.2 L 281.1,51.7 L 281.6,52.3 L 282.2,52.8 L 282.8,53.5 L 283.4,54.1 L 283.9,54.7 L 284.5,55.4 L 285.1,56.1 L 285.7,56.8 L 286.2,57.6 L 286.8,58.3 L 287.4,59.1 L 288.0,59.9 L 288.5,60.7 L 289.1,61.5 L 289.7,62.4 L 290.3,63.3 L 290.9,64.2 L 291.4,65.1 L 292.0,66.0 L 292.6,67.0 L 293.1,68.0 L 293.7,69.0 L 294.3,70.0 L 294.9,71.0 L 295.4,72.0 L 296.0,73.1 L 296.6,74.2 L 297.2,75.3 L 297.8,76.4 L 298.3,77.5 L 298.9,78.7 L 299.5,79.8 L 300.0,81.0 L 300.6,82.2 L 301.2,83.4 L 301.8,84.7 L 302.4,85.9 L 302.9,87.2 L 303.5,88.4 L 304.1,89.7 L 304.6,91.0 L 305.2,92.3 L 305.8,93.6 L 306.4,95.0 L 306.9,96.3 L 307.5,97.7 L 308.1,99.0 L 308.7,100.4 L 309.2,101.8 L 309.8,103.2 L 310.4,104.6 L 311.0,106.1 L 311.5,107.5 L 312.1,108.9 L 312.7,110.4 L 313.3,111.9 L 313.9,113.3 L 314.4,114.8 L 315.0,116.3 L 315.6,117.8 L 316.1,119.3 L 316.7,120.8 L 317.3,122.3 L 317.9,123.9 L 318.4,125.4 L 319.0,126.9 L 319.6,128.5 L 320.2,130.0 L 320.8,131.5 L 321.3,133.1 L 321.9,134.7 L 322.5,136.2 L 323.1,137.8 L 323.6,139.3 L 324.2,140.9 L 324.8,142.5 L 325.4,144.1 L 325.9,145.6 L 326.5,147.2 L 327.1,148.8 L 327.7,150.3 L 328.2,151.9 L 328.8,153.5 L 329.4,155.1 L 329.9,156.6 L 330.5,158.2 L 331.1,159.8 L 331.7,161.4 L 332.2,162.9 L 332.8,164.5 L 333.4,166.0 L 334.0,167.6 L 334.6,169.1 L 335.1,170.7 L 335.7,172.2 L 336.3,173.8 L 336.9,175.3 L 337.4,176.8 L 338.0,178.3 L 338.6,179.9 L 339.2,181.4 L 339.7,182.9 L 340.3,184.4 L 340.9,185.8 L 341.5,187.3 L 342.0,188.8 L 342.6,190.2 L 343.2,191.7 L 343.8,193.1 L 344.3,194.6 L 344.9,196.0 L 345.5,197.4 L 346.1,198.8 L 346.6,200.2 L 347.2,201.6 L 347.8,202.9 L 348.4,204.3 L 348.9,205.6 L 349.5,207.0 L 350.1,208.3 L 350.6,209.6 L 351.2,210.9 L 351.8,212.1 L 352.4,213.4 L 352.9,214.7 L 353.5,215.9 L 354.1,217.1 L 354.7,218.3 L 355.2,219.5 L 355.8,220.7 L 356.4,221.8 L 357.0,223.0 L 357.5,224.1 L 358.1,225.2 L 358.7,226.3 L 359.3,227.4 L 359.8,228.4 L 360.4,229.5 L 361.0,230.5 L 361.6,231.5 L 362.1,232.5 L 362.7,233.4 L 363.3,234.4 L 363.9,235.3 L 364.4,236.2 L 365.0,237.1 L 365.6,238.0 L 366.2,238.8 L 366.8,239.7 L 367.3,240.5 L 367.9,241.3 L 368.5,242.0 L 369.1,242.8 L 369.6,243.5 L 370.2,244.2 L 370.8,244.9 L 371.3,245.6 L 371.9,246.2 L 372.5,246.8 L 373.1,247.4 L 373.6,248.0 L 374.2,248.5 L 374.8,249.1 L 375.4,249.6 L 375.9,250.1 L 376.5,250.5 L 377.1,251.0 L 377.7,251.4 L 378.2,251.8 L 378.8,252.2 L 379.4,252.5 L 380.0,252.9 L 380.6,253.2 L 381.1,253.4 L 381.7,253.7 L 382.3,253.9 L 382.9,254.1 L 383.4,254.3 L 384.0,254.5 L 384.6,254.6 L 385.2,254.8 L 385.7,254.9 L 386.3,254.9 L 386.9,255.0 L 387.4,255.0 L 388.0,255.0 L 388.6,255.0 L 389.2,254.9 L 389.8,254.9 L 390.3,254.8 L 390.9,254.6 L 391.5,254.5 L 392.1,254.3 L 392.6,254.1 L 393.2,253.9 L 393.8,253.7 L 394.4,253.4 L 394.9,253.2 L 395.5,252.9 L 396.1,252.5 L 396.7,252.2 L 397.2,251.8 L 397.8,251.4 L 398.4,251.0 L 399.0,250.5 L 399.5,250.1 L 400.1,249.6 L 400.7,249.1 L 401.2,248.5 L 401.8,248.0 L 402.4,247.4 L 403.0,246.8 L 403.6,246.2 L 404.1,245.5 L 404.7,244.9 L 405.3,244.2 L 405.9,243.5 L 406.4,242.8 L 407.0,242.0 L 407.6,241.3 L 408.1,240.5 L 408.7,239.7 L 409.3,238.8 L 409.9,238.0 L 410.4,237.1 L 411.0,236.2 L 411.6,235.3 L 412.2,234.4 L 412.8,233.4 L 413.3,232.5 L 413.9,231.5 L 414.5,230.5 L 415.0,229.5 L 415.6,228.4 L 416.2,227.4 L 416.8,226.3 L 417.3,225.2 L 417.9,224.1 L 418.5,223.0 L 419.1,221.8 L 419.6,220.7 L 420.2,219.5 L 420.8,218.3 L 421.4,217.1 L 421.9,215.9 L 422.5,214.6 L 423.1,213.4 L 423.7,212.1 L 424.2,210.9 L 424.8,209.6 L 425.4,208.3 L 426.0,207.0 L 426.6,205.6 L 427.1,204.3 L 427.7,202.9 L 428.3,201.6 L 428.8,200.2 L 429.4,198.8 L 430.0,197.4\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/>\n<line x1=\"42\" y1=\"150\" x2=\"442\" y2=\"150\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"62\" y1=\"14\" x2=\"62\" y2=\"286\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"177\" y1=\"150\" x2=\"177\" y2=\"155\" stroke=\"#222\"/><text x=\"177\" y=\"171\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"292\" y1=\"150\" x2=\"292\" y2=\"155\" stroke=\"#222\"/><text x=\"292\" y=\"171\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"407\" y1=\"150\" x2=\"407\" y2=\"155\" stroke=\"#222\"/><text x=\"407\" y=\"171\" font-size=\"12.5\" text-anchor=\"middle\">3</text><line x1=\"57\" y1=\"255\" x2=\"67\" y2=\"255\" stroke=\"#222\"/><text x=\"52\" y=\"260\" font-size=\"12.5\" text-anchor=\"end\">-5</text><line x1=\"57\" y1=\"213\" x2=\"67\" y2=\"213\" stroke=\"#222\"/><text x=\"52\" y=\"218\" font-size=\"12.5\" text-anchor=\"end\">-3</text><line x1=\"57\" y1=\"87\" x2=\"67\" y2=\"87\" stroke=\"#222\"/><text x=\"52\" y=\"92\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"57\" y1=\"45\" x2=\"67\" y2=\"45\" stroke=\"#222\"/><text x=\"52\" y=\"50\" font-size=\"12.5\" text-anchor=\"end\">5</text>\n<text x=\"432\" y=\"36\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">amplitud 5</text>\n<text x=\"445\" y=\"155\" font-size=\"14\">x</text><text x=\"70\" y=\"26\" font-size=\"14\">y</text>\n</svg></span></p><p><strong>a)</strong> Karakteristiska ekvationen är \\(r^2+9=0\\) med rötterna \\(r=\\pm3i\\). Rent imaginära rötter \\(\\pm\\beta i\\) ger lösningen</p><p>\\[y=C_1\\cos3x+C_2\\sin3x.\\]</p><p>Villkoret \\(y(0)=3\\) ger direkt \\(C_1=3\\). Derivatan är</p><p>\\[y'=-3C_1\\sin3x+3C_2\\cos3x,\\]</p><p>så \\(y'(0)=3C_2=-12\\), alltså \\(C_2=-4\\). Lösningen är</p><p>\\[y=\\mathbf{3\\cos3x-4\\sin3x}.\\]</p><p><strong>b)</strong> Utveckla den önskade formen med additionsformeln:</p><p>\\[A\\cos(3x+\\varphi)=A\\cos\\varphi\\cos3x-A\\sin\\varphi\\sin3x.\\]</p><p>Jämförelse av koefficienterna framför \\(\\cos3x\\) och \\(\\sin3x\\) ger</p><p>\\[A\\cos\\varphi=3,\\qquad A\\sin\\varphi=4.\\]</p><p>Kvadrera och addera. Eftersom \\(\\cos^2\\varphi+\\sin^2\\varphi=1\\) faller \\(\\varphi\\) bort:</p><p>\\[A^2=3^2+4^2=25\\Rightarrow A=5.\\]</p><p>Vinkeln fås ur \\(\\tan\\varphi=4/3\\), och eftersom både \\(\\cos\\varphi\\) och \\(\\sin\\varphi\\) är positiva ligger \\(\\varphi\\) i första kvadranten:</p><p>\\[\\varphi=\\arctan\\frac43\\approx0,927.\\]</p><p>Alltså \\(y\\approx5\\cos(3x+0,927)\\), och <strong>amplituden är 5</strong>. Det stämmer med figuren, där kurvan precis når \\(\\pm5\\).</p>",
-    "id": "4.121"
+    "t": "<span class=\"fig\"><svg width=\"470\" height=\"320\" viewBox=\"0 0 470 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Svängningskurva med amplituden 5 och streckade linjer vid y lika med 5 och minus 5\">\n<rect width=\"470\" height=\"320\" fill=\"white\"/>\n<line x1=\"60\" y1=\"45\" x2=\"425\" y2=\"45\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<line x1=\"60\" y1=\"265\" x2=\"425\" y2=\"265\" stroke=\"#B23A2E\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/>\n<path d=\"M 60.0,89.0 L 60.6,90.3 L 61.1,91.7 L 61.7,93.0 L 62.3,94.4 L 62.9,95.8 L 63.5,97.2 L 64.0,98.6 L 64.6,100.0 L 65.2,101.4 L 65.8,102.9 L 66.3,104.4 L 66.9,105.8 L 67.5,107.3 L 68.0,108.8 L 68.6,110.3 L 69.2,111.8 L 69.8,113.3 L 70.3,114.9 L 70.9,116.4 L 71.5,118.0 L 72.1,119.5 L 72.7,121.1 L 73.2,122.7 L 73.8,124.2 L 74.4,125.8 L 75.0,127.4 L 75.5,129.0 L 76.1,130.6 L 76.7,132.2 L 77.2,133.8 L 77.8,135.5 L 78.4,137.1 L 79.0,138.7 L 79.5,140.4 L 80.1,142.0 L 80.7,143.6 L 81.3,145.3 L 81.8,146.9 L 82.4,148.6 L 83.0,150.2 L 83.6,151.9 L 84.2,153.5 L 84.7,155.2 L 85.3,156.8 L 85.9,158.5 L 86.5,160.1 L 87.0,161.8 L 87.6,163.4 L 88.2,165.1 L 88.8,166.7 L 89.3,168.3 L 89.9,170.0 L 90.5,171.6 L 91.0,173.2 L 91.6,174.9 L 92.2,176.5 L 92.8,178.1 L 93.3,179.7 L 93.9,181.3 L 94.5,182.9 L 95.1,184.5 L 95.7,186.1 L 96.2,187.7 L 96.8,189.2 L 97.4,190.8 L 98.0,192.4 L 98.5,193.9 L 99.1,195.4 L 99.7,197.0 L 100.2,198.5 L 100.8,200.0 L 101.4,201.5 L 102.0,203.0 L 102.5,204.5 L 103.1,205.9 L 103.7,207.4 L 104.3,208.8 L 104.8,210.3 L 105.4,211.7 L 106.0,213.1 L 106.6,214.5 L 107.2,215.9 L 107.7,217.2 L 108.3,218.6 L 108.9,219.9 L 109.4,221.3 L 110.0,222.6 L 110.6,223.9 L 111.2,225.1 L 111.8,226.4 L 112.3,227.7 L 112.9,228.9 L 113.5,230.1 L 114.0,231.3 L 114.6,232.5 L 115.2,233.6 L 115.8,234.8 L 116.3,235.9 L 116.9,237.0 L 117.5,238.1 L 118.1,239.2 L 118.7,240.2 L 119.2,241.3 L 119.8,242.3 L 120.4,243.3 L 121.0,244.3 L 121.5,245.2 L 122.1,246.1 L 122.7,247.1 L 123.2,247.9 L 123.8,248.8 L 124.4,249.7 L 125.0,250.5 L 125.5,251.3 L 126.1,252.1 L 126.7,252.9 L 127.3,253.6 L 127.8,254.3 L 128.4,255.0 L 129.0,255.7 L 129.6,256.3 L 130.1,257.0 L 130.7,257.6 L 131.3,258.2 L 131.9,258.7 L 132.4,259.3 L 133.0,259.8 L 133.6,260.3 L 134.2,260.7 L 134.8,261.2 L 135.3,261.6 L 135.9,262.0 L 136.5,262.4 L 137.1,262.7 L 137.6,263.0 L 138.2,263.3 L 138.8,263.6 L 139.3,263.9 L 139.9,264.1 L 140.5,264.3 L 141.1,264.5 L 141.6,264.6 L 142.2,264.7 L 142.8,264.8 L 143.4,264.9 L 143.9,265.0 L 144.5,265.0 L 145.1,265.0 L 145.7,265.0 L 146.2,264.9 L 146.8,264.9 L 147.4,264.8 L 148.0,264.6 L 148.6,264.5 L 149.1,264.3 L 149.7,264.1 L 150.3,263.9 L 150.9,263.7 L 151.4,263.4 L 152.0,263.1 L 152.6,262.8 L 153.2,262.5 L 153.7,262.1 L 154.3,261.7 L 154.9,261.3 L 155.4,260.8 L 156.0,260.4 L 156.6,259.9 L 157.2,259.4 L 157.8,258.9 L 158.3,258.3 L 158.9,257.7 L 159.5,257.1 L 160.1,256.5 L 160.6,255.9 L 161.2,255.2 L 161.8,254.5 L 162.4,253.8 L 162.9,253.0 L 163.5,252.3 L 164.1,251.5 L 164.7,250.7 L 165.2,249.9 L 165.8,249.0 L 166.4,248.2 L 166.9,247.3 L 167.5,246.4 L 168.1,245.4 L 168.7,244.5 L 169.2,243.5 L 169.8,242.5 L 170.4,241.5 L 171.0,240.5 L 171.6,239.4 L 172.1,238.4 L 172.7,237.3 L 173.3,236.2 L 173.8,235.1 L 174.4,233.9 L 175.0,232.8 L 175.6,231.6 L 176.2,230.4 L 176.7,229.2 L 177.3,228.0 L 177.9,226.7 L 178.4,225.5 L 179.0,224.2 L 179.6,222.9 L 180.2,221.6 L 180.8,220.3 L 181.3,218.9 L 181.9,217.6 L 182.5,216.2 L 183.1,214.8 L 183.6,213.4 L 184.2,212.0 L 184.8,210.6 L 185.4,209.2 L 185.9,207.7 L 186.5,206.3 L 187.1,204.8 L 187.7,203.4 L 188.2,201.9 L 188.8,200.4 L 189.4,198.9 L 189.9,197.3 L 190.5,195.8 L 191.1,194.3 L 191.7,192.7 L 192.2,191.2 L 192.8,189.6 L 193.4,188.0 L 194.0,186.5 L 194.5,184.9 L 195.1,183.3 L 195.7,181.7 L 196.3,180.1 L 196.8,178.5 L 197.4,176.9 L 198.0,175.2 L 198.6,173.6 L 199.2,172.0 L 199.7,170.4 L 200.3,168.7 L 200.9,167.1 L 201.4,165.4 L 202.0,163.8 L 202.6,162.2 L 203.2,160.5 L 203.8,158.9 L 204.3,157.2 L 204.9,155.6 L 205.5,153.9 L 206.1,152.3 L 206.6,150.6 L 207.2,149.0 L 207.8,147.3 L 208.3,145.7 L 208.9,144.0 L 209.5,142.4 L 210.1,140.8 L 210.7,139.1 L 211.2,137.5 L 211.8,135.9 L 212.4,134.2 L 213.0,132.6 L 213.5,131.0 L 214.1,129.4 L 214.7,127.8 L 215.2,126.2 L 215.8,124.6 L 216.4,123.0 L 217.0,121.5 L 217.6,119.9 L 218.1,118.3 L 218.7,116.8 L 219.3,115.2 L 219.8,113.7 L 220.4,112.2 L 221.0,110.7 L 221.6,109.2 L 222.1,107.7 L 222.7,106.2 L 223.3,104.7 L 223.9,103.2 L 224.4,101.8 L 225.0,100.4 L 225.6,98.9 L 226.2,97.5 L 226.8,96.1 L 227.3,94.7 L 227.9,93.4 L 228.5,92.0 L 229.0,90.6 L 229.6,89.3 L 230.2,88.0 L 230.8,86.7 L 231.3,85.4 L 231.9,84.1 L 232.5,82.9 L 233.1,81.7 L 233.7,80.4 L 234.2,79.2 L 234.8,78.0 L 235.4,76.9 L 236.0,75.7 L 236.5,74.6 L 237.1,73.5 L 237.7,72.4 L 238.2,71.3 L 238.8,70.2 L 239.4,69.2 L 240.0,68.2 L 240.6,67.2 L 241.1,66.2 L 241.7,65.2 L 242.3,64.3 L 242.9,63.3 L 243.4,62.4 L 244.0,61.6 L 244.6,60.7 L 245.2,59.9 L 245.7,59.0 L 246.3,58.2 L 246.9,57.5 L 247.4,56.7 L 248.0,56.0 L 248.6,55.3 L 249.2,54.6 L 249.8,53.9 L 250.3,53.3 L 250.9,52.7 L 251.5,52.1 L 252.0,51.5 L 252.6,51.0 L 253.2,50.4 L 253.8,49.9 L 254.3,49.5 L 254.9,49.0 L 255.5,48.6 L 256.1,48.2 L 256.6,47.8 L 257.2,47.4 L 257.8,47.1 L 258.4,46.8 L 258.9,46.5 L 259.5,46.2 L 260.1,46.0 L 260.7,45.8 L 261.2,45.6 L 261.8,45.5 L 262.4,45.3 L 263.0,45.2 L 263.6,45.1 L 264.1,45.1 L 264.7,45.0 L 265.3,45.0 L 265.9,45.0 L 266.4,45.0 L 267.0,45.1 L 267.6,45.2 L 268.1,45.3 L 268.7,45.4 L 269.3,45.6 L 269.9,45.8 L 270.5,46.0 L 271.0,46.2 L 271.6,46.5 L 272.2,46.8 L 272.8,47.1 L 273.3,47.4 L 273.9,47.8 L 274.5,48.1 L 275.1,48.5 L 275.6,49.0 L 276.2,49.4 L 276.8,49.9 L 277.4,50.4 L 277.9,50.9 L 278.5,51.4 L 279.1,52.0 L 279.6,52.6 L 280.2,53.2 L 280.8,53.9 L 281.4,54.5 L 281.9,55.2 L 282.5,55.9 L 283.1,56.6 L 283.7,57.4 L 284.2,58.2 L 284.8,59.0 L 285.4,59.8 L 286.0,60.6 L 286.5,61.5 L 287.1,62.3 L 287.7,63.2 L 288.3,64.2 L 288.9,65.1 L 289.4,66.1 L 290.0,67.0 L 290.6,68.0 L 291.1,69.1 L 291.7,70.1 L 292.3,71.2 L 292.9,72.2 L 293.4,73.3 L 294.0,74.4 L 294.6,75.6 L 295.2,76.7 L 295.8,77.9 L 296.3,79.1 L 296.9,80.3 L 297.5,81.5 L 298.0,82.7 L 298.6,84.0 L 299.2,85.3 L 299.8,86.5 L 300.4,87.8 L 300.9,89.2 L 301.5,90.5 L 302.1,91.8 L 302.6,93.2 L 303.2,94.6 L 303.8,95.9 L 304.4,97.3 L 304.9,98.8 L 305.5,100.2 L 306.1,101.6 L 306.7,103.1 L 307.2,104.5 L 307.8,106.0 L 308.4,107.5 L 309.0,109.0 L 309.5,110.5 L 310.1,112.0 L 310.7,113.5 L 311.3,115.0 L 311.9,116.6 L 312.4,118.1 L 313.0,119.7 L 313.6,121.3 L 314.1,122.8 L 314.7,124.4 L 315.3,126.0 L 315.9,127.6 L 316.4,129.2 L 317.0,130.8 L 317.6,132.4 L 318.2,134.0 L 318.8,135.7 L 319.3,137.3 L 319.9,138.9 L 320.5,140.6 L 321.1,142.2 L 321.6,143.8 L 322.2,145.5 L 322.8,147.1 L 323.4,148.8 L 323.9,150.4 L 324.5,152.1 L 325.1,153.7 L 325.7,155.4 L 326.2,157.0 L 326.8,158.7 L 327.4,160.3 L 327.9,162.0 L 328.5,163.6 L 329.1,165.2 L 329.7,166.9 L 330.2,168.5 L 330.8,170.2 L 331.4,171.8 L 332.0,173.4 L 332.6,175.1 L 333.1,176.7 L 333.7,178.3 L 334.3,179.9 L 334.9,181.5 L 335.4,183.1 L 336.0,184.7 L 336.6,186.3 L 337.2,187.9 L 337.7,189.4 L 338.3,191.0 L 338.9,192.5 L 339.5,194.1 L 340.0,195.6 L 340.6,197.2 L 341.2,198.7 L 341.8,200.2 L 342.3,201.7 L 342.9,203.2 L 343.5,204.7 L 344.1,206.1 L 344.6,207.6 L 345.2,209.0 L 345.8,210.4 L 346.4,211.9 L 346.9,213.3 L 347.5,214.7 L 348.1,216.0 L 348.6,217.4 L 349.2,218.8 L 349.8,220.1 L 350.4,221.4 L 350.9,222.7 L 351.5,224.0 L 352.1,225.3 L 352.7,226.6 L 353.2,227.8 L 353.8,229.0 L 354.4,230.2 L 355.0,231.4 L 355.5,232.6 L 356.1,233.8 L 356.7,234.9 L 357.3,236.0 L 357.8,237.2 L 358.4,238.2 L 359.0,239.3 L 359.6,240.4 L 360.1,241.4 L 360.7,242.4 L 361.3,243.4 L 361.9,244.4 L 362.4,245.3 L 363.0,246.3 L 363.6,247.2 L 364.2,248.1 L 364.8,248.9 L 365.3,249.8 L 365.9,250.6 L 366.5,251.4 L 367.1,252.2 L 367.6,252.9 L 368.2,253.7 L 368.8,254.4 L 369.3,255.1 L 369.9,255.8 L 370.5,256.4 L 371.1,257.1 L 371.6,257.7 L 372.2,258.2 L 372.8,258.8 L 373.4,259.3 L 373.9,259.8 L 374.5,260.3 L 375.1,260.8 L 375.7,261.2 L 376.2,261.6 L 376.8,262.0 L 377.4,262.4 L 378.0,262.8 L 378.6,263.1 L 379.1,263.4 L 379.7,263.6 L 380.3,263.9 L 380.9,264.1 L 381.4,264.3 L 382.0,264.5 L 382.6,264.6 L 383.2,264.7 L 383.7,264.8 L 384.3,264.9 L 384.9,265.0 L 385.4,265.0 L 386.0,265.0 L 386.6,265.0 L 387.2,264.9 L 387.8,264.8 L 388.3,264.7 L 388.9,264.6 L 389.5,264.5 L 390.1,264.3 L 390.6,264.1 L 391.2,263.9 L 391.8,263.6 L 392.4,263.4 L 392.9,263.1 L 393.5,262.8 L 394.1,262.4 L 394.7,262.0 L 395.2,261.6 L 395.8,261.2 L 396.4,260.8 L 397.0,260.3 L 397.5,259.8 L 398.1,259.3 L 398.7,258.8 L 399.2,258.2 L 399.8,257.7 L 400.4,257.1 L 401.0,256.4 L 401.6,255.8 L 402.1,255.1 L 402.7,254.4 L 403.3,253.7 L 403.9,252.9 L 404.4,252.2 L 405.0,251.4 L 405.6,250.6 L 406.1,249.8 L 406.7,248.9 L 407.3,248.1 L 407.9,247.2 L 408.4,246.2 L 409.0,245.3 L 409.6,244.4 L 410.2,243.4 L 410.8,242.4 L 411.3,241.4 L 411.9,240.4 L 412.5,239.3 L 413.0,238.2 L 413.6,237.2 L 414.2,236.0 L 414.8,234.9 L 415.3,233.8 L 415.9,232.6 L 416.5,231.4 L 417.1,230.2 L 417.6,229.0 L 418.2,227.8 L 418.8,226.6 L 419.4,225.3 L 419.9,224.0 L 420.5,222.7 L 421.1,221.4 L 421.7,220.1 L 422.2,218.8 L 422.8,217.4 L 423.4,216.0 L 424.0,214.7 L 424.6,213.3 L 425.1,211.9 L 425.7,210.4 L 426.3,209.0 L 426.8,207.6 L 427.4,206.1 L 428.0,204.6\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/>\n<line x1=\"40\" y1=\"155\" x2=\"440\" y2=\"155\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"60\" y1=\"10\" x2=\"60\" y2=\"300\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"175\" y1=\"155\" x2=\"175\" y2=\"160\" stroke=\"#222\"/><text x=\"175\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"290\" y1=\"155\" x2=\"290\" y2=\"160\" stroke=\"#222\"/><text x=\"290\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">2</text><line x1=\"405\" y1=\"155\" x2=\"405\" y2=\"160\" stroke=\"#222\"/><text x=\"405\" y=\"175\" font-size=\"12.5\" text-anchor=\"middle\">3</text><line x1=\"55\" y1=\"265\" x2=\"65\" y2=\"265\" stroke=\"#222\"/><text x=\"50\" y=\"270\" font-size=\"12.5\" text-anchor=\"end\">-5</text><line x1=\"55\" y1=\"221\" x2=\"65\" y2=\"221\" stroke=\"#222\"/><text x=\"50\" y=\"226\" font-size=\"12.5\" text-anchor=\"end\">-3</text><line x1=\"55\" y1=\"89\" x2=\"65\" y2=\"89\" stroke=\"#222\"/><text x=\"50\" y=\"94\" font-size=\"12.5\" text-anchor=\"end\">3</text><line x1=\"55\" y1=\"45\" x2=\"65\" y2=\"45\" stroke=\"#222\"/><text x=\"50\" y=\"50\" font-size=\"12.5\" text-anchor=\"end\">5</text>\n<circle cx=\"60\" cy=\"89\" r=\"5\" fill=\"#B23A2E\"/>\n<text x=\"70\" y=\"80\" font-size=\"14\" fill=\"#B23A2E\">y(0) = 3</text>\n<text x=\"428\" y=\"36\" font-size=\"13\" fill=\"#B23A2E\" text-anchor=\"end\">största utslag</text>\n<text x=\"443\" y=\"160\" font-size=\"14\">x</text><text x=\"68\" y=\"22\" font-size=\"14\">y</text>\n<text x=\"40\" y=\"304\" font-size=\"14\" fill=\"#777\">Lika stort utslag åt båda håll: odämpad svängning.</text>\n</svg></span><p>En odämpad svängning beskrivs av</p><p>\\[y''+9y=0,\\qquad y(0)=3,\\qquad y'(0)=-12.\\]</p><ol type=\"a\"><li>Bestäm \\(y(x)\\).</li><li>Skriv lösningen på formen \\(y=A\\cos(3x+\\varphi)\\) och bestäm amplituden \\(A\\).</li></ol>",
+    "s": "<p><strong>a)</strong> Karakteristiska ekvationen är \\(r^2+9=0\\) med rötterna \\(r=\\pm3i\\). Rent imaginära rötter \\(\\pm\\beta i\\) ger lösningen</p><p>\\[y=C_1\\cos3x+C_2\\sin3x.\\]</p><p>Villkoret \\(y(0)=3\\) ger direkt \\(C_1=3\\). Derivatan är</p><p>\\[y'=-3C_1\\sin3x+3C_2\\cos3x,\\]</p><p>så \\(y'(0)=3C_2=-12\\), alltså \\(C_2=-4\\). Lösningen är</p><p>\\[y=\\mathbf{3\\cos3x-4\\sin3x}.\\]</p><p><strong>b)</strong> Utveckla den önskade formen med additionsformeln:</p><p>\\[A\\cos(3x+\\varphi)=A\\cos\\varphi\\cos3x-A\\sin\\varphi\\sin3x.\\]</p><p>Jämförelse av koefficienterna framför \\(\\cos3x\\) och \\(\\sin3x\\) ger</p><p>\\[A\\cos\\varphi=3,\\qquad A\\sin\\varphi=4.\\]</p><p>Kvadrera och addera. Eftersom \\(\\cos^2\\varphi+\\sin^2\\varphi=1\\) faller \\(\\varphi\\) bort:</p><p>\\[A^2=3^2+4^2=25\\Rightarrow A=5.\\]</p><p>Vinkeln fås ur \\(\\tan\\varphi=4/3\\), och eftersom både \\(\\cos\\varphi\\) och \\(\\sin\\varphi\\) är positiva ligger \\(\\varphi\\) i första kvadranten:</p><p>\\[\\varphi=\\arctan\\frac43\\approx0,927.\\]</p><p>Alltså \\(y\\approx5\\cos(3x+0,927)\\), och <strong>amplituden är 5</strong>. Det stämmer med figuren, där kurvan precis når \\(\\pm5\\).</p>",
+    "id": "4.121",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6702,7 +8042,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös begynnelsevärdesproblemet</p><p>\\[y'=2y,\\qquad y(0)=3.\\]</p>",
     "s": "<p>Den allmänna lösningen till \\(y'=2y\\) är \\(y=Ce^{2x}\\).</p><p>Begynnelsevillkoret ger</p><p>\\[3=y(0)=C.\\]</p><p><strong>\\[y=3e^{2x}.\\]</strong></p>",
-    "id": "4.124"
+    "id": "4.124",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6712,7 +8054,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'=-0,5y,\\qquad y(0)=8.\\]</p>",
     "s": "<p>Den allmänna lösningen är \\(y=Ce^{-0,5x}\\). Av \\(y(0)=8\\) följer \\(C=8\\).</p><p><strong>\\[y=8e^{-0,5x}.\\]</strong></p>",
-    "id": "4.125"
+    "id": "4.125",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6722,7 +8066,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'=y+4,\\qquad y(0)=2.\\]</p>",
     "s": "<p>En konstant partikulär lösning fås av \\(0=A+4\\), alltså \\(A=-4\\). Den allmänna lösningen är därför</p><p>\\[y=Ce^x-4.\\]</p><p>Begynnelsevillkoret ger \\(2=C-4\\), alltså \\(C=6\\).</p><p><strong>\\[y=6e^x-4.\\]</strong></p>",
-    "id": "4.126"
+    "id": "4.126",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6732,7 +8078,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Lös</p><p>\\[y''-5y'+6y=0,\\qquad y(0)=2,\\quad y'(0)=1.\\]</p>",
     "s": "<p>Karakteristiska ekvationen är \\(r^2-5r+6=0\\), med rötterna 2 och 3.</p><p>\\[y=C_1e^{2x}+C_2e^{3x}.\\]</p><p>Villkoren ger</p><p>\\[C_1+C_2=2,\\qquad2C_1+3C_2=1.\\]</p><p>Subtrahera två gånger den första ekvationen från den andra:</p><p>\\[C_2=-3,\\qquad C_1=5.\\]</p><p><strong>\\[y=5e^{2x}-3e^{3x}.\\]</strong></p>",
-    "id": "4.127"
+    "id": "4.127",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6742,7 +8090,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Lös</p><p>\\[y''+4y=0,\\qquad y(0)=0,\\quad y'(0)=6.\\]</p>",
     "s": "<p>Karakteristiska rötter är \\(r=\\pm2i\\), så</p><p>\\[y=C_1\\cos2x+C_2\\sin2x.\\]</p><p>Av \\(y(0)=0\\) fås \\(C_1=0\\).</p><p>\\[y'=2C_2\\cos2x\\]</p><p>och \\(y'(0)=6\\) ger \\(2C_2=6\\Rightarrow C_2=3\\).</p><p><strong>\\[y=3\\sin2x.\\]</strong></p>",
-    "id": "4.128"
+    "id": "4.128",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6752,7 +8102,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''+2y'+5y=0,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
     "s": "<p>Karakteristiska ekvationen \\(r^2+2r+5=0\\) ger \\(r=-1\\pm2i\\).</p><p>\\[y=e^{-x}(C_1\\cos2x+C_2\\sin2x).\\]</p><p>Av \\(y(0)=1\\) fås \\(C_1=1\\).</p><p>Derivatan vid \\(x=0\\) är \\(y'(0)=-C_1+2C_2\\). Villkoret \\(y'(0)=0\\) ger</p><p>\\[-1+2C_2=0\\Rightarrow C_2=\\frac12.\\]</p><p><strong>\\[y=e^{-x}\\left(\\cos2x+\\frac12\\sin2x\\right).\\]</strong></p>",
-    "id": "4.129"
+    "id": "4.129",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6762,7 +8114,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''-4y'+4y=0,\\qquad y(0)=2,\\quad y'(0)=1.\\]</p>",
     "s": "<p>Karakteristiska ekvationen är \\((r-2)^2=0\\). Alltså</p><p>\\[y=(C_1+C_2x)e^{2x}.\\]</p><p>Av \\(y(0)=2\\) fås \\(C_1=2\\).</p><p>Derivera:</p><p>\\[y'=\\bigl(C_2+2C_1+2C_2x\\bigr)e^{2x}.\\]</p><p>Vid \\(x=0\\): \\(1=C_2+4\\), alltså \\(C_2=-3\\).</p><p><strong>\\[y=(2-3x)e^{2x}.\\]</strong></p>",
-    "id": "4.130"
+    "id": "4.130",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6772,7 +8126,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''-3y'+2y=4,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
     "s": "<p>Den homogena ekvationen har rötterna 1 och 2:</p><p>\\[y_h=C_1e^x+C_2e^{2x}.\\]</p><p>För högerledet 4 prövar vi en konstant \\(y_p=A\\). Insättning ger \\(2A=4\\), alltså \\(A=2\\).</p><p>\\[y=C_1e^x+C_2e^{2x}+2.\\]</p><p>Villkoren ger</p><p>\\[C_1+C_2=-1,\\qquad C_1+2C_2=0.\\]</p><p>Alltså \\(C_2=1\\) och \\(C_1=-2\\).</p><p><strong>\\[y=-2e^x+e^{2x}+2.\\]</strong></p>",
-    "id": "4.131"
+    "id": "4.131",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6782,7 +8138,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Lös</p><p>\\[y'=3-y,\\qquad y(0)=5.\\]</p>",
     "s": "<p>Skriv ekvationen som \\(y'=-(y-3)\\). Den allmänna lösningen är</p><p>\\[y=3+Ce^{-x}.\\]</p><p>Begynnelsevillkoret ger \\(5=3+C\\), alltså \\(C=2\\).</p><p><strong>\\[y=3+2e^{-x}.\\]</strong></p>",
-    "id": "4.168"
+    "id": "4.168",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6792,7 +8150,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>Lös</p><p>\\[y''+9y=0,\\qquad y(0)=4,\\quad y'(0)=-3.\\]</p>",
     "s": "<p>Den allmänna lösningen är</p><p>\\[y=C_1\\cos3x+C_2\\sin3x.\\]</p><p>Av \\(y(0)=4\\) fås \\(C_1=4\\).</p><p>\\[y'=-3C_1\\sin3x+3C_2\\cos3x.\\]</p><p>Villkoret \\(y'(0)=-3\\) ger \\(3C_2=-3\\), alltså \\(C_2=-1\\).</p><p><strong>\\[y=4\\cos3x-\\sin3x.\\]</strong></p>",
-    "id": "4.169"
+    "id": "4.169",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6802,7 +8162,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''+4y'+4y=0,\\qquad y(0)=1,\\quad y'(0)=0.\\]</p>",
     "s": "<p>Karakteristiska ekvationen är \\((r+2)^2=0\\). Därför</p><p>\\[y=(C_1+C_2x)e^{-2x}.\\]</p><p>Av \\(y(0)=1\\) fås \\(C_1=1\\).</p><p>Vid \\(x=0\\) är</p><p>\\[y'(0)=C_2-2C_1=C_2-2.\\]</p><p>Villkoret \\(y'(0)=0\\) ger \\(C_2=2\\).</p><p><strong>\\[y=(1+2x)e^{-2x}.\\]</strong></p>",
-    "id": "4.170"
+    "id": "4.170",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6812,7 +8174,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Lös</p><p>\\[y''+y=2,\\qquad y(0)=0,\\quad y'(0)=1.\\]</p>",
     "s": "<p>Homogena lösningen är \\(C_1\\cos x+C_2\\sin x\\). En konstant partikulär lösning är \\(y_p=2\\).</p><p>\\[y=C_1\\cos x+C_2\\sin x+2.\\]</p><p>Av \\(y(0)=0\\): \\(C_1+2=0\\Rightarrow C_1=-2\\).</p><p>\\[y'=-C_1\\sin x+C_2\\cos x\\]</p><p>och \\(y'(0)=1\\) ger \\(C_2=1\\).</p><p><strong>\\[y=-2\\cos x+\\sin x+2.\\]</strong></p>",
-    "id": "4.171"
+    "id": "4.171",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6822,7 +8186,9 @@ window.BANKMATF1 = [
     "poang": "0/2/2",
     "t": "<span class=\"fig\"><svg width=\"470\" height=\"290\" viewBox=\"0 0 470 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Eulers metod med fyra steg jämförd med den exakta lösningen till y prim lika med minus två y\">\n<rect width=\"470\" height=\"290\" fill=\"white\"/>\n<path d=\"M 70.0,50.0 L 71.7,51.8 L 73.3,53.7 L 75.0,55.5 L 76.6,57.3 L 78.2,59.0 L 79.9,60.8 L 81.5,62.5 L 83.2,64.2 L 84.8,65.9 L 86.5,67.6 L 88.2,69.3 L 89.8,70.9 L 91.5,72.6 L 93.1,74.2 L 94.8,75.8 L 96.4,77.4 L 98.0,78.9 L 99.7,80.5 L 101.3,82.0 L 103.0,83.5 L 104.7,85.0 L 106.3,86.5 L 108.0,88.0 L 109.6,89.5 L 111.2,90.9 L 112.9,92.4 L 114.6,93.8 L 116.2,95.2 L 117.8,96.6 L 119.5,97.9 L 121.2,99.3 L 122.8,100.7 L 124.5,102.0 L 126.1,103.3 L 127.8,104.6 L 129.4,105.9 L 131.1,107.2 L 132.7,108.5 L 134.4,109.7 L 136.0,111.0 L 137.6,112.2 L 139.3,113.4 L 140.9,114.7 L 142.6,115.9 L 144.2,117.0 L 145.9,118.2 L 147.6,119.4 L 149.2,120.5 L 150.8,121.7 L 152.5,122.8 L 154.2,123.9 L 155.8,125.0 L 157.4,126.1 L 159.1,127.2 L 160.8,128.3 L 162.4,129.3 L 164.1,130.4 L 165.7,131.4 L 167.3,132.4 L 169.0,133.5 L 170.6,134.5 L 172.3,135.5 L 173.9,136.5 L 175.6,137.5 L 177.2,138.4 L 178.9,139.4 L 180.6,140.3 L 182.2,141.3 L 183.8,142.2 L 185.5,143.1 L 187.1,144.0 L 188.8,145.0 L 190.4,145.8 L 192.1,146.7 L 193.8,147.6 L 195.4,148.5 L 197.1,149.3 L 198.7,150.2 L 200.3,151.0 L 202.0,151.9 L 203.7,152.7 L 205.3,153.5 L 206.9,154.3 L 208.6,155.1 L 210.2,155.9 L 211.9,156.7 L 213.6,157.5 L 215.2,158.3 L 216.8,159.0 L 218.5,159.8 L 220.2,160.5 L 221.8,161.3 L 223.5,162.0 L 225.1,162.7 L 226.8,163.5 L 228.4,164.2 L 230.0,164.9 L 231.7,165.6 L 233.3,166.3 L 235.0,166.9 L 236.7,167.6 L 238.3,168.3 L 240.0,169.0 L 241.6,169.6 L 243.2,170.3 L 244.9,170.9 L 246.6,171.5 L 248.2,172.2 L 249.9,172.8 L 251.5,173.4 L 253.2,174.0 L 254.8,174.6 L 256.4,175.2 L 258.1,175.8 L 259.8,176.4 L 261.4,177.0 L 263.0,177.6 L 264.7,178.2 L 266.4,178.7 L 268.0,179.3 L 269.6,179.8 L 271.3,180.4 L 272.9,180.9 L 274.6,181.5 L 276.2,182.0 L 277.9,182.5 L 279.6,183.0 L 281.2,183.6 L 282.9,184.1 L 284.5,184.6 L 286.1,185.1 L 287.8,185.6 L 289.5,186.1 L 291.1,186.6 L 292.8,187.0 L 294.4,187.5 L 296.1,188.0 L 297.7,188.5 L 299.4,188.9 L 301.0,189.4 L 302.6,189.8 L 304.3,190.3 L 305.9,190.7 L 307.6,191.2 L 309.2,191.6 L 310.9,192.0 L 312.5,192.5 L 314.2,192.9 L 315.9,193.3 L 317.5,193.7 L 319.1,194.1 L 320.8,194.5 L 322.5,194.9 L 324.1,195.3 L 325.8,195.7 L 327.4,196.1 L 329.1,196.5 L 330.7,196.9 L 332.4,197.3 L 334.0,197.6 L 335.7,198.0 L 337.3,198.4 L 338.9,198.8 L 340.6,199.1 L 342.2,199.5 L 343.9,199.8 L 345.6,200.2 L 347.2,200.5 L 348.8,200.9 L 350.5,201.2 L 352.1,201.5 L 353.8,201.9 L 355.4,202.2 L 357.1,202.5 L 358.8,202.9 L 360.4,203.2 L 362.1,203.5 L 363.7,203.8 L 365.4,204.1 L 367.0,204.4 L 368.7,204.7 L 370.3,205.0 L 371.9,205.3 L 373.6,205.6 L 375.2,205.9 L 376.9,206.2 L 378.6,206.5 L 380.2,206.8 L 381.8,207.1 L 383.5,207.3 L 385.1,207.6 L 386.8,207.9 L 388.4,208.1 L 390.1,208.4 L 391.8,208.7 L 393.4,208.9 L 395.1,209.2 L 396.7,209.5 L 398.4,209.7 L 400.0,210.0\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/>\n<path d=\"M 70.0,50.0 L 152.5,142.5 L 235.0,188.8 L 317.5,211.9 L 400.0,223.4\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.2\" stroke-dasharray=\"7 4\"/>\n<circle cx=\"70.0\" cy=\"50.0\" r=\"4.5\" fill=\"#B23A2E\"/><circle cx=\"152.5\" cy=\"142.5\" r=\"4.5\" fill=\"#B23A2E\"/><circle cx=\"235.0\" cy=\"188.8\" r=\"4.5\" fill=\"#B23A2E\"/><circle cx=\"317.5\" cy=\"211.9\" r=\"4.5\" fill=\"#B23A2E\"/><circle cx=\"400.0\" cy=\"223.4\" r=\"4.5\" fill=\"#B23A2E\"/>\n<line x1=\"52\" y1=\"235\" x2=\"435\" y2=\"235\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"30\" x2=\"70\" y2=\"251\" stroke=\"#222\" stroke-width=\"2\"/>\n<line x1=\"152\" y1=\"235\" x2=\"152\" y2=\"240\" stroke=\"#222\"/><text x=\"152\" y=\"255\" font-size=\"12.5\" text-anchor=\"middle\">0,25</text><line x1=\"235\" y1=\"235\" x2=\"235\" y2=\"240\" stroke=\"#222\"/><text x=\"235\" y=\"255\" font-size=\"12.5\" text-anchor=\"middle\">0,5</text><line x1=\"318\" y1=\"235\" x2=\"318\" y2=\"240\" stroke=\"#222\"/><text x=\"318\" y=\"255\" font-size=\"12.5\" text-anchor=\"middle\">0,75</text><line x1=\"400\" y1=\"235\" x2=\"400\" y2=\"240\" stroke=\"#222\"/><text x=\"400\" y=\"255\" font-size=\"12.5\" text-anchor=\"middle\">1</text><line x1=\"65\" y1=\"189\" x2=\"75\" y2=\"189\" stroke=\"#222\"/><text x=\"60\" y=\"194\" font-size=\"12.5\" text-anchor=\"end\">0,25</text><line x1=\"65\" y1=\"142\" x2=\"75\" y2=\"142\" stroke=\"#222\"/><text x=\"60\" y=\"148\" font-size=\"12.5\" text-anchor=\"end\">0,5</text><line x1=\"65\" y1=\"96\" x2=\"75\" y2=\"96\" stroke=\"#222\"/><text x=\"60\" y=\"101\" font-size=\"12.5\" text-anchor=\"end\">0,75</text><line x1=\"65\" y1=\"50\" x2=\"75\" y2=\"50\" stroke=\"#222\"/><text x=\"60\" y=\"55\" font-size=\"12.5\" text-anchor=\"end\">1</text>\n<line x1=\"300\" y1=\"60\" x2=\"330\" y2=\"60\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/>\n<text x=\"338\" y=\"65\" font-size=\"14\" fill=\"#2C62A8\">exakt lösning</text>\n<line x1=\"300\" y1=\"84\" x2=\"330\" y2=\"84\" stroke=\"#B23A2E\" stroke-width=\"2.2\" stroke-dasharray=\"7 4\"/>\n<text x=\"338\" y=\"89\" font-size=\"14\" fill=\"#B23A2E\">Euler, h = 0,25</text>\n<text x=\"433\" y=\"240\" font-size=\"14\">t</text><text x=\"78\" y=\"42\" font-size=\"14\">y</text>\n</svg></span><p>Betrakta begynnelsevärdesproblemet</p><p>\\[y'=-2y,\\qquad y(0)=1.\\]</p><ol type=\"a\"><li>Använd Eulers metod med \\(h=0,25\\) för att approximera \\(y(1)\\).</li><li>Lös differentialekvationen exakt och beräkna det absoluta felet.</li><li>Figuren visar att Eulerkurvan hela tiden ligger under den exakta lösningen. Förklara varför.</li></ol>",
     "s": "<p><strong>a)</strong> Eulerformeln är \\(y_{n+1}=y_n+h\\,f(x_n,y_n)\\). Här blir</p><p>\\[y_{n+1}=y_n+0,25\\cdot(-2y_n)=y_n(1-0,5)=0,5\\,y_n.\\]</p><p>Varje steg halverar alltså värdet:</p><p>\\[y_1=0,5,\\quad y_2=0,25,\\quad y_3=0,125,\\quad y_4=0,0625.\\]</p><p>Efter fyra steg är \\(x=1\\), så \\(y(1)\\approx\\mathbf{0,0625}\\).</p><p><strong>b)</strong> Ekvationen är av typen \\(y'=ky\\) med \\(k=-2\\), så \\(y=Ce^{-2x}\\). Begynnelsevillkoret ger \\(C=1\\), alltså \\(y=e^{-2x}\\) och</p><p>\\[y(1)=e^{-2}\\approx0,1353.\\]</p><p>Det absoluta felet blir</p><p>\\[|0,0625-0,1353|\\approx\\mathbf{0,073}.\\]</p><p>Felet är stort i förhållande till värdet, eftersom steglängden 0,25 är grov för en så snabbt avtagande lösning.</p><p><strong>c)</strong> Den exakta lösningen \\(e^{-2x}\\) är konvex, alltså krökt uppåt. Eulers metod följer i varje steg tangenten i den aktuella punkten, och en tangent till en konvex kurva ligger under kurvan. Varje steg hamnar därför lite för lågt, och eftersom felen ackumuleras ligger Eulerkurvan under den exakta lösningen hela vägen. Mindre \\(h\\) skulle minska avvikelsen.</p>",
-    "id": "4.122"
+    "id": "4.122",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6832,7 +8198,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>För \\(y'=1+x-y\\) gäller \\(y(0)=2\\). Använd ett Eulersteg med \\(h=0,25\\) för att approximera \\(y(0,25)\\).</p>",
     "s": "<p>Startpunkten är \\((x_0,y_0)=(0,2)\\). Lutningen där är</p><p>\\[f(0,2)=1+0-2=-1.\\]</p><p>Eulers formel ger</p><p>\\[y_1=y_0+h f(x_0,y_0)=2+0,25(-1)=1,75.\\]</p><p><strong>\\(y(0,25)\\approx1,75\\).</strong></p>",
-    "id": "4.132"
+    "id": "4.132",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6841,8 +8209,10 @@ window.BANKMATF1 = [
     "typ": "flera Eulersteg",
     "poang": "3/0/0",
     "t": "<p>För \\(y'=1-y\\) gäller \\(y(0)=0\\). Använd Eulers metod med \\(h=0,5\\) för att approximera \\(y(2)\\).</p>",
-    "s": "<span class=\"fig\"><svg width=\"430\" height=\"280\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Eulerpolygon för y prim lika med ett minus y med steglängd noll komma fem\"><rect width=\"430\" height=\"280\" fill=\"white\"/><line x1=\"55\" y1=\"235\" x2=\"390\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,235.0 138.8,141.8 222.5,95.2 306.2,71.9 390.0,60.3\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/><circle cx=\"55.0\" cy=\"235.0\" r=\"4.5\" fill=\"#2C62A8\"/><circle cx=\"138.8\" cy=\"141.8\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"147\" y=\"129\" font-size=\"11\">(0,5; 0,5)</text><circle cx=\"222.5\" cy=\"95.2\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"231\" y=\"83\" font-size=\"11\">(1; 0,75)</text><circle cx=\"306.2\" cy=\"71.9\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"312\" y=\"86\" font-size=\"11\" text-anchor=\"middle\">(1,5; 0,875)</text><circle cx=\"390.0\" cy=\"60.3\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"390\" y=\"46\" font-size=\"11\" text-anchor=\"end\">(2; 0,9375)</text><text x=\"55.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"138.8\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0,5</text><text x=\"222.5\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"306.2\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1,5</text><text x=\"390.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"401\" y=\"230\" font-size=\"14\">t</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Eulers formel är \\(y_{n+1}=y_n+h(1-y_n)\\).</p><p>\\[y_1=0+0,5(1)=0,5\\]</p><p>\\[y_2=0,5+0,5(0,5)=0,75\\]</p><p>\\[y_3=0,75+0,5(0,25)=0,875\\]</p><p>\\[y_4=0,875+0,5(0,125)=0,9375.\\]</p><p><strong>\\(y(2)\\approx0,9375\\).</strong></p>",
-    "id": "4.133"
+    "s": "<span class=\"fig\"><svg width=\"430\" height=\"280\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Eulerpolygon för y prim lika med ett minus y med steglängd noll komma fem\"><rect width=\"430\" height=\"280\" fill=\"white\"/><line x1=\"55\" y1=\"235\" x2=\"390\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><line x1=\"55\" y1=\"30\" x2=\"55\" y2=\"235\" stroke=\"#555\" stroke-width=\"1.3\"/><polyline points=\"55.0,235.0 138.8,141.8 222.5,95.2 306.2,71.9 390.0,60.3\" fill=\"none\" stroke=\"#2C62A8\" stroke-width=\"2.6\"/><circle cx=\"55.0\" cy=\"235.0\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"62.0\" y=\"228.0\" font-size=\"11\">(0; 0)</text><circle cx=\"138.8\" cy=\"141.8\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"145.8\" y=\"134.8\" font-size=\"11\">(0,5; 0,5)</text><circle cx=\"222.5\" cy=\"95.2\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"229.5\" y=\"88.2\" font-size=\"11\">(1; 0,75)</text><circle cx=\"306.2\" cy=\"71.9\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"313.2\" y=\"64.9\" font-size=\"11\">(1,5; 0,875)</text><circle cx=\"390.0\" cy=\"60.3\" r=\"4.5\" fill=\"#2C62A8\"/><text x=\"328.0\" y=\"53.3\" font-size=\"11\">(2; 0,9375)</text><text x=\"55.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"138.8\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">0.5</text><text x=\"222.5\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"306.2\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">1.5</text><text x=\"390.0\" y=\"255\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"401\" y=\"230\" font-size=\"14\">t</text><text x=\"63\" y=\"27\" font-size=\"14\">y</text></svg></span><p>Eulers formel är \\(y_{n+1}=y_n+h(1-y_n)\\).</p><p>\\[y_1=0+0,5(1)=0,5\\]</p><p>\\[y_2=0,5+0,5(0,5)=0,75\\]</p><p>\\[y_3=0,75+0,5(0,25)=0,875\\]</p><p>\\[y_4=0,875+0,5(0,125)=0,9375.\\]</p><p><strong>\\(y(2)\\approx0,9375\\).</strong></p>",
+    "id": "4.133",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6852,7 +8222,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>För differentialekvationen \\(y'=2x-y\\), bestäm riktningsfältets lutning i punkterna</p><ol type=\"a\"><li>\\((0,1)\\)</li><li>\\((1,0)\\)</li><li>\\((2,3)\\).</li></ol>",
     "s": "<p>Lutningen fås genom att sätta in punktens koordinater i \\(2x-y\\).</p><p><strong>a)</strong> \\(2\\cdot0-1=-1\\).</p><p><strong>b)</strong> \\(2\\cdot1-0=2\\).</p><p><strong>c)</strong> \\(2\\cdot2-3=1\\).</p>",
-    "id": "4.134"
+    "id": "4.134",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6862,7 +8234,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm de konstanta jämviktslösningarna till</p><p>\\[y'=(y-1)(3-y).\\]</p>",
     "s": "<p>En konstant lösning har \\(y'=0\\). Därför löser vi</p><p>\\[(y-1)(3-y)=0.\\]</p><p>Det ger \\(y=1\\) eller \\(y=3\\).</p><p><strong>Jämviktslösningarna är \\(y(x)=1\\) och \\(y(x)=3\\).</strong></p>",
-    "id": "4.135"
+    "id": "4.135",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6872,7 +8246,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>För \\(y'=-y\\) gäller \\(y(0)=1\\).</p><ol type=\"a\"><li>Approximerar \\(y(1)\\) med Eulers metod och \\(h=0,5\\).</li><li>Gör samma sak med \\(h=0,25\\).</li><li>Det exakta värdet är \\(e^{-1}\\approx0,3679\\). Vilken approximation är bäst?</li></ol>",
     "s": "<p><strong>a)</strong> Med \\(h=0,5\\) multipliceras värdet varje steg med \\(1-h=0,5\\):</p><p>\\[y(1)\\approx0,5^2=0,25.\\]</p><p><strong>b)</strong> Med \\(h=0,25\\) multipliceras värdet med \\(0,75\\) vid varje av fyra steg:</p><p>\\[y(1)\\approx0,75^4=0,31640625.\\]</p><p><strong>c)</strong> Felet blir ungefär \\(0,1179\\) respektive \\(0,0515\\). Den mindre steglängden \\(h=0,25\\) ger alltså den bättre approximationen.</p>",
-    "id": "4.136"
+    "id": "4.136",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6880,9 +8256,11 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "tolka riktningsfält och linjen där lutningen är noll",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med x minus två y\"><rect width=\"420\" height=\"300\" fill=\"white\"/><line x1=\"42\" y1=\"150\" x2=\"378\" y2=\"150\" stroke=\"#555\" stroke-width=\"1.4\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"272\" stroke=\"#555\" stroke-width=\"1.4\"/><text x=\"66\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-2</text><text x=\"138\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-1</text><text x=\"282\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"354\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"198\" y=\"264\" font-size=\"12\" text-anchor=\"end\">-2</text><text x=\"198\" y=\"209\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"198\" y=\"99\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"198\" y=\"44\" font-size=\"12\" text-anchor=\"end\">2</text><line x1=\"58.9\" y1=\"270.9\" x2=\"73.1\" y2=\"249.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"53.0\" y1=\"205.0\" x2=\"79.0\" y2=\"205.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"58.9\" y1=\"139.1\" x2=\"73.1\" y2=\"160.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"62.0\" y1=\"82.6\" x2=\"70.0\" y2=\"107.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"63.2\" y1=\"27.3\" x2=\"68.8\" y2=\"52.7\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"271.9\" x2=\"143.2\" y2=\"248.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"212.9\" x2=\"148.3\" y2=\"197.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"142.1\" x2=\"148.3\" y2=\"157.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"83.1\" x2=\"143.2\" y2=\"106.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.7\" y1=\"27.4\" x2=\"141.3\" y2=\"52.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"272.4\" x2=\"214.0\" y2=\"247.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"215.9\" x2=\"217.1\" y2=\"194.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"197.0\" y1=\"150.0\" x2=\"223.0\" y2=\"150.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"84.1\" x2=\"217.1\" y2=\"105.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"27.6\" x2=\"214.0\" y2=\"52.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"278.7\" y1=\"272.6\" x2=\"285.3\" y2=\"247.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"216.9\" x2=\"287.2\" y2=\"193.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"157.9\" x2=\"292.3\" y2=\"142.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"87.1\" x2=\"292.3\" y2=\"102.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"28.1\" x2=\"287.2\" y2=\"51.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"351.2\" y1=\"272.7\" x2=\"356.8\" y2=\"247.3\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"350.0\" y1=\"217.4\" x2=\"358.0\" y2=\"192.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"160.9\" x2=\"361.1\" y2=\"139.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"341.0\" y1=\"95.0\" x2=\"367.0\" y2=\"95.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"29.1\" x2=\"361.1\" y2=\"50.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"66\" y1=\"205\" x2=\"354\" y2=\"95\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"318\" y=\"126\" font-size=\"13\" fill=\"#B23A2E\">y = x/2</text><text x=\"387\" y=\"145\" font-size=\"14\">x</text><text x=\"218\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=x-2y\\).</p><ol type=\"a\"><li>Förklara varför segmenten är horisontella längs linjen \\(y=x\\).</li><li>En lösning går genom \\((0,1)\\). Stiger eller sjunker den precis där?</li></ol>",
+    "t": "<span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med x minus två y\"><rect width=\"420\" height=\"300\" fill=\"white\"/><line x1=\"42\" y1=\"150\" x2=\"378\" y2=\"150\" stroke=\"#555\" stroke-width=\"1.4\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"272\" stroke=\"#555\" stroke-width=\"1.4\"/><text x=\"66\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-2</text><text x=\"138\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">-1</text><text x=\"210\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"282\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"354\" y=\"170\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"198\" y=\"264\" font-size=\"12\" text-anchor=\"end\">-2</text><text x=\"198\" y=\"209\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"198\" y=\"99\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"198\" y=\"44\" font-size=\"12\" text-anchor=\"end\">2</text><line x1=\"58.9\" y1=\"270.9\" x2=\"73.1\" y2=\"249.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"53.0\" y1=\"205.0\" x2=\"79.0\" y2=\"205.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"58.9\" y1=\"139.1\" x2=\"73.1\" y2=\"160.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"62.0\" y1=\"82.6\" x2=\"70.0\" y2=\"107.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"63.2\" y1=\"27.3\" x2=\"68.8\" y2=\"52.7\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"271.9\" x2=\"143.2\" y2=\"248.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"212.9\" x2=\"148.3\" y2=\"197.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.7\" y1=\"142.1\" x2=\"148.3\" y2=\"157.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"132.8\" y1=\"83.1\" x2=\"143.2\" y2=\"106.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.7\" y1=\"27.4\" x2=\"141.3\" y2=\"52.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"272.4\" x2=\"214.0\" y2=\"247.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"215.9\" x2=\"217.1\" y2=\"194.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"197.0\" y1=\"150.0\" x2=\"223.0\" y2=\"150.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"202.9\" y1=\"84.1\" x2=\"217.1\" y2=\"105.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"206.0\" y1=\"27.6\" x2=\"214.0\" y2=\"52.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"278.7\" y1=\"272.6\" x2=\"285.3\" y2=\"247.4\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"216.9\" x2=\"287.2\" y2=\"193.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"157.9\" x2=\"292.3\" y2=\"142.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"271.7\" y1=\"87.1\" x2=\"292.3\" y2=\"102.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"276.8\" y1=\"28.1\" x2=\"287.2\" y2=\"51.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"351.2\" y1=\"272.7\" x2=\"356.8\" y2=\"247.3\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"350.0\" y1=\"217.4\" x2=\"358.0\" y2=\"192.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"160.9\" x2=\"361.1\" y2=\"139.1\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"341.0\" y1=\"95.0\" x2=\"367.0\" y2=\"95.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"346.9\" y1=\"29.1\" x2=\"361.1\" y2=\"50.9\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"66\" y1=\"205\" x2=\"354\" y2=\"95\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"312\" y=\"103\" font-size=\"13\" fill=\"#B23A2E\">y = x/2</text><text x=\"387\" y=\"145\" font-size=\"14\">x</text><text x=\"218\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=x-2y\\).</p><ol type=\"a\"><li>Förklara varför segmenten är horisontella längs linjen \\(y=x\\).</li><li>En lösning går genom \\((0,1)\\). Stiger eller sjunker den precis där?</li></ol>",
     "s": "<p><strong>a)</strong> Segmenten är horisontella där lutningen är noll:</p><p>\\[x-2y=0\\Rightarrow y=\\frac{x}{2}.\\]</p><p>Alltså ligger de horisontella segmenten längs linjen <strong>\\(y=x/2\\)</strong>.</p><p><strong>b)</strong> I punkten \\((0,1)\\) är</p><p>\\[y'=0-2\\cdot1=-2.\\]</p><p>Lösningen <strong>sjunker</strong> precis där.</p>",
-    "id": "4.137"
+    "id": "4.137",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6892,7 +8270,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<span class=\"fig\"><svg width=\"430\" height=\"300\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Riktningsfält för y prim lika med y gånger två minus y\"><rect width=\"430\" height=\"300\" fill=\"white\"/><line x1=\"55\" y1=\"209.5\" x2=\"390\" y2=\"209.5\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"55\" y1=\"28\" x2=\"55\" y2=\"270\" stroke=\"#777\" stroke-width=\"1.2\"/><text x=\"45\" y=\"274.0\" font-size=\"12\" text-anchor=\"end\">-1</text><text x=\"45\" y=\"213.5\" font-size=\"12\" text-anchor=\"end\">0</text><text x=\"45\" y=\"153.0\" font-size=\"12\" text-anchor=\"end\">1</text><text x=\"45\" y=\"92.5\" font-size=\"12\" text-anchor=\"end\">2</text><text x=\"45\" y=\"32.0\" font-size=\"12\" text-anchor=\"end\">3</text><text x=\"55.0\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">0</text><text x=\"138.8\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">1</text><text x=\"222.5\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">2</text><text x=\"306.2\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">3</text><text x=\"390.0\" y=\"286\" font-size=\"12\" text-anchor=\"middle\">4</text><line x1=\"50.4\" y1=\"260.0\" x2=\"59.6\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"44.0\" y1=\"209.5\" x2=\"66.0\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"45.3\" y1=\"184.5\" x2=\"64.7\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"46.1\" y1=\"155.4\" x2=\"63.9\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"45.3\" y1=\"124.0\" x2=\"64.7\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"44.0\" y1=\"88.5\" x2=\"66.0\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"46.8\" y1=\"50.9\" x2=\"63.2\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"50.4\" y1=\"18.0\" x2=\"59.6\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.1\" y1=\"260.0\" x2=\"143.4\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.8\" y1=\"209.5\" x2=\"149.8\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.1\" y1=\"184.5\" x2=\"148.4\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.8\" y1=\"155.4\" x2=\"147.7\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"129.1\" y1=\"124.0\" x2=\"148.4\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"127.8\" y1=\"88.5\" x2=\"149.8\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"130.6\" y1=\"50.9\" x2=\"146.9\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"134.1\" y1=\"18.0\" x2=\"143.4\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"217.9\" y1=\"260.0\" x2=\"227.1\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"211.5\" y1=\"209.5\" x2=\"233.5\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"212.8\" y1=\"184.5\" x2=\"232.2\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"213.6\" y1=\"155.4\" x2=\"231.4\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"212.8\" y1=\"124.0\" x2=\"232.2\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"211.5\" y1=\"88.5\" x2=\"233.5\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"214.3\" y1=\"50.9\" x2=\"230.7\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"217.9\" y1=\"18.0\" x2=\"227.1\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"301.6\" y1=\"260.0\" x2=\"310.9\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"295.2\" y1=\"209.5\" x2=\"317.2\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"296.6\" y1=\"184.5\" x2=\"315.9\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"297.3\" y1=\"155.4\" x2=\"315.2\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"296.6\" y1=\"124.0\" x2=\"315.9\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"295.2\" y1=\"88.5\" x2=\"317.2\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"298.1\" y1=\"50.9\" x2=\"314.4\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"301.6\" y1=\"18.0\" x2=\"310.9\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"385.4\" y1=\"260.0\" x2=\"394.6\" y2=\"280.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"379.0\" y1=\"209.5\" x2=\"401.0\" y2=\"209.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"380.3\" y1=\"184.5\" x2=\"399.7\" y2=\"174.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"381.1\" y1=\"155.4\" x2=\"398.9\" y2=\"142.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"380.3\" y1=\"124.0\" x2=\"399.7\" y2=\"113.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"379.0\" y1=\"88.5\" x2=\"401.0\" y2=\"88.5\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"381.8\" y1=\"50.9\" x2=\"398.2\" y2=\"65.6\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"385.4\" y1=\"18.0\" x2=\"394.6\" y2=\"38.0\" stroke=\"#2C62A8\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"55\" y1=\"209.5\" x2=\"390\" y2=\"209.5\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"315\" y=\"202.5\" font-size=\"13\" fill=\"#B23A2E\">y = 0</text><line x1=\"55\" y1=\"88.5\" x2=\"390\" y2=\"88.5\" stroke=\"#B23A2E\" stroke-width=\"1.4\" stroke-dasharray=\"6 5\"/><text x=\"315\" y=\"81.5\" font-size=\"13\" fill=\"#B23A2E\">y = 2</text><text x=\"400\" y=\"251\" font-size=\"14\">t</text><text x=\"63\" y=\"24\" font-size=\"14\">y</text></svg></span><p>Riktningsfältet hör till \\(y'=y(2-y)\\).</p><ol type=\"a\"><li>Vilka jämviktslösningar finns?</li><li>Vad händer på lång sikt med en lösning som startar vid \\(y(0)=0,5\\)?</li><li>Vad händer om \\(y(0)=3\\)?</li></ol>",
     "s": "<p><strong>a)</strong> Jämvikt kräver \\(y'=0\\), alltså \\(y=0\\) eller \\(y=2\\).</p><p><strong>b)</strong> För \\(0<y<2\\) är \\(y(2-y)>0\\), så lösningen växer. När den närmar sig 2 blir lutningen mindre. Lösningen närmar sig därför <strong>\\(y=2\\) underifrån</strong>.</p><p><strong>c)</strong> För \\(y>2\\) är \\(2-y<0\\), så \\(y'<0\\). Lösningen sjunker och närmar sig <strong>\\(y=2\\) ovanifrån</strong>.</p>",
-    "id": "4.138"
+    "id": "4.138",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6902,7 +8282,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En koncentration \\(C(t)\\) modelleras av</p><p>\\[C'=4-0,2C,\\qquad C(0)=10,\\]</p><p>där \\(t\\) mäts i timmar. Använd Eulers metod med \\(h=1\\) för att approximera \\(C(3)\\).</p>",
     "s": "<p>Eulers formel är</p><p>\\[C_{n+1}=C_n+1\\cdot(4-0,2C_n).\\]</p><p>\\[C_1=10+(4-2)=12\\]</p><p>\\[C_2=12+(4-2,4)=13,6\\]</p><p>\\[C_3=13,6+(4-2,72)=14,88.\\]</p><p><strong>\\(C(3)\\approx14,88\\).</strong></p>",
-    "id": "4.139"
+    "id": "4.139",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6912,7 +8294,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>För differentialekvationen \\(y'=y-x^2\\), bestäm lutningen i punkterna</p><ol type=\"a\"><li>\\((0,2)\\)</li><li>\\((1,1)\\)</li><li>\\((2,3)\\).</li></ol>",
     "s": "<p>Sätt in koordinaterna i \\(y-x^2\\).</p><p><strong>a)</strong> \\(2-0^2=2\\).</p><p><strong>b)</strong> \\(1-1^2=0\\).</p><p><strong>c)</strong> \\(3-2^2=-1\\).</p>",
-    "id": "4.172"
+    "id": "4.172",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6922,7 +8306,9 @@ window.BANKMATF1 = [
     "poang": "3/0/0",
     "t": "<p>För \\(y'=x+y\\) gäller \\(y(0)=1\\). Använd Eulers metod med \\(h=0,2\\) för att approximera \\(y(0,4)\\).</p>",
     "s": "<p>Första steget:</p><p>\\[y_1=1+0,2(0+1)=1,2.\\]</p><p>Nu är \\(x_1=0,2\\). Lutningen där är \\(0,2+1,2=1,4\\).</p><p>Andra steget:</p><p>\\[y_2=1,2+0,2\\cdot1,4=1,48.\\]</p><p><strong>\\(y(0,4)\\approx1,48\\).</strong></p>",
-    "id": "4.173"
+    "id": "4.173",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6932,7 +8318,9 @@ window.BANKMATF1 = [
     "poang": "0/3/0",
     "t": "<p>Betrakta differentialekvationen</p><p>\\[y'=(1-y)(y+2).\\]</p><ol type=\"a\"><li>Bestäm jämviktslösningarna.</li><li>Avgör vilken jämvikt som är stabil och vilken som är instabil.</li></ol>",
     "s": "<p><strong>a)</strong> Jämvikt fås när högerledet är noll:</p><p>\\[(1-y)(y+2)=0\\Rightarrow y=1\\text{ eller }y=-2.\\]</p><p><strong>b)</strong> Undersök tecknet på \\(y'\\):</p><p>För \\(y<-2\\) är \\(y'<0\\), så lösningar rör sig nedåt.</p><p>För \\(-2<y<1\\) är \\(y'>0\\), så lösningar rör sig uppåt.</p><p>För \\(y>1\\) är \\(y'<0\\), så lösningar rör sig nedåt.</p><p>Alltså rör sig lösningar bort från \\(y=-2\\): den är <strong>instabil</strong>. Lösningar från båda sidor rör sig mot \\(y=1\\): den är <strong>stabil</strong>.</p>",
-    "id": "4.174"
+    "id": "4.174",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6940,9 +8328,11 @@ window.BANKMATF1 = [
     "niva": "A",
     "typ": "jämvikter och stabilitet i logistisk modell",
     "poang": "0/1/3",
-    "t": "<p>En population modelleras av</p><p>\\[P'=0,5\\,P\\left(1-\\frac{P}{400}\\right).\\]</p><ol type=\"a\"><li>Bestäm jämviktslösningarna.</li><li>Avgör för vilka \\(P\\gt0\\) populationen växer respektive minskar.</li><li>Klassificera jämvikterna som stabila eller instabila och beskriv vad som händer med en population som startar på \\(P(0)=50\\).</li></ol>",
-    "s": "<p><span class=\"fig\"><svg width=\"470\" height=\"345\" viewBox=\"0 0 470 345\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Faslinje för den logistiska modellen med jämvikterna P lika med 0 och P lika med 400\">\n<rect width=\"470\" height=\"345\" fill=\"white\"/>\n<text x=\"150\" y=\"26\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">P</text>\n<line x1=\"150\" y1=\"34\" x2=\"150\" y2=\"294\" stroke=\"#ccc\" stroke-width=\"1.6\"/>\n<text x=\"132\" y=\"252\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">0</text><text x=\"132\" y=\"180\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">200</text><text x=\"132\" y=\"108\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">400</text><text x=\"132\" y=\"36\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">600</text><line x1=\"150\" y1=\"286\" x2=\"150\" y2=\"258\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M144 248 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"150\" y1=\"240\" x2=\"150\" y2=\"196\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M144 206 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"150\" y1=\"186\" x2=\"150\" y2=\"157\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M144 167 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"150\" y1=\"139\" x2=\"150\" y2=\"114\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M144 124 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"150\" y1=\"45\" x2=\"150\" y2=\"78\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M144 68 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"150\" y1=\"85\" x2=\"150\" y2=\"99\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M144 89 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><circle cx=\"150\" cy=\"247\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"172\" y=\"252\" font-size=\"16\">P = 0</text><circle cx=\"150\" cy=\"103\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"172\" y=\"108\" font-size=\"16\">P = 400</text>\n<text x=\"280\" y=\"50\" font-size=\"15\" fill=\"#B23A2E\">P&#8242; &lt; 0</text>\n<text x=\"280\" y=\"176\" font-size=\"15\" fill=\"#2E7D52\">P&#8242; &gt; 0</text>\n<text x=\"280\" y=\"277\" font-size=\"15\" fill=\"#B23A2E\">P&#8242; &lt; 0</text>\n</svg></span></p><p><strong>a)</strong> En jämviktslösning är konstant, alltså \\(P'=0\\):</p><p>\\[0,5P\\left(1-\\frac{P}{400}\\right)=0\\Rightarrow P=0\\quad\\text{eller}\\quad P=400.\\]</p><p><strong>b)</strong> Undersök tecknet på högerledet mellan och utanför jämvikterna.</p><p>För \\(0\\lt P\\lt400\\) är \\(P\\gt0\\) och \\(1-\\frac{P}{400}\\gt0\\), så produkten är positiv och <strong>populationen växer</strong>.</p><p>För \\(P\\gt400\\) är \\(P\\gt0\\) men \\(1-\\frac{P}{400}\\lt0\\), så produkten är negativ och <strong>populationen minskar</strong>.</p><p><strong>c)</strong> Faslinjen i figuren sammanfattar tecknen. Pilarna pekar bort från \\(P=0\\) och mot \\(P=400\\) från båda hållen.</p><p>Startar populationen strax ovanför 0 växer den, alltså rör den sig bort från jämvikten: <strong>\\(P=0\\) är instabil</strong>.</p><p>Kommer populationen underifrån växer den mot 400, och kommer den ovanifrån minskar den mot 400. Lösningarna närmar sig alltså jämvikten från båda håll: <strong>\\(P=400\\) är stabil</strong>.</p><p>Med \\(P(0)=50\\) ligger startvärdet mellan jämvikterna. Populationen växer därför hela tiden och närmar sig 400 utan att någonsin nå eller passera värdet. Talet 400 är modellens bärkraft.</p>",
-    "id": "4.123"
+    "t": "<span class=\"fig\"><svg width=\"470\" height=\"330\" viewBox=\"0 0 470 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Faslinje för den logistiska modellen med jämvikterna y lika med 0 och y lika med 400 samt pilar som visar riktningen\">\n<rect width=\"470\" height=\"330\" fill=\"white\"/>\n<line x1=\"140\" y1=\"6\" x2=\"140\" y2=\"284\" stroke=\"#ccc\" stroke-width=\"1.6\"/>\n<text x=\"124\" y=\"242\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">0</text><text x=\"124\" y=\"170\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">200</text><text x=\"124\" y=\"98\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">400</text><text x=\"124\" y=\"26\" font-size=\"12.5\" fill=\"#999\" text-anchor=\"end\">600</text><line x1=\"140\" y1=\"276\" x2=\"140\" y2=\"248\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 238 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"230\" x2=\"140\" y2=\"186\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 196 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"176\" x2=\"140\" y2=\"147\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 157 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"129\" x2=\"140\" y2=\"104\" stroke=\"#2E7D52\" stroke-width=\"3\"/><path d=\"M134 114 l6 -10 6 10\" fill=\"none\" stroke=\"#2E7D52\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"35\" x2=\"140\" y2=\"68\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 58 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><line x1=\"140\" y1=\"75\" x2=\"140\" y2=\"89\" stroke=\"#B23A2E\" stroke-width=\"3\"/><path d=\"M134 79 l6 10 6 -10\" fill=\"none\" stroke=\"#B23A2E\" stroke-width=\"2.6\"/><circle cx=\"140\" cy=\"237\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"162\" y=\"242\" font-size=\"16\">y = 0</text><circle cx=\"140\" cy=\"93\" r=\"9\" fill=\"#fff\" stroke=\"#222\" stroke-width=\"2.4\"/><text x=\"162\" y=\"98\" font-size=\"16\">y = 400</text>\n<text x=\"260\" y=\"40\" font-size=\"15\" fill=\"#B23A2E\">y&#8242; &lt; 0</text>\n<text x=\"260\" y=\"170\" font-size=\"15\" fill=\"#2E7D52\">y&#8242; &gt; 0</text>\n<text x=\"260\" y=\"267\" font-size=\"15\" fill=\"#B23A2E\">y&#8242; &lt; 0</text>\n<text x=\"140\" y=\"-6\" font-size=\"14\" fill=\"#777\" text-anchor=\"middle\">y</text>\n<text x=\"30\" y=\"318\" font-size=\"14\" fill=\"#777\">Pilarna visar åt vilket håll lösningen rör sig.</text>\n</svg></span><p>En population modelleras av</p><p>\\[P'=0,5\\,P\\left(1-\\frac{P}{400}\\right).\\]</p><ol type=\"a\"><li>Bestäm jämviktslösningarna.</li><li>Avgör för vilka \\(P\\gt0\\) populationen växer respektive minskar.</li><li>Klassificera jämvikterna som stabila eller instabila och beskriv vad som händer med en population som startar på \\(P(0)=50\\).</li></ol>",
+    "s": "<p><strong>a)</strong> En jämviktslösning är konstant, alltså \\(P'=0\\):</p><p>\\[0,5P\\left(1-\\frac{P}{400}\\right)=0\\Rightarrow P=0\\quad\\text{eller}\\quad P=400.\\]</p><p><strong>b)</strong> Undersök tecknet på högerledet mellan och utanför jämvikterna.</p><p>För \\(0\\lt P\\lt400\\) är \\(P\\gt0\\) och \\(1-\\frac{P}{400}\\gt0\\), så produkten är positiv och <strong>populationen växer</strong>.</p><p>För \\(P\\gt400\\) är \\(P\\gt0\\) men \\(1-\\frac{P}{400}\\lt0\\), så produkten är negativ och <strong>populationen minskar</strong>.</p><p><strong>c)</strong> Faslinjen i figuren sammanfattar tecknen. Pilarna pekar bort från \\(P=0\\) och mot \\(P=400\\) från båda hållen.</p><p>Startar populationen strax ovanför 0 växer den, alltså rör den sig bort från jämvikten: <strong>\\(P=0\\) är instabil</strong>.</p><p>Kommer populationen underifrån växer den mot 400, och kommer den ovanifrån minskar den mot 400. Lösningarna närmar sig alltså jämvikten från båda håll: <strong>\\(P=400\\) är stabil</strong>.</p><p>Med \\(P(0)=50\\) ligger startvärdet mellan jämvikterna. Populationen växer därför hela tiden och närmar sig 400 utan att någonsin nå eller passera värdet. Talet 400 är modellens bärkraft.</p>",
+    "id": "4.123",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6952,7 +8342,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm ordningen på differentialekvationen</p><p>\\[y'''+4y'-y=0.\\]</p>",
     "s": "<p>Ordningen bestäms av den högsta derivatan som förekommer. Här är den högsta derivatan \\(y'''\\).</p><p><strong>Ekvationen är av tredje ordningen.</strong></p>",
-    "id": "4.156"
+    "id": "4.156",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6962,7 +8354,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Visa att \\(y=Ce^{3x}\\) löser \\(y'=3y\\).</p>",
     "s": "<p>Derivera:</p><p>\\[y'=3Ce^{3x}.\\]</p><p>Högerledet är</p><p>\\[3y=3Ce^{3x}.\\]</p><p>Vänster- och högerled är lika, så lösningsfamiljen är verifierad.</p>",
-    "id": "4.157"
+    "id": "4.157",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6972,7 +8366,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>Bestäm de konstanta lösningarna till</p><p>\\[y'=y(4-y).\\]</p>",
     "s": "<p>En konstant lösning kräver \\(y'=0\\). Därför</p><p>\\[y(4-y)=0\\]</p><p>vilket ger <strong>\\(y=0\\)</strong> eller <strong>\\(y=4\\)</strong>.</p>",
-    "id": "4.158"
+    "id": "4.158",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6982,7 +8378,9 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "t": "<p>En temperaturmodell är</p><p>\\[T'=-0,2(T-15).\\]</p><p>Är temperaturen stigande eller sjunkande när \\(T=25\\)? Hur är det när \\(T=10\\)?</p>",
     "s": "<p>När \\(T=25\\):</p><p>\\[T'=-0,2(25-15)=-2<0,\\]</p><p>så temperaturen <strong>sjunker</strong>.</p><p>När \\(T=10\\):</p><p>\\[T'=-0,2(10-15)=1>0,\\]</p><p>så temperaturen <strong>stiger</strong>.</p>",
-    "id": "4.159"
+    "id": "4.159",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -6992,7 +8390,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>En lösningsfamilj ges av</p><p>\\[y=Ce^{-2x}+3.\\]</p><p>Bestäm en första ordningens differentialekvation som har exakt denna lösningsfamilj.</p>",
     "s": "<p>Flytta först jämviktsvärdet:</p><p>\\[y-3=Ce^{-2x}.\\]</p><p>Derivera:</p><p>\\[y'=-2Ce^{-2x}=-2(y-3).\\]</p><p>En passande differentialekvation är därför</p><p><strong>\\[y'=-2(y-3).\\]</strong></p>",
-    "id": "4.160"
+    "id": "4.160",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "kap": 4,
@@ -7002,7 +8402,9 @@ window.BANKMATF1 = [
     "poang": "0/2/0",
     "t": "<p>Visa genom insättning att \\(y=xe^x\\) löser</p><p>\\[y''-2y'+y=0.\\]</p>",
     "s": "<p>Derivera:</p><p>\\[y'=e^x+xe^x=(x+1)e^x,\\]</p><p>\\[y''=(x+2)e^x.\\]</p><p>Insättning ger</p><p>\\[(x+2)e^x-2(x+1)e^x+xe^x\\]</p><p>\\[=(x+2-2x-2+x)e^x=0.\\]</p><p>Alltså är \\(y=xe^x\\) en lösning.</p>",
-    "id": "4.161"
+    "id": "4.161",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.208",
@@ -7012,7 +8414,9 @@ window.BANKMATF1 = [
     "typ": "fördela identiska objekt med ett minsta antal i varje grupp",
     "poang": "0/2/0",
     "t": "<p>Under fyra träningsveckor ska 14 likadana bonuspass fördelas. Varje vecka ska innehålla minst 2 bonuspass.</p><p>På hur många olika sätt kan antalet bonuspass fördelas mellan veckorna?</p>",
-    "s": "<p><strong>Första steget:</strong> Kravet på minst 2 pass per vecka använder \\(4\\cdot2=8\\) pass. Då återstår</p><p>\\[14-8=6\\]</p><p>pass som får fördelas fritt mellan de fyra veckorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"105\" viewBox=\"0 0 420 122\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Exempel på sex markeringar fördelade i fyra grupper med tre skiljestreck\">\n<rect x=\"10\" y=\"12\" width=\"400\" height=\"96\" rx=\"7\" fill=\"white\" stroke=\"#c7c7c7\"/>\n<circle cx=\"55\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"82\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"112\" y1=\"35\" x2=\"112\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"145\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"178\" y1=\"35\" x2=\"178\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"207\" y1=\"35\" x2=\"207\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"241\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"268\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"295\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<text x=\"52\" y=\"99\" font-size=\"12\">2</text><text x=\"142\" y=\"99\" font-size=\"12\">1</text><text x=\"190\" y=\"99\" font-size=\"12\">0</text><text x=\"266\" y=\"99\" font-size=\"12\">3</text>\n<text x=\"323\" y=\"61\" font-size=\"12\">extra pass</text>\n</svg></span><p>Vi kan tänka de 6 återstående passen som 6 markeringar. Tre streck skiljer de fyra veckorna åt. Bilden visar ett exempel: \\(2,1,0,3\\) extra pass.</p><p>Totalt ska alltså 6 markeringar och 3 streck ordnas. Vi väljer var de tre strecken ska stå bland 9 platser:</p><p>\\[\\binom93=84.\\]</p><p><strong>Det finns 84 möjliga fördelningar.</strong></p>"
+    "s": "<p><strong>Första steget:</strong> Kravet på minst 2 pass per vecka använder \\(4\\cdot2=8\\) pass. Då återstår</p><p>\\[14-8=6\\]</p><p>pass som får fördelas fritt mellan de fyra veckorna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"105\" viewBox=\"0 0 420 122\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Exempel på sex markeringar fördelade i fyra grupper med tre skiljestreck\">\n<rect x=\"10\" y=\"12\" width=\"400\" height=\"96\" rx=\"7\" fill=\"white\" stroke=\"#c7c7c7\"/>\n<circle cx=\"55\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"82\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"112\" y1=\"35\" x2=\"112\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"145\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<line x1=\"178\" y1=\"35\" x2=\"178\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<line x1=\"207\" y1=\"35\" x2=\"207\" y2=\"81\" stroke=\"#333\" stroke-width=\"3\"/>\n<circle cx=\"241\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"268\" cy=\"58\" r=\"8\" fill=\"#555\"/><circle cx=\"295\" cy=\"58\" r=\"8\" fill=\"#555\"/>\n<text x=\"52\" y=\"99\" font-size=\"12\">2</text><text x=\"142\" y=\"99\" font-size=\"12\">1</text><text x=\"190\" y=\"99\" font-size=\"12\">0</text><text x=\"266\" y=\"99\" font-size=\"12\">3</text>\n<text x=\"323\" y=\"61\" font-size=\"12\">extra pass</text>\n</svg></span><p>Vi kan tänka de 6 återstående passen som 6 markeringar. Tre streck skiljer de fyra veckorna åt. Bilden visar ett exempel: \\(2,1,0,3\\) extra pass.</p><p>Totalt ska alltså 6 markeringar och 3 streck ordnas. Vi väljer var de tre strecken ska stå bland 9 platser:</p><p>\\[\\binom93=84.\\]</p><p><strong>Det finns 84 möjliga fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.209",
@@ -7022,7 +8426,9 @@ window.BANKMATF1 = [
     "typ": "fördelning med olika minsta antal",
     "poang": "0/2/0",
     "t": "<p>Ett café ska förbereda 12 portionsskålar av tre sorters frukt: äpple, banan och päron. Minst 1 skål ska vara äpple, minst 2 ska vara banan och minst 3 ska vara päron.</p><p>På hur många sätt kan antalet skålar av de tre sorterna fördelas?</p>",
-    "s": "<p>Vi uppfyller först minimikraven: \\(1+2+3=6\\) skålar. Då återstår 6 skålar att fördela fritt mellan tre sorter.</p><p>Låt de extra antalen vara \\(x,y,z\\). Då</p><p>\\[x+y+z=6\\]</p><p>där variablerna är 0 eller positiva.</p><p>Sex markeringar ska delas i tre grupper med två streck. Därför blir antalet fördelningar</p><p>\\[\\binom{8}{2}=28.\\]</p><p><strong>Svar: 28 fördelningar.</strong></p>"
+    "s": "<p>Vi uppfyller först minimikraven: \\(1+2+3=6\\) skålar. Då återstår 6 skålar att fördela fritt mellan tre sorter.</p><p>Låt de extra antalen vara \\(x,y,z\\). Då</p><p>\\[x+y+z=6\\]</p><p>där variablerna är 0 eller positiva.</p><p>Sex markeringar ska delas i tre grupper med två streck. Därför blir antalet fördelningar</p><p>\\[\\binom{8}{2}=28.\\]</p><p><strong>Svar: 28 fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.210",
@@ -7032,7 +8438,9 @@ window.BANKMATF1 = [
     "typ": "heltalslösningar med två minsta villkor",
     "poang": "0/2/0",
     "t": "<p>Bestäm antalet heltalslösningar till</p><p>\\[x+y+z+w=10\\]</p><p>där alla variabler är 0 eller positiva och dessutom \\(x\\ge2\\) och \\(y\\ge1\\).</p>",
-    "s": "<p>Sätt \\(x=2+a\\) och \\(y=1+b\\), där \\(a,b\\ge0\\). Då blir ekvationen</p><p>\\[a+b+z+w=7.\\]</p><p>Vi ska alltså fördela 7 enheter mellan fyra variabler. Det motsvarar 7 markeringar och 3 streck:</p><p>\\[\\binom{10}{3}=120.\\]</p><p><strong>Det finns 120 lösningar.</strong></p>"
+    "s": "<p>Sätt \\(x=2+a\\) och \\(y=1+b\\), där \\(a,b\\ge0\\). Då blir ekvationen</p><p>\\[a+b+z+w=7.\\]</p><p>Vi ska alltså fördela 7 enheter mellan fyra variabler. Det motsvarar 7 markeringar och 3 streck:</p><p>\\[\\binom{10}{3}=120.\\]</p><p><strong>Det finns 120 lösningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.211",
@@ -7042,7 +8450,9 @@ window.BANKMATF1 = [
     "typ": "heltalslösningar med övre gräns",
     "poang": "0/2/0",
     "t": "<p>Hur många heltalslösningar har</p><p>\\[x+y+z=15\\]</p><p>om \\(x,y,z\\) är 0 eller positiva och \\(x\\le5\\)?</p>",
-    "s": "<p>Utan villkoret \\(x\\le5\\) finns</p><p>\\[\\binom{17}{2}=136\\]</p><p>lösningar.</p><p>Vi tar bort lösningarna där \\(x\\ge6\\). Sätt då \\(x=6+a\\). Ekvationen blir</p><p>\\[a+y+z=9,\\]</p><p>vilket ger</p><p>\\[\\binom{11}{2}=55\\]</p><p>lösningar.</p><p>Alltså återstår</p><p>\\[136-55=81.\\]</p><p><strong>Svar: 81 lösningar.</strong></p>"
+    "s": "<p>Utan villkoret \\(x\\le5\\) finns</p><p>\\[\\binom{17}{2}=136\\]</p><p>lösningar.</p><p>Vi tar bort lösningarna där \\(x\\ge6\\). Sätt då \\(x=6+a\\). Ekvationen blir</p><p>\\[a+y+z=9,\\]</p><p>vilket ger</p><p>\\[\\binom{11}{2}=55\\]</p><p>lösningar.</p><p>Alltså återstår</p><p>\\[136-55=81.\\]</p><p><strong>Svar: 81 lösningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.212",
@@ -7052,7 +8462,9 @@ window.BANKMATF1 = [
     "typ": "fördela identiska föremål med minimikrav",
     "poang": "0/2/0",
     "t": "<p>18 likadana klistermärken ska delas mellan fem barn. Varje barn ska få minst 2 klistermärken.</p><p>På hur många sätt kan antalen fördelas?</p>",
-    "s": "<p>Ge först varje barn 2 klistermärken. Då används 10 och det återstår 8.</p><p>De 8 återstående klistermärkena får fördelas fritt mellan fem barn. Vi behöver därför fyra skiljestreck:</p><p>\\[\\binom{8+4}{4}=\\binom{12}{4}=495.\\]</p><p><strong>Svar: 495 fördelningar.</strong></p>"
+    "s": "<p>Ge först varje barn 2 klistermärken. Då används 10 och det återstår 8.</p><p>De 8 återstående klistermärkena får fördelas fritt mellan fem barn. Vi behöver därför fyra skiljestreck:</p><p>\\[\\binom{8+4}{4}=\\binom{12}{4}=495.\\]</p><p><strong>Svar: 495 fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.213",
@@ -7062,7 +8474,9 @@ window.BANKMATF1 = [
     "typ": "fördelning med övre gräns för en grupp",
     "poang": "0/2/0",
     "t": "<p>Tio likadana rabattkuponger ska fördelas mellan fyra butiker. En bestämd butik får högst 2 kuponger. Övriga butiker får även få 0 kuponger.</p><p>På hur många sätt kan kupongerna fördelas?</p>",
-    "s": "<p>Utan begränsningen finns</p><p>\\[\\binom{13}{3}=286\\]</p><p>fördelningar.</p><p>Vi tar bort de fördelningar där den bestämda butiken får minst 3 kuponger. Lägg först 3 kuponger där. Då återstår 7 kuponger att fördela mellan fyra butiker:</p><p>\\[\\binom{10}{3}=120.\\]</p><p>Antalet tillåtna fördelningar blir</p><p>\\[286-120=166.\\]</p><p><strong>Svar: 166.</strong></p>"
+    "s": "<p>Utan begränsningen finns</p><p>\\[\\binom{13}{3}=286\\]</p><p>fördelningar.</p><p>Vi tar bort de fördelningar där den bestämda butiken får minst 3 kuponger. Lägg först 3 kuponger där. Då återstår 7 kuponger att fördela mellan fyra butiker:</p><p>\\[\\binom{10}{3}=120.\\]</p><p>Antalet tillåtna fördelningar blir</p><p>\\[286-120=166.\\]</p><p><strong>Svar: 166.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.214",
@@ -7072,7 +8486,9 @@ window.BANKMATF1 = [
     "typ": "kombinationer med upprepning och två obligatoriska sorter",
     "poang": "0/2/0",
     "t": "<p>En kund väljer 7 bakverk från fyra sorter. Flera bakverk av samma sort får väljas. Kunden vill ha minst ett kanelbakverk och minst ett chokladbakverk.</p><p>Hur många olika val av antal finns?</p>",
-    "s": "<p>Lägg först undan ett kanelbakverk och ett chokladbakverk. Då återstår 5 bakverk att fördela fritt mellan fyra sorter.</p><p>Fem markeringar och tre skiljestreck ger</p><p>\\[\\binom{8}{3}=56.\\]</p><p><strong>Det finns 56 olika val.</strong></p>"
+    "s": "<p>Lägg först undan ett kanelbakverk och ett chokladbakverk. Då återstår 5 bakverk att fördela fritt mellan fyra sorter.</p><p>Fem markeringar och tre skiljestreck ger</p><p>\\[\\binom{8}{3}=56.\\]</p><p><strong>Det finns 56 olika val.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.215",
@@ -7082,7 +8498,9 @@ window.BANKMATF1 = [
     "typ": "poängfördelning med minimi- och maximivillkor",
     "poang": "0/2/0",
     "t": "<p>En bedömning består av fyra delområden. Totalt ska 14 poäng fördelas mellan delområdena. Varje delområde ska få minst 2 poäng och det första delområdet får högst 5 poäng.</p><p>På hur många sätt kan poängtalen fördelas?</p>",
-    "s": "<p>Ge först varje delområde 2 poäng. Då återstår 6 poäng att fördela.</p><p>Låt de extra poängen vara \\(x_1,x_2,x_3,x_4\\). Då</p><p>\\[x_1+x_2+x_3+x_4=6.\\]</p><p>Utan maxvillkoret finns \\(\\binom93=84\\) fördelningar.</p><p>Det första delområdet får högst 5 poäng totalt, alltså högst 3 extra poäng. Vi tar därför bort fallen \\(x_1\\ge4\\). Sätt \\(x_1=4+y\\). Då återstår</p><p>\\[y+x_2+x_3+x_4=2,\\]</p><p>vilket ger \\(\\binom53=10\\) fall.</p><p>Alltså</p><p>\\[84-10=74.\\]</p><p><strong>Svar: 74 fördelningar.</strong></p>"
+    "s": "<p>Ge först varje delområde 2 poäng. Då återstår 6 poäng att fördela.</p><p>Låt de extra poängen vara \\(x_1,x_2,x_3,x_4\\). Då</p><p>\\[x_1+x_2+x_3+x_4=6.\\]</p><p>Utan maxvillkoret finns \\(\\binom93=84\\) fördelningar.</p><p>Det första delområdet får högst 5 poäng totalt, alltså högst 3 extra poäng. Vi tar därför bort fallen \\(x_1\\ge4\\). Sätt \\(x_1=4+y\\). Då återstår</p><p>\\[y+x_2+x_3+x_4=2,\\]</p><p>vilket ger \\(\\binom53=10\\) fall.</p><p>Alltså</p><p>\\[84-10=74.\\]</p><p><strong>Svar: 74 fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.216",
@@ -7092,7 +8510,9 @@ window.BANKMATF1 = [
     "typ": "välja grupp med minst två från varje kategori",
     "poang": "0/2/0",
     "t": "<p>En arbetsgrupp med 5 personer ska väljas bland 7 personer från avdelning A och 6 personer från avdelning B. Gruppen ska innehålla minst 2 personer från vardera avdelningen.</p><p>Hur många grupper är möjliga?</p>",
-    "s": "<p>Med 5 personer och minst 2 från varje avdelning finns bara två möjliga fördelningar:</p><p>2 från A och 3 från B, eller 3 från A och 2 från B.</p><p>Därför</p><p>\\[\\binom72\\binom63+\\binom73\\binom62\\]</p><p>\\[=21\\cdot20+35\\cdot15=420+525=945.\\]</p><p><strong>Svar: 945 grupper.</strong></p>"
+    "s": "<p>Med 5 personer och minst 2 från varje avdelning finns bara två möjliga fördelningar:</p><p>2 från A och 3 från B, eller 3 från A och 2 från B.</p><p>Därför</p><p>\\[\\binom72\\binom63+\\binom73\\binom62\\]</p><p>\\[=21\\cdot20+35\\cdot15=420+525=945.\\]</p><p><strong>Svar: 945 grupper.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.217",
@@ -7102,7 +8522,9 @@ window.BANKMATF1 = [
     "typ": "välja provuppgifter med flera kategorivillkor",
     "poang": "0/3/0",
     "t": "<p>Ett prov ska innehålla 6 uppgifter. Läraren kan välja bland 5 algebrauppgifter, 4 kombinatorikuppgifter och 3 talteoriuppgifter.</p><p>Provet ska innehålla minst 2 kombinatorikuppgifter och minst 1 talteoriuppgift. Hur många olika prov kan skapas om ordningen inte spelar roll?</p>",
-    "s": "<p>Vi delar upp efter hur många kombinatorikuppgifter och talteoriuppgifter som väljs. De möjliga fördelningarna \\((A,K,T)\\) är</p><p>\\[(3,2,1),(2,2,2),(1,2,3),(2,3,1),(1,3,2),(0,3,3),(1,4,1),(0,4,2).\\]</p><p>För varje fördelning väljer vi uppgifter inom respektive kategori och adderar fallen:</p><p>\\[\\binom53\\binom42\\binom31+\\binom52\\binom42\\binom32+\\binom51\\binom42\\binom33\\]</p><p>\\[+\\binom52\\binom43\\binom31+\\binom51\\binom43\\binom32+\\binom50\\binom43\\binom33\\]</p><p>\\[+\\binom51\\binom44\\binom31+\\binom50\\binom44\\binom32=592.\\]</p><p><strong>Svar: 592 olika prov.</strong></p>"
+    "s": "<p>Vi delar upp efter hur många kombinatorikuppgifter och talteoriuppgifter som väljs. De möjliga fördelningarna \\((A,K,T)\\) är</p><p>\\[(3,2,1),(2,2,2),(1,2,3),(2,3,1),(1,3,2),(0,3,3),(1,4,1),(0,4,2).\\]</p><p>För varje fördelning väljer vi uppgifter inom respektive kategori och adderar fallen:</p><p>\\[\\binom53\\binom42\\binom31+\\binom52\\binom42\\binom32+\\binom51\\binom42\\binom33\\]</p><p>\\[+\\binom52\\binom43\\binom31+\\binom51\\binom43\\binom32+\\binom50\\binom43\\binom33\\]</p><p>\\[+\\binom51\\binom44\\binom31+\\binom50\\binom44\\binom32=592.\\]</p><p><strong>Svar: 592 olika prov.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.218",
@@ -7112,7 +8534,9 @@ window.BANKMATF1 = [
     "typ": "ordna bokstäver med upprepning och vokaler tillsammans",
     "poang": "0/2/0",
     "t": "<p>Hur många olika ord kan bildas av alla bokstäver i <strong>MATEMATIK</strong> om alla vokaler ska stå tillsammans?</p>",
-    "s": "<p>Vokalerna är A, A, E och I. Betrakta dem först som ett block.</p><p>Då ska följande sex objekt ordnas:</p><p>vokalblocket, M, M, T, T, K.</p><p>Eftersom M och T förekommer två gånger vardera blir antalet yttre ordningar</p><p>\\[\\frac{6!}{2!2!}=180.\\]</p><p>Inne i vokalblocket kan A, A, E och I ordnas på</p><p>\\[\\frac{4!}{2!}=12\\]</p><p>sätt.</p><p>Multiplikationsprincipen ger</p><p>\\[180\\cdot12=2160.\\]</p><p><strong>Svar: 2160 ord.</strong></p>"
+    "s": "<p>Vokalerna är A, A, E och I. Betrakta dem först som ett block.</p><p>Då ska följande sex objekt ordnas:</p><p>vokalblocket, M, M, T, T, K.</p><p>Eftersom M och T förekommer två gånger vardera blir antalet yttre ordningar</p><p>\\[\\frac{6!}{2!2!}=180.\\]</p><p>Inne i vokalblocket kan A, A, E och I ordnas på</p><p>\\[\\frac{4!}{2!}=12\\]</p><p>sätt.</p><p>Multiplikationsprincipen ger</p><p>\\[180\\cdot12=2160.\\]</p><p><strong>Svar: 2160 ord.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.219",
@@ -7122,7 +8546,9 @@ window.BANKMATF1 = [
     "typ": "ordna böcker med två blockvillkor",
     "poang": "0/2/0",
     "t": "<p>På en hylla ska 8 olika böcker ställas i rad. Tre bestämda matematikböcker ska stå tillsammans och två bestämda fysikböcker ska också stå tillsammans.</p><p>På hur många sätt kan böckerna ordnas?</p>",
-    "s": "<p>Se de tre matematikböckerna som ett block och de två fysikböckerna som ett annat block.</p><p>Tillsammans med de tre återstående böckerna har vi då 5 objekt att ordna:</p><p>\\[5!\\]</p><p>Matematikböckerna kan ordnas inom sitt block på \\(3!\\) sätt och fysikböckerna på \\(2!\\) sätt.</p><p>Totalt</p><p>\\[5!\\cdot3!\\cdot2!=120\\cdot6\\cdot2=1440.\\]</p><p><strong>Svar: 1440 ordningar.</strong></p>"
+    "s": "<p>Se de tre matematikböckerna som ett block och de två fysikböckerna som ett annat block.</p><p>Tillsammans med de tre återstående böckerna har vi då 5 objekt att ordna:</p><p>\\[5!\\]</p><p>Matematikböckerna kan ordnas inom sitt block på \\(3!\\) sätt och fysikböckerna på \\(2!\\) sätt.</p><p>Totalt</p><p>\\[5!\\cdot3!\\cdot2!=120\\cdot6\\cdot2=1440.\\]</p><p><strong>Svar: 1440 ordningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.220",
@@ -7132,7 +8558,9 @@ window.BANKMATF1 = [
     "typ": "välja platser utan grannar och placera personer",
     "poang": "0/3/0",
     "t": "<span class=\"fig smal\"><svg width=\"380\" height=\"105\" viewBox=\"0 0 420 116\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"En rad med tio numrerade sittplatser\">\n<rect x=\"8\" y=\"10\" width=\"404\" height=\"92\" rx=\"7\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"22\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"37\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">1</text><rect x=\"60\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"75\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">2</text><rect x=\"98\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"113\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">3</text><rect x=\"136\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"151\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">4</text><rect x=\"174\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"189\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">5</text><rect x=\"212\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"227\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">6</text><rect x=\"250\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"265\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">7</text><rect x=\"288\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"303\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">8</text><rect x=\"326\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"341\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">9</text><rect x=\"364\" y=\"35\" width=\"30\" height=\"34\" rx=\"5\" fill=\"white\" stroke=\"#555\" stroke-width=\"1.6\"/><text x=\"379\" y=\"57\" text-anchor=\"middle\" font-size=\"12\">10</text></svg></span><p>Fyra olika elever ska placeras på fyra av de tio stolarna. Ingen av de använda stolarna får ligga bredvid en annan använd stol.</p><p>På hur många sätt kan eleverna placeras?</p>",
-    "s": "<p><strong>Steg 1: välj stolarna.</strong> Antalet sätt att välja 4 platser bland 10 utan att två valda platser ligger intill varandra är</p><p>\\[\\binom{10-4+1}{4}=\\binom74=35.\\]</p><p>Ett sätt att förstå formeln är att först tänka en tom stol mellan varje par valda stolar. Då återstår 7 möjliga lägen för de 4 valda stolarna.</p><p><strong>Steg 2: placera eleverna.</strong> De fyra olika eleverna kan ordnas på de valda stolarna på</p><p>\\[4!=24\\]</p><p>sätt.</p><p>Totalt</p><p>\\[35\\cdot24=840.\\]</p><p><strong>Svar: 840 placeringar.</strong></p>"
+    "s": "<p><strong>Steg 1: välj stolarna.</strong> Antalet sätt att välja 4 platser bland 10 utan att två valda platser ligger intill varandra är</p><p>\\[\\binom{10-4+1}{4}=\\binom74=35.\\]</p><p>Ett sätt att förstå formeln är att först tänka en tom stol mellan varje par valda stolar. Då återstår 7 möjliga lägen för de 4 valda stolarna.</p><p><strong>Steg 2: placera eleverna.</strong> De fyra olika eleverna kan ordnas på de valda stolarna på</p><p>\\[4!=24\\]</p><p>sätt.</p><p>Totalt</p><p>\\[35\\cdot24=840.\\]</p><p><strong>Svar: 840 placeringar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.221",
@@ -7142,7 +8570,9 @@ window.BANKMATF1 = [
     "typ": "kod med exakt antal ettor utan angränsande ettor",
     "poang": "0/2/0",
     "t": "<p>En kod består av åtta tecken, där varje tecken är 0 eller 1. Koden ska innehålla exakt tre ettor och inga två ettor får stå bredvid varandra.</p><p>Hur många sådana koder finns?</p>",
-    "s": "<p>Vi ska välja tre positioner bland åtta, men inga två får vara intill varandra.</p><p>För tre valda positioner behövs minst två mellanrum mellan ettorna. Standardräkningen för 3 icke angränsande positioner bland 8 ger</p><p>\\[\\binom{8-3+1}{3}=\\binom63=20.\\]</p><p><strong>Det finns 20 koder.</strong></p>"
+    "s": "<p>Vi ska välja tre positioner bland åtta, men inga två får vara intill varandra.</p><p>För tre valda positioner behövs minst två mellanrum mellan ettorna. Standardräkningen för 3 icke angränsande positioner bland 8 ger</p><p>\\[\\binom{8-3+1}{3}=\\binom63=20.\\]</p><p><strong>Det finns 20 koder.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.222",
@@ -7152,7 +8582,9 @@ window.BANKMATF1 = [
     "typ": "kod med exakta typer av tecken utan upprepning",
     "poang": "0/2/0",
     "t": "<p>En kod består av 6 tecken. Exakt 2 tecken ska vara bokstäver och övriga 4 ska vara siffror. Bokstäverna väljs bland A, B, C, D och E. Inget tecken får upprepas.</p><p>Hur många koder är möjliga?</p>",
-    "s": "<p>Välj först vilka 2 av kodens 6 positioner som ska innehålla bokstäver:</p><p>\\[\\binom62=15.\\]</p><p>De två olika bokstäverna kan väljas och ordnas på</p><p>\\[5\\cdot4=20\\]</p><p>sätt.</p><p>De fyra olika siffrorna kan väljas och ordnas på</p><p>\\[10\\cdot9\\cdot8\\cdot7=5040\\]</p><p>sätt.</p><p>Totalt</p><p>\\[15\\cdot20\\cdot5040=1\\,512\\,000.\\]</p><p><strong>Svar: 1 512 000 koder.</strong></p>"
+    "s": "<p>Välj först vilka 2 av kodens 6 positioner som ska innehålla bokstäver:</p><p>\\[\\binom62=15.\\]</p><p>De två olika bokstäverna kan väljas och ordnas på</p><p>\\[5\\cdot4=20\\]</p><p>sätt.</p><p>De fyra olika siffrorna kan väljas och ordnas på</p><p>\\[10\\cdot9\\cdot8\\cdot7=5040\\]</p><p>sätt.</p><p>Totalt</p><p>\\[15\\cdot20\\cdot5040=1\\,512\\,000.\\]</p><p><strong>Svar: 1 512 000 koder.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.223",
@@ -7162,7 +8594,9 @@ window.BANKMATF1 = [
     "typ": "registreringskod med minst en vokal och utan upprepning",
     "poang": "0/3/0",
     "t": "<p>En kod består av tre bokstäver följda av tre siffror. Inga bokstäver får upprepas och inga siffror får upprepas. Bland de 26 bokstäverna räknas A, E, I, O och U som vokaler.</p><p>Hur många koder innehåller minst en vokal?</p>",
-    "s": "<p>Det är enklast att använda komplementmetoden.</p><p>Alla ordnade val av tre olika bokstäver:</p><p>\\[26\\cdot25\\cdot24=15600.\\]</p><p>Det finns 21 icke-vokaler. Koder utan någon vokal har därför</p><p>\\[21\\cdot20\\cdot19=7980\\]</p><p>möjliga bokstavsdelar.</p><p>Med minst en vokal återstår</p><p>\\[15600-7980=7620\\]</p><p>bokstavsdelar.</p><p>Sifferdelen kan bildas på</p><p>\\[10\\cdot9\\cdot8=720\\]</p><p>sätt.</p><p>Totalt</p><p>\\[7620\\cdot720=5\\,486\\,400.\\]</p><p><strong>Svar: 5 486 400 koder.</strong></p>"
+    "s": "<p>Det är enklast att använda komplementmetoden.</p><p>Alla ordnade val av tre olika bokstäver:</p><p>\\[26\\cdot25\\cdot24=15600.\\]</p><p>Det finns 21 icke-vokaler. Koder utan någon vokal har därför</p><p>\\[21\\cdot20\\cdot19=7980\\]</p><p>möjliga bokstavsdelar.</p><p>Med minst en vokal återstår</p><p>\\[15600-7980=7620\\]</p><p>bokstavsdelar.</p><p>Sifferdelen kan bildas på</p><p>\\[10\\cdot9\\cdot8=720\\]</p><p>sätt.</p><p>Totalt</p><p>\\[7620\\cdot720=5\\,486\\,400.\\]</p><p><strong>Svar: 5 486 400 koder.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.224",
@@ -7172,7 +8606,9 @@ window.BANKMATF1 = [
     "typ": "kod med exakt två bestämda tecken utan att de står intill",
     "poang": "0/2/0",
     "t": "<p>En kod består av 6 bokstäver. Varje position får innehålla A, B, C eller D och upprepning är tillåten. Koden ska innehålla exakt två A, och de två A:na får inte stå bredvid varandra.</p><p>Hur många koder finns?</p>",
-    "s": "<p>Först väljer vi två positioner för A som inte ligger intill varandra. Antalet sådana val bland 6 positioner är</p><p>\\[\\binom{6-2+1}{2}=\\binom52=10.\\]</p><p>På de fyra återstående positionerna får vi välja B, C eller D fritt:</p><p>\\[3^4=81.\\]</p><p>Multiplikationsprincipen ger</p><p>\\[10\\cdot81=810.\\]</p><p><strong>Svar: 810 koder.</strong></p>"
+    "s": "<p>Först väljer vi två positioner för A som inte ligger intill varandra. Antalet sådana val bland 6 positioner är</p><p>\\[\\binom{6-2+1}{2}=\\binom52=10.\\]</p><p>På de fyra återstående positionerna får vi välja B, C eller D fritt:</p><p>\\[3^4=81.\\]</p><p>Multiplikationsprincipen ger</p><p>\\[10\\cdot81=810.\\]</p><p><strong>Svar: 810 koder.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.225",
@@ -7182,7 +8618,9 @@ window.BANKMATF1 = [
     "typ": "prispall med förbjudet par",
     "poang": "0/2/0",
     "t": "<p>Åtta löpare deltar i ett lopp. Guld, silver och brons ska delas ut. Två bestämda löpare, A och B, får av en särskild anledning inte båda finnas på prispallen.</p><p>Hur många möjliga prispallar finns?</p>",
-    "s": "<p>Utan begränsningen finns</p><p>\\[8\\cdot7\\cdot6=336\\]</p><p>ordnade prispallar.</p><p>Räkna de förbjudna fallen: A och B är båda med. Den tredje personen väljs bland de övriga 6 och de tre personerna kan ordnas på prispallen på \\(3!\\) sätt:</p><p>\\[6\\cdot3!=36.\\]</p><p>Tillåtna prispallar:</p><p>\\[336-36=300.\\]</p><p><strong>Svar: 300.</strong></p>"
+    "s": "<p>Utan begränsningen finns</p><p>\\[8\\cdot7\\cdot6=336\\]</p><p>ordnade prispallar.</p><p>Räkna de förbjudna fallen: A och B är båda med. Den tredje personen väljs bland de övriga 6 och de tre personerna kan ordnas på prispallen på \\(3!\\) sätt:</p><p>\\[6\\cdot3!=36.\\]</p><p>Tillåtna prispallar:</p><p>\\[336-36=300.\\]</p><p><strong>Svar: 300.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.226",
@@ -7192,7 +8630,9 @@ window.BANKMATF1 = [
     "typ": "kortkombination med exakt antal hjärter och kungar",
     "poang": "0/3/0",
     "t": "<p>Ur en vanlig kortlek med 52 kort väljs 5 kort utan hänsyn till ordning.</p><p>Hur många femkortshänder innehåller exakt 2 hjärter och exakt 1 kung?</p>",
-    "s": "<p>Vi måste skilja på två fall eftersom hjärter kung både är hjärter och kung.</p><p><strong>Fall 1: hjärter kung är med.</strong> Välj ytterligare 1 hjärter bland de 12 hjärter som inte är kung och 3 kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[12\\binom{36}{3}=85\\,680.\\]</p><p><strong>Fall 2: den enda kungen är inte hjärter kung.</strong> Välj 1 av de 3 kungarna utanför hjärter, 2 hjärter bland de 12 hjärter som inte är kung och 2 övriga kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[3\\binom{12}{2}\\binom{36}{2}=124\\,740.\\]</p><p>Totalt</p><p>\\[85\\,680+124\\,740=210\\,420.\\]</p><p><strong>Svar: 210 420 händer.</strong></p>"
+    "s": "<p>Vi måste skilja på två fall eftersom hjärter kung både är hjärter och kung.</p><p><strong>Fall 1: hjärter kung är med.</strong> Välj ytterligare 1 hjärter bland de 12 hjärter som inte är kung och 3 kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[12\\binom{36}{3}=85\\,680.\\]</p><p><strong>Fall 2: den enda kungen är inte hjärter kung.</strong> Välj 1 av de 3 kungarna utanför hjärter, 2 hjärter bland de 12 hjärter som inte är kung och 2 övriga kort bland de 36 kort som varken är hjärter eller kung:</p><p>\\[3\\binom{12}{2}\\binom{36}{2}=124\\,740.\\]</p><p>Totalt</p><p>\\[85\\,680+124\\,740=210\\,420.\\]</p><p><strong>Svar: 210 420 händer.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.227",
@@ -7202,7 +8642,9 @@ window.BANKMATF1 = [
     "typ": "kortprobabilitet med minst ett ess och minst en kung",
     "poang": "0/3/0",
     "t": "<p>Fem kort dras slumpmässigt ur en vanlig kortlek med 52 kort.</p><p>Bestäm sannolikheten att handen innehåller minst ett ess och minst en kung.</p>",
-    "s": "<p>Totalt finns \\(\\binom{52}{5}\\) femkortshänder.</p><p>Vi använder komplement och additionsprincipen. Från alla händer tar vi bort händer utan ess och händer utan kung, men då har händer utan både ess och kung tagits bort två gånger och måste läggas tillbaka:</p><p>\\[N=\\binom{52}{5}-2\\binom{48}{5}+\\binom{44}{5}=260\\,360.\\]</p><p>Sannolikheten blir</p><p>\\[P=\\frac{260360}{\\binom{52}{5}}\\approx0,1002.\\]</p><p><strong>Sannolikheten är cirka 10,0 %.</strong></p>"
+    "s": "<p>Totalt finns \\(\\binom{52}{5}\\) femkortshänder.</p><p>Vi använder komplement och additionsprincipen. Från alla händer tar vi bort händer utan ess och händer utan kung, men då har händer utan både ess och kung tagits bort två gånger och måste läggas tillbaka:</p><p>\\[N=\\binom{52}{5}-2\\binom{48}{5}+\\binom{44}{5}=260\\,360.\\]</p><p>Sannolikheten blir</p><p>\\[P=\\frac{260360}{\\binom{52}{5}}\\approx0,1002.\\]</p><p><strong>Sannolikheten är cirka 10,0 %.</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "1.228",
@@ -7212,7 +8654,9 @@ window.BANKMATF1 = [
     "typ": "kortaste vägar i rutnät med förbjuden punkt",
     "poang": "0/3/0",
     "t": "<span class=\"fig smal\"><svg width=\"330\" height=\"270\" viewBox=\"0 0 350 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rutnät med startpunkten A, slutpunkten B och punkten P\">\n<rect x=\"12\" y=\"12\" width=\"326\" height=\"252\" rx=\"7\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"45\" y1=\"45\" x2=\"45\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"95\" y1=\"45\" x2=\"95\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"145\" y1=\"45\" x2=\"145\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"195\" y1=\"45\" x2=\"195\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"245\" y1=\"45\" x2=\"245\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"295\" y1=\"45\" x2=\"295\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"225\" x2=\"295\" y2=\"225\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"180\" x2=\"295\" y2=\"180\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"135\" x2=\"295\" y2=\"135\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"90\" x2=\"295\" y2=\"90\" stroke=\"#aaa\" stroke-width=\"1\"/><line x1=\"45\" y1=\"45\" x2=\"295\" y2=\"45\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<circle cx=\"45\" cy=\"225\" r=\"5\" fill=\"#333\"/><text x=\"24\" y=\"232\" font-size=\"15\">A</text>\n<circle cx=\"295\" cy=\"45\" r=\"5\" fill=\"#333\"/><text x=\"304\" y=\"50\" font-size=\"15\">B</text>\n<circle cx=\"145\" cy=\"180\" r=\"6\" fill=\"#b45f32\"/><text x=\"154\" y=\"172\" font-size=\"15\">P</text>\n<text x=\"56\" y=\"255\" font-size=\"12\">endast åt höger eller uppåt</text>\n</svg></span><p>Från A till B ska man gå en kortaste väg i rutnätet. Man får bara gå åt höger eller uppåt. Punkten P får inte passeras.</p><p>Hur många kortaste vägar finns?</p>",
-    "s": "<p>Från A till B krävs 5 steg åt höger och 4 steg uppåt, totalt 9 steg. Utan begränsning finns</p><p>\\[\\binom94=126\\]</p><p>kortaste vägar.</p><p>Räkna sedan vägarna som passerar P. Från A till P krävs 2 steg åt höger och 1 upp:</p><p>\\[\\binom31=3.\\]</p><p>Från P till B krävs 3 steg åt höger och 3 upp:</p><p>\\[\\binom63=20.\\]</p><p>Alltså passerar</p><p>\\[3\\cdot20=60\\]</p><p>vägar P.</p><p>Antalet tillåtna vägar är därför</p><p>\\[126-60=66.\\]</p><p><strong>Svar: 66 vägar.</strong></p>"
+    "s": "<p>Från A till B krävs 5 steg åt höger och 4 steg uppåt, totalt 9 steg. Utan begränsning finns</p><p>\\[\\binom94=126\\]</p><p>kortaste vägar.</p><p>Räkna sedan vägarna som passerar P. Från A till P krävs 2 steg åt höger och 1 upp:</p><p>\\[\\binom31=3.\\]</p><p>Från P till B krävs 3 steg åt höger och 3 upp:</p><p>\\[\\binom63=20.\\]</p><p>Alltså passerar</p><p>\\[3\\cdot20=60\\]</p><p>vägar P.</p><p>Antalet tillåtna vägar är därför</p><p>\\[126-60=66.\\]</p><p><strong>Svar: 66 vägar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.229",
@@ -7222,7 +8666,9 @@ window.BANKMATF1 = [
     "typ": "fördela olika uppgifter så att alla får minst en",
     "poang": "0/3/0",
     "t": "<p>Sex olika laboratorieuppgifter ska fördelas mellan tre elever. Varje uppgift tilldelas exakt en elev och varje elev måste få minst en uppgift.</p><p>På hur många sätt kan uppgifterna fördelas?</p>",
-    "s": "<p>Utan kravet kan varje av de 6 uppgifterna tilldelas någon av 3 elever:</p><p>\\[3^6=729.\\]</p><p>Vi tar bort fördelningar där minst en elev inte får någon uppgift. Om en bestämd elev saknas kan varje uppgift gå till någon av de två andra:</p><p>\\[2^6=64.\\]</p><p>Det finns 3 val av den elev som saknas, så vi drar bort \\(3\\cdot64\\).</p><p>Fördelningar där två bestämda elever saknas har då dragits bort två gånger. Det finns 3 sådana fall, ett för varje elev som får alla uppgifter, så de läggs tillbaka:</p><p>\\[729-3\\cdot64+3=540.\\]</p><p><strong>Svar: 540 fördelningar.</strong></p>"
+    "s": "<p>Utan kravet kan varje av de 6 uppgifterna tilldelas någon av 3 elever:</p><p>\\[3^6=729.\\]</p><p>Vi tar bort fördelningar där minst en elev inte får någon uppgift. Om en bestämd elev saknas kan varje uppgift gå till någon av de två andra:</p><p>\\[2^6=64.\\]</p><p>Det finns 3 val av den elev som saknas, så vi drar bort \\(3\\cdot64\\).</p><p>Fördelningar där två bestämda elever saknas har då dragits bort två gånger. Det finns 3 sådana fall, ett för varje elev som får alla uppgifter, så de läggs tillbaka:</p><p>\\[729-3\\cdot64+3=540.\\]</p><p><strong>Svar: 540 fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.230",
@@ -7232,7 +8678,9 @@ window.BANKMATF1 = [
     "typ": "fördela identiska objekt med både minimi- och maximivillkor",
     "poang": "0/2/0",
     "t": "<p>Åtta likadana kulor ska läggas i fyra märkta lådor A, B, C och D. Ingen låda får vara tom och låda A får innehålla högst 3 kulor.</p><p>På hur många sätt kan antalen fördelas?</p>",
-    "s": "<p>Lägg först en kula i varje låda. Då återstår 4 kulor att fördela fritt. Sätt \\(x_A,x_B,x_C,x_D\\) till antalet extra kulor. Då</p><p>\\[x_A+x_B+x_C+x_D=4.\\]</p><p>Utan maxvillkoret finns</p><p>\\[\\binom73=35\\]</p><p>fördelningar.</p><p>Låda A får högst 3 kulor totalt, alltså högst 2 extra. Vi tar bort fallen \\(x_A\\ge3\\). Lägg 3 extra kulor i A; då återstår 1 extra kula att placera mellan fyra lådor:</p><p>\\[\\binom43=4.\\]</p><p>Alltså</p><p>\\[35-4=31.\\]</p><p><strong>Svar: 31 fördelningar.</strong></p>"
+    "s": "<p>Lägg först en kula i varje låda. Då återstår 4 kulor att fördela fritt. Sätt \\(x_A,x_B,x_C,x_D\\) till antalet extra kulor. Då</p><p>\\[x_A+x_B+x_C+x_D=4.\\]</p><p>Utan maxvillkoret finns</p><p>\\[\\binom73=35\\]</p><p>fördelningar.</p><p>Låda A får högst 3 kulor totalt, alltså högst 2 extra. Vi tar bort fallen \\(x_A\\ge3\\). Lägg 3 extra kulor i A; då återstår 1 extra kula att placera mellan fyra lådor:</p><p>\\[\\binom43=4.\\]</p><p>Alltså</p><p>\\[35-4=31.\\]</p><p><strong>Svar: 31 fördelningar.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "1.231",
@@ -7242,7 +8690,9 @@ window.BANKMATF1 = [
     "typ": "välja styrelse med minimi- och maximivillkor",
     "poang": "0/2/0",
     "t": "<p>En styrelse med 5 personer ska väljas bland 9 anställda. Tre av de anställda är chefer. Styrelsen ska innehålla minst 1 men högst 2 chefer.</p><p>Hur många styrelser är möjliga?</p>",
-    "s": "<p>Vi delar upp i två fall.</p><p><strong>Exakt 1 chef:</strong></p><p>\\[\\binom31\\binom64=3\\cdot15=45.\\]</p><p><strong>Exakt 2 chefer:</strong></p><p>\\[\\binom32\\binom63=3\\cdot20=60.\\]</p><p>Fallen kan inte överlappa, så vi adderar:</p><p>\\[45+60=105.\\]</p><p><strong>Svar: 105 styrelser.</strong></p>"
+    "s": "<p>Vi delar upp i två fall.</p><p><strong>Exakt 1 chef:</strong></p><p>\\[\\binom31\\binom64=3\\cdot15=45.\\]</p><p><strong>Exakt 2 chefer:</strong></p><p>\\[\\binom32\\binom63=3\\cdot20=60.\\]</p><p>Fallen kan inte överlappa, så vi adderar:</p><p>\\[45+60=105.\\]</p><p><strong>Svar: 105 styrelser.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "3.110",
@@ -7252,7 +8702,9 @@ window.BANKMATF1 = [
     "typ": "relaterad förändringshastighet för kvadrat via diagonal",
     "poang": "2/0/0",
     "t": "<span class=\"fig smal\"><svg width=\"240\" height=\"190\" viewBox=\"0 0 260 210\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kvadrat med diagonal d\">\n<rect x=\"10\" y=\"10\" width=\"240\" height=\"190\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"70\" y=\"50\" width=\"110\" height=\"110\" fill=\"#eef6ff\" stroke=\"#2c62a8\" stroke-width=\"2.5\"/>\n<line x1=\"70\" y1=\"160\" x2=\"180\" y2=\"50\" stroke=\"#b45f32\" stroke-width=\"2.4\"/>\n<text x=\"122\" y=\"101\" font-size=\"14\" fill=\"#7a3d19\">d</text>\n</svg></span><p>En kvadrats diagonal \\(d\\) ökar med 0,80 cm/s. Hur snabbt ökar kvadratens area när diagonalen är 10 cm?</p>",
-    "s": "<p>För en kvadrat gäller \\(A=\\frac{d^2}{2}\\), eftersom \\(d=s\\sqrt2\\).</p><p>Derivera:</p><p>\\[\\frac{dA}{dt}=d\\frac{dd}{dt}.\\]</p><p>Sätt in \\(d=10\\) cm och \\(dd/dt=0,80\\) cm/s:</p><p>\\[\\frac{dA}{dt}=10\\cdot0,80=8,0.\\]</p><p><strong>Svar: arean ökar med \\(8,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>"
+    "s": "<p>För en kvadrat gäller \\(A=\\frac{d^2}{2}\\), eftersom \\(d=s\\sqrt2\\).</p><p>Derivera:</p><p>\\[\\frac{dA}{dt}=d\\frac{dd}{dt}.\\]</p><p>Sätt in \\(d=10\\) cm och \\(dd/dt=0,80\\) cm/s:</p><p>\\[\\frac{dA}{dt}=10\\cdot0,80=8,0.\\]</p><p><strong>Svar: arean ökar med \\(8,0\\ \\text{cm}^2/\\text{s}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.111",
@@ -7261,8 +8713,10 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "cylinder med känt inflöde",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"200\" viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med konstant radie\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"200\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<ellipse cx=\"145\" cy=\"55\" rx=\"52\" ry=\"16\" fill=\"#f8fbff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"93\" y1=\"55\" x2=\"93\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"197\" y1=\"55\" x2=\"197\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<ellipse cx=\"145\" cy=\"165\" rx=\"52\" ry=\"16\" fill=\"#eef6ff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"145\" y1=\"165\" x2=\"145\" y2=\"55\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<text x=\"154\" y=\"111\" font-size=\"14\">h</text>\n<line x1=\"145\" y1=\"55\" x2=\"193\" y2=\"55\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"205\" y=\"52\" font-size=\"13\">r = 2 dm</text>\n</svg></span><p>En cylindrisk behållare har konstant radie 2 dm. Volymen ökar med 1,6 dm³/min.</p><p>Hur snabbt stiger vätskenivån?</p>",
-    "s": "<p>Volymen av en cylinder är \\(V=\\pi r^2h\\). Här är \\(r=2\\) dm konstant, så</p><p>\\[V=4\\pi h.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Sätt in \\(dV/dt=1,6\\) dm³/min:</p><p>\\[1,6=4\\pi\\frac{dh}{dt}\\Rightarrow \\frac{dh}{dt}=\\frac{0,4}{\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{0,4}{\\pi}\\ \\text{dm/min}\\approx0,127\\ \\text{dm/min}\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"270\" height=\"200\" viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med konstant radie\">\n<rect x=\"10\" y=\"10\" width=\"280\" height=\"200\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<ellipse cx=\"145\" cy=\"55\" rx=\"52\" ry=\"16\" fill=\"#f8fbff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"93\" y1=\"55\" x2=\"93\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"197\" y1=\"55\" x2=\"197\" y2=\"165\" stroke=\"#555\" stroke-width=\"2\"/>\n<ellipse cx=\"145\" cy=\"165\" rx=\"52\" ry=\"16\" fill=\"#eef6ff\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"145\" y1=\"165\" x2=\"145\" y2=\"55\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<text x=\"154\" y=\"111\" font-size=\"14\">h</text>\n<line x1=\"145\" y1=\"55\" x2=\"193\" y2=\"55\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"153\" y=\"47\" font-size=\"13\">r = 2 dm</text>\n</svg></span><p>En cylindrisk behållare har konstant radie 2 dm. Volymen ökar med 1,6 dm³/min.</p><p>Hur snabbt stiger vätskenivån?</p>",
+    "s": "<p>Volymen av en cylinder är \\(V=\\pi r^2h\\). Här är \\(r=2\\) dm konstant, så</p><p>\\[V=4\\pi h.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi\\frac{dh}{dt}.\\]</p><p>Sätt in \\(dV/dt=1,6\\) dm³/min:</p><p>\\[1,6=4\\pi\\frac{dh}{dt}\\Rightarrow \\frac{dh}{dt}=\\frac{0,4}{\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{0,4}{\\pi}\\ \\text{dm/min}\\approx0,127\\ \\text{dm/min}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.112",
@@ -7271,8 +8725,10 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "relaterade förändringshastigheter två fordon ny variant",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"250\" y=\"90\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"176\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två vägar korsar varandra vinkelrätt. En buss är 500 m väster om korsningen och kör österut med 72 km/h. En lastbil är 1200 m norr om korsningen och kör norrut. I detta ögonblick ökar avståndet mellan dem med 84 km/h.</p><p>Bestäm lastbilens hastighet.</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">x</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">y</text>\n<text x=\"250\" y=\"90\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"176\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Vi räknar i km. Låt \\(x\\) vara bussens avstånd till korsningen och \\(y\\) lastbilens avstånd till korsningen. Då är \\(x=0,5\\), \\(y=1,2\\).</p><p>Bussen närmar sig korsningen, så \\(x'=-72\\). Lastbilen kör bort från korsningen, så \\(y'=v\\). Avståndet mellan dem betecknas \\(s\\), och \\(s'=84\\).</p><p>Pythagoras ger \\(s^2=x^2+y^2\\), alltså \\(ss'=xx'+yy'\\).</p><p>Först är \\(s=\\sqrt{0,5^2+1,2^2}=1,3\\) km.</p><p>Sätt in:</p><p>\\[1,3\\cdot84=0,5\\cdot(-72)+1,2v.\\]</p><p>Det ger \\(109,2=-36+1,2v\\), alltså \\(1,2v=145,2\\) och</p><p>\\[v=121.\\]</p><p><strong>Svar: lastbilen kör \\(121\\ \\text{km/h}\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">y</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">x</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Två vägar korsar varandra vinkelrätt. En buss är 500 m väster om korsningen och kör österut med 72 km/h. En lastbil är 1200 m norr om korsningen och kör norrut. I detta ögonblick ökar avståndet mellan dem med 84 km/h.</p><p>Bestäm lastbilens hastighet.</p>",
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 420 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till två fordon på vinkelräta vägar\">\n<rect x=\"15\" y=\"15\" width=\"390\" height=\"225\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<rect x=\"182\" y=\"25\" width=\"56\" height=\"205\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"25\" y=\"102\" width=\"370\" height=\"56\" fill=\"#ececec\" stroke=\"#777\"/>\n<rect x=\"170\" y=\"90\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.6\"/>\n<circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#8b1e3f\"/><rect x=\"198\" y=\"57\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#c95477\" stroke=\"#8b1e3f\"/>\n<circle cx=\"318\" cy=\"130\" r=\"4.5\" fill=\"#0e5d9e\"/><rect x=\"306\" y=\"121\" width=\"24\" height=\"18\" rx=\"3\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"210\" y1=\"130\" x2=\"210\" y2=\"70\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"130\" x2=\"318\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"210\" y1=\"70\" x2=\"318\" y2=\"130\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"192\" y=\"103\" font-size=\"15\">x</text>\n<text x=\"260\" y=\"124\" font-size=\"15\">y</text>\n<text x=\"256\" y=\"96\" font-size=\"15\">s</text>\n<line x1=\"210\" y1=\"54\" x2=\"210\" y2=\"32\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<polygon points=\"210,28 205,38 215,38\" fill=\"#8b1e3f\"/>\n<line x1=\"334\" y1=\"130\" x2=\"356\" y2=\"130\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<polygon points=\"360,130 350,125 350,135\" fill=\"#0e5d9e\"/>\n<text x=\"116\" y=\"50\" font-size=\"12\">72 km/h</text><text x=\"307\" y=\"166\" font-size=\"12\">v km/h</text>\n<text x=\"223\" y=\"145\" font-size=\"13\">korsning</text>\n<text x=\"195\" y=\"50\" font-size=\"13\">A</text>\n<text x=\"334\" y=\"145\" font-size=\"13\">B</text>\n</svg></span><p>Vi räknar i km. Låt \\(x\\) vara bussens avstånd till korsningen och \\(y\\) lastbilens avstånd till korsningen. Då är \\(x=0,5\\), \\(y=1,2\\).</p><p>Bussen närmar sig korsningen, så \\(x'=-72\\). Lastbilen kör bort från korsningen, så \\(y'=v\\). Avståndet mellan dem betecknas \\(s\\), och \\(s'=84\\).</p><p>Pythagoras ger \\(s^2=x^2+y^2\\), alltså \\(ss'=xx'+yy'\\).</p><p>Först är \\(s=\\sqrt{0,5^2+1,2^2}=1,3\\) km.</p><p>Sätt in:</p><p>\\[1,3\\cdot84=0,5\\cdot(-72)+1,2v.\\]</p><p>Det ger \\(109,2=-36+1,2v\\), alltså \\(1,2v=145,2\\) och</p><p>\\[v=121.\\]</p><p><strong>Svar: lastbilen kör \\(121\\ \\text{km/h}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.113",
@@ -7281,8 +8737,10 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "konisk behållare med sambandet r lika med 2h",
     "poang": "0/2/0",
-    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare med r = 2h\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"187\" y=\"106\" font-size=\"14\" text-anchor=\"middle\">r = 2h</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"256\" y=\"32\" font-size=\"12\" text-anchor=\"end\">dV/dt = 3,0 dm³/s</text>\n</svg></span><p>I en konisk behållare gäller hela tiden sambandet \\(r=2h\\) för vätskans yta. Volymen ökar med 3,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=2,0\\) dm.</p>",
-    "s": "<p>Volymen ges av \\(V=\\frac13\\pi r^2h\\). Med \\(r=2h\\) får vi</p><p>\\[V=\\frac13\\pi(2h)^2h=\\frac43\\pi h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=2,0\\) dm blir</p><p>\\[3,0=4\\pi\\cdot2,0^2\\frac{dh}{dt}=16\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{3}{16\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{3}{16\\pi}\\ \\text{dm/s}\\approx0,0597\\ \\text{dm/s}\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"300\" height=\"225\" viewBox=\"0 0 340 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Konisk behållare med r = 2h\">\n<rect x=\"10\" y=\"10\" width=\"320\" height=\"235\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"95\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"245\" y1=\"45\" x2=\"170\" y2=\"205\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"95\" y1=\"45\" x2=\"245\" y2=\"45\" stroke=\"#555\" stroke-width=\"2.4\"/>\n<line x1=\"170\" y1=\"205\" x2=\"170\" y2=\"115\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<text x=\"178\" y=\"166\" font-size=\"14\">h</text>\n<line x1=\"170\" y1=\"115\" x2=\"208\" y2=\"115\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<text x=\"182\" y=\"108\" font-size=\"14\">r = 2h</text>\n<line x1=\"72\" y1=\"62\" x2=\"72\" y2=\"204\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n<line x1=\"265\" y1=\"45\" x2=\"265\" y2=\"205\" stroke=\"#999\" stroke-width=\"1.2\" stroke-dasharray=\"4 4\"/>\n\n<line x1=\"270\" y1=\"48\" x2=\"270\" y2=\"22\" stroke=\"#2E7D52\" stroke-width=\"2\"/>\n<polygon points=\"270,18 265,28 275,28\" fill=\"#2E7D52\"/>\n<text x=\"248\" y=\"32\" font-size=\"12\">dV/dt = 3,0 dm³/s</text>\n</svg></span><p>I en konisk behållare gäller hela tiden sambandet \\(r=2h\\) för vätskans yta. Volymen ökar med 3,0 dm³/s.</p><p>Bestäm \\(dh/dt\\) när \\(h=2,0\\) dm.</p>",
+    "s": "<p>Volymen ges av \\(V=\\frac13\\pi r^2h\\). Med \\(r=2h\\) får vi</p><p>\\[V=\\frac13\\pi(2h)^2h=\\frac43\\pi h^3.\\]</p><p>Derivera:</p><p>\\[\\frac{dV}{dt}=4\\pi h^2\\frac{dh}{dt}.\\]</p><p>När \\(h=2,0\\) dm blir</p><p>\\[3,0=4\\pi\\cdot2,0^2\\frac{dh}{dt}=16\\pi\\frac{dh}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dh}{dt}=\\frac{3}{16\\pi}.\\]</p><p><strong>Svar: \\(dh/dt=\\frac{3}{16\\pi}\\ \\text{dm/s}\\approx0,0597\\ \\text{dm/s}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.114",
@@ -7292,7 +8750,9 @@ window.BANKMATF1 = [
     "typ": "relaterade förändringshastigheter strålkastare och vägg",
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Strålkastare som lyser mot en vägg\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"65\" y=\"205\" width=\"280\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"305\" y=\"45\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<circle cx=\"105\" cy=\"205\" r=\"6\" fill=\"#444\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#d8a62a\" stroke-width=\"3\"/>\n<circle cx=\"305\" cy=\"120\" r=\"5\" fill=\"#f3ca62\" stroke=\"#a77b13\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"205\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"305\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"194\" y=\"198\" font-size=\"14\" fill=\"#1f5687\">12 m</text>\n<text x=\"314\" y=\"166\" font-size=\"14\" fill=\"#7f1f3d\">y</text>\n<path d=\"M87 197 A18 18 0 0 1 96 181\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.5\"/>\n<text x=\"92\" y=\"186\" font-size=\"13\" fill=\"#333\">v</text>\n</svg></span><p>En strålkastare står på marken 12 m från en lodrät vägg. Ljuskäglans träffpunkt på väggen rör sig uppåt med 3,0 m/s.</p><p>Hur snabbt ändras vinkeln \\(v\\) mellan marken och ljusstrålen när träffpunkten ligger 5,0 m över marken?</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till strålkastare och vägg\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"65\" y=\"205\" width=\"280\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"305\" y=\"45\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<circle cx=\"105\" cy=\"205\" r=\"6\" fill=\"#444\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#d8a62a\" stroke-width=\"3\"/>\n<circle cx=\"305\" cy=\"120\" r=\"5\" fill=\"#f3ca62\" stroke=\"#a77b13\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"205\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"305\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"194\" y=\"198\" font-size=\"14\" fill=\"#1f5687\">12 m</text>\n<text x=\"314\" y=\"166\" font-size=\"14\" fill=\"#7f1f3d\">y</text>\n<path d=\"M87 197 A18 18 0 0 1 96 181\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.5\"/>\n<text x=\"92\" y=\"186\" font-size=\"13\" fill=\"#333\">v</text>\n</svg></span><p>Låt \\(y\\) vara höjden på väggen och \\(v\\) vinkeln mellan marken och ljusstrålen. Av figuren gäller</p><p>\\[\\tan v=\\frac{y}{12}.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\sec^2(v)\\,v'=\\frac{1}{12}y'.\\]</p><p>När \\(y=5,0\\) m gäller \\(\\tan v=5/12\\). Då får vi från en 5-12-13-triangel att</p><p>\\[\\sec^2(v)=\\left(\\frac{13}{12}\\right)^2=\\frac{169}{144}.\\]</p><p>Sätt in \\(y'=3,0\\) m/s:</p><p>\\[\\frac{169}{144}v'=\\frac{3,0}{12}=\\frac14.\\]</p><p>Alltså</p><p>\\[v'=\\frac14\\cdot\\frac{144}{169}=\\frac{36}{169}\\approx0,213.\\]</p><p><strong>Svar: vinkeln ändras med ungefär \\(0,213\\ \\text{rad/s}\\).</strong></p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"220\" viewBox=\"0 0 410 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till strålkastare och vägg\">\n<rect x=\"10\" y=\"10\" width=\"390\" height=\"230\" rx=\"10\" fill=\"#fcfcfd\" stroke=\"#d8dde6\"/>\n<rect x=\"65\" y=\"205\" width=\"280\" height=\"8\" rx=\"4\" fill=\"#d6c7b2\"/>\n<rect x=\"305\" y=\"45\" width=\"8\" height=\"168\" rx=\"4\" fill=\"#d8dde6\"/>\n<circle cx=\"105\" cy=\"205\" r=\"6\" fill=\"#444\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#d8a62a\" stroke-width=\"3\"/>\n<circle cx=\"305\" cy=\"120\" r=\"5\" fill=\"#f3ca62\" stroke=\"#a77b13\"/>\n<line x1=\"105\" y1=\"205\" x2=\"305\" y2=\"205\" stroke=\"#2a72b5\" stroke-width=\"2.4\"/>\n<line x1=\"305\" y1=\"205\" x2=\"305\" y2=\"120\" stroke=\"#a92d51\" stroke-width=\"2.4\"/>\n<text x=\"194\" y=\"198\" font-size=\"14\" fill=\"#1f5687\">12 m</text>\n<text x=\"314\" y=\"166\" font-size=\"14\" fill=\"#7f1f3d\">y</text>\n<path d=\"M87 197 A18 18 0 0 1 96 181\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.5\"/>\n<text x=\"92\" y=\"186\" font-size=\"13\" fill=\"#333\">v</text>\n</svg></span><p>Låt \\(y\\) vara höjden på väggen och \\(v\\) vinkeln mellan marken och ljusstrålen. Av figuren gäller</p><p>\\[\\tan v=\\frac{y}{12}.\\]</p><p>Derivera med avseende på tiden:</p><p>\\[\\sec^2(v)\\,v'=\\frac{1}{12}y'.\\]</p><p>När \\(y=5,0\\) m gäller \\(\\tan v=5/12\\). Då får vi från en 5-12-13-triangel att</p><p>\\[\\sec^2(v)=\\left(\\frac{13}{12}\\right)^2=\\frac{169}{144}.\\]</p><p>Sätt in \\(y'=3,0\\) m/s:</p><p>\\[\\frac{169}{144}v'=\\frac{3,0}{12}=\\frac14.\\]</p><p>Alltså</p><p>\\[v'=\\frac14\\cdot\\frac{144}{169}=\\frac{36}{169}\\approx0,213.\\]</p><p><strong>Svar: vinkeln ändras med ungefär \\(0,213\\ \\text{rad/s}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.115",
@@ -7302,7 +8762,9 @@ window.BANKMATF1 = [
     "typ": "relaterade förändringshastigheter helikopter",
     "poang": "0/3/0",
     "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"225\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Helikopter och observatör på marken\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"226\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"40\" y1=\"195\" x2=\"390\" y2=\"195\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<circle cx=\"90\" cy=\"195\" r=\"4\" fill=\"#333\"/><text x=\"64\" y=\"212\" font-size=\"13\">O</text>\n<line x1=\"250\" y1=\"85\" x2=\"282\" y2=\"85\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"250\" y=\"90\" width=\"34\" height=\"13\" rx=\"5\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"267\" y1=\"85\" x2=\"267\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"245\" y1=\"72\" x2=\"289\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"250\" y1=\"195\" x2=\"250\" y2=\"98\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"250\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"267\" y2=\"96\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"171\" y=\"188\" font-size=\"14\">x</text>\n<text x=\"254\" y=\"151\" font-size=\"14\">1,2 km</text>\n<text x=\"178\" y=\"136\" font-size=\"14\">s</text>\n</svg></span><p>En helikopter flyger horisontellt på höjden 1,2 km. När den är 1,6 km horisontellt från en observatör på marken ökar avståndet mellan observatören och helikoptern med 150 km/h.</p><p>Bestäm helikopterns hastighet.</p>",
-    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"225\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till helikopter\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"226\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"40\" y1=\"195\" x2=\"390\" y2=\"195\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<circle cx=\"90\" cy=\"195\" r=\"4\" fill=\"#333\"/><text x=\"64\" y=\"212\" font-size=\"13\">O</text>\n<line x1=\"250\" y1=\"85\" x2=\"282\" y2=\"85\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"250\" y=\"90\" width=\"34\" height=\"13\" rx=\"5\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"267\" y1=\"85\" x2=\"267\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"245\" y1=\"72\" x2=\"289\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"250\" y1=\"195\" x2=\"250\" y2=\"98\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"250\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"267\" y2=\"96\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"171\" y=\"188\" font-size=\"14\">x</text>\n<text x=\"254\" y=\"151\" font-size=\"14\">1,2 km</text>\n<text x=\"178\" y=\"136\" font-size=\"14\">s</text>\n</svg></span><p>Låt \\(x\\) vara det horisontella avståndet från observatören till punkten rakt under helikoptern och \\(s\\) avståndet till helikoptern. Höjden är konstant 1,2 km.</p><p>Vi har sambandet</p><p>\\[s^2=x^2+1,2^2.\\]</p><p>Derivera:</p><p>\\[2ss'=2xx'\\quad\\Rightarrow\\quad ss'=xx'.\\]</p><p>När \\(x=1,6\\) km blir</p><p>\\[s=\\sqrt{1,6^2+1,2^2}=2,0\\ \\text{km}.\\]</p><p>Eftersom \\(s'=150\\) km/h får vi</p><p>\\[2,0\\cdot150=1,6x'.\\]</p><p>Alltså</p><p>\\[x'=\\frac{300}{1,6}=187,5.\\]</p><p><strong>Svar: helikopterns hastighet är \\(187,5\\ \\text{km/h}\\).</strong></p>"
+    "s": "<span class=\"fig smal\"><svg width=\"360\" height=\"225\" viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Facitfigur till helikopter\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"226\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"40\" y1=\"195\" x2=\"390\" y2=\"195\" stroke=\"#666\" stroke-width=\"2.5\"/>\n<circle cx=\"90\" cy=\"195\" r=\"4\" fill=\"#333\"/><text x=\"64\" y=\"212\" font-size=\"13\">O</text>\n<line x1=\"250\" y1=\"85\" x2=\"282\" y2=\"85\" stroke=\"#333\" stroke-width=\"3\"/>\n<rect x=\"250\" y=\"90\" width=\"34\" height=\"13\" rx=\"5\" fill=\"#5fa8dd\" stroke=\"#0e5d9e\"/>\n<line x1=\"267\" y1=\"85\" x2=\"267\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"245\" y1=\"72\" x2=\"289\" y2=\"72\" stroke=\"#333\" stroke-width=\"2\"/>\n<line x1=\"250\" y1=\"195\" x2=\"250\" y2=\"98\" stroke=\"#8b1e3f\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"250\" y2=\"195\" stroke=\"#0e5d9e\" stroke-width=\"2\"/>\n<line x1=\"90\" y1=\"195\" x2=\"267\" y2=\"96\" stroke=\"#b48a18\" stroke-width=\"2.2\"/>\n<text x=\"171\" y=\"188\" font-size=\"14\">x</text>\n<text x=\"254\" y=\"151\" font-size=\"14\">1,2 km</text>\n<text x=\"178\" y=\"136\" font-size=\"14\">s</text>\n</svg></span><p>Låt \\(x\\) vara det horisontella avståndet från observatören till punkten rakt under helikoptern och \\(s\\) avståndet till helikoptern. Höjden är konstant 1,2 km.</p><p>Vi har sambandet</p><p>\\[s^2=x^2+1,2^2.\\]</p><p>Derivera:</p><p>\\[2ss'=2xx'\\quad\\Rightarrow\\quad ss'=xx'.\\]</p><p>När \\(x=1,6\\) km blir</p><p>\\[s=\\sqrt{1,6^2+1,2^2}=2,0\\ \\text{km}.\\]</p><p>Eftersom \\(s'=150\\) km/h får vi</p><p>\\[2,0\\cdot150=1,6x'.\\]</p><p>Alltså</p><p>\\[x'=\\frac{300}{1,6}=187,5.\\]</p><p><strong>Svar: helikopterns hastighet är \\(187,5\\ \\text{km/h}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "3.116",
@@ -7311,8 +8773,10 @@ window.BANKMATF1 = [
     "niva": "E",
     "typ": "linjär approximation av logaritm med figur",
     "poang": "2/0/0",
-    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"205\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till y = ln x med tangent i x = 1\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"50\" y1=\"190\" x2=\"380\" y2=\"190\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"50\" y1=\"190\" x2=\"50\" y2=\"35\" stroke=\"#555\" stroke-width=\"2\"/>\n<path d=\"M 70 170 C 130 135, 180 120, 325 84\" fill=\"none\" stroke=\"#0e5d9e\" stroke-width=\"2.5\"/>\n<line x1=\"82\" y1=\"158\" x2=\"340\" y2=\"93\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<circle cx=\"210\" cy=\"126\" r=\"4\" fill=\"#333\"/>\n<text x=\"210\" y=\"150\" font-size=\"12\" text-anchor=\"middle\">x = 1</text>\n<text x=\"300\" y=\"72\" font-size=\"13\" fill=\"#0e5d9e\">y = ln x</text>\n<text x=\"300\" y=\"118\" font-size=\"13\" fill=\"#b45f32\">tangent</text>\n</svg></span><p>Använd tangentlinjen till \\(y=\\ln x\\) vid \\(x=1\\) för att uppskatta \\(\\ln(1,05)\\).</p>",
-    "s": "<p>Vi linjäriserar funktionen \\(f(x)=\\ln x\\) kring \\(x=1\\).</p><p>\\[f(1)=0,\\qquad f'(x)=\\frac1x\\Rightarrow f'(1)=1.\\]</p><p>Tangentlinjen blir därför</p><p>\\[L(x)=f(1)+f'(1)(x-1)=x-1.\\]</p><p>Sätt in \\(x=1,05\\):</p><p>\\[\\ln(1,05)\\approx L(1,05)=1,05-1=0,05.\\]</p><p><strong>Svar: \\(\\ln(1,05)\\approx0,05\\).</strong></p>"
+    "t": "<span class=\"fig smal\"><svg width=\"360\" height=\"205\" viewBox=\"0 0 420 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graf till y = ln x med tangent i x = 1\">\n<rect x=\"12\" y=\"12\" width=\"396\" height=\"211\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<line x1=\"50\" y1=\"190\" x2=\"380\" y2=\"190\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"50\" y1=\"190\" x2=\"50\" y2=\"35\" stroke=\"#555\" stroke-width=\"2\"/>\n<path d=\"M 70 170 C 130 135, 180 120, 325 84\" fill=\"none\" stroke=\"#0e5d9e\" stroke-width=\"2.5\"/>\n<line x1=\"82\" y1=\"158\" x2=\"340\" y2=\"93\" stroke=\"#b45f32\" stroke-width=\"2\"/>\n<circle cx=\"210\" cy=\"126\" r=\"4\" fill=\"#333\"/>\n<text x=\"217\" y=\"121\" font-size=\"12\">x = 1</text>\n<text x=\"280\" y=\"79\" font-size=\"13\">y = \\ln x</text>\n<text x=\"288\" y=\"103\" font-size=\"13\">tangent</text>\n</svg></span><p>Använd tangentlinjen till \\(y=\\ln x\\) vid \\(x=1\\) för att uppskatta \\(\\ln(1,05)\\).</p>",
+    "s": "<p>Vi linjäriserar funktionen \\(f(x)=\\ln x\\) kring \\(x=1\\).</p><p>\\[f(1)=0,\\qquad f'(x)=\\frac1x\\Rightarrow f'(1)=1.\\]</p><p>Tangentlinjen blir därför</p><p>\\[L(x)=f(1)+f'(1)(x-1)=x-1.\\]</p><p>Sätt in \\(x=1,05\\):</p><p>\\[\\ln(1,05)\\approx L(1,05)=1,05-1=0,05.\\]</p><p><strong>Svar: \\(\\ln(1,05)\\approx0,05\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "3.117",
@@ -7322,7 +8786,9 @@ window.BANKMATF1 = [
     "typ": "cirkelns omkrets från areaändring",
     "poang": "0/2/0",
     "t": "<span class=\"fig smal\"><svg width=\"260\" height=\"180\" viewBox=\"0 0 290 205\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med växande area\">\n<rect x=\"10\" y=\"10\" width=\"270\" height=\"185\" rx=\"8\" fill=\"white\" stroke=\"#d0d0d0\"/>\n<circle cx=\"140\" cy=\"105\" r=\"58\" fill=\"#f7fbff\" stroke=\"#2C62A8\" stroke-width=\"2.2\"/>\n<circle cx=\"140\" cy=\"105\" r=\"3.5\" fill=\"#2C62A8\"/>\n<line x1=\"140\" y1=\"105\" x2=\"194\" y2=\"105\" stroke=\"#b45f32\" stroke-width=\"2.2\"/>\n<polygon points=\"198,105 188,100 188,110\" fill=\"#b45f32\"/>\n<text x=\"163\" y=\"97\" font-size=\"14\">r</text>\n\n</svg></span><p>En cirkels area ökar med \\(6\\pi\\ \\text{cm}^2/\\text{s}\\). Hur snabbt ökar omkretsen när radien är 3,0 cm?</p>",
-    "s": "<p>Vi använder först sambandet för arean:</p><p>\\[A=\\pi r^2\\Rightarrow \\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>När \\(r=3,0\\) cm och \\(dA/dt=6\\pi\\) får vi</p><p>\\[6\\pi=2\\pi\\cdot3,0\\cdot\\frac{dr}{dt}.\\]</p><p>Därför är \\(dr/dt=1,0\\) cm/s.</p><p>Omkretsen är \\(O=2\\pi r\\), alltså</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}=2\\pi\\cdot1,0=2\\pi.\\]</p><p><strong>Svar: omkretsen ökar med \\(2\\pi\\ \\text{cm/s}\\).</strong></p>"
+    "s": "<p>Vi använder först sambandet för arean:</p><p>\\[A=\\pi r^2\\Rightarrow \\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>När \\(r=3,0\\) cm och \\(dA/dt=6\\pi\\) får vi</p><p>\\[6\\pi=2\\pi\\cdot3,0\\cdot\\frac{dr}{dt}.\\]</p><p>Därför är \\(dr/dt=1,0\\) cm/s.</p><p>Omkretsen är \\(O=2\\pi r\\), alltså</p><p>\\[\\frac{dO}{dt}=2\\pi\\frac{dr}{dt}=2\\pi\\cdot1,0=2\\pi.\\]</p><p><strong>Svar: omkretsen ökar med \\(2\\pi\\ \\text{cm/s}\\).</strong></p>",
+    "miniräknare": true,
+    "geogebra": false
   },
   {
     "id": "2.209",
@@ -7332,7 +8798,9 @@ window.BANKMATF1 = [
     "typ": "primtalsfaktorisering",
     "poang": "2/0/0",
     "t": "<p>Primtalsfaktorisera talet \\(840\\).</p>",
-    "s": "<p>Vi delar steg för steg med primtal:</p><p>\\[840=84\\cdot10=(2\\cdot2\\cdot3\\cdot7)(2\\cdot5).\\]</p><p>Samla lika faktorer:</p><p>\\[840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p><strong>Svar: \\(840=2^3\\cdot3\\cdot5\\cdot7\\).</strong></p>"
+    "s": "<p>Vi delar steg för steg med primtal:</p><p>\\[840=84\\cdot10=(2\\cdot2\\cdot3\\cdot7)(2\\cdot5).\\]</p><p>Samla lika faktorer:</p><p>\\[840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p><strong>Svar: \\(840=2^3\\cdot3\\cdot5\\cdot7\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.210",
@@ -7342,7 +8810,9 @@ window.BANKMATF1 = [
     "typ": "största gemensamma delare med primtalsfaktorisering",
     "poang": "2/0/0",
     "t": "<p>Bestäm \\(\\mathrm{{sgd}}(672,840)\\).</p>",
-    "s": "<p>Primtalsfaktorisera båda talen:</p><p>\\[672=2^5\\cdot3\\cdot7,\\qquad 840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p>Den största gemensamma delaren fås av de gemensamma primtalen med minsta exponent:</p><p>\\[\\mathrm{{sgd}}(672,840)=2^3\\cdot3\\cdot7=168.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(672,840)=168\\).</strong></p>"
+    "s": "<p>Primtalsfaktorisera båda talen:</p><p>\\[672=2^5\\cdot3\\cdot7,\\qquad 840=2^3\\cdot3\\cdot5\\cdot7.\\]</p><p>Den största gemensamma delaren fås av de gemensamma primtalen med minsta exponent:</p><p>\\[\\mathrm{{sgd}}(672,840)=2^3\\cdot3\\cdot7=168.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(672,840)=168\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.211",
@@ -7352,7 +8822,9 @@ window.BANKMATF1 = [
     "typ": "minsta gemensamma multipel med primtalsfaktorisering",
     "poang": "2/0/0",
     "t": "<p>Bestäm minsta gemensamma multipel till \\(45\\) och \\(72\\).</p>",
-    "s": "<p>Primtalsfaktorisera:</p><p>\\[45=3^2\\cdot5,\\qquad 72=2^3\\cdot3^2.\\]</p><p>För minsta gemensamma multipel tar vi med alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(45,72)=2^3\\cdot3^2\\cdot5=360.\\]</p><p><strong>Svar: minsta gemensamma multipel är \\(360\\).</strong></p>"
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[45=3^2\\cdot5,\\qquad 72=2^3\\cdot3^2.\\]</p><p>För minsta gemensamma multipel tar vi med alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(45,72)=2^3\\cdot3^2\\cdot5=360.\\]</p><p><strong>Svar: minsta gemensamma multipel är \\(360\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.212",
@@ -7362,7 +8834,9 @@ window.BANKMATF1 = [
     "typ": "Euklides algoritm",
     "poang": "2/0/0",
     "t": "<p>Använd Euklides algoritm för att bestämma \\(\\mathrm{{sgd}}(714,546)\\).</p>",
-    "s": "<p>Använd divisionsalgoritmen steg för steg:</p><p>\\[714=546\\cdot1+168\\]</p><p>\\[546=168\\cdot3+42\\]</p><p>\\[168=42\\cdot4+0\\]</p><p>När resten blir 0 är den sista positiva resten största gemensamma delaren.</p><p><strong>Svar: \\(\\mathrm{{sgd}}(714,546)=42\\).</strong></p>"
+    "s": "<p>Använd divisionsalgoritmen steg för steg:</p><p>\\[714=546\\cdot1+168\\]</p><p>\\[546=168\\cdot3+42\\]</p><p>\\[168=42\\cdot4+0\\]</p><p>När resten blir 0 är den sista positiva resten största gemensamma delaren.</p><p><strong>Svar: \\(\\mathrm{{sgd}}(714,546)=42\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.213",
@@ -7372,7 +8846,9 @@ window.BANKMATF1 = [
     "typ": "minsta faktor för delbarhet",
     "poang": "0/2/0",
     "t": "<p>Bestäm det minsta positiva heltalet \\(k\\) så att \\(90k\\) blir delbart med \\(168\\).</p>",
-    "s": "<p>Primtalsfaktorisera:</p><p>\\[90=2\\cdot3^2\\cdot5,\\qquad 168=2^3\\cdot3\\cdot7.\\]</p><p>För att \\(90k\\) ska vara delbart med \\(168\\) måste produkten innehålla minst faktorerna \\(2^3\\), \\(3\\) och \\(7\\).</p><p>Talet 90 innehåller redan \\(2\\) och \\(3^2\\), men saknar två extra tvåor och en sjua.</p><p>Alltså räcker</p><p>\\[k=2^2\\cdot7=28.\\]</p><p><strong>Svar: \\(k=28\\).</strong></p>"
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[90=2\\cdot3^2\\cdot5,\\qquad 168=2^3\\cdot3\\cdot7.\\]</p><p>För att \\(90k\\) ska vara delbart med \\(168\\) måste produkten innehålla minst faktorerna \\(2^3\\), \\(3\\) och \\(7\\).</p><p>Talet 90 innehåller redan \\(2\\) och \\(3^2\\), men saknar två extra tvåor och en sjua.</p><p>Alltså räcker</p><p>\\[k=2^2\\cdot7=28.\\]</p><p><strong>Svar: \\(k=28\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.214",
@@ -7382,7 +8858,9 @@ window.BANKMATF1 = [
     "typ": "identiska paket med största gemensamma delare",
     "poang": "0/2/0",
     "t": "<p>Ett idrottsläger har \\(210\\) bananer, \\(294\\) äpplen och \\(378\\) juicepaket. Man vill göra så många identiska matkassar som möjligt utan att något blir över.</p><p>Hur många matkassar kan göras, och vad innehåller varje kasse?</p>",
-    "s": "<p>Antalet kassar måste dela alla tre talen. Vi bestämmer därför</p><p>\\[\\mathrm{{sgd}}(210,294,378).\\]</p><p>Först</p><p>\\[\\mathrm{{sgd}}(210,294)=42.\\]</p><p>Sedan</p><p>\\[\\mathrm{{sgd}}(42,378)=42.\\]</p><p>Alltså kan man göra som mest \\(42\\) kassar.</p><p>Innehållet i varje kasse blir</p><p>\\[210/42=5\\text{ bananer},\\quad 294/42=7\\text{ äpplen},\\quad 378/42=9\\text{ juicepaket}.\\]</p><p><strong>Svar: \\(42\\) matkassar, med \\(5\\) bananer, \\(7\\) äpplen och \\(9\\) juicepaket i varje.</strong></p>"
+    "s": "<p>Antalet kassar måste dela alla tre talen. Vi bestämmer därför</p><p>\\[\\mathrm{{sgd}}(210,294,378).\\]</p><p>Först</p><p>\\[\\mathrm{{sgd}}(210,294)=42.\\]</p><p>Sedan</p><p>\\[\\mathrm{{sgd}}(42,378)=42.\\]</p><p>Alltså kan man göra som mest \\(42\\) kassar.</p><p>Innehållet i varje kasse blir</p><p>\\[210/42=5\\text{ bananer},\\quad 294/42=7\\text{ äpplen},\\quad 378/42=9\\text{ juicepaket}.\\]</p><p><strong>Svar: \\(42\\) matkassar, med \\(5\\) bananer, \\(7\\) äpplen och \\(9\\) juicepaket i varje.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.215",
@@ -7392,7 +8870,9 @@ window.BANKMATF1 = [
     "typ": "minsta gemensamma multipel i tidsschema",
     "poang": "0/2/0",
     "t": "<p>Tre sprinklers startar samtidigt. De går sedan igång var 14:e, 18:e respektive 24:e minut.</p><p>Efter hur lång tid går alla tre igång samtidigt nästa gång?</p>",
-    "s": "<p>Vi söker minsta gemensamma multipel till \\(14\\), \\(18\\) och \\(24\\).</p><p>Primtalsfaktorisera:</p><p>\\[14=2\\cdot7,\\qquad 18=2\\cdot3^2,\\qquad 24=2^3\\cdot3.\\]</p><p>Ta alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(14,18,24)=2^3\\cdot3^2\\cdot7=504.\\]</p><p><strong>Svar: de går igång samtidigt nästa gång efter \\(504\\) minuter, alltså efter \\(8\\) timmar och \\(24\\) minuter.</strong></p>"
+    "s": "<p>Vi söker minsta gemensamma multipel till \\(14\\), \\(18\\) och \\(24\\).</p><p>Primtalsfaktorisera:</p><p>\\[14=2\\cdot7,\\qquad 18=2\\cdot3^2,\\qquad 24=2^3\\cdot3.\\]</p><p>Ta alla primtal med största exponent:</p><p>\\[\\mathrm{{mgm}}(14,18,24)=2^3\\cdot3^2\\cdot7=504.\\]</p><p><strong>Svar: de går igång samtidigt nästa gång efter \\(504\\) minuter, alltså efter \\(8\\) timmar och \\(24\\) minuter.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.216",
@@ -7402,7 +8882,9 @@ window.BANKMATF1 = [
     "typ": "antal positiva delare",
     "poang": "0/2/0",
     "t": "<p>Hur många positiva delare har talet \\(900\\)?</p>",
-    "s": "<p>Primtalsfaktorisera:</p><p>\\[900=9\\cdot100=3^2\\cdot2^2\\cdot5^2=2^2\\cdot3^2\\cdot5^2.\\]</p><p>En positiv delare kan då skrivas som \\(2^a3^b5^c\\), där</p><p>\\[a,b,c\\in\\{0,1,2\\}.\\]</p><p>Det finns alltså 3 val för \\(a\\), 3 val för \\(b\\) och 3 val för \\(c\\).</p><p>Med multiplikationsprincipen fås</p><p>\\[3\\cdot3\\cdot3=27.\\]</p><p><strong>Svar: talet \\(900\\) har \\(27\\) positiva delare.</strong></p>"
+    "s": "<p>Primtalsfaktorisera:</p><p>\\[900=9\\cdot100=3^2\\cdot2^2\\cdot5^2=2^2\\cdot3^2\\cdot5^2.\\]</p><p>En positiv delare kan då skrivas som \\(2^a3^b5^c\\), där</p><p>\\[a,b,c\\in\\{0,1,2\\}.\\]</p><p>Det finns alltså 3 val för \\(a\\), 3 val för \\(b\\) och 3 val för \\(c\\).</p><p>Med multiplikationsprincipen fås</p><p>\\[3\\cdot3\\cdot3=27.\\]</p><p><strong>Svar: talet \\(900\\) har \\(27\\) positiva delare.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.217",
@@ -7412,7 +8894,9 @@ window.BANKMATF1 = [
     "typ": "Euklides algoritm och heltalskombination",
     "poang": "0/3/0",
     "t": "<p>Bestäm \\(\\mathrm{{sgd}}(612,342)\\) och skriv sedan denna största gemensamma delare som en heltalskombination av \\(612\\) och \\(342\\).</p>",
-    "s": "<p>Vi börjar med Euklides algoritm:</p><p>\\[612=342\\cdot1+270\\]</p><p>\\[342=270\\cdot1+72\\]</p><p>\\[270=72\\cdot3+54\\]</p><p>\\[72=54\\cdot1+18\\]</p><p>\\[54=18\\cdot3+0\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(612,342)=18\\).</p><p>Nu går vi baklänges:</p><p>\\[18=72-54\\]</p><p>och \\(54=270-72\\cdot3\\), alltså</p><p>\\[18=72-(270-72\\cdot3)=4\\cdot72-270.\\]</p><p>Vidare är \\(72=342-270\\), så</p><p>\\[18=4(342-270)-270=4\\cdot342-5\\cdot270.\\]</p><p>Slutligen är \\(270=612-342\\), alltså</p><p>\\[18=4\\cdot342-5(612-342)=-5\\cdot612+9\\cdot342.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(612,342)=18\\) och \\(18=-5\\cdot612+9\\cdot342\\).</strong></p>"
+    "s": "<p>Vi börjar med Euklides algoritm:</p><p>\\[612=342\\cdot1+270\\]</p><p>\\[342=270\\cdot1+72\\]</p><p>\\[270=72\\cdot3+54\\]</p><p>\\[72=54\\cdot1+18\\]</p><p>\\[54=18\\cdot3+0\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(612,342)=18\\).</p><p>Nu går vi baklänges:</p><p>\\[18=72-54\\]</p><p>och \\(54=270-72\\cdot3\\), alltså</p><p>\\[18=72-(270-72\\cdot3)=4\\cdot72-270.\\]</p><p>Vidare är \\(72=342-270\\), så</p><p>\\[18=4(342-270)-270=4\\cdot342-5\\cdot270.\\]</p><p>Slutligen är \\(270=612-342\\), alltså</p><p>\\[18=4\\cdot342-5(612-342)=-5\\cdot612+9\\cdot342.\\]</p><p><strong>Svar: \\(\\mathrm{{sgd}}(612,342)=18\\) och \\(18=-5\\cdot612+9\\cdot342\\).</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   },
   {
     "id": "2.218",
@@ -7422,6 +8906,8 @@ window.BANKMATF1 = [
     "typ": "största möjlig brickstorlek i kontext",
     "poang": "0/2/0",
     "t": "<p>Ett golv är 504 cm långt och 378 cm brett. Det ska täckas med lika stora kvadratiska plattor utan att någon platta kapas.</p><p>Bestäm den största möjliga sidlängden hos plattorna och hur många plattor som behövs.</p>",
-    "s": "<p>Plattans sidlängd måste dela både 504 och 378. Den största möjliga sidlängden är därför</p><p>\\[\\mathrm{{sgd}}(504,378).\\]</p><p>Med Euklides algoritm:</p><p>\\[504=378+126,\\qquad 378=3\\cdot126.\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(504,378)=126\\).</p><p>Varje platta blir alltså \\(126\\) cm \\(\\times\\) \\(126\\) cm.</p><p>Antalet plattor blir</p><p>\\[\\frac{504}{126}\\cdot\\frac{378}{126}=4\\cdot3=12.\\]</p><p><strong>Svar: sidlängden ska vara \\(126\\) cm och det behövs \\(12\\) plattor.</strong></p>"
+    "s": "<p>Plattans sidlängd måste dela både 504 och 378. Den största möjliga sidlängden är därför</p><p>\\[\\mathrm{{sgd}}(504,378).\\]</p><p>Med Euklides algoritm:</p><p>\\[504=378+126,\\qquad 378=3\\cdot126.\\]</p><p>Alltså är \\(\\mathrm{{sgd}}(504,378)=126\\).</p><p>Varje platta blir alltså \\(126\\) cm \\(\\times\\) \\(126\\) cm.</p><p>Antalet plattor blir</p><p>\\[\\frac{504}{126}\\cdot\\frac{378}{126}=4\\cdot3=12.\\]</p><p><strong>Svar: sidlängden ska vara \\(126\\) cm och det behövs \\(12\\) plattor.</strong></p>",
+    "miniräknare": false,
+    "geogebra": false
   }
 ];
