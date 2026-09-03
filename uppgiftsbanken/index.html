@@ -1758,367 +1758,6 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .kroppen{font-size:13.5px}
 }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   STARTSIDA · omarbetad formgivning
-   Ett enda avslutande lager som ersätter de tidigare startsidesskikten.
-   Principer: en accentfärg, tyst typografi i metatext, luft mellan
-   elementen och kursens egen färg enbart i ryggen och nivåmarkören.
-   ═══════════════════════════════════════════════════════════════════════ */
-:root{
-  --sida-papper:#FBFAF8;
-  --sida-ink:#1B1618;
-  --sida-ink-2:#57504F;
-  --sida-tyst:#8E8783;
-  --sida-linje:rgba(27,22,24,.09);
-  --sida-linje-svag:rgba(27,22,24,.055);
-}
-
-/* ── Underlag ── */
-.kursval{
-  padding:0!important;
-  background:
-    radial-gradient(1100px 620px at 12% -14%,rgba(180,49,35,.055),transparent 62%),
-    radial-gradient(900px 700px at 100% 8%,rgba(44,98,168,.035),transparent 66%),
-    var(--sida-papper)!important;
-}
-/* Millimeterrutnätet ger ytan karaktär utan att konkurrera med innehållet. */
-.kursval::before{
-  opacity:1!important;
-  background-image:
-    linear-gradient(rgba(27,22,24,.032) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(27,22,24,.032) 1px,transparent 1px)!important;
-  background-size:34px 34px!important;
-  -webkit-mask-image:radial-gradient(1000px 620px at 20% 0%,#000,transparent 72%)!important;
-          mask-image:radial-gradient(1000px 620px at 20% 0%,#000,transparent 72%)!important;
-}
-/* Tunn accentlinje längs sidans överkant. */
-.kursval::after{
-  content:"";position:fixed;left:0;right:0;top:0;height:3px;z-index:5;pointer-events:none;
-  background:linear-gradient(90deg,var(--ed) 0%,#C05340 38%,rgba(180,49,35,.22) 76%,transparent 100%);
-}
-.kv-inner{
-  width:min(1240px,100%)!important;
-  padding:clamp(26px,3.4vh,40px) clamp(22px,4.5vw,58px) clamp(40px,6vh,70px)!important;
-}
-
-/* ── Varumärkesrad: liten och tyst, inte sidans rubrik ── */
-.kv-nav{
-  margin:0 0 clamp(30px,4.4vh,46px)!important;
-  padding-bottom:15px;
-  border-bottom:1px solid var(--sida-linje-svag);
-  align-items:center!important;
-}
-.kv-brand{gap:14px!important;align-items:center!important}
-.kv-logo-shell{
-  width:44px!important;height:44px!important;border-radius:12px!important;
-  background:#fff!important;
-  border:1px solid var(--sida-linje)!important;
-  box-shadow:0 1px 2px rgba(27,22,24,.05),0 6px 16px rgba(27,22,24,.045)!important;
-}
-.kv-logo-shell img{width:31px!important;height:31px!important}
-.kv-brandname{
-  font-size:15px!important;font-weight:640!important;
-  letter-spacing:-.012em!important;line-height:1.25!important;
-  color:var(--sida-ink)!important;
-}
-.kv-brandmeta{
-  display:block!important;margin-top:2px!important;
-  font-family:var(--mono)!important;font-size:9.5px!important;font-weight:500!important;
-  letter-spacing:.15em!important;text-transform:uppercase!important;
-  color:var(--sida-tyst)!important;
-}
-
-/* ── Ingress ── */
-.kv-designhero{
-  display:block!important;
-  position:relative!important;
-  margin:0 0 clamp(30px,4vh,44px)!important;
-  padding:0!important;min-height:0!important;
-  border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;
-  overflow:visible!important;
-}
-.kv-designhero::before,.kv-designhero::after{display:none!important}
-.kv-designhero-art{display:none!important}
-.kv-designhero-copy{max-width:none!important}
-.kv-oga{
-  display:flex;align-items:center;gap:11px;margin:0 0 20px;
-  font-family:var(--mono);font-size:10px;font-weight:600;
-  letter-spacing:.19em;text-transform:uppercase;color:var(--ed-dark);
-}
-.kv-oga::before{content:"";width:26px;height:1.5px;border-radius:99px;background:var(--ed)}
-.kv-designhero h2{
-  margin:0!important;max-width:24ch!important;
-  font-size:clamp(33px,3.5vw,48px)!important;
-  line-height:1.02!important;letter-spacing:-.045em!important;
-  font-weight:700!important;color:var(--sida-ink)!important;
-  text-wrap:balance;
-}
-.kv-designhero h2 span{
-  color:var(--ed)!important;
-  /* Understruken markering som följer textens baslinje. */
-  background-image:linear-gradient(90deg,rgba(180,49,35,.26),rgba(180,49,35,.10));
-  background-repeat:no-repeat;
-  background-size:100% .09em;
-  background-position:0 .93em;
-}
-.kv-designhero .kv-designhero-sub{
-  margin:16px 0 0!important;max-width:54ch!important;
-  font-family:var(--las)!important;
-  font-size:clamp(15px,1.15vw,16.5px)!important;
-  line-height:1.6!important;font-weight:400!important;
-  color:var(--sida-ink-2)!important;
-  text-wrap:pretty;
-}
-/* Faktarad under ingressen. */
-.kv-fakta{
-  display:flex;flex-wrap:wrap;align-items:center;gap:9px 22px;
-  margin:20px 0 0;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--sida-tyst);
-}
-.kv-fakta b{color:var(--sida-ink-2);font-weight:600}
-.kv-fakta span{display:inline-flex;align-items:center;gap:8px}
-.kv-fakta span::before{
-  content:"";width:5px;height:5px;border-radius:50%;
-  background:var(--ed);opacity:.55;
-}
-
-/* ── Ämnesgrupper ── */
-.kv-grupp + .kv-grupp{
-  margin-top:clamp(30px,4vh,44px)!important;padding-top:0!important;border-top:0!important;
-}
-.kv-grupp + .kv-grupp::before{display:none!important}
-.kv-grupphuvud{
-  display:flex!important;align-items:center!important;gap:16px!important;
-  margin:0 0 18px!important;
-}
-.kv-grupphuvud h3{
-  flex:none;margin:0!important;
-  font-family:var(--mono)!important;font-size:10.5px!important;font-weight:600!important;
-  letter-spacing:.19em!important;text-transform:uppercase!important;
-  color:var(--sida-ink-2)!important;
-}
-/* Hårfin linje som fyller ut resten av raden. */
-.kv-grupphuvud::after{
-  content:"";flex:1 1 auto;height:1px;background:var(--sida-linje-svag);
-}
-.kv-grupphuvud span{
-  flex:none;order:3;
-  padding:0!important;border:0!important;background:none!important;
-  font-family:var(--mono)!important;font-size:10px!important;letter-spacing:.1em!important;
-  text-transform:uppercase!important;color:var(--sida-tyst)!important;
-}
-.kv-kortgrid{gap:16px!important}
-
-/* ── Kurskort ── */
-.kurskort{
-  min-height:0!important;
-  padding:22px 22px 18px 28px!important;
-  border:1px solid var(--sida-linje)!important;
-  border-radius:16px!important;
-  background:#fff!important;
-  box-shadow:0 1px 2px rgba(27,22,24,.035),0 2px 4px rgba(27,22,24,.02)!important;
-  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-  transition:transform .3s cubic-bezier(.2,.75,.25,1),box-shadow .3s cubic-bezier(.2,.75,.25,1),border-color .25s!important;
-}
-.kurskort::before{
-  background:radial-gradient(460px circle at var(--mx) var(--my),color-mix(in oklab,var(--acc) 6%,transparent),transparent 46%)!important;
-}
-.kurskort::after{display:none!important}
-.kurskort:hover{
-  transform:translateY(-3px)!important;
-  border-color:color-mix(in oklab,var(--acc) 26%,var(--sida-linje))!important;
-  background:#fff!important;
-  box-shadow:
-    0 1px 2px rgba(27,22,24,.04),
-    0 18px 40px -12px color-mix(in oklab,var(--acc) 22%,rgba(27,22,24,.16))!important;
-}
-.kurskort:focus-visible{
-  outline:none!important;
-  border-color:var(--acc)!important;
-  box-shadow:0 0 0 3px color-mix(in oklab,var(--acc) 22%,transparent)!important;
-}
-/* Ryggen behåller kursens egen färg. */
-.kurskort .kk-rygg{
-  width:7px!important;border-radius:16px 0 0 16px!important;
-  box-shadow:inset -1px 0 rgba(255,255,255,.22)!important;
-  transition:width .3s cubic-bezier(.2,.75,.25,1)!important;
-}
-.kurskort:hover .kk-rygg{width:10px!important}
-
-/* Topprad: nivåmärke till vänster, spårprickar till höger. */
-.kk-top{align-items:center!important;gap:14px!important;min-height:24px}
-.kk-index{
-  display:inline-flex!important;align-items:center!important;gap:8px!important;
-  font-family:var(--mono)!important;font-size:9.5px!important;font-weight:600!important;
-  letter-spacing:.16em!important;text-transform:uppercase!important;
-  color:var(--sida-tyst)!important;
-}
-.kk-index::before{
-  width:6px!important;height:6px!important;border-radius:50%!important;
-  background:var(--acc)!important;
-  box-shadow:0 0 0 3.5px color-mix(in oklab,var(--acc) 13%,transparent)!important;
-}
-.kk-number{display:none!important}
-.kk-spar{
-  display:inline-flex;align-items:center;gap:5px;margin-left:auto;
-}
-.kk-spar i{
-  display:inline-flex;align-items:center;height:20px;padding:0 7px;
-  border-radius:999px;font-family:var(--mono);font-style:normal;
-  font-size:9px;font-weight:600;letter-spacing:.06em;
-  color:color-mix(in oklab,var(--sp) 68%,#231D1F);
-  background:color-mix(in oklab,var(--sp) 11%,#fff);
-  border:1px solid color-mix(in oklab,var(--sp) 26%,transparent);
-}
-
-/* Titel */
-.kk-namn{
-  margin:16px 0 0!important;
-  font-size:23px!important;line-height:1.14!important;
-  font-weight:680!important;letter-spacing:-.032em!important;
-  color:var(--sida-ink)!important;
-  text-wrap:balance;
-}
-
-/* Områden: tre exempel och en dämpad räknare i stället för en lång kedja. */
-/* Områdena sätts som löptext på exakt två rader. Det ger korten samma
-   höjd oavsett hur långa områdesnamnen är, och ersätter den tidigare
-   brickmattan som gjorde alla kort visuellt lika. */
-.kk-taggar{
-  display:block!important;
-  margin-top:11px!important;min-height:2.9em;max-width:100%!important;
-  font-family:var(--las)!important;font-size:13.5px!important;line-height:1.45!important;
-  color:#6E6764!important;
-}
-.kk-mer{
-  white-space:nowrap;font-family:var(--mono);font-size:11px;
-  letter-spacing:.02em;color:var(--sida-tyst);
-}
-.kk-tag{
-  display:inline!important;min-height:0!important;height:auto!important;
-  padding:0!important;border:0!important;background:none!important;
-  font:inherit!important;letter-spacing:0!important;color:inherit!important;
-}
-.kk-tag + .kk-tag::before{
-  content:"\00a0\00b7\00a0";color:#C4BDB9;
-}
-.kurskort:hover .kk-tag{transform:none!important;background:none!important;border:0!important}
-
-/* Fot */
-.kk-fot{
-  align-items:center!important;
-  min-height:0!important;margin-top:auto!important;padding-top:15px!important;
-  border-top:1px solid var(--sida-linje-svag)!important;
-}
-.kk-status,.kk-meta{
-  margin:0!important;
-  font-family:var(--mono)!important;font-size:10px!important;font-weight:500!important;
-  letter-spacing:.1em!important;text-transform:uppercase!important;
-  color:var(--sida-tyst)!important;
-}
-.kk-status::before{display:none!important}
-.kk-action{
-  width:36px!important;height:36px!important;flex:0 0 36px!important;
-  border:1px solid var(--sida-linje)!important;
-  background:#fff!important;color:var(--sida-ink-2)!important;
-  box-shadow:none!important;
-  transition:background .22s,color .22s,border-color .22s,transform .3s cubic-bezier(.2,.75,.25,1)!important;
-}
-.kk-action svg{width:17px!important;height:17px!important;stroke-width:2!important}
-.kurskort:hover .kk-action{
-  background:var(--acc)!important;border-color:var(--acc)!important;color:#fff!important;
-  transform:translateX(3px)!important;
-  box-shadow:0 5px 14px -3px color-mix(in oklab,var(--acc) 45%,transparent)!important;
-}
-
-/* Diskret markering i stället för diagonal stämpel. */
-.kk-byggstamp{
-  position:absolute!important;z-index:6!important;
-  left:auto!important;right:20px!important;top:22px!important;bottom:auto!important;
-  width:auto!important;transform:none!important;
-  padding:4px 9px!important;
-  border:1px solid rgba(142,37,25,.20)!important;border-radius:999px!important;
-  background:#FDF2EF!important;color:#8E2519!important;box-shadow:none!important;
-  font-family:var(--mono)!important;font-size:8.5px!important;font-weight:600!important;
-  letter-spacing:.13em!important;text-transform:uppercase!important;line-height:1.2!important;
-}
-.kurskort[data-ready="false"]{background:#FDFCFB!important}
-
-/* ── Sidfot ── */
-.kv-sidfot{
-  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
-  margin:clamp(44px,6vh,66px) 0 0;padding-top:20px;
-  border-top:1px solid var(--sida-linje-svag);
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--sida-tyst);
-}
-.kv-sidfot b{color:var(--sida-ink-2);font-weight:600}
-
-
-
-/* ── Ingressens dekor: en stiliserad bladstapel som balanserar rubriken ── */
-.kv-blad{display:none}
-@media(min-width:1080px){
-  .kv-designhero{
-    display:grid!important;
-    grid-template-columns:minmax(0,1fr) 300px;
-    align-items:center;
-    gap:48px;
-  }
-  .kv-blad{
-    display:block;position:relative;height:236px;justify-self:end;width:100%;
-    pointer-events:none;
-  }
-  .kv-blad i{
-    position:absolute;display:block;top:50%;left:50%;
-    width:158px;height:212px;border-radius:10px;
-    background:#fff;border:1px solid rgba(27,22,24,.10);
-    box-shadow:0 1px 2px rgba(27,22,24,.04),0 16px 34px -14px rgba(27,22,24,.22);
-  }
-  .kv-blad i:nth-child(1){transform:translate(-50%,-50%) rotate(-8.5deg) translateX(-46px)}
-  .kv-blad i:nth-child(2){transform:translate(-50%,-50%) rotate(-1.5deg)}
-  .kv-blad i:nth-child(3){transform:translate(-50%,-50%) rotate(6.5deg) translateX(46px)}
-  /* Radlinjer och en röd rubrikregel antyder ett utskrivet övningsblad. */
-  .kv-blad i::before{
-    content:"";position:absolute;left:18px;top:20px;width:56px;height:3px;border-radius:99px;
-    background:var(--ed);opacity:.85;
-  }
-  .kv-blad i::after{
-    content:"";position:absolute;left:18px;right:18px;top:38px;height:2px;border-radius:99px;
-    background:rgba(27,22,24,.13);
-    box-shadow:
-      0 14px 0 rgba(27,22,24,.11), 0 28px 0 rgba(27,22,24,.09),
-      0 42px 0 rgba(27,22,24,.07), 0 62px 0 rgba(27,22,24,.11),
-      0 76px 0 rgba(27,22,24,.09), 0 90px 0 rgba(27,22,24,.07),
-      0 110px 0 rgba(27,22,24,.10), 0 124px 0 rgba(27,22,24,.08);
-  }
-  .kv-blad i:nth-child(3)::before{background:#2C62A8;opacity:.75}
-  .kv-blad i:nth-child(1)::before{background:#2E7D52;opacity:.7}
-}
-@media(max-width:1080px){
-  .kv-kortgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:700px){
-  .kv-inner{padding:24px 20px 44px!important}
-  .kv-nav{margin-bottom:34px!important;padding-bottom:15px}
-  .kv-designhero{margin-bottom:32px!important}
-  .kv-designhero h2{font-size:clamp(30px,8.4vw,40px)!important;max-width:none!important}
-  .kv-designhero .kv-designhero-sub{font-size:15px!important;margin-top:14px!important;line-height:1.55!important}
-  .kv-fakta{gap:7px 16px;margin-top:20px;font-size:9.5px}
-  .kv-kortgrid{grid-template-columns:1fr!important;gap:13px!important}
-  .kurskort{padding:20px 20px 17px 26px!important;border-radius:14px!important}
-  .kk-namn{font-size:21px!important;margin-top:14px!important}
-  .kk-taggar{min-height:0!important}
-  .kk-fot{margin-top:16px!important}
-  .kv-sidfot{flex-direction:column;align-items:flex-start;gap:7px}
-}
-@media (prefers-reduced-motion:reduce){
-  .kurskort,.kk-action,.kk-rygg,.kk-tag{transition:none!important}
-  .kurskort:hover{transform:none!important}
-  .kurskort:hover .kk-action{transform:none!important}
-}
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -2204,20 +1843,18 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
         <span class="kv-logo-shell"><img src="logo.png" alt="Erik Dahlbergsgymnasiet"></span>
         <span class="kv-brandtext">
           <span class="kv-brandname">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-          <span class="kv-brandmeta">Matematik &amp; fysik</span>
         </span>
       </div>
     </header>
 
     <section class="kv-designhero" aria-label="Introduktion">
       <div class="kv-designhero-copy">
-        <p class="kv-oga">Uppgiftsbank</p>
-        <h2>Bygg prov och <span>övningsblad</span> på minuter.</h2>
-        <p class="kv-designhero-sub">Välj kurs, filtrera på område, nivå och poäng, redigera uppgifterna
-        och skriv ut med eller utan facit.</p>
-        <p class="kv-fakta" id="kvFakta"></p>
+        <h2>Bygg ett <span>prov eller övningsblad.</span></h2>
+        <p class="kv-designhero-sub">Välj kurs för att börja</p>
       </div>
-      <div class="kv-blad" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="kv-designhero-art" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
     </section>
 
     <section class="kv-kurssektion" aria-labelledby="kvKurserRubrik">
@@ -2227,11 +1864,6 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
       <div class="kv-kort" id="kvKort"></div>
       <p class="kv-fel" id="kvFel" hidden></p>
     </section>
-
-    <footer class="kv-sidfot">
-      <span>Erik Dahlbergsgymnasiet &middot; <b>Uppgiftsbanken</b></span>
-      <span id="kvVersion"></span>
-    </footer>
   </div>
 </div>
 
@@ -2680,45 +2312,18 @@ function LOS(html){
 
 /* ═══ kursväljaren ═══ */
 function ritaKursval(){
-  /* Titeln delas upp så att nivån blir en egen markör i stället för att
-     upprepas i rubriken. "Fysik - nivå 2" blir rubriken "Fysik" plus "Nivå 2". */
-  const delaTitel=t=>{
-    const m=/^(.*?)\s*[-–]\s*niv[åa]\s*(\S+)\s*$/i.exec(t);
-    return m?{namn:m[1].trim(),niva:m[2]}:{namn:t,niva:null};
-  };
-  /* Områdena skrivs som löptext. Listan kortas på hela områdesnamn i
-     stället för att klippas mitt i ett ord, och resten summeras. */
-  const OMR_BUDGET=58;
-  const kortaOmraden=lista=>{
-    const visade=[]; let langd=0;
-    for(const t of lista){
-      const ny=langd+(visade.length?3:0)+t.length;
-      if(visade.length && ny>OMR_BUDGET) break;
-      visade.push(t); langd=ny;
-    }
-    if(!visade.length && lista.length) visade.push(lista[0]);
-    return {visade, kvar:lista.length-visade.length};
-  };
-  const kortHTML=k=>{
-    const {namn,niva}=delaTitel(k.titel);
-    const taggar=k.taggar||[];
-    const omr=kortaOmraden(taggar);
-    const spår=(k.spår||[]).map(s=>
-      `<i style="--sp:${s.färg||k.färg||'#B43123'}">${s.etikett}</i>`).join('');
-    return `
+  const kortHTML=k=>`
     <button class="kurskort" type="button" data-kurs="${k.id}" data-ready="${!!k.data}" aria-label="Öppna ${k.titel}" style="--acc:${k.färg||'#B43123'};--rygg:${k.rygg||k.färg||'#B43123'}">
       <span class="kk-rygg" aria-hidden="true"></span>
-      ${k.underUppbyggnad?`<span class="kk-byggstamp">Under uppbyggnad</span>`:''}
+      ${k.underUppbyggnad?`<span class="kk-byggstamp" aria-label="Under uppbyggnad">Under uppbyggnad</span>`:''}
       <span class="kk-top">
-        <span class="kk-index">Nivå ${niva||k.siffra}</span>
-        ${spår?`<span class="kk-spar" aria-hidden="true">${spår}</span>`:''}
+        <span class="kk-index">Nivå ${k.siffra}</span>
+        <span class="kk-number" aria-hidden="true">0${k.siffra}</span>
       </span>
-      <span class="kk-namn">${namn}</span>
-      <span class="kk-taggar" title="${taggar.join(' · ')}">${
-        omr.visade.map(t=>`<span class="kk-tag">${t}</span>`).join('')}${
-        omr.kvar>0?`<span class="kk-mer"> +${omr.kvar} till</span>`:''}</span>
+      <span class="kk-namn">${k.titel}</span>
+      <span class="kk-taggar">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
       <span class="kk-fot">
-        <span class="kk-meta">${k.data?`${k.data.bank.length} uppgifter`:`${taggar.length} områden`}</span>
+        ${k.data?`<span class="kk-status">${k.data.bank.length} uppgifter redo</span>`:''}
         <span class="kk-action" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4.5 12h14M14 7.5l4.5 4.5-4.5 4.5"/>
@@ -2726,7 +2331,6 @@ function ritaKursval(){
         </span>
       </span>
     </button>`;
-  };
 
   const grupper=[
     {namn:'Fysik',kurser:KURSER.filter(k=>k.id.startsWith('fy'))},
@@ -2741,28 +2345,6 @@ function ritaKursval(){
       </div>
       <div class="kv-kortgrid">${g.kurser.map(kortHTML).join('')}</div>
     </section>`).join('');
-
-  /* Faktaraden räknas fram ur KURSER så att den aldrig kan bli inaktuell. */
-  const fakta=$('#kvFakta');
-  if(fakta){
-    const omr=new Set();
-    KURSER.forEach(k=>(k.taggar||[]).forEach(t=>omr.add(t)));
-    fakta.innerHTML=[
-      `<b>${KURSER.length}</b>&nbsp;kurser`,
-      `<b>${grupper.length}</b>&nbsp;ämnen`,
-      `<b>${omr.size}</b>&nbsp;områden`,
-      `Facit till varje uppgift`
-    ].map(t=>`<span>${t}</span>`).join('');
-  }
-  const ver=$('#kvVersion');
-  if(ver){
-    const d=/^(\d{4})-(\d{2})-(\d{2})/.exec(BANK_VERSION);
-    const mån=['januari','februari','mars','april','maj','juni','juli',
-               'augusti','september','oktober','november','december'];
-    ver.textContent=d
-      ? `Uppdaterad ${+d[3]} ${mån[+d[2]-1]} ${d[1]}`
-      : 'Uppdaterad '+BANK_VERSION;
-  }
 
   $$('.kurskort').forEach(kort=>{
     kort.addEventListener('pointermove',e=>{
