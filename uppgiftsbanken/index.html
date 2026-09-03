@@ -1236,8 +1236,12 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .pu p:last-child{margin-bottom:0}
   #utskrift .pu .fig{margin-top:2pt!important}
   #utskrift .fu p{margin:0 0 3pt}
-  #utskrift .pp{float:right;font-family:var(--mono);font-size:9.5pt;color:#444;margin-left:10pt}
-  #utskrift .nivåmärke{float:right;margin-left:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+  #utskrift .utskriftsmeta{float:right;display:inline-flex;align-items:center;gap:5pt;margin-left:10pt;white-space:nowrap}
+  #utskrift .utskriftsverktyg{display:inline-flex;align-items:center;gap:3.5pt;color:#444}
+  #utskrift .utskriftsikon{display:inline-flex;align-items:center;justify-content:center;width:14pt;height:14pt}
+  #utskrift .utskriftsikon svg{display:block;width:13pt;height:13pt;overflow:visible}
+  #utskrift .pp{float:none;font-family:var(--mono);font-size:9.5pt;color:#444;margin-left:0}
+  #utskrift .nivåmärke{float:none;margin-left:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;
     font-family:var(--mono);font-size:9pt;font-weight:700;letter-spacing:.03em;
     border-radius:4pt;padding:1.5pt 6pt;line-height:1.5}
   #utskrift .nivåmärke.E{background:var(--nE-bg);color:var(--nE)}
@@ -4034,6 +4038,21 @@ function trimmaUtskriftsFigurer(root){
 }
 
 /* ── export ── */
+function utskriftsVerktyg(x){
+  const delar=[];
+  const taggad=k=>Object.prototype.hasOwnProperty.call(x||{},k);
+  if(taggad('miniräknare')){
+    if(x['miniräknare']){
+      delar.push(`<span class="utskriftsikon" title="Miniräknare tillåten" aria-label="Miniräknare tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
+    }else{
+      delar.push(`<span class="utskriftsikon" title="Miniräknare inte tillåten" aria-label="Miniräknare inte tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/><path d="M2.6 21.4 21.4 2.6" stroke="#fff" stroke-width="4.4"/><path d="M2.6 21.4 21.4 2.6" stroke-width="2.4"/></svg></span>`);
+    }
+  }
+  if(x?.geogebra){
+    delar.push(`<span class="utskriftsikon" title="GeoGebra tillåtet" aria-label="GeoGebra tillåtet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>`);
+  }
+  return delar.length?`<span class="utskriftsverktyg">${delar.join('')}</span>`:'';
+}
 function bladHTML({facit}){
   const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
   const vp=state.visaPoäng;
@@ -4050,7 +4069,9 @@ function bladHTML({facit}){
     const märke=vp
       ? `<span class="pp">${x.poang}</span>`
       : `<span class="nivåmärke ${x.niva}">${x.niva}</span>`;
-    h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${märke}${x.t}</div></div>`;
+    const verktyg=utskriftsVerktyg(x);
+    const meta=(verktyg||märke)?`<span class="utskriftsmeta">${verktyg}${märke}</span>`:'';
+    h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${meta}${x.t}</div></div>`;
   });
   if(facit){
     h+=`<div class="fk"><h1 style="font-size:14pt;margin-bottom:12pt">Facit</h1>`;
@@ -4134,8 +4155,12 @@ $('#expWord').addEventListener('click',()=>{
       .pm{font-size:9.5pt;color:#444}
       .pu{margin-bottom:14pt}
       .pn{font-weight:bold;float:left;width:26pt}
-      .pp{float:right;font-size:9.5pt;color:#444}
-      .nivåmärke{float:right;margin-left:10pt;font-weight:bold;font-size:9pt;letter-spacing:.3pt;
+      .utskriftsmeta{float:right;display:inline-flex;align-items:center;gap:5pt;margin-left:10pt;white-space:nowrap}
+      .utskriftsverktyg{display:inline-flex;align-items:center;gap:3.5pt;color:#444}
+      .utskriftsikon{display:inline-flex;align-items:center;justify-content:center;width:14pt;height:14pt}
+      .utskriftsikon svg{display:block;width:13pt;height:13pt}
+      .pp{float:none;font-size:9.5pt;color:#444}
+      .nivåmärke{float:none;margin-left:0;font-weight:bold;font-size:9pt;letter-spacing:.3pt;
         border-radius:4pt;padding:1.5pt 7pt}
       .nivåmärke.E{background:#E9F3EF;color:#0F6B4F}
       .nivåmärke.C{background:#EAF0F8;color:#2A5D9E}
