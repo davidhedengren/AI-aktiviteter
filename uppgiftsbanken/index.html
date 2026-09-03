@@ -2471,6 +2471,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 
     <div class="bladfot">
       <label class="växel"><input type="checkbox" id="taMedFacit" checked> Ta med facit</label>
+      <label class="växel"><input type="checkbox" id="visaHjälpmedelExport" checked> Visa symbol för digitalt hjälpmedel</label>
       <div class="exportrad">
         <button class="knapp primär" id="expPdf">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V4h12v5M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>
@@ -4167,7 +4168,7 @@ function utskriftsVerktyg(x){
   }
   return delar.length?`<span class="utskriftsverktyg">${delar.join('')}</span>`:'';
 }
-function bladHTML({facit}){
+function bladHTML({facit,hjalpmedel=true}){
   const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
   const vp=state.visaPoäng;
   const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
@@ -4183,7 +4184,7 @@ function bladHTML({facit}){
     const märke=vp
       ? `<span class="pp">${x.poang}</span>`
       : `<span class="nivåmärke ${x.niva}">${x.niva}</span>`;
-    const verktyg=utskriftsVerktyg(x);
+    const verktyg=hjalpmedel?utskriftsVerktyg(x):'';
     const meta=(verktyg||märke)?`<span class="utskriftsmeta">${verktyg}${märke}</span>`:'';
     h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${meta}${x.t}</div></div>`;
   });
@@ -4196,7 +4197,7 @@ function bladHTML({facit}){
 }
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
-  u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  u.innerHTML=bladHTML({facit:$('#taMedFacit').checked,hjalpmedel:$('#visaHjälpmedelExport').checked});
   /* Renderar KaTeX i DOM innan elementets geometri mäts. */
   renderKatex(u);
 
@@ -4229,7 +4230,7 @@ $('#expPdf').addEventListener('click',()=>{
 $('#expWord').addEventListener('click',()=>{
   const temp=document.createElement('div');
   temp.style.cssText='position:fixed;left:-100000px;top:0;width:180mm;background:#fff';
-  temp.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  temp.innerHTML=bladHTML({facit:$('#taMedFacit').checked,hjalpmedel:$('#visaHjälpmedelExport').checked});
   document.body.appendChild(temp);
   /* Rendera KaTeX medan temp-elementet är i DOM:en så att HTML-resultatet */
   /* innehåller KaTeX-spans som fungerar utan externa resurser i Word        */
