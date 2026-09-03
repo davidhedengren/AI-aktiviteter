@@ -766,6 +766,10 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .verktygsikon svg{width:12.5px;height:12.5px;display:block}
 .verktygsikon.räknare{background:#F5F1EA;color:#725B38;border-color:#E7DDCD}
 .verktygsikon.geogebra{background:#EDF2F9;color:#315F99;border-color:#DCE5F2}
+/* Räknaren med snedstreck tonas neutralt, så att den inte förväxlas med
+   den bruna "tillåten"-ikonen i en snabb blick nedför listan. */
+.verktygsikon.utan-räknare{background:#F1F0F2;color:#5C575E;border-color:#DEDCE0}
+.verktygsikon.utan-räknare .urtag{stroke:#F1F0F2}
 .bmeta .verktygsikon{width:18px;height:18px;border-radius:5px}
 .bmeta .verktygsikon svg{width:11px;height:11px}
 @media(max-width:680px){
@@ -2729,7 +2733,15 @@ function synkaHjälpknappar(){
 }
 function verktygsIkoner(x){
   const delar=[];
-  if(x?.['miniräknare']) delar.push(`<span class="verktygsikon räknare" title="Miniräknare tillåten" aria-label="Miniräknare tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
+  /* Kurser utan hjälpmedelstaggar ska inte få någon ikon alls. Att fältet
+     saknas är inte samma sak som att hjälpmedlet är otillåtet. */
+  const taggad=k=>Object.prototype.hasOwnProperty.call(x||{},k);
+  if(taggad('miniräknare')){
+    if(x['miniräknare'])
+      delar.push(`<span class="verktygsikon räknare" title="Miniräknare tillåten" aria-label="Miniräknare tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg></span>`);
+    else
+      delar.push(`<span class="verktygsikon utan-räknare" title="Miniräknare inte tillåten" aria-label="Miniräknare inte tillåten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8v3H8zM8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/><path d="M2.6 21.4 21.4 2.6" class="urtag" stroke-width="4.4"/><path d="M2.6 21.4 21.4 2.6" stroke-width="2.4"/></svg></span>`);
+  }
   if(x?.geogebra) delar.push(`<span class="verktygsikon geogebra" title="GeoGebra tillåtet" aria-label="GeoGebra tillåtet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5M4 19.5h16"/><path d="M6.5 15.5c2-4.5 4-6 6-4.2 1.7 1.5 2.8.3 5-4.8"/><circle cx="6.5" cy="15.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.3" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>`);
   return delar.length?`<span class="verktygsikoner">${delar.join('')}</span>`:'';
 }
