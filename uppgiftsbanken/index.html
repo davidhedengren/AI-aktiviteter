@@ -2283,7 +2283,6 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
 </head>
 <body class="password-locked">
 
@@ -4491,11 +4490,14 @@ $('#expPdf').addEventListener('click',()=>{
   });
 });
 
-/* ── Word-export · provlayout ────────────────────────────────────────────
-   Layouten följer skolans provmall: logotyp + namn/klass, tydlig provrubrik,
-   datum, informationsblock, instruktionsrad och en tunn skiljelinje mellan
-   uppgifterna. Hjälpmedel anges inte i provhuvudet; eventuella task-specifika
-   hjälpmedelssymboler styrs fortfarande av exportens befintliga toggle. */
+/* ── Word-export · äkta OOXML/DOCX ───────────────────────────────────────
+   Exporten använder docx.js och skapar riktiga Word-element i document.xml.
+   Ingen altChunk, MHTML eller HTML ligger inuti DOCX-filen. Det gör filen
+   kompatibel även med Word på Android/iPhone. Texten är redigerbar; formler
+   och figurer bäddas in som PNG för att behålla exakt utseende. */
+
+let WORD_DOCX_LIB=null;
+let WORD_H2C_READY=null;
 
 function wordEsc(s){
   return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -4506,8 +4508,7 @@ function wordDatum(raw){
   if(Number.isNaN(d.getTime())) return raw;
   const veckodag=new Intl.DateTimeFormat('sv-SE',{weekday:'long'}).format(d);
   const manad=new Intl.DateTimeFormat('sv-SE',{month:'long'}).format(d);
-  const v=veckodag.charAt(0).toUpperCase()+veckodag.slice(1);
-  return `${v} den ${d.getDate()} ${manad} ${d.getFullYear()}`;
+  return `${veckodag.charAt(0).toUpperCase()+veckodag.slice(1)} den ${d.getDate()} ${manad} ${d.getFullYear()}`;
 }
 function wordProvMeta(){
   const p={E:0,C:0,A:0};
@@ -4517,107 +4518,81 @@ function wordProvMeta(){
   });
   return {p,tot:p.E+p.C+p.A};
 }
-function wordTaskMeta(x,totalEndast=false){
-  if(totalEndast) return `<span class="word-points">(${totalpoang(x)} p)</span>`;
-  if(state.visaPoäng) return `<span class="word-points">(${wordEsc(x.poang)})</span>`;
-  return `<span class="word-level word-${wordEsc((x.niva||'E').split('/')[0])}">${wordEsc(x.niva||'')}</span>`;
+function wordMetaText(x,totalEndast=false){
+  if(totalEndast) return `${totalpoang(x)} p`;
+  if(state.visaPoäng) return x.poang||'';
+  return x.niva||'';
 }
-function wordProvKropp({facit=false,hjalpmedel=true,totalEndast=false,typ=dokumentTyp()}={}){
-  const fallback=typ==='prov'?'Prov':'Övningsblad';
-  const titel=($('#bTitel').value||fallback).trim();
-  const klass=($('#bKlass').value||'').trim();
-  const datum=wordDatum($('#bDatum').value);
-  const meta=wordProvMeta();
-
-  let h=`<div class="word-page">`;
-
-  if(typ==='prov'){
-    h+=`
-      <table class="word-top" role="presentation">
-        <tr>
-          <td class="word-logo"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"></td>
-          <td class="word-ident">
-            <div class="word-ident-row"><b>Namn:</b><span class="word-line">&nbsp;</span></div>
-            <div class="word-ident-row"><b>Klass:</b><span class="word-line">${wordEsc(klass)}</span></div>
-          </td>
-        </tr>
-      </table>
-
-      <h1 class="word-title">${wordEsc(titel)}</h1>
-      ${datum?`<div class="word-date">${wordEsc(datum)}</div>`:''}
-      <div class="word-rule"></div>
-
-      <div class="word-notice">BETYGET PÅ DETTA PROV ÄR EN RIKTLINJE, EN PROGNOS, PÅ HUR VÄL ELEVEN UPPFYLLER
-      KRITERIERNA FÖR ETT BETYG VID KURSENS SLUT. ETT BETYG PÅ HELA KURSEN SÄTTS VID KURSENS
-      SLUT, INNAN DESS FINNS ALLTID MÖJLIGHET TILL FÖRBÄTTRING.</div>
-
-      <div class="word-max"><b>MAX:</b> ${meta.tot} POÄNG</div>
-      ${totalEndast?'':`<div class="word-distribution">Poängfördelning: ${meta.p.E} E &nbsp;·&nbsp; ${meta.p.C} C &nbsp;·&nbsp; ${meta.p.A} A</div>`}
-
-      <div class="word-instruction">REDOVISA MED FULLSTÄNDIGA LÖSNINGAR OM INGET ANNAT ANGES. SKRIV SVAR.</div>`;
-  }else{
-    h+=`
-      <table class="word-sheet-top" role="presentation">
-        <tr>
-          <td><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"></td>
-          <td class="word-sheet-head">
-            <h1>${wordEsc(titel)}</h1>
-            <div class="word-sheet-meta">${[AKTIV?AKTIV.titel:'',klass,datum].filter(Boolean).map(wordEsc).join(' · ')}</div>
-            ${totalEndast?`<div class="word-sheet-count">${state.blad.length} uppgifter · ${meta.tot} poäng</div>`:`<div class="word-sheet-count">${state.blad.length} uppgifter</div>`}
-          </td>
-        </tr>
-      </table>`;
+async function wordLaddaDocxBibliotek(){
+  if(WORD_DOCX_LIB) return WORD_DOCX_LIB;
+  try{
+    WORD_DOCX_LIB=await import('https://cdn.jsdelivr.net/npm/docx@9.5.1/+esm');
+    return WORD_DOCX_LIB;
+  }catch(e){
+    console.error('Kunde inte ladda docx.js',e);
+    throw new Error('Word-biblioteket kunde inte laddas. Kontrollera internetanslutningen och försök igen.');
   }
-
-  h+=`<div class="word-tasks">`;
-  state.blad.forEach((x,i)=>{
-    const verktyg=hjalpmedel?utskriftsVerktyg(x):'';
-    h+=`<div class="word-task">
-      <table class="word-task-grid" role="presentation">
-        <tr>
-          <td class="word-num">${i+1}.</td>
-          <td class="word-content">${x.t}</td>
-          <td class="word-task-meta">${verktyg}${wordTaskMeta(x,totalEndast)}</td>
-        </tr>
-      </table>
-    </div>`;
+}
+async function wordLaddaHtml2Canvas(){
+  if(window.html2canvas) return window.html2canvas;
+  if(WORD_H2C_READY) return WORD_H2C_READY;
+  WORD_H2C_READY=new Promise((resolve,reject)=>{
+    const sc=document.createElement('script');
+    sc.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+    sc.onload=()=>resolve(window.html2canvas);
+    sc.onerror=()=>reject(new Error('Kunde inte ladda bildrenderaren.'));
+    document.head.appendChild(sc);
   });
-  h+=`</div>`;
-
-  if(facit){
-    h+=`<div class="word-answer-key"><h1>Facit</h1>`;
-    state.blad.forEach((x,i)=>{
-      h+=`<div class="word-answer"><b>${i+1}.</b> ${LOS(x.s)}</div>`;
-    });
-    h+=`</div>`;
-  }
-  return h+`</div>`;
+  return WORD_H2C_READY;
 }
-
-function wordBildDataUrl(blob){
-  return new Promise((ok,fel)=>{
-    const r=new FileReader();
-    r.onload=()=>ok(r.result);
-    r.onerror=fel;
-    r.readAsDataURL(blob);
+function wordDataUrlBytes(dataUrl){
+  const b64=String(dataUrl).split(',')[1]||'';
+  const bin=atob(b64);
+  const out=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i);
+  return out;
+}
+async function wordUrlTillDataUrl(url){
+  if(!url) return null;
+  if(url.startsWith('data:')) return url;
+  const r=await fetch(url);
+  if(!r.ok) throw new Error('Bild kunde inte hämtas.');
+  const blob=await r.blob();
+  return await new Promise((resolve,reject)=>{
+    const fr=new FileReader();
+    fr.onload=()=>resolve(fr.result);
+    fr.onerror=reject;
+    fr.readAsDataURL(blob);
   });
 }
-async function wordSvgTillPng(svg){
+async function wordRenderElementTillPng(el,{maxWidth=640,scale=2}={}){
+  const h2c=await wordLaddaHtml2Canvas();
+  const c=await h2c(el,{
+    backgroundColor:'#ffffff',
+    scale,
+    logging:false,
+    useCORS:true,
+    allowTaint:false
+  });
+  const ratio=Math.min(1,maxWidth/c.width);
+  return {
+    data:wordDataUrlBytes(c.toDataURL('image/png')),
+    width:Math.max(1,Math.round(c.width*ratio)),
+    height:Math.max(1,Math.round(c.height*ratio))
+  };
+}
+async function wordSvgTillPngData(svg,maxWidth=640){
   const rect=svg.getBoundingClientRect();
   const vb=svg.viewBox?.baseVal;
   let w=Math.max(40,Math.round(rect.width||vb?.width||500));
   let h=Math.max(30,Math.round(rect.height||vb?.height||300));
-  const maxW=1300, scale=Math.min(2.2,maxW/w);
-  const cw=Math.max(1,Math.round(w*scale)), ch=Math.max(1,Math.round(h*scale));
-
-  const klon=svg.cloneNode(true);
-  if(!klon.getAttribute('xmlns')) klon.setAttribute('xmlns','http://www.w3.org/2000/svg');
-  klon.setAttribute('width',w);
-  klon.setAttribute('height',h);
-  const xml=new XMLSerializer().serializeToString(klon);
-  const blob=new Blob([xml],{type:'image/svg+xml;charset=utf-8'});
+  const pxScale=Math.min(2.2,1300/w);
+  const cw=Math.max(1,Math.round(w*pxScale)), ch=Math.max(1,Math.round(h*pxScale));
+  const clone=svg.cloneNode(true);
+  if(!clone.getAttribute('xmlns')) clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  clone.setAttribute('width',w); clone.setAttribute('height',h);
+  const blob=new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'});
   const url=URL.createObjectURL(blob);
-
   try{
     const im=new Image();
     await new Promise((ok,fel)=>{im.onload=ok;im.onerror=fel;im.src=url;});
@@ -4626,218 +4601,390 @@ async function wordSvgTillPng(svg){
     const ctx=c.getContext('2d');
     ctx.fillStyle='#fff';ctx.fillRect(0,0,cw,ch);
     ctx.drawImage(im,0,0,cw,ch);
-    return {src:c.toDataURL('image/png'),width:w,height:h};
-  }finally{
-    URL.revokeObjectURL(url);
-  }
+    const ratio=Math.min(1,maxWidth/w);
+    return {
+      data:wordDataUrlBytes(c.toDataURL('image/png')),
+      width:Math.max(1,Math.round(w*ratio)),
+      height:Math.max(1,Math.round(h*ratio))
+    };
+  }finally{ URL.revokeObjectURL(url); }
 }
-async function wordBaddaInBilder(root){
-  /* Inline-SVG är huvudorsaken till att figurer tidigare försvann i Word.
-     Rasterisera dem till skarpa PNG-bilder innan DOCX-filen byggs. */
-  for(const svg of [...root.querySelectorAll('svg')]){
+function wordTemp(html,width=650){
+  const d=document.createElement('div');
+  d.className='word-native-temp';
+  d.style.cssText=`position:fixed;left:-100000px;top:0;width:${width}px;background:#fff;color:#111;font-family:Arial,sans-serif;font-size:16px;line-height:1.35;padding:0`;
+  d.innerHTML=html;
+  document.body.appendChild(d);
+  renderKatex(d);
+  return d;
+}
+async function wordRastreraSpecial(root){
+  await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));
+  trimmaUtskriftsFigurer(root);
+
+  /* KaTeX-formler rasteriseras separat så övrig text förblir redigerbar. */
+  for(const k of [...root.querySelectorAll('.katex')]){
     try{
-      const png=await wordSvgTillPng(svg);
+      const bild=await wordRenderElementTillPng(k,{maxWidth:600,scale:2.2});
       const img=document.createElement('img');
-      img.src=png.src;
-      img.alt=svg.getAttribute('aria-label')||'Figur';
-      img.style.cssText=`width:${Math.round(png.width)}px;max-width:100%;height:auto;display:inline-block;vertical-align:middle`;
-      svg.replaceWith(img);
+      img.src='data:image/png;base64,'+btoa(String.fromCharCode(...bild.data));
+      img.dataset.wordWidth=bild.width;
+      img.dataset.wordHeight=bild.height;
+      img.dataset.wordMath='1';
+      img.alt=k.querySelector('annotation[encoding="application/x-tex"]')?.textContent||'formel';
+      k.replaceWith(img);
     }catch(e){
-      /* Om en enstaka ikon inte kan rasteriseras ska resten av provet ändå exporteras. */
-      svg.remove();
+      const ann=k.querySelector('annotation[encoding="application/x-tex"]');
+      k.replaceWith(document.createTextNode(ann?.textContent||k.textContent||''));
     }
   }
 
-  /* Gör även vanliga bilder självständiga från webbplatsens URL. */
-  for(const img of [...root.querySelectorAll('img')]){
-    if(!img.src || img.src.startsWith('data:')) continue;
+  /* SVG-figurer rasteriseras i hög upplösning. */
+  for(const svg of [...root.querySelectorAll('svg')]){
     try{
-      const svar=await fetch(img.src);
-      if(!svar.ok) continue;
-      img.src=await wordBildDataUrl(await svar.blob());
+      const bild=await wordSvgTillPngData(svg,620);
+      const img=document.createElement('img');
+      img.src='data:image/png;base64,'+btoa(String.fromCharCode(...bild.data));
+      img.dataset.wordWidth=bild.width;
+      img.dataset.wordHeight=bild.height;
+      img.alt=svg.getAttribute('aria-label')||'Figur';
+      svg.replaceWith(img);
+    }catch(e){ svg.remove(); }
+  }
+
+  /* Vanliga bilder görs självständiga från webbplatsen. */
+  for(const img of [...root.querySelectorAll('img')]){
+    try{
+      if(!img.src.startsWith('data:')) img.src=await wordUrlTillDataUrl(img.src);
+      if(!img.dataset.wordWidth){
+        const r=img.getBoundingClientRect();
+        const naturalW=img.naturalWidth||r.width||500;
+        const naturalH=img.naturalHeight||r.height||300;
+        const ratio=Math.min(1,620/naturalW);
+        img.dataset.wordWidth=Math.max(1,Math.round(naturalW*ratio));
+        img.dataset.wordHeight=Math.max(1,Math.round(naturalH*ratio));
+      }
     }catch(e){}
   }
 }
-function wordForenklaMatematik(root){
-  /* KaTeX innehåller semantisk MathML. Behåll MathML när den finns i stället
-     för att exportera den synliga KaTeX-DOM:en med hundratals CSS-klasser. */
-  root.querySelectorAll('.katex').forEach(el=>{
-    const math=el.querySelector('.katex-mathml math');
-    if(math){
-      const clone=math.cloneNode(true);
-      el.replaceWith(clone);
-    }else{
-      const ann=el.querySelector('annotation[encoding="application/x-tex"]');
-      if(ann){
-        const span=document.createElement('span');
-        span.className='word-math-fallback';
-        span.textContent=ann.textContent;
-        el.replaceWith(span);
-      }
+function wordRunsFranNod(node,docx,stil={}){
+  const {TextRun,ImageRun}=docx;
+  const out=[];
+  if(node.nodeType===Node.TEXT_NODE){
+    const text=node.nodeValue||'';
+    if(text) out.push(new TextRun({text,bold:!!stil.bold,italics:!!stil.italics,size:22,font:'Arial'}));
+    return out;
+  }
+  if(node.nodeType!==Node.ELEMENT_NODE) return out;
+  const tag=node.tagName.toLowerCase();
+  const nästa={
+    ...stil,
+    bold:stil.bold||tag==='strong'||tag==='b',
+    italics:stil.italics||tag==='em'||tag==='i'
+  };
+  if(tag==='br'){
+    out.push(new TextRun({break:1}));
+    return out;
+  }
+  if(tag==='img'){
+    try{
+      const data=wordDataUrlBytes(node.src);
+      const width=Math.min(620,Number(node.dataset.wordWidth)||Math.max(20,node.naturalWidth||120));
+      const h0=Number(node.dataset.wordHeight)||Math.max(20,node.naturalHeight||40);
+      const w0=Number(node.dataset.wordWidth)||Math.max(20,node.naturalWidth||120);
+      const height=Math.max(8,Math.round(h0*(width/w0)));
+      out.push(new ImageRun({data,type:'png',transformation:{width,height}}));
+    }catch(e){
+      if(node.alt) out.push(new TextRun({text:`[${node.alt}]`,italics:true,size:20}));
     }
-  });
+    return out;
+  }
+  for(const ch of node.childNodes) out.push(...wordRunsFranNod(ch,docx,nästa));
+  return out;
 }
-function wordDokumentHTML(kropp,titel){
-  return `<!DOCTYPE html>
-  <html xmlns:o="urn:schemas-microsoft-com:office:office"
-        xmlns:w="urn:schemas-microsoft-com:office:word"
-        xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-        xmlns="http://www.w3.org/TR/REC-html40">
-  <head>
-    <meta charset="utf-8">
-    <title>${wordEsc(titel)}</title>
-    <style>
-      @page WordSection1{
-        size:595.3pt 841.9pt;
-        margin:42pt 46pt 48pt 46pt;
-      }
-      div.WordSection1{page:WordSection1}
-      body{
-        margin:0;
-        color:#111;
-        font-family:Arial,Helvetica,sans-serif;
-        font-size:10.8pt;
-        line-height:1.28;
-      }
-      .word-page{width:100%}
-      table{border-collapse:collapse}
-      .word-top{width:100%;margin:0 0 24pt}
-      .word-top td{border:0;padding:0;vertical-align:top}
-      .word-logo{width:46%}
-      .word-logo img{width:82px;height:auto;display:block}
-      .word-ident{width:54%;padding-top:2pt!important}
-      .word-ident-row{display:block;margin:0 0 13pt;font-size:10.8pt;white-space:nowrap}
-      .word-ident-row b{display:inline-block;width:38pt}
-      .word-line{display:inline-block;width:160pt;min-height:13pt;border-bottom:0.8pt solid #111;padding:0 2pt 1pt}
-      .word-title{font-size:18pt;line-height:1.15;margin:0 0 17pt;font-weight:700}
-      .word-sheet-top{width:100%;margin:0 0 20pt;border-bottom:1.1pt solid #222}
-      .word-sheet-top td{border:0;padding:0 0 12pt;vertical-align:top}
-      .word-sheet-top td:first-child{width:88pt}
-      .word-sheet-top img{width:70px;height:auto;display:block}
-      .word-sheet-head h1{font-size:18pt;line-height:1.15;margin:2pt 0 6pt;font-weight:700}
-      .word-sheet-meta{font-size:9.5pt;color:#333;margin-bottom:3pt}
-      .word-sheet-count{font-size:8.8pt;color:#555}
+async function wordBlockTillElement(block,docx,{indent=0,after=90,bold=false}={}){
+  const {Paragraph,Table,TableRow,TableCell,WidthType,BorderStyle,AlignmentType,ImageRun}=docx;
+  const tag=block.tagName?.toLowerCase();
 
-      .word-date{font-size:11.5pt;font-weight:700;margin:0 0 13pt}
-      .word-rule{border-top:1.1pt solid #111;height:0;margin:0 0 20pt}
-      .word-notice{font-size:8.2pt;line-height:1.35;text-transform:uppercase;margin:0 0 13pt;max-width:98%}
-      .word-max{font-size:9.3pt;text-transform:uppercase;margin-top:2pt}
-      .word-distribution{font-size:8.8pt;margin:2pt 0 26pt;color:#222}
-      .word-instruction{
-        font-size:9.5pt;font-weight:700;text-transform:uppercase;
-        background:#E8E8E8;border-top:1.1pt solid #222;border-bottom:1.1pt solid #222;
-        padding:8pt 6pt 7pt;margin:0 0 14pt;
-      }
-      .word-task{
-        padding:0 0 10pt;margin:0 0 10pt;
-        border-bottom:0.55pt solid #B8B8B8;
-        page-break-inside:avoid;
-      }
-      .word-task-grid{width:100%;table-layout:fixed}
-      .word-task-grid td{border:0;padding:0;vertical-align:top}
-      .word-num{width:25pt;padding:1pt 8pt 0 1pt!important;font-size:10.5pt}
-      .word-content{width:auto;padding-right:7pt!important}
-      .word-task-meta{width:67pt;text-align:right;white-space:nowrap;padding-top:1pt!important;font-size:9.5pt}
-      .word-points{font-size:9.7pt}
-      .word-level{display:inline-block;font-weight:700;font-size:8.7pt;padding:1pt 5pt;border:0.6pt solid #bbb}
-      .word-E{color:#0F6B4F}.word-C{color:#2A5D9E}.word-A{color:#6E3B86}
-      .word-content p{margin:0 0 5pt}
-      .word-content p:last-child{margin-bottom:0}
-      .word-content ol,.word-content ul{margin:4pt 0 5pt 20pt;padding-left:12pt}
-      .word-content li{margin:0 0 3pt}
-      .word-content table.data{border-collapse:collapse;font-size:9.5pt;margin:7pt 0}
-      .word-content table.data th,.word-content table.data td{border:0.7pt solid #777;padding:3pt 7pt}
-      .word-content table.data th{background:#F0F0F0;font-weight:700}
-      .fig{display:block!important;margin:7pt auto 5pt!important;text-align:center;max-width:100%!important}
-      .fig img{display:block;margin:0 auto;max-width:100%!important;height:auto!important}
-      .utskriftsverktyg{display:inline-block;margin-right:5pt;vertical-align:middle}
-      .utskriftsikon{display:inline-block;width:13pt;height:13pt;vertical-align:middle;margin-right:2pt}
-      .utskriftsikon img{max-width:13pt!important;max-height:13pt!important;width:13pt!important;height:13pt!important}
-      math{font-family:'Cambria Math','Times New Roman',serif;font-size:11pt}
-      .word-math-fallback{font-family:'Cambria Math','Times New Roman',serif;font-style:italic}
-      .word-answer-key{page-break-before:always}
-      .word-answer-key h1{font-size:16pt;margin:0 0 14pt}
-      .word-answer{padding:0 0 8pt;margin:0 0 8pt;border-bottom:0.45pt solid #CCC;font-size:10pt}
-      .steg{margin:3pt 0 3pt 20pt}
-      .stegnr{font-weight:700;color:#B43123;margin-right:6pt}
-      .komm{margin-left:20pt;color:#333}
-    </style>
-  </head>
-  <body><div class="WordSection1">${kropp}</div></body></html>`;
-}
-async function wordLaddaDocxBibliotek(){
-  if(window.htmlDocx?.asBlob) return true;
-  return await new Promise(resolve=>{
-    const bef=[...document.scripts].find(s=>/html-docx-js/.test(s.src||''));
-    if(bef){
-      let n=0;
-      const timer=setInterval(()=>{
-        n++;
-        if(window.htmlDocx?.asBlob){clearInterval(timer);resolve(true);}
-        else if(n>40){clearInterval(timer);resolve(false);}
-      },100);
-      return;
+  if(tag==='table'){
+    /* Tabeller renderas som bild för att värden, ramar och matematik ska behållas exakt. */
+    const bild=await wordRenderElementTillPng(block,{maxWidth:610,scale:2});
+    return new Paragraph({
+      alignment:AlignmentType.CENTER,
+      spacing:{before:60,after:100},
+      children:[new ImageRun({data:bild.data,type:'png',transformation:{width:bild.width,height:bild.height}})]
+    });
+  }
+
+  if(tag==='img' || (block.classList&&block.classList.contains('fig'))){
+    const img=tag==='img'?block:block.querySelector('img');
+    if(img){
+      const runs=wordRunsFranNod(img,docx);
+      return new Paragraph({alignment:AlignmentType.CENTER,spacing:{before:60,after:100},children:runs});
     }
-    const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js';
-    s.onload=()=>resolve(Boolean(window.htmlDocx?.asBlob));
-    s.onerror=()=>resolve(false);
-    document.head.appendChild(s);
+  }
+
+  const children=wordRunsFranNod(block,docx,{bold});
+  return new Paragraph({
+    spacing:{after},
+    indent:indent?{left:indent}:undefined,
+    children:children.length?children:[new docx.TextRun('')]
   });
 }
+async function wordHtmlTillParagrapher(html,docx,{indent=0}={}){
+  const root=wordTemp(html,620);
+  try{
+    await wordRastreraSpecial(root);
+    const blocks=[];
+    for(const node of [...root.childNodes]){
+      if(node.nodeType===Node.TEXT_NODE){
+        if(node.nodeValue.trim()){
+          const p=document.createElement('p');p.textContent=node.nodeValue;blocks.push(p);
+        }
+      }else if(node.nodeType===Node.ELEMENT_NODE){
+        const tag=node.tagName.toLowerCase();
+        if(['p','div','table','img','ul','ol','span'].includes(tag)){
+          if(tag==='ul'||tag==='ol'){
+            for(const li of [...node.children]){
+              const p=document.createElement('p');
+              p.innerHTML=(tag==='ol'?`${[...node.children].indexOf(li)+1}. `:'• ')+li.innerHTML;
+              blocks.push(p);
+            }
+          }else if(tag==='span' && !node.classList.contains('fig')){
+            const p=document.createElement('p');p.appendChild(node.cloneNode(true));blocks.push(p);
+          }else blocks.push(node);
+        }
+      }
+    }
+    const out=[];
+    for(const b of blocks) out.push(await wordBlockTillElement(b,docx,{indent}));
+    return out;
+  }finally{root.remove();}
+}
+async function wordBildRunFranUrl(url,docx,width=88){
+  try{
+    const dataUrl=await wordUrlTillDataUrl(url);
+    const data=wordDataUrlBytes(dataUrl);
+    return new docx.ImageRun({data,type:'png',transformation:{width,height:Math.round(width*.78)}});
+  }catch(e){
+    return new docx.TextRun({text:'Erik Dahlbergsgymnasiet',bold:true,size:18});
+  }
+}
+function wordCellBorders(docx,{bottom=false}={}){
+  const {BorderStyle}=docx;
+  const none={style:BorderStyle.NIL,size:0,color:'FFFFFF'};
+  return {
+    top:none,left:none,right:none,
+    bottom:bottom?{style:BorderStyle.SINGLE,size:4,color:'B8B8B8'}:none,
+    insideHorizontal:none,insideVertical:none
+  };
+}
+async function wordSkapaNativeDocx(){
+  const docx=await wordLaddaDocxBibliotek();
+  const {
+    Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,WidthType,
+    AlignmentType,VerticalAlign,BorderStyle,ShadingType,PageBreak
+  }=docx;
+
+  const typ=dokumentTyp();
+  const totalEndast=$('#visaTotalpoangExport').checked;
+  const hjalpmedel=$('#visaHjälpmedelExport').checked;
+  const facit=$('#taMedFacit').checked;
+  const titel=($('#bTitel').value||(typ==='prov'?'Prov':'Övningsblad')).trim();
+  const klass=($('#bKlass').value||'').trim();
+  const datum=wordDatum($('#bDatum').value);
+  const meta=wordProvMeta();
+  const children=[];
+  const logoRun=await wordBildRunFranUrl(LOGO,docx,82);
+  const noBorder=wordCellBorders(docx);
+
+  if(typ==='prov'){
+    children.push(new Table({
+      width:{size:100,type:WidthType.PERCENTAGE},
+      borders:noBorder,
+      rows:[new TableRow({children:[
+        new TableCell({
+          width:{size:46,type:WidthType.PERCENTAGE},borders:noBorder,verticalAlign:VerticalAlign.TOP,
+          children:[new Paragraph({children:[logoRun]})]
+        }),
+        new TableCell({
+          width:{size:54,type:WidthType.PERCENTAGE},borders:noBorder,verticalAlign:VerticalAlign.TOP,
+          children:[
+            new Paragraph({spacing:{after:130},children:[
+              new TextRun({text:'Namn: ',bold:true,size:22}),
+              new TextRun({text:'________________________________',size:22})
+            ]}),
+            new Paragraph({spacing:{after:60},children:[
+              new TextRun({text:'Klass: ',bold:true,size:22}),
+              new TextRun({text:klass||'________________________________',size:22})
+            ]})
+          ]
+        })
+      ]})]
+    }));
+    children.push(new Paragraph({spacing:{before:180,after:120},children:[new TextRun({text:titel,bold:true,size:36,font:'Arial'})]}));
+    if(datum) children.push(new Paragraph({spacing:{after:100},children:[new TextRun({text:datum,bold:true,size:23,font:'Arial'})]}));
+    children.push(new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:8,color:'222222'}},spacing:{after:220},children:[new TextRun('')]}));
+    children.push(new Paragraph({spacing:{after:120},children:[new TextRun({
+      text:'BETYGET PÅ DETTA PROV ÄR EN RIKTLINJE, EN PROGNOS, PÅ HUR VÄL ELEVEN UPPFYLLER KRITERIERNA FÖR ETT BETYG VID KURSENS SLUT. ETT BETYG PÅ HELA KURSEN SÄTTS VID KURSENS SLUT, INNAN DESS FINNS ALLTID MÖJLIGHET TILL FÖRBÄTTRING.',
+      size:17,font:'Arial'
+    })]}));
+    children.push(new Paragraph({spacing:{after:totalEndast?200:30},children:[
+      new TextRun({text:`MAX: ${meta.tot} POÄNG`,bold:true,size:19,font:'Arial'})
+    ]}));
+    if(!totalEndast){
+      children.push(new Paragraph({spacing:{after:210},children:[
+        new TextRun({text:`Poängfördelning: ${meta.p.E} E  ·  ${meta.p.C} C  ·  ${meta.p.A} A`,size:18,font:'Arial'})
+      ]}));
+    }
+    children.push(new Table({
+      width:{size:100,type:WidthType.PERCENTAGE},
+      borders:{
+        top:{style:BorderStyle.SINGLE,size:7,color:'444444'},
+        bottom:{style:BorderStyle.SINGLE,size:7,color:'444444'},
+        left:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        right:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        insideHorizontal:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        insideVertical:{style:BorderStyle.NIL,size:0,color:'FFFFFF'}
+      },
+      rows:[new TableRow({children:[new TableCell({
+        shading:{fill:'E8E8E8',type:ShadingType.CLEAR},
+        margins:{top:100,bottom:90,left:90,right:90},
+        children:[new Paragraph({children:[new TextRun({
+          text:'REDOVISA MED FULLSTÄNDIGA LÖSNINGAR OM INGET ANNAT ANGES. SKRIV SVAR.',
+          bold:true,size:19,font:'Arial'
+        })]})]
+      })]})]
+    }));
+    children.push(new Paragraph({spacing:{after:80},children:[new TextRun('')]}));
+  }else{
+    children.push(new Table({
+      width:{size:100,type:WidthType.PERCENTAGE},
+      borders:{
+        top:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        left:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        right:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        insideHorizontal:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        insideVertical:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
+        bottom:{style:BorderStyle.SINGLE,size:7,color:'333333'}
+      },
+      rows:[new TableRow({children:[
+        new TableCell({width:{size:18,type:WidthType.PERCENTAGE},borders:noBorder,children:[new Paragraph({children:[logoRun]})]}),
+        new TableCell({width:{size:82,type:WidthType.PERCENTAGE},borders:noBorder,children:[
+          new Paragraph({spacing:{after:45},children:[new TextRun({text:titel,bold:true,size:36,font:'Arial'})]}),
+          new Paragraph({spacing:{after:30},children:[new TextRun({
+            text:[AKTIV?AKTIV.titel:'',klass,datum].filter(Boolean).join(' · '),size:19,color:'444444',font:'Arial'
+          })]}),
+          new Paragraph({children:[new TextRun({
+            text:`${state.blad.length} uppgifter${totalEndast?` · ${meta.tot} poäng`:''}`,size:18,color:'666666',font:'Arial'
+          })]})
+        ]})
+      ]})]
+    }));
+    children.push(new Paragraph({spacing:{after:110},children:[new TextRun('')]}));
+  }
+
+  for(let i=0;i<state.blad.length;i++){
+    const x=state.blad[i];
+    const taskParas=await wordHtmlTillParagrapher(x.t,docx,{indent:0});
+
+    let toolRun=null;
+    if(hjalpmedel){
+      const toolHtml=utskriftsVerktyg(x);
+      if(toolHtml){
+        const tmp=wordTemp(toolHtml,120);
+        try{
+          await wordRastreraSpecial(tmp);
+          const img=tmp.querySelector('img');
+          if(img){
+            const data=wordDataUrlBytes(img.src);
+            toolRun=new docx.ImageRun({data,type:'png',transformation:{width:18,height:18}});
+          }
+        }finally{tmp.remove();}
+      }
+    }
+
+    const firstRuns=[
+      new TextRun({text:`${i+1}.`,size:22,font:'Arial'})
+    ];
+    if(toolRun){ firstRuns.push(new TextRun({text:'  '}),toolRun); }
+    firstRuns.push(new TextRun({text:`\t${wordMetaText(x,totalEndast)}`,size:19,font:'Arial'}));
+
+    const header=new Paragraph({
+      tabStops:[{type:'right',position:9000}],
+      spacing:{after:50},
+      children:firstRuns
+    });
+
+    const inner=[header,...taskParas];
+    const border=wordCellBorders(docx,{bottom:true});
+    children.push(new Table({
+      width:{size:100,type:WidthType.PERCENTAGE},
+      borders:border,
+      rows:[new TableRow({
+        cantSplit:true,
+        children:[new TableCell({
+          borders:border,
+          margins:{top:80,bottom:110,left:15,right:15},
+          children:inner
+        })]
+      })]
+    }));
+    children.push(new Paragraph({spacing:{after:55},children:[new TextRun('')]}));
+  }
+
+  if(facit){
+    children.push(new Paragraph({children:[new PageBreak()]}));
+    children.push(new Paragraph({spacing:{after:140},children:[new TextRun({text:'Facit',bold:true,size:32,font:'Arial'})]}));
+    for(let i=0;i<state.blad.length;i++){
+      children.push(new Paragraph({spacing:{before:60,after:40},children:[new TextRun({text:`${i+1}.`,bold:true,size:22,font:'Arial'})]}));
+      children.push(...await wordHtmlTillParagrapher(LOS(state.blad[i].s),docx,{indent:220}));
+      children.push(new Paragraph({
+        border:{bottom:{style:BorderStyle.SINGLE,size:3,color:'D0D0D0'}},
+        spacing:{after:70},
+        children:[new TextRun('')]
+      }));
+    }
+  }
+
+  const doc=new Document({
+    creator:'Uppgiftslabbet',
+    title,
+    description:'Skapat i Uppgiftslabbet',
+    sections:[{
+      properties:{
+        page:{
+          size:{width:11906,height:16838},
+          margin:{top:840,right:920,bottom:960,left:920,header:0,footer:0,gutter:0}
+        }
+      },
+      children
+    }]
+  });
+  return {blob:await Packer.toBlob(doc),titel};
+}
+
 async function exporteraWord(){
   if(!state.blad.length){alert('Lägg först till minst en uppgift i bladet.');return;}
   const knapp=$('#expWord'),gammalText=knapp.innerHTML;
   knapp.disabled=true;
   knapp.textContent='Skapar Word…';
-
-  const temp=document.createElement('div');
-  temp.style.cssText='position:fixed;left:-100000px;top:0;width:670px;background:#fff;color:#000';
-  temp.innerHTML=wordProvKropp({
-    facit:$('#taMedFacit').checked,
-    hjalpmedel:$('#visaHjälpmedelExport').checked,
-    totalEndast:$('#visaTotalpoangExport').checked,
-    typ:dokumentTyp()
-  });
-  document.body.appendChild(temp);
-
   try{
-    renderKatex(temp);
-    await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));
-    trimmaUtskriftsFigurer(temp);
-    await wordBaddaInBilder(temp);
-    wordForenklaMatematik(temp);
-
-    const titel=($('#bTitel').value||'Prov').trim();
-    const html=wordDokumentHTML(temp.innerHTML,titel);
-    const namn=(titel.replace(/[^\wåäöÅÄÖ -]/g,'').trim()||'Prov');
-
-    const harDocx=await wordLaddaDocxBibliotek();
-    let blob,filnamn;
-    if(harDocx){
-      blob=window.htmlDocx.asBlob(html,{
-        orientation:'portrait',
-        margins:{top:840,right:920,bottom:960,left:920,header:0,footer:0,gutter:0}
-      });
-      filnamn=namn+'.docx';
-    }else{
-      /* Reservväg om CDN är blockerat: samma snygga HTML-layout öppnas i Word,
-         men filformatet blir klassisk .doc. */
-      blob=new Blob(['\ufeff'+html],{type:'application/msword'});
-      filnamn=namn+'.doc';
-    }
-
+    const {blob,titel}=await wordSkapaNativeDocx();
+    const namn=(titel.replace(/[^\wåäöÅÄÖ -]/g,'').trim()||'Prov')+'.docx';
+    const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=filnamn;
+    a.href=url;
+    a.download=namn;
+    a.rel='noopener';
     document.body.appendChild(a);
     a.click();
-    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},700);
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),4000);
   }catch(e){
     console.error(e);
-    alert('Word-exporten kunde inte skapas. Prova igen eller ladda om sidan.');
+    alert(e?.message||'Word-exporten kunde inte skapas. Prova igen eller ladda om sidan.');
   }finally{
-    temp.remove();
     knapp.disabled=false;
     knapp.innerHTML=gammalText;
   }
