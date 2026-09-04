@@ -4792,13 +4792,15 @@ $('#expPdf').addEventListener('click',()=>{
 /* ── Word-export · äkta OOXML/DOCX ───────────────────────────────────────
    Exporten använder docx.js och skapar riktiga Word-element i document.xml.
    Ingen altChunk, MHTML eller HTML ligger inuti DOCX-filen. Det gör filen
-   kompatibel även med Word på Android/iPhone. Texten är redigerbar; formler
-   och figurer bäddas in som PNG för att behålla exakt utseende. */
+   kompatibel även med Word på Android/iPhone. Vanlig text och tabeller är
+   redigerbara. KaTeX-formler bäddas in separat och SVG-figurer bäddas som
+   riktiga SVG-objekt med PNG-fallback. */
 
 let WORD_DOCX_LIB=null;
 let WORD_H2C_READY=null;
 let WORD_SANDLÅDA=null;
 const WORD_VERKTYGSCACHE=new Map();
+const WORD_MATTECACHE=new Map();
 
 /* Väntar på nästa bildruta men ger upp efter en kort stund. requestAnimationFrame
    pausas helt i bakgrundsflikar; utan tidsgränsen låser sig exporten om användaren
@@ -4855,6 +4857,7 @@ function wordStängSandlåda(){
   try{ if(WORD_SANDLÅDA&&WORD_SANDLÅDA.ram.isConnected) WORD_SANDLÅDA.ram.remove(); }catch(_){}
   WORD_SANDLÅDA=null;
   WORD_VERKTYGSCACHE.clear();
+  WORD_MATTECACHE.clear();
 }
 
 function wordEsc(s){
@@ -4977,6 +4980,15 @@ async function wordRenderElementTillPng(el,{maxWidth=640,scale=1.45,timeout=2500
     c.height=1;
   }
 }
+
+function wordSvgDataUri(svg){
+  const clone=svg.cloneNode(true);
+  if(!clone.getAttribute('xmlns')) clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  const text=new XMLSerializer().serializeToString(clone);
+  const bytes=new TextEncoder().encode(text);
+  return 'data:image/svg+xml;base64,'+wordBytesTillBase64(bytes);
+}
+
 async function wordSvgTillPngData(svg,maxWidth=640){
   const rect=svg.getBoundingClientRect();
   const vb=svg.viewBox?.baseVal;
@@ -5032,37 +5044,63 @@ async function wordRastreraSpecial(root){
   await wordNästaBildruta();
   trimmaUtskriftsFigurer(root);
 
-  /* KaTeX-formler rasteriseras separat så övrig text förblir redigerbar. */
+  /* Bara själva KaTeX-formeln rasteriseras. Vanlig text förblir riktig
+     Word-text. Formler cachas på LaTeX-källan så samma formel inte behöver
+     renderas flera gånger i ett prov/facit. */
   for(const k of [...root.querySelectorAll('.katex')]){
+    const tex=(k.querySelector('annotation[encoding="application/x-tex"]')?.textContent||'').trim();
+    const nyckel=tex||k.textContent||'';
     try{
-      const bild=await wordRenderElementTillPng(k,{maxWidth:600,scale:2.2});
-      const img=document.createElement('img');
+      let bild=WORD_MATTECACHE.get(nyckel);
+      if(!bild){
+        bild=await wordRenderElementTillPng(k,{maxWidth:600,scale:2.0,timeout:12000});
+        if(nyckel) WORD_MATTECACHE.set(nyckel,bild);
+      }
+      const img=root.ownerDocument.createElement('img');
       img.src='data:image/png;base64,'+wordBytesTillBase64(bild.data);
       img.dataset.wordWidth=bild.width;
       img.dataset.wordHeight=bild.height;
       img.dataset.wordMath='1';
-      img.alt=k.querySelector('annotation[encoding="application/x-tex"]')?.textContent||'formel';
+      img.alt=tex||'formel';
       k.replaceWith(img);
     }catch(e){
-      const ann=k.querySelector('annotation[encoding="application/x-tex"]');
-      k.replaceWith(document.createTextNode(ann?.textContent||k.textContent||''));
+      console.warn('Word-export: formel föll tillbaka till text.',e);
+      k.replaceWith(root.ownerDocument.createTextNode(tex||k.textContent||''));
     }
   }
 
-  /* SVG-figurer rasteriseras i hög upplösning. */
+  /* SVG behålls som SVG i DOCX. Här skapas bara en PNG-reservbild för
+     äldre Word-versioner. SVG och reservbild lagras på ett temporärt img-
+     element, så figuren blir ett eget objekt i Word och kan storleksändras. */
   for(const svg of [...root.querySelectorAll('svg')]){
     try{
-      const bild=await wordSvgTillPngData(svg,620);
-      const img=document.createElement('img');
-      img.src='data:image/png;base64,'+wordBytesTillBase64(bild.data);
-      img.dataset.wordWidth=bild.width;
-      img.dataset.wordHeight=bild.height;
-      img.alt=svg.getAttribute('aria-label')||'Figur';
+      const svgData=wordSvgDataUri(svg);
+      const fallback=await wordSvgTillPngData(svg,620);
+      const img=root.ownerDocument.createElement('img');
+      img.src='data:image/png;base64,'+wordBytesTillBase64(fallback.data);
+      img.dataset.wordSvg=svgData;
+      img.dataset.wordWidth=fallback.width;
+      img.dataset.wordHeight=fallback.height;
+      img.alt=svg.getAttribute('aria-label')||svg.getAttribute('role')||'Figur';
       svg.replaceWith(img);
-    }catch(e){ svg.remove(); }
+    }catch(e){
+      console.warn('Word-export: SVG föll tillbaka till PNG.',e);
+      try{
+        const fallback=await wordSvgTillPngData(svg,620);
+        const img=root.ownerDocument.createElement('img');
+        img.src='data:image/png;base64,'+wordBytesTillBase64(fallback.data);
+        img.dataset.wordWidth=fallback.width;
+        img.dataset.wordHeight=fallback.height;
+        img.alt=svg.getAttribute('aria-label')||'Figur';
+        svg.replaceWith(img);
+      }catch(_){
+        svg.remove();
+      }
+    }
   }
 
-  /* Vanliga bilder görs självständiga från webbplatsen. */
+  /* Vanliga bilder görs självständiga från webbplatsen och förblir egna
+     bildobjekt i Word. */
   for(const img of [...root.querySelectorAll('img')]){
     try{
       if(!img.src.startsWith('data:')) img.src=await wordUrlTillDataUrl(img.src);
@@ -5074,7 +5112,9 @@ async function wordRastreraSpecial(root){
         img.dataset.wordWidth=Math.max(1,Math.round(naturalW*ratio));
         img.dataset.wordHeight=Math.max(1,Math.round(naturalH*ratio));
       }
-    }catch(e){}
+    }catch(e){
+      console.warn('Word-export: bild kunde inte hämtas.',e);
+    }
   }
 }
 function wordRunsFranNod(node,docx,stil={}){
@@ -5098,13 +5138,40 @@ function wordRunsFranNod(node,docx,stil={}){
   }
   if(tag==='img'){
     try{
-      const data=wordDataUrlBytes(node.src);
       const width=Math.min(620,Number(node.dataset.wordWidth)||Math.max(20,node.naturalWidth||120));
       const h0=Number(node.dataset.wordHeight)||Math.max(20,node.naturalHeight||40);
       const w0=Number(node.dataset.wordWidth)||Math.max(20,node.naturalWidth||120);
       const height=Math.max(8,Math.round(h0*(width/w0)));
-      out.push(new ImageRun({data,type:'png',transformation:{width,height}}));
+      const pngData=wordDataUrlBytes(node.src);
+
+      if(node.dataset.wordSvg){
+        /* docx.js stöder SVG direkt, men kräver en rasterfallback för
+           Word-versioner som saknar SVG-stöd. */
+        out.push(new ImageRun({
+          data:node.dataset.wordSvg,
+          type:'svg',
+          fallback:{data:pngData,type:'png'},
+          transformation:{width,height},
+          altText:{
+            name:node.alt||'Figur',
+            description:node.alt||'Figur',
+            title:node.alt||'Figur'
+          }
+        }));
+      }else{
+        out.push(new ImageRun({
+          data:pngData,
+          type:'png',
+          transformation:{width,height},
+          altText:{
+            name:node.alt||'Bild',
+            description:node.alt||'Bild',
+            title:node.alt||'Bild'
+          }
+        }));
+      }
     }catch(e){
+      console.warn('Word-export: bildobjekt kunde inte skapas.',e);
       if(node.alt) out.push(new TextRun({text:`[${node.alt}]`,italics:true,size:20}));
     }
     return out;
@@ -5117,13 +5184,29 @@ async function wordBlockTillElement(block,docx,{indent=0,after=90,bold=false}={}
   const tag=block.tagName?.toLowerCase();
 
   if(tag==='table'){
-    /* Tabeller renderas som bild för att värden, ramar och matematik ska behållas exakt. */
-    const bild=await wordRenderElementTillPng(block,{maxWidth:610,scale:2});
-    return new Paragraph({
-      alignment:AlignmentType.CENTER,
-      spacing:{before:60,after:100},
-      children:[new ImageRun({data:bild.data,type:'png',transformation:{width:bild.width,height:bild.height}})]
-    });
+    /* Riktig Word-tabell: texten kan redigeras och formler/bilder ligger
+       som separata objekt i respektive cell. */
+    const rows=[];
+    for(const tr of [...block.querySelectorAll(':scope > thead > tr, :scope > tbody > tr, :scope > tr')]){
+      const cells=[];
+      for(const cell of [...tr.children].filter(c=>/^(TD|TH)$/.test(c.tagName))){
+        const runs=wordRunsFranNod(cell,docx,{bold:cell.tagName==='TH'});
+        cells.push(new TableCell({
+          margins:{top:55,bottom:55,left:70,right:70},
+          children:[new Paragraph({
+            spacing:{before:0,after:0},
+            children:runs.length?runs:[new docx.TextRun('')]
+          })]
+        }));
+      }
+      if(cells.length) rows.push(new TableRow({children:cells}));
+    }
+    if(rows.length){
+      return new Table({
+        width:{size:100,type:WidthType.PERCENTAGE},
+        rows
+      });
+    }
   }
 
   if(tag==='img' || (block.classList&&block.classList.contains('fig'))){
@@ -5145,62 +5228,108 @@ async function wordHtmlTillParagrapher(html,docx,{indent=0}={}){
   const root=await wordTemp(html,620);
   try{
     await wordNästaBildruta();
-    trimmaUtskriftsFigurer(root);
 
-    /* Komplexa uppgifter renderas som EN bild i stället för en bild per
-       formel/SVG. Det minskar minnesanvändningen kraftigt och undviker att
-       webbläsaren låser sig under Word-export. */
-    const komplex=!!root.querySelector('.katex,svg,img,table,.fig');
-    if(komplex){
-      try{
-        const bild=await wordRenderElementTillPng(root,{maxWidth:610,scale:1.45});
-        return [new docx.Paragraph({
-          spacing:{after:35},
-          indent:indent?{left:indent}:undefined,
-          children:[new docx.ImageRun({
-            data:bild.data,
-            type:'png',
-            transformation:{width:bild.width,height:bild.height}
-          })]
-        })];
-      }catch(e){
-        /* Hellre en uppgift som text än en export som avbryts. */
-        console.warn('Word-export: uppgiften kunde inte ritas som bild.',e);
-        return [new docx.Paragraph({
-          spacing:{after:90},
-          indent:indent?{left:indent}:undefined,
-          children:[new docx.TextRun({text:(root.textContent||'').trim(),size:22,font:'Arial'})]
-        })];
-      }
-    }
+    /* Hybridexport:
+       - vanlig text = riktig Word-text
+       - KaTeX = liten separat formelbild
+       - SVG = riktig SVG med PNG-fallback
+       - vanliga bilder = separata bildobjekt
+       - tabeller = riktiga Word-tabeller
+       Hela uppgiften rasteriseras aldrig. */
+    await wordRastreraSpecial(root);
 
     const blocks=[];
-    for(const node of [...root.childNodes]){
+    const addBlock=node=>{
+      if(!node) return;
       if(node.nodeType===Node.TEXT_NODE){
         if(node.nodeValue.trim()){
-          const q=document.createElement('p');q.textContent=node.nodeValue;blocks.push(q);
+          const q=root.ownerDocument.createElement('p');
+          q.textContent=node.nodeValue;
+          blocks.push(q);
         }
-      }else if(node.nodeType===Node.ELEMENT_NODE){
-        const tag=node.tagName.toLowerCase();
-        if(['p','div','ul','ol','span'].includes(tag)){
-          if(tag==='ul'||tag==='ol'){
-            for(const li of [...node.children]){
-              const q=document.createElement('p');
-              q.innerHTML=(tag==='ol'?`${[...node.children].indexOf(li)+1}. `:'• ')+li.innerHTML;
-              blocks.push(q);
-            }
-          }else if(tag==='span'){
-            const q=document.createElement('p');q.appendChild(node.cloneNode(true));blocks.push(q);
-          }else blocks.push(node);
+        return;
+      }
+      if(node.nodeType!==Node.ELEMENT_NODE) return;
+      const tag=node.tagName.toLowerCase();
+
+      if(tag==='ul'||tag==='ol'){
+        const lis=[...node.children].filter(x=>x.tagName?.toLowerCase()==='li');
+        lis.forEach((li,j)=>{
+          const q=root.ownerDocument.createElement('p');
+          const prefix=tag==='ol'?`${j+1}. `:'• ';
+          q.appendChild(root.ownerDocument.createTextNode(prefix));
+          for(const ch of [...li.childNodes]) q.appendChild(ch.cloneNode(true));
+          blocks.push(q);
+        });
+        return;
+      }
+
+      /* Deluppgifter ska bli separata redigerbara stycken. */
+      if(node.classList?.contains('deluppgifter')){
+        for(const ch of [...node.children]) addBlock(ch);
+        return;
+      }
+
+      if(['p','table','img'].includes(tag)){
+        blocks.push(node);
+        return;
+      }
+
+      if(tag==='span' && node.classList?.contains('fig')){
+        blocks.push(node);
+        return;
+      }
+
+      if(tag==='div'){
+        const blockBarn=[...node.children].filter(ch=>{
+          const t=ch.tagName?.toLowerCase();
+          return ['p','div','table','ul','ol'].includes(t)||ch.classList?.contains('fig');
+        });
+        if(blockBarn.length){
+          for(const ch of [...node.childNodes]) addBlock(ch);
+        }else{
+          blocks.push(node);
+        }
+        return;
+      }
+
+      if(tag==='span'){
+        const q=root.ownerDocument.createElement('p');
+        q.appendChild(node.cloneNode(true));
+        blocks.push(q);
+        return;
+      }
+
+      blocks.push(node);
+    };
+
+    for(const node of [...root.childNodes]) addBlock(node);
+
+    const out=[];
+    for(const b of blocks){
+      try{
+        const el=await wordBlockTillElement(b,docx,{indent});
+        if(el) out.push(el);
+      }catch(e){
+        /* Ett enskilt block får inte kunna fälla hela dokumentet. */
+        console.warn('Word-export: block föll tillbaka till ren text.',e);
+        const txt=(b.textContent||'').trim();
+        if(txt){
+          out.push(new docx.Paragraph({
+            spacing:{after:90},
+            indent:indent?{left:indent}:undefined,
+            children:[new docx.TextRun({text:txt,size:22,font:'Arial'})]
+          }));
         }
       }
     }
-    const out=[];
-    for(const b of blocks) out.push(await wordBlockTillElement(b,docx,{indent}));
-    return out;
+
+    return out.length?out:[new docx.Paragraph({
+      indent:indent?{left:indent}:undefined,
+      children:[new docx.TextRun('')]
+    })];
   }finally{
     root.remove();
-    /* Ge webbläsaren en chans att städa mellan uppgifterna. */
     await new Promise(ok=>setTimeout(ok,0));
   }
 }
@@ -5338,7 +5467,18 @@ async function wordSkapaNativeDocx(rapportera=()=>{}){
   for(let i=0;i<state.blad.length;i++){
     const x=state.blad[i];
     rapportera(++steg,antalSteg);
-    const taskParas=await wordHtmlTillParagrapher(x.t,docx,{indent:360});
+    let taskParas;
+    try{
+      taskParas=await wordHtmlTillParagrapher(x.t,docx,{indent:360});
+    }catch(e){
+      console.warn('Word-export: uppgift '+(x.id||i+1)+' föll tillbaka till ren text.',e);
+      const plain=(new DOMParser().parseFromString(x.t||'','text/html').body.textContent||'').trim();
+      taskParas=[new Paragraph({
+        spacing:{after:35},
+        indent:{left:360},
+        children:[new TextRun({text:plain,size:22,font:'Arial'})]
+      })];
+    }
 
     let toolRun=null;
     if(hjalpmedel){
@@ -5420,7 +5560,16 @@ async function wordSkapaNativeDocx(rapportera=()=>{}){
     for(let i=0;i<state.blad.length;i++){
       rapportera(++steg,antalSteg);
       children.push(new Paragraph({spacing:{before:60,after:40},children:[new TextRun({text:`${i+1}.`,bold:true,size:22,font:'Arial'})]}));
-      children.push(...await wordHtmlTillParagrapher(LOS(state.blad[i].s),docx,{indent:220}));
+      try{
+        children.push(...await wordHtmlTillParagrapher(LOS(state.blad[i].s),docx,{indent:220}));
+      }catch(e){
+        console.warn('Word-export: facit '+(state.blad[i].id||i+1)+' föll tillbaka till ren text.',e);
+        const plain=(new DOMParser().parseFromString(LOS(state.blad[i].s)||'','text/html').body.textContent||'').trim();
+        children.push(new Paragraph({
+          indent:{left:220},
+          children:[new TextRun({text:plain,size:22,font:'Arial'})]
+        }));
+      }
       children.push(new Paragraph({
         border:{bottom:{style:BorderStyle.SINGLE,size:3,color:'D0D0D0'}},
         spacing:{after:70},
