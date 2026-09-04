@@ -5155,7 +5155,7 @@ async function wordHtmlTillParagrapher(html,docx,{indent=0}={}){
       try{
         const bild=await wordRenderElementTillPng(root,{maxWidth:610,scale:1.45});
         return [new docx.Paragraph({
-          spacing:{after:90},
+          spacing:{after:35},
           indent:indent?{left:indent}:undefined,
           children:[new docx.ImageRun({
             data:bild.data,
@@ -5338,7 +5338,7 @@ async function wordSkapaNativeDocx(rapportera=()=>{}){
   for(let i=0;i<state.blad.length;i++){
     const x=state.blad[i];
     rapportera(++steg,antalSteg);
-    const taskParas=await wordHtmlTillParagrapher(x.t,docx,{indent:0});
+    const taskParas=await wordHtmlTillParagrapher(x.t,docx,{indent:360});
 
     let toolRun=null;
     if(hjalpmedel){
@@ -5374,19 +5374,30 @@ async function wordSkapaNativeDocx(rapportera=()=>{}){
       new TextRun({text:`${i+1}.`,size:22,font:'Arial'})
     ];
     if(toolRun){ firstRuns.push(new TextRun({text:'  '}),toolRun); }
-    firstRuns.push(new TextRun({text:`\t${wordMetaText(x,totalEndast)}`,size:19,font:'Arial'}));
 
-    /* Stabil Word-layout: en enda cell per uppgift.
-       Poängen placeras med en högerställd tabbstopp i stället för en
-       separat tabellkolumn. Det undviker docx.js-problemet som kunde
-       krascha exporten i vissa webbläsare. */
+    /* Uppgiftsnumret ligger i en egen smal inledning. Själva uppgiften
+       börjar en tabbindragning åt höger, så texten inte hamnar rakt under
+       siffran när den bryts över flera rader. */
     const header=new Paragraph({
-      tabStops:[{type:'right',position:9200}],
-      spacing:{after:50},
+      spacing:{after:10},
       children:firstRuns
     });
 
+    const metaText=wordMetaText(x,totalEndast);
+    const poangRad=metaText ? new Paragraph({
+      alignment:AlignmentType.RIGHT,
+      spacing:{before:20,after:0},
+      children:[new TextRun({
+        text:`(${metaText})`,
+        size:19,
+        font:'Arial'
+      })]
+    }) : null;
+
+    /* Poängen ligger efter själva uppgiften i stället för i uppgiftens
+       överkant. Den högerställs och skrivs inom parentes. */
     const inner=[header,...taskParas];
+    if(poangRad) inner.push(poangRad);
     const border=wordCellBorders(docx,{bottom:true});
     children.push(new Table({
       width:{size:100,type:WidthType.PERCENTAGE},
