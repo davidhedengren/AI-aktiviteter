@@ -2307,14 +2307,59 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 .pdf-ovningsmeta{font-size:9.5pt;color:#333;margin-bottom:3pt}
 .pdf-ovningsantal{font-size:8.8pt;color:#555}
 .pdf-pu{
-  display:grid!important;grid-template-columns:25pt minmax(0,1fr) 67pt;
+  display:grid!important;grid-template-columns:25pt minmax(0,1fr) 78pt;
   gap:0;padding:0 0 9pt!important;margin:0 0 9pt!important;
   border-bottom:.55pt solid #b8b8b8;break-inside:avoid;page-break-inside:avoid
 }
 .pdf-pu>.pn{width:auto!important;padding:1pt 8pt 0 1pt!important}
 .pdf-uppgiftstext{min-width:0;padding-right:7pt}
-.pdf-uppgiftsmeta{text-align:right;white-space:nowrap;padding-top:1pt;font-size:9.5pt}
+.pdf-uppgiftsmeta{
+  text-align:right;white-space:nowrap;padding-top:1pt;font-size:9.5pt;
+  justify-self:stretch;align-self:start
+}
 .pdf-uppgiftsmeta .utskriftsverktyg{margin-right:5pt}
+
+/* Export: deluppgifter med formler ska radbrytas stabilt och aldrig överlappa */
+.pdf-uppgiftstext{overflow:visible}
+.pdf-uppgiftstext .katex-display{
+  display:inline-block!important;margin:0 .12em!important;max-width:100%;
+  vertical-align:middle
+}
+.pdf-uppgiftstext .katex-display>.katex{
+  display:inline-block!important;text-align:left!important;white-space:nowrap
+}
+.pdf-uppgiftstext ol,.pdf-uppgiftstext ul{
+  margin:.28em 0 .1em 0!important;padding:0!important;list-style:none!important
+}
+.pdf-uppgiftstext li{
+  display:block!important;margin:.18em 0!important;padding:0!important;
+  min-width:0;width:100%;clear:both
+}
+.pdf-uppgiftstext p{margin:.16em 0!important}
+.pdf-uppgiftstext .fig{display:block!important;max-width:100%!important;margin:.45em auto!important}
+.pdf-uppgiftstext .fig svg,.pdf-uppgiftstext .fig img{max-width:100%!important;height:auto!important}
+
+/* Export: håll matematik proportionerlig mot brödtexten */
+.pdf-uppgiftstext{
+  font-size:10.8pt;
+  line-height:1.35;
+}
+.pdf-uppgiftstext .katex{
+  font-size:1em!important;
+}
+.pdf-uppgiftstext .katex-display{
+  font-size:1em!important;
+  line-height:1.15!important;
+}
+.pdf-uppgiftstext .katex-display>.katex{
+  font-size:1em!important;
+}
+.pdf-uppgiftstext .katex .mfrac{
+  font-size:.98em!important;
+}
+.pdf-uppgiftstext .katex-display + br{
+  display:none!important;
+}
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -4271,6 +4316,33 @@ $('#slumpaAntal').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventD
 
 /* Trimma tom SVG-yta vid utskrift.
    Används på figurer vars storlek har ändrats i redigeraren. */
+
+function stabiliseraPdfDeluppgifter(root){
+  root.querySelectorAll('.pdf-uppgiftstext li').forEach(li=>{
+    li.style.display='block';
+    li.style.width='100%';
+    li.style.clear='both';
+  });
+  root.querySelectorAll('.pdf-uppgiftstext p, .pdf-uppgiftstext > div').forEach(el=>{
+    const txt=(el.textContent||'').trim();
+    if(/^[a-zåäö]\)/i.test(txt)){
+      el.style.display='block';
+      el.style.width='100%';
+      el.style.clear='both';
+    }
+  });
+  root.querySelectorAll('.pdf-uppgiftstext .katex-display').forEach(k=>{
+    if(!k.closest('.fig')){
+      k.style.display='inline-block';
+      k.style.margin='0 .12em';
+      k.style.verticalAlign='middle';
+      k.style.fontSize='1em';
+      const inner=k.querySelector('.katex');
+      if(inner) inner.style.fontSize='1em';
+    }
+  });
+}
+
 function trimmaUtskriftsFigurer(root){
   if(!root)return;
 
@@ -4529,13 +4601,14 @@ $('#expPdf').addEventListener('click',()=>{
       typ:dokumentTyp()
     });
     renderKatex(u);
+    stabiliseraPdfDeluppgifter(u);
 
     requestAnimationFrame(()=>{
       try{
         const gammal=u.getAttribute('style');
         u.style.cssText=[
           'display:block','position:fixed','left:-100000px','top:0',
-          'width:180mm','visibility:hidden','pointer-events:none','background:#fff'
+          'width:180mm','visibility:hidden','pointer-events:none','background:#fff','font-size:10.8pt'
         ].join(';');
         requestAnimationFrame(()=>{
           try{
@@ -4979,30 +5052,42 @@ async function wordSkapaNativeDocx(){
       }
     }
 
-    const firstRuns=[
-      new TextRun({text:`${i+1}.`,size:22,font:'Arial'})
-    ];
-    if(toolRun){ firstRuns.push(new TextRun({text:'  '}),toolRun); }
-    firstRuns.push(new TextRun({text:`\t${wordMetaText(x,totalEndast)}`,size:19,font:'Arial'}));
-
-    const header=new Paragraph({
-      tabStops:[{type:'right',position:9000}],
-      spacing:{after:50},
-      children:firstRuns
-    });
-
-    const inner=[header,...taskParas];
     const border=wordCellBorders(docx,{bottom:true});
+    const nummerRuns=[new TextRun({text:`${i+1}.`,size:22,font:'Arial'})];
+    if(toolRun){ nummerRuns.push(new TextRun({text:' '}),toolRun); }
+
     children.push(new Table({
       width:{size:100,type:WidthType.PERCENTAGE},
       borders:border,
       rows:[new TableRow({
         cantSplit:true,
-        children:[new TableCell({
-          borders:border,
-          margins:{top:80,bottom:110,left:15,right:15},
-          children:inner
-        })]
+        children:[
+          new TableCell({
+            width:{size:8,type:WidthType.PERCENTAGE},
+            borders:border,
+            margins:{top:80,bottom:110,left:15,right:35},
+            verticalAlign:VerticalAlign.TOP,
+            children:[new Paragraph({spacing:{after:0},children:nummerRuns})]
+          }),
+          new TableCell({
+            width:{size:80,type:WidthType.PERCENTAGE},
+            borders:border,
+            margins:{top:80,bottom:110,left:0,right:50},
+            verticalAlign:VerticalAlign.TOP,
+            children:taskParas.length?taskParas:[new Paragraph({children:[new TextRun('')]})]
+          }),
+          new TableCell({
+            width:{size:12,type:WidthType.PERCENTAGE},
+            borders:border,
+            margins:{top:80,bottom:110,left:20,right:15},
+            verticalAlign:VerticalAlign.TOP,
+            children:[new Paragraph({
+              alignment:AlignmentType.RIGHT,
+              spacing:{after:0},
+              children:[new TextRun({text:wordMetaText(x,totalEndast),size:19,font:'Arial'})]
+            })]
+          })
+        ]
       })]
     }));
     children.push(new Paragraph({spacing:{after:55},children:[new TextRun('')]}));
