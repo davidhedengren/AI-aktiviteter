@@ -4694,6 +4694,14 @@ function wordDataUrlBytes(dataUrl){
   for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i);
   return out;
 }
+function wordBytesTillBase64(bytes){
+  let bin='';
+  const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    bin+=String.fromCharCode.apply(null,bytes.subarray(i,Math.min(i+chunk,bytes.length)));
+  }
+  return btoa(bin);
+}
 async function wordUrlTillDataUrl(url){
   if(!url) return null;
   if(url.startsWith('data:')) return url;
@@ -4769,7 +4777,7 @@ async function wordRastreraSpecial(root){
     try{
       const bild=await wordRenderElementTillPng(k,{maxWidth:600,scale:2.2});
       const img=document.createElement('img');
-      img.src='data:image/png;base64,'+btoa(String.fromCharCode(...bild.data));
+      img.src='data:image/png;base64,'+wordBytesTillBase64(bild.data);
       img.dataset.wordWidth=bild.width;
       img.dataset.wordHeight=bild.height;
       img.dataset.wordMath='1';
@@ -4786,7 +4794,7 @@ async function wordRastreraSpecial(root){
     try{
       const bild=await wordSvgTillPngData(svg,620);
       const img=document.createElement('img');
-      img.src='data:image/png;base64,'+btoa(String.fromCharCode(...bild.data));
+      img.src='data:image/png;base64,'+wordBytesTillBase64(bild.data);
       img.dataset.wordWidth=bild.width;
       img.dataset.wordHeight=bild.height;
       img.alt=svg.getAttribute('aria-label')||'Figur';
@@ -5052,59 +5060,34 @@ async function wordSkapaNativeDocx(){
       }
     }
 
-    const cellBottom={
-      top:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      left:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      right:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      bottom:{style:BorderStyle.SINGLE,size:3,color:'B8B8B8'}
-    };
-    const tableNoBorders={
-      top:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      left:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      right:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      bottom:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      insideHorizontal:{style:BorderStyle.NIL,size:0,color:'FFFFFF'},
-      insideVertical:{style:BorderStyle.NIL,size:0,color:'FFFFFF'}
-    };
-    const nummerRuns=[new TextRun({text:`${i+1}.`,size:22,font:'Arial'})];
-    if(toolRun){ nummerRuns.push(new TextRun({text:' '}),toolRun); }
+    const firstRuns=[
+      new TextRun({text:`${i+1}.`,size:22,font:'Arial'})
+    ];
+    if(toolRun){ firstRuns.push(new TextRun({text:'  '}),toolRun); }
+    firstRuns.push(new TextRun({text:`\t${wordMetaText(x,totalEndast)}`,size:19,font:'Arial'}));
 
-    /* DXA-bredder ger Word en stabil fast layout:
-       700 + 7650 + 1100 = 9450 twips, ungefär den användbara sidbredden. */
+    /* Stabil Word-layout: en enda cell per uppgift.
+       Poängen placeras med en högerställd tabbstopp i stället för en
+       separat tabellkolumn. Det undviker docx.js-problemet som kunde
+       krascha exporten i vissa webbläsare. */
+    const header=new Paragraph({
+      tabStops:[{type:'right',position:9200}],
+      spacing:{after:50},
+      children:firstRuns
+    });
+
+    const inner=[header,...taskParas];
+    const border=wordCellBorders(docx,{bottom:true});
     children.push(new Table({
-      width:{size:9450,type:WidthType.DXA},
-      columnWidths:[700,7650,1100],
-      layout:docx.TableLayoutType.FIXED,
-      borders:tableNoBorders,
+      width:{size:100,type:WidthType.PERCENTAGE},
+      borders:border,
       rows:[new TableRow({
         cantSplit:true,
-        children:[
-          new TableCell({
-            width:{size:700,type:WidthType.DXA},
-            borders:cellBottom,
-            margins:{top:80,bottom:110,left:15,right:35},
-            verticalAlign:VerticalAlign.TOP,
-            children:[new Paragraph({spacing:{after:0},children:nummerRuns})]
-          }),
-          new TableCell({
-            width:{size:7650,type:WidthType.DXA},
-            borders:cellBottom,
-            margins:{top:80,bottom:110,left:0,right:50},
-            verticalAlign:VerticalAlign.TOP,
-            children:taskParas.length?taskParas:[new Paragraph({children:[new TextRun('')]})]
-          }),
-          new TableCell({
-            width:{size:1100,type:WidthType.DXA},
-            borders:cellBottom,
-            margins:{top:80,bottom:110,left:20,right:15},
-            verticalAlign:VerticalAlign.TOP,
-            children:[new Paragraph({
-              alignment:AlignmentType.RIGHT,
-              spacing:{after:0},
-              children:[new TextRun({text:wordMetaText(x,totalEndast),size:19,font:'Arial'})]
-            })]
-          })
-        ]
+        children:[new TableCell({
+          borders:border,
+          margins:{top:80,bottom:110,left:15,right:15},
+          children:inner
+        })]
       })]
     }));
     children.push(new Paragraph({spacing:{after:55},children:[new TextRun('')]}));
@@ -5160,7 +5143,7 @@ async function exporteraWord(){
     setTimeout(()=>URL.revokeObjectURL(url),4000);
   }catch(e){
     console.error(e);
-    alert(e?.message||'Word-exporten kunde inte skapas. Prova igen eller ladda om sidan.');
+    alert('Word-exporten kunde inte skapas.\n\nFel: '+(e?.message||String(e)||'Okänt fel'));
   }finally{
     knapp.disabled=false;
     knapp.innerHTML=gammalText;
