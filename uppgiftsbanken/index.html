@@ -1023,6 +1023,50 @@ table.data th{background:var(--sunken);font-weight:600}
 
 /* ── höger: övningsbladet ── */
 .höger{background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+
+/* ── spara/ladda dokument ── */
+.spararad{display:flex;align-items:center;gap:7px;margin-top:9px}
+.spararad .knapp{flex:0 0 auto;padding:7px 11px;font-size:12px}
+.spararad .sparstatus{margin-left:auto;min-width:0;font-size:10.5px;color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spararad .sparstatus.sparad{color:#28725b}
+.sparmodal{position:fixed;inset:0;z-index:600;display:grid;place-items:center;padding:24px;
+  background:rgba(25,22,24,.38);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.sparmodal[hidden]{display:none!important}
+.sparmodal-kort{width:min(620px,100%);max-height:min(760px,88vh);display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh-3);overflow:hidden}
+.sparmodal-huvud{display:flex;align-items:center;gap:14px;padding:18px 20px 15px;border-bottom:1px solid var(--line)}
+.sparmodal-huvud h2{margin:0;font-size:18px;letter-spacing:-.02em}
+.sparmodal-huvud p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.sparmodal-huvud .fyll{flex:1}
+.sparmodal-stang{width:34px;height:34px;border:0;border-radius:9px;background:transparent;cursor:pointer;
+  display:grid;place-items:center;color:var(--ink-2)}
+.sparmodal-stang:hover{background:var(--sunken);color:var(--ink)}
+.sparmodal-stang svg{width:17px;height:17px}
+.sparmodal-body{padding:18px 20px;overflow:auto}
+.sparnamn{display:grid;gap:7px}
+.sparnamn label{font-size:11px;font-weight:700;color:var(--ink-2)}
+.sparnamn input{width:100%;border:1px solid var(--line);background:var(--canvas);border-radius:9px;
+  padding:10px 11px;font-size:14px;outline:none}
+.sparnamn input:focus{border-color:var(--ed);box-shadow:0 0 0 3px var(--ed-ring);background:#fff}
+.sparmodal-fot{display:flex;justify-content:flex-end;gap:8px;padding:13px 20px 17px;border-top:1px solid var(--line)}
+.sparlista{display:grid;gap:9px}
+.sparpost{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;
+  padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.sparpost:hover{border-color:#d4d1d6;background:#fdfdfd}
+.sparpost-namn{font-weight:650;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sparpost-meta{margin-top:3px;font-size:10.5px;color:var(--muted);display:flex;gap:7px;flex-wrap:wrap}
+.sparpost-knappar{display:flex;gap:6px}
+.sparpost-knappar button{border:1px solid var(--line);background:var(--canvas);border-radius:8px;padding:6px 9px;
+  font-size:11px;cursor:pointer}
+.sparpost-knappar button:hover{background:var(--sunken)}
+.sparpost-knappar button.radera{color:var(--ed-dark)}
+.spartomt{text-align:center;padding:38px 18px;color:var(--muted)}
+.spartomt strong{display:block;color:var(--ink);margin-bottom:4px;font-size:14px}
+@media(max-width:560px){
+  .sparmodal{padding:10px}.sparpost{grid-template-columns:1fr}.sparpost-knappar{justify-content:flex-end}
+  .spararad{flex-wrap:wrap}.spararad .sparstatus{flex-basis:100%;margin-left:0}
+}
 .bladtopp{padding:20px 18px 16px;border-bottom:1px solid var(--line-2)}
 .bladtopp h2{margin:0 0 13px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .fält{display:flex;flex-direction:column;gap:8px}
@@ -2684,6 +2728,17 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
           <input id="bKlass" placeholder="Klass" aria-label="Klass">
           <input id="bDatum" placeholder="Datum" aria-label="Datum">
         </div>
+        <div class="spararad" aria-label="Spara och ladda dokument">
+          <button class="knapp liten" id="sparaDokument" type="button" title="Spara prov eller övningsblad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h12l2 2v14H5z"/><path d="M8 4v6h8V4"/><path d="M8 20v-6h8v6"/></svg>
+            Spara
+          </button>
+          <button class="knapp liten tyst" id="laddaDokument" type="button" title="Öppna sparade dokument">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h6l2 2h10v10H3z"/><path d="m12 12-3 3 3 3"/><path d="M9 15h7"/></svg>
+            Ladda
+          </button>
+          <span class="sparstatus" id="sparstatus" aria-live="polite"></span>
+        </div>
       </div>
     </div>
 
@@ -3033,6 +3088,198 @@ const state={omr:new Set(),nivåer:new Set(['E','C','A']),formagor:new Set(FORMA
      hjälpmedlet är tillåtet, false = filtrera inte alls. */
   miniraknare:'alla',geogebra:false};
 const NIVÅORDNING={E:0,C:1,A:2};
+
+/* ═══ lokal sparning av prov/övningsblad ═══ */
+const SPAR_KEY='uppgiftslabbet_saved_documents_v1';
+const UTKAST_KEY='uppgiftslabbet_current_draft_v1';
+let AKTIV_SPAR_ID=null;
+let sparTimer=null;
+
+function sparUuid(){
+  if(globalThis.crypto?.randomUUID) return crypto.randomUUID();
+  return 'doc-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+}
+function sparLasaAlla(){
+  try{
+    const x=JSON.parse(localStorage.getItem(SPAR_KEY)||'[]');
+    return Array.isArray(x)?x:[];
+  }catch(e){ console.warn('Kunde inte läsa sparade dokument',e); return []; }
+}
+function sparSkrivAlla(lista){ localStorage.setItem(SPAR_KEY,JSON.stringify(lista)); }
+function sparInstallningar(){
+  return {
+    title:($('#bTitel')?.value||'').trim(),
+    className:($('#bKlass')?.value||'').trim(),
+    date:($('#bDatum')?.value||'').trim(),
+    documentType:dokumentTyp(),
+    includeSolutions:Boolean($('#taMedFacit')?.checked),
+    totalPointsOnly:Boolean($('#visaTotalpoangExport')?.checked),
+    showAidSymbols:Boolean($('#visaHjälpmedelExport')?.checked),
+    showPoints:Boolean(state.visaPoäng)
+  };
+}
+function sparSnapshotUppgift(x){
+  try{return structuredClone(x);}
+  catch(e){return JSON.parse(JSON.stringify(x));}
+}
+function sparByggDokument(namn,id=AKTIV_SPAR_ID||sparUuid()){
+  const now=new Date().toISOString();
+  const tidigare=sparLasaAlla().find(x=>x.id===id);
+  return {
+    version:1,id,
+    name:(namn||$('#bTitel')?.value||'Dokument').trim()||'Dokument',
+    kind:dokumentTyp(),
+    course:AKTIV?.id||null,
+    track:state.spår||null,
+    createdAt:tidigare?.createdAt||now,
+    updatedAt:now,
+    settings:sparInstallningar(),
+    tasks:state.blad.map((x,i)=>({bankId:x.id||null,order:i,snapshot:sparSnapshotUppgift(x)}))
+  };
+}
+function sparStatus(text,ok=false){
+  const el=$('#sparstatus'); if(!el) return;
+  el.textContent=text||''; el.classList.toggle('sparad',Boolean(ok));
+}
+function sparFormatTid(iso){
+  const d=new Date(iso); if(Number.isNaN(d.getTime())) return '';
+  return d.toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'});
+}
+function sparSparaManuellt(namn){
+  const docs=sparLasaAlla(), doc=sparByggDokument(namn);
+  const i=docs.findIndex(x=>x.id===doc.id);
+  if(i>=0) docs[i]=doc; else docs.unshift(doc);
+  try{
+    sparSkrivAlla(docs); AKTIV_SPAR_ID=doc.id;
+    sparStatus('Sparat '+sparFormatTid(doc.updatedAt),true);
+    sparAutosparaNu(); return doc;
+  }catch(e){
+    console.error('Sparning misslyckades',e);
+    const quota=e?.name==='QuotaExceededError'?' Webbläsarens lokala lagring är full.':'';
+    alert('Dokumentet kunde inte sparas.'+quota); throw e;
+  }
+}
+function sparAutosparaNu(){
+  if(!AKTIV) return;
+  const draft={
+    version:1,activeSaveId:AKTIV_SPAR_ID,course:AKTIV.id,track:state.spår||null,
+    settings:sparInstallningar(),
+    tasks:state.blad.map((x,i)=>({bankId:x.id||null,order:i,snapshot:sparSnapshotUppgift(x)})),
+    updatedAt:new Date().toISOString()
+  };
+  try{localStorage.setItem(UTKAST_KEY,JSON.stringify(draft));}
+  catch(e){console.warn('Autosparning kunde inte genomföras',e);}
+}
+function sparSchemalaggAutospar(){ clearTimeout(sparTimer); sparTimer=setTimeout(sparAutosparaNu,350); }
+function sparStangModal(){ $('#sparmodal').hidden=true; }
+function sparOppnaSpara(){
+  if(!AKTIV) return;
+  $('#sparmodalTitel').textContent=AKTIV_SPAR_ID?'Spara ändringar':'Spara dokument';
+  $('#sparmodalText').textContent=AKTIV_SPAR_ID?'Det sparade dokumentet uppdateras.':'Dokumentet sparas i den här webbläsaren.';
+  $('#sparmodalSpara').hidden=false; $('#sparmodalLadda').hidden=true; $('#sparmodalFot').hidden=false;
+  const current=sparLasaAlla().find(x=>x.id===AKTIV_SPAR_ID);
+  $('#sparnamnInput').value=current?.name||($('#bTitel').value||'').trim()||'Dokument';
+  $('#sparmodal').hidden=false;
+  setTimeout(()=>{$('#sparnamnInput').focus();$('#sparnamnInput').select();},0);
+}
+function sparRadera(id){
+  const docs=sparLasaAlla(), d=docs.find(x=>x.id===id); if(!d) return;
+  if(!confirm(`Ta bort "${d.name}"?`)) return;
+  sparSkrivAlla(docs.filter(x=>x.id!==id));
+  if(AKTIV_SPAR_ID===id){AKTIV_SPAR_ID=null;sparStatus('');}
+  sparRenderLista();
+}
+function sparDuplicera(id){
+  const d=sparLasaAlla().find(x=>x.id===id); if(!d) return;
+  const kopia=JSON.parse(JSON.stringify(d));
+  kopia.id=sparUuid(); kopia.name=d.name+' – kopia';
+  kopia.createdAt=kopia.updatedAt=new Date().toISOString();
+  const docs=sparLasaAlla(); docs.unshift(kopia); sparSkrivAlla(docs); sparRenderLista();
+}
+function sparRenderLista(){
+  const list=$('#sparlista');
+  const docs=sparLasaAlla().sort((a,b)=>String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  if(!docs.length){
+    list.innerHTML='<div class="spartomt"><strong>Inga sparade dokument ännu</strong><span>Spara ett prov eller övningsblad så visas det här.</span></div>'; return;
+  }
+  const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  list.innerHTML=docs.map(d=>{
+    const kurs=KURSER.find(k=>k.id===d.course), typ=d.kind==='prov'?'Prov':'Övningsblad';
+    const sp=d.track?` · ${esc(d.track)}`:'', antal=Array.isArray(d.tasks)?d.tasks.length:0;
+    return `<div class="sparpost">
+      <div><div class="sparpost-namn">${esc(d.name)}</div>
+      <div class="sparpost-meta"><span>${typ}</span><span>${esc(kurs?.titel||d.course||'Okänd kurs')}${sp}</span>
+      <span>${antal} ${antal===1?'uppgift':'uppgifter'}</span><span>${esc(sparFormatTid(d.updatedAt))}</span></div></div>
+      <div class="sparpost-knappar">
+        <button type="button" data-spar-ladda="${esc(d.id)}">Ladda</button>
+        <button type="button" data-spar-kopiera="${esc(d.id)}">Duplicera</button>
+        <button type="button" class="radera" data-spar-radera="${esc(d.id)}">Ta bort</button>
+      </div></div>`;
+  }).join('');
+  $$('[data-spar-ladda]',list).forEach(b=>b.addEventListener('click',()=>sparLaddaId(b.dataset.sparLadda)));
+  $$('[data-spar-kopiera]',list).forEach(b=>b.addEventListener('click',()=>sparDuplicera(b.dataset.sparKopiera)));
+  $$('[data-spar-radera]',list).forEach(b=>b.addEventListener('click',()=>sparRadera(b.dataset.sparRadera)));
+}
+function sparOppnaLadda(){
+  $('#sparmodalTitel').textContent='Sparade dokument';
+  $('#sparmodalText').textContent='Sparade lokalt i den här webbläsaren.';
+  $('#sparmodalSpara').hidden=true; $('#sparmodalLadda').hidden=false; $('#sparmodalFot').hidden=true;
+  sparRenderLista(); $('#sparmodal').hidden=false;
+}
+async function sparVantaKurs(id,timeout=8000){
+  const start=Date.now();
+  while(Date.now()-start<timeout){
+    if(AKTIV?.id===id && Array.isArray(DB?.bank)) return true;
+    await new Promise(ok=>setTimeout(ok,40));
+  }
+  return false;
+}
+async function sparSakerstallKurs(courseId){
+  const kurs=KURSER.find(k=>k.id===courseId);
+  if(!kurs) throw new Error('Den sparade kursen finns inte längre.');
+  if(AKTIV?.id===courseId) return kurs;
+  const kort=document.querySelector(`.kurskort[data-kurs="${courseId}"]`);
+  if(kurs.data) startaKurs(kurs); else await väljKurs(kurs,kort);
+  if(!(await sparVantaKurs(courseId))) throw new Error('Kursen hann inte läsas in.');
+  return kurs;
+}
+function sparAppliceraInstallningar(d){
+  const st=d.settings||{};
+  if($('#bladTyp')) $('#bladTyp').value=st.documentType==='prov'?'prov':'ovning';
+  if($('#bTitel')) $('#bTitel').value=st.title||d.name||'';
+  if($('#bKlass')) $('#bKlass').value=st.className||'';
+  if($('#bDatum')) $('#bDatum').value=st.date||'';
+  if($('#taMedFacit')) $('#taMedFacit').checked=st.includeSolutions!==false;
+  if($('#visaTotalpoangExport')) $('#visaTotalpoangExport').checked=Boolean(st.totalPointsOnly);
+  if($('#visaHjälpmedelExport')) $('#visaHjälpmedelExport').checked=st.showAidSymbols!==false;
+  state.visaPoäng=Boolean(st.showPoints); if($('#visaPoäng')) $('#visaPoäng').checked=state.visaPoäng;
+}
+async function sparLaddaDokument(doc,{manuell=true}={}){
+  if(!doc) return;
+  try{
+    await sparSakerstallKurs(doc.course);
+    state.spår=doc.track||state.spår;
+    if(typeof byggSpårfilter==='function') byggSpårfilter();
+    if(typeof uppdateraKursTema==='function') uppdateraKursTema();
+    if(typeof uppdateraKursRubriker==='function') uppdateraKursRubriker();
+    state.blad=(Array.isArray(doc.tasks)?doc.tasks:[]).sort((a,b)=>(a.order??0)-(b.order??0)).map(t=>{
+      if(t.snapshot) return sparSnapshotUppgift(t.snapshot);
+      return DB.bank.find(x=>String(x.id)===String(t.bankId));
+    }).filter(Boolean);
+    sparAppliceraInstallningar(doc);
+    AKTIV_SPAR_ID=manuell?doc.id:(doc.activeSaveId||null);
+    byggTräd(); rita(); ritaBlad(); sparStangModal();
+    sparStatus(manuell?'Laddat · '+sparFormatTid(doc.updatedAt):'Utkast återställt',true);
+    sparAutosparaNu();
+  }catch(e){
+    console.error('Kunde inte ladda dokument',e);
+    alert('Dokumentet kunde inte laddas. '+(e?.message||e));
+  }
+}
+async function sparLaddaId(id){
+  const doc=sparLasaAlla().find(x=>x.id===id); if(doc) await sparLaddaDokument(doc,{manuell:true});
+}
+
 const nyckel=x=>x.kap+':'+x.omr;
 const aktivtSpår=()=>AKTIV?.spår?.length?state.spår:null;
 function hörTillSpår(x,spår=aktivtSpår()){
@@ -3447,6 +3694,8 @@ function visaKursval(){
 }
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
+  AKTIV_SPAR_ID=null;
+  sparStatus('');
   renKursadress(kurs);
 
   /* Vyn växlas innan uppgiftsrenderingen så att renderingsfel kan visas i bankvyn. */
@@ -3824,6 +4073,7 @@ function ritaBlad(){
     [state.blad[i+1],state.blad[i]]=[state.blad[i],state.blad[i+1]];ritaBlad();}));
   $$('[data-bort]').forEach(k=>k.addEventListener('click',()=>vippa(k.dataset.bort)));
   $('#expPdf').disabled=$('#expWord').disabled=!b.length;
+  sparSchemalaggAutospar();
 }
 
 /* ── redigera uppgift före tillägg ── */
@@ -5692,6 +5942,26 @@ function renderKatex(root){
 /* Initierar KaTeX efter att skriptet har laddats. */
 window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(); });
 
+/* ── spara/ladda · händelser ── */
+$('#sparaDokument').addEventListener('click',sparOppnaSpara);
+$('#laddaDokument').addEventListener('click',sparOppnaLadda);
+$('#sparmodalStang').addEventListener('click',sparStangModal);
+$('#sparAvbryt').addEventListener('click',sparStangModal);
+$('#sparBekrafta').addEventListener('click',()=>{
+  try{
+    const namn=($('#sparnamnInput').value||'').trim();
+    if(!namn){$('#sparnamnInput').focus();return;}
+    sparSparaManuellt(namn); sparStangModal();
+  }catch(e){}
+});
+$('#sparnamnInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('#sparBekrafta').click();}});
+$('#sparmodal').addEventListener('click',e=>{if(e.target===$('#sparmodal')) sparStangModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && !$('#sparmodal').hidden) sparStangModal();});
+['bTitel','bKlass','bDatum','bladTyp','taMedFacit','visaTotalpoangExport','visaHjälpmedelExport'].forEach(id=>{
+  const el=$('#'+id); if(!el) return;
+  el.addEventListener(el.matches('input[type="checkbox"],select')?'change':'input',sparSchemalaggAutospar);
+});
+
 /* ── Initiering ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
 const DIREKTKURS=kursFrånAdress();
@@ -5707,5 +5977,35 @@ if(DIREKTKURS){
   });
 }
 </script>
+
+<div class="sparmodal" id="sparmodal" hidden aria-modal="true" role="dialog" aria-labelledby="sparmodalTitel">
+  <div class="sparmodal-kort">
+    <div class="sparmodal-huvud">
+      <div>
+        <h2 id="sparmodalTitel">Spara dokument</h2>
+        <p id="sparmodalText"></p>
+      </div>
+      <div class="fyll"></div>
+      <button class="sparmodal-stang" id="sparmodalStang" type="button" aria-label="Stäng">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="sparmodal-body">
+      <div id="sparmodalSpara" hidden>
+        <div class="sparnamn">
+          <label for="sparnamnInput">Namn på dokumentet</label>
+          <input id="sparnamnInput" autocomplete="off" maxlength="100">
+        </div>
+      </div>
+      <div id="sparmodalLadda" hidden>
+        <div class="sparlista" id="sparlista"></div>
+      </div>
+    </div>
+    <div class="sparmodal-fot" id="sparmodalFot">
+      <button class="knapp tyst" id="sparAvbryt" type="button">Avbryt</button>
+      <button class="knapp primär" id="sparBekrafta" type="button">Spara</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
