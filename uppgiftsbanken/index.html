@@ -1534,6 +1534,47 @@ table.data th{background:var(--sunken);font-weight:600}
 /* Säkerställer att attributet hidden kan dölja kursväljaren när en kurs öppnas. */
 .kursval[hidden]{display:none!important}
 
+/* ── Lösenordsskydd för den statiska sidan ── */
+body.password-locked{overflow:hidden}
+body.password-locked > :not(#passwordGate){visibility:hidden}
+.password-gate{
+  position:fixed;inset:0;z-index:10000;display:grid;place-items:center;
+  padding:24px;background:var(--canvas);color:var(--ink)
+}
+.password-gate[hidden]{display:none}
+.password-card{
+  width:min(410px,100%);padding:30px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh-3)
+}
+.password-brand{display:flex;align-items:center;gap:13px;margin-bottom:24px}
+.password-brand img{width:50px;height:50px;object-fit:contain}
+.password-brand-text{display:grid;gap:2px}
+.password-brand-title{font-size:17px;font-weight:750;line-height:1.2}
+.password-brand-subtitle{font-size:12.5px;color:var(--muted)}
+.password-card h1{margin:0 0 7px;font-size:25px;line-height:1.2}
+.password-card > p{margin:0 0 22px;color:var(--ink-2);line-height:1.55}
+.password-card label{display:block;margin-bottom:7px;font-size:13px;font-weight:700}
+.password-row{display:flex;gap:8px}
+.password-row input{
+  min-width:0;flex:1;height:44px;padding:0 13px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s);
+  font:inherit;outline:none
+}
+.password-row input:focus{border-color:var(--ed);box-shadow:0 0 0 3px var(--ed-ring)}
+.password-row button{
+  height:44px;padding:0 18px;border:0;border-radius:var(--r-s);cursor:pointer;
+  color:#fff;background:var(--ed);font:700 14px var(--ui)
+}
+.password-row button:hover{background:var(--ed-dark)}
+.password-error{min-height:20px;margin:9px 0 0!important;color:var(--ed-dark)!important;font-size:13px}
+@media (max-width:480px){
+  .password-card{padding:24px 20px}
+  .password-row{display:grid}
+  .password-row button{width:100%}
+}
+
+
+
 /* ── Startsida · visuell förfining ──
    Bokfärgerna i kurskortens vänsterkant behålls oförändrade.
    Övriga färger används som ett neutralt gränssnittslager och representerar inte matematikspår. */
@@ -2325,7 +2366,77 @@ table.data th{background:var(--sunken);font-weight:600}
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
+<body class="password-locked">
+
+<section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
+  <form class="password-card" id="passwordForm">
+    <div class="password-brand">
+      <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+      <div class="password-brand-text">
+        <span class="password-brand-title">Erik Dahlbergsgymnasiets uppgiftsbank</span>
+        <span class="password-brand-subtitle">Fysik nivå 1–2 · Matematik nivå 1–2 · Fortsättning nivå 1–2 · Fördjupning nivå 1</span>
+      </div>
+    </div>
+    <h1 id="passwordTitle">Ange lösenord</h1>
+    <p>Skriv lösenordet för att öppna uppgiftsbanken.</p>
+    <label for="passwordInput">Lösenord</label>
+    <div class="password-row">
+      <input id="passwordInput" name="password" type="password" autocomplete="current-password" required autofocus>
+      <button type="submit">Öppna sidan</button>
+    </div>
+    <p class="password-error" id="passwordError" role="alert" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+(() => {
+  const SESSION_KEY = 'ed-uppgiftsbank-auth-v1';
+  const PASSWORD_HASH = 'e745af8533088ae5a3fd104c17f2d4434e51c0372c1f0b95910f6506814bbfed';
+  const gate = document.getElementById('passwordGate');
+  const form = document.getElementById('passwordForm');
+  const input = document.getElementById('passwordInput');
+  const error = document.getElementById('passwordError');
+
+  function arUpplast(){
+    try{return sessionStorage.getItem(SESSION_KEY)==='1'}catch{return false}
+  }
+  function markeraUpplast(){
+    try{sessionStorage.setItem(SESSION_KEY,'1')}catch{}
+  }
+  function oppnaSidan(){
+    document.body.classList.remove('password-locked');
+    gate.hidden = true;
+  }
+  async function sha256(text){
+    const data = new TextEncoder().encode(text.normalize('NFC'));
+    const digest = await crypto.subtle.digest('SHA-256',data);
+    return Array.from(new Uint8Array(digest),byte => byte.toString(16).padStart(2,'0')).join('');
+  }
+
+  if(arUpplast()){
+    oppnaSidan();
+    return;
+  }
+
+  form.addEventListener('submit',async event => {
+    event.preventDefault();
+    error.textContent = '';
+    try{
+      if(await sha256(input.value)===PASSWORD_HASH){
+        markeraUpplast();
+        oppnaSidan();
+      }else{
+        input.value = '';
+        error.textContent = 'Fel lösenord. Försök igen.';
+        input.focus();
+      }
+    }catch{
+      error.textContent = 'Lösenordskontrollen kunde inte starta i den här webbläsaren.';
+    }
+  });
+})();
+</script>
+
 <!-- Kursväljare: varje kurs definieras i KURSER med separata filer och globala namn. -->
 <div class="kursval" id="kursval">
   <div class="kv-inner">
