@@ -869,6 +869,22 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .träffar{font-size:13.5px;color:var(--ink-2)}
 .träffar b{color:var(--ink);font-weight:600}
 .mittopp .fyll{flex:1}
+/* ── förmågefilter i mittradens överkant ── */
+.formagefilter{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.formagefilter[hidden]{display:none!important}
+.formagefilter .formageetikett{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--muted);margin-right:1px;white-space:nowrap}
+.formagefilter button{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);
+  border-radius:8px;padding:6px 9px;font:600 11.5px var(--ui);cursor:pointer;white-space:nowrap;
+  transition:background .15s,border-color .15s,color .15s,box-shadow .15s,transform .08s}
+.formagefilter button:hover{border-color:#D0CDD3;color:var(--ink);transform:translateY(-.5px)}
+.formagefilter button[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark);
+  border-color:color-mix(in oklab,var(--ed) 22%,var(--line));
+  box-shadow:0 0 0 1px color-mix(in oklab,var(--ed) 8%,transparent) inset}
+.formagefilter button:focus-visible{outline:2px solid var(--ed);outline-offset:2px}
+@media(max-width:1050px){
+  .formagefilter{order:3;flex-basis:100%}
+}
 .kort{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
   padding:15px 17px 15px 15px;margin-bottom:9px;display:grid;grid-template-columns:22px 1fr;gap:13px;
   cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .12s}
@@ -2421,6 +2437,14 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
     <div class="mittopp">
       <span class="träffar" id="träffar"></span>
       <button class="knapp tyst" id="läggAlla">Lägg till alla</button>
+      <div class="formagefilter" id="formagefilter" aria-label="Filtrera på förmåga" hidden>
+        <span class="formageetikett">Förmåga</span>
+        <button type="button" data-formaga="begrepp" aria-pressed="true">Begrepp</button>
+        <button type="button" data-formaga="procedur" aria-pressed="true">Procedur</button>
+        <button type="button" data-formaga="resonemang" aria-pressed="true">Resonemang</button>
+        <button type="button" data-formaga="modellering" aria-pressed="true">Modellering</button>
+        <button type="button" data-formaga="problemlösning" aria-pressed="true">Problemlösning</button>
+      </div>
       <div class="fyll"></div>
       <div class="kryssgrupp">
         <button class="knapp tyst liten" id="sorteraKnapp" type="button" aria-pressed="false">
@@ -2713,6 +2737,55 @@ const KURSER=[
   }
 ];
 
+/* ═══════════════ kursadresser ═══════════════
+   En och samma app används för alla kurser. Små index-filer i kursmapparna
+   skickar hit ?kurs=<id>; när kursen är laddad visas den rena adressen igen. */
+const KURSSLUG={
+  fy1:'fysik1',
+  fy2:'fysik2',
+  ma1:'ma1',
+  ma2:'ma2',
+  mato1:'maforts1',
+  mato2:'maforts2',
+  matf1:'mafordjupning1'
+};
+
+/* På den riktiga domänen är appens rot /. På GitHubs reservadress ligger
+   projektet under /Uppgiftslabbet/, så även den adressen fortsätter fungera. */
+const APP_ROOT=(()=>{
+  if(location.hostname.toLowerCase().endsWith('.github.io')){
+    const första=location.pathname.split('/').filter(Boolean)[0];
+    return första?`/${första}/`:'/';
+  }
+  return '/';
+})();
+
+function kursFrånAdress(){
+  const q=new URLSearchParams(location.search).get('kurs');
+  if(q){
+    const nyckel=q.toLowerCase();
+    const viaQuery=KURSER.find(k=>k.id.toLowerCase()===nyckel || KURSSLUG[k.id]===nyckel);
+    if(viaQuery) return viaQuery;
+  }
+  const delar=location.pathname.split('/').filter(Boolean);
+  const sista=(delar.at(-1)||'').toLowerCase();
+  return KURSER.find(k=>KURSSLUG[k.id]===sista)||null;
+}
+function renKursadress(kurs){
+  const slug=KURSSLUG[kurs?.id];
+  if(!slug) return;
+  const mål=APP_ROOT+slug+'/';
+  if(location.pathname!==mål || location.search || location.hash){
+    history.replaceState({kurs:kurs.id},'',mål);
+  }
+}
+function renStartadress(){
+  if(location.pathname!==APP_ROOT || location.search || location.hash){
+    history.replaceState({},'',APP_ROOT);
+  }
+}
+
+
 /* ═══════════════ app ═══════════════ */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const svgBock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>';
@@ -2730,7 +2803,8 @@ let LOGO='logo.png';
 /* ═══ tillstånd ═══ */
 let AKTIV=null;                                   /* vald kurs */
 let DB={bank:[],kapnamn:{},omr:{}};               /* kursens data */
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null,
+const FORMAGOR=['begrepp','procedur','resonemang','modellering','problemlösning'];
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),formagor:new Set(FORMAGOR),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,spår:null,
   /* Hjälpmedelsfiltret är av/på: true = visa bara uppgifter där
      hjälpmedlet är tillåtet, false = filtrera inte alls. */
   miniraknare:'alla',geogebra:false};
@@ -3131,6 +3205,7 @@ async function väljKurs(kurs,kort){
 }
 function visaKursval(){
   AKTIV=null;
+  renStartadress();
   document.documentElement.style.setProperty('--ed','#B43123');
   document.documentElement.style.setProperty('--ed-dark','#8E2519');
   document.documentElement.style.setProperty('--ed-tint','#FBF0EE');
@@ -3148,6 +3223,7 @@ function visaKursval(){
 }
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
+  renKursadress(kurs);
 
   /* Vyn växlas innan uppgiftsrenderingen så att renderingsfel kan visas i bankvyn. */
   $('#kursval').hidden=true;
@@ -3162,7 +3238,7 @@ function startaKurs(kurs){
       if(!x.familj) x.familj=String(x.id??'').replace(/[a-z]$/,'');
     });
     state.omr.clear(); state.blad=[]; state.sök='';
-    state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
+    state.nivåer=new Set(['E','C','A']); state.formagor=new Set(FORMAGOR); state.sorteraNivå=false; state.visaPoäng=false;
     state.miniraknare='alla'; state.geogebra=false;
     state.spår=kurs.defaultSpår||(kurs.spår?.[0]?.id||null);
     $('#sökfält').value=''; $('#visaPoäng').checked=false;
@@ -3180,6 +3256,7 @@ function startaKurs(kurs){
     try{
       byggSpårfilter();
       byggHjälpmedelsfilter();
+      byggFormagefilter();
       uppdateraKursTema();
       uppdateraKursRubriker();
       byggTräd();
@@ -3189,6 +3266,18 @@ function startaKurs(kurs){
       console.error('Kunde inte starta kursen',err);
       $('#lista').innerHTML=`<div class="tomt"><h3>Kursen kunde inte öppnas</h3><p>${String(err?.message||err)}</p></div>`;
     }
+  });
+}
+
+/* Förmågefiltret visas bara i banker som faktiskt har förmågemetadata.
+   Därmed fungerar samma index.html även medan övriga kurser successivt taggas. */
+function byggFormagefilter(){
+  const box=$('#formagefilter');
+  if(!box) return;
+  const harMetadata=DB.bank.some(x=>Array.isArray(x.formaga)?x.formaga.length:Boolean(x.formaga));
+  box.hidden=!harMetadata;
+  $$('#formagefilter [data-formaga]').forEach(b=>{
+    b.setAttribute('aria-pressed',state.formagor.has(b.dataset.formaga));
   });
 }
 
@@ -3262,6 +3351,12 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   b.setAttribute('aria-pressed',state.nivåer.has(n));
   rita();
 }));
+$$('#formagefilter [data-formaga]').forEach(b=>b.addEventListener('click',()=>{
+  const f=b.dataset.formaga;
+  if(state.formagor.has(f)) state.formagor.delete(f); else state.formagor.add(f);
+  b.setAttribute('aria-pressed',state.formagor.has(f));
+  rita();
+}));
 $$('.hjälpval button').forEach(b=>b.addEventListener('click',()=>{
   if(b.dataset.verktyg==='geogebra'){
     state.geogebra=!state.geogebra;
@@ -3324,6 +3419,7 @@ function söktextFör(x){
     x.omr, områdesnamn,
     kapitelNamn(x.kap),
     familj, taggar,
+    Array.isArray(x.formaga)?x.formaga.join(' '):(x.formaga||''),
     x['miniräknare']?'miniräknare räknare':'utan miniräknare',
     x.geogebra?'geogebra':'utan geogebra',
     x.typ||'', x.kategori||''
@@ -3341,6 +3437,10 @@ function urval(){
   const termer=state.sök ? state.sök.split(' ').filter(Boolean) : [];
   return variantBank().filter(x=>{
     if(!state.nivåer.has(x.niva)) return false;
+    const formagor=Array.isArray(x.formaga)?x.formaga:(x.formaga?[x.formaga]:[]);
+    /* Exkluderande logik: om en uppgift har en förmåga som användaren klickat ur
+       ska uppgiften döljas, även om den samtidigt har en annan aktiv förmåga. */
+    if(formagor.some(f=>!state.formagor.has(f))) return false;
     if(state.miniraknare!=='alla' && Boolean(x['miniräknare'])!==(state.miniraknare==='ja')) return false;
     if(state.geogebra && !x.geogebra) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
@@ -4392,7 +4492,18 @@ window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(
 
 /* ── Initiering ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
+const DIREKTKURS=kursFrånAdress();
 ritaKursval();
+
+/* Direktlänkar som /ma1/ och /fysik2/ öppnar samma kurs som ett klick på
+   motsvarande kurskort. Lösenordsgrinden ligger kvar ovanpå tills sessionen
+   är upplåst, så direktlänken kringgår inte lösenordsskyddet. */
+if(DIREKTKURS){
+  requestAnimationFrame(()=>{
+    const kort=document.querySelector(`.kurskort[data-kurs="${DIREKTKURS.id}"]`);
+    if(kort) väljKurs(DIREKTKURS,kort);
+  });
+}
 </script>
 </body>
 </html>
