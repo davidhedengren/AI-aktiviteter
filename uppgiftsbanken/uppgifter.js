@@ -2,6 +2,29 @@
    Metadatarevision 2026-09-04.
    Uppgift 6.32: reviderad SVG-bild införd 2026-09-04.
 */
+/* ==================================================================
+   Figurstorlek – gemensam standard för SVG- och rasterbilder
+   ================================================================== */
+window.FIGUR = {
+  hojd: 170,
+  maxBredd: 480,
+  marginal: '0.7em 0 0.9em'
+};
+
+(function () {
+  var f = window.FIGUR;
+  var css =
+    '.fig{display:block!important;text-align:left!important;' +
+    'margin:' + f.marginal + '!important}' +
+    '.fig svg,.fig img{display:block!important;height:' + f.hojd + 'px!important;' +
+    'width:auto!important;max-width:min(' + f.maxBredd + 'px,100%)!important;' +
+    'object-fit:contain!important}';
+  var el = document.createElement('style');
+  el.id = 'figur-storlek';
+  el.textContent = css;
+  (document.head || document.documentElement).appendChild(el);
+})();
+
 window.BANK = [
   {
     "id": "2.12",
