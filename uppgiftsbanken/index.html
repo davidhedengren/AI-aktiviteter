@@ -3,8 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Uppgiftslabbet – Erik Dahlbergsgymnasiets stora uppgiftsbank</title>
-<link rel="icon" type="image/png" href="logo.png">
+<title>Uppgiftslabbet – uppgifter i matematik och fysik för gymnasiet</title>
+<meta name="description" content="Uppgiftslabbet är Erik Dahlbergsgymnasiets uppgiftsbank för matematik och fysik. Sök, filtrera, slumpa och bygg övningsblad och prov för gymnasiet.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#B43123">
+
+<link rel="canonical" id="seoCanonical" href="https://uppgiftslabbet.se/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Uppgiftslabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:url" id="seoOgUrl" content="https://uppgiftslabbet.se/">
+<meta property="og:title" id="seoOgTitle" content="Uppgiftslabbet – uppgifter i matematik och fysik för gymnasiet">
+<meta property="og:description" id="seoOgDescription" content="Sök, filtrera, slumpa och bygg övningsblad och prov i matematik och fysik för gymnasiet.">
+<meta property="og:image" content="https://uppgiftslabbet.se/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Uppgiftslabbet – uppgifter i matematik och fysik">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="seoTwitterTitle" content="Uppgiftslabbet – uppgifter i matematik och fysik för gymnasiet">
+<meta name="twitter:description" id="seoTwitterDescription" content="Sök, filtrera, slumpa och bygg övningsblad och prov i matematik och fysik för gymnasiet.">
+<meta name="twitter:image" content="https://uppgiftslabbet.se/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Uppgiftslabbet",
+  "url":"https://uppgiftslabbet.se/",
+  "inLanguage":"sv-SE",
+  "description":"Erik Dahlbergsgymnasiets uppgiftsbank för matematik och fysik på gymnasiet."
+}
+</script>
+<script>
+(function(){
+  const routes={
+    "/": {
+      title:"Uppgiftslabbet – uppgifter i matematik och fysik för gymnasiet",
+      description:"Uppgiftslabbet är Erik Dahlbergsgymnasiets uppgiftsbank för matematik och fysik. Sök, filtrera, slumpa och bygg övningsblad och prov för gymnasiet."
+    },
+    "/ma1/": {
+      title:"Matematik nivå 1 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Matematik nivå 1a, 1b och 1c. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/ma2/": {
+      title:"Matematik nivå 2 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Matematik nivå 2a, 2b och 2c. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/maforts1/": {
+      title:"Matematik fortsättning nivå 1 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Matematik – fortsättning nivå 1. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/maforts2/": {
+      title:"Matematik fortsättning nivå 2 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Matematik – fortsättning nivå 2. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/mafordjupning1/": {
+      title:"Matematik fördjupning nivå 1 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Matematik – fördjupning nivå 1. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/fysik1/": {
+      title:"Fysik nivå 1 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Fysik nivå 1. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    },
+    "/fysik2/": {
+      title:"Fysik nivå 2 – Uppgiftslabbet",
+      description:"Övningsuppgifter i Fysik nivå 2. Filtrera efter område, nivå och förmåga och bygg egna övningsblad."
+    }
+  };
+  let path=location.pathname;
+  if(!path.endsWith("/")) path+="/";
+  const data=routes[path]||routes["/"];
+  const canonical="https://uppgiftslabbet.se"+(routes[path]?path:"/");
+  document.title=data.title;
+  const desc=document.querySelector('meta[name="description"]');
+  if(desc) desc.content=data.description;
+  const can=document.getElementById("seoCanonical");
+  if(can) can.href=canonical;
+  const ogUrl=document.getElementById("seoOgUrl");
+  if(ogUrl) ogUrl.content=canonical;
+  for(const id of ["seoOgTitle","seoTwitterTitle"]){
+    const el=document.getElementById(id); if(el) el.content=data.title;
+  }
+  for(const id of ["seoOgDescription","seoTwitterDescription"]){
+    const el=document.getElementById(id); if(el) el.content=data.description;
+  }
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -628,6 +718,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .slumprad input:focus{outline:none;background:var(--surface);border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
 .slumprad .knapp{flex:1;justify-content:center;padding:9px 10px}
 .knapp:disabled{opacity:.4;cursor:not-allowed;transform:none}
+#expWord:disabled{cursor:progress}
 .knapp:focus-visible,input:focus-visible,.omrad:focus-visible,.kort:focus-visible{
   outline:2px solid var(--ed);outline-offset:2px}
 .knapp svg{width:15px;height:15px;flex:none}
@@ -1304,6 +1395,20 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift h1{font-family:var(--ui);font-size:17pt;margin:0;font-weight:700}
   #utskrift .pm{font-family:var(--mono);font-size:9.5pt;color:#444;margin-top:2px}
   #utskrift .pu{margin-bottom:16pt;break-inside:avoid;display:grid;grid-template-columns:24pt 1fr;gap:6pt}
+  #utskrift .pu.pdf-pu{
+    display:grid!important;
+    grid-template-columns:25pt minmax(0,1fr) 78pt!important;
+    column-gap:0!important;
+    align-items:start!important
+  }
+  #utskrift .pu.pdf-pu .pdf-uppgiftsmeta{
+    grid-column:3!important;
+    grid-row:1!important;
+    text-align:right!important;
+    justify-self:stretch!important;
+    white-space:nowrap!important;
+    padding-top:1pt!important
+  }
   #utskrift .pn{font-family:var(--mono);font-weight:600}
   #utskrift .pu p{margin:0 0 6pt}
   #utskrift .pu p:last-child{margin-bottom:0}
@@ -2488,7 +2593,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   <div class="slumpwrap">
     <button class="knapp tyst" id="slumpaKnapp" type="button" aria-expanded="false" aria-controls="slumppanel">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
-      Slumpa ett övningsblad
+      Slumpa
     </button>
     <div class="slumppanel" id="slumppanel">
       <label for="slumpaAntal">Antal uppgifter</label>
@@ -4261,49 +4366,101 @@ function körSlumpa(){
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
 
-  /* Blandar kandidater och tar bort dubbletter inom samma familj före kvotberäkningen. */
-  const blandad=pool.slice().sort(()=>Math.random()-.5);
-  const fam=new Set(), kand={E:[],C:[],A:[]};
-  for(const x of blandad){
-    if(fam.has(x.familj))continue;
-    fam.add(x.familj);
-    if(kand[x.niva]) kand[x.niva].push(x);
+  const blanda=a=>{
+    const b=a.slice();
+    for(let i=b.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [b[i],b[j]]=[b[j],b[i]];
+    }
+    return b;
+  };
+  const omrNyckel=x=>String(x.omr??'');
+  const famNyckel=x=>String(x.familj||`__utan_familj__${x.id}`);
+  const nivaNyckel=x=>{
+    const v=String(x.niva||'').trim().toUpperCase();
+    return v==='E'||v==='C'||v==='A'?v:'';
+  };
+
+  /* Målfördelning:
+     E+C+A = 50/30/20
+     E+C   = 60/40
+     C+A   = 60/40 (C/A)
+     E+A   = 70/30
+     en nivå = 100 %
+     Endast nivåer som faktiskt finns i det filtrerade urvalet används. */
+  const tillgangligaNivaer=['E','C','A'].filter(nv=>pool.some(x=>nivaNyckel(x)===nv));
+  const vikter=(()=>{
+    const k=tillgangligaNivaer.join('');
+    if(k==='ECA') return {E:.50,C:.30,A:.20};
+    if(k==='EC')  return {E:.60,C:.40};
+    if(k==='CA')  return {C:.60,A:.40};
+    if(k==='EA')  return {E:.70,A:.30};
+    if(k==='E')   return {E:1};
+    if(k==='C')   return {C:1};
+    if(k==='A')   return {A:1};
+    return {};
+  })();
+
+  /* Hamilton-fördelning ger exakt n uppgifter och ligger så nära
+     procentsatserna som möjligt. */
+  const kvot={E:0,C:0,A:0};
+  if(tillgangligaNivaer.length){
+    const delar=tillgangligaNivaer.map(nv=>{
+      const exakt=n*(vikter[nv]||0);
+      const helt=Math.floor(exakt);
+      kvot[nv]=helt;
+      return {nv,rest:exakt-helt};
+    });
+    let kvar=n-delar.reduce((sum,d)=>sum+kvot[d.nv],0);
+    delar.sort((a,b)=>b.rest-a.rest || ['E','C','A'].indexOf(a.nv)-['E','C','A'].indexOf(b.nv));
+    for(let i=0;i<kvar;i++) kvot[delar[i%delar.length].nv]++;
   }
 
-  /* Fördelar uppgifter endast över de nivåer som finns i det aktuella urvalet. */
-  const vikt={E:5,C:4,A:3};
-  const nivaer=['E','C','A'].filter(k=>kand[k].length);
+  const omraden=blanda([...new Set(pool.map(omrNyckel))]);
   const ut=[];
-  if(nivaer.length){
-    const summa=nivaer.reduce((s,k)=>s+vikt[k],0);
-    const mal={}, rest=[];
-    nivaer.forEach(k=>{
-      const exakt=n*vikt[k]/summa;
-      mal[k]=Math.min(kand[k].length,Math.floor(exakt));
-      rest.push([k,exakt-Math.floor(exakt)]);
-    });
-    rest.sort((a,b)=>b[1]-a[1]);
-    /* Fördelar återstående platser och hoppar över nivåer utan fler kandidater. */
-    let kvar=n-nivaer.reduce((s,k)=>s+mal[k],0);
-    let varv=0;
-    while(kvar>0&&varv<nivaer.length*40){
-      const k=rest[varv%rest.length][0];
-      if(mal[k]<kand[k].length){mal[k]++;kvar--;}
-      varv++;
-    }
-    nivaer.forEach(k=>ut.push(...kand[k].slice(0,mal[k])));
+  const valdaId=new Set();
+  const anvandaFamiljer=new Set();
+  const antalNiva={E:0,C:0,A:0};
 
-    /* Fyller återstående platser från övriga nivåer om en nivå saknar tillräckligt många uppgifter. */
-    if(ut.length<n){
-      const har=new Set(ut.map(x=>x.id));
-      for(const k of nivaer){
-        for(const x of kand[k]){
-          if(ut.length>=n)break;
-          if(!har.has(x.id)){ut.push(x);har.add(x.id);}
-        }
-        if(ut.length>=n)break;
-      }
+  const behov=niv=>Math.max(0,(kvot[niv]||0)-(antalNiva[niv]||0));
+
+  /* Kandidatpoäng:
+     - stark prioritet till nivå som fortfarande ligger under sin kvot
+     - prioritet till ännu oanvänd familj
+     - prioritet till område som hittills fått få uppgifter
+     På så sätt balanseras nivå, familj och område samtidigt. */
+  const antalOmrade=new Map(omraden.map(o=>[o,0]));
+  while(ut.length<n){
+    let kandidater=pool.filter(x=>!valdaId.has(x.id));
+    if(!kandidater.length) break;
+
+    const nivaerMedBehov=tillgangligaNivaer.filter(nv=>behov(nv)>0);
+    if(nivaerMedBehov.length){
+      const medRattNiva=kandidater.filter(x=>nivaerMedBehov.includes(nivaNyckel(x)));
+      if(medRattNiva.length) kandidater=medRattNiva;
     }
+
+    let bast=-Infinity, basta=[];
+    for(const x of kandidater){
+      const nv=nivaNyckel(x), fam=famNyckel(x), omr=omrNyckel(x);
+      let poang=0;
+      if(behov(nv)>0) poang+=1000+behov(nv)*25;
+      if(!anvandaFamiljer.has(fam)) poang+=300;
+      poang-= (antalOmrade.get(omr)||0)*45;
+      /* liten slumpterm bryter likvärdiga kandidater utan att slå ut balansen */
+      poang+=Math.random()*10;
+      if(poang>bast+1e-9){ bast=poang; basta=[x]; }
+      else if(Math.abs(poang-bast)<1e-9) basta.push(x);
+    }
+
+    const x=basta[Math.floor(Math.random()*basta.length)]||kandidater[0];
+    ut.push(x);
+    valdaId.add(x.id);
+    anvandaFamiljer.add(famNyckel(x));
+    const nv=nivaNyckel(x);
+    if(nv) antalNiva[nv]=(antalNiva[nv]||0)+1;
+    const omr=omrNyckel(x);
+    antalOmrade.set(omr,(antalOmrade.get(omr)||0)+1);
   }
 
   state.blad=ut; rita(); ritaBlad();
@@ -4715,7 +4872,7 @@ async function wordUrlTillDataUrl(url){
     fr.readAsDataURL(blob);
   });
 }
-async function wordRenderElementTillPng(el,{maxWidth=640,scale=2}={}){
+async function wordRenderElementTillPng(el,{maxWidth=640,scale=1.45}={}){
   const h2c=await wordLaddaHtml2Canvas();
   const c=await h2c(el,{
     backgroundColor:'#ffffff',
@@ -4724,12 +4881,24 @@ async function wordRenderElementTillPng(el,{maxWidth=640,scale=2}={}){
     useCORS:true,
     allowTaint:false
   });
-  const ratio=Math.min(1,maxWidth/c.width);
-  return {
-    data:wordDataUrlBytes(c.toDataURL('image/png')),
-    width:Math.max(1,Math.round(c.width*ratio)),
-    height:Math.max(1,Math.round(c.height*ratio))
-  };
+  try{
+    const cssWidth=Math.max(1,el.getBoundingClientRect().width||c.width/scale||c.width);
+    const cssHeight=Math.max(1,el.getBoundingClientRect().height||c.height/scale||c.height);
+    const ratio=Math.min(1,maxWidth/cssWidth);
+    const blob=await new Promise((resolve,reject)=>{
+      c.toBlob(b=>b?resolve(b):reject(new Error('Kunde inte skapa PNG-bild.')),'image/png');
+    });
+    const data=new Uint8Array(await blob.arrayBuffer());
+    return {
+      data,
+      width:Math.max(1,Math.round(cssWidth*ratio)),
+      height:Math.max(1,Math.round(cssHeight*ratio))
+    };
+  }finally{
+    /* Frigör canvasminnet direkt. Detta är viktigt på mobil och för stora prov. */
+    c.width=1;
+    c.height=1;
+  }
 }
 async function wordSvgTillPngData(svg,maxWidth=640){
   const rect=svg.getBoundingClientRect();
@@ -4884,24 +5053,43 @@ async function wordBlockTillElement(block,docx,{indent=0,after=90,bold=false}={}
 async function wordHtmlTillParagrapher(html,docx,{indent=0}={}){
   const root=wordTemp(html,620);
   try{
-    await wordRastreraSpecial(root);
+    await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));
+    trimmaUtskriftsFigurer(root);
+
+    /* Komplexa uppgifter renderas som EN bild i stället för en bild per
+       formel/SVG. Det minskar minnesanvändningen kraftigt och undviker att
+       webbläsaren låser sig under Word-export. */
+    const komplex=!!root.querySelector('.katex,svg,img,table,.fig');
+    if(komplex){
+      const bild=await wordRenderElementTillPng(root,{maxWidth:610,scale:1.45});
+      return [new docx.Paragraph({
+        spacing:{after:90},
+        indent:indent?{left:indent}:undefined,
+        children:[new docx.ImageRun({
+          data:bild.data,
+          type:'png',
+          transformation:{width:bild.width,height:bild.height}
+        })]
+      })];
+    }
+
     const blocks=[];
     for(const node of [...root.childNodes]){
       if(node.nodeType===Node.TEXT_NODE){
         if(node.nodeValue.trim()){
-          const p=document.createElement('p');p.textContent=node.nodeValue;blocks.push(p);
+          const q=document.createElement('p');q.textContent=node.nodeValue;blocks.push(q);
         }
       }else if(node.nodeType===Node.ELEMENT_NODE){
         const tag=node.tagName.toLowerCase();
-        if(['p','div','table','img','ul','ol','span'].includes(tag)){
+        if(['p','div','ul','ol','span'].includes(tag)){
           if(tag==='ul'||tag==='ol'){
             for(const li of [...node.children]){
-              const p=document.createElement('p');
-              p.innerHTML=(tag==='ol'?`${[...node.children].indexOf(li)+1}. `:'• ')+li.innerHTML;
-              blocks.push(p);
+              const q=document.createElement('p');
+              q.innerHTML=(tag==='ol'?`${[...node.children].indexOf(li)+1}. `:'• ')+li.innerHTML;
+              blocks.push(q);
             }
-          }else if(tag==='span' && !node.classList.contains('fig')){
-            const p=document.createElement('p');p.appendChild(node.cloneNode(true));blocks.push(p);
+          }else if(tag==='span'){
+            const q=document.createElement('p');q.appendChild(node.cloneNode(true));blocks.push(q);
           }else blocks.push(node);
         }
       }
@@ -4909,7 +5097,11 @@ async function wordHtmlTillParagrapher(html,docx,{indent=0}={}){
     const out=[];
     for(const b of blocks) out.push(await wordBlockTillElement(b,docx,{indent}));
     return out;
-  }finally{root.remove();}
+  }finally{
+    root.remove();
+    /* Ge webbläsaren en chans att städa mellan uppgifterna. */
+    await new Promise(ok=>setTimeout(ok,0));
+  }
 }
 async function wordBildRunFranUrl(url,docx,width=88){
   try{
@@ -5050,12 +5242,16 @@ async function wordSkapaNativeDocx(){
       if(toolHtml){
         const tmp=wordTemp(toolHtml,120);
         try{
-          await wordRastreraSpecial(tmp);
-          const img=tmp.querySelector('img');
-          if(img){
-            const data=wordDataUrlBytes(img.src);
-            toolRun=new docx.ImageRun({data,type:'png',transformation:{width:18,height:18}});
-          }
+          await new Promise(ok=>requestAnimationFrame(()=>requestAnimationFrame(ok)));
+          const bild=await wordRenderElementTillPng(tmp,{maxWidth:36,scale:1.35});
+          const ratio=Math.min(1,18/Math.max(1,bild.height));
+          toolRun=new docx.ImageRun({
+            data:bild.data,type:'png',
+            transformation:{
+              width:Math.max(12,Math.round(bild.width*ratio)),
+              height:Math.max(12,Math.round(bild.height*ratio))
+            }
+          });
         }finally{tmp.remove();}
       }
     }
@@ -5158,6 +5354,17 @@ function uppdateraDokumenttyp(){
   const nu=(input.value||'').trim();
   const arAuto=/^(Övningsblad|Prov)(\s|$)/i.test(nu);
   if(arAuto) input.value=`${typ==='prov'?'Prov':'Övningsblad'}${namn?' '+namn:''}`;
+
+  /* Dokumenttypernas standardinställningar. */
+  const total=$('#visaTotalpoangExport');
+  const hjalp=$('#visaHjälpmedelExport');
+  if(typ==='prov'){
+    if(total) total.checked=true;
+    if(hjalp) hjalp.checked=false;
+  }else{
+    if(total) total.checked=false;
+    if(hjalp) hjalp.checked=true;
+  }
 }
 $('#bladTyp').addEventListener('change',uppdateraDokumenttyp);
 
