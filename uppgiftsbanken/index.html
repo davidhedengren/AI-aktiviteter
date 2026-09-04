@@ -5942,25 +5942,55 @@ function renderKatex(root){
 /* Initierar KaTeX efter att skriptet har laddats. */
 window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(); });
 
-/* ── spara/ladda · händelser ── */
-$('#sparaDokument').addEventListener('click',sparOppnaSpara);
-$('#laddaDokument').addEventListener('click',sparOppnaLadda);
-$('#sparmodalStang').addEventListener('click',sparStangModal);
-$('#sparAvbryt').addEventListener('click',sparStangModal);
-$('#sparBekrafta').addEventListener('click',()=>{
-  try{
-    const namn=($('#sparnamnInput').value||'').trim();
-    if(!namn){$('#sparnamnInput').focus();return;}
-    sparSparaManuellt(namn); sparStangModal();
-  }catch(e){}
-});
-$('#sparnamnInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('#sparBekrafta').click();}});
-$('#sparmodal').addEventListener('click',e=>{if(e.target===$('#sparmodal')) sparStangModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape' && !$('#sparmodal').hidden) sparStangModal();});
-['bTitel','bKlass','bDatum','bladTyp','taMedFacit','visaTotalpoangExport','visaHjälpmedelExport'].forEach(id=>{
-  const el=$('#'+id); if(!el) return;
-  el.addEventListener(el.matches('input[type="checkbox"],select')?'change':'input',sparSchemalaggAutospar);
-});
+/* ── spara/ladda · händelser ──
+   Modalen ligger efter huvudskriptet i HTML. Händelserna måste därför bindas
+   först när hela DOM:en är färdigparsad; annars är modal-elementen null och
+   skriptet avbryts, vilket gör att hela startsidan ser kraschad ut. */
+function initSparaLaddaUI(){
+  const spara=$('#sparaDokument');
+  const ladda=$('#laddaDokument');
+  const stang=$('#sparmodalStang');
+  const avbryt=$('#sparAvbryt');
+  const bekrafta=$('#sparBekrafta');
+  const namnInput=$('#sparnamnInput');
+  const modal=$('#sparmodal');
+
+  if(!spara || !ladda || !stang || !avbryt || !bekrafta || !namnInput || !modal){
+    console.error('Spara/ladda-UI kunde inte initieras: ett eller flera element saknas.');
+    return;
+  }
+
+  spara.addEventListener('click',sparOppnaSpara);
+  ladda.addEventListener('click',sparOppnaLadda);
+  stang.addEventListener('click',sparStangModal);
+  avbryt.addEventListener('click',sparStangModal);
+  bekrafta.addEventListener('click',()=>{
+    try{
+      const namn=(namnInput.value||'').trim();
+      if(!namn){namnInput.focus();return;}
+      sparSparaManuellt(namn);
+      sparStangModal();
+    }catch(e){}
+  });
+  namnInput.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){e.preventDefault();bekrafta.click();}
+  });
+  modal.addEventListener('click',e=>{if(e.target===modal) sparStangModal();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && !modal.hidden) sparStangModal();
+  });
+
+  ['bTitel','bKlass','bDatum','bladTyp','taMedFacit','visaTotalpoangExport','visaHjälpmedelExport'].forEach(id=>{
+    const el=$('#'+id);
+    if(!el) return;
+    el.addEventListener(el.matches('input[type="checkbox"],select')?'change':'input',sparSchemalaggAutospar);
+  });
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',initSparaLaddaUI,{once:true});
+}else{
+  initSparaLaddaUI();
+}
 
 /* ── Initiering ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
