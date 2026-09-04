@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Erik Dahlbergsgymnasiets uppgiftsbank</title>
+<title>Uppgiftslabbet – Erik Dahlbergsgymnasiets stora uppgiftsbank</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -992,6 +992,18 @@ table.data th{background:var(--sunken);font-weight:600}
 .exportrad{display:flex;gap:9px}
 .exportrad .knapp{flex:1;justify-content:center;padding:11px 14px;border-radius:11px;font-weight:600}
 .exportrad .knapp.primär{box-shadow:0 2px 8px rgba(180,49,35,.22)}
+.exportrad .knapp.till-analys{
+  border-color:rgba(42,93,158,.24);
+  background:#EEF3FA;
+  color:#244F87;
+}
+.exportrad .knapp.till-analys:hover{
+  border-color:rgba(42,93,158,.42);
+  background:#E4ECF7;
+  color:#173E70;
+}
+.exportrad .knapp.till-analys svg{width:18px;height:18px}
+
 .växel{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13.5px;font-weight:500;
   color:var(--ink-2);cursor:pointer}
 .växel input{appearance:none;width:38px;height:22px;border-radius:99px;background:#D6D5D9;position:relative;
@@ -2257,6 +2269,59 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .kurskort:hover{transform:none!important}
   .kurskort:hover .kk-action{transform:none!important}
 }
+
+/* ── Mörkt tema + temaknapp ── */
+.kv-theme-toggle{
+  margin-left:auto;width:44px;height:44px;flex:0 0 44px;padding:0;
+  display:grid;place-items:center;border:1px solid rgba(43,37,39,.09);
+  border-radius:13px;background:rgba(255,255,255,.88);color:var(--ink-2);
+  box-shadow:0 1px 2px rgba(43,37,39,.04),0 7px 20px rgba(43,37,39,.045);
+  cursor:pointer;transition:background .18s,border-color .18s,color .18s,transform .08s,box-shadow .18s;
+}
+.kv-theme-toggle:hover{background:#fff;border-color:rgba(180,49,35,.20);color:var(--ed);box-shadow:0 7px 22px rgba(43,37,39,.08)}
+.kv-theme-toggle:active{transform:translateY(1px)}
+.kv-theme-toggle:focus-visible{outline:2px solid var(--ed);outline-offset:3px}
+.kv-theme-toggle svg{width:20px;height:20px;display:block}
+.kv-theme-toggle .sun-icon{display:none}
+:root[data-theme="dark"] .kv-theme-toggle .moon-icon{display:none}
+:root[data-theme="dark"] .kv-theme-toggle .sun-icon{display:block}
+
+:root[data-theme="dark"]{
+  --canvas:#1F1B1C;--surface:#292426;--sunken:#332D30;
+  --ink:#F2EEEF;--ink-2:#C1B9BC;--muted:#948B8F;--line:#40383B;--line-2:#342E31;
+  --ed:#D66D61;--ed-dark:#F08A7E;--ed-tint:#452A29;--ed-ring:rgba(214,109,97,.20);
+  --nE:#55B894;--nC:#78A0D0;--nA:#B88ACB;
+  --nE-bg:#193A30;--nC-bg:#26364B;--nA-bg:#392C41;
+  --sidebar-bg:#292426;--sidebar-bg-2:#292426;--sidebar-hover:#332D30;--sidebar-line:#40383B;
+}
+:root[data-theme="dark"] body{background:var(--canvas);color:var(--ink)}
+:root[data-theme="dark"] .kursval{
+  background:
+    radial-gradient(900px 520px at 8% -10%,rgba(214,109,97,.08),transparent 66%),
+    radial-gradient(720px 520px at 96% 104%,rgba(255,255,255,.025),transparent 68%),
+    #1F1B1C;
+}
+:root[data-theme="dark"] .kv-logo-shell,
+:root[data-theme="dark"] .kv-theme-toggle{background:#292426;border-color:#40383B}
+:root[data-theme="dark"] .kv-logo-shell img{background:#fff;border-radius:11px}
+:root[data-theme="dark"] .kv-brandname,
+:root[data-theme="dark"] .kk-namn,
+:root[data-theme="dark"] .kv-designhero-copy h2{color:#F2EEEF}
+:root[data-theme="dark"] .kurskort{background:rgba(41,36,38,.92);border-color:#40383B;color:var(--ink)}
+:root[data-theme="dark"] .kurskort:hover{background:#302A2D;border-color:rgba(214,109,97,.30);box-shadow:0 16px 48px rgba(0,0,0,.20)}
+:root[data-theme="dark"] .kk-number{color:#3A3336}
+:root[data-theme="dark"] .kurskort:hover .kk-number{color:#493538}
+:root[data-theme="dark"] .kk-tag{background:#332D30;border-color:#443B3F;color:#B8AFB3}
+:root[data-theme="dark"] .kurskort:hover .kk-tag{background:#393235;border-color:#554448;color:#D0C8CB}
+:root[data-theme="dark"] .kk-action{background:#452A29;border-color:#5A3633;color:#E78378}
+:root[data-theme="dark"] .top{background:var(--surface);border-color:var(--line)}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea{background:#211D1F;color:var(--ink);border-color:var(--line)}
+@media(max-width:520px){
+  .kv-theme-toggle{width:40px;height:40px;flex-basis:40px;border-radius:12px}
+}
+
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -2341,10 +2406,19 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
       <div class="kv-brand">
         <span class="kv-logo-shell"><img src="logo.png" alt="Erik Dahlbergsgymnasiet"></span>
         <span class="kv-brandtext">
-          <span class="kv-brandname">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-          <span class="kv-brandmeta">Matematik &amp; fysik</span>
+          <span class="kv-brandname">Uppgiftslabbet</span>
+          <span class="kv-brandmeta">Erik Dahlbergsgymnasiets stora uppgiftsbank</span>
         </span>
       </div>
+      <button class="kv-theme-toggle" id="kvThemeToggle" type="button" aria-label="Byt till mörkt tema" title="Byt till mörkt tema">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8Z"/>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
     </header>
 
     <section class="kv-designhero" aria-label="Introduktion">
@@ -2500,6 +2574,15 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
         <button class="knapp primär" id="expPdf">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V4h12v5M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>
           PDF
+        </button>
+        <button class="knapp till-analys" id="tillAnalys" type="button" title="Skicka provets uppgifter direkt till resultatanalysen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 3h6"/>
+            <path d="M10 3v7.2l-4.7 7.2A2.3 2.3 0 0 0 7.2 21h9.6a2.3 2.3 0 0 0 1.9-3.6L14 10.2V3"/>
+            <path d="M7.7 16h8.6"/>
+            <path d="M10 13.2h4"/>
+          </svg>
+          Till analys
         </button>
         <button class="knapp" id="expWord">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
@@ -4295,6 +4378,101 @@ function bladHTML({facit,hjalpmedel=true}){
   }
   return h;
 }
+
+/* ── Till analys ──────────────────────────────────────────────────────────
+   Uppgiftslabbet och /analys ligger på samma origin. Därför kan ett prov
+   lämnas över direkt via localStorage utan filhämtning eller manuell
+   inmatning. Posten tas bort av analysverktyget när den har lästs. */
+const ANALYS_TRANSFER_KEY='uppgiftslabbet_analysis_transfer_v1';
+
+function analysNiva(niva){
+  return niva==='A'?5:(niva==='C'?3:1);
+}
+function analysPoangSumma(poang){
+  const m=String(poang||'').match(/(\d+)\s*\/\s*(\d+)\s*\/\s*(\d+)/);
+  return m ? (+m[1]+ +m[2]+ +m[3]) : 0;
+}
+function analysDelar(x){
+  /* Om banken har explicit delpoäng används den. Annars blir uppgiften en
+     sammanhållen analysuppgift med sin totala maxpoäng. */
+  if(Array.isArray(x?.delpoang) && x.delpoang.length){
+    const delar=x.delpoang.map(d=>{
+      const p=analysPoangSumma(d?.poang ?? d?.points ?? '');
+      return p>0?p:null;
+    }).filter(v=>v!==null);
+    if(delar.length) return delar;
+  }
+  const total=analysPoangSumma(x?.poang);
+  return total>0?[total]:[];
+}
+function byggAnalysOverforing(){
+  const tasks=[];
+  let nextId=1;
+  state.blad.forEach(x=>{
+    const maxdelar=analysDelar(x);
+    if(!maxdelar.length) return;
+    const omradesnamn=DB.omr?.[x.kap]?.[x.omr] || x.omr || '(utan område)';
+    const tid=nextId++;
+    tasks.push({
+      id:tid,
+      areas:[omradesnamn],
+      level:analysNiva(x.niva),
+      weights:{[omradesnamn]:1},
+      parts:maxdelar.map(max=>({id:nextId++,max})),
+      source:{
+        bankId:x.id,
+        family:x.familj||null,
+        abilities:Array.isArray(x.formaga)?[...x.formaga]:[],
+        course:AKTIV?.id||null,
+        track:state.spår||null
+      }
+    });
+  });
+
+  const total=tasks.reduce((s,t)=>s+t.parts.reduce((a,p)=>a+(Number(p.max)||0),0),0);
+  const areas=[];
+  tasks.forEach(t=>t.areas.forEach(a=>{if(!areas.includes(a))areas.push(a);}));
+
+  return {
+    schema:'uppgiftslabbet-analysis-transfer-v1',
+    createdAt:Date.now(),
+    className:($('#bKlass').value||'').trim(),
+    courseName:AKTIV?.titel||'',
+    data:{
+      testName:($('#bTitel').value||'').trim()||'Prov från Uppgiftslabbet',
+      grades:{
+        e:total?Math.round(total*.28):'',
+        d:'',
+        c:total?Math.round(total*.55):'',
+        b:'',
+        a:total?Math.round(total*.78):''
+      },
+      areas,
+      tasks,
+      students:[]
+    }
+  };
+}
+function skickaTillAnalys(){
+  if(!state.blad.length){
+    alert('Lägg först till minst en uppgift i bladet.');
+    return;
+  }
+  const transfer=byggAnalysOverforing();
+  if(!transfer.data.tasks.length){
+    alert('De valda uppgifterna saknar poäng och kan därför inte skickas till analysen.');
+    return;
+  }
+  try{
+    localStorage.setItem(ANALYS_TRANSFER_KEY,JSON.stringify(transfer));
+  }catch(e){
+    alert('Kunde inte förbereda överföringen till analysen i den här webbläsaren.');
+    return;
+  }
+  window.location.href='/analys/?from=uppgiftslabbet';
+}
+$('#tillAnalys').addEventListener('click',skickaTillAnalys);
+
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
   u.innerHTML=bladHTML({facit:$('#taMedFacit').checked,hjalpmedel:$('#visaHjälpmedelExport').checked});
@@ -4505,5 +4683,36 @@ if(DIREKTKURS){
   });
 }
 </script>
+
+<script>
+(function(){
+  const KEY='uppgiftslabbet_theme';
+  const html=document.documentElement;
+
+  function applyTheme(theme){
+    html.setAttribute('data-theme',theme);
+    try{localStorage.setItem(KEY,theme);}catch(e){}
+    const btn=document.getElementById('kvThemeToggle');
+    if(btn){
+      const dark=theme==='dark';
+      btn.setAttribute('aria-label',dark?'Byt till ljust tema':'Byt till mörkt tema');
+      btn.title=dark?'Byt till ljust tema':'Byt till mörkt tema';
+    }
+  }
+
+  let saved=null;
+  try{saved=localStorage.getItem(KEY);}catch(e){}
+  const initial=saved||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  applyTheme(initial);
+
+  const bind=()=>{
+    const btn=document.getElementById('kvThemeToggle');
+    if(btn) btn.addEventListener('click',()=>applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind);
+  else bind();
+})();
+</script>
+
 </body>
 </html>
