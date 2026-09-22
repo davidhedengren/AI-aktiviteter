@@ -778,15 +778,20 @@ function targetFn(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>
 function targetFnNoisy(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;const noise=(Math.random()-0.5)*0.08;return(examScore(vs)+noise)>examThr()?1:0;}
 function targetLabel(vs){if(isCalc())return '–';return targetFn(vs)===1?'Ja':'Nej';}
 function initCalcWeights(){W=[[[2,1],[1,-2],[1,-1]],[[2,-1,1]]];B=[[0,0,0],[-1]];}
-function initW(){if(isCalc()){initCalcWeights();return;}W=[];B=[];for(let l=1;l<layers.length;l++){const w=[],b=[];for(let j=0;j<layers[l];j++){const r=[];for(let i=0;i<layers[l-1];i++)r.push(Math.round((Math.random()*2-1)*100)/100);w.push(r);b.push(Math.round((Math.random()*0.4-0.2)*100)/100);}W.push(w);B.push(b);}wDeltas=[];for(let l=0;l<W.length;l++){const d=[];for(let j=0;j<W[l].length;j++){const r=[];for(let i=0;i<W[l][j].length;i++)r.push(0);d.push(r);}wDeltas.push(d);}}
+/* I gymscenariot får första lagrets vikter fyra gånger större spann. Med
+   vikter mellan −1 och 1 börjar alla dolda neuroner i sigmoidens linjära mitt
+   och liknar varandra, och med exakt sex neuroner för sex gränser blev en av
+   dem ibland oanvänd. Större startvikter ger neuronerna olika startgränser,
+   och sex neuroner hamnar då pålitligt över fyra. */
+function initW(){if(isCalc()){initCalcWeights();return;}W=[];B=[];for(let l=1;l<layers.length;l++){const w=[],b=[];const sc=(curSc==='gym'&&l===1)?4:1;for(let j=0;j<layers[l];j++){const r=[];for(let i=0;i<layers[l-1];i++)r.push(Math.round((Math.random()*2-1)*sc*100)/100);w.push(r);b.push(Math.round((Math.random()*0.4-0.2)*100)/100);}W.push(w);B.push(b);}wDeltas=[];for(let l=0;l<W.length;l++){const d=[];for(let j=0;j<W[l].length;j++){const r=[];for(let i=0;i<W[l][j].length;i++)r.push(0);d.push(r);}wDeltas.push(d);}}
 function initV(){vals=[];for(let l=0;l<layers.length;l++){const lv=[];for(let j=0;j<layers[l];j++)lv.push({raw:null,act:null,computed:false});vals.push(lv);}const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};stepQueue=[];for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++)stepQueue.push({l,j});stepIdx=0;hlNeuron=null;hlEdges=[];stepHist=[];}
 function snapVals(){return JSON.parse(JSON.stringify(vals));}
 function forwardFull(){const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){let s=B[l-1][j];for(let i=0;i<layers[l-1];i++)s+=W[l-1][j][i]*vals[l-1][i].act;vals[l][j]={raw:s,act:act_(s,l),computed:true};}stepIdx=stepQueue.length;}
 /* Gym: hälften av exemplen är godkända pass. Av de underkända bryter de
-   flesta mot ett enda villkor och ligger bara ett eller två steg utanför
-   sin gräns. Sådana gränsfall gör att varje gräns måste läras för sig.
-   Med slumpade motexempel bröt de flesta mot flera villkor samtidigt, och
-   då räckte fyra neuroner nästan lika långt som sex. */
+   flesta mot ett enda villkor, medan övriga värden ligger inom sina gränser.
+   Sådana exempel gör att varje gräns måste läras för sig. Med slumpade
+   motexempel bröt de flesta mot flera villkor samtidigt, och då räckte fyra
+   neuroner nästan lika långt som sex. */
 const GYMVALS=(function(){
   const out=[];
   for(const vo of GYMVARS){
@@ -821,10 +826,12 @@ function genGymData(n){
 function genData(n){if(curSc==='gym')return genGymData(n);const av=activeVars(),nI=av.length,xs=[],ys=[];if(curSc==='gym'||curSc==='exam'){let ja=0,nej=0,t=Math.floor(n/2),guard=0;while((ja<t||nej<t)&&guard<n*400){guard++;const x=[];for(let j=0;j<nI;j++)x.push(curSc==='gym'?snapNorm(Math.random(),av[j]):Math.round(Math.random()*100)/100);const y=targetFnNoisy(x);if(y===1&&ja<t){xs.push(x);ys.push(y);ja++;}else if(y===0&&nej<t){xs.push(x);ys.push(y);nej++;}}}else{for(let i=0;i<n;i++){const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);xs.push(x);ys.push(targetFnNoisy(x));}}return{xs,ys};}
 /* Andel rätt på färsk data som modellen inte tränats på. Det är måttet som
    går att jämföra mellan olika arkitekturer – förlusten säger lite för den
-   som inte vet vad den mäter. */
+   som inte vet vad den mäter. Testmängden är 4000 exempel. Med 400 var
+   slumpfelet runt ±2,5 procentenheter, lika stort som skillnaden mellan
+   fyra och sex neuroner. */
 function testAccuracy(){
   if(isCalc())return null;
-  const d=genData(400);let ok=0;
+  const d=genData(4000);let ok=0;
   for(let s=0;s<d.xs.length;s++){
     let c=d.xs[s].slice();
     for(let l=0;l<W.length;l++){
