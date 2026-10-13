@@ -253,7 +253,7 @@ const WIN=5;
 let hiddenPct=20;
 let SIZE=15,board=[],hidden=new Set(),cells=[],gameOver=false;
 let currentPlayer='X',blindX=0,blindO=0,totalMoves=0,lastMove=null;
-let vsAI=false,aiThinking=false,aiTried=new Set();
+let vsAI=false,aiThinking=false,aiTried=new Set(),belief=new Map(),prevBlind=0;
 
 function setMode(ai){
   vsAI=ai;
@@ -267,7 +267,7 @@ function startGame(){
   SIZE=parseInt(document.getElementById('sizeSelect').value);
   hiddenPct=parseInt(document.getElementById('hiddenSlider').value);
   board=[];cells=[];hidden.clear();gameOver=false;currentPlayer='X';
-  blindX=0;blindO=0;totalMoves=0;lastMove=null;aiThinking=false;aiTried.clear();
+  blindX=0;blindO=0;totalMoves=0;lastMove=null;aiThinking=false;aiTried.clear();belief=new Map();prevBlind=0;
   for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
   const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
   shuffle(all);const numH=Math.floor(SIZE*SIZE*hiddenPct/100);
@@ -366,6 +366,9 @@ function maybeAI(){
 }
 
 /* ---- AI-agent under samma dimma ---- */
+/* AI:n ser inte under dimman. I stället håller den en uppskattning (belief) av hur
+   troligt det är att varje dold ruta redan har ett X. Den vet hur många drag X har
+   gjort och hur många X som syns, så skillnaden är antalet blinda X-drag. */
 function inb(r,c){return r>=0&&r<SIZE&&c>=0&&c<SIZE;}
 function runValue(cnt,open){
   if(cnt>=5)return 100000;
@@ -375,17 +378,24 @@ function runValue(cnt,open){
   if(cnt>=1)return open===2?8:open>=1?2:0;
   return 0;
 }
-function offenseScore(r,c){
+function visX(r,c){return !hidden.has(key(r,c))&&board[r][c]==='X'?1:0;}
+function visO(r,c){return !hidden.has(key(r,c))&&board[r][c]==='O'?1:0;}
+function visFree(r,c){return !hidden.has(key(r,c))&&board[r][c]==='';}
+function pX(k){return belief.get(k)||0;}
+/* AI:ns egna blinda drag räknas som O bara i den mån den tror att X inte var där först. */
+function mineO(r,c){const k=key(r,c);if(hidden.has(k))return aiTried.has(k)?1-pX(k):0;return board[r][c]==='O'?1:0;}
+function freeO(r,c){const k=key(r,c);return hidden.has(k)?!aiTried.has(k):board[r][c]==='';}
+/* Värdet av raderna genom (r,c). mine anger hur mycket en ruta räknas som egen (0–1). */
+function lineScore(r,c,mine,free){
   const dirs=[[1,0],[0,1],[1,1],[1,-1]];let tot=0;
   for(const[dr,dc] of dirs){
     let cnt=1,open=0;
     for(const sgn of [1,-1]){
       let nr=r+dr*sgn,nc=c+dc*sgn,steps=0;
       while(inb(nr,nc)&&steps<4){
-        const k=key(nr,nc);
-        if(!hidden.has(k)&&board[nr][nc]==='O'){cnt++;}
-        else if(!hidden.has(k)&&board[nr][nc]===''){open++;break;}
-        else break;
+        const v=mine(nr,nc);
+        if(v>0)cnt+=v;
+        else{if(free(nr,nc))open++;break;}
         nr+=dr*sgn;nc+=dc*sgn;steps++;
       }
     }
@@ -393,13 +403,37 @@ function offenseScore(r,c){
   }
   return tot;
 }
+function offenseScore(r,c){return lineScore(r,c,mineO,freeO);}
+function updateBelief(){
+  let seen=0;
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)seen+=visX(r,c);
+  const blind=Math.ceil(totalMoves/2)-seen;
+  const open=[];hidden.forEach(k=>{if(!aiTried.has(k))open.push(k);});
+  /* 1. Ett nytt blint X-drag hamnade troligast i en dold ruta som var bra för X,
+        alltså en som bygger X:s rad eller blockerar AI:ns. */
+  for(let i=prevBlind;i<blind;i++){
+    const w=open.map(k=>{const[r,c]=k.split(',').map(Number);return lineScore(r,c,visX,visFree)+0.9*lineScore(r,c,visO,visFree)+1;});
+    const tot=w.reduce((a,b)=>a+b,0);
+    open.forEach((k,j)=>belief.set(k,1-(1-pX(k))*(1-w[j]/tot)));
+  }
+  prevBlind=blind;
+  /* 2. X bygger sina rader runt sina dolda markörer. Dolda rutor som passar in i
+        X:s synliga rader blir därför mer misstänkta. */
+  if(blind<=0)return;
+  const w=open.map(k=>{const[r,c]=k.split(',').map(Number);return lineScore(r,c,visX,visFree)+1;});
+  const tot=w.reduce((a,b)=>a+b,0);
+  open.forEach((k,j)=>belief.set(k,Math.max(pX(k),Math.min(0.9,blind*w[j]/tot))));
+}
 function capRun(r,c,dr,dc){
   let run=0,nr=r+dr,nc=c+dc,steps=0;
   while(inb(nr,nc)&&steps<5){
     const k=key(nr,nc);
-    if(!hidden.has(k)&&board[nr][nc]==='X')run+=1;
-    else if(hidden.has(k))run+=0.5; // Dold ruta = kanske X
-    else break;
+    if(!hidden.has(k)){if(board[nr][nc]==='X')run+=1;else break;}
+    else{
+      /* En dold ruta räknas som så mycket X som AI:n tror att den är. */
+      if(aiTried.has(k)&&pX(k)<0.5)break; // Troligen AI:ns egen markör
+      run+=pX(k);
+    }
     nr+=dr;nc+=dc;steps++;
   }
   return run;
@@ -416,19 +450,20 @@ function defenseScore(r,c){
 function playable(r,c){const k=key(r,c);if(hidden.has(k))return !aiTried.has(k);return board[r][c]==='';}
 
 function chooseAIMove(){
+  updateBelief();
   let list=[];
   for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(playable(r,c))list.push([r,c]);
   if(list.length===0)return null;
   const cc=(SIZE-1)/2;
   let best=null,bestScore=-Infinity;
   for(const[r,c] of list){
+    const isH=hidden.has(key(r,c)),p=isH?pX(key(r,c)):0;
     let off=offenseScore(r,c),def=defenseScore(r,c);
-    // Kombinerat poäng: attack + försvar + centrumsattraktivitet + litet brus
-    let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
-    /* Dolda rutor får en liten bonus så att AI:n oftare lägger i dimman. */
+    // Kombinerat poäng: (attack + försvar) gånger chansen att rutan är ledig + centrumsattraktivitet + litet brus
+    let s=(off+def*1.05)*(1-p)+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
+    /* Dolda rutor får en liten bonus så att AI:n gärna lägger i dimman. */
     /* Undantag: i kritiska lägen (hög poäng) väger dold och synlig ruta lika. */
-    const isH=hidden.has(key(r,c));
-    const sv=(isH&&s<1000)?s*1.2+4:s;
+    const sv=(isH&&s<1000)?s*1.1+2:s;
     if(sv>bestScore){bestScore=sv;best={r,c};}
   }
   return best;
