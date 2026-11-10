@@ -55,7 +55,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .app{display:flex;gap:12px;flex:1;position:relative;z-index:1;padding:12px;}
 .canvas-area{flex:1;display:flex;flex-direction:column;align-items:center;padding:16px;gap:10px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .canvas-wrap{position:relative;border:2px solid var(--border);border-radius:var(--r-md);overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.5);}
-#cv{display:block;cursor:crosshair;}
+#cv{display:block;cursor:crosshair;width:min(500px,calc(100vw - 56px));height:auto;aspect-ratio:1;}
 .class-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;}
 .cls-btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:7px 18px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:.2s var(--ease-spring);background:transparent;}
 .cls-btn:hover{transform:translateY(-1px);}
@@ -268,6 +268,41 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
 .step-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:0.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(102,152,255,.25);font-family:'JetBrains Mono',monospace;}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.tc-btn:disabled{opacity:.38;cursor:not-allowed;transform:none;filter:none;}
+.knn-ctl{display:none;align-items:center;gap:9px;margin-top:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);font-size:0.78em;color:var(--dim);}
+.knn-ctl.on{display:flex;}
+.knn-ctl b{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-size:1.08em;}
+.knn-ctl .knn-k{white-space:nowrap;min-width:46px;}
+.knn-ctl input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:60px;height:4px;border-radius:2px;background:var(--bg);outline:none;}
+.knn-ctl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(77,128,255,.18);}
+.knn-ctl input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--accent);cursor:pointer;}
+.knn-ctl .knn-sub{font-size:.9em;color:var(--dim2);white-space:nowrap;}
+/* ══ Breda skärmar: ritytan blir så stor som höjden tillåter och knapparna för klass och
+   träning ligger bredvid den i stället för under, så att allt syns utan att scrolla. ══ */
+@media (min-width:1100px){
+  :root{--hd-h:50px;--ctl-w:214px;--cv:max(320px,min(calc(100vh - var(--hd-h) - 64px),calc(100vw - 670px)));}
+  @supports (height:100dvh){:root{--cv:max(320px,min(calc(100dvh - var(--hd-h) - 64px),calc(100vw - 670px)));}}
+  .hd{height:var(--hd-h);padding:0 160px;display:flex;align-items:center;justify-content:center;}
+  .hd p{display:none;}
+  .app{flex:none;height:calc(100vh - var(--hd-h) - 1px);height:calc(100dvh - var(--hd-h) - 1px);min-height:383px;}
+  .canvas-area{display:grid;grid-template-columns:auto var(--ctl-w);grid-auto-rows:min-content;gap:14px 18px;justify-content:center;align-content:start;align-items:start;}
+  .canvas-wrap{grid-column:1;grid-row:1 / span 4;}
+  #cv{width:var(--cv);height:var(--cv);}
+  .class-row,.train-row{grid-column:2;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:8px;}
+  .canvas-hint{text-align:center;}
+  .train-row{padding-top:14px;border-top:1px solid var(--border-soft);}
+  .speed-wrap{justify-content:center;margin-top:2px;}
+  .legend-strip{grid-column:2;flex-direction:column;align-items:flex-start;gap:6px;}
+  .panel{min-height:0;width:360px;}
+  .model-radio-list{gap:8px;}
+  .story-hint{display:none;}
+  #viewStd{gap:0;}
+  /* Steg 3 (status och träffsäkerhet) fäster i panelens nederkant, så att det syns även när panelen måste scrollas. */
+  #viewStd > :nth-child(5){position:sticky;bottom:-14px;z-index:2;margin:0 -14px;padding:10px 14px 12px;background:#0d1120;border-top:1px solid var(--border-soft);box-shadow:0 -12px 18px rgba(6,8,16,.55);}
+  .story-divider{margin:11px 0 11px 34px;}
+  .preset-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .pbtn{padding:7px 2px;}
+}
 @media(max-width:820px){
   .app{flex-direction:column;padding:8px;gap:8px;}
   .canvas-area{border-right:none;}
@@ -374,7 +409,13 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
                 <span class="mr-icon"><svg viewBox="0 0 20 14" fill="none"><path class="mr-flat" d="M2 12L18 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="mr-wavy" d="M1 7C3 2 5 2 7 7C9 12 11 12 13 7C15 2 17 2 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
                 <span class="mr-label"><span class="mr-name">Neuralt nätverk</span><span class="mr-sub">Dolt lager med neuroner som böjer gränsen</span></span>
               </button>
+              <button class="model-radio" id="mKNN" onclick="setModel('knn')">
+                <span class="mr-dot"></span>
+                <span class="mr-icon"><svg viewBox="0 0 20 14" fill="none"><circle cx="10" cy="7" r="5.6" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2"/><circle cx="10" cy="7" r="1.7" fill="currentColor"/><circle cx="6.6" cy="5" r="1.2" fill="currentColor"/><circle cx="13" cy="9.6" r="1.2" fill="currentColor"/><circle cx="12.6" cy="3.8" r="1.2" fill="currentColor"/></svg></span>
+                <span class="mr-label"><span class="mr-name">k-närmaste grannar</span><span class="mr-sub">De k närmaste punkterna röstar</span></span>
+              </button>
             </div>
+            <div class="knn-ctl" id="knnCtl"><span class="knn-k">k = <b id="knnVal">5</b></span><input type="range" id="knnSlider" min="1" max="15" step="2" value="5" oninput="setK(this.value)" aria-label="k"><span class="knn-sub">grannar röstar</span></div>
             <div class="info-box" id="infoBox" style="margin-top:12px">
               <strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa om den lyckas klassificera exempelvis ett XOR-mönster.
             </div>
@@ -436,6 +477,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
                 <span class="g-tag" onclick="openConcept('xor',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>XOR</span>
               </div>
               <div class="begrepp-row">
+                <span class="g-tag" onclick="openConcept('knn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg>k-närmaste grannar</span>
                 <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>Om mönstren</span>
               </div>
             </div>
@@ -600,12 +642,13 @@ class Net{
 }
 
 const CS=500,DR=2.6,BGRES=100;
-const BASE_ARCH={linear:[2,1],nn1:[2,18,1]};
+const BASE_ARCH={linear:[2,1],nn1:[2,18,1],knn:[2,1]};
 const LR_MAP={tanh:0.17,relu:0.08};
 const SPEED_SPF=[1,3,8,25];
 const SPEED_LABELS=['½×','1×','2×','5×'];
 
 let points=[],curClass=0,curModel='nn1',actFn='tanh';
+let knnK=5;
 let customArch=null;
 let net=null,itr=0,lastLoss=0,playing=false;
 let vizMode='boundary';
@@ -617,12 +660,44 @@ let reluExplained=false;
 let lastShownPct=null,boundaryPulseAt=null;
 
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+/* Ritytan ritas i logiska koordinater (CS×CS) men bufferten följer visad storlek, så att den är skarp. */
+function fitCanvas(){
+  const d=Math.min(3,window.devicePixelRatio||1),cw=cv.clientWidth||CS;
+  const b=Math.max(CS,Math.round(cw*d));
+  if(cv.width!==b||cv.height!==b){cv.width=b;cv.height=b;}
+  ctx.setTransform(b/CS,0,0,b/CS,0,0);
+}
+fitCanvas();
+if(window.ResizeObserver)new ResizeObserver(fitCanvas).observe(cv);
+else window.addEventListener('resize',fitCanvas);
 const tmp=document.createElement('canvas');tmp.width=BGRES;tmp.height=BGRES;
 const tctx=tmp.getContext('2d');
 
 const d2p=(x,y)=>[(x/DR+.5)*CS,(-y/DR+.5)*CS];
 const p2d=(px,py)=>[(px/CS-.5)*DR,-(py/CS-.5)*DR];
 const getArch=()=>customArch??BASE_ARCH[curModel];
+/* k-närmaste grannar: ingen träning. En punkt får den klass som flest av de k närmaste
+   datapunkterna har. predict() ger andelen grannar i klass B, i samma form som Net.predict. */
+class KNN{
+  constructor(){this.arch=[2,1];this.b=[[0]];}
+  predict(inp){
+    const n=points.length;if(!n)return .5;
+    const k=Math.min(knnK,n),x=inp[0],y=inp[1];
+    const bd=new Float64Array(k).fill(Infinity),bc=new Uint8Array(k);
+    for(let i=0;i<n;i++){
+      const p=points[i],dx=p.x-x,dy=p.y-y,dd=dx*dx+dy*dy;
+      if(dd>=bd[k-1])continue;
+      let j=k-1;while(j>0&&bd[j-1]>dd){bd[j]=bd[j-1];bc[j]=bc[j-1];j--;}
+      bd[j]=dd;bc[j]=p.cls;
+    }
+    let b=0;for(let j=0;j<k;j++)b+=bc[j];
+    return b/k;
+  }
+  predictCombo(inp){return this.predict(inp);}
+  trainStep(){return 0;}
+}
+const mkNet=()=>curModel==='knn'?new KNN():new Net(getArch(),actFn);
+function setK(v){knnK=parseInt(v)||1;document.getElementById('knnVal').textContent=knnK;}
 const getLR=()=>LR_MAP[actFn]??0.12;
 const hasBoth=()=>points.some(p=>p.cls===0)&&points.some(p=>p.cls===1);
 
@@ -664,11 +739,23 @@ function drawBoundaryContour(pGrid){
   ctx.restore();
 }
 
+/* k-NN räknas om bara när punkterna eller k ändras, inte i varje bildruta. */
+let knnKey='',knnId=null,knnGrid=null;
 function renderBg(){
   /* Beslutsgränsen ritas först när träningen har börjat. Nätverket startar med
      slumpade vikter, så en gräns före första steget skulle visa brus och se ut
      som ett resultat. */
   if(!net||!hasBoth()||itr===0){ctx.fillStyle='#090b14';ctx.fillRect(0,0,CS,CS);return;}
+  if(curModel==='knn'){
+    let h=points.length*131+knnK*7;for(const p of points)h+=p.x*31.7+p.y*17.3+p.cls*5.1;
+    const key=h.toFixed(6);
+    if(key===knnKey&&knnGrid){
+      ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+      ctx.drawImage(tmp,0,0,CS,CS);ctx.restore();
+      drawBoundaryContour(knnGrid);return;
+    }
+    knnKey=key;
+  }else knnKey='';
   const id=tctx.createImageData(BGRES,BGRES);const d=id.data;
   const useCombo=(vizMode==='combo'&&net.arch.length>2);
   let pGrid=null;
@@ -695,6 +782,7 @@ function renderBg(){
   tctx.putImageData(id,0,0);
   ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   ctx.drawImage(tmp,0,0,CS,CS);ctx.restore();
+  if(curModel==='knn')knnGrid=pGrid;
   if(pGrid)drawBoundaryContour(pGrid);
 }
 
@@ -786,19 +874,22 @@ function updateStats(){
   }
   lastShownPct=newPct;
   const detail=document.getElementById('statusDetail');
-  if(itr>0)detail.textContent=nA+' A · '+nB+' B · '+itr+' iter · loss '+lastLoss.toFixed(4);
+  if(curModel==='knn'&&itr>0)detail.textContent=nA+' A · '+nB+' B · k = '+Math.min(knnK,points.length);
+  else if(itr>0)detail.textContent=nA+' A · '+nB+' B · '+itr+' iter · loss '+lastLoss.toFixed(4);
   else if(points.length>0)detail.textContent=nA+' A · '+nB+' B';
   else detail.textContent='';
   document.getElementById('legendStrip').style.display=hasBoth()?'flex':'none';
   const dot=document.getElementById('tdot'),st=document.getElementById('tstatus');
   if(points.length===0){dot.className='status-dot';st.textContent='Rita punkter för att börja';}
   else if(!hasBoth()){dot.className='status-dot';st.textContent='Lägg till punkter i båda klasser';}
+  else if(curModel==='knn'){dot.className='status-dot done';st.textContent='Ingen träning behövs';}
   else if(playing){dot.className='status-dot on';st.textContent='Tränar…';}
   else if(itr===0){dot.className='status-dot';st.textContent='Tryck ▶ Träna';}
   else{const done=lastLoss<0.02;dot.className='status-dot'+(done?' done':'');st.textContent=done?'✓ Konvergerad':'Pausad';}
 }
 
 function loop(){
+  if(curModel==='knn'){playing=false;itr=hasBoth()?1:0;}
   if(playing&&net&&hasBoth()){
     const data=points.map(p=>({x:[p.x,p.y],y:p.cls}));
     const spf=SPEED_SPF[speedIdx];
@@ -817,17 +908,18 @@ function updPlayBtn(){const b=document.getElementById('btnPlay');b.textContent=p
 function updateSpeed(){speedIdx=parseInt(document.getElementById('speedSlider').value);document.getElementById('speedLabel').textContent=SPEED_LABELS[speedIdx];}
 
 function initNet(){
-  net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();
+  net=mkNet();itr=0;lastLoss=0;playing=false;updPlayBtn();
   buildArchControls();
   comboSel=new Set();comboDirty=true;
   ensureComboGrid();
 }
-function togglePlay(){if(!hasBoth())return;if(itr===0)net=new Net(getArch(),actFn);playing=!playing;updPlayBtn();}
+function togglePlay(){if(!hasBoth()||curModel==='knn')return;if(itr===0)net=mkNet();playing=!playing;updPlayBtn();}
 function resetNet(){playing=false;initNet();}
 function clearAll(){points=[];playing=false;initNet();}
 function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
 
 const MODEL_INFO={
+  knn:'<strong>k-närmaste grannar (k-NN)</strong> tränas inte. Varje plats får den klass som flest av de <strong>k</strong> närmaste punkterna har. Dra i reglaget: litet k ger en hackig gräns, stort k en jämnare.',
   linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Prova mönstren ovan och se vilka den klarar av.',
   nn1:'<strong>Dolt lager (18 neuroner)</strong>. Varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och prova <strong>Neuroner</strong> för att se hur!'
 };
@@ -836,6 +928,9 @@ function setModel(m){
   curModel=m;customArch=null;
   document.getElementById('mLin').classList.toggle('active',m==='linear');
   document.getElementById('mNN1').classList.toggle('active',m==='nn1');
+  document.getElementById('mKNN').classList.toggle('active',m==='knn');
+  document.getElementById('knnCtl').classList.toggle('on',m==='knn');
+  document.getElementById('btnPlay').disabled=(m==='knn');
   document.getElementById('infoBox').innerHTML=MODEL_INFO[m];
   updateAdvAvailability();
   initNet();
@@ -843,7 +938,7 @@ function setModel(m){
 
 function updateAdvAvailability(){
   const btn=document.getElementById('ptAdv');
-  const enabled=(curModel!=='linear');
+  const enabled=(curModel==='nn1');
   btn.disabled=!enabled;
   btn.title=enabled?'':'Kräver ett neuralt nätverk';
   document.getElementById('tabHint').style.display=enabled?'none':'block';
@@ -851,7 +946,7 @@ function updateAdvAvailability(){
 }
 
 function setPanelTab(tab){
-  if(tab==='adv'&&curModel==='linear')return;
+  if(tab==='adv'&&curModel!=='nn1')return;
   curTab=tab;
   document.getElementById('ptStd').classList.toggle('active',tab==='std');
   document.getElementById('ptAdv').classList.toggle('active',tab==='adv');
@@ -868,7 +963,7 @@ cv.addEventListener('mousedown',e=>{
   e.preventDefault();const r=cv.getBoundingClientRect();
   const px=(e.clientX-r.left)*CS/r.width,py=(e.clientY-r.top)*CS/r.height;
   const[x,y]=p2d(px,py);const cls=e.button===2?1:curClass;
-  if(!points.some(p=>Math.hypot(p.x-x,p.y-y)<0.09)){points.push(mkPoint(x,y,cls));if(hasBoth()&&itr===0)net=new Net(getArch(),actFn);}
+  if(!points.some(p=>Math.hypot(p.x-x,p.y-y)<0.09)){points.push(mkPoint(x,y,cls));if(hasBoth()&&itr===0)net=mkNet();}
 });
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 
@@ -1034,6 +1129,12 @@ function applyArchValue(v){
 
 /* ════════════════ Glaskort (concept cards) ════════════════ */
 const CONCEPTS={
+  knn:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg>',
+    title:'k-närmaste grannar',
+    def:'<strong>k-närmaste grannar</strong> (k-NN) lär sig ingenting i förväg. När modellen ska avgöra vilken klass en plats tillhör letar den upp de <strong>k</strong> datapunkter som ligger närmast och låter dem rösta. Med <em>k = 1</em> bestämmer den allra närmaste punkten ensam, så gränsen blir hackig och påverkas av varje avvikande punkt. Det kallas <em>överanpassning</em>. Med ett stort k jämnas gränsen ut, men små detaljer i mönstret kan försvinna.',
+    illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.03)"/><circle cx="70" cy="40" r="24" fill="none" stroke="#e8ecf8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="70" cy="40" r="4" fill="#e8ecf8"/><circle cx="58" cy="30" r="4" fill="#ff6a5e"/><circle cx="84" cy="34" r="4" fill="#4d80ff"/><circle cx="78" cy="54" r="4" fill="#4d80ff"/><circle cx="26" cy="26" r="4" fill="#ff6a5e"/><circle cx="32" cy="56" r="4" fill="#ff6a5e"/><circle cx="114" cy="24" r="4" fill="#4d80ff"/><circle cx="110" cy="58" r="4" fill="#4d80ff"/></svg>'
+  },
   beslutsgrans:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/></svg>',
     title:'Beslutsgräns',
