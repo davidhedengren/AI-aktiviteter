@@ -398,15 +398,49 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   .overlay-card h2{font-size:1.1em;}
   .overlay-card .sub{margin-bottom:8px;}
 }
+/* ══ The intro box on laptops and larger: a wider box and larger text, so it can be read
+   on a laptop screen. Each step has its heading on its own line, so that someone who
+   only skims still sees what to do. The mobile sizes above apply as before. ══ */
+@media (min-width:900px){
+  .overlay-card{max-width:720px;padding:38px 46px;}
+  .intro-viz{width:240px;height:110px;margin:0 auto 18px;}
+  .overlay-card h2{font-size:29px;margin-bottom:10px;}
+  .overlay-card .sub{font-size:16.5px;line-height:1.55;margin-bottom:22px;color:var(--subtle);}
+  .overlay-card .steps{gap:16px;margin:20px 0;}
+  .overlay-card .step{font-size:16px;line-height:1.5;gap:16px;color:var(--subtle);}
+  .overlay-card .step strong{display:block;font-size:17px;margin-bottom:1px;}
+  .step-num{width:34px;height:34px;border-radius:10px;font-size:16px;margin-top:2px;}
+  .overlay-btn{padding:16px;margin-top:24px;font-size:17px;border-radius:12px;}
+  .overlay-btn svg{width:18px;height:18px;}
+}
+/* Low laptop screens: same text size, but tighter vertically so the box fits without scrolling. */
+@media (min-width:900px) and (max-height:720px){
+  .overlay-card{padding:24px 42px;}
+  .intro-viz{width:140px;height:64px;margin:0 auto 10px;}
+  .overlay-card h2{font-size:27px;margin-bottom:8px;}
+  .overlay-card .sub{margin-bottom:14px;}
+  .overlay-card .steps{gap:11px;margin:14px 0;}
+  .overlay-btn{padding:14px;margin-top:16px;}
+}
+/* ── Header button that opens the introduction again ── */
+.hd-right{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:flex;align-items:center;gap:8px;z-index:2;}
+.hd-right .lang-link{position:static;transform:none;margin:0;}
+.intro-btn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:.75em;font-weight:700;color:var(--dim);padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);cursor:pointer;transition:.2s;white-space:nowrap;}
+.intro-btn:hover{color:var(--text);border-color:var(--dim);}
+.intro-btn svg{width:13px;height:13px;flex-shrink:0;}
+@media(max-width:940px){.hd-right{position:static;transform:none;display:inline-flex;margin:0 4px 6px;vertical-align:top;}}
 </style>
 </head>
 <body>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter">
-    <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span>
-    Svenska</a>
+  <div class="hd-right">
+    <button type="button" class="intro-btn" onclick="openIntro()" aria-label="Show the introduction again" title="Show the introduction again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>Introduction</button>
+    <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter">
+      <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span>
+      Svenska</a>
+  </div>
   <h1>Search algorithms in a <span>maze</span></h1>
   <p>Choose a ready-made maze or build your own, and watch how BFS, DFS, Greedy best-first and A* find their way to the goal.</p>
 </div>
@@ -1356,8 +1390,14 @@ document.getElementById('nextStepBtn').addEventListener('click',()=>{pausePlayba
 document.getElementById('prevStepBtn').addEventListener('click',()=>{pausePlayback();stepBack();});
 document.getElementById('resetBtn').addEventListener('click',resetPlayback);
 
+function openIntro(){
+  pausePlayback();
+  const o=document.getElementById('introOverlay');o.classList.add('show');
+  const b=o.querySelector('.overlay-btn');if(b)b.focus();
+}
+window.openIntro=openIntro;
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeConcept();return;}
+  if(e.key==='Escape'){closeConcept();document.getElementById('introOverlay').classList.remove('show');return;}
   if(e.target.matches('input,select,textarea'))return;
   if(document.getElementById('introOverlay').classList.contains('show'))return;
   if(conceptOpen())return;
