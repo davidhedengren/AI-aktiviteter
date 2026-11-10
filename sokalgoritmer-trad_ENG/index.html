@@ -151,26 +151,48 @@ button{font-family:inherit;}
 
 /* ── DS panel ── */
 .ds-panel{display:none;margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s;box-shadow:0 6px 22px rgba(0,0,0,.3);}
-/* ── Two columns on a wide screen ──
-   The data structure panel needs to be readable while the search is running.
-   Below the tree it ends up off screen on a laptop, so on wide enough screens
-   it moves into a column of its own beside the canvas and follows along when
-   the page is scrolled. The column is reserved only once the panel is active,
-   that is, once an algorithm has been chosen, so the tree stays centred
-   until then. */
+/* ── Side panel on wide screens ──
+   The tree on the left grows as large as the height allows. Algorithm choice,
+   playback, example trees and the data-structure panel sit in a column on the
+   right, so everything can be reached and read without scrolling. */
 @media (min-width:1120px){
-  .page-wrap:has(.ds-panel.ds-active){max-width:1180px;display:grid;justify-content:center;
-    grid-template-columns:minmax(0,680px) minmax(270px,320px);gap:14px 20px;align-items:start;}
-  .page-wrap:has(.ds-panel.ds-active) > .alg-cards-label,
-  .page-wrap:has(.ds-panel.ds-active) > .alg-cards{grid-column:1 / -1;}
-  .page-wrap:has(.ds-panel.ds-active) > #canvasContainer{grid-column:1;margin:0;}
-  .page-wrap:has(.ds-panel.ds-active) > #statusBar,
-  .page-wrap:has(.ds-panel.ds-active) > .control-card{grid-column:1;}
-  .page-wrap:has(.ds-panel.ds-active) > .ds-panel{grid-column:2;grid-row:3 / span 3;
-    margin-top:0;position:sticky;top:16px;max-height:calc(100vh - 32px);display:flex;
-    flex-direction:column;}
-  .page-wrap:has(.ds-panel.ds-active) > .ds-panel .ds-body{min-height:0;}
-  .page-wrap:has(.ds-panel.ds-active) > .ds-panel .ds-body-inner{overflow-y:auto;}
+  :root{--hd-h:58px;--pad:16px;--sb-h:34px;--side:clamp(360px,32vw,440px);
+    --cw:min(calc(min(100vw,1680px) - var(--side) - 70px),calc((100vh - var(--hd-h) - 2*var(--pad) - var(--sb-h) - 2px)*780/460));}
+  @supports (height:100dvh){:root{
+    --cw:min(calc(min(100vw,1680px) - var(--side) - 70px),calc((100dvh - var(--hd-h) - 2*var(--pad) - var(--sb-h) - 2px)*780/460));}}
+  .hd{height:var(--hd-h);padding:0 20px;display:flex;align-items:center;justify-content:center;}
+  .hd h1{font-size:1.3em;margin:0;}
+  .hd p{display:none;}
+  .page-wrap{max-width:1680px;padding:var(--pad) 24px;display:grid;column-gap:22px;
+    grid-template-columns:minmax(0,1fr) var(--side);
+    grid-template-rows:auto auto auto minmax(0,1fr);
+    grid-template-areas:"board label" "board cards" "board ctl" "board ds";
+    height:max(calc(100vh - var(--hd-h)),540px);height:max(calc(100dvh - var(--hd-h)),540px);}
+  .page-wrap > #canvasContainer{grid-area:board;align-self:start;justify-self:center;margin:0;max-width:none;width:min(100%,var(--cw));}
+  .page-wrap > #statusBar{grid-area:board;align-self:start;justify-self:center;width:min(100%,var(--cw));
+    margin-top:calc(var(--cw)*460/780 + 8px);min-height:0;height:calc(var(--sb-h) - 8px);}
+  .page-wrap > .alg-cards-label{grid-area:label;margin-bottom:6px;}
+  .page-wrap > .alg-cards{grid-area:cards;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:10px;}
+  .page-wrap > .control-card{grid-area:ctl;margin-top:0;padding:12px 14px;}
+  .cc-primary{gap:8px 10px;}
+  .cc-primary #startBtn{flex:1 1 auto;padding:10px 12px;}
+  #stepCounter:empty{display:none;}
+  .cc-divider{margin:11px 0;}
+  .cc-secondary{gap:8px;}
+  .cc-secondary .cc-sep{display:none;}
+  .cc-secondary .cc-group{flex:1 1 100%;}
+  .tree-picker{gap:6px 10px;}
+  .tp-list{flex-wrap:nowrap;}
+  .control-card .cc-secondary .btn-ghost{padding:8px 12px;}
+  .page-wrap > .ds-panel{grid-area:ds;align-self:start;margin-top:10px;max-height:calc(100% - 10px);min-height:0;}
+  .page-wrap > .ds-panel.ds-active{display:flex;flex-direction:column;}
+  .page-wrap > .ds-panel .ds-body{min-height:0;}
+  .page-wrap > .ds-panel .ds-body-inner{overflow-y:auto;}
+}
+@media (min-width:1340px){
+  .page-wrap > .alg-cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+  .page-wrap > .alg-cards .alg-card{padding:8px 6px;gap:5px;}
+  .page-wrap > .alg-cards .alg-name{font-size:11.5px;line-height:1.15;}
 }
 
 .ds-panel.ds-active{display:block;}
@@ -731,6 +753,18 @@ let nodeCounter = 1;
 
 const canvas  = document.getElementById("treeCanvas");
 const ctx     = canvas.getContext("2d");
+/* The canvas is drawn in logical coordinates (CW×CH) but the buffer follows the
+   size the tree is actually shown at, so it stays sharp when scaled up. */
+const CW=780, CH=460;
+function fitCanvas(){
+  const d=Math.min(3,window.devicePixelRatio||1),cw=canvas.clientWidth||CW;
+  const bw=Math.max(CW,Math.round(cw*d)),bh=Math.round(bw*CH/CW);
+  if(canvas.width!==bw||canvas.height!==bh){canvas.width=bw;canvas.height=bh;}
+  ctx.setTransform(bw/CW,0,0,bh/CH,0,0);
+}
+fitCanvas();
+if(window.ResizeObserver)new ResizeObserver(fitCanvas).observe(canvas);
+else window.addEventListener('resize',fitCanvas);
 const NODE_RADIUS = 20;
 const GRID    = 50;
 const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -806,14 +840,14 @@ function drawScene(){
   const now = performance.now();
   const frontierIds = currentFrontierIds();
 
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#0b0f1a";ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,CW,CH);
+  ctx.fillStyle="#0b0f1a";ctx.fillRect(0,0,CW,CH);
 
   // CAD grid: every third line a bit stronger
-  for(let x=0,i=0;x<=canvas.width;x+=GRID,i++){ctx.strokeStyle=i%3===0?"rgba(102,152,255,.05)":"rgba(102,152,255,.02)";ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,canvas.height);ctx.stroke();}
-  for(let y=0,i=0;y<=canvas.height;y+=GRID,i++){ctx.strokeStyle=i%3===0?"rgba(102,152,255,.05)":"rgba(102,152,255,.02)";ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(canvas.width,y+.5);ctx.stroke();}
+  for(let x=0,i=0;x<=CW;x+=GRID,i++){ctx.strokeStyle=i%3===0?"rgba(102,152,255,.05)":"rgba(102,152,255,.02)";ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,CH);ctx.stroke();}
+  for(let y=0,i=0;y<=CH;y+=GRID,i++){ctx.strokeStyle=i%3===0?"rgba(102,152,255,.05)":"rgba(102,152,255,.02)";ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(CW,y+.5);ctx.stroke();}
   ctx.fillStyle="rgba(102,152,255,.08)";
-  for(let x=0;x<=canvas.width;x+=GRID)for(let y=0;y<=canvas.height;y+=GRID){ctx.beginPath();ctx.arc(x,y,1.4,0,2*Math.PI);ctx.fill();}
+  for(let x=0;x<=CW;x+=GRID)for(let y=0;y<=CH;y+=GRID){ctx.beginPath();ctx.arc(x,y,1.4,0,2*Math.PI);ctx.fill();}
 
   const hasMixedCosts = nodes.some(n=>n.edges.some(ed=>ed.cost!==1));
 
@@ -909,7 +943,7 @@ function drawScene(){
     if(now<dimState.t0+dimState.fadeIn)a=.4*(now-dimState.t0)/dimState.fadeIn;
     else if(now<dimState.holdEnd)a=.4;
     else a=Math.max(0,.4*(1-(now-dimState.holdEnd)/dimState.fadeOut));
-    if(a>0){ctx.fillStyle='rgba(6,9,18,'+a+')';ctx.fillRect(0,0,canvas.width,canvas.height);}
+    if(a>0){ctx.fillStyle='rgba(6,9,18,'+a+')';ctx.fillRect(0,0,CW,CH);}
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
@@ -1004,7 +1038,7 @@ function setStatus(msg, active=false){
 const tooltip=document.getElementById("canvasTooltip");
 function showTooltip(html, canvasX, canvasY){
   let r=canvas.getBoundingClientRect();
-  let sx=r.width/canvas.width, sy=r.height/canvas.height;
+  let sx=r.width/CW, sy=r.height/CH;
   let px=canvasX*sx, py=canvasY*sy;
   tooltip.innerHTML=html;
   tooltip.style.left=(px+14)+"px";
@@ -1025,7 +1059,7 @@ canvas.addEventListener("contextmenu",e=>e.preventDefault());
 
 function getPos(e){
   let r=canvas.getBoundingClientRect();
-  return {x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)};
+  return {x:(e.clientX-r.left)*(CW/r.width),y:(e.clientY-r.top)*(CH/r.height)};
 }
 function findNodeAt(x,y){ for(let n of nodes){let dx=x-n.x,dy=y-n.y;if(dx*dx+dy*dy<=NODE_RADIUS*NODE_RADIUS)return n;}return null; }
 function findEdgeAt(x,y){
@@ -1301,7 +1335,7 @@ function selectNode(n){selectedNode=n;positionToolbar();updateToolbar();document
 function deselect(){selectedNode=null;document.getElementById("nodeToolbar").classList.remove("show");}
 function positionToolbar(){
   if(!selectedNode)return;
-  let r=canvas.getBoundingClientRect();let sx=r.width/canvas.width,sy=r.height/canvas.height;
+  let r=canvas.getBoundingClientRect();let sx=r.width/CW,sy=r.height/CH;
   let tb=document.getElementById("nodeToolbar");
   tb.style.left=(canvas.offsetLeft+selectedNode.x*sx)+"px";
   tb.style.top=(canvas.offsetTop+selectedNode.y*sy-NODE_RADIUS*sy-8)+"px";
@@ -1343,7 +1377,7 @@ document.getElementById("ntHminus").addEventListener("click",()=>nudgeH(-1));
 let editingEdge=null;
 function openEdgeEditor(a,b){
   editingEdge={a,b};
-  let r=canvas.getBoundingClientRect();let sx=r.width/canvas.width,sy=r.height/canvas.height;
+  let r=canvas.getBoundingClientRect();let sx=r.width/CW,sy=r.height/CH;
   let mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
   let ee=document.getElementById("edgeEditor");
   ee.style.left=(canvas.offsetLeft+mx*sx)+"px";
