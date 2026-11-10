@@ -520,17 +520,27 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
 /* ═══════════════ Basics & canvas ═══════════════ */
 const COLS=30, ROWS=15, CELL=30, W=COLS*CELL, H=ROWS*CELL;
 const canvas=document.getElementById('mazeCanvas');
-const ctx=canvas.getContext('2d');
+const mainCtx=canvas.getContext('2d');
+let ctx=mainCtx;   // temporarily points at bgCtx while the static layer is drawn
 const canvasContainer=document.getElementById('canvasContainer');
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* The drawing surface follows the size the maze is actually shown at, so it stays
    sharp when scaled up on large screens. All drawing still uses W×H coordinates. */
 let PX=1;   // device pixels per drawing unit, used to scale glow
+let PY=1;
+/* Draw on demand: the maze is only redrawn when something has changed or while
+   an animation is running, not 60 times a second all the time. Everything that
+   never moves (background, grid, walls and floor) is drawn once to its own
+   image, bgCanvas, which is then copied into each frame. */
+const bgCanvas=document.createElement('canvas'),bgCtx=bgCanvas.getContext('2d');
+let staticDirty=true,drawQueued=false;
+function requestDraw(){if(!drawQueued){drawQueued=true;requestAnimationFrame(frame);}}
 function fitCanvas(){
   const d=Math.min(3,window.devicePixelRatio||1),cw=canvas.clientWidth||W;
   const bw=Math.round(cw*d),bh=Math.round(bw*H/W);
-  if(canvas.width!==bw||canvas.height!==bh){canvas.width=bw;canvas.height=bh;}
-  PX=bw/W;ctx.setTransform(PX,0,0,bh/H,0,0);
+  if(canvas.width!==bw||canvas.height!==bh){canvas.width=bw;canvas.height=bh;staticDirty=true;}
+  PX=bw/W;PY=bh/H;mainCtx.setTransform(PX,0,0,PY,0,0);
+  requestDraw();
 }
 fitCanvas();
 if(window.ResizeObserver)new ResizeObserver(fitCanvas).observe(canvas);
@@ -828,6 +838,7 @@ function startPathAnim(cells,animate){
   dimState={t0:n,fadeIn:280,holdEnd:n+380+dur,fadeOut:450};
 }
 function applyOps(i,animate){
+  requestDraw();
   const t=animate?performance.now():-1e6;
   const acc=hex2rgb(THEMES[computedFor||selectedAlg].accent);
   for(const op of searchSteps[i].ops){
@@ -838,6 +849,7 @@ function applyOps(i,animate){
   }
 }
 function recomputeToStep(K){
+  requestDraw();
   cellAnim.clear();heurLabels.clear();fVals.clear();
   pathState=null;dimState=null;particles.length=0;
   for(let i=0;i<=K&&i<searchSteps.length;i++)applyOps(i,false);
@@ -908,6 +920,7 @@ function undoMaze(){
 }
 function mazeChanged(fromUndo){
   if(!fromUndo)recordUndo();
+  staticDirty=true;requestDraw();
   pausePlayback();clearTimeout(popupTimer);
   computedFor=null;searchSteps=[];curStep=-1;
   recomputeToStep(-1);hideResultOverlay();
@@ -1002,10 +1015,12 @@ function drawLabel(r,c,txt){
   ctx.restore();
 }
 
-function frame(){
-  const now=performance.now();
-
-  ctx.clearRect(0,0,W,H);
+/* The static layer: background, grid and base tiles. Only redrawn when
+   the maze changes or the size changes. */
+function drawStatic(){
+  if(bgCanvas.width!==canvas.width||bgCanvas.height!==canvas.height){bgCanvas.width=canvas.width;bgCanvas.height=canvas.height;}
+  ctx=bgCtx;
+  ctx.setTransform(PX,0,0,PY,0,0);
   ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
 
   /* Grid – every third line slightly stronger */
@@ -1021,15 +1036,32 @@ function frame(){
     else if(v===3)paintTile(r,c,'#8b5e34');
     else paintTile(r,c,floorColors[r][c]);
   }
+  ctx=mainCtx;
+  staticDirty=false;
+}
+
+function frame(){
+  drawQueued=false;
+  const now=performance.now();
+  let animating=false;       // set when something moves and needs another frame
+  const searchDone=searchSteps.length>0&&curStep>=searchSteps.length-1;
+
+  if(staticDirty)drawStatic();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(bgCanvas,0,0);ctx.restore();
 
   /* Explored + queue */
   for(const[key,st]of cellAnim){
     const i=key.indexOf(','),r=+key.slice(0,i),c=+key.slice(i+1);
     if(isStart(r,c)||isGoal(r,c))continue;
+    if(now-st.t<D_IN)animating=true;                        // still growing / label fading in
     if(st.st==='fr'){
       const p=Math.min(1,(now-st.t)/D_IN);
       const sc=RM?1:easeOutBack(p);                          // grows from 70% to 100%
-      const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
+      /* The queue pulses while the search is running and stands still once it is
+         done, so the page does not redraw needlessly when nothing happens. */
+      const pulsing=!RM&&!searchDone;
+      if(pulsing)animating=true;
+      const pulse=pulsing?(.80+.20*Math.sin(now/850+((r*7+c*13)%10))):1;
       paintTileScaled(r,c,.7+.3*sc,pulse,QUEUE_COLOR,'rgba(240,169,78,.5)',9);
     }else{
       paintTile(r,c,'#6f9fd6');                              // explored
@@ -1046,12 +1078,14 @@ function frame(){
     else a=Math.max(0,.12*(1-(now-dimState.holdEnd)/dimState.fadeOut));
     if(a>0){ctx.fillStyle='rgba(5,8,16,'+a+')';ctx.fillRect(0,0,W,H);}
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
+    if(dimState)animating=true;
   }
 
   /* The path is drawn – a green light traces the line */
   if(pathState){
     const{cells,t0,dur}=pathState;
     const p=Math.max(0,Math.min(1,(now-t0)/dur));
+    if(p<1)animating=true;
     const total=cells.length,headF=p*(total-1),headI=Math.floor(headF);
     for(let i=0;i<=headI;i++){
       const[r,c]=cells[i];
@@ -1093,6 +1127,7 @@ function frame(){
       keep.push(pt);
     }
     particles=keep;
+    if(keep.length)animating=true;
   }
 
   /* Hover: thin white outline + preview – only in edit mode */
@@ -1109,9 +1144,14 @@ function frame(){
     ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;ctx.stroke();
   }
 
-  requestAnimationFrame(frame);
+  if(animating)requestDraw();
 }
-requestAnimationFrame(frame);
+requestDraw();
+/* Safety net: everything you do on the page (clicks, keys, mouse over the maze)
+   triggers a new frame, so no state can be left undrawn. */
+['pointerdown','pointerup','keydown','click'].forEach(t=>document.addEventListener(t,requestDraw,true));
+['pointermove','pointerleave','mousemove','mouseleave'].forEach(t=>canvas.addEventListener(t,requestDraw));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(requestDraw);
 
 /* ═══════════════ Mouse interaction (editing – requires edit mode) ═══════════════ */
 function getCellFromMouse(e){
