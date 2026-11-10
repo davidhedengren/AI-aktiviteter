@@ -95,7 +95,7 @@ button{font-family:inherit;}
 }
 #canvasContainer.alg-flash{animation:canvasAlgFlash .6s ease-out;}
 #mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
-#canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
+#canvasContainer.editing #mazeCanvas{cursor:crosshair;touch-action:none;-webkit-touch-callout:none;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
 
 /* ── Redigeringsläge: toggle + hjälpknapp ── */
 .edit-controls{display:inline-flex;gap:8px;align-items:center;}
@@ -662,8 +662,8 @@ const CONCEPTS={
       +t3('#3f6fd0','5','Kostnad 5')
       +'</div>'
       +'<div class="gc-ctrl">'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Vänsterklick</span><span>växlar mellan <strong>vägg</strong> och <strong>väg</strong>. Håll knappen nedtryckt och dra för att rita flera rutor i följd.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Högerklick</span><span>stegar rutan vidare i ordningen <strong>mål</strong>, <strong>kostnad 3</strong>, <strong>kostnad 5</strong>, <strong>vägg</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Klick / tryck</span><span>växlar mellan <strong>vägg</strong> och <strong>väg</strong>. Håll nedtryckt och dra för att rita flera rutor i följd.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Högerklick / håll</span><span>stegar rutan vidare i ordningen <strong>mål</strong>, <strong>kostnad 3</strong>, <strong>kostnad 5</strong>, <strong>vägg</strong>. På pekskärm håller du fingret still på rutan en stund.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Dra</span><span>ta tag i den gröna startrutan och dra för att flytta startpunkten.</span></div>'
       +'</div>'
       +'<button class="gc-btn" onclick="closeConcept()">Börja bygga</button>'
@@ -897,7 +897,7 @@ function resetPlayback(){
 function ensureComputed(){
   if(!selectedAlg){setInfo('Välj en algoritm ovan för att starta sökningen.');return false;}
   if(computedFor===selectedAlg&&searchSteps.length)return true;
-  if(ends.length===0){setInfo('Labyrinten saknar mål. Aktivera redigeringsläget och högerklicka på en ruta för att skapa ett mål.');return false;}
+  if(ends.length===0){setInfo('Labyrinten saknar mål. Aktivera redigeringsläget och högerklicka på en ruta (eller håll fingret på den) för att skapa ett mål.');return false;}
   currentAlgorithm=selectedAlg;computedFor=selectedAlg;
   searchSteps=precomputeSearch(selectedAlg);
   curStep=-1;recomputeToStep(-1);
@@ -1159,17 +1159,36 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(requestDraw);
 /* ═══════════════ Musinteraktion (redigering – kräver redigeringsläge) ═══════════════ */
 function getCellFromMouse(e){
   const rect=canvas.getBoundingClientRect();
+  if(!(rect.width>0&&rect.height>0))return null;
   const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
   const col=Math.floor(mx/CELL),row=Math.floor(my/CELL);
   if(row<0||row>=ROWS||col<0||col>=COLS)return null;
   return[row,col];
 }
 canvas.oncontextmenu=e=>e.preventDefault();
-canvas.addEventListener('mousedown',e=>{
+/* Pekskärm och penna: ett tryck eller drag ritar som vänsterklick, och ett långt
+   tryck (utan att flytta fingret) gör samma sak som högerklick. Därför ritas den
+   första rutan först när fingret flyttas eller släpps. */
+const LONG_PRESS=480;
+let pressTimer=null,pendingTap=null;
+function cancelPress(){clearTimeout(pressTimer);pressTimer=null;pendingTap=null;}
+/* Högerklick: stegar rutan vidare i ordningen mål → kostnad 3 → kostnad 5 → vägg */
+function cycleCell(r,c){
+  if(isStart(r,c))return;
+  const inEnds=ends.some(x=>x[0]===r&&x[1]===c);
+  if(inEnds){ends=ends.filter(x=>!(x[0]===r&&x[1]===c));grid[r][c]=3;}
+  else if(grid[r][c]===3)grid[r][c]=2;
+  else if(grid[r][c]===2)grid[r][c]=1;
+  else{ends.push([r,c]);grid[r][c]=0;}
+  mazeChanged();
+}
+canvas.addEventListener('pointerdown',e=>{
+  if(!e.isPrimary)return;
   e.preventDefault();
   if(!editMode)return;
   const cell=getCellFromMouse(e);if(!cell)return;
-  drag_start_pos=cell;
+  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
+  drag_start_pos=cell;hoverCell=cell;
   const[row,col]=cell;
   if(row===start[0]&&col===start[1]){
     is_dragging_start=true;old_start=[start[0],start[1]];
@@ -1179,7 +1198,14 @@ canvas.addEventListener('mousedown',e=>{
     dragging_point='paint';
     paintVal=grid[row][col]===1?0:1;
     lastPaintCell=cell;strokeRecorded=false;
-    if(paintLine(cell,cell))mazeChanged();
+    if(e.pointerType!=='mouse'){
+      pendingTap=cell;
+      pressTimer=setTimeout(()=>{
+        const c=pendingTap;cancelPress();if(!c)return;
+        endPaint();cycleCell(c[0],c[1]);
+        if(navigator.vibrate)navigator.vibrate(12);
+      },LONG_PRESS);
+    }else if(paintLine(cell,cell))mazeChanged();
   }else dragging_point='other';
 });
 function canPaint(r,c){return !isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1);}
@@ -1197,13 +1223,16 @@ function paintLine(a,b){
   return changed;
 }
 function endPaint(){paintVal=null;lastPaintCell=null;if(dragging_point==='paint'){dragging_point=null;drag_start_pos=null;}}
-window.addEventListener('mouseup',endPaint);
-canvas.addEventListener('mousemove',e=>{
+window.addEventListener('pointerup',endPaint);
+canvas.addEventListener('pointermove',e=>{
+  if(!e.isPrimary)return;
   hoverCell=getCellFromMouse(e);
   if(is_dragging_start){if(hoverCell)potential_start=hoverCell;}
   else if(dragging_point==='paint'){
+    /* Fingret har lämnat första rutan: det är ett drag, inte ett långt tryck */
+    if(pendingTap&&hoverCell&&(hoverCell[0]!==pendingTap[0]||hoverCell[1]!==pendingTap[1]))cancelPress();
     if(!(e.buttons&1))endPaint();
-    else if(hoverCell){
+    else if(hoverCell&&!pendingTap){
       const from=lastPaintCell||hoverCell;
       if(from[0]!==hoverCell[0]||from[1]!==hoverCell[1]||!lastPaintCell){
         if(paintLine(from,hoverCell))mazeChanged();
@@ -1225,9 +1254,17 @@ canvas.addEventListener('mousemove',e=>{
     }else hideMazeTooltip();
   }else hideMazeTooltip();
 });
-canvas.addEventListener('mouseleave',()=>{hoverCell=null;lastPaintCell=null;hideMazeTooltip();});
-canvas.addEventListener('mouseup',e=>{
+canvas.addEventListener('pointerleave',()=>{hoverCell=null;lastPaintCell=null;hideMazeTooltip();});
+canvas.addEventListener('pointercancel',()=>{
+  cancelPress();endPaint();hoverCell=null;
+  is_dragging_start=false;dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;
+});
+canvas.addEventListener('pointerup',e=>{
+  if(!e.isPrimary)return;
   e.preventDefault();
+  /* Kort tryck på pekskärm: rita rutan nu */
+  if(pendingTap){const c=pendingTap;cancelPress();if(paintLine(c,c))mazeChanged();}
+  if(e.pointerType!=='mouse'){hoverCell=null;hideMazeTooltip();}
   if(!editMode&&!is_dragging_start&&!dragging_point)return;
   const cell=getCellFromMouse(e);
   if(is_dragging_start){
@@ -1238,15 +1275,7 @@ canvas.addEventListener('mouseup',e=>{
     dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;return;
   }
   if(dragging_point==='other'&&cell&&drag_start_pos&&cell[0]===drag_start_pos[0]&&cell[1]===drag_start_pos[1]){
-    const[r,c]=cell;
-    if(e.button===2){
-      const inEnds=ends.some(x=>x[0]===r&&x[1]===c);
-      if(inEnds){ends=ends.filter(x=>!(x[0]===r&&x[1]===c));grid[r][c]=3;}
-      else if(grid[r][c]===3)grid[r][c]=2;
-      else if(grid[r][c]===2)grid[r][c]=1;
-      else{ends.push([r,c]);grid[r][c]=0;}
-      mazeChanged();
-    }
+    if(e.button===2)cycleCell(cell[0],cell[1]);
   }
   dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;endPaint();
 });
