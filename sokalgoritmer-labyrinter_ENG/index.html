@@ -537,6 +537,7 @@ let popupTimer=null;
 /* Editing */
 let is_dragging_start=false, old_start=null, potential_start=null, dragging_point=null, drag_start_pos=null;
 let hoverCell=null;
+let paintVal=null, lastPaintCell=null;   // ongoing brush stroke: 0 = floor, 1 = wall
 
 const resultDiv=document.getElementById('info');
 
@@ -1031,7 +1032,7 @@ function frame(){
   /* Hover: thin white outline + preview – only in edit mode */
   if(hoverCell&&editMode){
     const[r,c]=hoverCell;
-    if(!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
+    if(paintVal===null&&!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
       ctx.save();ctx.globalAlpha=.32;
       if(grid[r][c]===1)paintTile(r,c,floorColors[r][c]);   // wall → preview floor
       else paintTile(r,c,'#10141f');                         // floor → preview wall
@@ -1064,15 +1065,42 @@ canvas.addEventListener('mousedown',e=>{
   if(row===start[0]&&col===start[1]){
     is_dragging_start=true;old_start=[start[0],start[1]];
     potential_start=[start[0],start[1]];dragging_point=null;
+  }else if(e.button===0){
+    /* Brush stroke: the first cell decides whether the whole stroke draws walls or paths */
+    dragging_point='paint';
+    paintVal=grid[row][col]===1?0:1;
+    lastPaintCell=cell;
+    if(paintLine(cell,cell))mazeChanged();
   }else dragging_point='other';
 });
+function canPaint(r,c){return !isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1);}
+/* Fills every cell along the line a→b (4-connected, so paths and walls get no diagonal gaps). */
+function paintLine(a,b){
+  let[r,c]=a;const[r1,c1]=b;
+  const dr=Math.abs(r1-r),dc=Math.abs(c1-c),sr=r<r1?1:-1,sc=c<c1?1:-1;
+  let changed=false;
+  const set=(r,c)=>{if(canPaint(r,c)&&grid[r][c]!==paintVal){grid[r][c]=paintVal;changed=true;}};
+  set(r,c);
+  for(let ix=0,iy=0;ix<dc||iy<dr;){
+    if((.5+ix)/dc<(.5+iy)/dr){c+=sc;ix++;}else{r+=sr;iy++;}
+    set(r,c);
+  }
+  return changed;
+}
+function endPaint(){paintVal=null;lastPaintCell=null;if(dragging_point==='paint'){dragging_point=null;drag_start_pos=null;}}
+window.addEventListener('mouseup',endPaint);
 canvas.addEventListener('mousemove',e=>{
   hoverCell=getCellFromMouse(e);
   if(is_dragging_start){if(hoverCell)potential_start=hoverCell;}
-  else if(dragging_point==='other'&&e.buttons===1){
-    if(hoverCell){const[r,c]=hoverCell;
-      if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
-      mazeChanged();}
+  else if(dragging_point==='paint'){
+    if(!(e.buttons&1))endPaint();
+    else if(hoverCell){
+      const from=lastPaintCell||hoverCell;
+      if(from[0]!==hoverCell[0]||from[1]!==hoverCell[1]||!lastPaintCell){
+        if(paintLine(from,hoverCell))mazeChanged();
+        lastPaintCell=hoverCell;
+      }
+    }
   }
   /* A* tooltip: f(n) = g(n) + h(n) */
   if(hoverCell){
@@ -1088,7 +1116,7 @@ canvas.addEventListener('mousemove',e=>{
     }else hideMazeTooltip();
   }else hideMazeTooltip();
 });
-canvas.addEventListener('mouseleave',()=>{hoverCell=null;hideMazeTooltip();});
+canvas.addEventListener('mouseleave',()=>{hoverCell=null;lastPaintCell=null;hideMazeTooltip();});
 canvas.addEventListener('mouseup',e=>{
   e.preventDefault();
   if(!editMode&&!is_dragging_start&&!dragging_point)return;
@@ -1102,10 +1130,7 @@ canvas.addEventListener('mouseup',e=>{
   }
   if(dragging_point==='other'&&cell&&drag_start_pos&&cell[0]===drag_start_pos[0]&&cell[1]===drag_start_pos[1]){
     const[r,c]=cell;
-    if(e.button===0){
-      if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
-      mazeChanged();
-    }else if(e.button===2){
+    if(e.button===2){
       const inEnds=ends.some(x=>x[0]===r&&x[1]===c);
       if(inEnds){ends=ends.filter(x=>!(x[0]===r&&x[1]===c));grid[r][c]=3;}
       else if(grid[r][c]===3)grid[r][c]=2;
@@ -1114,7 +1139,7 @@ canvas.addEventListener('mouseup',e=>{
       mazeChanged();
     }
   }
-  dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;
+  dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;endPaint();
 });
 
 const mazeTooltip=document.getElementById('mazeTooltip');
