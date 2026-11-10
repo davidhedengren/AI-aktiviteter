@@ -1722,5 +1722,99 @@ render();
   $('introGo').focus();
 })();
 </script>
+<script>
+/* ── The intro box ──
+   On laptops and larger screens the intro box is enlarged so the text can be read (about 16 px),
+   but never more than lets the whole box fit in the window. Mobile sizes are not affected.
+   A button next to the language link opens the introduction again; the buttons in the box
+   then only close it, without restarting anything. */
+(function(){
+  var CFG={"overlay": "#intro", "card": ".ovlc", "mode": "show", "lang": "#langLink", "zoom": 1.22, "text": ".osub,.jrn li", "lead": ".jrn li > span > b:first-child", "label": "Introduction", "aria": "Show the introduction again"};
+  var ov=document.querySelector(CFG.overlay),card=ov&&ov.querySelector(CFG.card);
+  if(!ov||!card)return;
+  var css='.intro-btn{display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap;transition:filter .2s;}'
+    +'.intro-btn:hover{filter:brightness(1.35);}'
+    +'.intro-btn svg{width:13px;height:13px;flex-shrink:0;}'
+    +'@media (max-width:1099px){.intro-btn-lab{display:none;}}'
+    +'@media (min-width:900px){';
+  if(CFG.text)css+=CFG.text.split(',').map(function(s){return CFG.overlay+' '+s;}).join(',')+'{color:#b4c0dc;}';
+  if(CFG.lead)css+=CFG.overlay+':not(.intro-flat) '+CFG.lead+'{display:block;}';
+  css+='}';
+  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+
+  function isOpen(){
+    if(CFG.mode==='show')return ov.classList.contains('show');
+    if(CFG.mode==='hidden')return !ov.classList.contains('hidden');
+    return getComputedStyle(ov).display!=='none';
+  }
+  function setOpen(on){
+    if(CFG.mode==='show')ov.classList.toggle('show',on);
+    else if(CFG.mode==='hidden')ov.classList.toggle('hidden',!on);
+    else ov.style.display=on?'flex':'none';
+  }
+  function room(){
+    var h=card.scrollHeight,w=card.offsetWidth;if(!h||!w)return 1;
+    return Math.min(CFG.zoom,(window.innerHeight-36)/h,(window.innerWidth-48)/w);
+  }
+  function fit(){
+    card.style.zoom='';ov.classList.remove('intro-flat');
+    if(window.innerWidth<900||!isOpen())return;
+    var z=room();
+    /* If full enlargement does not fit with the step headings on their own line, they go back on the same line as the text. */
+    if(CFG.lead&&z<CFG.zoom-0.04){ov.classList.add('intro-flat');z=room();}
+    if(z>1.03)card.style.zoom=z.toFixed(3);
+  }
+  fit();
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+
+  if(CFG.reopen===false)return;
+  var reviewing=false,pairs=[];
+  function openIntro(){
+    reviewing=true;setOpen(true);fit();
+    var b=card.querySelector('button');if(b)b.focus();
+  }
+  function closeReview(){reviewing=false;setOpen(false);}
+  ov.addEventListener('click',function(e){
+    if(!reviewing)return;
+    var b=e.target.closest?e.target.closest('button,a'):null;
+    if(b&&card.contains(b)){e.stopPropagation();e.preventDefault();closeReview();}
+  },true);
+  document.addEventListener('keydown',function(e){if(reviewing&&e.key==='Escape')closeReview();});
+
+  var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>';
+  Array.prototype.forEach.call(document.querySelectorAll(CFG.lang),function(lang){
+    var b=document.createElement('button');b.type='button';b.className='intro-btn';
+    b.setAttribute('aria-label',CFG.aria);b.title=CFG.aria;
+    b.innerHTML=ICON+'<span class="intro-btn-lab">'+CFG.label+'</span>';
+    b.addEventListener('click',openIntro);
+    lang.parentNode.insertBefore(b,lang);pairs.push([b,lang]);
+  });
+  var COPY=['fontSize','fontWeight','fontFamily','color','letterSpacing','lineHeight','paddingTop','paddingRight','paddingBottom','paddingLeft','backgroundColor','backgroundImage','boxShadow','columnGap','zIndex'];
+  function place(){
+    pairs.forEach(function(p){
+      var b=p[0],lang=p[1],cs=getComputedStyle(lang),s=b.style;
+      COPY.forEach(function(k){s[k]=cs[k];});
+      s.border=cs.borderTopWidth+' '+cs.borderTopStyle+' '+cs.borderTopColor;
+      s.borderRadius=cs.borderTopLeftRadius;
+      s.boxSizing='border-box';s.height=lang.offsetHeight+'px';s.verticalAlign=cs.verticalAlign;
+      if(cs.position==='absolute'){
+        s.position='absolute';s.top=cs.top;s.transform=cs.transform==='none'?'':cs.transform;
+        s.right=(parseFloat(cs.right)+lang.offsetWidth+8)+'px';s.margin='0';
+      }else{
+        s.position='';s.top='';s.right='';s.transform='';
+        s.margin=cs.marginTop+' '+cs.marginRight+' '+cs.marginBottom+' '+cs.marginLeft;
+        var pc=getComputedStyle(lang.parentNode);
+        if(pc.display.indexOf('flex')>=0&&pc.justifyContent==='space-between')s.marginLeft='auto';
+      }
+    });
+  }
+  place();
+  window.addEventListener('resize',place);
+  window.addEventListener('load',place);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+})();
+</script>
 </body>
 </html>
