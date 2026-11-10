@@ -539,22 +539,22 @@
     </svg>
     <h2>Naïve <span>Bayes</span> Lab</h2>
     <p class="o-lead">
-      Here you train a <strong>Naïve Bayes classifier</strong>, the same type of algorithm used in spam filters, and see the mathematics behind every decision.
+      Train a <strong>Naïve Bayes classifier</strong>, the same type of algorithm as in spam filters, and see the mathematics behind every decision.
     </p>
     <div class="o-step">
       <div class="o-step-num">1</div>
       <div class="o-step-body"><div class="o-step-h">Train</div>
-      <p>Click <strong>Generate</strong> to fill the model with sample emails. You control the number and the ratio between spam and regular emails.</p></div>
+      <p>Click <strong>Generate</strong> to fill the model with sample emails.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">2</div>
       <div class="o-step-body"><div class="o-step-h">Explore the model</div>
-      <p>See what the model has learned, that is, which words lean toward spam, which lean toward regular email and how strongly they do so.</p></div>
+      <p>See which words lean toward spam and which lean toward regular email.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">3</div>
       <div class="o-step-body"><div class="o-step-h">Classify</div>
-      <p>Write your own email and press Enter. You get the model's answer with a confidence percentage and can follow the whole calculation behind it.</p></div>
+      <p>Write your own email and press Enter. You get the answer as a percentage and can follow the whole calculation.</p></div>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -2120,7 +2120,7 @@ refresh();
    A button next to the language link opens the introduction again; the buttons in the box
    then only close it, without restarting anything. */
 (function(){
-  var CFG={"overlay": "#introOverlay", "card": ".overlay-card", "mode": "display", "lang": ".lang-link", "zoom": 1.25, "text": ".o-lead,.o-step-body p", "lead": "", "label": "Introduction", "aria": "Show the introduction again"};
+  var CFG={"overlay": "#introOverlay", "card": ".overlay-card", "mode": "display", "lang": ".lang-link", "zoom": 1.34, "text": ".o-lead,.o-step-body p", "lead": "", "label": "Introduction", "aria": "Show the introduction again"};
   var ov=document.querySelector(CFG.overlay),card=ov&&ov.querySelector(CFG.card);
   if(!ov||!card)return;
   var css='.intro-btn{display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap;transition:filter .2s;}'

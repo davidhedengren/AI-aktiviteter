@@ -539,22 +539,22 @@
     </svg>
     <h2>Naïve <span>Bayes</span>-labbet</h2>
     <p class="o-lead">
-      Här tränar du en <strong>Naïve Bayes-klassificerare</strong>, samma typ av algoritm som används i spamfilter, och ser matematiken bakom varje beslut.
+      Träna en <strong>Naïve Bayes-klassificerare</strong>, samma typ av algoritm som i spamfilter, och se matematiken bakom varje beslut.
     </p>
     <div class="o-step">
       <div class="o-step-num">1</div>
       <div class="o-step-body"><div class="o-step-h">Träna</div>
-      <p>Klicka på <strong>Generera</strong> så fylls modellen med exempelmejl. Du styr antalet och fördelningen mellan skräppost och vanliga mejl.</p></div>
+      <p>Klicka på <strong>Generera</strong> för att fylla modellen med exempelmejl.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">2</div>
       <div class="o-step-body"><div class="o-step-h">Utforska modellen</div>
-      <p>Se vad modellen lärt sig, alltså vilka ord som lutar mot skräppost, vilka som lutar mot vanliga mejl och hur starkt de gör det.</p></div>
+      <p>Se vilka ord som lutar mot skräppost och vilka som lutar mot vanliga mejl.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">3</div>
       <div class="o-step-body"><div class="o-step-h">Klassificera</div>
-      <p>Skriv ett eget mejl och tryck Enter. Du får modellens svar med säkerhet i procent och kan följa hela beräkningen bakom.</p></div>
+      <p>Skriv ett eget mejl och tryck Enter. Du får svaret i procent och kan följa hela beräkningen.</p></div>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -2142,7 +2142,7 @@ refresh();
    En knapp bredvid språklänken öppnar introduktionen igen; då stänger knapparna i rutan
    den bara, utan att starta om något. */
 (function(){
-  var CFG={"overlay": "#introOverlay", "card": ".overlay-card", "mode": "display", "lang": ".lang-link", "zoom": 1.25, "text": ".o-lead,.o-step-body p", "lead": "", "label": "Introduktion", "aria": "Visa introduktionen igen"};
+  var CFG={"overlay": "#introOverlay", "card": ".overlay-card", "mode": "display", "lang": ".lang-link", "zoom": 1.34, "text": ".o-lead,.o-step-body p", "lead": "", "label": "Introduktion", "aria": "Visa introduktionen igen"};
   var ov=document.querySelector(CFG.overlay),card=ov&&ov.querySelector(CFG.card);
   if(!ov||!card)return;
   var css='.intro-btn{display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap;transition:filter .2s;}'
