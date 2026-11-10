@@ -332,6 +332,42 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   .player{flex:1;justify-content:center;}
   .tips-btn{margin-left:0;}
 }
+/* ══ Breda skärmar (laptop och uppåt): labyrinten till vänster, kontrollerna i en
+   sidopanel till höger. Labyrinten blir så stor som höjden tillåter, så att
+   allt ryms utan att man behöver scrolla. ══ */
+@media (min-width:1100px){
+  :root{--hd-h:58px;--pad:16px;}
+  .hd{height:var(--hd-h);padding:0 20px;display:flex;align-items:center;justify-content:center;}
+  .hd h1{font-size:1.3em;margin:0;}
+  .hd p{display:none;}
+  .page-wrap{max-width:1680px;padding:var(--pad) 24px;
+    display:grid;grid-template-columns:minmax(0,1fr) 296px;column-gap:26px;align-content:start;
+    grid-template-areas:"board label" "board cards" "board controls" "board row" "board info" "board .";
+    grid-template-rows:auto auto auto auto auto 1fr;
+    min-height:calc(100vh - var(--hd-h));min-height:calc(100dvh - var(--hd-h));}
+  #canvasContainer{grid-area:board;align-self:start;margin:0 auto;max-width:none;
+    /* bredd = 2 × tillgänglig höjd (labyrinten är 2:1), men aldrig bredare än kolumnen */
+    width:min(100%,calc((100vh - var(--hd-h) - 2*var(--pad) - 2px)*2));
+    width:min(100%,calc((100dvh - var(--hd-h) - 2*var(--pad) - 2px)*2));}
+  .alg-cards-label{grid-area:label;}
+  .alg-cards{grid-area:cards;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:12px;}
+  .alg-card{padding:9px 8px;justify-content:flex-start;}
+  .alg-name{font-size:12.5px;}
+  #controls{grid-area:controls;margin-top:0;gap:8px;}
+  #startSearchBtn{width:100%;}
+  .player{flex:1 1 auto;}
+  .edit-controls{flex:1 1 100%;}
+  .edit-controls .hud-toggle{flex:1;justify-content:center;}
+  .controls-row{grid-area:row;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;}
+  .maze-picker{grid-column:1/-1;flex-direction:column;align-items:stretch;gap:7px;}
+  .mp-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;}
+  .mp-item{padding:4px 3px 3px;}
+  .mp-item canvas{width:100%;height:auto;aspect-ratio:2/1;}
+  .btn-ghost{padding:7px 4px;}
+  .tips-btn{grid-column:1/-1;margin:2px 0 0;justify-content:center;}
+  #info{grid-area:info;margin-top:12px;}
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
 }
@@ -486,7 +522,18 @@ const canvas=document.getElementById('mazeCanvas');
 const ctx=canvas.getContext('2d');
 const canvasContainer=document.getElementById('canvasContainer');
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-(function(){const d=Math.min(2,window.devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);})();
+/* Ritytan följer den storlek labyrinten faktiskt visas i, så att den är skarp
+   även när den skalas upp på stora skärmar. All ritning sker ändå i W×H-koordinater. */
+let PX=1;   // bildpunkter per ritkoordinat, används för att skala glöd
+function fitCanvas(){
+  const d=Math.min(3,window.devicePixelRatio||1),cw=canvas.clientWidth||W;
+  const bw=Math.round(cw*d),bh=Math.round(bw*H/W);
+  if(canvas.width!==bw||canvas.height!==bh){canvas.width=bw;canvas.height=bh;}
+  PX=bw/W;ctx.setTransform(PX,0,0,bh/H,0,0);
+}
+fitCanvas();
+if(window.ResizeObserver)new ResizeObserver(fitCanvas).observe(canvas);
+else window.addEventListener('resize',fitCanvas);
 
 /* Accentfärg per algoritm */
 const THEMES={
@@ -844,7 +891,26 @@ function ensureComputed(){
   curStep=-1;recomputeToStep(-1);
   return searchSteps.length>0;
 }
-function mazeChanged(){
+/* Ångra (Ctrl+Z): labyrintens tillstånd sparas före varje ändring.
+   Ett helt penseldrag räknas som en ändring. */
+const undoStack=[];let lastSnap=null,strokeRecorded=false;
+function snapMaze(){return JSON.stringify({grid,start,ends});}
+function recordUndo(){
+  const s=snapMaze();
+  if(lastSnap!==null&&s!==lastSnap&&!(paintVal!==null&&strokeRecorded)){
+    undoStack.push(lastSnap);if(undoStack.length>200)undoStack.shift();
+    if(paintVal!==null)strokeRecorded=true;
+  }
+  lastSnap=s;
+}
+function undoMaze(){
+  if(!undoStack.length||paintVal!==null||is_dragging_start)return;
+  const s=JSON.parse(undoStack.pop());
+  grid=s.grid;start=s.start;ends=s.ends;
+  lastSnap=snapMaze();mazeChanged(true);
+}
+function mazeChanged(fromUndo){
+  if(!fromUndo)recordUndo();
   pausePlayback();clearTimeout(popupTimer);
   computedFor=null;searchSteps=[];curStep=-1;
   recomputeToStep(-1);hideResultOverlay();
@@ -902,14 +968,14 @@ function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w
 function paintTile(r,c,fill,glow,blur){
   const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
   ctx.save();
-  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=blur||12;}
+  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=(blur||12)*PX;}
   rr(x,y,s,s,5);ctx.fillStyle=fill;ctx.fill();
   ctx.restore();
 }
 function paintTileScaled(r,c,scale,alpha,fill,glow,blur){
   const s=(CELL-2)*scale,x=(c+.5)*CELL-s/2,y=(r+.5)*CELL-s/2;
   ctx.save();ctx.globalAlpha=alpha;
-  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=blur||10;}
+  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=(blur||10)*PX;}
   rr(x,y,s,s,5*scale);ctx.fillStyle=fill;ctx.fill();
   ctx.restore();
 }
@@ -1000,7 +1066,7 @@ function frame(){
       const[r1,c1]=cells[headI],[r2,c2]=cells[Math.min(headI+1,total-1)];
       const f=headF-headI;
       const x=((c1+.5)+(c2-c1)*f)*CELL,y=((r1+.5)+(r2-r1)*f)*CELL;
-      ctx.save();ctx.shadowColor='#3ddc84';ctx.shadowBlur=18;
+      ctx.save();ctx.shadowColor='#3ddc84';ctx.shadowBlur=18*PX;
       ctx.fillStyle='#c9ffe3';ctx.beginPath();ctx.arc(x,y,4.5,0,7);ctx.fill();
       ctx.restore();
     }
@@ -1072,7 +1138,7 @@ canvas.addEventListener('mousedown',e=>{
     /* Penseldrag: första rutan avgör om vi ritar väggar eller gångar under hela draget */
     dragging_point='paint';
     paintVal=grid[row][col]===1?0:1;
-    lastPaintCell=cell;
+    lastPaintCell=cell;strokeRecorded=false;
     if(paintLine(cell,cell))mazeChanged();
   }else dragging_point='other';
 });
@@ -1229,6 +1295,8 @@ document.addEventListener('keydown',e=>{
   if(e.target.matches('input,select,textarea'))return;
   if(document.getElementById('introOverlay').classList.contains('show'))return;
   if(conceptOpen())return;
+  if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&(e.key==='z'||e.key==='Z')){e.preventDefault();undoMaze();return;}
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
   if(e.code==='Space'){e.preventDefault();togglePlay();}
   else if(e.key==='ArrowRight'){e.preventDefault();pausePlayback();if(ensureComputed())stepForward(true);}
   else if(e.key==='ArrowLeft'){e.preventDefault();pausePlayback();stepBack();}
@@ -1327,6 +1395,7 @@ document.getElementById('clearMazeBtn').addEventListener('click',()=>{
   start=[...startMaze.start];ends=startMaze.ends.map(x=>[...x]);
   grid[start[0]][start[1]]=0;ends.forEach(x=>{grid[x[0]][x[1]]=0;});
   currentAlgorithm=selectedAlg;
+  lastSnap=snapMaze();
   if(selectedAlg)document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
   updatePlayerUI();
 })();
