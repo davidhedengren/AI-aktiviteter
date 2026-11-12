@@ -298,6 +298,41 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
   box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
 .gc-btn:hover{filter:brightness(1.07);}
+
+/* ── Fördjupning: ordning när flera rutor är lika bra ──
+   Nås via en diskret länk i "Förklaringar & tips". Eleven behöver aldrig
+   röra den, men läraren kan visa hur valet påverkar vägen. */
+.tie-list{display:flex;flex-direction:column;gap:6px;margin-top:14px;text-align:left;}
+.tie-opt{display:flex;align-items:center;gap:10px;width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:10px;
+  background:rgba(255,255,255,.025);color:var(--dim);font:inherit;font-size:11.5px;line-height:1.4;text-align:left;cursor:pointer;transition:border-color .18s,background .18s;}
+.tie-opt:hover{border-color:var(--accent);}
+.tie-opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-dim);}
+.tie-radio{flex-shrink:0;width:14px;height:14px;border-radius:50%;border:1.5px solid var(--dim);position:relative;}
+.tie-opt[aria-checked="true"] .tie-radio{border-color:var(--accent2);}
+.tie-opt[aria-checked="true"] .tie-radio::after{content:'';position:absolute;inset:2.5px;border-radius:50%;background:var(--accent2);}
+.tie-txt{display:flex;flex-direction:column;}
+.tie-txt strong{font-size:12px;}
+.tie-extra{padding:4px 4px 6px 35px;display:flex;flex-direction:column;gap:7px;align-items:flex-start;text-align:left;}
+.tie-dirs{display:flex;gap:6px;}
+.tie-dir{width:40px;padding:5px 0 3px;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--border);border-radius:9px;
+  background:var(--surface2);color:var(--text);font:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.tie-dir:hover{border-color:var(--accent);}
+.tie-dir.pick{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,206,84,.25);}
+.tie-arrow{display:block;width:17px;height:17px;}.tie-arrow svg{display:block;width:100%;height:100%;}
+.tie-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);}
+.tie-hint{font-size:10.5px;color:var(--dim);line-height:1.45;}
+.tie-reroll{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:999px;
+  background:var(--surface2);color:var(--subtle);font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;}
+.tie-reroll:hover{border-color:var(--accent);color:var(--text);}
+.tie-reroll svg{width:13px;height:13px;}
+.tie-link{display:block;margin:16px auto 0;padding:4px 6px;border:none;background:none;color:var(--dim);font:inherit;font-size:11px;
+  text-decoration:underline;text-decoration-color:rgba(126,138,170,.4);text-underline-offset:3px;cursor:pointer;}
+.tie-link:hover{color:var(--accent2);}
+/* Syns bara när en annan ordning än standard är vald, så att ingen glömmer bort den. */
+.tie-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px dashed rgba(255,206,84,.45);border-radius:999px;
+  background:rgba(255,206,84,.06);color:var(--gold);font:inherit;font-size:11px;font-weight:600;cursor:pointer;}
+.tie-badge[hidden]{display:none;}
+.tie-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);}
 .gc-btn:active{transform:translateY(1px);}
 
 /* ── Intro overlay ── */
@@ -365,6 +400,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   .mp-item canvas{width:100%;height:auto;aspect-ratio:2/1;}
   .btn-ghost{padding:7px 4px;}
   .tips-btn{grid-column:1/-1;margin:2px 0 0;justify-content:center;}
+  .tie-badge{grid-column:1/-1;justify-content:center;}
   #info{grid-area:info;margin-top:12px;}
 }
 
@@ -505,6 +541,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   <input type="file" id="loadInput" style="display:none;">
   <button id="loadBtn" class="btn-ghost">Ladda</button>
   <button id="clearMazeBtn" class="btn-ghost">Töm</button>
+  <button id="tieBadge" class="tie-badge" hidden onclick="openConcept('ordning',event)"></button>
   <button class="tips-btn" onclick="openConcept('tips',event)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
     Förklaringar &amp; tips
@@ -638,10 +675,69 @@ function cellCost(r,c){if(grid[r][c]===2)return 5;if(grid[r][c]===3)return 3;if(
 function calcPathCost(path){let s=0;for(const[r,c]of path)s+=cellCost(r,c);return s;}
 function heuristic(a,b){return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1]);}
 function minH(r,c){return ends.map(e=>heuristic([r,c],e)).reduce((a,b)=>Math.min(a,b),Infinity);}
-function get_neighbors(n){const[r,c]=n,out=[];for(const[dx,dy]of[[-1,0],[1,0],[0,-1],[0,1]]){const nr=r+dx,nc=c+dy;if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS)out.push([nr,nc]);}return out;}
 
 class PriorityQ{constructor(){this._d=[];}push(i){this._d.push(i);this._d.sort((a,b)=>a[0]-b[0]);}pop(){return this._d.shift();}empty(){return this._d.length===0;}}
-const directions=[[-1,0],[0,1],[1,0],[0,-1]];
+const directions=[[-1,0],[0,1],[1,0],[0,-1]];   // upp, höger, ner, vänster (medurs)
+
+/* ═══════════════ Ordning vid lika prioritet (fördjupning) ═══════════════
+   När flera grannar är lika bra måste algoritmen ändå välja en först.
+   tieOrder ger riktningarna (index i directions) i den ordning de föredras.
+   'std' är det ursprungliga beteendet: DFS svänger höger först (riktningen räknas
+   som nedåt i startrutan) och övriga provar upp, ner, vänster, höger.
+   Höger och vänster räknas från det håll man kom ifrån, uppåt i startrutan.
+   Slumpläget ger varje ruta en egen ordning ur ett frö, så att samma sökning blir
+   likadan varje gång och kan stegas bakåt, tills man slumpar om. */
+let tieMode='std',tieFixed=[0,1,2,3],tieSeed=1,tiePick=null;
+const TIE_REL={right:[1,0,3,2],left:[3,0,1,2]};   // sväng höger/vänster, rakt fram, bakåt
+function tieStartDir(alg){return(alg==='DFS'&&tieMode==='std')?2:0;}
+function tieRng(s){return()=>{s=(s+0x6D2B79F5)|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function tieOrder(alg,r,c,d){
+  if(tieMode==='std')return alg==='DFS'?[(d+2)%4,(d+1)%4,d,(d+3)%4]:[0,2,3,1];
+  if(TIE_REL[tieMode])return TIE_REL[tieMode].map(o=>(d+o)%4);
+  if(tieMode==='fixed')return tieFixed;
+  const rnd=tieRng(Math.imul(tieSeed,7919)+r*COLS+c),a=[0,1,2,3];
+  for(let i=3;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+/* Grannar i föredragen ordning som [rad, kolumn, riktning]. */
+function tieNeighbors(alg,r,c,d){
+  const out=[];
+  for(const nd of tieOrder(alg,r,c,d)){const nr=r+directions[nd][0],nc=c+directions[nd][1];
+    if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS)out.push([nr,nc,nd]);}
+  return out;
+}
+const TIE_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>';
+const TIE_DIRNAME=['upp','höger','ner','vänster'];
+const TIE_OPTS=[
+  ['std','Standard','DFS svänger höger först. Övriga provar upp, ner, vänster, höger.'],
+  ['right','Sväng höger först','Annars rakt fram, och sist vänster.'],
+  ['left','Sväng vänster först','Annars rakt fram, och sist höger.'],
+  ['fixed','Fast ordning','Samma riktning först i varje ruta, oavsett varifrån man kom.'],
+  ['random','Slumpmässig','Varje ruta får en egen, slumpad ordning.']
+];
+function tieName(){return TIE_OPTS.find(o=>o[0]===tieMode)[1];}
+function tieCardHTML(){
+  let h='Ibland är flera rutor <strong>lika bra</strong> att undersöka härnäst. Algoritmen måste ändå välja en, och ordningen avgör vilken väg som hittas.'
+    +'<div class="tie-list" role="radiogroup" aria-label="Ordning vid lika prioritet">';
+  for(const[m,name,desc]of TIE_OPTS){
+    h+='<button class="tie-opt" data-tie-mode="'+m+'" role="radio" aria-checked="'+(tieMode===m)+'"><span class="tie-radio"></span>'
+      +'<span class="tie-txt"><strong>'+name+'</strong><span>'+desc+'</span></span></button>';
+    if(tieMode===m&&m==='fixed'){
+      h+='<div class="tie-extra"><div class="tie-dirs">'
+        +tieFixed.map((d,i)=>'<button class="tie-dir'+(tiePick===i?' pick':'')+'" data-tie-dir="'+i+'" aria-label="Plats '+(i+1)+': '+TIE_DIRNAME[d]+'">'
+          +'<span class="tie-arrow" style="transform:rotate('+(d*90)+'deg)">'+TIE_ARROW+'</span><span class="tie-num">'+(i+1)+'</span></button>').join('')
+        +'</div><div class="tie-hint">Klicka på två pilar för att byta plats på dem.</div></div>';
+    }
+    if(tieMode===m&&m==='random'){
+      h+='<div class="tie-extra"><button class="tie-reroll" data-tie-reroll>'
+        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Slumpa om</button>'
+        +'<div class="tie-hint">Slumpen gäller alla algoritmer tills du slumpar om, så att de kan jämföras på lika villkor.</div></div>';
+    }
+  }
+  return h+'</div>'
+    +'<div class="gc-note">Höger och vänster räknas från det håll algoritmen kom ifrån. I startrutan räknas det som uppåt. Valet gäller alla fyra algoritmerna och återgår till standard när sidan laddas om.</div>'
+    +'<button class="gc-btn" onclick="closeConcept()">Klar</button>';
+}
 
 /* ═══════════════ Glaskort (concept cards) ═══════════════ */
 function t3(color,glyph,label,sub){
@@ -718,6 +814,12 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Hovra</span><span>håll muspekaren över en undersökt ruta under en A*-sökning för att se hela uträkningen av '+M_F+'.</span></div>'
       +'</div>'
       +'<div class="gc-note"><strong>Steg till mål</strong> är antalet förflyttningar längs vägen och <strong>undersökta</strong> är antalet rutor algoritmen behandlat. I labyrinter med kostnadsrutor visas även <strong>vägkostnad</strong>, summan för rutorna på vägen, och <strong>sökkostnad</strong>, summan för alla undersökta rutor.</div>'
+      +'<button class="tie-link" onclick="openConceptFrom(\'ordning\',this)">Fördjupning: när flera rutor är lika bra</button>'
+  },
+  ordning:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><path d="M12 14 6 8"/><path d="M12 14l6-6"/><path d="M3 8l3-3 3 3"/><path d="M15 8l3-3 3 3"/></svg>',
+    title:'Fördjupning: lika bra rutor',
+    get def(){return tieCardHTML();}
   },
   kostnader:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
@@ -731,8 +833,10 @@ const CONCEPTS={
       +'<button class="gc-btn" onclick="closeConcept()">Förstått</button>'
   }
 };
+let conceptId=null;
 function openConceptFrom(id,el){
   const c=CONCEPTS[id];if(!c)return;
+  conceptId=id;
   const card=document.getElementById('conceptCard');
   document.getElementById('conceptIcon').innerHTML=c.icon;
   document.getElementById('conceptTitle').innerHTML=c.title;
@@ -757,8 +861,38 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-window.openConcept=openConcept;window.closeConcept=closeConcept;
+window.openConcept=openConcept;window.closeConcept=closeConcept;window.openConceptFrom=openConceptFrom;
 function conceptOpen(){return document.getElementById('conceptBackdrop').classList.contains('show');}
+
+/* Val i fördjupningskortet: byt läge, byt plats på två pilar eller slumpa om.
+   Kortet ritas om på plats och fokus läggs tillbaka på samma knapp. */
+document.getElementById('conceptDef').addEventListener('click',e=>{
+  const b=e.target.closest('[data-tie-mode],[data-tie-dir],[data-tie-reroll]');
+  if(!b||conceptId!=='ordning')return;
+  let sel;
+  if(b.dataset.tieMode){
+    if(tieMode===b.dataset.tieMode)return;
+    tieMode=b.dataset.tieMode;tiePick=null;sel='[data-tie-mode="'+tieMode+'"]';
+  }else if(b.dataset.tieDir!=null){
+    const i=+b.dataset.tieDir;sel='[data-tie-dir="'+i+'"]';
+    if(tiePick===null){tiePick=i;renderTieCard(sel);return;}
+    if(tiePick!==i){const f=tieFixed.slice();[f[tiePick],f[i]]=[f[i],f[tiePick]];tieFixed=f;}
+    tiePick=null;
+  }else{
+    tieSeed=1+Math.floor(Math.random()*1e9);sel='[data-tie-reroll]';
+  }
+  tieChanged();renderTieCard(sel);
+});
+function renderTieCard(sel){
+  const d=document.getElementById('conceptDef');d.innerHTML=tieCardHTML();
+  const f=sel&&d.querySelector(sel);if(f)f.focus({preventScroll:true});
+}
+function tieChanged(){
+  computedFor=null;searchSteps=[];resetPlayback();
+  const badge=document.getElementById('tieBadge');
+  badge.hidden=tieMode==='std';
+  badge.textContent='Lika bra rutor: '+tieName();
+}
 
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el||RM)return;
@@ -787,36 +921,36 @@ function precomputeSearch(alg){
   const commit=res=>{steps.push({ops:cur,result:res||null});cur=null;};
 
   if(alg==='BFS'){
-    let queue=[[[start[0],start[1]],[]]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
+    let queue=[[[start[0],start[1]],[],tieStartDir(alg)]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
     while(queue.length){
-      const[current,path]=queue.shift();const[row,col]=current;cost+=cellCost(row,col);begin();
+      const[current,path,direction]=queue.shift();const[row,col]=current;cost+=cellCost(row,col);begin();
       if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
         commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
       cur.push({t:'ex',r:row,c:col});ec++;
-      for(const[nr,nc]of get_neighbors([row,col])){const k=nr+','+nc;
-        if(!explored.has(k)&&grid[nr][nc]!==1){queue.push([[nr,nc],path.concat([current])]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}
+      for(const[nr,nc,nd]of tieNeighbors(alg,row,col,direction)){const k=nr+','+nc;
+        if(!explored.has(k)&&grid[nr][nc]!==1){queue.push([[nr,nc],path.concat([current]),nd]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}
       commit();
     }
     begin();commit({found:false});return steps;
   }
   if(alg==='DFS'){
-    let stack=[[[start[0],start[1]],[],2]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
+    let stack=[[[start[0],start[1]],[],tieStartDir(alg)]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
     while(stack.length){
       const[current,path,direction]=stack.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
       if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
         commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
       cur.push({t:'ex',r:row,c:col});ec++;
-      const order=[(direction+3)%4,direction,(direction+1)%4,(direction+2)%4];
-      for(const nd of order){const[dx,dy]=directions[nd];const nr=row+dx,nc=col+dy;
-        if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS){const k=nr+','+nc;
-          if(!explored.has(k)&&grid[nr][nc]!==1){stack.push([[nr,nc],path.concat([current]),nd]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}}
+      /* Stacken tar ut det som lades dit sist, så den föredragna grannen läggs dit sist. */
+      const nbs=tieNeighbors(alg,row,col,direction);
+      for(let i=nbs.length-1;i>=0;i--){const[nr,nc,nd]=nbs[i];const k=nr+','+nc;
+        if(!explored.has(k)&&grid[nr][nc]!==1){stack.push([[nr,nc],path.concat([current]),nd]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}
       commit();
     }
     begin();commit({found:false});return steps;
   }
   if(alg==='A*'){
-    const open=new PriorityQ(),came=new Map(),g=new Map();
-    g.set(start[0]+','+start[1],0);
+    const open=new PriorityQ(),came=new Map(),g=new Map(),dirOf=new Map();
+    g.set(start[0]+','+start[1],0);dirOf.set(start[0]+','+start[1],tieStartDir(alg));
     open.push([minH(start[0],start[1]),[start[0],start[1]]]);
     let ec=1,cost=0;
     while(!open.empty()){
@@ -828,9 +962,9 @@ function precomputeSearch(alg){
         commit({found:true,steps:path.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(path),searchCost:cost});return steps;
       }
       cur.push({t:'ex',r:row,c:col});
-      for(const[nr,nc]of get_neighbors([row,col])){if(grid[nr][nc]===1)continue;
+      for(const[nr,nc,nd]of tieNeighbors(alg,row,col,dirOf.get(row+','+col))){if(grid[nr][nc]===1)continue;
         const tg=g.get(row+','+col)+cellCost(nr,nc),nk=nr+','+nc;
-        if(!g.has(nk)||tg<g.get(nk)){came.set(nk,[row,col]);g.set(nk,tg);
+        if(!g.has(nk)||tg<g.get(nk)){came.set(nk,[row,col]);g.set(nk,tg);dirOf.set(nk,nd);
           const hh=minH(nr,nc),ff=tg+hh;
           open.push([ff,[nr,nc]]);cur.push({t:'fr',r:nr,c:nc,lbl:String(ff),fv:[ff,hh]});}}
       ec++;commit();
@@ -839,17 +973,17 @@ function precomputeSearch(alg){
   }
   if(alg==='Greedy'){
     const open=new PriorityQ(),explored=new Set();
-    open.push([minH(start[0],start[1]),[start[0],start[1]],[]]);
+    open.push([minH(start[0],start[1]),[start[0],start[1]],[],tieStartDir(alg)]);
     let ec=1,cost=0;
     while(!open.empty()){
-      const[,current,path]=open.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
+      const[,current,path,direction]=open.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
       if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
         commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
       explored.add(row+','+col);ec++;cur.push({t:'ex',r:row,c:col});
-      for(const[nr,nc]of get_neighbors(current)){const k=nr+','+nc;
+      for(const[nr,nc,nd]of tieNeighbors(alg,row,col,direction)){const k=nr+','+nc;
         if(explored.has(k)||grid[nr][nc]===1)continue;
         const hh=minH(nr,nc);
-        open.push([hh,[nr,nc],path.concat([current])]);explored.add(k);
+        open.push([hh,[nr,nc],path.concat([current]),nd]);explored.add(k);
         cur.push({t:'fr',r:nr,c:nc,lbl:String(hh),fv:[hh,hh]});}
       commit();
     }
