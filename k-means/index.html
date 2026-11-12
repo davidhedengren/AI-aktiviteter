@@ -1369,15 +1369,13 @@ document.addEventListener('keydown',e=>{
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 });
-/* 3D-tilt på begreppskortet. Avaktiveras vid prefers-reduced-motion. */
+/* Ljuset på begreppskortet följer muspekaren. Själva kortet lutar inte, så att det är lätt att klicka. */
 (function(){const inn=$('ccardIn');
   inn.addEventListener('pointermove',e=>{
     if(RM.matches)return;
     const r=inn.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-    inn.style.setProperty('--mx',(px*100)+'%');inn.style.setProperty('--my',(py*100)+'%');
-    inn.style.transform=`perspective(1000px) rotateX(${(0.5-py)*7}deg) rotateY(${(px-0.5)*7}deg)`;});
-  inn.addEventListener('pointerleave',()=>{inn.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';});})();
+    inn.style.setProperty('--mx',(px*100)+'%');inn.style.setProperty('--my',(py*100)+'%');});})();
 
 /* ═══════════ ångra & meddelanden ═══════════ */
 function pushUndo(){

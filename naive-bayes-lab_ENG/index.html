@@ -898,24 +898,15 @@ function closeTokenModal(){
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeTokenModal(); });
 
-(function initCardTilt(){
+/* The light on the card follows the mouse pointer. The card itself does not tilt, so it stays easy to click. */
+(function initCardGlow(){
   const el = document.getElementById('conceptCardInner'); if(!el) return;
-  const MAX_TILT = 7;
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX-r.left)/r.width, py = (e.clientY-r.top)/r.height;
-    const rx = (0.5-py)*MAX_TILT*2, ry = (px-0.5)*MAX_TILT*2;
-    el.style.setProperty('--mx',(px*100)+'%');
-    el.style.setProperty('--my',(py*100)+'%');
-    el.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    const sx = (px-0.5)*22, sy = (py-0.5)*22;
-    el.style.boxShadow = `${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
   });
-  el.addEventListener('mouseleave', () => {
-    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
-    el.style.boxShadow = '';
-  });
+  el.addEventListener('mouseleave',()=>{el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');});
 })();
 
 

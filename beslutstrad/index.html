@@ -1135,13 +1135,6 @@ document.addEventListener('click',e=>{
   const t=e.target.closest('[data-term]');if(t){openConcept(t.dataset.term);return;}
   if(e.target.closest('[data-close-concept]')||e.target.id==='conceptModal')closeModal(document.getElementById('conceptModal'));
 });
-/* tilt effect */
-(function(){const cm=document.getElementById('conceptModal');
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  cm.addEventListener('mousemove',e=>{const card=document.getElementById('tiltcard');if(!card)return;const r=card.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
-    card.style.transform=`perspective(800px) rotateY(${px*7}deg) rotateX(${-py*7}deg)`;});
-  cm.addEventListener('mouseleave',()=>{const card=document.getElementById('tiltcard');if(card)card.style.transform='';});})();
 
 /* ================= tree logic ================= */
 function counts(rows){let g=0;for(const r of rows)if(r.label==='G')g++;return{g,o:rows.length-g};}

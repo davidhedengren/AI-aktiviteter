@@ -1523,7 +1523,7 @@ function goStep(n){
 }
 
 // ════════════════════════════════════════════════════════════
-//  Begrepp: klickbara glaskort med 3D-tilt
+//  Begrepp: klickbara glaskort
 // ════════════════════════════════════════════════════════════
 const GLOSSARY = {
   pixel:         { t:'Pixel',          d:'A picture element, the smallest building block of a digital image. Here each pixel has a grey value between <b>0 (black)</b> and <b>255 (white)</b>. A computer never sees anything but these numbers.'},
@@ -1677,11 +1677,9 @@ if(!reduceMotion){
     const r = conceptCard.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width;
     const py = (e.clientY - r.top) / r.height;
-    conceptCard.style.transform = `rotateY(${(px - 0.5) * 10}deg) rotateX(${(0.5 - py) * 8}deg)`;
     conceptCard.style.setProperty('--gx', (px * 100) + '%');
     conceptCard.style.setProperty('--gy', (py * 100) + '%');
   });
-  conceptCard.addEventListener('pointerleave', () => { conceptCard.style.transform = ''; });
 }
 document.addEventListener('click', e => {
   const t = e.target.closest('.term');
