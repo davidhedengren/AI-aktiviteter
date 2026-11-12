@@ -410,6 +410,37 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
   box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
 .gc-btn:hover{filter:brightness(1.07);}
+
+/* ── Going deeper: order when several nodes are equally good ──
+   Reached through the link under "Explanations & tips". Students never
+   need to touch it, but a teacher can show how the choice affects the search. */
+.tie-list{display:flex;flex-direction:column;gap:6px;margin-top:14px;text-align:left;}
+.tie-opt{display:flex;align-items:center;gap:10px;width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:10px;
+  background:rgba(255,255,255,.025);color:var(--dim);font:inherit;font-size:11.5px;line-height:1.4;text-align:left;cursor:pointer;transition:border-color .18s,background .18s;}
+.tie-opt:hover{border-color:var(--accent);}
+.tie-opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-dim);}
+.tie-radio{flex-shrink:0;width:14px;height:14px;border-radius:50%;border:1.5px solid var(--dim);position:relative;}
+.tie-opt[aria-checked="true"] .tie-radio{border-color:var(--accent2);}
+.tie-opt[aria-checked="true"] .tie-radio::after{content:'';position:absolute;inset:2.5px;border-radius:50%;background:var(--accent2);}
+.tie-txt{display:flex;flex-direction:column;}
+.tie-txt strong{font-size:12px;}
+.tie-extra{padding:4px 4px 6px 35px;display:flex;flex-direction:column;gap:7px;align-items:flex-start;text-align:left;}
+.tie-hint{font-size:10.5px;color:var(--dim);line-height:1.45;}
+.tie-reroll{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:999px;
+  background:var(--surface2);color:var(--subtle);font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;}
+.tie-reroll:hover{border-color:var(--accent);color:var(--text);}
+.tie-reroll svg{width:13px;height:13px;}
+.tie-link{display:block;margin:16px auto 0;padding:4px 6px;border:none;background:none;color:var(--dim);font:inherit;font-size:11px;
+  text-decoration:underline;text-decoration-color:rgba(126,138,170,.4);text-underline-offset:3px;cursor:pointer;}
+.tie-link:hover{color:var(--accent2);}
+/* The link under Explanations & tips. It turns yellow and shows the choice when something other than standard is selected, so nobody forgets it. */
+.tips-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;}
+/* The link makes the column taller, so the buttons beside it align to the top instead of being centred. */
+.cc-secondary > .tips-wrap,.cc-secondary > #clearNodesBtn{align-self:flex-start;}
+.tie-under,.control-card .tie-under{padding:2px 6px;border:none;border-radius:6px;background:none;color:var(--dim);font-family:inherit;font-size:10.5px;font-weight:500;
+  text-decoration:underline;text-decoration-color:rgba(126,138,170,.35);text-underline-offset:3px;cursor:pointer;box-shadow:none;}
+.tie-under:hover,.control-card .tie-under:hover{color:var(--accent2);}
+.tie-under.on,.control-card .tie-under.on{color:#ffce54;text-decoration-color:rgba(255,206,84,.45);}
 .gc-btn:active{transform:translateY(1px);}
 
 
@@ -680,7 +711,10 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
       </button>
     </div>
     <span class="cc-sep"></span>
-    <button class="btn-ghost" onclick="openConcept('tips',event)">Explanations &amp; tips</button>
+    <div class="tips-wrap">
+      <button class="btn-ghost" onclick="openConcept('tips',event)">Explanations &amp; tips</button>
+      <button id="tieLink" class="tie-under" onclick="openConcept('ordning',event)">When several nodes are equally good</button>
+    </div>
     <button id="clearNodesBtn" class="btn-ghost">Clear nodes</button>
   </div>
 </div>
@@ -1275,11 +1309,19 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>hold the pointer over a node during an A* search to see the calculation of '+M_F+'.</span></div>'
       +'</div>'
       +'<div class="gc-note"><strong>Examined</strong> is the number of nodes the algorithm has taken out of the queue. <strong>Search cost</strong> is the sum of the edge costs leading to those nodes, and <strong>path cost</strong> is the sum of the edge costs along the path that was found.</div>'
+      +'<button class="tie-link" onclick="openConceptFrom(\'ordning\',this)">When several nodes are equally good</button>'
+  },
+  ordning:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><path d="M12 14 6 8"/><path d="M12 14l6-6"/><path d="M3 8l3-3 3 3"/><path d="M15 8l3-3 3 3"/></svg>',
+    title:'When several nodes are equally good',
+    get def(){return tieCardHTML();}
   }
 };
 
+let conceptId=null;
 function openConceptFrom(id,el){
   const c=CONCEPTS[id];if(!c)return;
+  conceptId=id;
   const card=document.getElementById('conceptCard');
   document.getElementById('conceptIcon').innerHTML=c.icon;
   document.getElementById('conceptTitle').innerHTML=c.title;
@@ -1304,8 +1346,26 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-window.openConcept=openConcept;window.closeConcept=closeConcept;
+window.openConcept=openConcept;window.closeConcept=closeConcept;window.openConceptFrom=openConceptFrom;
 function conceptOpen(){return document.getElementById('conceptBackdrop').classList.contains('show');}
+
+/* Choices in the going-deeper card: change mode or reshuffle.
+   The card is redrawn in place and focus goes back to the same button. */
+document.getElementById('conceptDef').addEventListener('click',e=>{
+  const b=e.target.closest('[data-tie-mode],[data-tie-reroll]');
+  if(!b||conceptId!=='ordning')return;
+  let sel;
+  if(b.dataset.tieMode){
+    if(tieMode===b.dataset.tieMode)return;
+    tieMode=b.dataset.tieMode;sel='[data-tie-mode="'+tieMode+'"]';
+  }else{tieSeed=1+Math.floor(Math.random()*1e9);sel='[data-tie-reroll]';}
+  resetSearch();
+  const link=document.getElementById('tieLink');
+  link.classList.toggle('on',tieMode!=='left');
+  link.textContent='When several nodes are equally good'+(tieMode==='left'?'':': '+tieName());
+  const d=document.getElementById('conceptDef');d.innerHTML=tieCardHTML();
+  const f=d.querySelector(sel);if(f)f.focus({preventScroll:true});
+});
 
 /* ═══════════════ Redigeringsläge ═══════════════
    Allt byggande är avstängt tills läget slås på. Sökningen och
@@ -1503,6 +1563,46 @@ function buildTreePicker(){
   });
 }
 buildTreePicker();
+
+/* ═══════════════ Order on equal priority (going deeper) ═══════════════
+   When a node has several children, the order here decides which is queued first.
+   That controls which child BFS and DFS take first, and which one wins when
+   Greedy best-first or A* has several nodes with the same value.
+   Children are sorted by their position on the canvas. Random mode shuffles the
+   children with a seed, so the search is the same every time until you reshuffle. */
+let tieMode='left',tieSeed=1;
+function tieRng(s){return()=>{s=(s+0x6D2B79F5)|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+/* A node's edges in preferred order. */
+function orderedEdges(node){
+  const pos=e=>getNodeById(e.targetId)||{x:0,y:0,id:e.targetId};
+  const es=[...node.edges].sort((a,b)=>{const A=pos(a),B=pos(b);return(A.x-B.x)||(A.y-B.y)||(a.targetId-b.targetId);});
+  if(tieMode==='right')es.sort((a,b)=>{const A=pos(a),B=pos(b);return(B.x-A.x)||(A.y-B.y)||(a.targetId-b.targetId);});
+  if(tieMode==='random'){const rnd=tieRng(Math.imul(tieSeed,7919)+node.id);
+    for(let i=es.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[es[i],es[j]]=[es[j],es[i]];}}
+  return es;
+}
+const TIE_OPTS=[
+  ['left','Left first','Children are taken from left to right. This is the standard.'],
+  ['right','Right first','Children are taken from right to left.'],
+  ['random','Random','Every node gets its own random order of children.']
+];
+function tieName(){return TIE_OPTS.find(o=>o[0]===tieMode)[1];}
+function tieCardHTML(){
+  let h='Often several nodes are <strong>equally good</strong> to examine next. The algorithm still has to pick one of them first, and that choice can change which path it finds.'
+    +'<div class="tie-list" role="radiogroup" aria-label=\"Order on equal priority\">';
+  for(const[m,name,desc]of TIE_OPTS){
+    h+='<button class="tie-opt" data-tie-mode="'+m+'" role="radio" aria-checked="'+(tieMode===m)+'"><span class="tie-radio"></span>'
+      +'<span class="tie-txt"><strong>'+name+'</strong><span>'+desc+'</span></span></button>';
+    if(tieMode===m&&m==='random'){
+      h+='<div class="tie-extra"><button class="tie-reroll" data-tie-reroll>'
+        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reshuffle</button>'
+        +'<div class="tie-hint">All algorithms get the same randomness, so they can be compared.</div></div>';
+    }
+  }
+  return h+'</div>'
+    +'<div class="gc-note">The setting applies to all four algorithms. Reloading the page sets it back to Left first.</div>'
+    +'<button class="gc-btn" onclick="closeConcept()">Done</button>';
+}
 
 /* ============================================================
    SEARCH CONTROLS
@@ -1811,7 +1911,7 @@ function stepBFS(){
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);
-  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);st.queue.enqueue({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
+  for(let ed of orderedEdges(node)){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);st.queue.enqueue({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id);return {done:false};
 }
 function setupDFS(){
@@ -1823,7 +1923,8 @@ function stepDFS(){
   let current=st.stack.pop();st.expansionsCount++;st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
-  let node=getNodeById(current.id);let children=[...node.edges];children.sort((a,b)=>a.targetId-b.targetId);children.reverse();
+  let node=getNodeById(current.id);/* The stack takes out what was put there last, so the preferred child is pushed last. */
+  let children=orderedEdges(node).reverse();
   for(let ed of children){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);st.stack.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id);return {done:false};
 }
@@ -1839,7 +1940,7 @@ function stepGreedy(){
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);
-  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);let hh=getNodeById(ed.targetId).h||0;st.pq.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar,priority:hh});st.frontier.add(ed.targetId);}}
+  for(let ed of orderedEdges(node)){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);let hh=getNodeById(ed.targetId).h||0;st.pq.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar,priority:hh});st.frontier.add(ed.targetId);}}
   visitedSet.add(current.id);return {done:false};
 }
 function setupAstar(){
@@ -1855,7 +1956,7 @@ function stepAstar(){
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);let gCur=st.gScore[current.id];
-  for(let ed of node.edges){let cId=ed.targetId;let newG=gCur+ed.cost;if(newG<st.gScore[cId]){st.gScore[cId]=newG;lastAdded.push(cId);let hh=getNodeById(cId).h||0;st.pq.push({id:cId,path:[...current.path,cId],costSoFar:newG,parentCostSoFar:current.costSoFar,priority:newG+hh});st.frontier.add(cId);}}
+  for(let ed of orderedEdges(node)){let cId=ed.targetId;let newG=gCur+ed.cost;if(newG<st.gScore[cId]){st.gScore[cId]=newG;lastAdded.push(cId);let hh=getNodeById(cId).h||0;st.pq.push({id:cId,path:[...current.path,cId],costSoFar:newG,parentCostSoFar:current.costSoFar,priority:newG+hh});st.frontier.add(cId);}}
   visitedSet.add(current.id);return {done:false};
 }
 

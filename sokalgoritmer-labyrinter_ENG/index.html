@@ -301,7 +301,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
 .gc-btn:hover{filter:brightness(1.07);}
 
 /* ── Going deeper: order when several cells are equally good ──
-   Reached through a discreet link in "Explanations & tips". Students never
+   Reached through the link under "Explanations & tips". Students never
    need to touch it, but a teacher can show how the choice affects the path. */
 .tie-list{display:flex;flex-direction:column;gap:6px;margin-top:14px;text-align:left;}
 .tie-opt{display:flex;align-items:center;gap:10px;width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:10px;
@@ -329,11 +329,12 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
 .tie-link{display:block;margin:16px auto 0;padding:4px 6px;border:none;background:none;color:var(--dim);font:inherit;font-size:11px;
   text-decoration:underline;text-decoration-color:rgba(126,138,170,.4);text-underline-offset:3px;cursor:pointer;}
 .tie-link:hover{color:var(--accent2);}
-/* Only shown when an order other than standard is selected, so nobody forgets about it. */
-.tie-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px dashed rgba(255,206,84,.45);border-radius:999px;
-  background:rgba(255,206,84,.06);color:var(--gold);font:inherit;font-size:11px;font-weight:600;cursor:pointer;}
-.tie-badge[hidden]{display:none;}
-.tie-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);}
+/* The link under Explanations & tips. It turns yellow and shows the choice when something other than standard is selected, so nobody forgets it. */
+.tips-wrap{margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.tie-under,.control-card .tie-under{padding:2px 6px;border:none;border-radius:6px;background:none;color:var(--dim);font-family:inherit;font-size:10.5px;font-weight:500;
+  text-decoration:underline;text-decoration-color:rgba(126,138,170,.35);text-underline-offset:3px;cursor:pointer;box-shadow:none;}
+.tie-under:hover,.control-card .tie-under:hover{color:var(--accent2);}
+.tie-under.on,.control-card .tie-under.on{color:#ffce54;text-decoration-color:rgba(255,206,84,.45);}
 .gc-btn:active{transform:translateY(1px);}
 
 /* ── Intro overlay ── */
@@ -367,6 +368,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   #startSearchBtn{width:100%;}
   .player{flex:1;justify-content:center;}
   .tips-btn{margin-left:0;}
+  .tips-wrap{margin-left:0;}
 }
 /* ══ Wide screens (laptop and up): the maze on the left, the controls in a
    side panel on the right. The maze grows as large as the height allows, so
@@ -401,7 +403,8 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   .mp-item canvas{width:100%;height:auto;aspect-ratio:2/1;}
   .btn-ghost{padding:7px 4px;}
   .tips-btn{grid-column:1/-1;margin:2px 0 0;justify-content:center;}
-  .tie-badge{grid-column:1/-1;justify-content:center;}
+  .tips-wrap{grid-column:1/-1;margin:2px 0 0;align-items:stretch;}
+  .tips-wrap .tips-btn{margin:0;}
   #info{grid-area:info;margin-top:12px;}
 }
 
@@ -542,11 +545,13 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
   <input type="file" id="loadInput" style="display:none;">
   <button id="loadBtn" class="btn-ghost">Load</button>
   <button id="clearMazeBtn" class="btn-ghost">Clear</button>
-  <button id="tieBadge" class="tie-badge" hidden onclick="openConcept('ordning',event)"></button>
-  <button class="tips-btn" onclick="openConcept('tips',event)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
-    Explanations &amp; tips
-  </button>
+  <div class="tips-wrap">
+    <button class="tips-btn" onclick="openConcept('tips',event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+      Explanations &amp; tips
+    </button>
+    <button id="tieLink" class="tie-under" onclick="openConcept('ordning',event)">When several cells are equally good</button>
+  </div>
 </div>
 
 <div id="info" role="status"></div>
@@ -736,7 +741,7 @@ function tieCardHTML(){
     }
   }
   return h+'</div>'
-    +'<div class="gc-note">Right and left are counted from the direction the algorithm is moving, not from the screen. In the start cell it counts as moving up. The setting applies to all four algorithms. Reloading the page sets it back to Standard.</div>'
+    +'<div class="gc-note">The setting applies to all four algorithms. Reloading the page sets it back to Standard.</div>'
     +'<button class="gc-btn" onclick="closeConcept()">Done</button>';
 }
 
@@ -811,11 +816,11 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>hold the pointer over an examined cell during an A* search to see the full calculation of '+M_F+'.</span></div>'
       +'</div>'
       +'<div class="gc-note"><strong>Steps to goal</strong> is the number of moves along the path and <strong>examined</strong> is the number of cells the algorithm has processed. In mazes with cost cells, <strong>path cost</strong>, the sum for the cells on the path, and <strong>search cost</strong>, the sum for every examined cell, are also shown.</div>'
-      +'<button class="tie-link" onclick="openConceptFrom(\'ordning\',this)">Going deeper: when several cells are equally good</button>'
+      +'<button class="tie-link" onclick="openConceptFrom(\'ordning\',this)">When several cells are equally good</button>'
   },
   ordning:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-7"/><path d="M12 14 6 8"/><path d="M12 14l6-6"/><path d="M3 8l3-3 3 3"/><path d="M15 8l3-3 3 3"/></svg>',
-    title:'Going deeper: equally good cells',
+    title:'When several cells are equally good',
     get def(){return tieCardHTML();}
   },
   kostnader:{
@@ -886,29 +891,20 @@ function renderTieCard(sel){
 }
 function tieChanged(){
   computedFor=null;searchSteps=[];resetPlayback();
-  const badge=document.getElementById('tieBadge');
-  badge.hidden=tieMode==='std';
-  badge.textContent='Equally good cells: '+tieName();
+  const link=document.getElementById('tieLink');
+  link.classList.toggle('on',tieMode!=='std');
+  link.textContent='When several cells are equally good'+(tieMode==='std'?'':': '+tieName());
 }
 
-(function initCardTilt(){
+/* The light on the card follows the mouse pointer. The card itself does not tilt, so it stays easy to click. */
+(function initCardGlow(){
   const el=document.getElementById('conceptCardInner');if(!el||RM)return;
-  const MAX_TILT=5;
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
-    el.style.setProperty('--mx',(px*100)+'%');
-    el.style.setProperty('--my',(py*100)+'%');
-    el.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
-    const sx=(px-0.5)*22,sy=(py-0.5)*22;
-    el.style.boxShadow=(-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+    el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
   });
-  el.addEventListener('mouseleave',()=>{
-    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
-    el.style.boxShadow='';
-  });
+  el.addEventListener('mouseleave',()=>{el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');});
 })();
 
 /* ═══════════════ Pre-computing the search ═══════════════ */
